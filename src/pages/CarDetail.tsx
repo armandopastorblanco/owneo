@@ -37,12 +37,12 @@ const CarDetail = () => {
             Back to Portfolio
           </Link>
 
-          {/* Hero Image */}
-          <div className="aspect-[21/9] overflow-hidden rounded-lg mb-8 bg-muted">
+          {/* Hero Image with Animation */}
+          <div className="relative aspect-[21/9] overflow-hidden rounded-lg mb-8 bg-gradient-to-b from-muted to-background">
             <img
               src={car.image}
               alt={car.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
             />
           </div>
 
@@ -67,12 +67,12 @@ const CarDetail = () => {
             </p>
           </section>
 
-          {/* Image Gallery Placeholder */}
+          {/* Image Gallery */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Gallery</h2>
             <div className="grid md:grid-cols-3 gap-4">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
+                <div key={i} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
                   <img
                     src={car.image}
                     alt={`${car.name} view ${i}`}

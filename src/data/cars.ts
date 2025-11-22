@@ -1,3 +1,19 @@
+import ferrariPortofino from "@/assets/cars/ferrari-portofino.jpg";
+import porsche911TurboS from "@/assets/cars/porsche-911-turbo-s.jpg";
+import lamborghiniHuracanEvo from "@/assets/cars/lamborghini-huracan-evo.jpg";
+import porscheMacanTurbo from "@/assets/cars/porsche-macan-turbo.jpg";
+import ferrariF8Tributo from "@/assets/cars/ferrari-f8-tributo.jpg";
+import lamborghiniUrus from "@/assets/cars/lamborghini-urus.jpg";
+import porscheTaycanTurboS from "@/assets/cars/porsche-taycan-turbo-s.jpg";
+import ferrariRoma from "@/assets/cars/ferrari-roma.jpg";
+import lamborghiniAventador from "@/assets/cars/lamborghini-aventador.jpg";
+import astonMartinDB11 from "@/assets/cars/aston-martin-db11.jpg";
+import mclaren720s from "@/assets/cars/mclaren-720s.jpg";
+import porscheCayenneTurboGT from "@/assets/cars/porsche-cayenne-turbo-gt.jpg";
+import mercedesAMGGTR from "@/assets/cars/mercedes-amg-gt-r.jpg";
+import bentleyContinentalGT from "@/assets/cars/bentley-continental-gt.jpg";
+import rollsRoyceWraith from "@/assets/cars/rolls-royce-wraith.jpg";
+
 export interface Car {
   id: string;
   name: string;
@@ -31,7 +47,7 @@ export const cars: Car[] = [
     model: "Portofino",
     year: 2024,
     price: "€215,000",
-    image: "/placeholder.svg",
+    image: ferrariPortofino,
     category: "Convertible GT",
     description: "The epitome of Italian elegance meets breathtaking performance",
     luxuryDescription: "The Ferrari Portofino embodies the perfect fusion of exhilarating performance and luxurious comfort. This sophisticated convertible grand tourer captures the essence of la dolce vita with its retractable hardtop, sumptuous leather interiors, and the unmistakable roar of a Ferrari V8 engine. Every journey becomes an unforgettable experience, whether cruising along the Mediterranean coast or commanding the open road with absolute authority.",
@@ -61,7 +77,7 @@ export const cars: Car[] = [
     model: "911 Turbo S",
     year: 2024,
     price: "€230,000",
-    image: "/placeholder.svg",
+    image: porsche911TurboS,
     category: "Sports Coupe",
     description: "German engineering at its absolute finest",
     luxuryDescription: "The Porsche 911 Turbo S represents the pinnacle of precision engineering and timeless design. This legendary sports car combines blistering acceleration with everyday usability, delivering an uncompromising driving experience that has captivated enthusiasts for generations. Its iconic silhouette conceals cutting-edge technology and raw power, making it the ultimate expression of automotive excellence.",
@@ -91,7 +107,7 @@ export const cars: Car[] = [
     model: "Huracán EVO",
     year: 2024,
     price: "€250,000",
-    image: "/placeholder.svg",
+    image: lamborghiniHuracanEvo,
     category: "Supercar",
     description: "Raw Italian passion in its purest form",
     luxuryDescription: "The Lamborghini Huracán EVO is a masterpiece of automotive artistry that commands attention wherever it goes. With its aggressive angular design and naturally aspirated V10 engine, this supercar delivers an visceral driving experience that awakens all your senses. The Huracán EVO isn't just a car—it's a statement of uncompromising ambition and unapologetic performance.",
@@ -121,7 +137,7 @@ export const cars: Car[] = [
     model: "Macan Turbo",
     year: 2024,
     price: "€95,000",
-    image: "/placeholder.svg",
+    image: porscheMacanTurbo,
     category: "Luxury SUV",
     description: "The sports car of SUVs",
     luxuryDescription: "The Porsche Macan Turbo redefines what a luxury SUV can be. Combining Porsche's legendary sports car DNA with the versatility of an SUV, it delivers exhilarating performance without sacrificing comfort or practicality. Whether navigating city streets or conquering mountain roads, the Macan Turbo offers an unmatched blend of power, agility, and refined luxury.",
@@ -151,7 +167,7 @@ export const cars: Car[] = [
     model: "F8 Tributo",
     year: 2024,
     price: "€280,000",
-    image: "/placeholder.svg",
+    image: ferrariF8Tributo,
     category: "Supercar",
     description: "A tribute to the most powerful V8 in Ferrari history",
     luxuryDescription: "The Ferrari F8 Tributo celebrates Ferrari's most powerful V8 engine with stunning design and extraordinary performance. This mid-engine masterpiece delivers track-focused dynamics with road-car refinement, offering an unfiltered connection between driver and machine. Every detail, from its sculpted bodywork to its meticulously crafted interior, reflects Ferrari's unwavering commitment to excellence.",
@@ -181,7 +197,7 @@ export const cars: Car[] = [
     model: "Urus",
     year: 2024,
     price: "€220,000",
-    image: "/placeholder.svg",
+    image: lamborghiniUrus,
     category: "Super SUV",
     description: "The world's first Super Sport Utility Vehicle",
     luxuryDescription: "The Lamborghini Urus breaks all conventions as the world's first Super SUV. Combining Lamborghini's iconic design language with unprecedented versatility, the Urus delivers supercar performance in an SUV package. Its luxurious cabin, cutting-edge technology, and unmistakable Lamborghini character make it the perfect choice for those who refuse to compromise.",
@@ -211,7 +227,7 @@ export const cars: Car[] = [
     model: "Taycan Turbo S",
     year: 2024,
     price: "€190,000",
-    image: "/placeholder.svg",
+    image: porscheTaycanTurboS,
     category: "Electric Sports Sedan",
     description: "The future of performance is electric",
     luxuryDescription: "The Porsche Taycan Turbo S proves that electric performance can be truly exhilarating. This groundbreaking sports sedan combines instant torque delivery with Porsche's legendary handling dynamics, creating a driving experience unlike any other. With its stunning design, luxurious interior, and zero-emission powertrain, the Taycan Turbo S represents the perfect fusion of sustainability and performance.",
@@ -241,7 +257,7 @@ export const cars: Car[] = [
     model: "Roma",
     year: 2024,
     price: "€210,000",
-    image: "/placeholder.svg",
+    image: ferrariRoma,
     category: "Grand Tourer",
     description: "Contemporary elegance meets timeless Ferrari performance",
     luxuryDescription: "The Ferrari Roma captures the carefree, pleasurable way of life of 1950s and '60s Rome, reimagined for the modern era. This sophisticated grand tourer features a minimalist yet elegant design, a driver-focused cockpit, and the thrilling performance of a Ferrari V8. The Roma represents a new chapter in Ferrari's legacy, where refined luxury meets exhilarating dynamics.",
@@ -271,7 +287,7 @@ export const cars: Car[] = [
     model: "Aventador Ultimae",
     year: 2024,
     price: "€500,000",
-    image: "/placeholder.svg",
+    image: lamborghiniAventador,
     category: "Flagship Supercar",
     description: "The final evolution of an icon",
     luxuryDescription: "The Lamborghini Aventador Ultimae represents the ultimate expression of naturally aspirated V12 performance. This limited-edition masterpiece combines the best elements of the Aventador SVJ and S models, creating the most powerful and refined Aventador ever built. With its dramatic scissor doors, carbon fiber monocoque, and spine-tingling V12 soundtrack, the Ultimae is a fitting tribute to one of the greatest supercars ever created.",
@@ -301,7 +317,7 @@ export const cars: Car[] = [
     model: "DB11",
     year: 2024,
     price: "€225,000",
-    image: "/placeholder.svg",
+    image: astonMartinDB11,
     category: "Grand Tourer",
     description: "British elegance at its finest",
     luxuryDescription: "The Aston Martin DB11 embodies the perfect balance of beauty and performance. This quintessentially British grand tourer features hand-crafted luxury, timeless design, and a powerful twin-turbo V8 or V12 engine. Every journey in the DB11 is an occasion, whether you're crossing continents in supreme comfort or enjoying spirited driving on your favorite road.",
@@ -331,7 +347,7 @@ export const cars: Car[] = [
     model: "720S",
     year: 2024,
     price: "€285,000",
-    image: "/placeholder.svg",
+    image: mclaren720s,
     category: "Supercar",
     description: "Aerodynamic excellence meets raw performance",
     luxuryDescription: "The McLaren 720S pushes the boundaries of what a supercar can achieve. With its innovative carbon fiber structure, distinctive dihedral doors, and breathtaking performance, the 720S delivers a driving experience that's both thrilling and refined. Every aspect of its design serves a purpose, creating a machine that's as functional as it is beautiful.",
@@ -361,7 +377,7 @@ export const cars: Car[] = [
     model: "Cayenne Turbo GT",
     year: 2024,
     price: "€185,000",
-    image: "/placeholder.svg",
+    image: porscheCayenneTurboGT,
     category: "Performance SUV",
     description: "The most powerful Cayenne ever created",
     luxuryDescription: "The Porsche Cayenne Turbo GT is the ultimate performance SUV, combining track-focused capabilities with everyday usability. This exceptional vehicle features aggressive styling, enhanced aerodynamics, and the most powerful engine ever fitted to a Cayenne. It's proof that an SUV can deliver genuine sports car performance without compromise.",
@@ -391,7 +407,7 @@ export const cars: Car[] = [
     model: "GT R",
     year: 2024,
     price: "€195,000",
-    image: "/placeholder.svg",
+    image: mercedesAMGGTR,
     category: "Sports Coupe",
     description: "The Beast of the Green Hell",
     luxuryDescription: "The Mercedes-AMG GT R, known as 'The Beast of the Green Hell,' is a track-focused supercar that brings Nürburgring-honed performance to the road. With its distinctive styling, handcrafted AMG V8 engine, and race-derived technology, the GT R delivers an intoxicating blend of raw power and refined luxury that only AMG can provide.",
@@ -421,7 +437,7 @@ export const cars: Car[] = [
     model: "Continental GT",
     year: 2024,
     price: "€240,000",
-    image: "/placeholder.svg",
+    image: bentleyContinentalGT,
     category: "Luxury Grand Tourer",
     description: "Unparalleled luxury meets effortless performance",
     luxuryDescription: "The Bentley Continental GT represents the pinnacle of grand touring luxury. Hand-crafted in Crewe, England, this magnificent coupe combines exquisite materials, meticulous attention to detail, and potent W12 power. Every journey becomes an experience in absolute comfort and refinement, where the only limit is the horizon ahead.",
@@ -451,7 +467,7 @@ export const cars: Car[] = [
     model: "Wraith",
     year: 2024,
     price: "€350,000",
-    image: "/placeholder.svg",
+    image: rollsRoyceWraith,
     category: "Luxury Coupe",
     description: "The most powerful Rolls-Royce ever created",
     luxuryDescription: "The Rolls-Royce Wraith is a statement of uncompromising luxury and performance. This fastback coupe combines the effortless power of a twin-turbo V12 with the supreme comfort and craftsmanship that only Rolls-Royce can deliver. Every detail, from the starlight headliner to the spirit of ecstasy, is designed to create an automotive experience beyond compare.",
