@@ -35,11 +35,11 @@ const Cities = () => {
                   className="relative border border-border rounded-lg overflow-hidden"
                 >
                   {/* Background Image with Overlay */}
-                  <div className="absolute inset-0 z-0">
+                  <div className="absolute inset-0 z-0 overflow-hidden">
                     <img 
                       src={city.image} 
                       alt={city.name}
-                      className="w-full h-full object-cover opacity-30"
+                      className="w-full h-full object-cover opacity-30 animate-[city-zoom_25s_ease-in-out_infinite]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
                   </div>
