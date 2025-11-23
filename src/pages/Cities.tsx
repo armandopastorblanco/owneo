@@ -30,14 +30,29 @@ const Cities = () => {
               const availableCars = getCarsForCity(city.name);
               
               return (
-                <div key={city.id} className="border border-border rounded-lg p-8 bg-card">
-                  <div className="flex items-start gap-4 mb-6">
-                    <MapPin className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
-                    <div>
-                      <h2 className="text-3xl font-bold mb-2 text-foreground">{city.name}</h2>
-                      <p className="text-muted-foreground">{city.description}</p>
-                    </div>
+                <div 
+                  key={city.id} 
+                  className="relative border border-border rounded-lg overflow-hidden"
+                >
+                  {/* Background Image with Overlay */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src={city.image} 
+                      alt={city.name}
+                      className="w-full h-full object-cover opacity-30"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
                   </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 p-8">
+                    <div className="flex items-start gap-4 mb-6">
+                      <MapPin className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
+                      <div>
+                        <h2 className="text-3xl font-bold mb-2 text-foreground">{city.name}</h2>
+                        <p className="text-muted-foreground">{city.description}</p>
+                      </div>
+                    </div>
 
                   <div className="mb-4">
                     <h3 className="text-lg font-semibold mb-4 text-foreground">
@@ -63,6 +78,7 @@ const Cities = () => {
                         </Link>
                       ))}
                     </div>
+                  </div>
                   </div>
                 </div>
               );

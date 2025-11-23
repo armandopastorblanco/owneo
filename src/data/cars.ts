@@ -492,35 +492,41 @@ export const cars: Car[] = [
   }
 ];
 
+import barcelonaImg from "@/assets/cities/barcelona.jpg";
+import madridImg from "@/assets/cities/madrid.jpg";
+import marbellaImg from "@/assets/cities/marbella.jpg";
+import valenciaImg from "@/assets/cities/valencia.jpg";
+import ibizaImg from "@/assets/cities/ibiza.jpg";
+
 export const cities = [
   {
     id: "barcelona",
     name: "Barcelona",
     description: "The cosmopolitan capital of Catalonia, where modernist architecture meets Mediterranean beaches",
-    image: "/placeholder.svg"
+    image: barcelonaImg
   },
   {
     id: "madrid",
     name: "Madrid",
     description: "Spain's vibrant capital, renowned for its royal heritage and world-class culture",
-    image: "/placeholder.svg"
+    image: madridImg
   },
   {
     id: "marbella",
     name: "Marbella",
     description: "The jewel of Costa del Sol, synonymous with luxury, glamour, and sophisticated living",
-    image: "/placeholder.svg"
+    image: marbellaImg
   },
   {
     id: "valencia",
     name: "Valencia",
     description: "A perfect blend of historic charm and futuristic architecture on Spain's eastern coast",
-    image: "/placeholder.svg"
+    image: valenciaImg
   },
   {
     id: "ibiza",
     name: "Ibiza",
     description: "The legendary Mediterranean island offering pristine beaches and exclusive experiences",
-    image: "/placeholder.svg"
+    image: ibizaImg
   }
 ];
