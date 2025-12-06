@@ -14,6 +14,14 @@ import mercedesAMGGTR from "@/assets/cars/mercedes-amg-gt-r.jpg";
 import bentleyContinentalGT from "@/assets/cars/bentley-continental-gt.jpg";
 import rollsRoyceWraith from "@/assets/cars/rolls-royce-wraith.jpg";
 
+// Ferrari Portofino gallery images
+import ferrariPortofinoGallery1 from "@/assets/cars/gallery/ferrari-portofino-1.jpg";
+import ferrariPortofinoGallery2 from "@/assets/cars/gallery/ferrari-portofino-2.jpg";
+import ferrariPortofinoGallery3 from "@/assets/cars/gallery/ferrari-portofino-3.jpg";
+import ferrariPortofinoGallery4 from "@/assets/cars/gallery/ferrari-portofino-4.jpg";
+import ferrariPortofinoGallery5 from "@/assets/cars/gallery/ferrari-portofino-5.jpg";
+import ferrariPortofinoGallery6 from "@/assets/cars/gallery/ferrari-portofino-6.jpg";
+
 export interface Car {
   id: string;
   name: string;
@@ -22,6 +30,7 @@ export interface Car {
   year: number;
   price: string;
   image: string;
+  gallery?: string[];
   category: string;
   description: string;
   luxuryDescription: string;
@@ -48,6 +57,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€215,000",
     image: ferrariPortofino,
+    gallery: [
+      ferrariPortofinoGallery1,
+      ferrariPortofinoGallery2,
+      ferrariPortofinoGallery3,
+      ferrariPortofinoGallery4,
+      ferrariPortofinoGallery5,
+      ferrariPortofinoGallery6
+    ],
     category: "Convertible GT",
     description: "The epitome of Italian elegance meets breathtaking performance",
     luxuryDescription: "The Ferrari Portofino embodies the perfect fusion of exhilarating performance and luxurious comfort. This sophisticated convertible grand tourer captures the essence of la dolce vita with its retractable hardtop, sumptuous leather interiors, and the unmistakable roar of a Ferrari V8 engine. Every journey becomes an unforgettable experience, whether cruising along the Mediterranean coast or commanding the open road with absolute authority.",

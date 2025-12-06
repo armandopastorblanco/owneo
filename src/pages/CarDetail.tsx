@@ -71,15 +71,27 @@ const CarDetail = () => {
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Gallery</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
-                  <img
-                    src={car.image}
-                    alt={`${car.name} view ${i}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-              ))}
+              {car.gallery ? (
+                car.gallery.map((image, index) => (
+                  <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
+                    <img
+                      src={image}
+                      alt={`${car.name} view ${index + 1}`}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                ))
+              ) : (
+                [1, 2, 3].map((i) => (
+                  <div key={i} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
+                    <img
+                      src={car.image}
+                      alt={`${car.name} view ${i}`}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                ))
+              )}
             </div>
           </section>
 
