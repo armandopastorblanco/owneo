@@ -2,12 +2,17 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cities, cars } from "@/data/cars";
-import { Card, CardContent } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MapPin, ArrowRight } from "lucide-react";
 
 const Cities = () => {
-  const getCarsForCity = (cityName: string) => {
-    return cars.filter(car => car.availableIn.includes(cityName));
+  const getFeatureCarForCity = (cityName: string) => {
+    const cityCars = cars.filter(car => car.availableIn.includes(cityName));
+    return cityCars[0];
+  };
+
+  const getCarsCountForCity = (cityName: string) => {
+    return cars.filter(car => car.availableIn.includes(cityName)).length;
   };
 
   return (
@@ -25,60 +30,52 @@ const Cities = () => {
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cities.map((city) => {
-              const availableCars = getCarsForCity(city.name);
+              const featureCar = getFeatureCarForCity(city.name);
+              const carsCount = getCarsCountForCity(city.name);
               
               return (
                 <div 
                   key={city.id} 
-                  className="relative border border-border rounded-lg overflow-hidden"
+                  className="group relative h-[450px] rounded-xl overflow-hidden border border-border"
                 >
-                  {/* Background Image with Overlay */}
+                  {/* City Background Image */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
                     <img 
                       src={city.image} 
                       alt={city.name}
-                      className="w-full h-full object-cover opacity-30 animate-[city-zoom_25s_ease-in-out_infinite]"
+                      className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500 animate-[city-zoom_25s_ease-in-out_infinite]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
                   </div>
 
-                  {/* Content */}
-                  <div className="relative z-10 p-8">
-                    <div className="flex items-start gap-4 mb-6">
-                      <MapPin className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
-                      <div>
-                        <h2 className="text-3xl font-bold mb-2 text-foreground">{city.name}</h2>
-                        <p className="text-muted-foreground">{city.description}</p>
-                      </div>
+                  {/* Featured Car Image */}
+                  {featureCar && (
+                    <div className="absolute inset-x-0 top-1/4 z-10 flex justify-center px-6">
+                      <img 
+                        src={featureCar.image} 
+                        alt={featureCar.name}
+                        className="w-full max-w-[280px] h-auto object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
+                  )}
 
-                  <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-4 text-foreground">
-                      Available Vehicles ({availableCars.length})
-                    </h3>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {availableCars.map((car) => (
-                        <Link key={car.id} to={`/car/${car.id}`}>
-                          <Card className="hover-lift cursor-pointer bg-background border-border">
-                            <CardContent className="p-4">
-                              <div className="aspect-[16/10] mb-3 overflow-hidden rounded-md bg-muted">
-                                <img
-                                  src={car.image}
-                                  alt={car.name}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                              <h4 className="font-semibold text-foreground mb-1">{car.name}</h4>
-                              <p className="text-sm text-muted-foreground">{car.category}</p>
-                              <p className="text-lg font-bold text-primary mt-2">{car.price}</p>
-                            </CardContent>
-                          </Card>
-                        </Link>
-                      ))}
+                  {/* Content Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 z-20 p-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <MapPin className="w-5 h-5 text-primary" />
+                      <h2 className="text-2xl font-bold text-foreground">{city.name}</h2>
                     </div>
-                  </div>
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {city.description}
+                    </p>
+                    <Link to={`/portfolio?city=${encodeURIComponent(city.name)}`}>
+                      <Button className="w-full group/btn">
+                        <span>Explore {carsCount} Vehicles</span>
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               );
