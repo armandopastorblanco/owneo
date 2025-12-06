@@ -497,6 +497,7 @@ import madridImg from "@/assets/cities/madrid.jpg";
 import marbellaImg from "@/assets/cities/marbella.jpg";
 import valenciaImg from "@/assets/cities/valencia.jpg";
 import ibizaImg from "@/assets/cities/ibiza.jpg";
+import alicanteImg from "@/assets/cities/alicante.jpg";
 
 export const cities = [
   {
@@ -528,5 +529,11 @@ export const cities = [
     name: "Ibiza",
     description: "The legendary Mediterranean island offering pristine beaches and exclusive experiences",
     image: ibizaImg
+  },
+  {
+    id: "alicante",
+    name: "Alicante",
+    description: "A stunning Mediterranean gem with golden beaches, historic castles, and vibrant coastal lifestyle",
+    image: alicanteImg
   }
 ];
