@@ -6,11 +6,6 @@ import { Button } from "@/components/ui/button";
 import { MapPin, ArrowRight } from "lucide-react";
 
 const Cities = () => {
-  const getFeatureCarForCity = (cityName: string) => {
-    const cityCars = cars.filter(car => car.availableIn.includes(cityName));
-    return cityCars[0];
-  };
-
   const getCarsCountForCity = (cityName: string) => {
     return cars.filter(car => car.availableIn.includes(cityName)).length;
   };
@@ -32,7 +27,6 @@ const Cities = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cities.map((city) => {
-              const featureCar = getFeatureCarForCity(city.name);
               const carsCount = getCarsCountForCity(city.name);
               
               return (
@@ -40,26 +34,15 @@ const Cities = () => {
                   key={city.id} 
                   className="group relative h-[450px] rounded-xl overflow-hidden border border-border"
                 >
-                  {/* City Background Image */}
+                  {/* City + Car Background Image */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
                     <img 
                       src={city.image} 
-                      alt={city.name}
-                      className="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500 animate-[city-zoom_25s_ease-in-out_infinite]"
+                      alt={`Luxury car in ${city.name}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                   </div>
-
-                  {/* Featured Car Image */}
-                  {featureCar && (
-                    <div className="absolute inset-x-0 top-1/4 z-10 flex justify-center px-6">
-                      <img 
-                        src={featureCar.image} 
-                        alt={featureCar.name}
-                        className="w-full max-w-[280px] h-auto object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  )}
 
                   {/* Content Overlay */}
                   <div className="absolute inset-x-0 bottom-0 z-20 p-6">
