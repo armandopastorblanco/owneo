@@ -29,7 +29,7 @@ const Navbar = () => {
             <Link to="/dashboard">
               <Button variant="outline" size="sm" className="flex items-center gap-2 border-primary/50 hover:bg-primary hover:text-primary-foreground">
                 <User className="w-4 h-4" />
-                <span className="hidden sm:inline">My Account</span>
+                <span className="hidden sm:inline">Mi Cuenta</span>
               </Button>
             </Link>
           </div>
