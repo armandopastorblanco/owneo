@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import ferrariPortofino from "@/assets/cars/ferrari-portofino.jpg";
 
 const mockUserData = {
-  name: "Carlos Mendez",
+  name: "Carlos Méndez",
   email: "carlos.mendez@example.com",
   credits: 30,
   vehicle: {
@@ -64,17 +64,17 @@ const Dashboard = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-5 h-5" />
-            <span>Back to Home</span>
+            <span>Volver al Inicio</span>
           </Link>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">Welcome,</span>
+            <span className="text-sm text-muted-foreground">Bienvenido,</span>
             <span className="font-semibold text-foreground">{mockUserData.name}</span>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-foreground">My Dashboard</h1>
+        <h1 className="text-4xl font-bold mb-8 text-foreground">Mi Panel</h1>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column - Vehicle Details */}
@@ -84,7 +84,7 @@ const Dashboard = () => {
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <Car className="w-5 h-5 text-primary" />
-                  My Vehicle
+                  Mi Vehículo
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
@@ -98,12 +98,12 @@ const Dashboard = () => {
                   </div>
                   <div className="p-6 flex flex-col justify-center space-y-4">
                     <div>
-                      <p className="text-sm text-muted-foreground">Vehicle</p>
+                      <p className="text-sm text-muted-foreground">Vehículo</p>
                       <p className="text-2xl font-bold text-foreground">{mockUserData.vehicle.name}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Year</p>
+                        <p className="text-sm text-muted-foreground">Año</p>
                         <p className="font-semibold text-foreground">{mockUserData.vehicle.year}</p>
                       </div>
                       <div>
@@ -111,17 +111,17 @@ const Dashboard = () => {
                         <p className="font-semibold text-foreground">{mockUserData.vehicle.color}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">License Plate</p>
+                        <p className="text-sm text-muted-foreground">Matrícula</p>
                         <p className="font-semibold text-foreground">{mockUserData.vehicle.licensePlate}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Brand</p>
+                        <p className="text-sm text-muted-foreground">Marca</p>
                         <p className="font-semibold text-foreground">{mockUserData.vehicle.brand}</p>
                       </div>
                     </div>
                     <Link to={`/car/${mockUserData.vehicle.id}`}>
                       <Button variant="outline" className="w-full mt-2">
-                        View Full Details
+                        Ver Detalles Completos
                       </Button>
                     </Link>
                   </div>
@@ -134,7 +134,7 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <MapPin className="w-5 h-5 text-primary" />
-                  Vehicle Location
+                  Ubicación del Vehículo
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -145,13 +145,13 @@ const Dashboard = () => {
                       <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
                       <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Coordinates: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
+                        Coordenadas: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
                       </p>
                     </div>
                   </div>
                 </div>
                 <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Get Directions
+                  Cómo Llegar
                 </Button>
               </CardContent>
             </Card>
@@ -161,7 +161,7 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <CalendarIcon className="w-5 h-5 text-primary" />
-                  Book Usage Days
+                  Reservar Días de Uso
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -179,21 +179,21 @@ const Dashboard = () => {
                     }}
                   />
                   <div className="mt-4 w-full">
-                    <p className="text-sm text-muted-foreground mb-2">Selected dates:</p>
+                    <p className="text-sm text-muted-foreground mb-2">Fechas seleccionadas:</p>
                     <div className="flex flex-wrap gap-2">
                       {selectedDates.length > 0 ? (
                         selectedDates.sort((a, b) => a.getTime() - b.getTime()).map((date, i) => (
                           <Badge key={i} variant="secondary" className="bg-primary/20 text-primary">
-                            {format(date, "MMM d, yyyy")}
+                            {format(date, "d MMM, yyyy")}
                           </Badge>
                         ))
                       ) : (
-                        <span className="text-muted-foreground text-sm">No dates selected</span>
+                        <span className="text-muted-foreground text-sm">No hay fechas seleccionadas</span>
                       )}
                     </div>
                   </div>
                   <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
-                    Confirm Booking
+                    Confirmar Reserva
                   </Button>
                 </div>
               </CardContent>
@@ -207,20 +207,20 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <CreditCard className="w-5 h-5 text-primary" />
-                  My Credits
+                  Mis Créditos
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-6">
                   <div className="text-6xl font-bold text-primary mb-2">{mockUserData.credits}</div>
-                  <p className="text-muted-foreground">credits remaining</p>
+                  <p className="text-muted-foreground">créditos disponibles</p>
                   <div className="mt-4 w-full bg-muted rounded-full h-3">
                     <div 
                       className="bg-primary h-3 rounded-full transition-all duration-500"
                       style={{ width: `${(mockUserData.credits / 30) * 100}%` }}
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">1 credit = 1 day of usage</p>
+                  <p className="text-xs text-muted-foreground mt-2">1 crédito = 1 día de uso</p>
                 </div>
               </CardContent>
             </Card>
@@ -233,12 +233,12 @@ const Dashboard = () => {
                     <FileText className="w-7 h-7 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground">Vehicle Documents</h3>
-                    <p className="text-sm text-muted-foreground">Insurance, registration, service history</p>
+                    <h3 className="font-semibold text-foreground">Documentos del Vehículo</h3>
+                    <p className="text-sm text-muted-foreground">Seguro, registro, historial de servicio</p>
                   </div>
                 </div>
                 <Button className="w-full mt-4" variant="outline">
-                  Access Documents
+                  Acceder a Documentos
                 </Button>
               </CardContent>
             </Card>
@@ -251,12 +251,12 @@ const Dashboard = () => {
                     <Phone className="w-7 h-7 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground">Concierge Service</h3>
-                    <p className="text-sm text-muted-foreground">24/7 premium assistance</p>
+                    <h3 className="font-semibold text-foreground">Servicio de Conserjería</h3>
+                    <p className="text-sm text-muted-foreground">Asistencia premium 24/7</p>
                   </div>
                 </div>
                 <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Contact Concierge
+                  Contactar Conserjería
                 </Button>
               </CardContent>
             </Card>
@@ -264,23 +264,23 @@ const Dashboard = () => {
             {/* Quick Stats */}
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="text-foreground text-lg">This Month</CardTitle>
+                <CardTitle className="text-foreground text-lg">Este Mes</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Days Booked</span>
+                  <span className="text-muted-foreground">Días Reservados</span>
                   <span className="font-semibold text-foreground">{selectedDates.length}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Credits Used</span>
+                  <span className="text-muted-foreground">Créditos Usados</span>
                   <span className="font-semibold text-foreground">0</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Next Booking</span>
+                  <span className="text-muted-foreground">Próxima Reserva</span>
                   <span className="font-semibold text-primary">
                     {selectedDates.length > 0 
-                      ? format(selectedDates.sort((a, b) => a.getTime() - b.getTime())[0], "MMM d")
-                      : "None"
+                      ? format(selectedDates.sort((a, b) => a.getTime() - b.getTime())[0], "d MMM")
+                      : "Ninguna"
                     }
                   </span>
                 </div>
