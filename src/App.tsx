@@ -8,6 +8,7 @@ import Portfolio from "./pages/Portfolio";
 import Cities from "./pages/Cities";
 import CarDetail from "./pages/CarDetail";
 import Dashboard from "./pages/Dashboard";
+import CalendarShowcase from "./pages/CalendarShowcase";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/cities" element={<Cities />} />
           <Route path="/car/:id" element={<CarDetail />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/calendar-showcase" element={<CalendarShowcase />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
