@@ -286,6 +286,36 @@ const Dashboard = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Tips Module */}
+            <Card className="border-border bg-gradient-to-br from-card to-muted/30">
+              <CardHeader>
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
+                  <span className="text-primary">✨</span>
+                  Consejos VIP
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                    <p className="text-sm font-medium text-foreground">🛣️ Rutas Escénicas</p>
+                    <p className="text-xs text-muted-foreground mt-1">Descubre las carreteras más espectaculares de la costa mediterránea para disfrutar al máximo tu supercar.</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                    <p className="text-sm font-medium text-foreground">🔧 Cuidado Premium</p>
+                    <p className="text-xs text-muted-foreground mt-1">Mantén el modo Sport para una experiencia óptima. Evita baches y revisa los neumáticos antes de cada viaje.</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                    <p className="text-sm font-medium text-foreground">📸 Momentos Únicos</p>
+                    <p className="text-xs text-muted-foreground mt-1">Reserva al atardecer para las mejores fotos. Nuestro equipo puede organizar sesiones fotográficas exclusivas.</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                    <p className="text-sm font-medium text-foreground">🍽️ Experiencias Gastro</p>
+                    <p className="text-xs text-muted-foreground mt-1">Combina tu reserva con restaurantes de alta cocina. Solicita recomendaciones a tu conserjería personal.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
