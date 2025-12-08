@@ -129,33 +129,6 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Vehicle Location */}
-            <Card className="border-border bg-card">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  Ubicación del Vehículo
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden relative">
-                  {/* Mock map placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-muted to-background flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
-                      <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Coordenadas: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Cómo Llegar
-                </Button>
-              </CardContent>
-            </Card>
-
             {/* Booking Calendar */}
             <Card className="border-border bg-card">
               <CardHeader>
@@ -196,6 +169,33 @@ const Dashboard = () => {
                     Confirmar Reserva
                   </Button>
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Vehicle Location */}
+            <Card className="border-border bg-card">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-foreground">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  Ubicación del Vehículo
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden relative">
+                  {/* Mock map placeholder */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-muted to-background flex items-center justify-center">
+                    <div className="text-center">
+                      <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
+                      <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Coordenadas: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+                  Cómo Llegar
+                </Button>
               </CardContent>
             </Card>
           </div>
