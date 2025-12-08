@@ -17,16 +17,16 @@ All colors MUST be HSL.
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 348 83% 47%;
+    --primary: 0 100% 28%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 0 70% 50%;
+    --secondary: 0 100% 28%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 348 83% 47%;
+    --accent: 0 100% 28%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -34,13 +34,13 @@ All colors MUST be HSL.
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 348 83% 47%;
+    --ring: 0 100% 28%;
 
     --radius: 0.5rem;
     
     --luxury-gold: 45 100% 70%;
     --luxury-gold-light: 45 100% 80%;
-    --ferrari-red: 0 70% 50%;
+    --ferrari-red: 0 100% 28%;
     --deep-black: 0 0% 7%;
     --charcoal: 0 0% 15%;
 
