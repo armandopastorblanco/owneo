@@ -1,16 +1,36 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Car, FileText, MapPin, Phone, Calendar as CalendarIcon, CreditCard } from "lucide-react";
+import { ArrowLeft, Car, FileText, MapPin, Phone, Calendar as CalendarIcon, CreditCard, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { format, addDays, differenceInDays, startOfDay } from "date-fns";
+import { es } from "date-fns/locale";
+import { DateRange } from "react-day-picker";
+import { toast } from "sonner";
 
 // Mock user data
 import ferrariPortofino from "@/assets/cars/ferrari-portofino.jpg";
+
+// Double credit periods (July, August, Christmas)
+const isDoubleCredit = (date: Date) => {
+  const month = date.getMonth();
+  const day = date.getDate();
+  
+  // July (6) and August (7)
+  if (month === 6 || month === 7) return true;
+  
+  // Christmas holidays (Dec 20 - Jan 6)
+  if (month === 11 && day >= 20) return true;
+  if (month === 0 && day <= 6) return true;
+  
+  return false;
+};
+
+const MIN_DAYS = 7;
+const MAX_DAYS = 14;
 
 const mockUserData = {
   name: "Carlos Méndez",
@@ -29,33 +49,43 @@ const mockUserData = {
       address: "Marina Port Vell, Barcelona",
       coordinates: { lat: 41.3749, lng: 2.1844 }
     }
-  },
-  bookedDates: [
-    new Date(2025, 11, 10),
-    new Date(2025, 11, 11),
-    new Date(2025, 11, 12),
-    new Date(2025, 11, 20),
-    new Date(2025, 11, 21),
-  ]
+  }
 };
 
 const Dashboard = () => {
-  const [selectedDates, setSelectedDates] = useState<Date[]>(mockUserData.bookedDates);
-  const [calendarOpen, setCalendarOpen] = useState(false);
-
-  const handleDateSelect = (date: Date | undefined) => {
-    if (!date) return;
-    
-    const dateExists = selectedDates.some(
-      (d) => d.toDateString() === date.toDateString()
-    );
-
-    if (dateExists) {
-      setSelectedDates(selectedDates.filter((d) => d.toDateString() !== date.toDateString()));
-    } else {
-      setSelectedDates([...selectedDates, date]);
+  const [range, setRange] = useState<DateRange | undefined>();
+  
+  const handleSelect = (newRange: DateRange | undefined) => {
+    if (!newRange?.from) {
+      setRange(undefined);
+      return;
     }
+    
+    if (newRange.from && newRange.to) {
+      const days = differenceInDays(newRange.to, newRange.from) + 1;
+      if (days < MIN_DAYS || days > MAX_DAYS) {
+        if (days < MIN_DAYS) toast.error(`Mínimo ${MIN_DAYS} días`);
+        if (days > MAX_DAYS) toast.error(`Máximo ${MAX_DAYS} días`);
+        return;
+      }
+    }
+    setRange(newRange);
   };
+
+  const calculateCredits = () => {
+    if (!range?.from || !range?.to) return { normal: 0, double: 0, total: 0 };
+    let normal = 0, double = 0;
+    let current = range.from;
+    while (current <= range.to) {
+      if (isDoubleCredit(current)) double++;
+      else normal++;
+      current = addDays(current, 1);
+    }
+    return { normal, double, total: normal + double * 2 };
+  };
+
+  const credits = calculateCredits();
+  const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -138,34 +168,54 @@ const Dashboard = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex flex-wrap gap-2 w-full justify-center">
+                    <Badge variant="outline" className="text-xs">
+                      <Info className="w-3 h-3 mr-1" />
+                      Mín. 7 días
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      <Info className="w-3 h-3 mr-1" />
+                      Máx. 14 días
+                    </Badge>
+                    <Badge className="bg-primary/20 text-primary text-xs">
+                      Jul-Ago & Navidad = 2x
+                    </Badge>
+                  </div>
                   <Calendar
-                    mode="multiple"
-                    selected={selectedDates}
-                    onSelect={(dates) => dates && setSelectedDates(dates)}
-                    className="rounded-md border border-border pointer-events-auto"
+                    mode="range"
+                    selected={range}
+                    onSelect={handleSelect}
+                    locale={es}
+                    disabled={(date) => date < startOfDay(new Date())}
                     modifiers={{
-                      booked: selectedDates
+                      doubleCredit: (date) => isDoubleCredit(date)
                     }}
                     modifiersStyles={{
-                      booked: { backgroundColor: "hsl(var(--primary))", color: "hsl(var(--primary-foreground))" }
+                      doubleCredit: { 
+                        border: "2px solid hsl(var(--primary))",
+                        borderRadius: "4px"
+                      }
                     }}
+                    className="rounded-md border border-border pointer-events-auto"
                   />
-                  <div className="mt-4 w-full">
-                    <p className="text-sm text-muted-foreground mb-2">Fechas seleccionadas:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedDates.length > 0 ? (
-                        selectedDates.sort((a, b) => a.getTime() - b.getTime()).map((date, i) => (
-                          <Badge key={i} variant="secondary" className="bg-primary/20 text-primary">
-                            {format(date, "d MMM, yyyy")}
-                          </Badge>
-                        ))
-                      ) : (
-                        <span className="text-muted-foreground text-sm">No hay fechas seleccionadas</span>
-                      )}
+                  {range?.from && range?.to && (
+                    <div className="w-full grid grid-cols-3 gap-2 text-center">
+                      <div className="p-2 rounded bg-muted/50">
+                        <p className="text-xs text-muted-foreground">Normal</p>
+                        <p className="font-bold text-foreground">{credits.normal}</p>
+                      </div>
+                      <div className="p-2 rounded bg-primary/10">
+                        <p className="text-xs text-muted-foreground">Alta (x2)</p>
+                        <p className="font-bold text-primary">{credits.double}</p>
+                      </div>
+                      <div className="p-2 rounded bg-primary/20">
+                        <p className="text-xs text-muted-foreground">Total</p>
+                        <p className="font-bold text-primary text-lg">{credits.total}</p>
+                      </div>
                     </div>
-                  </div>
-                  <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+                  )}
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                     Confirmar Reserva
                   </Button>
                 </div>
@@ -269,17 +319,17 @@ const Dashboard = () => {
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Días Reservados</span>
-                  <span className="font-semibold text-foreground">{selectedDates.length}</span>
+                  <span className="font-semibold text-foreground">{totalDays}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Créditos Usados</span>
-                  <span className="font-semibold text-foreground">0</span>
+                  <span className="text-muted-foreground">Créditos a Usar</span>
+                  <span className="font-semibold text-foreground">{credits.total}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Próxima Reserva</span>
                   <span className="font-semibold text-primary">
-                    {selectedDates.length > 0 
-                      ? format(selectedDates.sort((a, b) => a.getTime() - b.getTime())[0], "d MMM")
+                    {range?.from 
+                      ? format(range.from, "d MMM", { locale: es })
                       : "Ninguna"
                     }
                   </span>
