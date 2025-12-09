@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-showroom.jpg";
 
 const Index = () => {
-  const featuredCars = cars.slice(0, 3);
+  const featuredCars = cars.slice(0, 4);
 
   return (
     <div className="min-h-screen bg-background">
@@ -39,13 +39,13 @@ const Index = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
-            Experience the extraordinary. Discover Spain's most exclusive collection of luxury supercars.
+            Vive lo extraordinario. Descubre la colección más exclusiva de supercoches de lujo en España.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in">
             <Link to="/portfolio">
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-semibold">
-                VIEW COLLECTION
+                VER COLECCIÓN
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -55,7 +55,7 @@ const Index = () => {
                 variant="outline" 
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-lg font-semibold"
               >
-                EXPLORE LOCATIONS
+                EXPLORAR UBICACIONES
               </Button>
             </Link>
           </div>
@@ -67,14 +67,14 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              Featured Collection
+              Colección Destacada
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Handpicked masterpieces from the world's most prestigious manufacturers
+              Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredCars.map((car) => (
               <CarCard key={car.id} car={car} />
             ))}
@@ -87,7 +87,7 @@ const Index = () => {
                 variant="outline" 
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
-                VIEW ALL VEHICLES
+                VER TODOS LOS VEHÍCULOS
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -101,15 +101,15 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-12 text-center">
             <div>
               <div className="text-5xl font-bold text-primary mb-2">15+</div>
-              <div className="text-muted-foreground">Luxury Supercars</div>
+              <div className="text-muted-foreground">Supercoches de Lujo</div>
             </div>
             <div>
               <div className="text-5xl font-bold text-primary mb-2">5</div>
-              <div className="text-muted-foreground">Premium Locations</div>
+              <div className="text-muted-foreground">Ubicaciones Premium</div>
             </div>
             <div>
               <div className="text-5xl font-bold text-primary mb-2">100%</div>
-              <div className="text-muted-foreground">Excellence Guaranteed</div>
+              <div className="text-muted-foreground">Excelencia Garantizada</div>
             </div>
           </div>
         </div>
