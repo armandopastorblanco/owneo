@@ -1,5 +1,4 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
-import logoOwneo from "@/assets/logo-owneo.png";
 
 const Footer = () => {
   return (
@@ -7,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <img src={logoOwneo} alt="OWNEO" className="h-8 mb-4" />
+            <h3 className="text-lg font-bold text-primary mb-4">OWNEO</h3>
             <p className="text-sm text-muted-foreground">
               Tu destino exclusivo para supercoches de lujo en España
             </p>
