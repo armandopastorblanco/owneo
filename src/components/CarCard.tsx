@@ -31,8 +31,8 @@ const CarCard = ({ car }: CarCardProps) => {
             {car.description}
           </p>
           <div className="flex items-center justify-between mt-auto">
-            <span className="text-2xl font-bold text-primary">{car.price}</span>
-            <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
+            <span className="text-2xl font-bold text-foreground">{car.price}</span>
+            <ArrowRight className="w-5 h-5 text-foreground group-hover:translate-x-1 transition-transform" />
           </div>
         </CardContent>
       </Card>
