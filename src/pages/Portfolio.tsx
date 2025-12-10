@@ -12,7 +12,7 @@ const Portfolio = () => {
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-bold mb-4 text-foreground">
-              Our <span className="text-primary">Portfolio</span>
+              Our <span className="text-foreground">Portfolio</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Explore our exclusive collection of the world's most prestigious supercars

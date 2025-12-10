@@ -18,7 +18,7 @@ const Cities = () => {
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-bold mb-4 text-foreground">
-              Premium <span className="text-primary">Locations</span>
+              Premium <span className="text-foreground">Locations</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover our exclusive showrooms across Spain's most prestigious cities
@@ -47,7 +47,7 @@ const Cities = () => {
                   {/* Content Overlay */}
                   <div className="absolute inset-x-0 bottom-0 z-20 p-6">
                     <div className="flex items-center gap-2 mb-2">
-                      <MapPin className="w-5 h-5 text-primary" />
+                      <MapPin className="w-5 h-5 text-foreground" />
                       <h2 className="text-2xl font-bold text-foreground">{city.name}</h2>
                     </div>
                     <p className="text-sm text-muted-foreground mb-4 line-clamp-2">

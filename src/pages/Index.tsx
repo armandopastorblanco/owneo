@@ -11,7 +11,7 @@ const Index = () => {
   const featuredCars = cars.slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-background font-encode font-extralight">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}

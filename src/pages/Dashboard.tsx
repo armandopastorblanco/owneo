@@ -113,7 +113,7 @@ const Dashboard = () => {
             <Card className="overflow-hidden border-border bg-card">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Car className="w-5 h-5 text-primary" />
+                  <Car className="w-5 h-5 text-foreground" />
                   Mi Vehículo
                 </CardTitle>
               </CardHeader>
@@ -163,7 +163,7 @@ const Dashboard = () => {
             <Card className="border-border bg-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
-                  <CalendarIcon className="w-5 h-5 text-primary" />
+                  <CalendarIcon className="w-5 h-5 text-foreground" />
                   Reservar Días de Uso
                 </CardTitle>
               </CardHeader>
@@ -178,7 +178,7 @@ const Dashboard = () => {
                       <Info className="w-3 h-3 mr-1" />
                       Máx. 14 días
                     </Badge>
-                    <Badge className="bg-primary/20 text-primary text-xs">
+                    <Badge className="bg-foreground/20 text-foreground text-xs">
                       Jul-Ago & Navidad = 2x
                     </Badge>
                   </div>
@@ -193,7 +193,7 @@ const Dashboard = () => {
                     }}
                     modifiersStyles={{
                       doubleCredit: { 
-                        border: "2px solid hsl(var(--primary))",
+                        border: "2px solid hsl(var(--foreground))",
                         borderRadius: "4px"
                       }
                     }}
@@ -205,17 +205,17 @@ const Dashboard = () => {
                         <p className="text-xs text-muted-foreground">Normal</p>
                         <p className="font-bold text-foreground">{credits.normal}</p>
                       </div>
-                      <div className="p-2 rounded bg-primary/10">
+                      <div className="p-2 rounded bg-foreground/10">
                         <p className="text-xs text-muted-foreground">Alta (x2)</p>
-                        <p className="font-bold text-primary">{credits.double}</p>
+                        <p className="font-bold text-foreground">{credits.double}</p>
                       </div>
-                      <div className="p-2 rounded bg-primary/20">
+                      <div className="p-2 rounded bg-foreground/20">
                         <p className="text-xs text-muted-foreground">Total</p>
-                        <p className="font-bold text-primary text-lg">{credits.total}</p>
+                        <p className="font-bold text-foreground text-lg">{credits.total}</p>
                       </div>
                     </div>
                   )}
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <Button className="w-full bg-foreground hover:bg-foreground/90 text-background">
                     Confirmar Reserva
                   </Button>
                 </div>
@@ -226,24 +226,24 @@ const Dashboard = () => {
             <Card className="border-border bg-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
-                  <MapPin className="w-5 h-5 text-primary" />
+                  <MapPin className="w-5 h-5 text-foreground" />
                   Ubicación del Vehículo
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden relative">
                   {/* Mock map placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-muted to-background flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
-                      <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
+                    <div className="absolute inset-0 bg-gradient-to-br from-muted to-background flex items-center justify-center">
+                      <div className="text-center">
+                        <MapPin className="w-12 h-12 text-foreground mx-auto mb-3" />
+                        <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
                       <p className="text-sm text-muted-foreground mt-1">
                         Coordenadas: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
                       </p>
                     </div>
                   </div>
                 </div>
-                <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Button className="w-full mt-4 bg-foreground hover:bg-foreground/90 text-background">
                   Cómo Llegar
                 </Button>
               </CardContent>
@@ -253,20 +253,20 @@ const Dashboard = () => {
           {/* Right Column - Quick Actions & Credits */}
           <div className="space-y-6">
             {/* Credits Card */}
-            <Card className="border-border bg-gradient-to-br from-primary/20 to-card">
+            <Card className="border-border bg-gradient-to-br from-foreground/20 to-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-foreground">
-                  <CreditCard className="w-5 h-5 text-primary" />
+                  <CreditCard className="w-5 h-5 text-foreground" />
                   Mis Créditos
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-6">
-                  <div className="text-6xl font-bold text-primary mb-2">{mockUserData.credits}</div>
+                  <div className="text-6xl font-bold text-foreground mb-2">{mockUserData.credits}</div>
                   <p className="text-muted-foreground">créditos disponibles</p>
                   <div className="mt-4 w-full bg-muted rounded-full h-3">
                     <div 
-                      className="bg-primary h-3 rounded-full transition-all duration-500"
+                      className="bg-foreground h-3 rounded-full transition-all duration-500"
                       style={{ width: `${(mockUserData.credits / 30) * 100}%` }}
                     />
                   </div>
@@ -276,11 +276,11 @@ const Dashboard = () => {
             </Card>
 
             {/* Vehicle Documents CTA */}
-            <Card className="border-border bg-card hover:border-primary/50 transition-colors cursor-pointer group">
+            <Card className="border-border bg-card hover:border-foreground/50 transition-colors cursor-pointer group">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                    <FileText className="w-7 h-7 text-primary" />
+                  <div className="w-14 h-14 rounded-full bg-foreground/20 flex items-center justify-center group-hover:bg-foreground/30 transition-colors">
+                    <FileText className="w-7 h-7 text-foreground" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground">Documentos del Vehículo</h3>
@@ -294,18 +294,18 @@ const Dashboard = () => {
             </Card>
 
             {/* Concierge CTA */}
-            <Card className="border-border bg-card hover:border-primary/50 transition-colors cursor-pointer group">
+            <Card className="border-border bg-card hover:border-foreground/50 transition-colors cursor-pointer group">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                    <Phone className="w-7 h-7 text-primary" />
+                  <div className="w-14 h-14 rounded-full bg-foreground/20 flex items-center justify-center group-hover:bg-foreground/30 transition-colors">
+                    <Phone className="w-7 h-7 text-foreground" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground">Servicio de Conserjería</h3>
                     <p className="text-sm text-muted-foreground">Asistencia premium 24/7</p>
                   </div>
                 </div>
-                <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Button className="w-full mt-4 bg-foreground hover:bg-foreground/90 text-background">
                   Contactar Conserjería
                 </Button>
               </CardContent>
@@ -327,7 +327,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Próxima Reserva</span>
-                  <span className="font-semibold text-primary">
+                  <span className="font-semibold text-foreground">
                     {range?.from 
                       ? format(range.from, "d MMM", { locale: es })
                       : "Ninguna"
@@ -341,25 +341,25 @@ const Dashboard = () => {
             <Card className="border-border bg-gradient-to-br from-card to-muted/30">
               <CardHeader>
                 <CardTitle className="text-foreground text-lg flex items-center gap-2">
-                  <span className="text-primary">✨</span>
+                  <span className="text-foreground">✨</span>
                   Consejos VIP
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-foreground/30 transition-colors">
                     <p className="text-sm font-medium text-foreground">🛣️ Rutas Escénicas</p>
                     <p className="text-xs text-muted-foreground mt-1">Descubre las carreteras más espectaculares de la costa mediterránea para disfrutar al máximo tu supercar.</p>
                   </div>
-                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-foreground/30 transition-colors">
                     <p className="text-sm font-medium text-foreground">🔧 Cuidado Premium</p>
                     <p className="text-xs text-muted-foreground mt-1">Mantén el modo Sport para una experiencia óptima. Evita baches y revisa los neumáticos antes de cada viaje.</p>
                   </div>
-                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-foreground/30 transition-colors">
                     <p className="text-sm font-medium text-foreground">📸 Momentos Únicos</p>
                     <p className="text-xs text-muted-foreground mt-1">Reserva al atardecer para las mejores fotos. Nuestro equipo puede organizar sesiones fotográficas exclusivas.</p>
                   </div>
-                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-primary/30 transition-colors">
+                  <div className="p-3 rounded-lg bg-background/50 border border-border/50 hover:border-foreground/30 transition-colors">
                     <p className="text-sm font-medium text-foreground">🍽️ Experiencias Gastro</p>
                     <p className="text-xs text-muted-foreground mt-1">Combina tu reserva con restaurantes de alta cocina. Solicita recomendaciones a tu conserjería personal.</p>
                   </div>

@@ -16,7 +16,7 @@ const CarDetail = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 text-foreground">Car not found</h1>
           <Link to="/portfolio">
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+            <Button variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
               <ArrowLeft className="mr-2 w-4 h-4" />
               Back to Portfolio
             </Button>
@@ -32,7 +32,7 @@ const CarDetail = () => {
       
       <main className="pt-24 pb-12 px-6">
         <div className="container mx-auto max-w-6xl">
-          <Link to="/portfolio" className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors">
+          <Link to="/portfolio" className="inline-flex items-center text-foreground hover:text-foreground/80 mb-8 transition-colors">
             <ArrowLeft className="mr-2 w-4 h-4" />
             Back to Portfolio
           </Link>
@@ -54,7 +54,7 @@ const CarDetail = () => {
                   {car.category}
                 </span>
                 <h1 className="text-5xl font-bold mt-2 mb-4 text-foreground">{car.name}</h1>
-                <p className="text-2xl text-primary font-bold">{car.price}</p>
+                <p className="text-2xl text-foreground font-bold">{car.price}</p>
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ const CarDetail = () => {
             <div className="grid md:grid-cols-2 gap-4">
               {car.features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg">
-                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                  <CheckCircle2 className="w-5 h-5 text-foreground flex-shrink-0" />
                   <span className="text-foreground">{feature}</span>
                 </div>
               ))}
@@ -131,7 +131,7 @@ const CarDetail = () => {
             <div className="flex flex-wrap gap-3">
               {car.availableIn.map((city) => (
                 <div key={city} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full">
-                  <MapPin className="w-4 h-4 text-primary" />
+                  <MapPin className="w-4 h-4 text-foreground" />
                   <span className="text-foreground">{city}</span>
                 </div>
               ))}
@@ -139,11 +139,11 @@ const CarDetail = () => {
           </section>
 
           {/* CTA */}
-          <Card className="bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/20">
+          <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
             <CardContent className="p-8 text-center">
               <h3 className="text-2xl font-bold mb-4 text-foreground">Ready to Experience This Masterpiece?</h3>
               <p className="text-muted-foreground mb-6">Contact us to schedule a private viewing</p>
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90">
                 REQUEST CONSULTATION
               </Button>
             </CardContent>
