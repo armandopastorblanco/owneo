@@ -25,13 +25,13 @@ const Index = () => {
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <div className="flex items-center justify-center gap-2 mb-6 animate-fade-in">
-            <Star className="w-5 h-5 text-primary fill-primary" />
-            <Star className="w-5 h-5 text-primary fill-primary" />
-            <Star className="w-5 h-5 text-primary fill-primary" />
+            <Star className="w-5 h-5 text-foreground fill-foreground" />
+            <Star className="w-5 h-5 text-foreground fill-foreground" />
+            <Star className="w-5 h-5 text-foreground fill-foreground" />
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent">
+            <span className="text-foreground">
               PRESTIGE
             </span>
             <br />
@@ -44,7 +44,7 @@ const Index = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in">
             <Link to="/portfolio">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-semibold">
+              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 px-8 py-6 text-lg font-semibold">
                 VER COLECCIÓN
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -53,7 +53,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-lg font-semibold"
+                className="border-foreground text-foreground hover:bg-foreground hover:text-background px-8 py-6 text-lg font-semibold"
               >
                 EXPLORAR UBICACIONES
               </Button>
@@ -85,7 +85,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className="border-foreground text-foreground hover:bg-foreground hover:text-background"
               >
                 VER TODOS LOS VEHÍCULOS
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -100,15 +100,15 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-12 text-center">
             <div>
-              <div className="text-5xl font-bold text-primary mb-2">15+</div>
+              <div className="text-5xl font-bold text-foreground mb-2">15+</div>
               <div className="text-muted-foreground">Supercoches de Lujo</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-primary mb-2">5</div>
+              <div className="text-5xl font-bold text-foreground mb-2">5</div>
               <div className="text-muted-foreground">Ubicaciones Premium</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-primary mb-2">100%</div>
+              <div className="text-5xl font-bold text-foreground mb-2">100%</div>
               <div className="text-muted-foreground">Excelencia Garantizada</div>
             </div>
           </div>
