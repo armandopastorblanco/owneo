@@ -20,20 +20,20 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <Car className="w-8 h-8 text-primary" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <Car className="w-8 h-8 text-foreground" />
+            <span className="text-2xl font-bold text-foreground">
               OWNEO
             </span>
           </Link>
           
           <div className="flex items-center gap-8">
-            <Link to="/" className={`text-sm font-medium transition-colors ${isActive("/") ? "text-primary" : "text-foreground hover:text-primary"}`}>
+            <Link to="/" className={`text-sm font-medium transition-colors ${isActive("/") ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
               {language === "es" ? "INICIO" : "HOME"}
             </Link>
-            <Link to="/portfolio" className={`text-sm font-medium transition-colors ${isActive("/portfolio") ? "text-primary" : "text-foreground hover:text-primary"}`}>
+            <Link to="/portfolio" className={`text-sm font-medium transition-colors ${isActive("/portfolio") ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
               PORTFOLIO
             </Link>
-            <Link to="/cities" className={`text-sm font-medium transition-colors ${isActive("/cities") ? "text-primary" : "text-foreground hover:text-primary"}`}>
+            <Link to="/cities" className={`text-sm font-medium transition-colors ${isActive("/cities") ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
               {language === "es" ? "UBICACIONES" : "LOCATIONS"}
             </Link>
             
@@ -49,7 +49,7 @@ const Navbar = () => {
             </Select>
             
             <Link to="/dashboard">
-              <Button variant="outline" size="sm" className="flex items-center gap-2 border-primary/50 hover:bg-primary hover:text-primary-foreground">
+              <Button variant="outline" size="sm" className="flex items-center gap-2 border-foreground/50 hover:bg-foreground hover:text-background">
                 <User className="w-4 h-4" />
                 <span className="hidden sm:inline">{language === "es" ? "Mi Cuenta" : "My Account"}</span>
               </Button>

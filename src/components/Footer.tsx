@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-bold text-primary mb-4">OWNEO</h3>
+            <h3 className="text-lg font-bold text-foreground mb-4">OWNEO</h3>
             <p className="text-sm text-muted-foreground">
               Tu destino exclusivo para supercoches de lujo en España
             </p>
@@ -33,23 +33,23 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground">QUICK LINKS</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <div><a href="/portfolio" className="hover:text-primary transition-colors">Our Portfolio</a></div>
-              <div><a href="/cities" className="hover:text-primary transition-colors">Locations</a></div>
-              <div><a href="#" className="hover:text-primary transition-colors">About Us</a></div>
-              <div><a href="#" className="hover:text-primary transition-colors">Contact</a></div>
+              <div><a href="/portfolio" className="hover:text-foreground transition-colors">Our Portfolio</a></div>
+              <div><a href="/cities" className="hover:text-foreground transition-colors">Locations</a></div>
+              <div><a href="#" className="hover:text-foreground transition-colors">About Us</a></div>
+              <div><a href="#" className="hover:text-foreground transition-colors">Contact</a></div>
             </div>
           </div>
           
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground">FOLLOW US</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
             </div>

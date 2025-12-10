@@ -24,7 +24,7 @@ const CarCard = ({ car }: CarCardProps) => {
               {car.category}
             </span>
           </div>
-          <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+          <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-foreground/80 transition-colors">
             {car.name}
           </h3>
           <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
