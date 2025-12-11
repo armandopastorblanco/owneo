@@ -163,6 +163,89 @@ const Index = () => {
         </div>
       </section>
 
+      {/* SEO Storytelling Section */}
+      <section className="py-24 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+              El Lujo de los Supercoches, Ahora Accesible
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              En OWNEO revolucionamos el concepto de <strong className="text-foreground">alquiler de supercoches de lujo</strong> en España, 
+              haciendo realidad el sueño de conducir los vehículos más exclusivos del mundo.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 mb-16">
+            <article className="space-y-4">
+              <h3 className="text-xl font-semibold text-foreground">
+                Las Marcas Más Prestigiosas del Mundo
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Nuestra flota exclusiva incluye los <strong className="text-foreground">superdeportivos Ferrari</strong> más codiciados, 
+                desde el icónico Ferrari Portofino hasta el impresionante F8 Tributo. Experimenta la potencia de un 
+                <strong className="text-foreground"> Lamborghini Huracán</strong> o el rugido del legendario Aventador. 
+                Para los amantes de la ingeniería alemana, ofrecemos la gama completa de <strong className="text-foreground">Porsche</strong>: 
+                el 911 Turbo S, el Taycan eléctrico y los SUV deportivos Cayenne y Macan.
+              </p>
+            </article>
+
+            <article className="space-y-4">
+              <h3 className="text-xl font-semibold text-foreground">
+                Elegancia Británica y Exclusividad
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Descubre el refinamiento del <strong className="text-foreground">Aston Martin DB11</strong>, 
+                la innovación aerodinámica del <strong className="text-foreground">McLaren 720S</strong>, 
+                o el lujo supremo del <strong className="text-foreground">Rolls-Royce Wraith</strong>. 
+                Completa tu experiencia con la artesanía del <strong className="text-foreground">Bentley Continental GT</strong> 
+                o la potencia del <strong className="text-foreground">Mercedes-AMG GT R</strong>, conocido como "La Bestia del Infierno Verde".
+              </p>
+            </article>
+          </div>
+
+          <div className="bg-card/50 rounded-2xl p-8 md:p-12 border border-border">
+            <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
+              Supercar Sharing: La Nueva Era del Lujo Compartido
+            </h3>
+            <p className="text-muted-foreground leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+              El <strong className="text-foreground">supercar sharing</strong> representa la evolución del acceso al lujo automovilístico. 
+              Ya no es necesario invertir cientos de miles de euros para disfrutar de un <strong className="text-foreground">coche de alta gama</strong>. 
+              Con OWNEO, accede a una <strong className="text-foreground">flota de supercoches premium</strong> en las mejores ubicaciones de España: 
+              Barcelona, Madrid, Marbella, Valencia, Ibiza y Alicante.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div className="p-4">
+                <h4 className="font-semibold text-foreground mb-2">Experiencia VIP</h4>
+                <p className="text-sm text-muted-foreground">
+                  Servicio de concierge personalizado y entrega a domicilio en toda España
+                </p>
+              </div>
+              <div className="p-4">
+                <h4 className="font-semibold text-foreground mb-2">Flexibilidad Total</h4>
+                <p className="text-sm text-muted-foreground">
+                  Alquiler por días o semanas, adaptado a tus necesidades de lujo
+                </p>
+              </div>
+              <div className="p-4">
+                <h4 className="font-semibold text-foreground mb-2">Calidad Garantizada</h4>
+                <p className="text-sm text-muted-foreground">
+                  Vehículos impecables con mantenimiento premium y seguro completo
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-muted-foreground mt-12 leading-relaxed max-w-3xl mx-auto">
+            Desde el <strong className="text-foreground">alquiler de Ferrari en Barcelona</strong> hasta un 
+            <strong className="text-foreground"> Lamborghini en Marbella</strong>, OWNEO te ofrece la oportunidad de vivir 
+            experiencias únicas al volante de los <strong className="text-foreground">mejores supercoches del mundo</strong>. 
+            Descubre por qué somos líderes en <strong className="text-foreground">luxury car rental</strong> y 
+            <strong className="text-foreground"> supercar experiences</strong> en España.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
