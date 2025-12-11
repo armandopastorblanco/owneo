@@ -103,8 +103,8 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cities.map((city) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {cities.slice(0, 4).map((city) => (
               <Link 
                 key={city.id} 
                 to="/cities" 
