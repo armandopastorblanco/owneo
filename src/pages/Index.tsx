@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
-import { cars } from "@/data/cars";
+import { cars, cities } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-showroom.jpg";
 
@@ -84,6 +84,58 @@ const Index = () => {
                 className="border-foreground text-foreground hover:bg-foreground hover:text-background"
               >
                 VER TODOS LOS VEHÍCULOS
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Locations Showcase */}
+      <section className="py-20 px-6 bg-card/50">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Nuestras Ubicaciones
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Descubre nuestra flota en las ciudades más exclusivas de España
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cities.map((city) => (
+              <Link 
+                key={city.id} 
+                to="/cities" 
+                className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
+              >
+                <img
+                  src={city.image}
+                  alt={city.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <MapPin className="w-4 h-4 text-foreground" />
+                    <span className="text-sm text-muted-foreground uppercase tracking-wider">España</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{city.name}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/cities">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-foreground text-foreground hover:bg-foreground hover:text-background"
+              >
+                VER TODAS LAS UBICACIONES
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
