@@ -65,8 +65,8 @@ export const cars: Car[] = [
       ferrariPortofinoGallery5,
       ferrariPortofinoGallery6
     ],
-    category: "Convertible GT",
-    description: "The epitome of Italian elegance meets breathtaking performance",
+    category: "GT Descapotable",
+    description: "La máxima expresión de la elegancia italiana con un rendimiento extraordinario",
     luxuryDescription: "The Ferrari Portofino embodies the perfect fusion of exhilarating performance and luxurious comfort. This sophisticated convertible grand tourer captures the essence of la dolce vita with its retractable hardtop, sumptuous leather interiors, and the unmistakable roar of a Ferrari V8 engine. Every journey becomes an unforgettable experience, whether cruising along the Mediterranean coast or commanding the open road with absolute authority.",
     specifications: {
       engine: "3.9L Twin-Turbo V8",
@@ -95,8 +95,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€230,000",
     image: porsche911TurboS,
-    category: "Sports Coupe",
-    description: "German engineering at its absolute finest",
+    category: "Coupé Deportivo",
+    description: "Ingeniería alemana en su máxima expresión",
     luxuryDescription: "The Porsche 911 Turbo S represents the pinnacle of precision engineering and timeless design. This legendary sports car combines blistering acceleration with everyday usability, delivering an uncompromising driving experience that has captivated enthusiasts for generations. Its iconic silhouette conceals cutting-edge technology and raw power, making it the ultimate expression of automotive excellence.",
     specifications: {
       engine: "3.8L Twin-Turbo Flat-6",
@@ -125,8 +125,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€250,000",
     image: lamborghiniHuracanEvo,
-    category: "Supercar",
-    description: "Raw Italian passion in its purest form",
+    category: "Superdeportivo",
+    description: "Pasión italiana en su forma más pura",
     luxuryDescription: "The Lamborghini Huracán EVO is a masterpiece of automotive artistry that commands attention wherever it goes. With its aggressive angular design and naturally aspirated V10 engine, this supercar delivers an visceral driving experience that awakens all your senses. The Huracán EVO isn't just a car—it's a statement of uncompromising ambition and unapologetic performance.",
     specifications: {
       engine: "5.2L V10",
@@ -155,8 +155,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€95,000",
     image: porscheMacanTurbo,
-    category: "Luxury SUV",
-    description: "The sports car of SUVs",
+    category: "SUV de Lujo",
+    description: "El deportivo de los SUV",
     luxuryDescription: "The Porsche Macan Turbo redefines what a luxury SUV can be. Combining Porsche's legendary sports car DNA with the versatility of an SUV, it delivers exhilarating performance without sacrificing comfort or practicality. Whether navigating city streets or conquering mountain roads, the Macan Turbo offers an unmatched blend of power, agility, and refined luxury.",
     specifications: {
       engine: "2.9L Twin-Turbo V6",
@@ -185,8 +185,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€280,000",
     image: ferrariF8Tributo,
-    category: "Supercar",
-    description: "A tribute to the most powerful V8 in Ferrari history",
+    category: "Superdeportivo",
+    description: "Un tributo al V8 más potente en la historia de Ferrari",
     luxuryDescription: "The Ferrari F8 Tributo celebrates Ferrari's most powerful V8 engine with stunning design and extraordinary performance. This mid-engine masterpiece delivers track-focused dynamics with road-car refinement, offering an unfiltered connection between driver and machine. Every detail, from its sculpted bodywork to its meticulously crafted interior, reflects Ferrari's unwavering commitment to excellence.",
     specifications: {
       engine: "3.9L Twin-Turbo V8",
@@ -216,7 +216,7 @@ export const cars: Car[] = [
     price: "€220,000",
     image: lamborghiniUrus,
     category: "Super SUV",
-    description: "The world's first Super Sport Utility Vehicle",
+    description: "El primer Super Sport Utility Vehicle del mundo",
     luxuryDescription: "The Lamborghini Urus breaks all conventions as the world's first Super SUV. Combining Lamborghini's iconic design language with unprecedented versatility, the Urus delivers supercar performance in an SUV package. Its luxurious cabin, cutting-edge technology, and unmistakable Lamborghini character make it the perfect choice for those who refuse to compromise.",
     specifications: {
       engine: "4.0L Twin-Turbo V8",
@@ -245,8 +245,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€190,000",
     image: porscheTaycanTurboS,
-    category: "Electric Sports Sedan",
-    description: "The future of performance is electric",
+    category: "Sedán Deportivo Eléctrico",
+    description: "El futuro del rendimiento es eléctrico",
     luxuryDescription: "The Porsche Taycan Turbo S proves that electric performance can be truly exhilarating. This groundbreaking sports sedan combines instant torque delivery with Porsche's legendary handling dynamics, creating a driving experience unlike any other. With its stunning design, luxurious interior, and zero-emission powertrain, the Taycan Turbo S represents the perfect fusion of sustainability and performance.",
     specifications: {
       engine: "Dual Electric Motors",
@@ -275,8 +275,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€210,000",
     image: ferrariRoma,
-    category: "Grand Tourer",
-    description: "Contemporary elegance meets timeless Ferrari performance",
+    category: "Gran Turismo",
+    description: "Elegancia contemporánea con el rendimiento intemporal de Ferrari",
     luxuryDescription: "The Ferrari Roma captures the carefree, pleasurable way of life of 1950s and '60s Rome, reimagined for the modern era. This sophisticated grand tourer features a minimalist yet elegant design, a driver-focused cockpit, and the thrilling performance of a Ferrari V8. The Roma represents a new chapter in Ferrari's legacy, where refined luxury meets exhilarating dynamics.",
     specifications: {
       engine: "3.9L Twin-Turbo V8",
@@ -305,8 +305,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€500,000",
     image: lamborghiniAventador,
-    category: "Flagship Supercar",
-    description: "The final evolution of an icon",
+    category: "Superdeportivo Insignia",
+    description: "La evolución final de un icono",
     luxuryDescription: "The Lamborghini Aventador Ultimae represents the ultimate expression of naturally aspirated V12 performance. This limited-edition masterpiece combines the best elements of the Aventador SVJ and S models, creating the most powerful and refined Aventador ever built. With its dramatic scissor doors, carbon fiber monocoque, and spine-tingling V12 soundtrack, the Ultimae is a fitting tribute to one of the greatest supercars ever created.",
     specifications: {
       engine: "6.5L V12",
@@ -335,8 +335,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€225,000",
     image: astonMartinDB11,
-    category: "Grand Tourer",
-    description: "British elegance at its finest",
+    category: "Gran Turismo",
+    description: "Elegancia británica en su máxima expresión",
     luxuryDescription: "The Aston Martin DB11 embodies the perfect balance of beauty and performance. This quintessentially British grand tourer features hand-crafted luxury, timeless design, and a powerful twin-turbo V8 or V12 engine. Every journey in the DB11 is an occasion, whether you're crossing continents in supreme comfort or enjoying spirited driving on your favorite road.",
     specifications: {
       engine: "4.0L Twin-Turbo V8",
@@ -365,8 +365,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€285,000",
     image: mclaren720s,
-    category: "Supercar",
-    description: "Aerodynamic excellence meets raw performance",
+    category: "Superdeportivo",
+    description: "Excelencia aerodinámica con rendimiento puro",
     luxuryDescription: "The McLaren 720S pushes the boundaries of what a supercar can achieve. With its innovative carbon fiber structure, distinctive dihedral doors, and breathtaking performance, the 720S delivers a driving experience that's both thrilling and refined. Every aspect of its design serves a purpose, creating a machine that's as functional as it is beautiful.",
     specifications: {
       engine: "4.0L Twin-Turbo V8",
@@ -395,8 +395,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€185,000",
     image: porscheCayenneTurboGT,
-    category: "Performance SUV",
-    description: "The most powerful Cayenne ever created",
+    category: "SUV de Alto Rendimiento",
+    description: "El Cayenne más potente jamás creado",
     luxuryDescription: "The Porsche Cayenne Turbo GT is the ultimate performance SUV, combining track-focused capabilities with everyday usability. This exceptional vehicle features aggressive styling, enhanced aerodynamics, and the most powerful engine ever fitted to a Cayenne. It's proof that an SUV can deliver genuine sports car performance without compromise.",
     specifications: {
       engine: "4.0L Twin-Turbo V8",
@@ -425,8 +425,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€195,000",
     image: mercedesAMGGTR,
-    category: "Sports Coupe",
-    description: "The Beast of the Green Hell",
+    category: "Coupé Deportivo",
+    description: "La Bestia del Infierno Verde",
     luxuryDescription: "The Mercedes-AMG GT R, known as 'The Beast of the Green Hell,' is a track-focused supercar that brings Nürburgring-honed performance to the road. With its distinctive styling, handcrafted AMG V8 engine, and race-derived technology, the GT R delivers an intoxicating blend of raw power and refined luxury that only AMG can provide.",
     specifications: {
       engine: "4.0L Twin-Turbo V8",
@@ -455,8 +455,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€240,000",
     image: bentleyContinentalGT,
-    category: "Luxury Grand Tourer",
-    description: "Unparalleled luxury meets effortless performance",
+    category: "Gran Turismo de Lujo",
+    description: "Lujo incomparable con rendimiento sin esfuerzo",
     luxuryDescription: "The Bentley Continental GT represents the pinnacle of grand touring luxury. Hand-crafted in Crewe, England, this magnificent coupe combines exquisite materials, meticulous attention to detail, and potent W12 power. Every journey becomes an experience in absolute comfort and refinement, where the only limit is the horizon ahead.",
     specifications: {
       engine: "6.0L Twin-Turbo W12",
@@ -485,8 +485,8 @@ export const cars: Car[] = [
     year: 2024,
     price: "€350,000",
     image: rollsRoyceWraith,
-    category: "Luxury Coupe",
-    description: "The most powerful Rolls-Royce ever created",
+    category: "Coupé de Lujo",
+    description: "El Rolls-Royce más potente jamás creado",
     luxuryDescription: "The Rolls-Royce Wraith is a statement of uncompromising luxury and performance. This fastback coupe combines the effortless power of a twin-turbo V12 with the supreme comfort and craftsmanship that only Rolls-Royce can deliver. Every detail, from the starlight headliner to the spirit of ecstasy, is designed to create an automotive experience beyond compare.",
     specifications: {
       engine: "6.6L Twin-Turbo V12",
@@ -520,37 +520,37 @@ export const cities = [
   {
     id: "barcelona",
     name: "Barcelona",
-    description: "The cosmopolitan capital of Catalonia, where modernist architecture meets Mediterranean beaches",
+    description: "La capital cosmopolita de Cataluña, donde la arquitectura modernista se encuentra con las playas mediterráneas",
     image: barcelonaImg
   },
   {
     id: "madrid",
     name: "Madrid",
-    description: "Spain's vibrant capital, renowned for its royal heritage and world-class culture",
+    description: "La vibrante capital de España, conocida por su patrimonio real y su cultura de clase mundial",
     image: madridImg
   },
   {
     id: "marbella",
     name: "Marbella",
-    description: "The jewel of Costa del Sol, synonymous with luxury, glamour, and sophisticated living",
+    description: "La joya de la Costa del Sol, sinónimo de lujo, glamour y vida sofisticada",
     image: marbellaImg
   },
   {
     id: "valencia",
     name: "Valencia",
-    description: "A perfect blend of historic charm and futuristic architecture on Spain's eastern coast",
+    description: "Una mezcla perfecta de encanto histórico y arquitectura futurista en la costa este de España",
     image: valenciaImg
   },
   {
     id: "ibiza",
     name: "Ibiza",
-    description: "The legendary Mediterranean island offering pristine beaches and exclusive experiences",
+    description: "La legendaria isla mediterránea que ofrece playas vírgenes y experiencias exclusivas",
     image: ibizaImg
   },
   {
     id: "alicante",
     name: "Alicante",
-    description: "A stunning Mediterranean gem with golden beaches, historic castles, and vibrant coastal lifestyle",
+    description: "Una joya mediterránea impresionante con playas doradas, castillos históricos y un vibrante estilo de vida costero",
     image: alicanteImg
   }
 ];
