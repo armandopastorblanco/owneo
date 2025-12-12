@@ -11,7 +11,9 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">CONTACT</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">CONTACTO
+
+          </h4>
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
