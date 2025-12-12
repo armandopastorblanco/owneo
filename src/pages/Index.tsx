@@ -6,27 +6,23 @@ import CarCard from "@/components/CarCard";
 import { cars, cities } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-showroom.jpg";
-
 const Index = () => {
   const featuredCars = cars.slice(0, 4);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center animate-[subtle-zoom_20s_ease-in-out_infinite]"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        >
+        <div className="absolute inset-0 bg-cover bg-center animate-[subtle-zoom_20s_ease-in-out_infinite]" style={{
+        backgroundImage: `url(${heroImage})`
+      }}>
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <div className="flex items-center justify-center gap-2 mb-6 animate-fade-in">
             <Star className="w-5 h-5 text-foreground fill-foreground" />
-            <Star className="w-5 h-5 text-foreground fill-foreground" />
+            <Star className="w-5 h-5 fill-foreground bg-primary text-primary-foreground" />
             <Star className="w-5 h-5 text-foreground fill-foreground" />
           </div>
           
@@ -46,11 +42,7 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/cities">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-foreground text-foreground hover:bg-foreground hover:text-background px-8 py-6 text-lg font-semibold"
-              >
+              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background px-8 py-6 text-lg font-semibold">
                 EXPLORAR UBICACIONES
               </Button>
             </Link>
@@ -71,18 +63,12 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredCars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
+            {featuredCars.map(car => <CarCard key={car.id} car={car} />)}
           </div>
           
           <div className="text-center mt-12">
             <Link to="/portfolio">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-foreground text-foreground hover:bg-foreground hover:text-background"
-              >
+              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
                 VER TODOS LOS VEHÍCULOS
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -104,17 +90,8 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {cities.slice(0, 4).map((city) => (
-              <Link 
-                key={city.id} 
-                to="/cities" 
-                className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
-              >
-                <img
-                  src={city.image}
-                  alt={city.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+            {cities.slice(0, 4).map(city => <Link key={city.id} to="/cities" className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift">
+                <img src={city.image} alt={city.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-center gap-2 mb-2">
@@ -124,17 +101,12 @@ const Index = () => {
                   <h3 className="text-2xl font-bold text-foreground mb-2">{city.name}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
                 </div>
-              </Link>
-            ))}
+              </Link>)}
           </div>
           
           <div className="text-center mt-12">
             <Link to="/cities">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-foreground text-foreground hover:bg-foreground hover:text-background"
-              >
+              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
                 VER TODAS LAS UBICACIONES
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -272,8 +244,6 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

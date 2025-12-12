@@ -1,8 +1,6 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-card border-t border-border mt-20">
+  return <footer className="bg-card border-t border-border mt-20">
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
@@ -25,7 +23,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Barcelona, Spain</span>
+                <span>Alicante, Spain</span>
               </div>
             </div>
           </div>
@@ -60,8 +58,6 @@ const Footer = () => {
           <p>&copy; 2024 Prestige Motors. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
