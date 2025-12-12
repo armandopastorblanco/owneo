@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Prestige Motors. All rights reserved.</p>
+          <p>© 2025 OWNEO. All rights reserved.</p>
         </div>
       </div>
     </footer>;
