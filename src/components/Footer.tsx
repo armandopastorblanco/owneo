@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">QUICK LINKS</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">ENLACES</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
               <div><a href="/portfolio" className="hover:text-foreground transition-colors">Our Portfolio</a></div>
               <div><a href="/cities" className="hover:text-foreground transition-colors">Locations</a></div>
@@ -41,7 +41,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">FOLLOW US</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">REDES SOCIALES </h4>
             <div className="flex gap-4">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Instagram className="w-5 h-5" />
