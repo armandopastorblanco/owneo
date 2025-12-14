@@ -21,9 +21,9 @@ const Index = () => {
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <div className="flex items-center justify-center gap-2 mb-6 animate-fade-in">
-            <Star className="w-5 h-5 text-foreground fill-foreground" />
-            <Star className="w-5 h-5 fill-foreground bg-primary text-primary-foreground" />
-            <Star className="w-5 h-5 text-foreground fill-foreground" />
+            <Star className="text-foreground fill-foreground w-0 h-0" />
+            <Star className="fill-foreground bg-primary text-primary-foreground w-0 h-0" />
+            <Star className="text-foreground fill-foreground h-0 w-0" />
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">
