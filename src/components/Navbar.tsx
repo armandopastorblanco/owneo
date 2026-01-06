@@ -20,6 +20,7 @@ const Navbar = () => {
     { path: "/", label: language === "es" ? "INICIO" : "HOME" },
     { path: "/portfolio", label: "PORTFOLIO" },
     { path: "/cities", label: language === "es" ? "UBICACIONES" : "LOCATIONS" },
+    { path: "/quienes-somos", label: language === "es" ? "QUIÉNES SOMOS" : "ABOUT US" },
   ];
   
   return (
