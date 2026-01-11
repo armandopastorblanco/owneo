@@ -32,13 +32,7 @@ const CarCard = ({ car }: CarCardProps) => {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           {/* Available participations badge */}
-          <div className={`absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 ${
-            availableParticipations === 0 
-              ? 'bg-destructive/90 text-destructive-foreground' 
-              : availableParticipations <= 3 
-                ? 'bg-amber-500/90 text-white' 
-                : 'bg-emerald-500/90 text-white'
-          }`}>
+          <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-[hsl(var(--participation-available))] text-background">
             <Users className="w-3.5 h-3.5" />
             {availableParticipations}/10 disponibles
           </div>
