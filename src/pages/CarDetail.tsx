@@ -1,14 +1,32 @@
 import { useParams, Link } from "react-router-dom";
+import { useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cars } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, MapPin, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle2, Users, Info } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const CarDetail = () => {
   const { id } = useParams();
   const car = cars.find(c => c.id === id);
+
+  // Generate a stable random number of available participations based on car id
+  const availableParticipations = useMemo(() => {
+    if (!id) return 5;
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      hash = ((hash << 5) - hash) + id.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash) % 11; // 0 to 10
+  }, [id]);
 
   if (!car) {
     return (
@@ -26,6 +44,9 @@ const CarDetail = () => {
     );
   }
 
+  const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
+  const sharePrice = Math.round(numericPrice * 0.1);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -34,7 +55,7 @@ const CarDetail = () => {
         <div className="container mx-auto max-w-6xl">
           <Link to="/portfolio" className="inline-flex items-center text-foreground hover:text-foreground/80 mb-8 transition-colors">
             <ArrowLeft className="mr-2 w-4 h-4" />
-            Back to Portfolio
+            Volver al Portfolio
           </Link>
 
           {/* Hero Image with Animation */}
@@ -44,18 +65,61 @@ const CarDetail = () => {
               alt={car.name}
               className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
             />
+            {/* Available participations badge */}
+            <div className={`absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${
+              availableParticipations === 0 
+                ? 'bg-destructive/90 text-destructive-foreground' 
+                : availableParticipations <= 3 
+                  ? 'bg-amber-500/90 text-white' 
+                  : 'bg-emerald-500/90 text-white'
+            }`}>
+              <Users className="w-4 h-4" />
+              {availableParticipations}/10 participaciones disponibles
+            </div>
           </div>
 
           {/* Car Info Header */}
           <div className="mb-12">
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-4">
               <div>
                 <span className="text-sm text-muted-foreground uppercase tracking-wider">
                   {car.category}
                 </span>
                 <h1 className="text-5xl font-bold mt-2 mb-4 text-foreground">{car.name}</h1>
-                <p className="text-2xl text-foreground font-bold">{car.price}</p>
               </div>
+              
+              {/* Pricing Card with Tooltip */}
+              <Card className="bg-card/50 border-border/50 md:min-w-[280px]">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-sm text-muted-foreground uppercase tracking-wider">Cuota de participación</span>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Info className="w-4 h-4 text-muted-foreground cursor-help" />
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs p-4">
+                          <p className="font-semibold mb-2">¿Cómo funciona el co-sharing?</p>
+                          <p className="text-sm text-muted-foreground">
+                            La cuota de participación representa el 10% del valor total del vehículo. 
+                            Como co-propietario, disfrutas de acceso exclusivo al vehículo según tu participación, 
+                            compartiendo los costes de mantenimiento, seguro y almacenamiento con otros miembros.
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                  <p className="text-3xl font-bold text-foreground mb-2">
+                    {sharePrice.toLocaleString('es-ES')}€
+                  </p>
+                  <p className="text-lg text-muted-foreground line-through">
+                    {car.price}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-3">
+                    Valor total del vehículo
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
