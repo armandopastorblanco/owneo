@@ -31,7 +31,19 @@ const CarCard = ({ car }: CarCardProps) => {
             {car.description}
           </p>
           <div className="flex items-center justify-between mt-auto">
-            <span className="text-2xl font-bold text-foreground">{car.price}</span>
+            <div className="flex flex-col">
+              <span className="text-xs text-muted-foreground uppercase tracking-wider">Cuota de participación</span>
+              <span className="text-2xl font-bold text-foreground">
+                {(() => {
+                  const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
+                  const sharePrice = Math.round(numericPrice * 0.1);
+                  return `${sharePrice.toLocaleString('es-ES')}€`;
+                })()}
+              </span>
+              <span className="text-sm text-muted-foreground line-through">
+                {car.price}
+              </span>
+            </div>
             <ArrowRight className="w-5 h-5 text-foreground group-hover:translate-x-1 transition-transform" />
           </div>
         </CardContent>
