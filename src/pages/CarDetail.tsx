@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ParticipationForm from "@/components/ParticipationForm";
 
 const CarDetail = () => {
   const { id } = useParams();
@@ -199,11 +200,13 @@ const CarDetail = () => {
           {/* CTA */}
           <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-foreground">Ready to Experience This Masterpiece?</h3>
-              <p className="text-muted-foreground mb-6">Contact us to schedule a private viewing</p>
-              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90">
-                REQUEST CONSULTATION
-              </Button>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser copropietario de esta obra maestra?</h3>
+              <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
+              <ParticipationForm 
+                carName={car.name} 
+                availableParticipations={availableParticipations}
+                sharePrice={sharePrice}
+              />
             </CardContent>
           </Card>
         </div>
