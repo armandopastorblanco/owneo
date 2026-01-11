@@ -66,13 +66,7 @@ const CarDetail = () => {
               className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
             />
             {/* Available participations badge */}
-            <div className={`absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${
-              availableParticipations === 0 
-                ? 'bg-destructive/90 text-destructive-foreground' 
-                : availableParticipations <= 3 
-                  ? 'bg-amber-500/90 text-white' 
-                  : 'bg-emerald-500/90 text-white'
-            }`}>
+            <div className="absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 bg-[hsl(var(--participation-available))] text-background">
               <Users className="w-4 h-4" />
               {availableParticipations}/10 participaciones disponibles
             </div>
