@@ -56,8 +56,8 @@ const NuestroModelo = () => {
     {
       number: "05",
       icon: Repeat,
-      title: "Vende tus Participaciones",
-      description: "Flexibilidad total: puedes vender tus participaciones en cualquier momento o adquirir más participaciones en diferentes vehículos de nuestra flota."
+      title: "Venta a 5 Años",
+      description: "Recupera hasta el 70% de tu inversión inicial. Al cabo de 5 años, vendemos el vehículo y distribuimos el valor entre los copropietarios según sus participaciones."
     }
   ];
 
@@ -67,13 +67,17 @@ const NuestroModelo = () => {
     { icon: Lock, title: "Datos Encriptados", description: "Máxima seguridad digital" },
     { icon: Wrench, title: "Garantía del Vehículo", description: "Cobertura completa incluida" },
     { icon: FileCheck, title: "Costes Transparentes", description: "Sin sorpresas ni costes ocultos" },
-    { icon: Repeat, title: "Venta Flexible", description: "Liquida tu participación cuando quieras" }
+    { icon: Repeat, title: "Venta a 5 Años", description: "Recupera hasta el 70% de tu inversión" }
   ];
 
   const comparisonData = {
     vehiclePrice: 250000,
-    shares: 5,
-    sharePrice: 50000,
+    shares: 10,
+    sharePrice: 25000,
+    resaleValue: {
+      individual: 175000, // 70% del valor original
+      cosharing: 17500 // 70% de la participación
+    },
     annualCosts: {
       individual: {
         insurance: 5000,
@@ -85,29 +89,30 @@ const NuestroModelo = () => {
         total: 44000
       },
       cosharing: {
-        insurance: 1000,
-        maintenance: 1600,
-        storage: 720,
-        depreciation: 5000,
-        registration: 240,
-        cleaning: 240,
-        total: 8800
+        insurance: 500,
+        maintenance: 800,
+        storage: 360,
+        depreciation: 2500,
+        registration: 120,
+        cleaning: 120,
+        total: 4400
       }
     },
     usage: {
-      daysPerShare: 30,
-      kmPerShare: 3000
+      daysPerShare: 36,
+      kmPerShare: 2500
     }
   };
 
   const practicalExample = {
     vehicle: "Porsche 911 Turbo S",
     totalShares: 10,
-    yourShares: 2,
-    daysPerYear: 60,
-    kmPerYear: 6000,
+    yourShares: 1,
+    daysPerYear: 36,
+    kmPerYear: 2500,
     pricePerShare: 25000,
-    yourInvestment: 50000
+    yourInvestment: 25000,
+    resaleValue: 17500
   };
 
   return (
@@ -257,12 +262,25 @@ const NuestroModelo = () => {
                     <Check className="w-5 h-5 text-primary" />
                     <h4 className="text-lg font-bold text-primary">OWNEO Co-Sharing</h4>
                   </div>
-                  <p className="text-sm text-muted-foreground">5 copropietarios (1 participación)</p>
+                  <p className="text-sm text-muted-foreground">10 copropietarios (1 participación)</p>
                 </div>
               </div>
 
               {/* Cost Rows */}
               <div className="divide-y divide-border">
+                {/* Initial Cost Row */}
+                <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border bg-accent/5">
+                  <div className="p-4 flex items-center">
+                    <span className="text-sm font-bold text-foreground">💰 Coste inicial de compra</span>
+                  </div>
+                  <div className="p-4 bg-muted/30 flex items-center justify-center">
+                    <span className="text-lg font-bold text-foreground">€{comparisonData.vehiclePrice.toLocaleString()}</span>
+                  </div>
+                  <div className="p-4 bg-primary/5 flex items-center justify-center">
+                    <span className="text-lg font-bold text-primary">€{comparisonData.sharePrice.toLocaleString()}</span>
+                  </div>
+                </div>
+
                 {[
                   { label: "Seguro anual", individual: comparisonData.annualCosts.individual.insurance, cosharing: comparisonData.annualCosts.cosharing.insurance },
                   { label: "Mantenimiento y servicio", individual: comparisonData.annualCosts.individual.maintenance, cosharing: comparisonData.annualCosts.cosharing.maintenance },
@@ -294,6 +312,19 @@ const NuestroModelo = () => {
                   </div>
                   <div className="p-6 bg-primary/10 flex items-center justify-center">
                     <span className="text-2xl font-bold text-primary">€{comparisonData.annualCosts.cosharing.total.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                {/* Resale Value Row */}
+                <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border bg-green-500/5">
+                  <div className="p-4 flex items-center">
+                    <span className="text-sm font-bold text-foreground">🔄 Precio de reventa (5 años)</span>
+                  </div>
+                  <div className="p-4 bg-muted/30 flex items-center justify-center">
+                    <span className="text-lg font-bold text-green-600">+€{comparisonData.resaleValue.individual.toLocaleString()}</span>
+                  </div>
+                  <div className="p-4 bg-primary/5 flex items-center justify-center">
+                    <span className="text-lg font-bold text-green-600">+€{comparisonData.resaleValue.cosharing.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
@@ -380,7 +411,7 @@ const NuestroModelo = () => {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-foreground">Tu Copropiedad</h3>
-                    <p className="text-primary font-medium">2 participaciones adquiridas</p>
+                    <p className="text-primary font-medium">1 participación adquirida</p>
                   </div>
                 </div>
 
@@ -406,18 +437,25 @@ const NuestroModelo = () => {
                     </div>
                     <span className="text-xl font-bold text-foreground">{practicalExample.kmPerYear.toLocaleString()} km</span>
                   </div>
-                  <div className="flex justify-between items-center py-3">
+                  <div className="flex justify-between items-center py-3 border-b border-border/30">
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-primary" />
                       <span className="text-foreground">Reserva flexible</span>
                     </div>
                     <span className="text-sm font-medium text-primary">Calendario digital 24/7</span>
                   </div>
+                  <div className="flex justify-between items-center py-3">
+                    <div className="flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4 text-green-600" />
+                      <span className="text-foreground">Recuperas al vender</span>
+                    </div>
+                    <span className="text-xl font-bold text-green-600">€{practicalExample.resaleValue.toLocaleString()}</span>
+                  </div>
                 </div>
 
                 <div className="mt-6 p-4 bg-background/50 rounded-xl">
                   <p className="text-sm text-muted-foreground text-center">
-                    Con 2 participaciones, disfrutas <strong className="text-foreground">60 días al año</strong> de un {practicalExample.vehicle} por solo <strong className="text-primary">€{practicalExample.yourInvestment.toLocaleString()}</strong> de inversión inicial.
+                    Con 1 participación, disfrutas <strong className="text-foreground">{practicalExample.daysPerYear} días al año</strong> de un {practicalExample.vehicle} por solo <strong className="text-primary">€{practicalExample.yourInvestment.toLocaleString()}</strong> y <strong className="text-green-600">recuperas hasta €{practicalExample.resaleValue.toLocaleString()}</strong> al cabo de 5 años.
                   </p>
                 </div>
               </div>
