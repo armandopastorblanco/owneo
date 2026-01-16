@@ -33,11 +33,11 @@ const CarDetail = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4 text-foreground">Car not found</h1>
+          <h1 className="text-4xl font-bold mb-4 text-foreground">Vehículo no encontrado</h1>
           <Link to="/portfolio">
             <Button variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
               <ArrowLeft className="mr-2 w-4 h-4" />
-              Back to Portfolio
+              Volver al Portfolio
             </Button>
           </Link>
         </div>
@@ -120,7 +120,7 @@ const CarDetail = () => {
 
           {/* Luxury Description */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-foreground">The Experience</h2>
+            <h2 className="text-3xl font-bold mb-6 text-foreground">La Experiencia</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               {car.luxuryDescription}
             </p>
@@ -128,14 +128,14 @@ const CarDetail = () => {
 
           {/* Image Gallery */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Gallery</h2>
+            <h2 className="text-3xl font-bold mb-6 text-foreground">Galería</h2>
             <div className="grid md:grid-cols-3 gap-4">
               {car.gallery ? (
                 car.gallery.map((image, index) => (
                   <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
                     <img
                       src={image}
-                      alt={`${car.name} view ${index + 1}`}
+                      alt={`${car.name} vista ${index + 1}`}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -145,7 +145,7 @@ const CarDetail = () => {
                   <div key={i} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
                     <img
                       src={car.image}
-                      alt={`${car.name} view ${i}`}
+                      alt={`${car.name} vista ${i}`}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -156,7 +156,7 @@ const CarDetail = () => {
 
           {/* Specifications */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Technical Specifications</h2>
+            <h2 className="text-3xl font-bold mb-6 text-foreground">Especificaciones Técnicas</h2>
             <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -173,7 +173,7 @@ const CarDetail = () => {
 
           {/* Features */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Premium Features</h2>
+            <h2 className="text-3xl font-bold mb-6 text-foreground">Características Premium</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {car.features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg">
@@ -184,9 +184,78 @@ const CarDetail = () => {
             </div>
           </section>
 
+          {/* Comparison Section: Compra Individual VS OWNEO Co-Sharing */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold mb-6 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
+            <p className="text-muted-foreground mb-8">
+              Descubre cómo el modelo de copropiedad OWNEO te permite disfrutar de este {car.name} con una inversión significativamente menor.
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-4 px-4 text-muted-foreground font-medium">Concepto</th>
+                    <th className="text-center py-4 px-4 text-muted-foreground font-medium">Compra Individual</th>
+                    <th className="text-center py-4 px-4 font-medium text-primary">OWNEO Co-Sharing</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Inversión Inicial</td>
+                    <td className="py-4 px-4 text-center text-foreground">{car.price}</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">{sharePrice.toLocaleString('es-ES')}€</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Seguro Anual</td>
+                    <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.03).toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">~{Math.round(numericPrice * 0.003).toLocaleString('es-ES')}€</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Mantenimiento Anual</td>
+                    <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.02).toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">~{Math.round(numericPrice * 0.002).toLocaleString('es-ES')}€</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Almacenamiento Anual</td>
+                    <td className="py-4 px-4 text-center text-foreground">~3.000€</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">~300€</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Depreciación (5 años)</td>
+                    <td className="py-4 px-4 text-center text-foreground">~30-40%</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">Compartida entre copropietarios</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Días de Uso Estimados/Año</td>
+                    <td className="py-4 px-4 text-center text-foreground">~15-20 días</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">~36 días garantizados</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-4 px-4 text-foreground font-medium">Reventa a 5 Años</td>
+                    <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.65).toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">Hasta 70% de tu inversión</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-4 text-foreground font-bold">Coste Real por Día de Uso</td>
+                    <td className="py-4 px-4 text-center text-foreground font-bold">~{Math.round((numericPrice * 0.35 + numericPrice * 0.05 * 5) / (17 * 5)).toLocaleString('es-ES')}€/día</td>
+                    <td className="py-4 px-4 text-center text-primary font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (36 * 5)).toLocaleString('es-ES')}€/día</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-8 p-6 bg-primary/10 rounded-lg border border-primary/20">
+              <p className="text-center text-foreground">
+                <span className="font-bold text-primary">Ahorra hasta un 80%</span> en costes anuales con OWNEO Co-Sharing, 
+                disfrutando del {car.name} sin las cargas financieras de la propiedad exclusiva.
+              </p>
+            </div>
+          </section>
+
           {/* Available Locations */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Available At</h2>
+            <h2 className="text-3xl font-bold mb-6 text-foreground">Disponible En</h2>
             <div className="flex flex-wrap gap-3">
               {car.availableIn.map((city) => (
                 <div key={city} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full">
