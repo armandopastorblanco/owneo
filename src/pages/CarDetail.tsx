@@ -228,8 +228,8 @@ const CarDetail = () => {
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Días de Uso Estimados/Año</td>
-                    <td className="py-4 px-4 text-center text-foreground">~15-20 días</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~36 días garantizados</td>
+                    <td className="py-4 px-4 text-center text-foreground">~50 días</td>
+                    <td className="py-4 px-4 text-center text-primary font-semibold">~30 días</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Reventa a 5 Años</td>
@@ -238,8 +238,8 @@ const CarDetail = () => {
                   </tr>
                   <tr>
                     <td className="py-4 px-4 text-foreground font-bold">Coste Real por Día de Uso</td>
-                    <td className="py-4 px-4 text-center text-foreground font-bold">~{Math.round((numericPrice * 0.35 + numericPrice * 0.05 * 5) / (17 * 5)).toLocaleString('es-ES')}€/día</td>
-                    <td className="py-4 px-4 text-center text-primary font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (36 * 5)).toLocaleString('es-ES')}€/día</td>
+                    <td className="py-4 px-4 text-center text-foreground font-bold">~{Math.round((numericPrice * 0.35 + numericPrice * 0.05 * 5) / (50 * 5)).toLocaleString('es-ES')}€/día</td>
+                    <td className="py-4 px-4 text-center text-primary font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (30 * 5)).toLocaleString('es-ES')}€/día</td>
                   </tr>
                 </tbody>
               </table>
