@@ -6,6 +6,8 @@ import CarCard from "@/components/CarCard";
 import { cars, cities } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-showroom.jpg";
+import owneoLogo from "@/assets/owneo-logo.jpg";
+
 const Index = () => {
   const featuredCars = cars.slice(0, 4);
   return <div className="min-h-screen bg-background">
@@ -26,9 +28,9 @@ const Index = () => {
             <Star className="text-foreground fill-foreground h-0 w-0" />
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">
-            <span className="text-foreground">OWNEO</span>
-          </h1>
+          <div className="mb-6 animate-fade-in">
+            <img src={owneoLogo} alt="OWNEO" className="h-20 md:h-32 w-auto mx-auto" />
+          </div>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
             Vive lo extraordinario. Descubre la colección más exclusiva de supercoches de lujo en España.
