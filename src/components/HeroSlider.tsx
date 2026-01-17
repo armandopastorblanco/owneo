@@ -87,49 +87,103 @@ const HeroSlider = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Content - Minimal */}
-      <div className="relative z-10 h-full flex flex-col justify-end pb-32 px-6 md:px-12 lg:px-20">
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto w-full">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-24 left-6 md:left-12 lg:left-20"
+            className="mb-8"
           >
-            <img src={owneoLogo} alt="OWNEO" className="h-12 md:h-16 lg:h-20 w-auto" />
+            <img src={owneoLogo} alt="OWNEO" className="h-16 md:h-24 lg:h-28 w-auto" />
           </motion.div>
 
-          {/* Car Name Only */}
+          {/* Dynamic Text Content */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="space-y-4"
             >
+              {/* Accent text */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-sm md:text-base uppercase tracking-[0.3em] text-muted-foreground"
+              >
+                {currentData.accent}
+              </motion.p>
+
+              {/* Car Name */}
               <motion.h1
-                className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground tracking-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight"
               >
                 {currentData.car?.name}
               </motion.h1>
-              
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+
+              {/* Tagline */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-8"
+                className="text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light"
+              >
+                {currentData.tagline}
+              </motion.p>
+
+              {/* Specs highlight */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="flex flex-wrap gap-6 pt-4"
+              >
+                <div className="flex flex-col">
+                  <span className="text-2xl md:text-3xl font-bold text-foreground">{currentData.car?.specifications.power}</span>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">Potencia</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-2xl md:text-3xl font-bold text-foreground">{currentData.car?.specifications.acceleration}</span>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">0-100 km/h</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-2xl md:text-3xl font-bold text-foreground">{currentData.car?.specifications.topSpeed}</span>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">Vel. Máx</span>
+                </div>
+              </motion.div>
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex flex-col sm:flex-row gap-4 pt-8"
               >
                 <Link to={`/car/${currentData.car?.id}`}>
                   <Button 
-                    variant="ghost"
-                    className="text-foreground hover:bg-foreground/10 text-lg font-medium tracking-wide group"
+                    size="lg" 
+                    className="bg-foreground text-background hover:bg-foreground/90 px-8 py-6 text-lg font-semibold group"
                   >
                     DESCUBRIR
                     <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+                <Link to="/portfolio">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-foreground/50 text-foreground hover:bg-foreground hover:text-background px-8 py-6 text-lg font-semibold"
+                  >
+                    VER COLECCIÓN
                   </Button>
                 </Link>
               </motion.div>
