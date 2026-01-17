@@ -3,54 +3,17 @@ import { ArrowRight, Star, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
+import HeroSlider from "@/components/HeroSlider";
 import { cars, cities } from "@/data/cars";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-showroom.jpg";
-import owneoLogo from "@/assets/owneo-logo.jpg";
 
 const Index = () => {
   const featuredCars = cars.slice(0, 4);
   return <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center animate-[subtle-zoom_20s_ease-in-out_infinite]" style={{
-        backgroundImage: `url(${heroImage})`
-      }}>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
-        </div>
-        
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <div className="flex items-center justify-center gap-2 mb-6 animate-fade-in">
-            <Star className="text-foreground fill-foreground w-0 h-0" />
-            <Star className="fill-foreground bg-primary text-primary-foreground w-0 h-0" />
-            <Star className="text-foreground fill-foreground h-0 w-0" />
-          </div>
-          
-          <div className="mb-6 animate-fade-in">
-            <img src={owneoLogo} alt="OWNEO" className="h-20 md:h-32 w-auto mx-auto" />
-          </div>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
-            Vive lo extraordinario. Descubre la colección más exclusiva de supercoches de lujo en España.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in">
-            <Link to="/portfolio">
-              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 px-8 py-6 text-lg font-semibold">
-                VER COLECCIÓN
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/cities">
-              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background px-8 py-6 text-lg font-semibold">
-                EXPLORAR UBICACIONES
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero Slider Section */}
+      <HeroSlider />
 
       {/* Featured Collection */}
       <section className="py-20 px-6">
