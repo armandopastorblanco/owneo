@@ -1,209 +1,183 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cars } from "@/data/cars";
-import owneoLogo from "@/assets/owneo-logo.jpg";
 
-// Featured cars for the hero slider
+// Featured cars for the hero slider - more cars for variety
 const heroSlides = [
-  {
-    car: cars.find(c => c.id === "ferrari-f8-tributo"),
-    tagline: "Pura Potencia Italiana",
-    accent: "710 CV de emoción"
-  },
-  {
-    car: cars.find(c => c.id === "lamborghini-aventador"),
-    tagline: "El Rugido Legendario",
-    accent: "V12 atmosférico"
-  },
-  {
-    car: cars.find(c => c.id === "porsche-911-turbo-s"),
-    tagline: "Ingeniería Alemana",
-    accent: "Perfección deportiva"
-  },
-  {
-    car: cars.find(c => c.id === "mclaren-720s"),
-    tagline: "Aerodinámica Extrema",
-    accent: "Tecnología de competición"
-  },
-  {
-    car: cars.find(c => c.id === "rolls-royce-wraith"),
-    tagline: "Lujo Supremo",
-    accent: "Elegancia británica"
-  }
-].filter(slide => slide.car);
+  cars.find(c => c.id === "ferrari-f8-tributo"),
+  cars.find(c => c.id === "lamborghini-aventador"),
+  cars.find(c => c.id === "porsche-911-turbo-s"),
+  cars.find(c => c.id === "mclaren-720s"),
+  cars.find(c => c.id === "rolls-royce-wraith"),
+  cars.find(c => c.id === "ferrari-roma"),
+  cars.find(c => c.id === "bentley-continental-gt"),
+  cars.find(c => c.id === "mercedes-amg-gt-r"),
+].filter(Boolean);
 
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+    }, 2500); // Faster transitions for flash effect
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const nextSlide = () => {
-    setIsAutoPlaying(false);
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const prevSlide = () => {
-    setIsAutoPlaying(false);
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setIsAutoPlaying(false);
-    setCurrentSlide(index);
-  };
-
-  const currentData = heroSlides[currentSlide];
+  }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-background">
-      {/* Background Images with Animation */}
-      <AnimatePresence mode="wait">
+    <section className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Flash transition background images */}
+      <AnimatePresence mode="sync">
         <motion.div
           key={currentSlide}
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.95, opacity: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 1.2 }}
+          animate={{ opacity: 1, scale: 1.05 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ 
+            duration: 0.8, 
+            ease: [0.25, 0.1, 0.25, 1],
+            opacity: { duration: 0.4 }
+          }}
           className="absolute inset-0"
         >
           <div 
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${currentData.car?.image})` }}
+            style={{ backgroundImage: `url(${heroSlides[currentSlide]?.image})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/60" />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/50" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content - Minimal */}
-      <div className="relative z-10 h-full flex flex-col justify-end pb-32 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto w-full">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="absolute top-24 left-6 md:left-12 lg:left-20"
-          >
-            <img src={owneoLogo} alt="OWNEO" className="h-12 md:h-16 lg:h-20 w-auto" />
-          </motion.div>
+      {/* Flash effect overlay */}
+      <AnimatePresence>
+        <motion.div
+          key={`flash-${currentSlide}`}
+          initial={{ opacity: 0.7 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0 bg-white pointer-events-none z-10"
+        />
+      </AnimatePresence>
 
-          {/* Car Name Only */}
-          <AnimatePresence mode="wait">
+      {/* Animated light streaks */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
+        <motion.div
+          animate={{ 
+            x: ["-100%", "200%"],
+            opacity: [0, 0.3, 0]
+          }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity, 
+            repeatDelay: 2,
+            ease: "easeOut"
+          }}
+          className="absolute top-1/4 left-0 w-1/3 h-px bg-gradient-to-r from-transparent via-white to-transparent"
+        />
+        <motion.div
+          animate={{ 
+            x: ["-100%", "200%"],
+            opacity: [0, 0.2, 0]
+          }}
+          transition={{ 
+            duration: 1.2, 
+            repeat: Infinity, 
+            repeatDelay: 3,
+            delay: 0.5,
+            ease: "easeOut"
+          }}
+          className="absolute top-2/3 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-white to-transparent"
+        />
+      </div>
+
+      {/* Fixed centered text content */}
+      <div className="relative z-20 h-full flex flex-col items-center justify-center px-6 md:px-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight mb-6 leading-tight">
+            Vive lo
+            <span className="block mt-2 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+              extraordinario
+            </span>
+          </h1>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-2xl mx-auto mb-10"
+          >
+            Descubre la colección más exclusiva de supercoches de lujo en España.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+          >
+            <Link to="/portfolio">
+              <Button 
+                variant="outline"
+                size="lg"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black text-base md:text-lg font-medium tracking-wide px-8 py-6 group transition-all duration-300"
+              >
+                EXPLORAR COLECCIÓN
+                <ArrowRight className="ml-3 w-5 h-5 transition-transform group-hover:translate-x-2" />
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Animated car counter */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+        <div className="flex gap-2">
+          {heroSlides.map((_, index) => (
             <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <motion.h1
-                className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground tracking-tight"
-              >
-                {currentData.car?.name}
-              </motion.h1>
-              
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-8"
-              >
-                <Link to={`/car/${currentData.car?.id}`}>
-                  <Button 
-                    variant="ghost"
-                    className="text-foreground hover:bg-foreground/10 text-lg font-medium tracking-wide group"
-                  >
-                    DESCUBRIR
-                    <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
+              key={index}
+              animate={{ 
+                scale: index === currentSlide ? 1.2 : 1,
+                opacity: index === currentSlide ? 1 : 0.3
+              }}
+              transition={{ duration: 0.3 }}
+              className={`w-2 h-2 rounded-full ${
+                index === currentSlide ? "bg-white" : "bg-white/50"
+              }`}
+            />
+          ))}
         </div>
       </div>
 
-      {/* Navigation Arrows */}
-      <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20">
-        <button
-          onClick={prevSlide}
-          className="p-3 rounded-full bg-background/20 backdrop-blur-sm border border-foreground/20 text-foreground hover:bg-foreground hover:text-background transition-all duration-300"
-          aria-label="Anterior"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-      </div>
-      <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20">
-        <button
-          onClick={nextSlide}
-          className="p-3 rounded-full bg-background/20 backdrop-blur-sm border border-foreground/20 text-foreground hover:bg-foreground hover:text-background transition-all duration-300"
-          aria-label="Siguiente"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-        {heroSlides.map((slide, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`group relative overflow-hidden transition-all duration-500 ${
-              index === currentSlide 
-                ? "w-16 h-2 bg-foreground rounded-full" 
-                : "w-8 h-2 bg-foreground/30 hover:bg-foreground/50 rounded-full"
-            }`}
-            aria-label={`Ir a ${slide.car?.name}`}
-          >
-            {index === currentSlide && (
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 5, ease: "linear" }}
-                className="absolute inset-0 bg-foreground/50 origin-left"
-                style={{ display: isAutoPlaying ? "block" : "none" }}
-              />
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Car thumbnails preview */}
-      <div className="absolute bottom-24 right-4 md:right-8 z-20 hidden lg:flex gap-2">
-        {heroSlides.map((slide, index) => (
-          <motion.button
-            key={index}
-            onClick={() => goToSlide(index)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`relative w-20 h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-              index === currentSlide 
-                ? "border-foreground" 
-                : "border-transparent opacity-50 hover:opacity-100"
-            }`}
-          >
-            <img 
-              src={slide.car?.image} 
-              alt={slide.car?.name}
-              className="w-full h-full object-cover"
-            />
-          </motion.button>
+      {/* Speed lines effect */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              x: ["-100vw", "100vw"],
+              opacity: [0, 0.15, 0],
+            }}
+            transition={{
+              duration: 0.8,
+              delay: i * 0.1,
+              repeat: Infinity,
+              repeatDelay: 2 + i * 0.3,
+            }}
+            className="absolute h-[1px] bg-white"
+            style={{
+              top: `${20 + i * 15}%`,
+              width: `${10 + i * 5}%`,
+            }}
+          />
         ))}
       </div>
 
@@ -211,16 +185,16 @@ const HeroSlider = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 lg:left-8 lg:translate-x-0 z-20"
+        transition={{ delay: 2 }}
+        className="absolute bottom-8 right-8 z-20 hidden md:block"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-muted-foreground"
+          className="flex flex-col items-center gap-2 text-white/60"
         >
-          <span className="text-xs uppercase tracking-widest hidden md:block">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-foreground/50 to-transparent" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent" />
         </motion.div>
       </motion.div>
     </section>
