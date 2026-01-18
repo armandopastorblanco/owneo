@@ -79,40 +79,40 @@ const HeroSlider = () => {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Logo in hero - elegantly positioned */}
+      {/* Logo in hero - elegantly positioned, larger on mobile */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.3 }}
-        className="absolute top-28 left-1/2 -translate-x-1/2 z-30"
+        className="absolute top-24 sm:top-28 left-1/2 -translate-x-1/2 z-30"
       >
         <img 
           src={owneoLogo} 
           alt="OWNEO" 
-          className="h-16 md:h-20 lg:h-24 w-auto filter brightness-110"
+          className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto filter brightness-110"
         />
       </motion.div>
 
       {/* Minimal elegant text overlay */}
-      <div className="relative z-20 h-full flex flex-col items-center justify-center px-6 md:px-12 text-center">
+      <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-12 text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-4xl mx-auto mt-16"
+          className="max-w-4xl mx-auto mt-20 sm:mt-16"
         >
           {/* Elegant separator */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto mb-8"
+            className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto mb-6 sm:mb-8"
           />
           
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extralight text-white/90 tracking-[0.2em] uppercase mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extralight text-white/90 tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-2 sm:mb-4">
             Vive lo
           </h1>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.15em] uppercase mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.1em] sm:tracking-[0.15em] uppercase mb-6 sm:mb-8">
             Extraordinario
           </h1>
           
@@ -120,7 +120,7 @@ const HeroSlider = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            className="text-sm md:text-base lg:text-lg text-white/50 font-extralight tracking-[0.1em] max-w-xl mx-auto mb-12"
+            className="text-xs sm:text-sm md:text-base lg:text-lg text-white/50 font-extralight tracking-[0.05em] sm:tracking-[0.1em] max-w-xs sm:max-w-xl mx-auto mb-8 sm:mb-12 px-2"
           >
             El lujo de los supercoches, ahora accesible
           </motion.p>
