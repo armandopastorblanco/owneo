@@ -122,7 +122,7 @@ const HeroSlider = () => {
             transition={{ duration: 1, delay: 1 }}
             className="text-sm md:text-base lg:text-lg text-white/50 font-extralight tracking-[0.1em] max-w-xl mx-auto mb-12"
           >
-            La colección más exclusiva de supercoches de lujo en España
+            El lujo de los supercoches, ahora accesible
           </motion.p>
 
           <motion.div
