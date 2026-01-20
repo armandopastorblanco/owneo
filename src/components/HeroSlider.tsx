@@ -27,50 +27,97 @@ const heroSlides = [
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [nextSlide, setNextSlide] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    // Preload all images for smoother transitions
+    heroSlides.forEach((slide) => {
+      if (slide?.image) {
+        const img = new Image();
+        img.src = slide.image;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % heroSlides.length;
-        setNextSlide((next + 1) % heroSlides.length);
-        return next;
-      });
-    }, 3000);
+      setIsTransitioning(true);
+      
+      // Start transition to next slide
+      setTimeout(() => {
+        setCurrentSlide((prev) => {
+          const next = (prev + 1) % heroSlides.length;
+          setNextSlide((next + 1) % heroSlides.length);
+          return next;
+        });
+        setIsTransitioning(false);
+      }, 1500); // Half of the total transition time
+      
+    }, 6000); // Longer duration for luxury feel
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Preload next image */}
+      {/* Preload next images */}
       <div className="hidden">
         <img src={heroSlides[nextSlide]?.image} alt="" />
+        <img src={heroSlides[(nextSlide + 1) % heroSlides.length]?.image} alt="" />
       </div>
 
-      {/* Cinematic image transitions */}
-      <AnimatePresence mode="wait">
+      {/* Background layer - next slide (visible during crossfade) */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isTransitioning ? 1 : 0 }}
+        transition={{ duration: 2, ease: [0.43, 0.13, 0.23, 0.96] }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroSlides[nextSlide]?.image})` }}
+          animate={{ 
+            scale: isTransitioning ? [1, 1.08] : 1,
+          }}
+          transition={{ duration: 6, ease: "easeOut" }}
+        />
+      </motion.div>
+
+      {/* Current slide with elegant Ken Burns effect */}
+      <AnimatePresence mode="sync">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0, scale: 1.15 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ 
-            duration: 1.2, 
-            ease: [0.22, 1, 0.36, 1],
+            duration: 2.5, 
+            ease: [0.43, 0.13, 0.23, 0.96], // Cinematic easing
           }}
           className="absolute inset-0"
         >
           <motion.div 
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center will-change-transform"
             style={{ backgroundImage: `url(${heroSlides[currentSlide]?.image})` }}
-            animate={{ scale: [1, 1.05] }}
-            transition={{ duration: 3, ease: "linear" }}
+            initial={{ scale: 1, x: 0 }}
+            animate={{ 
+              scale: 1.12,
+              x: currentSlide % 2 === 0 ? "2%" : "-2%", // Subtle horizontal drift
+            }}
+            transition={{ 
+              duration: 8, 
+              ease: [0.25, 0.1, 0.25, 1], // Smooth cinematic motion
+            }}
           />
-          {/* Elegant gradient overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
         </motion.div>
       </AnimatePresence>
+
+      {/* Luxury gradient overlays with depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/50 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/30 z-10" />
+      
+      {/* Subtle film grain effect for premium feel */}
+      <div className="absolute inset-0 opacity-[0.015] z-10 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]" />
 
       {/* Subtle golden accent line */}
       <motion.div
