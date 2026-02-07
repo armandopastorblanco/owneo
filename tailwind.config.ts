@@ -50,6 +50,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        champagne: {
+          DEFAULT: "hsl(var(--champagne))",
+          foreground: "hsl(var(--champagne-foreground))",
+        },
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
