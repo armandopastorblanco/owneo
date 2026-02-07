@@ -126,25 +126,21 @@ const HeroSlider = () => {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Logo in hero - elegantly positioned with seamless blend */}
+      {/* Logo in hero - transparent blend with car images */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.3 }}
         className="absolute top-24 sm:top-28 left-1/2 -translate-x-1/2 z-30"
       >
-        <div className="relative">
-          {/* Soft radial glow behind logo for seamless integration */}
-          <div className="absolute inset-0 -m-8 bg-gradient-radial from-black/60 via-black/30 to-transparent blur-xl" />
-          <img 
-            src={owneoLogo} 
-            alt="OWNEO" 
-            className="relative h-20 sm:h-20 md:h-24 lg:h-28 w-auto filter brightness-125 contrast-110 mix-blend-lighten"
-            style={{
-              filter: 'brightness(1.25) contrast(1.1) drop-shadow(0 0 20px rgba(0,0,0,0.8))',
-            }}
-          />
-        </div>
+        <img 
+          src={owneoLogo} 
+          alt="OWNEO" 
+          className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto mix-blend-screen opacity-90"
+          style={{
+            filter: 'brightness(1.3) contrast(1.2)',
+          }}
+        />
       </motion.div>
 
       {/* Minimal elegant text overlay */}
