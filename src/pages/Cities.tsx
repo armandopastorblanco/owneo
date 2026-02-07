@@ -54,7 +54,7 @@ const Cities = () => {
                       {city.description}
                     </p>
                     <Link to={`/portfolio?city=${encodeURIComponent(city.name)}`}>
-                      <Button className="w-full group/btn">
+                      <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
                         <span>Explore {carsCount} Vehicles</span>
                         <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                       </Button>
