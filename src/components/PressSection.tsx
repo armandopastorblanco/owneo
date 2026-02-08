@@ -1,24 +1,48 @@
 import { motion } from "framer-motion";
 
+const ForbesLogo = () => (
+  <svg viewBox="0 0 200 50" className="h-8 w-auto fill-current">
+    <text x="0" y="38" fontSize="42" fontWeight="bold" fontFamily="Georgia, serif">FORBES</text>
+  </svg>
+);
+
+const MotorpasionLogo = () => (
+  <svg viewBox="0 0 200 40" className="h-7 w-auto fill-current">
+    <text x="0" y="30" fontSize="24" fontWeight="bold" fontFamily="Arial, sans-serif">MOTORPASIÓN</text>
+  </svg>
+);
+
+const GQLogo = () => (
+  <svg viewBox="0 0 60 50" className="h-10 w-auto fill-current">
+    <text x="0" y="42" fontSize="48" fontWeight="bold" fontFamily="Georgia, serif" fontStyle="italic">GQ</text>
+  </svg>
+);
+
+const VanityFairLogo = () => (
+  <svg viewBox="0 0 200 40" className="h-7 w-auto fill-current">
+    <text x="0" y="28" fontSize="22" fontWeight="normal" fontFamily="Georgia, serif" letterSpacing="3">VANITY FAIR</text>
+  </svg>
+);
+
 const pressReferences = [
   {
     name: "Forbes",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/1280px-Forbes_logo.svg.png",
+    Logo: ForbesLogo,
     quote: "Revolucionando el acceso al lujo automovilístico en España"
   },
   {
     name: "Motorpasión",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Motorpasi%C3%B3n_logo.svg/1280px-Motorpasi%C3%B3n_logo.svg.png",
+    Logo: MotorpasionLogo,
     quote: "La forma más inteligente de disfrutar un superdeportivo"
   },
   {
     name: "GQ",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/GQ_logo.svg/1280px-GQ_logo.svg.png",
+    Logo: GQLogo,
     quote: "El club de supercoches que está redefiniendo el lujo"
   },
   {
     name: "Vanity Fair",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Vanity_Fair_logo.svg/1280px-Vanity_Fair_logo.svg.png",
+    Logo: VanityFairLogo,
     quote: "Donde la exclusividad se encuentra con la comunidad"
   }
 ];
@@ -55,12 +79,8 @@ const PressSection = ({ standalone = true }: PressSectionProps) => {
             viewport={{ once: true }}
             className="group bg-background/50 rounded-2xl p-6 border border-border/30 hover:border-champagne/30 transition-all duration-300 hover:bg-background/70 flex flex-col items-center text-center"
           >
-            <div className="h-12 flex items-center justify-center mb-6">
-              <img
-                src={press.logo}
-                alt={`${press.name} logo`}
-                className="max-h-10 max-w-[140px] object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-              />
+            <div className="h-12 flex items-center justify-center mb-6 text-foreground/60 group-hover:text-foreground transition-colors duration-300">
+              <press.Logo />
             </div>
             <p className="text-sm text-muted-foreground italic leading-relaxed">
               "{press.quote}"
