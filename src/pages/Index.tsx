@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
 import HeroSlider from "@/components/HeroSlider";
+import PressSection from "@/components/PressSection";
 import { cars, cities } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 
@@ -193,7 +194,10 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="bg-card/30 rounded-2xl p-8 border border-border/50 text-center">
+          {/* Press Section */}
+          <PressSection standalone={false} />
+
+          <div className="bg-card/30 rounded-2xl p-8 border border-border/50 text-center mt-12">
             <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
               Desde el <strong className="text-foreground">alquiler de Ferrari en Barcelona</strong> hasta un 
               <strong className="text-foreground"> Lamborghini en Marbella</strong>, OWNEO te ofrece la oportunidad de vivir 
