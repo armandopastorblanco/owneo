@@ -1,8 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PressSection from "@/components/PressSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { 
+import {
   Users, 
   Share2, 
   Shield, 
@@ -310,6 +311,9 @@ const QuienesSomos = () => {
           </div>
         </div>
       </section>
+
+      {/* Press Section */}
+      <PressSection />
 
       {/* CTA Section */}
       <section className="py-20">
