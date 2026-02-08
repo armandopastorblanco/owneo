@@ -13,8 +13,8 @@ const MotorpasionLogo = () => (
 );
 
 const GQLogo = () => (
-  <svg viewBox="0 0 60 50" className="h-10 w-auto fill-current">
-    <text x="0" y="42" fontSize="48" fontWeight="bold" fontFamily="Georgia, serif" fontStyle="italic">GQ</text>
+  <svg viewBox="0 0 50 40" className="h-8 w-auto fill-current">
+    <text x="5" y="32" fontSize="36" fontWeight="bold" fontFamily="Georgia, serif" fontStyle="italic">GQ</text>
   </svg>
 );
 
