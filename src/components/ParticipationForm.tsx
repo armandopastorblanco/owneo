@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { User, Mail, Phone, MapPin, Linkedin, Users } from "lucide-react";
-
+import EvaluationQuestionnaire from "@/components/EvaluationQuestionnaire";
 const participationSchema = z.object({
   name: z.string().trim().min(2, "El nombre debe tener al menos 2 caracteres").max(50, "El nombre no puede exceder 50 caracteres"),
   surname: z.string().trim().min(2, "El apellido debe tener al menos 2 caracteres").max(50, "El apellido no puede exceder 50 caracteres"),
@@ -47,6 +47,7 @@ interface ParticipationFormProps {
 const ParticipationForm = ({ carName, availableParticipations, sharePrice }: ParticipationFormProps) => {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
 
   const {
     register,
@@ -67,17 +68,14 @@ const ParticipationForm = ({ carName, availableParticipations, sharePrice }: Par
 
   const onSubmit = async (data: ParticipationFormData) => {
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "¡Solicitud enviada!",
-      description: `Hemos recibido tu solicitud para ${data.participations} participación(es) en ${carName}. Te contactaremos pronto.`,
-    });
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsSubmitting(false);
+    setShowQuestionnaire(true);
+  };
+
+  const handleQuestionnaireComplete = () => {
     setOpen(false);
+    setShowQuestionnaire(false);
     reset();
   };
 
@@ -87,7 +85,7 @@ const ParticipationForm = ({ carName, availableParticipations, sharePrice }: Par
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) { setShowQuestionnaire(false); } }}>
       <DialogTrigger asChild>
         <Button 
           size="lg" 
@@ -97,7 +95,29 @@ const ParticipationForm = ({ carName, availableParticipations, sharePrice }: Par
           {availableParticipations === 0 ? "SIN DISPONIBILIDAD" : "SOLICITAR PARTICIPACIÓN"}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] bg-card border-border max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[550px] bg-card border-border max-h-[90vh] overflow-y-auto">
+        {showQuestionnaire ? (
+          <>
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold text-foreground">
+                Cuestionario de Evaluación
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground">
+                Completa este cuestionario obligatorio para finalizar tu solicitud de {carName}
+              </DialogDescription>
+            </DialogHeader>
+            <EvaluationQuestionnaire carName={carName} onComplete={handleQuestionnaireComplete} />
+          </>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-foreground">
+                Solicitar Participación
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground">
+                Completa el formulario para solicitar una participación en {carName}
+              </DialogDescription>
+            </DialogHeader>
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-foreground">
             Solicitar Participación
@@ -268,6 +288,8 @@ const ParticipationForm = ({ carName, availableParticipations, sharePrice }: Par
             Al enviar este formulario, aceptas nuestra política de privacidad y términos de servicio.
           </p>
         </form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
