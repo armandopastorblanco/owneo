@@ -36,30 +36,31 @@ const TikTokLanding = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[80vh] w-full overflow-hidden">
+      <section className="relative h-[85vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroImage}
-            alt="Supercar en showroom de lujo"
+            alt="Supercar en showroom de lujo en Madrid"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-black/40" />
         </div>
 
-        {/* Logo OWNEO grabado en la pared */}
+        {/* Logo OWNEO grabado en la pared del concesionario */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-          className="absolute top-[30%] left-[12%] z-10"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, delay: 0.8, ease: "easeOut" }}
+          className="absolute top-[25%] left-[8%] md:left-[10%] z-10"
         >
           <img
             src={owneoLogo}
             alt="OWNEO"
-            className="h-14 md:h-20 lg:h-28 w-auto opacity-60"
+            className="h-12 md:h-20 lg:h-28 w-auto"
             style={{
-              filter: "brightness(1.6) contrast(0.8) sepia(0.5) saturate(2) hue-rotate(-10deg)",
-              mixBlendMode: "soft-light",
+              opacity: 0.45,
+              filter: "brightness(1.8) contrast(0.7) sepia(0.6) saturate(1.8) hue-rotate(-10deg)",
+              mixBlendMode: "overlay",
             }}
           />
         </motion.div>
@@ -68,19 +69,43 @@ const TikTokLanding = () => {
       {/* Steps Section */}
       <section className="relative z-10 -mt-24 pb-20">
         <div className="container mx-auto px-6">
-          {/* Tagline */}
+          {/* Tagline with elegant reveal animation */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.2 }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-extralight tracking-[0.15em] text-foreground uppercase">
-              Lujo compartido,{" "}
-              <span className="text-luxury-gold font-light">disfrute individual</span>
-            </h2>
-            <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--luxury-gold))] to-transparent mx-auto mt-6" />
+            <div className="overflow-hidden">
+              <motion.h2
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="text-2xl md:text-4xl lg:text-5xl font-extralight tracking-[0.15em] text-foreground uppercase"
+              >
+                Lujo compartido,
+              </motion.h2>
+            </div>
+            <div className="overflow-hidden mt-1">
+              <motion.h2
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="text-2xl md:text-4xl lg:text-5xl font-light tracking-[0.15em] text-luxury-gold uppercase"
+              >
+                disfrute individual
+              </motion.h2>
+            </div>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
+              className="w-32 h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--luxury-gold))] to-transparent mx-auto mt-8 origin-center"
+            />
           </motion.div>
 
           {/* Steps grid */}
