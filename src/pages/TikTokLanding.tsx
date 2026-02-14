@@ -46,20 +46,6 @@ const TikTokLanding = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/50" />
         </div>
 
-        {/* Logo overlay */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-        >
-          <img
-            src={owneoLogo}
-            alt="OWNEO"
-            className="h-20 md:h-28 lg:h-36 w-auto mix-blend-screen opacity-90"
-            style={{ filter: "brightness(1.3) contrast(1.2)" }}
-          />
-        </motion.div>
       </section>
 
       {/* Steps Section */}
