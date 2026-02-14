@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import CalendarShowcase from "./pages/CalendarShowcase";
 import QuienesSomos from "./pages/QuienesSomos";
 import NuestroModelo from "./pages/NuestroModelo";
+import TikTokLanding from "./pages/TikTokLanding";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/calendar-showcase" element={<CalendarShowcase />} />
           <Route path="/quienes-somos" element={<QuienesSomos />} />
           <Route path="/nuestro-modelo" element={<NuestroModelo />} />
+          <Route path="/tiktok" element={<TikTokLanding />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
