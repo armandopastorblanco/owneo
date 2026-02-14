@@ -46,6 +46,23 @@ const TikTokLanding = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/50" />
         </div>
 
+        {/* Logo OWNEO grabado en la pared */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="absolute top-[30%] left-[12%] z-10"
+        >
+          <img
+            src={owneoLogo}
+            alt="OWNEO"
+            className="h-14 md:h-20 lg:h-28 w-auto opacity-60"
+            style={{
+              filter: "brightness(1.6) contrast(0.8) sepia(0.5) saturate(2) hue-rotate(-10deg)",
+              mixBlendMode: "soft-light",
+            }}
+          />
+        </motion.div>
       </section>
 
       {/* Steps Section */}
