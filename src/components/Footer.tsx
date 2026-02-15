@@ -49,7 +49,7 @@ const Footer = () => {
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="/twitter" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
               <a href="/tiktok" className="text-muted-foreground hover:text-foreground transition-colors">
