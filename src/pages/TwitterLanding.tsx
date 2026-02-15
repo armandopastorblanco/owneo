@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/twitter-hero.jpg";
+import owneoLogo from "@/assets/owneo-logo.jpg";
 import { useRef } from "react";
 
 const values = [
@@ -76,16 +77,22 @@ const TwitterLanding = () => {
           style={{ opacity: heroOpacity }}
           className="absolute inset-0 flex flex-col items-center justify-end pb-[12vh] text-center px-6"
         >
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="text-3xl md:text-5xl lg:text-6xl font-extralight tracking-[0.12em] text-foreground"
-            >
-              Owneo
-            </motion.h1>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <img
+              src={owneoLogo}
+              alt="OWNEO"
+              className="h-14 md:h-20 lg:h-24 w-auto mx-auto"
+              style={{
+                filter: "brightness(2) contrast(0.9)",
+                mixBlendMode: "screen",
+              }}
+            />
+          </motion.div>
           <div className="overflow-hidden mt-2">
             <motion.p
               initial={{ y: "110%" }}
