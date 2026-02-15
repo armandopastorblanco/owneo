@@ -75,7 +75,7 @@ const TikTokLanding = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="text-2xl md:text-4xl lg:text-5xl font-light tracking-[0.15em] text-luxury-gold uppercase"
+                className="text-2xl md:text-4xl lg:text-5xl font-light tracking-[0.15em] text-champagne uppercase"
               >
                 disfrute individual
               </motion.h2>
@@ -85,7 +85,7 @@ const TikTokLanding = () => {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
-              className="w-32 h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--luxury-gold))] to-transparent mx-auto mt-8 origin-center"
+              className="w-32 h-[1px] bg-gradient-to-r from-transparent via-champagne to-transparent mx-auto mt-8 origin-center"
             />
           </motion.div>
 
@@ -101,13 +101,13 @@ const TikTokLanding = () => {
                 className="text-center group"
               >
                 {/* Icon circle */}
-                <div className="w-16 h-16 mx-auto mb-5 rounded-full border border-[hsl(var(--luxury-gold)/0.4)] flex items-center justify-center group-hover:border-[hsl(var(--luxury-gold))] transition-colors duration-300">
-                  <step.icon className="w-7 h-7 text-luxury-gold" />
+                <div className="w-16 h-16 mx-auto mb-5 rounded-full border border-champagne/40 flex items-center justify-center group-hover:border-champagne transition-colors duration-300">
+                  <step.icon className="w-7 h-7 text-champagne" />
                 </div>
 
                 {/* Connector line */}
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-[1px] bg-[hsl(var(--luxury-gold)/0.2)]" />
+                  <div className="hidden lg:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-[1px] bg-champagne/20" />
                 )}
 
                 <h3 className="text-sm font-semibold tracking-[0.2em] text-foreground mb-3">
@@ -132,7 +132,7 @@ const TikTokLanding = () => {
               <Button
                 variant="ghost"
                 size="lg"
-                className="border border-[hsl(var(--luxury-gold)/0.3)] text-luxury-gold hover:bg-[hsl(var(--luxury-gold)/0.1)] hover:border-[hsl(var(--luxury-gold)/0.6)] text-xs font-light tracking-[0.25em] px-12 py-6 group transition-all duration-500"
+                className="border border-champagne/30 text-champagne hover:bg-champagne/10 hover:border-champagne/60 text-xs font-light tracking-[0.25em] px-12 py-6 group transition-all duration-500"
               >
                 DESCUBRIR
                 <ArrowRight className="ml-3 w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />

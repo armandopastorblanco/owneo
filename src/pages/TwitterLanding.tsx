@@ -69,10 +69,8 @@ const TwitterLanding = () => {
             className="w-full h-full object-cover"
           />
         </motion.div>
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-black/60" />
 
-        {/* Hero content — bottom center like carsup */}
         <motion.div
           style={{ opacity: heroOpacity }}
           className="absolute inset-0 flex flex-col items-center justify-end pb-[12vh] text-center px-6"
@@ -138,7 +136,7 @@ const TwitterLanding = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="text-2xl md:text-4xl lg:text-5xl font-extralight tracking-[0.15em] text-luxury-gold uppercase"
+                className="text-2xl md:text-4xl lg:text-5xl font-extralight tracking-[0.15em] text-champagne uppercase"
               >
                 Lujo Compartido,
               </motion.h2>
@@ -171,12 +169,12 @@ const TwitterLanding = () => {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-            className="w-32 h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--luxury-gold))] to-transparent mx-auto mt-10 origin-center"
+            className="w-32 h-[1px] bg-gradient-to-r from-transparent via-champagne to-transparent mx-auto mt-10 origin-center"
           />
         </div>
       </section>
 
-      {/* Values Section — Cards like carsup */}
+      {/* Values Section */}
       <section className="pb-24 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8">
@@ -187,10 +185,10 @@ const TwitterLanding = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: index * 0.2 }}
-                className="group relative p-8 rounded-lg border border-border bg-card hover:border-[hsl(var(--luxury-gold)/0.3)] transition-all duration-500"
+                className="group relative p-8 rounded-lg border border-border bg-card hover:border-champagne/30 transition-all duration-500"
               >
-                <div className="w-14 h-14 rounded-full border border-[hsl(var(--luxury-gold)/0.3)] flex items-center justify-center mb-6 group-hover:border-[hsl(var(--luxury-gold)/0.6)] transition-colors duration-300">
-                  <value.icon className="w-6 h-6 text-luxury-gold" />
+                <div className="w-14 h-14 rounded-full border border-champagne/30 flex items-center justify-center mb-6 group-hover:border-champagne/60 transition-colors duration-300">
+                  <value.icon className="w-6 h-6 text-champagne" />
                 </div>
                 <h3 className="text-lg font-light tracking-[0.15em] text-foreground mb-3 uppercase">
                   {value.title}
@@ -226,7 +224,7 @@ const TwitterLanding = () => {
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 className="text-center"
               >
-                <feature.icon className="w-8 h-8 text-luxury-gold mx-auto mb-4" />
+                <feature.icon className="w-8 h-8 text-champagne mx-auto mb-4" />
                 <h4 className="text-sm font-semibold tracking-[0.2em] text-foreground mb-2 uppercase">
                   {feature.title}
                 </h4>
@@ -258,7 +256,7 @@ const TwitterLanding = () => {
             <Button
               variant="ghost"
               size="lg"
-              className="border border-[hsl(var(--luxury-gold)/0.3)] text-luxury-gold hover:bg-[hsl(var(--luxury-gold)/0.1)] hover:border-[hsl(var(--luxury-gold)/0.6)] text-xs font-light tracking-[0.25em] px-12 py-6 group transition-all duration-500"
+              className="border border-champagne/30 text-champagne hover:bg-champagne/10 hover:border-champagne/60 text-xs font-light tracking-[0.25em] px-12 py-6 group transition-all duration-500"
             >
               VER PORTFOLIO
               <ArrowRight className="ml-3 w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
