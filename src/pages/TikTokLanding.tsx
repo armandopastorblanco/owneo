@@ -4,7 +4,6 @@ import { ArrowRight, Car, PenLine, CalendarCheck, BadgeDollarSign } from "lucide
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import owneoLogo from "@/assets/owneo-logo.jpg";
 import heroImage from "@/assets/tiktok-hero.jpg";
 
 const steps = [
@@ -46,24 +45,6 @@ const TikTokLanding = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-black/40" />
         </div>
 
-        {/* Logo OWNEO grabado en la pared del concesionario */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, delay: 0.8, ease: "easeOut" }}
-          className="absolute top-[25%] left-[8%] md:left-[10%] z-10"
-        >
-          <img
-            src={owneoLogo}
-            alt="OWNEO"
-            className="h-12 md:h-20 lg:h-28 w-auto"
-            style={{
-              opacity: 0.45,
-              filter: "brightness(1.8) contrast(0.7) sepia(0.6) saturate(1.8) hue-rotate(-10deg)",
-              mixBlendMode: "overlay",
-            }}
-          />
-        </motion.div>
       </section>
 
       {/* Steps Section */}
