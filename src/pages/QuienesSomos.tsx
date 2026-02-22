@@ -98,21 +98,19 @@ const QuienesSomos = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden h-[85vh]">
+      <section className="relative pt-32 pb-20 overflow-hidden min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
           <img src={quienesSomosHero} alt="OWNEO showroom" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
         </div>
         
-        <div className="relative z-10 h-full flex flex-col justify-between pt-32 pb-12 px-4">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-10 leading-tight">
               Quiénes <span className="text-champagne">Somos</span>
             </h1>
-          </div>
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl mx-auto">
               En OWNEO reimaginamos el acceso al lujo automovilístico. Nuestro modelo exclusivo de 
               <strong className="text-white"> co-sharing de supercoches</strong> hace realidad 
               el sueño de conducir los vehículos más extraordinarios del mundo.
