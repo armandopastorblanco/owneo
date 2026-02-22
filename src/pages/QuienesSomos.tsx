@@ -17,6 +17,7 @@ import {
   Gem,
   ArrowRight
 } from "lucide-react";
+import quienesSomosHero from "@/assets/quienes-somos-hero.png";
 
 const QuienesSomos = () => {
   const steps = [
@@ -97,22 +98,24 @@ const QuienesSomos = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-champagne/5 via-transparent to-transparent" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-champagne/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-champagne/10 rounded-full blur-3xl" />
+      <section className="relative pt-32 pb-20 overflow-hidden min-h-[70vh] flex items-center">
+        <div className="absolute inset-0">
+          <img src={quienesSomosHero} alt="OWNEO showroom" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
               La Revolución del Supercar Sharing
             </span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Quiénes <span className="text-champagne">Somos</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto">
               En OWNEO reimaginamos el acceso al lujo automovilístico. Nuestro modelo exclusivo de 
-              <strong className="text-foreground"> co-sharing de supercoches</strong> hace realidad 
+              <strong className="text-white"> co-sharing de supercoches</strong> hace realidad 
               el sueño de conducir los vehículos más extraordinarios del mundo.
             </p>
           </div>
