@@ -107,13 +107,10 @@ const QuienesSomos = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-              La Revolución del Supercar Sharing
-            </span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-10 leading-tight">
               Quiénes <span className="text-champagne">Somos</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl mx-auto">
               En OWNEO reimaginamos el acceso al lujo automovilístico. Nuestro modelo exclusivo de 
               <strong className="text-white"> co-sharing de supercoches</strong> hace realidad 
               el sueño de conducir los vehículos más extraordinarios del mundo.
