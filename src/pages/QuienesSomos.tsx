@@ -98,20 +98,19 @@ const QuienesSomos = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden min-h-[70vh] flex items-center">
+      <section className="relative overflow-hidden h-[85vh]">
         <div className="absolute inset-0">
           <img src={quienesSomosHero} alt="OWNEO showroom" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30" />
         </div>
         
-        <div className="container mx-auto px-4 relative z-10 h-full flex flex-col justify-between py-8">
+        <div className="relative z-10 h-full flex flex-col justify-between pt-32 pb-12 px-4">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               Quiénes <span className="text-champagne">Somos</span>
             </h1>
           </div>
-          <div className="flex-1" />
           <div className="text-center max-w-3xl mx-auto">
             <p className="text-lg md:text-xl text-white/80 leading-relaxed">
               En OWNEO reimaginamos el acceso al lujo automovilístico. Nuestro modelo exclusivo de 
