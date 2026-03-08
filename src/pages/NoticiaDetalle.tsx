@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Timer, Crown } from "lucide-react";
+import ArticleCTAs from "@/components/ArticleCTAs";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { additionalNews, type NewsArticle } from "@/data/additionalNews";
 
