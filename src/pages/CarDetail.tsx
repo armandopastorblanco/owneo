@@ -155,6 +155,11 @@ const CarDetail = () => {
             </div>
           </section>
 
+          {/* 360° Viewer - only for cars with gallery */}
+          {car.gallery && car.gallery.length >= 6 && (
+            <Car360Viewer carName={car.name} gallery={car.gallery} />
+          )}
+
           {/* Specifications */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Especificaciones Técnicas</h2>
