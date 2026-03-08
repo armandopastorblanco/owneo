@@ -453,9 +453,7 @@ export const cars: Car[] = [
     gallery: [
       porscheMacanGallery1, porscheMacanGallery2, porscheMacanGallery3,
       porscheMacanGallery4, porscheMacanGallery5, porscheMacanGallery6,
-      porscheMacanGallery7, porscheMacanGallery8, porscheMacanGallery9,
-      porscheMacanGallery10, porscheMacanGallery11, porscheMacanGallery12,
-      porscheMacanGallery13, porscheMacanGallery14, porscheMacanGallery15
+      porscheMacanGallery7
     ],
     category: "SUV de Lujo",
     description: "El deportivo de los SUV",
