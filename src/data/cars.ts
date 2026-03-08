@@ -297,9 +297,9 @@ export const cars: Car[] = [
     image: ferrariPortofino,
     gallery: [
       ferrariPortofinoGallery1, ferrariPortofinoGallery2, ferrariPortofinoGallery3,
-      ferrariPortofinoGallery8, ferrariPortofinoGallery4, ferrariPortofinoGallery7,
-      ferrariPortofinoGallery10, ferrariPortofinoGallery11, ferrariPortofinoGallery12,
-      ferrariPortofinoGallery5, ferrariPortofinoGallery6, ferrariPortofinoGallery9,
+      ferrariPortofinoGallery8, ferrariPortofinoGallery9, ferrariPortofinoGallery4,
+      ferrariPortofinoGallery7, ferrariPortofinoGallery10, ferrariPortofinoGallery11,
+      ferrariPortofinoGallery12, ferrariPortofinoGallery5, ferrariPortofinoGallery6,
       ferrariPortofinoGallery13, ferrariPortofinoGallery14, ferrariPortofinoGallery15
     ],
     category: "GT Descapotable",
