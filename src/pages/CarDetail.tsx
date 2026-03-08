@@ -270,7 +270,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Días de Uso Estimados/Año</td>
                     <td className="py-4 px-4 text-center text-foreground">~50 días</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~30 días</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~30 días</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Reventa a 5 Años</td>
