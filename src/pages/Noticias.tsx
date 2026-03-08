@@ -45,7 +45,8 @@ const newsItems = [
     date: "15 Febrero 2026",
     category: "Hypercars",
     title: "McLaren W1: el hypercar británico que desafía a todos los límites",
-    excerpt: "Con un motor V8 híbrido de 1.275 CV y un peso de solo 1.399 kg, el McLaren W1 establece nuevos estándares en el segmento de los hypercars con tecnología directa de F1."
+    excerpt: "Con un motor V8 híbrido de 1.275 CV y un peso de solo 1.399 kg, el McLaren W1 establece nuevos estándares en el segmento de los hypercars con tecnología directa de F1.",
+    link: "/noticias/mclaren-w1"
   },
   {
     id: 5,
