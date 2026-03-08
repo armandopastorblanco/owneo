@@ -412,8 +412,11 @@ export const cars: Car[] = [
       lamborghiniUrusGallery2,
       lamborghiniUrusGallery3,
       lamborghiniUrusGallery4,
+      lamborghiniUrusGallery7,
+      lamborghiniUrusGallery8,
       lamborghiniUrusGallery5,
-      lamborghiniUrusGallery6
+      lamborghiniUrusGallery6,
+      lamborghiniUrusGallery9
     ],
     category: "Super SUV",
     description: "El primer Super Sport Utility Vehicle del mundo",
