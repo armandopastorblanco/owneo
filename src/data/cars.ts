@@ -38,6 +38,9 @@ import porsche911Gallery3 from "@/assets/cars/gallery/porsche-911-3.jpg";
 import porsche911Gallery4 from "@/assets/cars/gallery/porsche-911-4.jpg";
 import porsche911Gallery5 from "@/assets/cars/gallery/porsche-911-5.jpg";
 import porsche911Gallery6 from "@/assets/cars/gallery/porsche-911-6.jpg";
+import porsche911Gallery7 from "@/assets/cars/gallery/porsche-911-7.jpg";
+import porsche911Gallery8 from "@/assets/cars/gallery/porsche-911-8.jpg";
+import porsche911Gallery9 from "@/assets/cars/gallery/porsche-911-9.jpg";
 
 // Lamborghini Huracan gallery images
 import lamborghiniHuracanGallery1 from "@/assets/cars/gallery/lamborghini-huracan-1.jpg";
