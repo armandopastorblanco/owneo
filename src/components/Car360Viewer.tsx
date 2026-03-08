@@ -15,9 +15,10 @@ const Car360Viewer = ({ carName, gallery }: Car360ViewerProps) => {
   const startX = useRef(0);
   const startIndex = useRef(0);
 
-  // Split gallery: first 9 exterior, rest interior
-  const exteriorImages = gallery.slice(0, 9);
-  const interiorImages = gallery.slice(9);
+  // Dynamic split: ~60% exterior, ~40% interior
+  const exteriorCount = Math.ceil(gallery.length * 0.6);
+  const exteriorImages = gallery.slice(0, exteriorCount);
+  const interiorImages = gallery.slice(exteriorCount);
   const images = view === "exterior" ? exteriorImages : interiorImages;
 
   const handleViewChange = (val: string) => {
@@ -63,14 +64,14 @@ const Car360Viewer = ({ carName, gallery }: Car360ViewerProps) => {
             className="px-4 py-2 rounded-md text-sm font-medium data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
           >
             <Car className="w-4 h-4 mr-2" />
-            Exterior
+            Exterior ({exteriorImages.length})
           </ToggleGroupItem>
           <ToggleGroupItem
             value="interior"
             className="px-4 py-2 rounded-md text-sm font-medium data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
-            Interior
+            Interior ({interiorImages.length})
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
