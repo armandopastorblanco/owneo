@@ -15,9 +15,9 @@ const Car360Viewer = ({ carName, gallery }: Car360ViewerProps) => {
   const startX = useRef(0);
   const startIndex = useRef(0);
 
-  // Split gallery: first 6 exterior, last 3 interior
-  const exteriorImages = gallery.slice(0, 6);
-  const interiorImages = gallery.slice(6);
+  // Split gallery: first 9 exterior, rest interior
+  const exteriorImages = gallery.slice(0, 9);
+  const interiorImages = gallery.slice(9);
   const images = view === "exterior" ? exteriorImages : interiorImages;
 
   const handleViewChange = (val: string) => {
