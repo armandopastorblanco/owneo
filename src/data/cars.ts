@@ -405,9 +405,7 @@ export const cars: Car[] = [
     gallery: [
       lamborghiniHuracanGallery1, lamborghiniHuracanGallery2, lamborghiniHuracanGallery3,
       lamborghiniHuracanGallery4, lamborghiniHuracanGallery5, lamborghiniHuracanGallery6,
-      lamborghiniHuracanGallery7, lamborghiniHuracanGallery8, lamborghiniHuracanGallery9,
-      lamborghiniHuracanGallery10, lamborghiniHuracanGallery11, lamborghiniHuracanGallery12,
-      lamborghiniHuracanGallery13, lamborghiniHuracanGallery14, lamborghiniHuracanGallery15
+      lamborghiniHuracanGallery7, lamborghiniHuracanGallery11, lamborghiniHuracanGallery12
     ],
     category: "Superdeportivo",
     description: "Pasión italiana en su forma más pura",
