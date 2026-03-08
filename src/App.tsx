@@ -13,6 +13,7 @@ import QuienesSomos from "./pages/QuienesSomos";
 import NuestroModelo from "./pages/NuestroModelo";
 import TikTokLanding from "./pages/TikTokLanding";
 import TwitterLanding from "./pages/TwitterLanding";
+import Noticias from "./pages/Noticias";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
