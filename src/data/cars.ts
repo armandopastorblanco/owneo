@@ -453,8 +453,11 @@ export const cars: Car[] = [
       porscheTaycanGallery2,
       porscheTaycanGallery3,
       porscheTaycanGallery4,
+      porscheTaycanGallery7,
+      porscheTaycanGallery8,
       porscheTaycanGallery5,
-      porscheTaycanGallery6
+      porscheTaycanGallery6,
+      porscheTaycanGallery9
     ],
     category: "Sedán Deportivo Eléctrico",
     description: "El futuro del rendimiento es eléctrico",
