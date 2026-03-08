@@ -255,7 +255,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Mantenimiento Anual</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.02).toLocaleString('es-ES')}€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~{Math.round(numericPrice * 0.002).toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~{Math.round(numericPrice * 0.002).toLocaleString('es-ES')}€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Almacenamiento Anual</td>
