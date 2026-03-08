@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ParticipationForm from "@/components/ParticipationForm";
+import Car360Viewer from "@/components/Car360Viewer";
 
 const CarDetail = () => {
   const { id } = useParams();
@@ -153,6 +154,11 @@ const CarDetail = () => {
               )}
             </div>
           </section>
+
+          {/* 360° Viewer - only for cars with gallery */}
+          {car.gallery && car.gallery.length >= 6 && (
+            <Car360Viewer carName={car.name} gallery={car.gallery} />
+          )}
 
           {/* Specifications */}
           <section className="mb-12">
