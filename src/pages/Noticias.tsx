@@ -27,7 +27,8 @@ const newsItems = [
     date: "28 Febrero 2026",
     category: "Lanzamientos",
     title: "Lamborghini presenta el sucesor del Huracán con motor V8 híbrido",
-    excerpt: "Sant'Agata Bolognese desvela su nueva bestia: un V8 biturbo combinado con tres motores eléctricos que supera los 900 CV. La era híbrida de Lamborghini acaba de comenzar."
+    excerpt: "Sant'Agata Bolognese desvela su nueva bestia: un V8 biturbo combinado con tres motores eléctricos que supera los 900 CV. La era híbrida de Lamborghini acaba de comenzar.",
+    link: "/noticias/lamborghini-huracan-hibrido"
   },
   {
     id: 3,
