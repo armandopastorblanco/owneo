@@ -100,6 +100,7 @@ const Noticias = () => {
                 viewport={{ once: true }}
                 className="group bg-card/50 border border-border/30 rounded-2xl overflow-hidden hover:border-champagne/30 transition-all duration-300"
               >
+              {item.link ? <Link to={item.link} className="block">
                 <div className="relative overflow-hidden aspect-[16/10]">
                   <img
                     src={item.image}
