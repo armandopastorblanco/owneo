@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { additionalNews } from "@/data/additionalNews";
 
 import ferrariEv from "@/assets/news/ferrari-ev.jpg";
 import lamborghiniReveal from "@/assets/news/lamborghini-reveal.jpg";
@@ -11,7 +12,7 @@ import mclarenW1 from "@/assets/news/mclaren-w1.jpg";
 import bugattiTourbillon from "@/assets/news/bugatti-tourbillon.jpg";
 import mercedesAmgOne from "@/assets/news/mercedes-amg-one.jpg";
 
-const newsItems = [
+const originalNews = [
   {
     id: 1,
     image: ferrariEv,
@@ -67,6 +68,18 @@ const newsItems = [
     link: "/noticias/mercedes-amg-one-actualizacion"
   }
 ];
+
+const additionalNewsItems = additionalNews.map((a) => ({
+  id: a.id,
+  image: a.image,
+  date: a.date,
+  category: a.category,
+  title: a.title,
+  excerpt: a.excerpt,
+  link: `/noticias/${a.slug}`
+}));
+
+const newsItems = [...originalNews, ...additionalNewsItems];
 
 const Noticias = () => {
   return (
