@@ -54,7 +54,8 @@ const newsItems = [
     date: "8 Febrero 2026",
     category: "Lujo",
     title: "Bugatti Tourbillon: el V16 aspirado más potente jamás creado",
-    excerpt: "Bugatti sorprende al mundo con un motor V16 atmosférico de 1.000 CV complementado por un sistema híbrido. El Tourbillon es la nueva obra maestra de Molsheim."
+    excerpt: "Bugatti sorprende al mundo con un motor V16 atmosférico de 1.000 CV complementado por un sistema híbrido. El Tourbillon es la nueva obra maestra de Molsheim.",
+    link: "/noticias/bugatti-tourbillon"
   },
   {
     id: 6,
