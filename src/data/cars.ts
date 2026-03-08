@@ -93,6 +93,9 @@ import porscheTaycanGallery3 from "@/assets/cars/gallery/porsche-taycan-3.jpg";
 import porscheTaycanGallery4 from "@/assets/cars/gallery/porsche-taycan-4.jpg";
 import porscheTaycanGallery5 from "@/assets/cars/gallery/porsche-taycan-5.jpg";
 import porscheTaycanGallery6 from "@/assets/cars/gallery/porsche-taycan-6.jpg";
+import porscheTaycanGallery7 from "@/assets/cars/gallery/porsche-taycan-7.jpg";
+import porscheTaycanGallery8 from "@/assets/cars/gallery/porsche-taycan-8.jpg";
+import porscheTaycanGallery9 from "@/assets/cars/gallery/porsche-taycan-9.jpg";
 
 // Ferrari Roma gallery images
 import ferrariRomaGallery1 from "@/assets/cars/gallery/ferrari-roma-1.jpg";
