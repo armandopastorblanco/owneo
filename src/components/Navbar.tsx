@@ -33,6 +33,7 @@ const Navbar = () => {
     { path: "/nuestro-modelo", label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT" },
     { path: "/cities", label: language === "es" ? "UBICACIONES" : "LOCATIONS" },
     { path: "/quienes-somos", label: language === "es" ? "QUIÉNES SOMOS" : "ABOUT US" },
+    { path: "/noticias", label: language === "es" ? "NOTICIAS" : "NEWS" },
   ];
 
   // On home page, navbar is transparent until scrolled
