@@ -260,7 +260,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Almacenamiento Anual</td>
                     <td className="py-4 px-4 text-center text-foreground">~3.000€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~300€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~300€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Depreciación (5 años)</td>
