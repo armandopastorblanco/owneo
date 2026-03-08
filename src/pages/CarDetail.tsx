@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ParticipationForm from "@/components/ParticipationForm";
+import Car360Viewer from "@/components/Car360Viewer";
 
 const CarDetail = () => {
   const { id } = useParams();
