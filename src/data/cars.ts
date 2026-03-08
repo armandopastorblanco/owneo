@@ -49,6 +49,9 @@ import lamborghiniHuracanGallery3 from "@/assets/cars/gallery/lamborghini-huraca
 import lamborghiniHuracanGallery4 from "@/assets/cars/gallery/lamborghini-huracan-4.jpg";
 import lamborghiniHuracanGallery5 from "@/assets/cars/gallery/lamborghini-huracan-5.jpg";
 import lamborghiniHuracanGallery6 from "@/assets/cars/gallery/lamborghini-huracan-6.jpg";
+import lamborghiniHuracanGallery7 from "@/assets/cars/gallery/lamborghini-huracan-7.jpg";
+import lamborghiniHuracanGallery8 from "@/assets/cars/gallery/lamborghini-huracan-8.jpg";
+import lamborghiniHuracanGallery9 from "@/assets/cars/gallery/lamborghini-huracan-9.jpg";
 
 // Porsche Macan gallery images
 import porscheMacanGallery1 from "@/assets/cars/gallery/porsche-macan-1.jpg";
