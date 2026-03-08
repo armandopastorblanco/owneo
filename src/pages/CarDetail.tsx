@@ -203,7 +203,7 @@ const CarDetail = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   {Object.entries(car.specifications).map(([key, value]) => (
                     <div key={key} className="flex justify-between items-center border-b border-border pb-3">
-                      <span className="text-muted-foreground capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                      <span className="text-muted-foreground">{specLabels[key] || key.replace(/([A-Z])/g, ' $1').trim()}</span>
                       <span className="font-semibold text-foreground">{value}</span>
                     </div>
                   ))}
