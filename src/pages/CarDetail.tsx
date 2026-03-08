@@ -238,7 +238,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border">
                     <th className="text-left py-4 px-4 text-muted-foreground font-medium">Concepto</th>
                     <th className="text-center py-4 px-4 text-muted-foreground font-medium">Compra Individual</th>
-                    <th className="text-center py-4 px-4 font-medium text-primary">OWNEO Co-Sharing</th>
+                    <th className="text-center py-4 px-4 font-medium text-champagne">OWNEO Co-Sharing</th>
                   </tr>
                 </thead>
                 <tbody>
