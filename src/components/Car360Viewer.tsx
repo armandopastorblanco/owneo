@@ -15,8 +15,8 @@ const Car360Viewer = ({ carName, gallery }: Car360ViewerProps) => {
   const startX = useRef(0);
   const startIndex = useRef(0);
 
-  // Dynamic split: ~60% exterior, ~40% interior
-  const exteriorCount = Math.ceil(gallery.length * 0.6);
+  // Fixed split: 80% exterior, 20% interior (12 ext + 3 int for 15 images)
+  const exteriorCount = Math.ceil(gallery.length * 0.8);
   const exteriorImages = gallery.slice(0, exteriorCount);
   const interiorImages = gallery.slice(exteriorCount);
   const images = view === "exterior" ? exteriorImages : interiorImages;
