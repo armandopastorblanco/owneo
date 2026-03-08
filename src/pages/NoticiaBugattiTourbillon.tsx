@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Timer, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
+import ArticleCTAs from "@/components/ArticleCTAs";
 
 import heroImg from "@/assets/news/bugatti-tourbillon.jpg";
 import detailImg1 from "@/assets/news/bugatti-tourbillon-detail-1.jpg";
@@ -122,11 +123,7 @@ const NoticiaBugattiTourbillon = () => {
             </p>
           </motion.div>
 
-          <div className="pt-8 border-t border-border/30">
-            <Link to="/noticias" className="inline-flex items-center gap-2 text-champagne text-sm hover:gap-3 transition-all">
-              <ArrowLeft className="w-4 h-4" /> Volver a todas las noticias
-            </Link>
-          </div>
+          <ArticleCTAs vehicleName="Bugatti Tourbillon" />
         </div>
       </article>
 

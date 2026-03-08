@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Weight, Timer } from "lucide-react";
 import { Link } from "react-router-dom";
+import ArticleCTAs from "@/components/ArticleCTAs";
 
 import heroImg from "@/assets/news/mclaren-w1.jpg";
 import detailImg1 from "@/assets/news/mclaren-w1-detail-1.jpg";
@@ -119,11 +120,7 @@ const NoticiaMcLarenW1 = () => {
             </p>
           </motion.div>
 
-          <div className="pt-8 border-t border-border/30">
-            <Link to="/noticias" className="inline-flex items-center gap-2 text-champagne text-sm hover:gap-3 transition-all">
-              <ArrowLeft className="w-4 h-4" /> Volver a todas las noticias
-            </Link>
-          </div>
+          <ArticleCTAs vehicleName="McLaren W1" />
         </div>
       </article>
 
