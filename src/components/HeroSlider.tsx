@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cars } from "@/data/cars";
-import owneoLogo from "@/assets/owneo-logo.jpg";
+import owneoLogo from "@/assets/owneo-logo.png";
 
 // All premium cars for the hero slider
 const heroSlides = [
