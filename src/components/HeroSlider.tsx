@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cars } from "@/data/cars";
-import owneoLogo from "@/assets/owneo-logo.png";
+import owneoLogo from "@/assets/owneo-logo.jpg";
 
 // All premium cars for the hero slider
 const heroSlides = [
@@ -136,7 +136,10 @@ const HeroSlider = () => {
         <img 
           src={owneoLogo} 
           alt="OWNEO" 
-          className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+          className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto mix-blend-screen opacity-90"
+          style={{
+            filter: 'brightness(1.3) contrast(1.2)',
+          }}
         />
       </motion.div>
 
