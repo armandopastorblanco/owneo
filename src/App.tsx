@@ -37,6 +37,7 @@ const App = () => (
           <Route path="/tiktok" element={<TikTokLanding />} />
           <Route path="/twitter" element={<TwitterLanding />} />
           <Route path="/noticias" element={<Noticias />} />
+          <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

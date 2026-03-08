@@ -128,6 +128,7 @@ const Noticias = () => {
                     Leer más <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
+                {item.link ? </Link> : null}
               </motion.article>
             ))}
           </div>
