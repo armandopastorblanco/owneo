@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Battery, Timer } from "lucide-react";
+import ArticleCTAs from "@/components/ArticleCTAs";
 import { Link } from "react-router-dom";
 
 import heroImg from "@/assets/news/ferrari-ev.jpg";
