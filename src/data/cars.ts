@@ -60,6 +60,9 @@ import porscheMacanGallery3 from "@/assets/cars/gallery/porsche-macan-3.jpg";
 import porscheMacanGallery4 from "@/assets/cars/gallery/porsche-macan-4.jpg";
 import porscheMacanGallery5 from "@/assets/cars/gallery/porsche-macan-5.jpg";
 import porscheMacanGallery6 from "@/assets/cars/gallery/porsche-macan-6.jpg";
+import porscheMacanGallery7 from "@/assets/cars/gallery/porsche-macan-7.jpg";
+import porscheMacanGallery8 from "@/assets/cars/gallery/porsche-macan-8.jpg";
+import porscheMacanGallery9 from "@/assets/cars/gallery/porsche-macan-9.jpg";
 
 // Ferrari F8 gallery images
 import ferrariF8Gallery1 from "@/assets/cars/gallery/ferrari-f8-1.jpg";
