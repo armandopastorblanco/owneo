@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { cars } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, MapPin, CheckCircle2, Users, Info } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle2, Users, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
