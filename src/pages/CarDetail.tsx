@@ -154,6 +154,41 @@ const CarDetail = () => {
             </div>
           </section>
 
+          {/* 3D Visualization - Ferrari Portofino only */}
+          {car.id === "ferrari-portofino" && (
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold mb-6 text-foreground">Visualización 3D</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Exterior</h3>
+                  <div className="aspect-video rounded-lg overflow-hidden border border-border bg-card">
+                    <iframe
+                      title="Ferrari Portofino - Exterior 3D"
+                      className="w-full h-full"
+                      src="https://sketchfab.com/models/8a86c4d634f64f8b8ee836bc93fa6ac8/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0"
+                      allow="autoplay; fullscreen; xr-spatial-tracking"
+                      allowFullScreen
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">Arrastra para rotar · Scroll para zoom</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Interior</h3>
+                  <div className="aspect-video rounded-lg overflow-hidden border border-border bg-card">
+                    <iframe
+                      title="Ferrari Portofino - Interior 3D"
+                      className="w-full h-full"
+                      src="https://sketchfab.com/models/eea43a480f864cfaa5d606753d2d79a5/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark=0"
+                      allow="autoplay; fullscreen; xr-spatial-tracking"
+                      allowFullScreen
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">Arrastra para rotar · Scroll para zoom</p>
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Specifications */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Especificaciones Técnicas</h2>
