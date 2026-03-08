@@ -365,8 +365,11 @@ export const cars: Car[] = [
       ferrariF8Gallery2,
       ferrariF8Gallery3,
       ferrariF8Gallery4,
+      ferrariF8Gallery7,
+      ferrariF8Gallery8,
       ferrariF8Gallery5,
-      ferrariF8Gallery6
+      ferrariF8Gallery6,
+      ferrariF8Gallery9
     ],
     category: "Superdeportivo",
     description: "Un tributo al V8 más potente en la historia de Ferrari",
