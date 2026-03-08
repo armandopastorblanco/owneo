@@ -24,6 +24,12 @@ import ferrariPortofinoGallery6 from "@/assets/cars/gallery/ferrari-portofino-6.
 import ferrariPortofinoGallery7 from "@/assets/cars/gallery/ferrari-portofino-7.jpg";
 import ferrariPortofinoGallery8 from "@/assets/cars/gallery/ferrari-portofino-8.jpg";
 import ferrariPortofinoGallery9 from "@/assets/cars/gallery/ferrari-portofino-9.jpg";
+import ferrariPortofinoGallery10 from "@/assets/cars/gallery/ferrari-portofino-10.jpg";
+import ferrariPortofinoGallery11 from "@/assets/cars/gallery/ferrari-portofino-11.jpg";
+import ferrariPortofinoGallery12 from "@/assets/cars/gallery/ferrari-portofino-12.jpg";
+import ferrariPortofinoGallery13 from "@/assets/cars/gallery/ferrari-portofino-13.jpg";
+import ferrariPortofinoGallery14 from "@/assets/cars/gallery/ferrari-portofino-14.jpg";
+import ferrariPortofinoGallery15 from "@/assets/cars/gallery/ferrari-portofino-15.jpg";
 
 export interface Car {
   id: string;
