@@ -71,6 +71,9 @@ import ferrariF8Gallery3 from "@/assets/cars/gallery/ferrari-f8-3.jpg";
 import ferrariF8Gallery4 from "@/assets/cars/gallery/ferrari-f8-4.jpg";
 import ferrariF8Gallery5 from "@/assets/cars/gallery/ferrari-f8-5.jpg";
 import ferrariF8Gallery6 from "@/assets/cars/gallery/ferrari-f8-6.jpg";
+import ferrariF8Gallery7 from "@/assets/cars/gallery/ferrari-f8-7.jpg";
+import ferrariF8Gallery8 from "@/assets/cars/gallery/ferrari-f8-8.jpg";
+import ferrariF8Gallery9 from "@/assets/cars/gallery/ferrari-f8-9.jpg";
 
 // Lamborghini Urus gallery images
 import lamborghiniUrusGallery1 from "@/assets/cars/gallery/lamborghini-urus-1.jpg";
