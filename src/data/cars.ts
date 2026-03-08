@@ -281,16 +281,7 @@ export interface Car {
   category: string;
   description: string;
   luxuryDescription: string;
-  specifications: {
-    engine: string;
-    power: string;
-    torque: string;
-    acceleration: string;
-    topSpeed: string;
-    transmission: string;
-    drivetrain: string;
-    weight: string;
-  };
+  specifications: Record<string, string>;
   features: string[];
   availableIn: string[];
 }
