@@ -1,11 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { cars } from "@/data/cars";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, MapPin, CheckCircle2, Users, Info } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle2, Users, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -64,6 +64,25 @@ const CarDetail = () => {
     }
     return Math.abs(hash) % 11; // 0 to 10
   }, [id]);
+
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const navigateLightbox = useCallback((direction: number) => {
+    if (lightboxIndex === null || !car?.gallery) return;
+    const total = car.gallery.length;
+    setLightboxIndex((lightboxIndex + direction + total) % total);
+  }, [lightboxIndex, car]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxIndex, navigateLightbox]);
 
   if (!car) {
     return (
@@ -173,7 +192,11 @@ const CarDetail = () => {
             <div className="grid md:grid-cols-3 gap-4">
               {car.gallery ? (
                 car.gallery.map((image, index) => (
-                  <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background">
+                  <div
+                    key={index}
+                    className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background cursor-pointer"
+                    onClick={() => setLightboxIndex(index)}
+                  >
                     <img
                       src={image}
                       alt={`${car.name} vista ${index + 1}`}
@@ -194,6 +217,49 @@ const CarDetail = () => {
               )}
             </div>
           </section>
+
+          {/* Lightbox Overlay */}
+          {lightboxIndex !== null && car.gallery && (
+            <div
+              className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center"
+              onClick={() => setLightboxIndex(null)}
+            >
+              <button
+                className="absolute top-6 right-6 text-foreground/70 hover:text-foreground transition-colors"
+                onClick={() => setLightboxIndex(null)}
+              >
+                <X className="w-8 h-8" />
+              </button>
+
+              <button
+                className="absolute left-4 md:left-8 text-foreground/70 hover:text-foreground transition-colors p-2"
+                onClick={(e) => { e.stopPropagation(); navigateLightbox(-1); }}
+              >
+                <ChevronLeft className="w-10 h-10" />
+              </button>
+
+              <div
+                className="max-w-5xl max-h-[85vh] px-16"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={car.gallery[lightboxIndex]}
+                  alt={`${car.name} vista ${lightboxIndex + 1}`}
+                  className="max-w-full max-h-[85vh] object-contain rounded-lg"
+                />
+                <p className="text-center text-muted-foreground mt-4 text-sm">
+                  {lightboxIndex + 1} / {car.gallery.length}
+                </p>
+              </div>
+
+              <button
+                className="absolute right-4 md:right-8 text-foreground/70 hover:text-foreground transition-colors p-2"
+                onClick={(e) => { e.stopPropagation(); navigateLightbox(1); }}
+              >
+                <ChevronRight className="w-10 h-10" />
+              </button>
+            </div>
+          )}
 
           {/* Specifications */}
           <section className="mb-12">
