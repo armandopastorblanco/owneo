@@ -280,7 +280,7 @@ const CarDetail = () => {
                   <tr>
                     <td className="py-4 px-4 text-foreground font-bold">Coste Real por Día de Uso</td>
                     <td className="py-4 px-4 text-center text-foreground font-bold">~{Math.round((numericPrice * 0.35 + numericPrice * 0.05 * 5) / (50 * 5)).toLocaleString('es-ES')}€/día</td>
-                    <td className="py-4 px-4 text-center text-primary font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (30 * 5)).toLocaleString('es-ES')}€/día</td>
+                    <td className="py-4 px-4 text-center text-champagne font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (30 * 5)).toLocaleString('es-ES')}€/día</td>
                   </tr>
                 </tbody>
               </table>
