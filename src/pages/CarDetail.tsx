@@ -275,7 +275,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Reventa a 5 Años</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.65).toLocaleString('es-ES')}€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">Hasta 70% de tu inversión</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">Hasta 70% de tu inversión</td>
                   </tr>
                   <tr>
                     <td className="py-4 px-4 text-foreground font-bold">Coste Real por Día de Uso</td>
