@@ -56,14 +56,8 @@ import lamborghiniHuracanGallery4 from "@/assets/cars/gallery/lamborghini-huraca
 import lamborghiniHuracanGallery5 from "@/assets/cars/gallery/lamborghini-huracan-5.jpg";
 import lamborghiniHuracanGallery6 from "@/assets/cars/gallery/lamborghini-huracan-6.jpg";
 import lamborghiniHuracanGallery7 from "@/assets/cars/gallery/lamborghini-huracan-7.jpg";
-import lamborghiniHuracanGallery8 from "@/assets/cars/gallery/lamborghini-huracan-8.jpg";
-import lamborghiniHuracanGallery9 from "@/assets/cars/gallery/lamborghini-huracan-9.jpg";
-import lamborghiniHuracanGallery10 from "@/assets/cars/gallery/lamborghini-huracan-10.jpg";
 import lamborghiniHuracanGallery11 from "@/assets/cars/gallery/lamborghini-huracan-11.jpg";
 import lamborghiniHuracanGallery12 from "@/assets/cars/gallery/lamborghini-huracan-12.jpg";
-import lamborghiniHuracanGallery13 from "@/assets/cars/gallery/lamborghini-huracan-13.jpg";
-import lamborghiniHuracanGallery14 from "@/assets/cars/gallery/lamborghini-huracan-14.jpg";
-import lamborghiniHuracanGallery15 from "@/assets/cars/gallery/lamborghini-huracan-15.jpg";
 
 // Porsche Macan gallery images
 import porscheMacanGallery1 from "@/assets/cars/gallery/porsche-macan-1.jpg";
@@ -411,9 +405,7 @@ export const cars: Car[] = [
     gallery: [
       lamborghiniHuracanGallery1, lamborghiniHuracanGallery2, lamborghiniHuracanGallery3,
       lamborghiniHuracanGallery4, lamborghiniHuracanGallery5, lamborghiniHuracanGallery6,
-      lamborghiniHuracanGallery7, lamborghiniHuracanGallery8, lamborghiniHuracanGallery9,
-      lamborghiniHuracanGallery10, lamborghiniHuracanGallery11, lamborghiniHuracanGallery12,
-      lamborghiniHuracanGallery13, lamborghiniHuracanGallery14, lamborghiniHuracanGallery15
+      lamborghiniHuracanGallery7, lamborghiniHuracanGallery11, lamborghiniHuracanGallery12
     ],
     category: "Superdeportivo",
     description: "Pasión italiana en su forma más pura",
