@@ -67,14 +67,6 @@ import porscheMacanGallery4 from "@/assets/cars/gallery/porsche-macan-4.jpg";
 import porscheMacanGallery5 from "@/assets/cars/gallery/porsche-macan-5.jpg";
 import porscheMacanGallery6 from "@/assets/cars/gallery/porsche-macan-6.jpg";
 import porscheMacanGallery7 from "@/assets/cars/gallery/porsche-macan-7.jpg";
-import porscheMacanGallery8 from "@/assets/cars/gallery/porsche-macan-8.jpg";
-import porscheMacanGallery9 from "@/assets/cars/gallery/porsche-macan-9.jpg";
-import porscheMacanGallery10 from "@/assets/cars/gallery/porsche-macan-10.jpg";
-import porscheMacanGallery11 from "@/assets/cars/gallery/porsche-macan-11.jpg";
-import porscheMacanGallery12 from "@/assets/cars/gallery/porsche-macan-12.jpg";
-import porscheMacanGallery13 from "@/assets/cars/gallery/porsche-macan-13.jpg";
-import porscheMacanGallery14 from "@/assets/cars/gallery/porsche-macan-14.jpg";
-import porscheMacanGallery15 from "@/assets/cars/gallery/porsche-macan-15.jpg";
 
 // Ferrari F8 gallery images
 import ferrariF8Gallery1 from "@/assets/cars/gallery/ferrari-f8-1.jpg";
@@ -461,9 +453,7 @@ export const cars: Car[] = [
     gallery: [
       porscheMacanGallery1, porscheMacanGallery2, porscheMacanGallery3,
       porscheMacanGallery4, porscheMacanGallery5, porscheMacanGallery6,
-      porscheMacanGallery7, porscheMacanGallery8, porscheMacanGallery9,
-      porscheMacanGallery10, porscheMacanGallery11, porscheMacanGallery12,
-      porscheMacanGallery13, porscheMacanGallery14, porscheMacanGallery15
+      porscheMacanGallery7
     ],
     category: "SUV de Lujo",
     description: "El deportivo de los SUV",
