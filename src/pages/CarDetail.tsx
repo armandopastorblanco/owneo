@@ -238,57 +238,57 @@ const CarDetail = () => {
                   <tr className="border-b border-border">
                     <th className="text-left py-4 px-4 text-muted-foreground font-medium">Concepto</th>
                     <th className="text-center py-4 px-4 text-muted-foreground font-medium">Compra Individual</th>
-                    <th className="text-center py-4 px-4 font-medium text-primary">OWNEO Co-Sharing</th>
+                    <th className="text-center py-4 px-4 font-medium text-champagne">OWNEO Co-Sharing</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Inversión Inicial</td>
                     <td className="py-4 px-4 text-center text-foreground">{car.price}</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">{sharePrice.toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{sharePrice.toLocaleString('es-ES')}€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Seguro Anual</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.03).toLocaleString('es-ES')}€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~{Math.round(numericPrice * 0.003).toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~{Math.round(numericPrice * 0.003).toLocaleString('es-ES')}€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Mantenimiento Anual</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.02).toLocaleString('es-ES')}€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~{Math.round(numericPrice * 0.002).toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~{Math.round(numericPrice * 0.002).toLocaleString('es-ES')}€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Almacenamiento Anual</td>
                     <td className="py-4 px-4 text-center text-foreground">~3.000€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~300€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~300€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Depreciación (5 años)</td>
                     <td className="py-4 px-4 text-center text-foreground">~30-40%</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">Compartida entre copropietarios</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">Compartida entre copropietarios</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Días de Uso Estimados/Año</td>
                     <td className="py-4 px-4 text-center text-foreground">~50 días</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">~30 días</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">~30 días</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Reventa a 5 Años</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(numericPrice * 0.65).toLocaleString('es-ES')}€</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">Hasta 70% de tu inversión</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">Hasta 70% de tu inversión</td>
                   </tr>
                   <tr>
                     <td className="py-4 px-4 text-foreground font-bold">Coste Real por Día de Uso</td>
                     <td className="py-4 px-4 text-center text-foreground font-bold">~{Math.round((numericPrice * 0.35 + numericPrice * 0.05 * 5) / (50 * 5)).toLocaleString('es-ES')}€/día</td>
-                    <td className="py-4 px-4 text-center text-primary font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (30 * 5)).toLocaleString('es-ES')}€/día</td>
+                    <td className="py-4 px-4 text-center text-champagne font-bold">~{Math.round((sharePrice * 0.3 + sharePrice * 0.005 * 5) / (30 * 5)).toLocaleString('es-ES')}€/día</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div className="mt-8 p-6 bg-primary/10 rounded-lg border border-primary/20">
+            <div className="mt-8 p-6 bg-champagne/10 rounded-lg border border-champagne/20">
               <p className="text-center text-foreground">
-                <span className="font-bold text-primary">Ahorra hasta un 80%</span> en costes anuales con OWNEO Co-Sharing, 
+                <span className="font-bold text-champagne">Ahorra hasta un 80%</span> en costes anuales con OWNEO Co-Sharing, 
                 disfrutando del {car.name} sin las cargas financieras de la propiedad exclusiva.
               </p>
             </div>
