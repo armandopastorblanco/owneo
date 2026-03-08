@@ -14,6 +14,7 @@ import NuestroModelo from "./pages/NuestroModelo";
 import TikTokLanding from "./pages/TikTokLanding";
 import TwitterLanding from "./pages/TwitterLanding";
 import Noticias from "./pages/Noticias";
+import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
