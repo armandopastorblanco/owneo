@@ -28,7 +28,6 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { path: "/", label: language === "es" ? "INICIO" : "HOME" },
     { path: "/portfolio", label: "PORTFOLIO" },
     { path: "/nuestro-modelo", label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT" },
     { path: "/cities", label: language === "es" ? "UBICACIONES" : "LOCATIONS" },
@@ -51,7 +50,7 @@ const Navbar = () => {
             <img 
               src={owneoLogo} 
               alt="OWNEO" 
-              className="h-8 md:h-10 w-auto filter brightness-110"
+              className="h-10 md:h-12 w-auto filter brightness-110"
             />
           </Link>
           
