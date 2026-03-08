@@ -50,7 +50,7 @@ const Navbar = () => {
             <img 
               src={owneoLogo} 
               alt="OWNEO" 
-              className="h-14 md:h-16 lg:h-18 w-auto mix-blend-screen filter brightness-110"
+              className="h-14 md:h-16 lg:h-18 w-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]"
             />
           </Link>
           

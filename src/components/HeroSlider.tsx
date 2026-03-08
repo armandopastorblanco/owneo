@@ -136,10 +136,7 @@ const HeroSlider = () => {
         <img 
           src={owneoLogo} 
           alt="OWNEO" 
-          className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto mix-blend-screen opacity-80"
-          style={{
-            filter: 'brightness(1.8) contrast(1.5)',
-          }}
+          className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
         />
       </motion.div>
 
