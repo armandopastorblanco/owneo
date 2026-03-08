@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import ferrariEv from "@/assets/news/ferrari-ev.jpg";
 import lamborghiniReveal from "@/assets/news/lamborghini-reveal.jpg";
@@ -17,7 +18,8 @@ const newsItems = [
     date: "5 Marzo 2026",
     category: "Eléctricos",
     title: "Ferrari Luce EV: Nuevos detalles filtrados sobre el primer 100% eléctrico de Ferrari",
-    excerpt: "El primer superdeportivo totalmente eléctrico de Maranello promete más de 1.200 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari."
+    excerpt: "El primer superdeportivo totalmente eléctrico de Maranello promete más de 1.200 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari.",
+    link: "/noticias/ferrari-luce-ev"
   },
   {
     id: 2,
@@ -89,44 +91,54 @@ const Noticias = () => {
       <section className="pb-24 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {newsItems.map((item, index) => (
-              <motion.article
-                key={item.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group bg-card/50 border border-border/30 rounded-2xl overflow-hidden hover:border-champagne/30 transition-all duration-300"
-              >
-                <div className="relative overflow-hidden aspect-[16/10]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-champagne/90 text-background text-xs font-semibold px-3 py-1 rounded-full">
-                      {item.category}
+            {newsItems.map((item, index) => {
+              const CardContent = (
+                <>
+                  <div className="relative overflow-hidden aspect-[16/10]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-champagne/90 text-background text-xs font-semibold px-3 py-1 rounded-full">
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 text-muted-foreground text-xs mb-3">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>{item.date}</span>
+                    </div>
+                    <h2 className="text-lg font-semibold leading-snug mb-3 group-hover:text-champagne transition-colors duration-300">
+                      {item.title}
+                    </h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                      {item.excerpt}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-champagne font-medium tracking-wider uppercase group-hover:gap-3 transition-all duration-300">
+                      Leer más <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-muted-foreground text-xs mb-3">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>{item.date}</span>
-                  </div>
-                  <h2 className="text-lg font-semibold leading-snug mb-3 group-hover:text-champagne transition-colors duration-300">
-                    {item.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                    {item.excerpt}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-champagne font-medium tracking-wider uppercase group-hover:gap-3 transition-all duration-300">
-                    Leer más <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </motion.article>
-            ))}
+                </>
+              );
+
+              return (
+                <motion.article
+                  key={item.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group bg-card/50 border border-border/30 rounded-2xl overflow-hidden hover:border-champagne/30 transition-all duration-300"
+                >
+                  {item.link ? (
+                    <Link to={item.link} className="block">{CardContent}</Link>
+                  ) : CardContent}
+                </motion.article>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -14,6 +14,7 @@ import NuestroModelo from "./pages/NuestroModelo";
 import TikTokLanding from "./pages/TikTokLanding";
 import TwitterLanding from "./pages/TwitterLanding";
 import Noticias from "./pages/Noticias";
+import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/tiktok" element={<TikTokLanding />} />
           <Route path="/twitter" element={<TwitterLanding />} />
           <Route path="/noticias" element={<Noticias />} />
+          <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
