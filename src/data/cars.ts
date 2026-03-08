@@ -31,6 +31,136 @@ import ferrariPortofinoGallery13 from "@/assets/cars/gallery/ferrari-portofino-1
 import ferrariPortofinoGallery14 from "@/assets/cars/gallery/ferrari-portofino-14.jpg";
 import ferrariPortofinoGallery15 from "@/assets/cars/gallery/ferrari-portofino-15.jpg";
 
+// Porsche 911 gallery images
+import porsche911Gallery1 from "@/assets/cars/gallery/porsche-911-1.jpg";
+import porsche911Gallery2 from "@/assets/cars/gallery/porsche-911-2.jpg";
+import porsche911Gallery3 from "@/assets/cars/gallery/porsche-911-3.jpg";
+import porsche911Gallery4 from "@/assets/cars/gallery/porsche-911-4.jpg";
+import porsche911Gallery5 from "@/assets/cars/gallery/porsche-911-5.jpg";
+import porsche911Gallery6 from "@/assets/cars/gallery/porsche-911-6.jpg";
+import porsche911Gallery7 from "@/assets/cars/gallery/porsche-911-7.jpg";
+import porsche911Gallery8 from "@/assets/cars/gallery/porsche-911-8.jpg";
+import porsche911Gallery9 from "@/assets/cars/gallery/porsche-911-9.jpg";
+
+// Lamborghini Huracan gallery images
+import lamborghiniHuracanGallery1 from "@/assets/cars/gallery/lamborghini-huracan-1.jpg";
+import lamborghiniHuracanGallery2 from "@/assets/cars/gallery/lamborghini-huracan-2.jpg";
+import lamborghiniHuracanGallery3 from "@/assets/cars/gallery/lamborghini-huracan-3.jpg";
+import lamborghiniHuracanGallery4 from "@/assets/cars/gallery/lamborghini-huracan-4.jpg";
+import lamborghiniHuracanGallery5 from "@/assets/cars/gallery/lamborghini-huracan-5.jpg";
+import lamborghiniHuracanGallery6 from "@/assets/cars/gallery/lamborghini-huracan-6.jpg";
+import lamborghiniHuracanGallery7 from "@/assets/cars/gallery/lamborghini-huracan-7.jpg";
+import lamborghiniHuracanGallery8 from "@/assets/cars/gallery/lamborghini-huracan-8.jpg";
+import lamborghiniHuracanGallery9 from "@/assets/cars/gallery/lamborghini-huracan-9.jpg";
+
+// Porsche Macan gallery images
+import porscheMacanGallery1 from "@/assets/cars/gallery/porsche-macan-1.jpg";
+import porscheMacanGallery2 from "@/assets/cars/gallery/porsche-macan-2.jpg";
+import porscheMacanGallery3 from "@/assets/cars/gallery/porsche-macan-3.jpg";
+import porscheMacanGallery4 from "@/assets/cars/gallery/porsche-macan-4.jpg";
+import porscheMacanGallery5 from "@/assets/cars/gallery/porsche-macan-5.jpg";
+import porscheMacanGallery6 from "@/assets/cars/gallery/porsche-macan-6.jpg";
+import porscheMacanGallery7 from "@/assets/cars/gallery/porsche-macan-7.jpg";
+import porscheMacanGallery8 from "@/assets/cars/gallery/porsche-macan-8.jpg";
+import porscheMacanGallery9 from "@/assets/cars/gallery/porsche-macan-9.jpg";
+
+// Ferrari F8 gallery images
+import ferrariF8Gallery1 from "@/assets/cars/gallery/ferrari-f8-1.jpg";
+import ferrariF8Gallery2 from "@/assets/cars/gallery/ferrari-f8-2.jpg";
+import ferrariF8Gallery3 from "@/assets/cars/gallery/ferrari-f8-3.jpg";
+import ferrariF8Gallery4 from "@/assets/cars/gallery/ferrari-f8-4.jpg";
+import ferrariF8Gallery5 from "@/assets/cars/gallery/ferrari-f8-5.jpg";
+import ferrariF8Gallery6 from "@/assets/cars/gallery/ferrari-f8-6.jpg";
+import ferrariF8Gallery7 from "@/assets/cars/gallery/ferrari-f8-7.jpg";
+import ferrariF8Gallery8 from "@/assets/cars/gallery/ferrari-f8-8.jpg";
+import ferrariF8Gallery9 from "@/assets/cars/gallery/ferrari-f8-9.jpg";
+
+// Lamborghini Urus gallery images
+import lamborghiniUrusGallery1 from "@/assets/cars/gallery/lamborghini-urus-1.jpg";
+import lamborghiniUrusGallery2 from "@/assets/cars/gallery/lamborghini-urus-2.jpg";
+import lamborghiniUrusGallery3 from "@/assets/cars/gallery/lamborghini-urus-3.jpg";
+import lamborghiniUrusGallery4 from "@/assets/cars/gallery/lamborghini-urus-4.jpg";
+import lamborghiniUrusGallery5 from "@/assets/cars/gallery/lamborghini-urus-5.jpg";
+import lamborghiniUrusGallery6 from "@/assets/cars/gallery/lamborghini-urus-6.jpg";
+import lamborghiniUrusGallery7 from "@/assets/cars/gallery/lamborghini-urus-7.jpg";
+import lamborghiniUrusGallery8 from "@/assets/cars/gallery/lamborghini-urus-8.jpg";
+import lamborghiniUrusGallery9 from "@/assets/cars/gallery/lamborghini-urus-9.jpg";
+
+// Porsche Taycan gallery images
+import porscheTaycanGallery1 from "@/assets/cars/gallery/porsche-taycan-1.jpg";
+import porscheTaycanGallery2 from "@/assets/cars/gallery/porsche-taycan-2.jpg";
+import porscheTaycanGallery3 from "@/assets/cars/gallery/porsche-taycan-3.jpg";
+import porscheTaycanGallery4 from "@/assets/cars/gallery/porsche-taycan-4.jpg";
+import porscheTaycanGallery5 from "@/assets/cars/gallery/porsche-taycan-5.jpg";
+import porscheTaycanGallery6 from "@/assets/cars/gallery/porsche-taycan-6.jpg";
+import porscheTaycanGallery7 from "@/assets/cars/gallery/porsche-taycan-7.jpg";
+import porscheTaycanGallery8 from "@/assets/cars/gallery/porsche-taycan-8.jpg";
+import porscheTaycanGallery9 from "@/assets/cars/gallery/porsche-taycan-9.jpg";
+
+// Ferrari Roma gallery images
+import ferrariRomaGallery1 from "@/assets/cars/gallery/ferrari-roma-1.jpg";
+import ferrariRomaGallery2 from "@/assets/cars/gallery/ferrari-roma-2.jpg";
+import ferrariRomaGallery3 from "@/assets/cars/gallery/ferrari-roma-3.jpg";
+import ferrariRomaGallery4 from "@/assets/cars/gallery/ferrari-roma-4.jpg";
+import ferrariRomaGallery5 from "@/assets/cars/gallery/ferrari-roma-5.jpg";
+import ferrariRomaGallery6 from "@/assets/cars/gallery/ferrari-roma-6.jpg";
+
+// Lamborghini Aventador gallery images
+import lamborghiniAventadorGallery1 from "@/assets/cars/gallery/lamborghini-aventador-1.jpg";
+import lamborghiniAventadorGallery2 from "@/assets/cars/gallery/lamborghini-aventador-2.jpg";
+import lamborghiniAventadorGallery3 from "@/assets/cars/gallery/lamborghini-aventador-3.jpg";
+import lamborghiniAventadorGallery4 from "@/assets/cars/gallery/lamborghini-aventador-4.jpg";
+import lamborghiniAventadorGallery5 from "@/assets/cars/gallery/lamborghini-aventador-5.jpg";
+import lamborghiniAventadorGallery6 from "@/assets/cars/gallery/lamborghini-aventador-6.jpg";
+
+// Aston Martin DB11 gallery images
+import astonMartinDB11Gallery1 from "@/assets/cars/gallery/aston-martin-db11-1.jpg";
+import astonMartinDB11Gallery2 from "@/assets/cars/gallery/aston-martin-db11-2.jpg";
+import astonMartinDB11Gallery3 from "@/assets/cars/gallery/aston-martin-db11-3.jpg";
+import astonMartinDB11Gallery4 from "@/assets/cars/gallery/aston-martin-db11-4.jpg";
+import astonMartinDB11Gallery5 from "@/assets/cars/gallery/aston-martin-db11-5.jpg";
+import astonMartinDB11Gallery6 from "@/assets/cars/gallery/aston-martin-db11-6.jpg";
+
+// McLaren 720S gallery images
+import mclaren720sGallery1 from "@/assets/cars/gallery/mclaren-720s-1.jpg";
+import mclaren720sGallery2 from "@/assets/cars/gallery/mclaren-720s-2.jpg";
+import mclaren720sGallery3 from "@/assets/cars/gallery/mclaren-720s-3.jpg";
+import mclaren720sGallery4 from "@/assets/cars/gallery/mclaren-720s-4.jpg";
+import mclaren720sGallery5 from "@/assets/cars/gallery/mclaren-720s-5.jpg";
+import mclaren720sGallery6 from "@/assets/cars/gallery/mclaren-720s-6.jpg";
+
+// Porsche Cayenne gallery images
+import porscheCayenneGallery1 from "@/assets/cars/gallery/porsche-cayenne-1.jpg";
+import porscheCayenneGallery2 from "@/assets/cars/gallery/porsche-cayenne-2.jpg";
+import porscheCayenneGallery3 from "@/assets/cars/gallery/porsche-cayenne-3.jpg";
+import porscheCayenneGallery4 from "@/assets/cars/gallery/porsche-cayenne-4.jpg";
+import porscheCayenneGallery5 from "@/assets/cars/gallery/porsche-cayenne-5.jpg";
+import porscheCayenneGallery6 from "@/assets/cars/gallery/porsche-cayenne-6.jpg";
+
+// Mercedes-AMG GT R gallery images
+import mercedesAMGGTRGallery1 from "@/assets/cars/gallery/mercedes-amg-gt-r-1.jpg";
+import mercedesAMGGTRGallery2 from "@/assets/cars/gallery/mercedes-amg-gt-r-2.jpg";
+import mercedesAMGGTRGallery3 from "@/assets/cars/gallery/mercedes-amg-gt-r-3.jpg";
+import mercedesAMGGTRGallery4 from "@/assets/cars/gallery/mercedes-amg-gt-r-4.jpg";
+import mercedesAMGGTRGallery5 from "@/assets/cars/gallery/mercedes-amg-gt-r-5.jpg";
+import mercedesAMGGTRGallery6 from "@/assets/cars/gallery/mercedes-amg-gt-r-6.jpg";
+
+// Bentley Continental GT gallery images
+import bentleyContinentalGallery1 from "@/assets/cars/gallery/bentley-continental-1.jpg";
+import bentleyContinentalGallery2 from "@/assets/cars/gallery/bentley-continental-2.jpg";
+import bentleyContinentalGallery3 from "@/assets/cars/gallery/bentley-continental-3.jpg";
+import bentleyContinentalGallery4 from "@/assets/cars/gallery/bentley-continental-4.jpg";
+import bentleyContinentalGallery5 from "@/assets/cars/gallery/bentley-continental-5.jpg";
+import bentleyContinentalGallery6 from "@/assets/cars/gallery/bentley-continental-6.jpg";
+
+// Rolls-Royce Wraith gallery images
+import rollsRoyceWraithGallery1 from "@/assets/cars/gallery/rolls-royce-wraith-1.jpg";
+import rollsRoyceWraithGallery2 from "@/assets/cars/gallery/rolls-royce-wraith-2.jpg";
+import rollsRoyceWraithGallery3 from "@/assets/cars/gallery/rolls-royce-wraith-3.jpg";
+import rollsRoyceWraithGallery4 from "@/assets/cars/gallery/rolls-royce-wraith-4.jpg";
+import rollsRoyceWraithGallery5 from "@/assets/cars/gallery/rolls-royce-wraith-5.jpg";
+import rollsRoyceWraithGallery6 from "@/assets/cars/gallery/rolls-royce-wraith-6.jpg";
+
 export interface Car {
   id: string;
   name: string;
@@ -113,6 +243,17 @@ export const cars: Car[] = [
     year: 2024,
     price: "€230,000",
     image: porsche911TurboS,
+    gallery: [
+      porsche911Gallery1,
+      porsche911Gallery2,
+      porsche911Gallery3,
+      porsche911Gallery4,
+      porsche911Gallery7,
+      porsche911Gallery8,
+      porsche911Gallery5,
+      porsche911Gallery6,
+      porsche911Gallery9
+    ],
     category: "Coupé Deportivo",
     description: "Ingeniería alemana en su máxima expresión",
     luxuryDescription: "El Porsche 911 Turbo S representa la cúspide de la ingeniería de precisión y el diseño atemporal. Este legendario deportivo combina una aceleración fulminante con usabilidad cotidiana, ofreciendo una experiencia de conducción sin compromisos que ha cautivado a los entusiastas durante generaciones. Su icónica silueta oculta tecnología de vanguardia y potencia pura, convirtiéndolo en la expresión definitiva de la excelencia automotriz.",
@@ -143,6 +284,17 @@ export const cars: Car[] = [
     year: 2024,
     price: "€250,000",
     image: lamborghiniHuracanEvo,
+    gallery: [
+      lamborghiniHuracanGallery1,
+      lamborghiniHuracanGallery2,
+      lamborghiniHuracanGallery3,
+      lamborghiniHuracanGallery4,
+      lamborghiniHuracanGallery7,
+      lamborghiniHuracanGallery8,
+      lamborghiniHuracanGallery5,
+      lamborghiniHuracanGallery6,
+      lamborghiniHuracanGallery9
+    ],
     category: "Superdeportivo",
     description: "Pasión italiana en su forma más pura",
     luxuryDescription: "El Lamborghini Huracán EVO es una obra maestra del arte automotriz que acapara la atención dondequiera que vaya. Con su agresivo diseño angular y motor V10 atmosférico, este superdeportivo ofrece una experiencia de conducción visceral que despierta todos tus sentidos. El Huracán EVO no es solo un coche—es una declaración de ambición sin compromisos y rendimiento sin disculpas.",
@@ -173,6 +325,17 @@ export const cars: Car[] = [
     year: 2024,
     price: "€95,000",
     image: porscheMacanTurbo,
+    gallery: [
+      porscheMacanGallery1,
+      porscheMacanGallery2,
+      porscheMacanGallery3,
+      porscheMacanGallery4,
+      porscheMacanGallery7,
+      porscheMacanGallery8,
+      porscheMacanGallery5,
+      porscheMacanGallery6,
+      porscheMacanGallery9
+    ],
     category: "SUV de Lujo",
     description: "El deportivo de los SUV",
     luxuryDescription: "El Porsche Macan Turbo redefine lo que un SUV de lujo puede ser. Combinando el legendario ADN de deportivo de Porsche con la versatilidad de un SUV, ofrece un rendimiento exhilarante sin sacrificar confort o practicidad. Ya sea navegando por calles urbanas o conquistando carreteras de montaña, el Macan Turbo ofrece una combinación inigualable de potencia, agilidad y lujo refinado.",
@@ -203,6 +366,17 @@ export const cars: Car[] = [
     year: 2024,
     price: "€280,000",
     image: ferrariF8Tributo,
+    gallery: [
+      ferrariF8Gallery1,
+      ferrariF8Gallery2,
+      ferrariF8Gallery3,
+      ferrariF8Gallery4,
+      ferrariF8Gallery7,
+      ferrariF8Gallery8,
+      ferrariF8Gallery5,
+      ferrariF8Gallery6,
+      ferrariF8Gallery9
+    ],
     category: "Superdeportivo",
     description: "Un tributo al V8 más potente en la historia de Ferrari",
     luxuryDescription: "El Ferrari F8 Tributo celebra el motor V8 más potente de Ferrari con un diseño impresionante y un rendimiento extraordinario. Esta obra maestra de motor central ofrece dinámicas enfocadas a la pista con el refinamiento de un coche de carretera, proporcionando una conexión sin filtros entre conductor y máquina. Cada detalle, desde su carrocería esculpida hasta su interior meticulosamente elaborado, refleja el compromiso inquebrantable de Ferrari con la excelencia.",
@@ -233,6 +407,17 @@ export const cars: Car[] = [
     year: 2024,
     price: "€220,000",
     image: lamborghiniUrus,
+    gallery: [
+      lamborghiniUrusGallery1,
+      lamborghiniUrusGallery2,
+      lamborghiniUrusGallery3,
+      lamborghiniUrusGallery4,
+      lamborghiniUrusGallery7,
+      lamborghiniUrusGallery8,
+      lamborghiniUrusGallery5,
+      lamborghiniUrusGallery6,
+      lamborghiniUrusGallery9
+    ],
     category: "Super SUV",
     description: "El primer Super Sport Utility Vehicle del mundo",
     luxuryDescription: "El Lamborghini Urus rompe todas las convenciones como el primer Super SUV del mundo. Combinando el icónico lenguaje de diseño de Lamborghini con una versatilidad sin precedentes, el Urus ofrece rendimiento de superdeportivo en un paquete SUV. Su lujosa cabina, tecnología de vanguardia y carácter inconfundible de Lamborghini lo convierten en la elección perfecta para quienes se niegan a comprometer.",
@@ -263,6 +448,17 @@ export const cars: Car[] = [
     year: 2024,
     price: "€190,000",
     image: porscheTaycanTurboS,
+    gallery: [
+      porscheTaycanGallery1,
+      porscheTaycanGallery2,
+      porscheTaycanGallery3,
+      porscheTaycanGallery4,
+      porscheTaycanGallery7,
+      porscheTaycanGallery8,
+      porscheTaycanGallery5,
+      porscheTaycanGallery6,
+      porscheTaycanGallery9
+    ],
     category: "Sedán Deportivo Eléctrico",
     description: "El futuro del rendimiento es eléctrico",
     luxuryDescription: "El Porsche Taycan Turbo S demuestra que el rendimiento eléctrico puede ser verdaderamente exhilarante. Este revolucionario sedán deportivo combina entrega instantánea de par con las legendarias dinámicas de conducción de Porsche, creando una experiencia de conducción sin igual. Con su impresionante diseño, lujoso interior y tren motriz de cero emisiones, el Taycan Turbo S representa la fusión perfecta de sostenibilidad y rendimiento.",
@@ -293,6 +489,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€210,000",
     image: ferrariRoma,
+    gallery: [
+      ferrariRomaGallery1,
+      ferrariRomaGallery2,
+      ferrariRomaGallery3,
+      ferrariRomaGallery4,
+      ferrariRomaGallery5,
+      ferrariRomaGallery6
+    ],
     category: "Gran Turismo",
     description: "Elegancia contemporánea con el rendimiento intemporal de Ferrari",
     luxuryDescription: "El Ferrari Roma captura la forma de vida despreocupada y placentera de la Roma de los años 50 y 60, reimaginada para la era moderna. Este sofisticado Gran Turismo presenta un diseño minimalista pero elegante, una cabina centrada en el conductor y el emocionante rendimiento de un Ferrari V8. El Roma representa un nuevo capítulo en el legado de Ferrari, donde el lujo refinado se encuentra con la dinámica exhilarante.",
@@ -323,6 +527,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€500,000",
     image: lamborghiniAventador,
+    gallery: [
+      lamborghiniAventadorGallery1,
+      lamborghiniAventadorGallery2,
+      lamborghiniAventadorGallery3,
+      lamborghiniAventadorGallery4,
+      lamborghiniAventadorGallery5,
+      lamborghiniAventadorGallery6
+    ],
     category: "Superdeportivo Insignia",
     description: "La evolución final de un icono",
     luxuryDescription: "El Lamborghini Aventador Ultimae representa la expresión definitiva del rendimiento V12 atmosférico. Esta obra maestra de edición limitada combina los mejores elementos de los modelos Aventador SVJ y S, creando el Aventador más potente y refinado jamás construido. Con sus dramáticas puertas de tijera, monocasco de fibra de carbono y la banda sonora escalofriante del V12, el Ultimae es un tributo digno a uno de los superdeportivos más grandes jamás creados.",
@@ -353,6 +565,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€225,000",
     image: astonMartinDB11,
+    gallery: [
+      astonMartinDB11Gallery1,
+      astonMartinDB11Gallery2,
+      astonMartinDB11Gallery3,
+      astonMartinDB11Gallery4,
+      astonMartinDB11Gallery5,
+      astonMartinDB11Gallery6
+    ],
     category: "Gran Turismo",
     description: "Elegancia británica en su máxima expresión",
     luxuryDescription: "El Aston Martin DB11 encarna el equilibrio perfecto entre belleza y rendimiento. Este Gran Turismo quintaesencialmente británico presenta lujo artesanal, diseño atemporal y un potente motor twin-turbo V8 o V12. Cada viaje en el DB11 es una ocasión especial, ya sea cruzando continentes con supremo confort o disfrutando de una conducción enérgica en tu carretera favorita.",
@@ -383,6 +603,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€285,000",
     image: mclaren720s,
+    gallery: [
+      mclaren720sGallery1,
+      mclaren720sGallery2,
+      mclaren720sGallery3,
+      mclaren720sGallery4,
+      mclaren720sGallery5,
+      mclaren720sGallery6
+    ],
     category: "Superdeportivo",
     description: "Excelencia aerodinámica con rendimiento puro",
     luxuryDescription: "El McLaren 720S empuja los límites de lo que un superdeportivo puede lograr. Con su innovadora estructura de fibra de carbono, distintivas puertas diédricas y rendimiento impresionante, el 720S ofrece una experiencia de conducción que es tanto emocionante como refinada. Cada aspecto de su diseño tiene un propósito, creando una máquina que es tan funcional como hermosa.",
@@ -413,6 +641,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€185,000",
     image: porscheCayenneTurboGT,
+    gallery: [
+      porscheCayenneGallery1,
+      porscheCayenneGallery2,
+      porscheCayenneGallery3,
+      porscheCayenneGallery4,
+      porscheCayenneGallery5,
+      porscheCayenneGallery6
+    ],
     category: "SUV de Alto Rendimiento",
     description: "El Cayenne más potente jamás creado",
     luxuryDescription: "El Porsche Cayenne Turbo GT es el SUV de rendimiento definitivo, combinando capacidades enfocadas a la pista con usabilidad cotidiana. Este vehículo excepcional presenta un estilo agresivo, aerodinámica mejorada y el motor más potente jamás montado en un Cayenne. Es la prueba de que un SUV puede ofrecer rendimiento genuino de deportivo sin compromisos.",
@@ -443,6 +679,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€195,000",
     image: mercedesAMGGTR,
+    gallery: [
+      mercedesAMGGTRGallery1,
+      mercedesAMGGTRGallery2,
+      mercedesAMGGTRGallery3,
+      mercedesAMGGTRGallery4,
+      mercedesAMGGTRGallery5,
+      mercedesAMGGTRGallery6
+    ],
     category: "Coupé Deportivo",
     description: "La Bestia del Infierno Verde",
     luxuryDescription: "El Mercedes-AMG GT R, conocido como 'La Bestia del Infierno Verde', es un superdeportivo enfocado a la pista que trae el rendimiento perfeccionado en Nürburgring a la carretera. Con su estilo distintivo, motor V8 AMG artesanal y tecnología derivada de la competición, el GT R ofrece una mezcla embriagadora de potencia bruta y lujo refinado que solo AMG puede proporcionar.",
@@ -473,6 +717,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€240,000",
     image: bentleyContinentalGT,
+    gallery: [
+      bentleyContinentalGallery1,
+      bentleyContinentalGallery2,
+      bentleyContinentalGallery3,
+      bentleyContinentalGallery4,
+      bentleyContinentalGallery5,
+      bentleyContinentalGallery6
+    ],
     category: "Gran Turismo de Lujo",
     description: "Lujo incomparable con rendimiento sin esfuerzo",
     luxuryDescription: "El Bentley Continental GT representa la cúspide del lujo en Gran Turismo. Fabricado artesanalmente en Crewe, Inglaterra, este magnífico coupé combina materiales exquisitos, atención meticulosa al detalle y la potencia del W12. Cada viaje se convierte en una experiencia de confort y refinamiento absolutos, donde el único límite es el horizonte.",
@@ -503,6 +755,14 @@ export const cars: Car[] = [
     year: 2024,
     price: "€350,000",
     image: rollsRoyceWraith,
+    gallery: [
+      rollsRoyceWraithGallery1,
+      rollsRoyceWraithGallery2,
+      rollsRoyceWraithGallery3,
+      rollsRoyceWraithGallery4,
+      rollsRoyceWraithGallery5,
+      rollsRoyceWraithGallery6
+    ],
     category: "Coupé de Lujo",
     description: "El Rolls-Royce más potente jamás creado",
     luxuryDescription: "El Rolls-Royce Wraith es una declaración de lujo y rendimiento sin compromisos. Este coupé fastback combina la potencia sin esfuerzo de un V12 biturbo con el supremo confort y artesanía que solo Rolls-Royce puede ofrecer. Cada detalle, desde el techo cielo estrellado hasta el Espíritu del Éxtasis, está diseñado para crear una experiencia automotriz sin igual.",
