@@ -15,6 +15,41 @@ import {
 import ParticipationForm from "@/components/ParticipationForm";
 import Car360Viewer from "@/components/Car360Viewer";
 
+const specLabels: Record<string, string> = {
+  engine: "Motor",
+  power: "Potencia",
+  torque: "Par Motor",
+  acceleration: "Aceleración",
+  topSpeed: "Velocidad Máxima",
+  transmission: "Transmisión",
+  drivetrain: "Tracción",
+  weight: "Peso en Vacío",
+  fuelType: "Combustible",
+  displacement: "Cilindrada",
+  cylinders: "Cilindros",
+  valves: "Válvulas",
+  compression: "Relación de Compresión",
+  fuelSystem: "Sistema de Alimentación",
+  emissionClass: "Normativa de Emisiones",
+  co2Emissions: "Emisiones de CO₂",
+  fuelConsumption: "Consumo Combinado",
+  tankCapacity: "Capacidad del Depósito",
+  brakes: "Frenos",
+  tiresFront: "Neumáticos Delanteros",
+  tiresRear: "Neumáticos Traseros",
+  suspension: "Suspensión",
+  length: "Longitud",
+  width: "Anchura",
+  height: "Altura",
+  wheelbase: "Distancia entre Ejes",
+  trunkCapacity: "Capacidad del Maletero",
+  doors: "Puertas",
+  seats: "Plazas",
+  batteryCapacity: "Capacidad de Batería",
+  range: "Autonomía",
+  chargingTime: "Tiempo de Carga Rápida",
+};
+
 const CarDetail = () => {
   const { id } = useParams();
   const car = cars.find(c => c.id === id);
