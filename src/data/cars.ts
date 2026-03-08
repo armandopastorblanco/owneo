@@ -299,8 +299,7 @@ export const cars: Car[] = [
       ferrariPortofinoGallery1, ferrariPortofinoGallery2, ferrariPortofinoGallery3,
       ferrariPortofinoGallery8, ferrariPortofinoGallery9, ferrariPortofinoGallery4,
       ferrariPortofinoGallery7, ferrariPortofinoGallery6, ferrariPortofinoGallery10,
-      ferrariPortofinoGallery11, ferrariPortofinoGallery12, ferrariPortofinoGallery5,
-      ferrariPortofinoGallery13, ferrariPortofinoGallery14, ferrariPortofinoGallery15
+      ferrariPortofinoGallery11
     ],
     category: "GT Descapotable",
     description: "La máxima expresión de la elegancia italiana con un rendimiento extraordinario",
