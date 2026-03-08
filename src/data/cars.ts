@@ -41,6 +41,12 @@ import porsche911Gallery6 from "@/assets/cars/gallery/porsche-911-6.jpg";
 import porsche911Gallery7 from "@/assets/cars/gallery/porsche-911-7.jpg";
 import porsche911Gallery8 from "@/assets/cars/gallery/porsche-911-8.jpg";
 import porsche911Gallery9 from "@/assets/cars/gallery/porsche-911-9.jpg";
+import porsche911Gallery10 from "@/assets/cars/gallery/porsche-911-10.jpg";
+import porsche911Gallery11 from "@/assets/cars/gallery/porsche-911-11.jpg";
+import porsche911Gallery12 from "@/assets/cars/gallery/porsche-911-12.jpg";
+import porsche911Gallery13 from "@/assets/cars/gallery/porsche-911-13.jpg";
+import porsche911Gallery14 from "@/assets/cars/gallery/porsche-911-14.jpg";
+import porsche911Gallery15 from "@/assets/cars/gallery/porsche-911-15.jpg";
 
 // Lamborghini Huracan gallery images
 import lamborghiniHuracanGallery1 from "@/assets/cars/gallery/lamborghini-huracan-1.jpg";
@@ -52,6 +58,12 @@ import lamborghiniHuracanGallery6 from "@/assets/cars/gallery/lamborghini-huraca
 import lamborghiniHuracanGallery7 from "@/assets/cars/gallery/lamborghini-huracan-7.jpg";
 import lamborghiniHuracanGallery8 from "@/assets/cars/gallery/lamborghini-huracan-8.jpg";
 import lamborghiniHuracanGallery9 from "@/assets/cars/gallery/lamborghini-huracan-9.jpg";
+import lamborghiniHuracanGallery10 from "@/assets/cars/gallery/lamborghini-huracan-10.jpg";
+import lamborghiniHuracanGallery11 from "@/assets/cars/gallery/lamborghini-huracan-11.jpg";
+import lamborghiniHuracanGallery12 from "@/assets/cars/gallery/lamborghini-huracan-12.jpg";
+import lamborghiniHuracanGallery13 from "@/assets/cars/gallery/lamborghini-huracan-13.jpg";
+import lamborghiniHuracanGallery14 from "@/assets/cars/gallery/lamborghini-huracan-14.jpg";
+import lamborghiniHuracanGallery15 from "@/assets/cars/gallery/lamborghini-huracan-15.jpg";
 
 // Porsche Macan gallery images
 import porscheMacanGallery1 from "@/assets/cars/gallery/porsche-macan-1.jpg";
@@ -63,6 +75,12 @@ import porscheMacanGallery6 from "@/assets/cars/gallery/porsche-macan-6.jpg";
 import porscheMacanGallery7 from "@/assets/cars/gallery/porsche-macan-7.jpg";
 import porscheMacanGallery8 from "@/assets/cars/gallery/porsche-macan-8.jpg";
 import porscheMacanGallery9 from "@/assets/cars/gallery/porsche-macan-9.jpg";
+import porscheMacanGallery10 from "@/assets/cars/gallery/porsche-macan-10.jpg";
+import porscheMacanGallery11 from "@/assets/cars/gallery/porsche-macan-11.jpg";
+import porscheMacanGallery12 from "@/assets/cars/gallery/porsche-macan-12.jpg";
+import porscheMacanGallery13 from "@/assets/cars/gallery/porsche-macan-13.jpg";
+import porscheMacanGallery14 from "@/assets/cars/gallery/porsche-macan-14.jpg";
+import porscheMacanGallery15 from "@/assets/cars/gallery/porsche-macan-15.jpg";
 
 // Ferrari F8 gallery images
 import ferrariF8Gallery1 from "@/assets/cars/gallery/ferrari-f8-1.jpg";
@@ -74,6 +92,12 @@ import ferrariF8Gallery6 from "@/assets/cars/gallery/ferrari-f8-6.jpg";
 import ferrariF8Gallery7 from "@/assets/cars/gallery/ferrari-f8-7.jpg";
 import ferrariF8Gallery8 from "@/assets/cars/gallery/ferrari-f8-8.jpg";
 import ferrariF8Gallery9 from "@/assets/cars/gallery/ferrari-f8-9.jpg";
+import ferrariF8Gallery10 from "@/assets/cars/gallery/ferrari-f8-10.jpg";
+import ferrariF8Gallery11 from "@/assets/cars/gallery/ferrari-f8-11.jpg";
+import ferrariF8Gallery12 from "@/assets/cars/gallery/ferrari-f8-12.jpg";
+import ferrariF8Gallery13 from "@/assets/cars/gallery/ferrari-f8-13.jpg";
+import ferrariF8Gallery14 from "@/assets/cars/gallery/ferrari-f8-14.jpg";
+import ferrariF8Gallery15 from "@/assets/cars/gallery/ferrari-f8-15.jpg";
 
 // Lamborghini Urus gallery images
 import lamborghiniUrusGallery1 from "@/assets/cars/gallery/lamborghini-urus-1.jpg";
@@ -85,6 +109,12 @@ import lamborghiniUrusGallery6 from "@/assets/cars/gallery/lamborghini-urus-6.jp
 import lamborghiniUrusGallery7 from "@/assets/cars/gallery/lamborghini-urus-7.jpg";
 import lamborghiniUrusGallery8 from "@/assets/cars/gallery/lamborghini-urus-8.jpg";
 import lamborghiniUrusGallery9 from "@/assets/cars/gallery/lamborghini-urus-9.jpg";
+import lamborghiniUrusGallery10 from "@/assets/cars/gallery/lamborghini-urus-10.jpg";
+import lamborghiniUrusGallery11 from "@/assets/cars/gallery/lamborghini-urus-11.jpg";
+import lamborghiniUrusGallery12 from "@/assets/cars/gallery/lamborghini-urus-12.jpg";
+import lamborghiniUrusGallery13 from "@/assets/cars/gallery/lamborghini-urus-13.jpg";
+import lamborghiniUrusGallery14 from "@/assets/cars/gallery/lamborghini-urus-14.jpg";
+import lamborghiniUrusGallery15 from "@/assets/cars/gallery/lamborghini-urus-15.jpg";
 
 // Porsche Taycan gallery images
 import porscheTaycanGallery1 from "@/assets/cars/gallery/porsche-taycan-1.jpg";
@@ -96,6 +126,12 @@ import porscheTaycanGallery6 from "@/assets/cars/gallery/porsche-taycan-6.jpg";
 import porscheTaycanGallery7 from "@/assets/cars/gallery/porsche-taycan-7.jpg";
 import porscheTaycanGallery8 from "@/assets/cars/gallery/porsche-taycan-8.jpg";
 import porscheTaycanGallery9 from "@/assets/cars/gallery/porsche-taycan-9.jpg";
+import porscheTaycanGallery10 from "@/assets/cars/gallery/porsche-taycan-10.jpg";
+import porscheTaycanGallery11 from "@/assets/cars/gallery/porsche-taycan-11.jpg";
+import porscheTaycanGallery12 from "@/assets/cars/gallery/porsche-taycan-12.jpg";
+import porscheTaycanGallery13 from "@/assets/cars/gallery/porsche-taycan-13.jpg";
+import porscheTaycanGallery14 from "@/assets/cars/gallery/porsche-taycan-14.jpg";
+import porscheTaycanGallery15 from "@/assets/cars/gallery/porsche-taycan-15.jpg";
 
 // Ferrari Roma gallery images
 import ferrariRomaGallery1 from "@/assets/cars/gallery/ferrari-roma-1.jpg";
@@ -104,6 +140,15 @@ import ferrariRomaGallery3 from "@/assets/cars/gallery/ferrari-roma-3.jpg";
 import ferrariRomaGallery4 from "@/assets/cars/gallery/ferrari-roma-4.jpg";
 import ferrariRomaGallery5 from "@/assets/cars/gallery/ferrari-roma-5.jpg";
 import ferrariRomaGallery6 from "@/assets/cars/gallery/ferrari-roma-6.jpg";
+import ferrariRomaGallery7 from "@/assets/cars/gallery/ferrari-roma-7.jpg";
+import ferrariRomaGallery8 from "@/assets/cars/gallery/ferrari-roma-8.jpg";
+import ferrariRomaGallery9 from "@/assets/cars/gallery/ferrari-roma-9.jpg";
+import ferrariRomaGallery10 from "@/assets/cars/gallery/ferrari-roma-10.jpg";
+import ferrariRomaGallery11 from "@/assets/cars/gallery/ferrari-roma-11.jpg";
+import ferrariRomaGallery12 from "@/assets/cars/gallery/ferrari-roma-12.jpg";
+import ferrariRomaGallery13 from "@/assets/cars/gallery/ferrari-roma-13.jpg";
+import ferrariRomaGallery14 from "@/assets/cars/gallery/ferrari-roma-14.jpg";
+import ferrariRomaGallery15 from "@/assets/cars/gallery/ferrari-roma-15.jpg";
 
 // Lamborghini Aventador gallery images
 import lamborghiniAventadorGallery1 from "@/assets/cars/gallery/lamborghini-aventador-1.jpg";
@@ -112,6 +157,15 @@ import lamborghiniAventadorGallery3 from "@/assets/cars/gallery/lamborghini-aven
 import lamborghiniAventadorGallery4 from "@/assets/cars/gallery/lamborghini-aventador-4.jpg";
 import lamborghiniAventadorGallery5 from "@/assets/cars/gallery/lamborghini-aventador-5.jpg";
 import lamborghiniAventadorGallery6 from "@/assets/cars/gallery/lamborghini-aventador-6.jpg";
+import lamborghiniAventadorGallery7 from "@/assets/cars/gallery/lamborghini-aventador-7.jpg";
+import lamborghiniAventadorGallery8 from "@/assets/cars/gallery/lamborghini-aventador-8.jpg";
+import lamborghiniAventadorGallery9 from "@/assets/cars/gallery/lamborghini-aventador-9.jpg";
+import lamborghiniAventadorGallery10 from "@/assets/cars/gallery/lamborghini-aventador-10.jpg";
+import lamborghiniAventadorGallery11 from "@/assets/cars/gallery/lamborghini-aventador-11.jpg";
+import lamborghiniAventadorGallery12 from "@/assets/cars/gallery/lamborghini-aventador-12.jpg";
+import lamborghiniAventadorGallery13 from "@/assets/cars/gallery/lamborghini-aventador-13.jpg";
+import lamborghiniAventadorGallery14 from "@/assets/cars/gallery/lamborghini-aventador-14.jpg";
+import lamborghiniAventadorGallery15 from "@/assets/cars/gallery/lamborghini-aventador-15.jpg";
 
 // Aston Martin DB11 gallery images
 import astonMartinDB11Gallery1 from "@/assets/cars/gallery/aston-martin-db11-1.jpg";
@@ -120,6 +174,15 @@ import astonMartinDB11Gallery3 from "@/assets/cars/gallery/aston-martin-db11-3.j
 import astonMartinDB11Gallery4 from "@/assets/cars/gallery/aston-martin-db11-4.jpg";
 import astonMartinDB11Gallery5 from "@/assets/cars/gallery/aston-martin-db11-5.jpg";
 import astonMartinDB11Gallery6 from "@/assets/cars/gallery/aston-martin-db11-6.jpg";
+import astonMartinDB11Gallery7 from "@/assets/cars/gallery/aston-martin-db11-7.jpg";
+import astonMartinDB11Gallery8 from "@/assets/cars/gallery/aston-martin-db11-8.jpg";
+import astonMartinDB11Gallery9 from "@/assets/cars/gallery/aston-martin-db11-9.jpg";
+import astonMartinDB11Gallery10 from "@/assets/cars/gallery/aston-martin-db11-10.jpg";
+import astonMartinDB11Gallery11 from "@/assets/cars/gallery/aston-martin-db11-11.jpg";
+import astonMartinDB11Gallery12 from "@/assets/cars/gallery/aston-martin-db11-12.jpg";
+import astonMartinDB11Gallery13 from "@/assets/cars/gallery/aston-martin-db11-13.jpg";
+import astonMartinDB11Gallery14 from "@/assets/cars/gallery/aston-martin-db11-14.jpg";
+import astonMartinDB11Gallery15 from "@/assets/cars/gallery/aston-martin-db11-15.jpg";
 
 // McLaren 720S gallery images
 import mclaren720sGallery1 from "@/assets/cars/gallery/mclaren-720s-1.jpg";
@@ -128,6 +191,15 @@ import mclaren720sGallery3 from "@/assets/cars/gallery/mclaren-720s-3.jpg";
 import mclaren720sGallery4 from "@/assets/cars/gallery/mclaren-720s-4.jpg";
 import mclaren720sGallery5 from "@/assets/cars/gallery/mclaren-720s-5.jpg";
 import mclaren720sGallery6 from "@/assets/cars/gallery/mclaren-720s-6.jpg";
+import mclaren720sGallery7 from "@/assets/cars/gallery/mclaren-720s-7.jpg";
+import mclaren720sGallery8 from "@/assets/cars/gallery/mclaren-720s-8.jpg";
+import mclaren720sGallery9 from "@/assets/cars/gallery/mclaren-720s-9.jpg";
+import mclaren720sGallery10 from "@/assets/cars/gallery/mclaren-720s-10.jpg";
+import mclaren720sGallery11 from "@/assets/cars/gallery/mclaren-720s-11.jpg";
+import mclaren720sGallery12 from "@/assets/cars/gallery/mclaren-720s-12.jpg";
+import mclaren720sGallery13 from "@/assets/cars/gallery/mclaren-720s-13.jpg";
+import mclaren720sGallery14 from "@/assets/cars/gallery/mclaren-720s-14.jpg";
+import mclaren720sGallery15 from "@/assets/cars/gallery/mclaren-720s-15.jpg";
 
 // Porsche Cayenne gallery images
 import porscheCayenneGallery1 from "@/assets/cars/gallery/porsche-cayenne-1.jpg";
@@ -136,6 +208,15 @@ import porscheCayenneGallery3 from "@/assets/cars/gallery/porsche-cayenne-3.jpg"
 import porscheCayenneGallery4 from "@/assets/cars/gallery/porsche-cayenne-4.jpg";
 import porscheCayenneGallery5 from "@/assets/cars/gallery/porsche-cayenne-5.jpg";
 import porscheCayenneGallery6 from "@/assets/cars/gallery/porsche-cayenne-6.jpg";
+import porscheCayenneGallery7 from "@/assets/cars/gallery/porsche-cayenne-7.jpg";
+import porscheCayenneGallery8 from "@/assets/cars/gallery/porsche-cayenne-8.jpg";
+import porscheCayenneGallery9 from "@/assets/cars/gallery/porsche-cayenne-9.jpg";
+import porscheCayenneGallery10 from "@/assets/cars/gallery/porsche-cayenne-10.jpg";
+import porscheCayenneGallery11 from "@/assets/cars/gallery/porsche-cayenne-11.jpg";
+import porscheCayenneGallery12 from "@/assets/cars/gallery/porsche-cayenne-12.jpg";
+import porscheCayenneGallery13 from "@/assets/cars/gallery/porsche-cayenne-13.jpg";
+import porscheCayenneGallery14 from "@/assets/cars/gallery/porsche-cayenne-14.jpg";
+import porscheCayenneGallery15 from "@/assets/cars/gallery/porsche-cayenne-15.jpg";
 
 // Mercedes-AMG GT R gallery images
 import mercedesAMGGTRGallery1 from "@/assets/cars/gallery/mercedes-amg-gt-r-1.jpg";
@@ -144,6 +225,15 @@ import mercedesAMGGTRGallery3 from "@/assets/cars/gallery/mercedes-amg-gt-r-3.jp
 import mercedesAMGGTRGallery4 from "@/assets/cars/gallery/mercedes-amg-gt-r-4.jpg";
 import mercedesAMGGTRGallery5 from "@/assets/cars/gallery/mercedes-amg-gt-r-5.jpg";
 import mercedesAMGGTRGallery6 from "@/assets/cars/gallery/mercedes-amg-gt-r-6.jpg";
+import mercedesAMGGTRGallery7 from "@/assets/cars/gallery/mercedes-amg-gt-r-7.jpg";
+import mercedesAMGGTRGallery8 from "@/assets/cars/gallery/mercedes-amg-gt-r-8.jpg";
+import mercedesAMGGTRGallery9 from "@/assets/cars/gallery/mercedes-amg-gt-r-9.jpg";
+import mercedesAMGGTRGallery10 from "@/assets/cars/gallery/mercedes-amg-gt-r-10.jpg";
+import mercedesAMGGTRGallery11 from "@/assets/cars/gallery/mercedes-amg-gt-r-11.jpg";
+import mercedesAMGGTRGallery12 from "@/assets/cars/gallery/mercedes-amg-gt-r-12.jpg";
+import mercedesAMGGTRGallery13 from "@/assets/cars/gallery/mercedes-amg-gt-r-13.jpg";
+import mercedesAMGGTRGallery14 from "@/assets/cars/gallery/mercedes-amg-gt-r-14.jpg";
+import mercedesAMGGTRGallery15 from "@/assets/cars/gallery/mercedes-amg-gt-r-15.jpg";
 
 // Bentley Continental GT gallery images
 import bentleyContinentalGallery1 from "@/assets/cars/gallery/bentley-continental-1.jpg";
@@ -152,6 +242,15 @@ import bentleyContinentalGallery3 from "@/assets/cars/gallery/bentley-continenta
 import bentleyContinentalGallery4 from "@/assets/cars/gallery/bentley-continental-4.jpg";
 import bentleyContinentalGallery5 from "@/assets/cars/gallery/bentley-continental-5.jpg";
 import bentleyContinentalGallery6 from "@/assets/cars/gallery/bentley-continental-6.jpg";
+import bentleyContinentalGallery7 from "@/assets/cars/gallery/bentley-continental-7.jpg";
+import bentleyContinentalGallery8 from "@/assets/cars/gallery/bentley-continental-8.jpg";
+import bentleyContinentalGallery9 from "@/assets/cars/gallery/bentley-continental-9.jpg";
+import bentleyContinentalGallery10 from "@/assets/cars/gallery/bentley-continental-10.jpg";
+import bentleyContinentalGallery11 from "@/assets/cars/gallery/bentley-continental-11.jpg";
+import bentleyContinentalGallery12 from "@/assets/cars/gallery/bentley-continental-12.jpg";
+import bentleyContinentalGallery13 from "@/assets/cars/gallery/bentley-continental-13.jpg";
+import bentleyContinentalGallery14 from "@/assets/cars/gallery/bentley-continental-14.jpg";
+import bentleyContinentalGallery15 from "@/assets/cars/gallery/bentley-continental-15.jpg";
 
 // Rolls-Royce Wraith gallery images
 import rollsRoyceWraithGallery1 from "@/assets/cars/gallery/rolls-royce-wraith-1.jpg";
@@ -160,6 +259,15 @@ import rollsRoyceWraithGallery3 from "@/assets/cars/gallery/rolls-royce-wraith-3
 import rollsRoyceWraithGallery4 from "@/assets/cars/gallery/rolls-royce-wraith-4.jpg";
 import rollsRoyceWraithGallery5 from "@/assets/cars/gallery/rolls-royce-wraith-5.jpg";
 import rollsRoyceWraithGallery6 from "@/assets/cars/gallery/rolls-royce-wraith-6.jpg";
+import rollsRoyceWraithGallery7 from "@/assets/cars/gallery/rolls-royce-wraith-7.jpg";
+import rollsRoyceWraithGallery8 from "@/assets/cars/gallery/rolls-royce-wraith-8.jpg";
+import rollsRoyceWraithGallery9 from "@/assets/cars/gallery/rolls-royce-wraith-9.jpg";
+import rollsRoyceWraithGallery10 from "@/assets/cars/gallery/rolls-royce-wraith-10.jpg";
+import rollsRoyceWraithGallery11 from "@/assets/cars/gallery/rolls-royce-wraith-11.jpg";
+import rollsRoyceWraithGallery12 from "@/assets/cars/gallery/rolls-royce-wraith-12.jpg";
+import rollsRoyceWraithGallery13 from "@/assets/cars/gallery/rolls-royce-wraith-13.jpg";
+import rollsRoyceWraithGallery14 from "@/assets/cars/gallery/rolls-royce-wraith-14.jpg";
+import rollsRoyceWraithGallery15 from "@/assets/cars/gallery/rolls-royce-wraith-15.jpg";
 
 export interface Car {
   id: string;
@@ -197,21 +305,11 @@ export const cars: Car[] = [
     price: "€215,000",
     image: ferrariPortofino,
     gallery: [
-      ferrariPortofinoGallery1,
-      ferrariPortofinoGallery2,
-      ferrariPortofinoGallery3,
-      ferrariPortofinoGallery4,
-      ferrariPortofinoGallery7,
-      ferrariPortofinoGallery8,
-      ferrariPortofinoGallery10,
-      ferrariPortofinoGallery11,
-      ferrariPortofinoGallery12,
-      ferrariPortofinoGallery5,
-      ferrariPortofinoGallery6,
-      ferrariPortofinoGallery9,
-      ferrariPortofinoGallery13,
-      ferrariPortofinoGallery14,
-      ferrariPortofinoGallery15
+      ferrariPortofinoGallery1, ferrariPortofinoGallery2, ferrariPortofinoGallery3,
+      ferrariPortofinoGallery4, ferrariPortofinoGallery7, ferrariPortofinoGallery8,
+      ferrariPortofinoGallery10, ferrariPortofinoGallery11, ferrariPortofinoGallery12,
+      ferrariPortofinoGallery5, ferrariPortofinoGallery6, ferrariPortofinoGallery9,
+      ferrariPortofinoGallery13, ferrariPortofinoGallery14, ferrariPortofinoGallery15
     ],
     category: "GT Descapotable",
     description: "La máxima expresión de la elegancia italiana con un rendimiento extraordinario",
@@ -244,15 +342,11 @@ export const cars: Car[] = [
     price: "€230,000",
     image: porsche911TurboS,
     gallery: [
-      porsche911Gallery1,
-      porsche911Gallery2,
-      porsche911Gallery3,
-      porsche911Gallery4,
-      porsche911Gallery7,
-      porsche911Gallery8,
-      porsche911Gallery5,
-      porsche911Gallery6,
-      porsche911Gallery9
+      porsche911Gallery1, porsche911Gallery2, porsche911Gallery3,
+      porsche911Gallery4, porsche911Gallery5, porsche911Gallery6,
+      porsche911Gallery7, porsche911Gallery8, porsche911Gallery9,
+      porsche911Gallery10, porsche911Gallery11, porsche911Gallery12,
+      porsche911Gallery13, porsche911Gallery14, porsche911Gallery15
     ],
     category: "Coupé Deportivo",
     description: "Ingeniería alemana en su máxima expresión",
@@ -285,15 +379,11 @@ export const cars: Car[] = [
     price: "€250,000",
     image: lamborghiniHuracanEvo,
     gallery: [
-      lamborghiniHuracanGallery1,
-      lamborghiniHuracanGallery2,
-      lamborghiniHuracanGallery3,
-      lamborghiniHuracanGallery4,
-      lamborghiniHuracanGallery7,
-      lamborghiniHuracanGallery8,
-      lamborghiniHuracanGallery5,
-      lamborghiniHuracanGallery6,
-      lamborghiniHuracanGallery9
+      lamborghiniHuracanGallery1, lamborghiniHuracanGallery2, lamborghiniHuracanGallery3,
+      lamborghiniHuracanGallery4, lamborghiniHuracanGallery5, lamborghiniHuracanGallery6,
+      lamborghiniHuracanGallery7, lamborghiniHuracanGallery8, lamborghiniHuracanGallery9,
+      lamborghiniHuracanGallery10, lamborghiniHuracanGallery11, lamborghiniHuracanGallery12,
+      lamborghiniHuracanGallery13, lamborghiniHuracanGallery14, lamborghiniHuracanGallery15
     ],
     category: "Superdeportivo",
     description: "Pasión italiana en su forma más pura",
@@ -326,15 +416,11 @@ export const cars: Car[] = [
     price: "€95,000",
     image: porscheMacanTurbo,
     gallery: [
-      porscheMacanGallery1,
-      porscheMacanGallery2,
-      porscheMacanGallery3,
-      porscheMacanGallery4,
-      porscheMacanGallery7,
-      porscheMacanGallery8,
-      porscheMacanGallery5,
-      porscheMacanGallery6,
-      porscheMacanGallery9
+      porscheMacanGallery1, porscheMacanGallery2, porscheMacanGallery3,
+      porscheMacanGallery4, porscheMacanGallery5, porscheMacanGallery6,
+      porscheMacanGallery7, porscheMacanGallery8, porscheMacanGallery9,
+      porscheMacanGallery10, porscheMacanGallery11, porscheMacanGallery12,
+      porscheMacanGallery13, porscheMacanGallery14, porscheMacanGallery15
     ],
     category: "SUV de Lujo",
     description: "El deportivo de los SUV",
@@ -367,15 +453,11 @@ export const cars: Car[] = [
     price: "€280,000",
     image: ferrariF8Tributo,
     gallery: [
-      ferrariF8Gallery1,
-      ferrariF8Gallery2,
-      ferrariF8Gallery3,
-      ferrariF8Gallery4,
-      ferrariF8Gallery7,
-      ferrariF8Gallery8,
-      ferrariF8Gallery5,
-      ferrariF8Gallery6,
-      ferrariF8Gallery9
+      ferrariF8Gallery1, ferrariF8Gallery2, ferrariF8Gallery3,
+      ferrariF8Gallery4, ferrariF8Gallery5, ferrariF8Gallery6,
+      ferrariF8Gallery7, ferrariF8Gallery8, ferrariF8Gallery9,
+      ferrariF8Gallery10, ferrariF8Gallery11, ferrariF8Gallery12,
+      ferrariF8Gallery13, ferrariF8Gallery14, ferrariF8Gallery15
     ],
     category: "Superdeportivo",
     description: "Un tributo al V8 más potente en la historia de Ferrari",
@@ -408,15 +490,11 @@ export const cars: Car[] = [
     price: "€220,000",
     image: lamborghiniUrus,
     gallery: [
-      lamborghiniUrusGallery1,
-      lamborghiniUrusGallery2,
-      lamborghiniUrusGallery3,
-      lamborghiniUrusGallery4,
-      lamborghiniUrusGallery7,
-      lamborghiniUrusGallery8,
-      lamborghiniUrusGallery5,
-      lamborghiniUrusGallery6,
-      lamborghiniUrusGallery9
+      lamborghiniUrusGallery1, lamborghiniUrusGallery2, lamborghiniUrusGallery3,
+      lamborghiniUrusGallery4, lamborghiniUrusGallery5, lamborghiniUrusGallery6,
+      lamborghiniUrusGallery7, lamborghiniUrusGallery8, lamborghiniUrusGallery9,
+      lamborghiniUrusGallery10, lamborghiniUrusGallery11, lamborghiniUrusGallery12,
+      lamborghiniUrusGallery13, lamborghiniUrusGallery14, lamborghiniUrusGallery15
     ],
     category: "Super SUV",
     description: "El primer Super Sport Utility Vehicle del mundo",
@@ -449,15 +527,11 @@ export const cars: Car[] = [
     price: "€190,000",
     image: porscheTaycanTurboS,
     gallery: [
-      porscheTaycanGallery1,
-      porscheTaycanGallery2,
-      porscheTaycanGallery3,
-      porscheTaycanGallery4,
-      porscheTaycanGallery7,
-      porscheTaycanGallery8,
-      porscheTaycanGallery5,
-      porscheTaycanGallery6,
-      porscheTaycanGallery9
+      porscheTaycanGallery1, porscheTaycanGallery2, porscheTaycanGallery3,
+      porscheTaycanGallery4, porscheTaycanGallery5, porscheTaycanGallery6,
+      porscheTaycanGallery7, porscheTaycanGallery8, porscheTaycanGallery9,
+      porscheTaycanGallery10, porscheTaycanGallery11, porscheTaycanGallery12,
+      porscheTaycanGallery13, porscheTaycanGallery14, porscheTaycanGallery15
     ],
     category: "Sedán Deportivo Eléctrico",
     description: "El futuro del rendimiento es eléctrico",
@@ -490,12 +564,11 @@ export const cars: Car[] = [
     price: "€210,000",
     image: ferrariRoma,
     gallery: [
-      ferrariRomaGallery1,
-      ferrariRomaGallery2,
-      ferrariRomaGallery3,
-      ferrariRomaGallery4,
-      ferrariRomaGallery5,
-      ferrariRomaGallery6
+      ferrariRomaGallery1, ferrariRomaGallery2, ferrariRomaGallery3,
+      ferrariRomaGallery4, ferrariRomaGallery5, ferrariRomaGallery6,
+      ferrariRomaGallery7, ferrariRomaGallery8, ferrariRomaGallery9,
+      ferrariRomaGallery10, ferrariRomaGallery11, ferrariRomaGallery12,
+      ferrariRomaGallery13, ferrariRomaGallery14, ferrariRomaGallery15
     ],
     category: "Gran Turismo",
     description: "Elegancia contemporánea con el rendimiento intemporal de Ferrari",
@@ -528,12 +601,11 @@ export const cars: Car[] = [
     price: "€500,000",
     image: lamborghiniAventador,
     gallery: [
-      lamborghiniAventadorGallery1,
-      lamborghiniAventadorGallery2,
-      lamborghiniAventadorGallery3,
-      lamborghiniAventadorGallery4,
-      lamborghiniAventadorGallery5,
-      lamborghiniAventadorGallery6
+      lamborghiniAventadorGallery1, lamborghiniAventadorGallery2, lamborghiniAventadorGallery3,
+      lamborghiniAventadorGallery4, lamborghiniAventadorGallery5, lamborghiniAventadorGallery6,
+      lamborghiniAventadorGallery7, lamborghiniAventadorGallery8, lamborghiniAventadorGallery9,
+      lamborghiniAventadorGallery10, lamborghiniAventadorGallery11, lamborghiniAventadorGallery12,
+      lamborghiniAventadorGallery13, lamborghiniAventadorGallery14, lamborghiniAventadorGallery15
     ],
     category: "Superdeportivo Insignia",
     description: "La evolución final de un icono",
@@ -566,12 +638,11 @@ export const cars: Car[] = [
     price: "€225,000",
     image: astonMartinDB11,
     gallery: [
-      astonMartinDB11Gallery1,
-      astonMartinDB11Gallery2,
-      astonMartinDB11Gallery3,
-      astonMartinDB11Gallery4,
-      astonMartinDB11Gallery5,
-      astonMartinDB11Gallery6
+      astonMartinDB11Gallery1, astonMartinDB11Gallery2, astonMartinDB11Gallery3,
+      astonMartinDB11Gallery4, astonMartinDB11Gallery5, astonMartinDB11Gallery6,
+      astonMartinDB11Gallery7, astonMartinDB11Gallery8, astonMartinDB11Gallery9,
+      astonMartinDB11Gallery10, astonMartinDB11Gallery11, astonMartinDB11Gallery12,
+      astonMartinDB11Gallery13, astonMartinDB11Gallery14, astonMartinDB11Gallery15
     ],
     category: "Gran Turismo",
     description: "Elegancia británica en su máxima expresión",
@@ -604,12 +675,11 @@ export const cars: Car[] = [
     price: "€285,000",
     image: mclaren720s,
     gallery: [
-      mclaren720sGallery1,
-      mclaren720sGallery2,
-      mclaren720sGallery3,
-      mclaren720sGallery4,
-      mclaren720sGallery5,
-      mclaren720sGallery6
+      mclaren720sGallery1, mclaren720sGallery2, mclaren720sGallery3,
+      mclaren720sGallery4, mclaren720sGallery5, mclaren720sGallery6,
+      mclaren720sGallery7, mclaren720sGallery8, mclaren720sGallery9,
+      mclaren720sGallery10, mclaren720sGallery11, mclaren720sGallery12,
+      mclaren720sGallery13, mclaren720sGallery14, mclaren720sGallery15
     ],
     category: "Superdeportivo",
     description: "Excelencia aerodinámica con rendimiento puro",
@@ -642,12 +712,11 @@ export const cars: Car[] = [
     price: "€185,000",
     image: porscheCayenneTurboGT,
     gallery: [
-      porscheCayenneGallery1,
-      porscheCayenneGallery2,
-      porscheCayenneGallery3,
-      porscheCayenneGallery4,
-      porscheCayenneGallery5,
-      porscheCayenneGallery6
+      porscheCayenneGallery1, porscheCayenneGallery2, porscheCayenneGallery3,
+      porscheCayenneGallery4, porscheCayenneGallery5, porscheCayenneGallery6,
+      porscheCayenneGallery7, porscheCayenneGallery8, porscheCayenneGallery9,
+      porscheCayenneGallery10, porscheCayenneGallery11, porscheCayenneGallery12,
+      porscheCayenneGallery13, porscheCayenneGallery14, porscheCayenneGallery15
     ],
     category: "SUV de Alto Rendimiento",
     description: "El Cayenne más potente jamás creado",
@@ -680,12 +749,11 @@ export const cars: Car[] = [
     price: "€195,000",
     image: mercedesAMGGTR,
     gallery: [
-      mercedesAMGGTRGallery1,
-      mercedesAMGGTRGallery2,
-      mercedesAMGGTRGallery3,
-      mercedesAMGGTRGallery4,
-      mercedesAMGGTRGallery5,
-      mercedesAMGGTRGallery6
+      mercedesAMGGTRGallery1, mercedesAMGGTRGallery2, mercedesAMGGTRGallery3,
+      mercedesAMGGTRGallery4, mercedesAMGGTRGallery5, mercedesAMGGTRGallery6,
+      mercedesAMGGTRGallery7, mercedesAMGGTRGallery8, mercedesAMGGTRGallery9,
+      mercedesAMGGTRGallery10, mercedesAMGGTRGallery11, mercedesAMGGTRGallery12,
+      mercedesAMGGTRGallery13, mercedesAMGGTRGallery14, mercedesAMGGTRGallery15
     ],
     category: "Coupé Deportivo",
     description: "La Bestia del Infierno Verde",
@@ -718,12 +786,11 @@ export const cars: Car[] = [
     price: "€240,000",
     image: bentleyContinentalGT,
     gallery: [
-      bentleyContinentalGallery1,
-      bentleyContinentalGallery2,
-      bentleyContinentalGallery3,
-      bentleyContinentalGallery4,
-      bentleyContinentalGallery5,
-      bentleyContinentalGallery6
+      bentleyContinentalGallery1, bentleyContinentalGallery2, bentleyContinentalGallery3,
+      bentleyContinentalGallery4, bentleyContinentalGallery5, bentleyContinentalGallery6,
+      bentleyContinentalGallery7, bentleyContinentalGallery8, bentleyContinentalGallery9,
+      bentleyContinentalGallery10, bentleyContinentalGallery11, bentleyContinentalGallery12,
+      bentleyContinentalGallery13, bentleyContinentalGallery14, bentleyContinentalGallery15
     ],
     category: "Gran Turismo de Lujo",
     description: "Lujo incomparable con rendimiento sin esfuerzo",
@@ -756,12 +823,11 @@ export const cars: Car[] = [
     price: "€350,000",
     image: rollsRoyceWraith,
     gallery: [
-      rollsRoyceWraithGallery1,
-      rollsRoyceWraithGallery2,
-      rollsRoyceWraithGallery3,
-      rollsRoyceWraithGallery4,
-      rollsRoyceWraithGallery5,
-      rollsRoyceWraithGallery6
+      rollsRoyceWraithGallery1, rollsRoyceWraithGallery2, rollsRoyceWraithGallery3,
+      rollsRoyceWraithGallery4, rollsRoyceWraithGallery5, rollsRoyceWraithGallery6,
+      rollsRoyceWraithGallery7, rollsRoyceWraithGallery8, rollsRoyceWraithGallery9,
+      rollsRoyceWraithGallery10, rollsRoyceWraithGallery11, rollsRoyceWraithGallery12,
+      rollsRoyceWraithGallery13, rollsRoyceWraithGallery14, rollsRoyceWraithGallery15
     ],
     category: "Coupé de Lujo",
     description: "El Rolls-Royce más potente jamás creado",
@@ -828,7 +894,7 @@ export const cities = [
   {
     id: "alicante",
     name: "Alicante",
-    description: "Una joya mediterránea impresionante con playas doradas, castillos históricos y un vibrante estilo de vida costero",
+    description: "Una joya costera con playas doradas y un impresionante castillo medieval con vistas al Mediterráneo",
     image: alicanteImg
   }
 ];
