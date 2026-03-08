@@ -65,6 +65,25 @@ const CarDetail = () => {
     return Math.abs(hash) % 11; // 0 to 10
   }, [id]);
 
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const navigateLightbox = useCallback((direction: number) => {
+    if (lightboxIndex === null || !car?.gallery) return;
+    const total = car.gallery.length;
+    setLightboxIndex((lightboxIndex + direction + total) % total);
+  }, [lightboxIndex, car]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxIndex, navigateLightbox]);
+
   if (!car) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
