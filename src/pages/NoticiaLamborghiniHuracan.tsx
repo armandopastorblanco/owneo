@@ -124,11 +124,7 @@ const NoticiaLamborghiniHuracan = () => {
             </p>
           </motion.div>
 
-          <div className="pt-8 border-t border-border/30">
-            <Link to="/noticias" className="inline-flex items-center gap-2 text-champagne text-sm hover:gap-3 transition-all">
-              <ArrowLeft className="w-4 h-4" /> Volver a todas las noticias
-            </Link>
-          </div>
+          <ArticleCTAs vehicleName="Lamborghini Huracán" />
         </div>
       </article>
 
