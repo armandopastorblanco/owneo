@@ -18,7 +18,8 @@ const newsItems = [
     date: "5 Marzo 2026",
     category: "Eléctricos",
     title: "Ferrari Luce EV: Nuevos detalles filtrados sobre el primer 100% eléctrico de Ferrari",
-    excerpt: "El primer superdeportivo totalmente eléctrico de Maranello promete más de 1.200 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari."
+    excerpt: "El primer superdeportivo totalmente eléctrico de Maranello promete más de 1.200 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari.",
+    link: "/noticias/ferrari-luce-ev"
   },
   {
     id: 2,
