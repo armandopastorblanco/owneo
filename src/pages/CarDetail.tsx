@@ -286,9 +286,9 @@ const CarDetail = () => {
               </table>
             </div>
 
-            <div className="mt-8 p-6 bg-primary/10 rounded-lg border border-primary/20">
+            <div className="mt-8 p-6 bg-champagne/10 rounded-lg border border-champagne/20">
               <p className="text-center text-foreground">
-                <span className="font-bold text-primary">Ahorra hasta un 80%</span> en costes anuales con OWNEO Co-Sharing, 
+                <span className="font-bold text-champagne">Ahorra hasta un 80%</span> en costes anuales con OWNEO Co-Sharing, 
                 disfrutando del {car.name} sin las cargas financieras de la propiedad exclusiva.
               </p>
             </div>
