@@ -43,6 +43,11 @@ const App = () => (
           <Route path="/twitter" element={<TwitterLanding />} />
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
+          <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
+          <Route path="/noticias/porsche-911-gt3-rs-2026" element={<NoticiaPorscheGT3RS />} />
+          <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
+          <Route path="/noticias/bugatti-tourbillon" element={<NoticiaBugattiTourbillon />} />
+          <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

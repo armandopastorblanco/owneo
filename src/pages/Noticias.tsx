@@ -63,7 +63,8 @@ const newsItems = [
     date: "1 Febrero 2026",
     category: "Tecnología",
     title: "Mercedes-AMG ONE: actualización que lleva la tecnología F1 al siguiente nivel",
-    excerpt: "Mercedes actualiza su hypercar con nuevo software que mejora la respuesta del motor de F1 y añade 15 CV extra. Los propietarios existentes recibirán la actualización gratuitamente."
+    excerpt: "Mercedes actualiza su hypercar con nuevo software que mejora la respuesta del motor de F1 y añade 15 CV extra. Los propietarios existentes recibirán la actualización gratuitamente.",
+    link: "/noticias/mercedes-amg-one-actualizacion"
   }
 ];
 
