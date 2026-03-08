@@ -82,6 +82,9 @@ import lamborghiniUrusGallery3 from "@/assets/cars/gallery/lamborghini-urus-3.jp
 import lamborghiniUrusGallery4 from "@/assets/cars/gallery/lamborghini-urus-4.jpg";
 import lamborghiniUrusGallery5 from "@/assets/cars/gallery/lamborghini-urus-5.jpg";
 import lamborghiniUrusGallery6 from "@/assets/cars/gallery/lamborghini-urus-6.jpg";
+import lamborghiniUrusGallery7 from "@/assets/cars/gallery/lamborghini-urus-7.jpg";
+import lamborghiniUrusGallery8 from "@/assets/cars/gallery/lamborghini-urus-8.jpg";
+import lamborghiniUrusGallery9 from "@/assets/cars/gallery/lamborghini-urus-9.jpg";
 
 // Porsche Taycan gallery images
 import porscheTaycanGallery1 from "@/assets/cars/gallery/porsche-taycan-1.jpg";
