@@ -265,7 +265,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Depreciación (5 años)</td>
                     <td className="py-4 px-4 text-center text-foreground">~30-40%</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">Compartida entre copropietarios</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">Compartida entre copropietarios</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Días de Uso Estimados/Año</td>
