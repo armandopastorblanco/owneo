@@ -15,6 +15,11 @@ import TikTokLanding from "./pages/TikTokLanding";
 import TwitterLanding from "./pages/TwitterLanding";
 import Noticias from "./pages/Noticias";
 import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
+import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
+import NoticiaPorscheGT3RS from "./pages/NoticiaPorscheGT3RS";
+import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
+import NoticiaBugattiTourbillon from "./pages/NoticiaBugattiTourbillon";
+import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
