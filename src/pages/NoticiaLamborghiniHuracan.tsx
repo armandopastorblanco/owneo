@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Fuel, Weight } from "lucide-react";
 import { Link } from "react-router-dom";
+import ArticleCTAs from "@/components/ArticleCTAs";
 
 import heroImg from "@/assets/news/lamborghini-reveal.jpg";
 import detailImg1 from "@/assets/news/lamborghini-reveal-detail-1.jpg";

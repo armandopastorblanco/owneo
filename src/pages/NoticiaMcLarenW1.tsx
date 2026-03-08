@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Weight, Timer } from "lucide-react";
 import { Link } from "react-router-dom";
+import ArticleCTAs from "@/components/ArticleCTAs";
 
 import heroImg from "@/assets/news/mclaren-w1.jpg";
 import detailImg1 from "@/assets/news/mclaren-w1-detail-1.jpg";

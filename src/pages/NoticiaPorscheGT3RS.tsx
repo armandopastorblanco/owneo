@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Gauge, Timer, Wind, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import ArticleCTAs from "@/components/ArticleCTAs";
 
 import heroImg from "@/assets/news/porsche-gt3.jpg";
 import detailImg1 from "@/assets/news/porsche-gt3-detail-1.jpg";
