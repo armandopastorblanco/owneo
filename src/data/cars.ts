@@ -355,9 +355,7 @@ export const cars: Car[] = [
     gallery: [
       porsche911Gallery1, porsche911Gallery2, porsche911Gallery3,
       porsche911Gallery4, porsche911Gallery5, porsche911Gallery6,
-      porsche911Gallery7, porsche911Gallery8, porsche911Gallery9,
-      porsche911Gallery10, porsche911Gallery11, porsche911Gallery12,
-      porsche911Gallery13, porsche911Gallery14, porsche911Gallery15
+      porsche911Gallery7, porsche911Gallery15
     ],
     category: "Coupé Deportivo",
     description: "Ingeniería alemana en su máxima expresión",
