@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Car, ThumbsUp } from "lucide-react";
+import { ArrowLeft, Car, ThumbsUp, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -22,39 +22,33 @@ const ArticleCTAs = ({ vehicleName = "este vehículo" }: ArticleCTAsProps) => {
 
   return (
     <div className="pt-10 border-t border-border/30">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Link to="/noticias" className="group">
-          <Button
-            variant="outline"
-            className="w-full border-border/40 hover:border-champagne/50 hover:bg-champagne/5 text-sm font-medium tracking-wide transition-all duration-300"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Todas las noticias
-          </Button>
-        </Link>
-
-        <Link to="/portfolio" className="group">
-          <Button
-            variant="outline"
-            className="w-full border-border/40 hover:border-champagne/50 hover:bg-champagne/5 text-sm font-medium tracking-wide transition-all duration-300"
-          >
-            <Car className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-            Ver la gama OWNEO
-          </Button>
-        </Link>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button asChild size="lg" className="text-lg px-8 bg-champagne text-champagne-foreground hover:bg-champagne/90">
+          <Link to="/portfolio">
+            Ver la Gama OWNEO
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Link>
+        </Button>
 
         <Button
-          variant={voted ? "default" : "outline"}
+          size="lg"
           onClick={handleVote}
           disabled={voted}
           className={
             voted
-              ? "w-full bg-champagne/20 text-champagne border-champagne/30 cursor-default text-sm font-medium tracking-wide"
-              : "w-full border-border/40 hover:border-champagne/50 hover:bg-champagne/5 text-sm font-medium tracking-wide transition-all duration-300"
+              ? "text-lg px-8 bg-champagne/20 text-champagne border border-champagne/30 cursor-default"
+              : "text-lg px-8 bg-champagne text-champagne-foreground hover:bg-champagne/90"
           }
         >
-          <ThumbsUp className={`w-4 h-4 mr-2 ${voted ? "fill-champagne" : ""} transition-all`} />
+          <ThumbsUp className={`mr-2 w-5 h-5 ${voted ? "fill-champagne" : ""}`} />
           {voted ? "¡Voto registrado!" : "Votar por este vehículo"}
+        </Button>
+
+        <Button asChild variant="outline" size="lg" className="text-lg px-8 border-champagne/30 hover:bg-champagne/10">
+          <Link to="/noticias">
+            <ArrowLeft className="mr-2 w-5 h-5" />
+            Todas las Noticias
+          </Link>
         </Button>
       </div>
     </div>
