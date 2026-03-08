@@ -44,7 +44,7 @@ const ArticleCTAs = ({ vehicleName = "este vehículo" }: ArticleCTAsProps) => {
           {voted ? "¡Voto registrado!" : "Votar por este vehículo"}
         </Button>
 
-        <Button asChild variant="outline" size="lg" className="text-lg px-8 border-champagne/30 hover:bg-champagne/10">
+        <Button asChild size="lg" className="text-lg px-8 bg-champagne text-champagne-foreground hover:bg-champagne/90">
           <Link to="/noticias">
             <ArrowLeft className="mr-2 w-5 h-5" />
             Todas las Noticias
