@@ -245,7 +245,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Inversión Inicial</td>
                     <td className="py-4 px-4 text-center text-foreground">{car.price}</td>
-                    <td className="py-4 px-4 text-center text-primary font-semibold">{sharePrice.toLocaleString('es-ES')}€</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{sharePrice.toLocaleString('es-ES')}€</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Seguro Anual</td>
