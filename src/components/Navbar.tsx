@@ -28,7 +28,6 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { path: "/", label: language === "es" ? "INICIO" : "HOME" },
     { path: "/portfolio", label: "PORTFOLIO" },
     { path: "/nuestro-modelo", label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT" },
     { path: "/cities", label: language === "es" ? "UBICACIONES" : "LOCATIONS" },
