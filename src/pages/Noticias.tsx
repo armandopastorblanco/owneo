@@ -36,7 +36,8 @@ const newsItems = [
     date: "20 Febrero 2026",
     category: "Competición",
     title: "Porsche 911 GT3 RS 2026: récord en Nürburgring con neumáticos de serie",
-    excerpt: "El nuevo GT3 RS pulveriza el crono del Nordschleife con un tiempo de 6:44.3, convirtiéndose en el Porsche de producción más rápido en el circuito alemán."
+    excerpt: "El nuevo GT3 RS pulveriza el crono del Nordschleife con un tiempo de 6:44.3, convirtiéndose en el Porsche de producción más rápido en el circuito alemán.",
+    link: "/noticias/porsche-911-gt3-rs-2026"
   },
   {
     id: 4,
