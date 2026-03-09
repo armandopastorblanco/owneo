@@ -87,7 +87,7 @@ const Noticias = () => {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-16 px-6">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -95,10 +95,10 @@ const Noticias = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-4">
               Noticias
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
               Las últimas novedades del mundo de los supercars y el lujo automovilístico
             </p>
           </motion.div>
@@ -106,7 +106,7 @@ const Noticias = () => {
       </section>
 
       {/* News Grid */}
-      <section className="pb-24 px-6">
+      <section className="pb-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {newsItems.map((item, index) => {
