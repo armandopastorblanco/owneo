@@ -107,7 +107,7 @@ const CarDetail = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <main className="pt-24 pb-12 px-6">
+      <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <Link to="/portfolio" className="inline-flex items-center text-foreground hover:text-foreground/80 mb-8 transition-colors">
             <ArrowLeft className="mr-2 w-4 h-4" />
@@ -115,7 +115,7 @@ const CarDetail = () => {
           </Link>
 
           {/* Hero Image with Animation */}
-          <div className="relative aspect-[21/9] overflow-hidden rounded-lg mb-8 bg-gradient-to-b from-muted to-background">
+          <div className="relative aspect-[16/10] sm:aspect-[21/9] overflow-hidden rounded-lg mb-8 bg-gradient-to-b from-muted to-background">
             <img
               src={car.image}
               alt={car.name}
@@ -135,9 +135,9 @@ const CarDetail = () => {
                 <span className="text-sm text-muted-foreground uppercase tracking-wider">
                   {car.category}
                 </span>
-                <h1 className="text-5xl font-bold mt-2 mb-4 text-foreground">{car.name}</h1>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 mb-4 text-foreground">{car.name}</h1>
               </div>
-              
+
               {/* Pricing Card with Tooltip */}
               <Card className="bg-card/50 border-border/50 md:min-w-[280px]">
                 <CardContent className="p-6">
