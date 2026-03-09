@@ -131,7 +131,7 @@ const HeroSlider = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.3 }}
-        className="absolute top-24 sm:top-28 left-1/2 -translate-x-1/2 z-30"
+        className="absolute top-24 sm:top-28 left-1/2 -translate-x-1/2 z-30 hidden sm:block"
       >
         <img 
           src={owneoLogo} 

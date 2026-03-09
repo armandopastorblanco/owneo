@@ -120,20 +120,20 @@ const NuestroModelo = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-champagne/5 via-transparent to-transparent" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-champagne/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-champagne/10 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-xs sm:text-sm font-medium mb-6">
               Copropiedad con Respaldo de Activos
             </span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
               Nuestro <span className="text-champagne">Modelo</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
               "La copropiedad con respaldo de activos es <strong className="text-foreground">la forma más eficiente de poseer un supercar</strong> hoy en día."
             </p>
           </div>

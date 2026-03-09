@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import owneoLogo from "@/assets/owneo-logo.jpg";
 
 const Navbar = () => {
@@ -16,6 +16,7 @@ const Navbar = () => {
   const [language, setLanguage] = useState("es");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   const isActive = (path: string) => location.pathname === path;
   const isHomePage = location.pathname === "/";
 
@@ -27,33 +28,57 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on navigation
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { path: "/portfolio", label: "PORTFOLIO" },
-    { path: "/nuestro-modelo", label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT" },
-    { path: "/cities", label: language === "es" ? "UBICACIONES" : "LOCATIONS" },
-    { path: "/quienes-somos", label: language === "es" ? "QUIÉNES SOMOS" : "ABOUT US" },
+    {
+      path: "/nuestro-modelo",
+      label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT",
+    },
+    {
+      path: "/cities",
+      label: language === "es" ? "UBICACIONES" : "LOCATIONS",
+    },
+    {
+      path: "/quienes-somos",
+      label: language === "es" ? "QUIÉNES SOMOS" : "ABOUT US",
+    },
     { path: "/noticias", label: language === "es" ? "NOTICIAS" : "NEWS" },
   ];
 
-  // On home page, navbar is transparent until scrolled
-  const navBgClass = isHomePage 
-    ? scrolled 
-      ? "bg-black/95 backdrop-blur-md border-b border-white/10" 
+  // On home page, navbar is transparent until scrolled (or menu open)
+  const navBgClass = isHomePage
+    ? scrolled || mobileMenuOpen
+      ? "bg-background/95 backdrop-blur-md border-b border-border/40"
       : "bg-transparent border-b border-transparent"
-    : "bg-black/95 backdrop-blur-md border-b border-white/10";
-  
+    : "bg-background/95 backdrop-blur-md border-b border-border/40";
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBgClass}`}>
-      <div className="container mx-auto px-4 md:px-6 py-4">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBgClass}`}
+    >
+      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <img 
-              src={owneoLogo} 
-              alt="OWNEO" 
-              className="h-14 md:h-16 lg:h-18 w-auto mix-blend-screen filter brightness-110"
+            <img
+              src={owneoLogo}
+              alt="OWNEO"
+              className="h-12 sm:h-14 md:h-16 lg:h-[72px] w-auto mix-blend-screen filter brightness-110"
             />
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
@@ -61,32 +86,36 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={`text-xs font-light tracking-[0.15em] transition-colors duration-300 ${
-                  isActive(link.path) 
-                    ? "text-white" 
-                    : "text-white/50 hover:text-white/80"
+                  isActive(link.path)
+                    ? "text-foreground"
+                    : "text-foreground/50 hover:text-foreground/80"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            
-            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-white/10">
+
+            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border/40">
               <Select value={language} onValueChange={setLanguage}>
-                <SelectTrigger className="w-[80px] border-white/20 bg-transparent text-white/60 hover:text-white text-xs">
+                <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
                   <Globe className="w-3 h-3 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-black border-white/20">
-                  <SelectItem value="es" className="text-white/80">ES</SelectItem>
-                  <SelectItem value="en" className="text-white/80">EN</SelectItem>
+                <SelectContent className="bg-background border-border">
+                  <SelectItem value="es" className="text-foreground/80">
+                    ES
+                  </SelectItem>
+                  <SelectItem value="en" className="text-foreground/80">
+                    EN
+                  </SelectItem>
                 </SelectContent>
               </Select>
-              
+
               <Link to="/dashboard">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="flex items-center gap-2 text-white/50 hover:text-white hover:bg-white/5 text-xs font-light tracking-wider"
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
                 >
                   <User className="w-3.5 h-3.5" />
                   <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
@@ -97,54 +126,64 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-white/80"
+            className="md:hidden p-3 -mr-2 text-foreground/80"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4 space-y-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block text-xs font-light tracking-[0.15em] transition-colors ${
-                  isActive(link.path) 
-                    ? "text-white" 
-                    : "text-white/50 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            
-            <div className="flex items-center gap-4 pt-2 border-t border-white/10">
-              <Select value={language} onValueChange={setLanguage}>
-                <SelectTrigger className="w-[80px] border-white/20 bg-transparent text-white/60 text-xs">
-                  <Globe className="w-3 h-3 mr-2" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-black border-white/20">
-                  <SelectItem value="es" className="text-white/80">ES</SelectItem>
-                  <SelectItem value="en" className="text-white/80">EN</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="flex items-center gap-2 text-white/50 hover:text-white text-xs"
+          <div className="md:hidden mt-3 pt-4 border-t border-border/40 max-h-[calc(100vh-88px)] overflow-y-auto">
+            <div className="space-y-2 pb-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block rounded-md px-2 py-3 text-sm font-light tracking-[0.15em] transition-colors ${
+                    isActive(link.path)
+                      ? "text-foreground"
+                      : "text-foreground/60 hover:text-foreground"
+                  }`}
                 >
-                  <User className="w-3.5 h-3.5" />
-                  <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                </Button>
-              </Link>
+                  {link.label}
+                </Link>
+              ))}
+
+              <div className="flex items-center justify-between gap-3 pt-3 border-t border-border/40">
+                <Select value={language} onValueChange={setLanguage}>
+                  <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs">
+                    <Globe className="w-3 h-3 mr-2" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border-border">
+                    <SelectItem value="es" className="text-foreground/80">
+                      ES
+                    </SelectItem>
+                    <SelectItem value="en" className="text-foreground/80">
+                      EN
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs"
+                  >
+                    <User className="w-3.5 h-3.5" />
+                    <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         )}

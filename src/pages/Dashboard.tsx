@@ -91,12 +91,12 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-5 h-5" />
             <span>Volver al Inicio</span>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-start sm:items-end sm:text-right">
             <span className="text-sm text-muted-foreground">Bienvenido,</span>
             <span className="font-semibold text-foreground">{mockUserData.name}</span>
           </div>
@@ -104,7 +104,7 @@ const Dashboard = () => {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-foreground">Mi Panel</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-foreground">Mi Panel</h1>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column - Vehicle Details */}

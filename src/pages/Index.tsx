@@ -10,31 +10,39 @@ import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const featuredCars = cars.slice(0, 4);
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Slider Section */}
       <HeroSlider />
 
       {/* Featured Collection */}
-      <section className="py-20 px-6">
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
               Colección Destacada
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredCars.map(car => <CarCard key={car.id} car={car} />)}
+            {featuredCars.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
+              >
                 VER TODOS LOS VEHÍCULOS
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -44,35 +52,55 @@ const Index = () => {
       </section>
 
       {/* Locations Showcase */}
-      <section className="py-20 px-6 bg-card/50">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card/50">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
               Nuestras Ubicaciones
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Descubre nuestra flota en las ciudades más exclusivas de España
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {cities.slice(0, 4).map(city => <Link key={city.id} to="/cities" className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift">
-                <img src={city.image} alt={city.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            {cities.slice(0, 4).map((city) => (
+              <Link
+                key={city.id}
+                to="/cities"
+                className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
+              >
+                <img
+                  src={city.image}
+                  alt={city.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="w-4 h-4 text-foreground" />
-                    <span className="text-sm text-muted-foreground uppercase tracking-wider">España</span>
+                    <span className="text-sm text-muted-foreground uppercase tracking-wider">
+                      España
+                    </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">{city.name}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                    {city.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {city.description}
+                  </p>
                 </div>
-              </Link>)}
+              </Link>
+            ))}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link to="/cities">
-              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
+              >
                 VER TODAS LAS UBICACIONES
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -82,19 +110,25 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-6 bg-card border-y border-border">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card border-y border-border">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-3 gap-12 text-center">
+          <div className="grid md:grid-cols-3 gap-10 sm:gap-12 text-center">
             <div>
-              <div className="text-5xl font-bold text-foreground mb-2">15+</div>
+              <div className="text-4xl sm:text-5xl font-bold text-foreground mb-2">
+                15+
+              </div>
               <div className="text-muted-foreground">Supercoches de Lujo</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-foreground mb-2">5</div>
+              <div className="text-4xl sm:text-5xl font-bold text-foreground mb-2">
+                5
+              </div>
               <div className="text-muted-foreground">Ubicaciones Premium</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-foreground mb-2">100%</div>
+              <div className="text-4xl sm:text-5xl font-bold text-foreground mb-2">
+                100%
+              </div>
               <div className="text-muted-foreground">Excelencia Garantizada</div>
             </div>
           </div>
@@ -102,20 +136,23 @@ const Index = () => {
       </section>
 
       {/* SEO Storytelling Section */}
-      <section className="py-24 px-6">
+      <section className="py-20 sm:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-foreground">
               El Lujo de los Supercoches, Ahora Accesible
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              En OWNEO revolucionamos el concepto de <strong className="text-foreground">alquiler de supercoches de lujo</strong> en España, 
-              haciendo realidad el sueño de conducir los vehículos más exclusivos del mundo.
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              En OWNEO revolucionamos el concepto de{" "}
+              <strong className="text-foreground">
+                alquiler de supercoches de lujo
+              </strong>{" "}
+              en España, haciendo realidad el sueño de conducir los vehículos más exclusivos del mundo.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <article className="group bg-card/30 rounded-2xl p-8 border border-border/50 hover:border-foreground/20 transition-all duration-300 hover:bg-card/50">
+            <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-foreground/20 transition-all duration-300 hover:bg-card/50">
               <div className="w-12 h-12 rounded-xl bg-foreground/10 flex items-center justify-center mb-6">
                 <Star className="w-6 h-6 text-foreground" />
               </div>
@@ -123,18 +160,20 @@ const Index = () => {
                 Las Marcas Más Prestigiosas del Mundo
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Nuestra flota exclusiva incluye los <strong className="text-foreground">superdeportivos Ferrari</strong> más codiciados, 
-                desde el icónico Ferrari Portofino hasta el impresionante F8 Tributo. Experimenta la potencia de un 
-                <strong className="text-foreground"> Lamborghini Huracán</strong> o el rugido del legendario Aventador. 
-                Para los amantes de la ingeniería alemana, ofrecemos la gama completa de <strong className="text-foreground">Porsche</strong>: 
-                el 911 Turbo S, el Taycan eléctrico y los SUV deportivos Cayenne y Macan.
+                Nuestra flota exclusiva incluye los{" "}
+                <strong className="text-foreground">superdeportivos Ferrari</strong> más codiciados, desde el icónico Ferrari Portofino hasta el impresionante F8 Tributo. Experimenta la potencia de un
+                <strong className="text-foreground"> Lamborghini Huracán</strong> o el rugido del legendario Aventador. Para los amantes de la ingeniería alemana, ofrecemos la gama completa de{" "}
+                <strong className="text-foreground">Porsche</strong>: el 911 Turbo S, el Taycan eléctrico y los SUV deportivos Cayenne y Macan.
               </p>
-              <Link to="/portfolio" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline">
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline"
+              >
                 Ver más <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
 
-            <article className="group bg-card/30 rounded-2xl p-8 border border-border/50 hover:border-foreground/20 transition-all duration-300 hover:bg-card/50">
+            <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-foreground/20 transition-all duration-300 hover:bg-card/50">
               <div className="w-12 h-12 rounded-xl bg-foreground/10 flex items-center justify-center mb-6">
                 <Star className="w-6 h-6 text-foreground" />
               </div>
@@ -142,29 +181,32 @@ const Index = () => {
                 Elegancia Británica y Exclusividad
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Descubre el refinamiento del <strong className="text-foreground">Aston Martin DB11</strong>, 
-                la innovación aerodinámica del <strong className="text-foreground">McLaren 720S</strong>, 
-                o el lujo supremo del <strong className="text-foreground">Rolls-Royce Wraith</strong>. 
-                Completa tu experiencia con la artesanía del <strong className="text-foreground">Bentley Continental GT</strong> 
-                o la potencia del <strong className="text-foreground">Mercedes-AMG GT R</strong>, conocido como "La Bestia del Infierno Verde".
+                Descubre el refinamiento del{" "}
+                <strong className="text-foreground">Aston Martin DB11</strong>, la innovación aerodinámica del{" "}
+                <strong className="text-foreground">McLaren 720S</strong>, o el lujo supremo del{" "}
+                <strong className="text-foreground">Rolls-Royce Wraith</strong>. Completa tu experiencia con la artesanía del{" "}
+                <strong className="text-foreground">Bentley Continental GT</strong> o la potencia del{" "}
+                <strong className="text-foreground">Mercedes-AMG GT R</strong>, conocido como "La Bestia del Infierno Verde".
               </p>
-              <Link to="/portfolio" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline">
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline"
+              >
                 Ver más <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
           </div>
 
-          <div className="bg-gradient-to-br from-card/80 to-card/40 rounded-3xl p-8 md:p-12 border border-border/50 mb-12 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-card/80 to-card/40 rounded-3xl p-6 sm:p-8 md:p-12 border border-border/50 mb-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-foreground/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
                 Supercar Sharing: La Nueva Era del Lujo Compartido
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8 text-center max-w-3xl mx-auto">
-                El <strong className="text-foreground">supercar sharing</strong> representa la evolución del acceso al lujo automovilístico. 
-                Ya no es necesario invertir cientos de miles de euros para disfrutar de un <strong className="text-foreground">coche de alta gama</strong>. 
-                Con OWNEO, accede a una <strong className="text-foreground">flota de supercoches premium</strong> en las mejores ubicaciones de España: 
-                Barcelona, Madrid, Marbella, Valencia, Ibiza y Alicante.
+                El <strong className="text-foreground">supercar sharing</strong> representa la evolución del acceso al lujo automovilístico. Ya no es necesario invertir cientos de miles de euros para disfrutar de un{" "}
+                <strong className="text-foreground">coche de alta gama</strong>. Con OWNEO, accede a una{" "}
+                <strong className="text-foreground">flota de supercoches premium</strong> en las mejores ubicaciones de España: Barcelona, Madrid, Marbella, Valencia, Ibiza y Alicante.
               </p>
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
@@ -187,7 +229,10 @@ const Index = () => {
                 </div>
               </div>
               <div className="text-center">
-                <Link to="/cities" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline">
+                <Link
+                  to="/cities"
+                  className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline"
+                >
                   Ver ubicaciones <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -197,15 +242,19 @@ const Index = () => {
           {/* Press Section */}
           <PressSection standalone={false} />
 
-          <div className="bg-card/30 rounded-2xl p-8 border border-border/50 text-center mt-12">
+          <div className="bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 text-center mt-12">
             <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
-              Desde el <strong className="text-foreground">alquiler de Ferrari en Barcelona</strong> hasta un 
-              <strong className="text-foreground"> Lamborghini en Marbella</strong>, OWNEO te ofrece la oportunidad de vivir 
-              experiencias únicas al volante de los <strong className="text-foreground">mejores supercoches del mundo</strong>. 
-              Descubre por qué somos líderes en <strong className="text-foreground">luxury car rental</strong> y 
+              Desde el{" "}
+              <strong className="text-foreground">alquiler de Ferrari en Barcelona</strong> hasta un{" "}
+              <strong className="text-foreground"> Lamborghini en Marbella</strong>, OWNEO te ofrece la oportunidad de vivir experiencias únicas al volante de los{" "}
+              <strong className="text-foreground">mejores supercoches del mundo</strong>. Descubre por qué somos líderes en{" "}
+              <strong className="text-foreground">luxury car rental</strong> y{" "}
               <strong className="text-foreground"> supercar experiences</strong> en España.
             </p>
-            <Link to="/portfolio" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline">
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline"
+            >
               Explorar colección completa <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -213,6 +262,8 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

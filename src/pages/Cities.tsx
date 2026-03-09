@@ -7,20 +7,20 @@ import { MapPin, ArrowRight } from "lucide-react";
 
 const Cities = () => {
   const getCarsCountForCity = (cityName: string) => {
-    return cars.filter(car => car.availableIn.includes(cityName)).length;
+    return cars.filter((car) => car.availableIn.includes(cityName)).length;
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
-      <main className="pt-24 pb-12 px-6">
+
+      <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-foreground">
+          <div className="text-center mb-10 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-foreground">
               Premium <span className="text-foreground">Locations</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover our exclusive showrooms across Spain's most prestigious cities
             </p>
           </div>
@@ -28,16 +28,16 @@ const Cities = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cities.map((city) => {
               const carsCount = getCarsCountForCity(city.name);
-              
+
               return (
-                <div 
-                  key={city.id} 
-                  className="group relative h-[450px] rounded-xl overflow-hidden border border-border"
+                <div
+                  key={city.id}
+                  className="group relative h-[360px] sm:h-[450px] rounded-xl overflow-hidden border border-border"
                 >
                   {/* City + Car Background Image */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
-                    <img 
-                      src={city.image} 
+                    <img
+                      src={city.image}
                       alt={`Luxury car in ${city.name}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
@@ -45,7 +45,7 @@ const Cities = () => {
                   </div>
 
                   {/* Content Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 z-20 p-6">
+                  <div className="absolute inset-x-0 bottom-0 z-20 p-5 sm:p-6">
                     <div className="flex items-center gap-2 mb-2">
                       <MapPin className="w-5 h-5 text-foreground" />
                       <h2 className="text-2xl font-bold text-foreground">{city.name}</h2>
