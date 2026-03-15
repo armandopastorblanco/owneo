@@ -79,7 +79,11 @@ const additionalNewsItems = additionalNews.map((a) => ({
   link: `/noticias/${a.slug}`
 }));
 
-const newsItems = [...originalNews, ...additionalNewsItems];
+const allNews = [...originalNews, ...additionalNewsItems];
+const porscheIndex = allNews.findIndex(item => item.link === '/noticias/porsche-911-turbo-s-2026');
+const newsItems = porscheIndex !== -1 
+  ? [allNews[porscheIndex], ...allNews.slice(0, porscheIndex), ...allNews.slice(porscheIndex + 1)]
+  : allNews;
 
 const Noticias = () => {
   return (
