@@ -19,6 +19,9 @@ import lotusEmeya from "@/assets/news/lotus-emeya.jpg";
 import bmwXm from "@/assets/news/bmw-xm.jpg";
 import mercedesAmgGt2025 from "@/assets/news/mercedes-amg-gt-2025.jpg";
 import porsche911TurboS2026 from "@/assets/news/porsche-911-turbo-s-2026.jpg";
+import porscheTurboSDetail1 from "@/assets/news/porsche-turbo-s-detail-1.jpg";
+import porscheTurboSDetail2 from "@/assets/news/porsche-turbo-s-detail-2.jpg";
+import porscheTurboSDetail3 from "@/assets/news/porsche-turbo-s-detail-3.jpg";
 
 export interface NewsArticle {
   id: number;
