@@ -37,6 +37,7 @@ export interface NewsArticle {
     sections: { title: string; paragraphs: string[] }[];
   };
   specs?: { label: string; value: string }[];
+  detailImages?: { src: string; alt: string }[];
 }
 
 export const additionalNews: NewsArticle[] = [
