@@ -84,6 +84,17 @@ const NoticiaDetalle = () => {
               {section.paragraphs.map((p, pi) => (
                 <p key={pi} className="text-base leading-relaxed mb-6">{p}</p>
               ))}
+              {article.detailImages && article.detailImages[index] && (
+                <motion.img
+                  src={article.detailImages[index].src}
+                  alt={article.detailImages[index].alt}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="w-full rounded-xl mt-8"
+                />
+              )}
             </motion.div>
           ))}
 
