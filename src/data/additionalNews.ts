@@ -295,6 +295,11 @@ export const additionalNews: NewsArticle[] = [
       { title: "Chasis y comportamiento dinámico: eficacia sin drama", paragraphs: ["Uno de los grandes argumentos del 911 Turbo S frente a otros superdeportivos es su capacidad para poner la potencia en el suelo de forma eficaz en casi cualquier condición. La versión 2026 va un paso más allá gracias a una puesta a punto revisada de la suspensión activa, una gestión más fina de los diferenciales y una dirección todavía más precisa.", "Los modos de conducción permiten pasar de un gran turismo cómodo a un deportivo muy serio con apenas un giro del selector en el volante. En modo más radical, la respuesta del acelerador, la dureza de la suspensión y la gestión del cambio se orientan a exprimir al máximo las prestaciones, mientras que en los modos más suaves el coche se muestra sorprendentemente civilizado, incluso en ciudad o en autopista."] },
       { title: "Uso diario: el superdeportivo que puedes conducir cada día", paragraphs: ["El Porsche 911 Turbo S 2026 refuerza una idea clave de la marca: un superdeportivo puede ser utilizable a diario. El habitáculo sigue siendo relativamente práctico para dos personas, con buena visibilidad, asistencias a la conducción modernas y un maletero frontal suficiente para escapadas de fin de semana.", "El aislamiento acústico, ajustable en parte mediante válvulas de escape activas, permite disfrutar del sonido del motor cuando apetece y viajar en silencio cuando no. Esto, sumado a un consumo razonable para su nivel de prestaciones (especialmente en conducción normal), hace del Turbo S una opción muy atractiva para quienes no quieren un coche de colección estático, sino un deportivo que se usa de verdad."] }
     ] },
-    specs: [{ label: "Potencia", value: "650+ CV" }, { label: "0-100 km/h", value: "2,6 s" }, { label: "Motor", value: "Bóxer 6 Biturbo" }, { label: "Tracción", value: "Integral AWD" }]
+    specs: [{ label: "Potencia", value: "650+ CV" }, { label: "0-100 km/h", value: "2,6 s" }, { label: "Motor", value: "Bóxer 6 Biturbo" }, { label: "Tracción", value: "Integral AWD" }],
+    detailImages: [
+      { src: porscheTurboSDetail1, alt: "Porsche 911 Turbo S 2026 - Vista frontal lateral" },
+      { src: porscheTurboSDetail2, alt: "Porsche 911 Turbo S 2026 - Interior y cockpit" },
+      { src: porscheTurboSDetail3, alt: "Porsche 911 Turbo S 2026 - Vista trasera en carretera" }
+    ]
   }
 ];
