@@ -1,5 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
-import { User, Globe, Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { User, Globe, Menu, X, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import {
   Select,
