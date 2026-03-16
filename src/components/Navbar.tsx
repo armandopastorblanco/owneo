@@ -119,16 +119,39 @@ const Navbar = () => {
                 </SelectContent>
               </Select>
 
-              <Link to="/dashboard">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
-                >
-                  <User className="w-3.5 h-3.5" />
-                  <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                </Button>
-              </Link>
+              {user ? (
+                <>
+                  <Link to="/dashboard">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                    >
+                      <User className="w-3.5 h-3.5" />
+                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleSignOut}
+                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                  </Button>
+                </>
+              ) : (
+                <Link to="/login">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                  >
+                    <User className="w-3.5 h-3.5" />
+                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
 
