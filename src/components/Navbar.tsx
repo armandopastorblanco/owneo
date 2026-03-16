@@ -1,5 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
-import { User, Globe, Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { User, Globe, Menu, X, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -13,9 +14,16 @@ import owneoLogo from "@/assets/owneo-logo.jpg";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [language, setLanguage] = useState("es");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   const isActive = (path: string) => location.pathname === path;
   const isHomePage = location.pathname === "/";
@@ -111,16 +119,39 @@ const Navbar = () => {
                 </SelectContent>
               </Select>
 
-              <Link to="/dashboard">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
-                >
-                  <User className="w-3.5 h-3.5" />
-                  <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                </Button>
-              </Link>
+              {user ? (
+                <>
+                  <Link to="/dashboard">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                    >
+                      <User className="w-3.5 h-3.5" />
+                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleSignOut}
+                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                  </Button>
+                </>
+              ) : (
+                <Link to="/login">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                  >
+                    <User className="w-3.5 h-3.5" />
+                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
 
@@ -173,16 +204,26 @@ const Navbar = () => {
                   </SelectContent>
                 </Select>
 
-                <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs"
-                  >
-                    <User className="w-3.5 h-3.5" />
-                    <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                  </Button>
-                </Link>
+                {user ? (
+                  <div className="flex items-center gap-2">
+                    <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs">
+                        <User className="w-3.5 h-3.5" />
+                        <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      </Button>
+                    </Link>
+                    <Button variant="ghost" size="sm" onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="text-foreground/60 hover:text-foreground text-xs">
+                      <LogOut className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <Button variant="ghost" size="sm" className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs">
+                      <User className="w-3.5 h-3.5" />
+                      <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
