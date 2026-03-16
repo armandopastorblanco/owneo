@@ -204,16 +204,26 @@ const Navbar = () => {
                   </SelectContent>
                 </Select>
 
-                <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs"
-                  >
-                    <User className="w-3.5 h-3.5" />
-                    <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                  </Button>
-                </Link>
+                {user ? (
+                  <div className="flex items-center gap-2">
+                    <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs">
+                        <User className="w-3.5 h-3.5" />
+                        <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      </Button>
+                    </Link>
+                    <Button variant="ghost" size="sm" onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="text-foreground/60 hover:text-foreground text-xs">
+                      <LogOut className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <Button variant="ghost" size="sm" className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs">
+                      <User className="w-3.5 h-3.5" />
+                      <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
