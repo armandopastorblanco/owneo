@@ -110,6 +110,161 @@ export type Database = {
         }
         Relationships: []
       }
+      content_sections: {
+        Row: {
+          body: string | null
+          created_at: string
+          cta_link: string | null
+          cta_text: string | null
+          icon: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          page: string
+          section_key: string
+          sort_order: number
+          subtitle: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          cta_link?: string | null
+          cta_text?: string | null
+          icon?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          page: string
+          section_key: string
+          sort_order?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          cta_link?: string | null
+          cta_text?: string | null
+          icon?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          page?: string
+          section_key?: string
+          sort_order?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      featured_cars: {
+        Row: {
+          car_id: string
+          created_at: string
+          id: string
+          is_active: boolean
+          sort_order: number
+        }
+        Insert: {
+          car_id: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          sort_order?: number
+        }
+        Update: {
+          car_id?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "featured_cars_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hero_slides: {
+        Row: {
+          created_at: string
+          cta_link: string | null
+          cta_text: string | null
+          id: string
+          image_url: string
+          is_active: boolean
+          sort_order: number
+          subtitle: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cta_link?: string | null
+          cta_text?: string | null
+          id?: string
+          image_url: string
+          is_active?: boolean
+          sort_order?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cta_link?: string | null
+          cta_text?: string | null
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          sort_order?: number
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      locations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       participations: {
         Row: {
           car_id: string
