@@ -109,4 +109,38 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-encode font-extralight;
   }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Safe area for bottom nav */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Bottom nav spacer for pages */
+.pb-bottom-nav {
+  padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Remove hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .hover-lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .group:hover .group-hover\:scale-110 {
+    transform: none;
+  }
+}
+
+/* Ensure minimum touch targets */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
 }
