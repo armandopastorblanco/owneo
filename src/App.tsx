@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import BottomNav from "@/components/BottomNav";
 import { usePostHogPageView } from "@/hooks/usePostHogPageView";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
@@ -44,31 +45,34 @@ const App = () => (
       <BrowserRouter>
         <PostHogPageTracker />
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/cities" element={<Cities />} />
-            <Route path="/car/:id" element={<CarDetail />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/calendar-showcase" element={<CalendarShowcase />} />
-            <Route path="/quienes-somos" element={<QuienesSomos />} />
-            <Route path="/nuestro-modelo" element={<NuestroModelo />} />
-            <Route path="/tiktok" element={<TikTokLanding />} />
-            <Route path="/twitter" element={<TwitterLanding />} />
-            <Route path="/noticias" element={<Noticias />} />
-            <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
-            <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
-            <Route path="/noticias/porsche-911-gt3-rs-2026" element={<NoticiaPorscheGT3RS />} />
-            <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
-            <Route path="/noticias/bugatti-tourbillon" element={<NoticiaBugattiTourbillon />} />
-            <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
-            <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registro" element={<Registro />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="pb-bottom-nav md:pb-0">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/cities" element={<Cities />} />
+              <Route path="/car/:id" element={<CarDetail />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/calendar-showcase" element={<CalendarShowcase />} />
+              <Route path="/quienes-somos" element={<QuienesSomos />} />
+              <Route path="/nuestro-modelo" element={<NuestroModelo />} />
+              <Route path="/tiktok" element={<TikTokLanding />} />
+              <Route path="/twitter" element={<TwitterLanding />} />
+              <Route path="/noticias" element={<Noticias />} />
+              <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
+              <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
+              <Route path="/noticias/porsche-911-gt3-rs-2026" element={<NoticiaPorscheGT3RS />} />
+              <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
+              <Route path="/noticias/bugatti-tourbillon" element={<NoticiaBugattiTourbillon />} />
+              <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
+              <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/registro" element={<Registro />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <BottomNav />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
