@@ -36,12 +36,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on navigation
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Prevent background scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
     return () => {
@@ -66,7 +64,6 @@ const Navbar = () => {
     { path: "/noticias", label: language === "es" ? "NOTICIAS" : "NEWS" },
   ];
 
-  // On home page, navbar is transparent until scrolled (or menu open)
   const navBgClass = isHomePage
     ? scrolled || mobileMenuOpen
       ? "bg-background/95 backdrop-blur-md border-b border-border/40"
@@ -74,151 +71,76 @@ const Navbar = () => {
     : "bg-background/95 backdrop-blur-md border-b border-border/40";
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBgClass}`}
-    >
-      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <img
-              src={owneoLogo}
-              alt="OWNEO"
-              className="h-12 sm:h-14 md:h-16 lg:h-[72px] w-auto mix-blend-screen filter brightness-110"
-            />
-          </Link>
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBgClass}`}
+      >
+        <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center">
+              <img
+                src={owneoLogo}
+                alt="OWNEO"
+                className="h-12 sm:h-14 md:h-16 lg:h-[72px] w-auto mix-blend-screen filter brightness-110"
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-xs font-light tracking-[0.15em] transition-colors duration-300 ${
-                  isActive(link.path)
-                    ? "text-foreground"
-                    : "text-foreground/50 hover:text-foreground/80"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border/40">
-              <Select value={language} onValueChange={setLanguage}>
-                <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
-                  <Globe className="w-3 h-3 mr-2" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-background border-border">
-                  <SelectItem value="es" className="text-foreground/80">
-                    ES
-                  </SelectItem>
-                  <SelectItem value="en" className="text-foreground/80">
-                    EN
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-
-              {user ? (
-                <>
-                  <Link to="/dashboard">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
-                    >
-                      <User className="w-3.5 h-3.5" />
-                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleSignOut}
-                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                  </Button>
-                </>
-              ) : (
-                <Link to="/login">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
-                  >
-                    <User className="w-3.5 h-3.5" />
-                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-3 -mr-2 text-foreground/80"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-3 pt-4 border-t border-border/40 max-h-[calc(100vh-88px)] overflow-y-auto">
-            <div className="space-y-2 pb-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block rounded-md px-2 py-3 text-sm font-light tracking-[0.15em] transition-colors ${
+                  className={`text-xs font-light tracking-[0.15em] transition-colors duration-300 ${
                     isActive(link.path)
                       ? "text-foreground"
-                      : "text-foreground/60 hover:text-foreground"
+                      : "text-foreground/50 hover:text-foreground/80"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
 
-              <div className="flex items-center justify-between gap-3 pt-3 border-t border-border/40">
+              <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border/40">
                 <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs">
+                  <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
                     <Globe className="w-3 h-3 mr-2" />
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-background border-border">
-                    <SelectItem value="es" className="text-foreground/80">
-                      ES
-                    </SelectItem>
-                    <SelectItem value="en" className="text-foreground/80">
-                      EN
-                    </SelectItem>
+                    <SelectItem value="es" className="text-foreground/80">ES</SelectItem>
+                    <SelectItem value="en" className="text-foreground/80">EN</SelectItem>
                   </SelectContent>
                 </Select>
 
                 {user ? (
-                  <div className="flex items-center gap-2">
-                    <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="ghost" size="sm" className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs">
+                  <>
+                    <Link to="/dashboard">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                      >
                         <User className="w-3.5 h-3.5" />
                         <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
                       </Button>
                     </Link>
-                    <Button variant="ghost" size="sm" onClick={() => { handleSignOut(); setMobileMenuOpen(false); }} className="text-foreground/60 hover:text-foreground text-xs">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleSignOut}
+                      className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs"
+                    >
                       <LogOut className="w-3.5 h-3.5" />
                     </Button>
-                  </div>
+                  </>
                 ) : (
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="ghost" size="sm" className="flex items-center gap-2 text-foreground/60 hover:text-foreground text-xs">
+                  <Link to="/login">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                    >
                       <User className="w-3.5 h-3.5" />
                       <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
                     </Button>
@@ -226,10 +148,105 @@ const Navbar = () => {
                 )}
               </div>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-3 -mr-2 text-foreground/80 min-w-[48px] min-h-[48px] flex items-center justify-center"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      </nav>
+
+      {/* Full-screen mobile menu overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-[60] bg-background flex flex-col md:hidden animate-in fade-in duration-200">
+          {/* Header with logo and close */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border/40">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
+              <img
+                src={owneoLogo}
+                alt="OWNEO"
+                className="h-12 w-auto mix-blend-screen filter brightness-110"
+              />
+            </Link>
+            <button
+              className="p-3 text-foreground/80 min-w-[48px] min-h-[48px] flex items-center justify-center"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="w-7 h-7" />
+            </button>
+          </div>
+
+          {/* Menu links */}
+          <div className="flex-1 flex flex-col justify-center px-6 gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`block rounded-lg px-4 py-4 min-h-[56px] flex items-center text-lg font-light tracking-[0.15em] transition-colors active:bg-foreground/5 ${
+                  isActive(link.path)
+                    ? "text-foreground bg-foreground/5"
+                    : "text-foreground/60"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Bottom actions */}
+          <div className="px-6 pb-8 pt-4 border-t border-border/40 space-y-3">
+            <div className="flex items-center gap-3">
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs min-h-[48px]">
+                  <Globe className="w-4 h-4 mr-2" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-background border-border">
+                  <SelectItem value="es" className="text-foreground/80">ES</SelectItem>
+                  <SelectItem value="en" className="text-foreground/80">EN</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {user ? (
+                <div className="flex items-center gap-2 flex-1">
+                  <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex-1">
+                    <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
+                      <User className="w-4 h-4" />
+                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="outline"
+                    onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
+                    className="min-h-[48px] min-w-[48px] text-foreground/60"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1">
+                  <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
+                    <User className="w-4 h-4" />
+                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
