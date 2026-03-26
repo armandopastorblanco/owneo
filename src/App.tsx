@@ -32,6 +32,21 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const ScrollToTop = () => {
+  const { pathname, search, hash, key } = useLocation();
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    requestAnimationFrame(() => {
+      document.documentElement.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.body.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
+  }, [pathname, search, hash, key]);
+  return null;
+};
+
 const PostHogPageTracker = () => {
   usePostHogPageView();
   return null;
@@ -43,6 +58,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <PostHogPageTracker />
         <AuthProvider>
           <div className="pb-bottom-nav md:pb-0">
