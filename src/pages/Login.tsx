@@ -142,6 +142,13 @@ const Login = () => {
         </div>
       </div>
       <Footer />
+      <PWAInstallPrompt
+        show={pwa.showPrompt}
+        isIOS={pwa.isIOS}
+        canInstallNatively={pwa.canInstallNatively}
+        onInstall={pwa.install}
+        onDismiss={pwa.dismiss}
+      />
     </div>
   );
 };
