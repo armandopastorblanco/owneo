@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 const AndroidIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -119,6 +120,14 @@ const Footer = () => {
           <p>© 2025 OWNEO. All rights reserved.</p>
         </div>
       </div>
+
+      <PWAInstallPrompt
+        show={pwa.showPrompt}
+        isIOS={pwa.isIOS}
+        canInstallNatively={pwa.canInstallNatively}
+        onInstall={pwa.install}
+        onDismiss={pwa.dismiss}
+      />
     </footer>
   );
 };
