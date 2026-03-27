@@ -12,6 +12,12 @@ import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
+  const pwa = usePWAInstall();
+
+  useEffect(() => {
+    pwa.triggerPrompt();
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
