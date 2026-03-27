@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,16 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
+  const pwa = usePWAInstall();
+
+  useEffect(() => {
+    pwa.triggerPrompt();
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -134,6 +142,13 @@ const Login = () => {
         </div>
       </div>
       <Footer />
+      <PWAInstallPrompt
+        show={pwa.showPrompt}
+        isIOS={pwa.isIOS}
+        canInstallNatively={pwa.canInstallNatively}
+        onInstall={pwa.install}
+        onDismiss={pwa.dismiss}
+      />
     </div>
   );
 };
