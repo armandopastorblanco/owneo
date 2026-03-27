@@ -120,6 +120,14 @@ const Footer = () => {
           <p>© 2025 OWNEO. All rights reserved.</p>
         </div>
       </div>
+
+      <PWAInstallPrompt
+        show={pwa.showPrompt}
+        isIOS={pwa.isIOS}
+        canInstallNatively={pwa.canInstallNatively}
+        onInstall={pwa.install}
+        onDismiss={pwa.dismiss}
+      />
     </footer>
   );
 };
