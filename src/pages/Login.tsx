@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
   const [email, setEmail] = useState("");
