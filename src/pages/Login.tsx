@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,11 +14,7 @@ import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
   const pwa = usePWAInstall();
-
-  useEffect(() => {
-    pwa.triggerPrompt();
-  }, []);
-
+  const { user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,6 +22,15 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
+
+  useEffect(() => {
+    pwa.triggerPrompt();
+  }, []);
+
+  // Redirect already authenticated users to dashboard
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
 
