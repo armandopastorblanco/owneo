@@ -13,6 +13,7 @@ import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
   const pwa = usePWAInstall();
+  const { user } = useAuth();
 
   useEffect(() => {
     pwa.triggerPrompt();
