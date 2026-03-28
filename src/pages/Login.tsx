@@ -20,6 +20,11 @@ const Login = () => {
     pwa.triggerPrompt();
   }, []);
 
+  // Redirect already authenticated users to dashboard
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
