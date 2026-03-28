@@ -15,6 +15,13 @@ import { usePWAInstall } from "@/hooks/usePWAInstall";
 const Login = () => {
   const pwa = usePWAInstall();
   const { user } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { toast } = useToast();
 
   useEffect(() => {
     pwa.triggerPrompt();
@@ -24,14 +31,6 @@ const Login = () => {
   if (user) {
     return <Navigate to="/dashboard" replace />;
   }
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { toast } = useToast();
 
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
 
