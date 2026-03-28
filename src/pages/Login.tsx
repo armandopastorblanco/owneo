@@ -14,7 +14,7 @@ import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
   const pwa = usePWAInstall();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -26,6 +26,15 @@ const Login = () => {
   useEffect(() => {
     pwa.triggerPrompt();
   }, []);
+
+  // Show spinner while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-champagne border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   // Redirect already authenticated users to dashboard
   if (user) {
