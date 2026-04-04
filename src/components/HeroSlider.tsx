@@ -7,6 +7,9 @@ import { useCars } from "@/hooks/useCars";
 import owneoLogo from "@/assets/owneo-logo.jpg";
 
 const HeroSlider = () => {
+  const { data: cars = [] } = useCars();
+  const heroSlides = useMemo(() => cars.length > 0 ? cars : [], [cars]);
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [nextSlide, setNextSlide] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
