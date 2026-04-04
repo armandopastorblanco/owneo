@@ -25,10 +25,10 @@ const HeroSlider = () => {
   }, []);
 
   useEffect(() => {
+    if (heroSlides.length < 2) return;
     const interval = setInterval(() => {
       setIsTransitioning(true);
       
-      // Start transition to next slide
       setTimeout(() => {
         setCurrentSlide((prev) => {
           const next = (prev + 1) % heroSlides.length;
@@ -36,12 +36,12 @@ const HeroSlider = () => {
           return next;
         });
         setIsTransitioning(false);
-      }, 1500); // Half of the total transition time
+      }, 1500);
       
-    }, 6000); // Longer duration for luxury feel
+    }, 6000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides.length]);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
