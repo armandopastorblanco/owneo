@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useMemo, useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { cars } from "@/data/cars";
+import { useCar } from "@/hooks/useCars";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, MapPin, CheckCircle2, Users, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import ParticipationForm from "@/components/ParticipationForm";
 import Car360Viewer from "@/components/Car360Viewer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const specLabels: Record<string, string> = {
   engine: "Motor",
@@ -52,9 +53,8 @@ const specLabels: Record<string, string> = {
 
 const CarDetail = () => {
   const { id } = useParams();
-  const car = cars.find(c => c.id === id);
+  const { data: car, isLoading } = useCar(id);
 
-  // Generate a stable random number of available participations based on car id
   const availableParticipations = useMemo(() => {
     if (!id) return 5;
     let hash = 0;
@@ -62,7 +62,7 @@ const CarDetail = () => {
       hash = ((hash << 5) - hash) + id.charCodeAt(i);
       hash |= 0;
     }
-    return Math.abs(hash) % 11; // 0 to 10
+    return Math.abs(hash) % 11;
   }, [id]);
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -83,6 +83,22 @@ const CarDetail = () => {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [lightboxIndex, navigateLightbox]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
+          <div className="container mx-auto max-w-6xl">
+            <Skeleton className="h-8 w-40 mb-8" />
+            <Skeleton className="aspect-[21/9] rounded-lg mb-8" />
+            <Skeleton className="h-12 w-96 mb-4" />
+            <Skeleton className="h-24 w-full" />
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (!car) {
     return (
@@ -114,21 +130,18 @@ const CarDetail = () => {
             Volver al Portfolio
           </Link>
 
-          {/* Hero Image with Animation */}
           <div className="relative aspect-[16/10] sm:aspect-[21/9] overflow-hidden rounded-lg mb-8 bg-gradient-to-b from-muted to-background">
             <img
               src={car.image}
               alt={car.name}
               className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
             />
-            {/* Available participations badge */}
             <div className="absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 bg-[hsl(var(--participation-available))] text-background">
               <Users className="w-4 h-4" />
               {availableParticipations}/10 participaciones disponibles
             </div>
           </div>
 
-          {/* Car Info Header */}
           <div className="mb-12">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-4">
               <div>
@@ -138,7 +151,6 @@ const CarDetail = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 mb-4 text-foreground">{car.name}</h1>
               </div>
 
-              {/* Pricing Card with Tooltip */}
               <Card className="bg-card/50 border-border/50 md:min-w-[280px]">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-3">
@@ -173,7 +185,6 @@ const CarDetail = () => {
             </div>
           </div>
 
-          {/* Luxury Description */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">La Experiencia</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -181,12 +192,10 @@ const CarDetail = () => {
             </p>
           </section>
 
-          {/* 360° Viewer - only for cars with gallery */}
           {car.gallery && car.gallery.length >= 6 && (
             <Car360Viewer carName={car.name} gallery={car.gallery} />
           )}
 
-          {/* Image Gallery */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Galería</h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -218,7 +227,6 @@ const CarDetail = () => {
             </div>
           </section>
 
-          {/* Lightbox Overlay */}
           {lightboxIndex !== null && car.gallery && (
             <div
               className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center"
@@ -261,7 +269,6 @@ const CarDetail = () => {
             </div>
           )}
 
-          {/* Specifications */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Especificaciones Técnicas</h2>
             <Card className="bg-card border-border">
@@ -278,7 +285,6 @@ const CarDetail = () => {
             </Card>
           </section>
 
-          {/* Features */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Características Premium</h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -291,7 +297,6 @@ const CarDetail = () => {
             </div>
           </section>
 
-          {/* Comparison Section: Compra Individual VS OWNEO Co-Sharing */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
             <p className="text-muted-foreground mb-8">
@@ -360,7 +365,6 @@ const CarDetail = () => {
             </div>
           </section>
 
-          {/* Available Locations */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Disponible En</h2>
             <div className="flex flex-wrap gap-3">
@@ -373,7 +377,6 @@ const CarDetail = () => {
             </div>
           </section>
 
-          {/* CTA */}
           <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
             <CardContent className="p-8 text-center">
               <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser copropietario de esta obra maestra?</h3>
