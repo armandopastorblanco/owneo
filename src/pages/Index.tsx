@@ -5,10 +5,14 @@ import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
 import HeroSlider from "@/components/HeroSlider";
 import PressSection from "@/components/PressSection";
-import { cars, cities } from "@/data/cars";
+import { useCars } from "@/hooks/useCars";
+import { useLocations } from "@/hooks/useLocations";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
+  const { data: cars = [], isLoading: carsLoading } = useCars();
+  const { data: cities = [] } = useLocations();
   const featuredCars = cars.slice(0, 4);
 
   return (
@@ -30,11 +34,19 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredCars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
+          {carsLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <Skeleton key={i} className="h-[350px] rounded-xl" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {featuredCars.map((car) => (
+                <CarCard key={car.id} car={car} />
+              ))}
+            </div>
+          )}
 
           <div className="text-center mt-12">
             <Link to="/portfolio">

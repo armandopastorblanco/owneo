@@ -1,49 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cars } from "@/data/cars";
+import { useCars } from "@/hooks/useCars";
 import owneoLogo from "@/assets/owneo-logo.jpg";
 
-// All premium cars for the hero slider
-const heroSlides = [
-  cars.find(c => c.id === "ferrari-f8-tributo"),
-  cars.find(c => c.id === "lamborghini-aventador"),
-  cars.find(c => c.id === "porsche-911-turbo-s"),
-  cars.find(c => c.id === "mclaren-720s"),
-  cars.find(c => c.id === "rolls-royce-wraith"),
-  cars.find(c => c.id === "ferrari-roma"),
-  cars.find(c => c.id === "bentley-continental-gt"),
-  cars.find(c => c.id === "mercedes-amg-gt-r"),
-  cars.find(c => c.id === "lamborghini-huracan-evo"),
-  cars.find(c => c.id === "aston-martin-db11"),
-  cars.find(c => c.id === "porsche-taycan-turbo-s"),
-  cars.find(c => c.id === "ferrari-portofino"),
-  cars.find(c => c.id === "lamborghini-urus"),
-  cars.find(c => c.id === "porsche-cayenne-turbo-gt"),
-].filter(Boolean);
-
 const HeroSlider = () => {
+  const { data: cars = [] } = useCars();
+  const heroSlides = useMemo(() => cars.length > 0 ? cars : [], [cars]);
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [nextSlide, setNextSlide] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Preload all images for smoother transitions
     heroSlides.forEach((slide) => {
       if (slide?.image) {
         const img = new Image();
         img.src = slide.image;
       }
     });
-  }, []);
+  }, [heroSlides]);
 
   useEffect(() => {
+    if (heroSlides.length < 2) return;
     const interval = setInterval(() => {
       setIsTransitioning(true);
       
-      // Start transition to next slide
       setTimeout(() => {
         setCurrentSlide((prev) => {
           const next = (prev + 1) % heroSlides.length;
@@ -51,12 +35,16 @@ const HeroSlider = () => {
           return next;
         });
         setIsTransitioning(false);
-      }, 1500); // Half of the total transition time
+      }, 1500);
       
-    }, 6000); // Longer duration for luxury feel
+    }, 6000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides.length]);
+
+  if (heroSlides.length === 0) {
+    return <section className="relative h-screen w-full overflow-hidden bg-black" />;
+  }
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
