@@ -42,6 +42,10 @@ const HeroSlider = () => {
     return () => clearInterval(interval);
   }, [heroSlides.length]);
 
+  if (heroSlides.length === 0) {
+    return <section className="relative h-screen w-full overflow-hidden bg-black" />;
+  }
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
       {/* Preload next images */}
