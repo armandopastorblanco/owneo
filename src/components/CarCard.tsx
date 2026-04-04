@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Car } from "@/data/cars";
+import { Car } from "@/hooks/useCars";
 import { ArrowRight, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useMemo } from "react";
