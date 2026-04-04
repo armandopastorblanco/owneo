@@ -1,9 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
-import { cars } from "@/data/cars";
+import { useCars } from "@/hooks/useCars";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Portfolio = () => {
+  const { data: cars = [], isLoading } = useCars();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -19,11 +22,19 @@ const Portfolio = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-            {cars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <Skeleton key={i} className="h-[400px] rounded-xl" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+              {cars.map((car) => (
+                <CarCard key={car.id} car={car} />
+              ))}
+            </div>
+          )}
         </div>
       </main>
 
