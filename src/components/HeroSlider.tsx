@@ -1,28 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cars } from "@/data/cars";
+import { useCars } from "@/hooks/useCars";
 import owneoLogo from "@/assets/owneo-logo.jpg";
-
-// All premium cars for the hero slider
-const heroSlides = [
-  cars.find(c => c.id === "ferrari-f8-tributo"),
-  cars.find(c => c.id === "lamborghini-aventador"),
-  cars.find(c => c.id === "porsche-911-turbo-s"),
-  cars.find(c => c.id === "mclaren-720s"),
-  cars.find(c => c.id === "rolls-royce-wraith"),
-  cars.find(c => c.id === "ferrari-roma"),
-  cars.find(c => c.id === "bentley-continental-gt"),
-  cars.find(c => c.id === "mercedes-amg-gt-r"),
-  cars.find(c => c.id === "lamborghini-huracan-evo"),
-  cars.find(c => c.id === "aston-martin-db11"),
-  cars.find(c => c.id === "porsche-taycan-turbo-s"),
-  cars.find(c => c.id === "ferrari-portofino"),
-  cars.find(c => c.id === "lamborghini-urus"),
-  cars.find(c => c.id === "porsche-cayenne-turbo-gt"),
-].filter(Boolean);
 
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
