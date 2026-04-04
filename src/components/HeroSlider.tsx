@@ -15,14 +15,13 @@ const HeroSlider = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Preload all images for smoother transitions
     heroSlides.forEach((slide) => {
       if (slide?.image) {
         const img = new Image();
         img.src = slide.image;
       }
     });
-  }, []);
+  }, [heroSlides]);
 
   useEffect(() => {
     if (heroSlides.length < 2) return;
