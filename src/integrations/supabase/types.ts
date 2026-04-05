@@ -919,7 +919,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_user_city_id: { Args: { _user_id?: string }; Returns: string }
+      insert_audit_log: {
+        Args: {
+          _action: string
+          _details?: Json
+          _target_id?: string
+          _target_table?: string
+        }
+        Returns: string
+      }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_city_manager: { Args: { _user_id?: string }; Returns: boolean }
+      is_superadmin: { Args: { _user_id?: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "superadmin" | "city_manager" | "user"
