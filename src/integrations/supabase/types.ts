@@ -14,23 +14,130 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_logs: {
+        Row: {
+          action: string
+          admin_id: string | null
+          created_at: string
+          details: Json | null
+          id: string
+          target_id: string | null
+          target_table: string | null
+        }
+        Insert: {
+          action: string
+          admin_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          target_id?: string | null
+          target_table?: string | null
+        }
+        Update: {
+          action?: string
+          admin_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          target_id?: string | null
+          target_table?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_logs_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bank_reconciliation: {
+        Row: {
+          created_at: string
+          expected_amount: number | null
+          iban_user: string | null
+          id: string
+          matched_at: string | null
+          participation_request_id: string
+          reference_code: string | null
+          status: string | null
+          user_id: string
+          validated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          expected_amount?: number | null
+          iban_user?: string | null
+          id?: string
+          matched_at?: string | null
+          participation_request_id: string
+          reference_code?: string | null
+          status?: string | null
+          user_id: string
+          validated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          expected_amount?: number | null
+          iban_user?: string | null
+          id?: string
+          matched_at?: string | null
+          participation_request_id?: string
+          reference_code?: string | null
+          status?: string | null
+          user_id?: string
+          validated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bank_reconciliation_participation_request_id_fkey"
+            columns: ["participation_request_id"]
+            isOneToOne: false
+            referencedRelation: "participation_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bank_reconciliation_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bank_reconciliation_validated_by_fkey"
+            columns: ["validated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cars: {
         Row: {
           available_in: string[] | null
           brand: string
           category: string | null
           created_at: string
+          deadline: string | null
           description: string | null
           features: string[] | null
           gallery: string[] | null
           id: string
           image_url: string | null
           is_active: boolean | null
+          location_id: string | null
           luxury_description: string | null
+          max_participations: number | null
           model: string
           name: string
+          participation_price: number | null
           price: number
+          remaining_participations: number | null
           specifications: Json | null
+          status: string | null
+          technical_sheet: Json | null
+          total_km: number | null
           updated_at: string
           year: number
         }
@@ -39,17 +146,25 @@ export type Database = {
           brand: string
           category?: string | null
           created_at?: string
+          deadline?: string | null
           description?: string | null
           features?: string[] | null
           gallery?: string[] | null
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          location_id?: string | null
           luxury_description?: string | null
+          max_participations?: number | null
           model: string
           name: string
+          participation_price?: number | null
           price: number
+          remaining_participations?: number | null
           specifications?: Json | null
+          status?: string | null
+          technical_sheet?: Json | null
+          total_km?: number | null
           updated_at?: string
           year: number
         }
@@ -58,21 +173,37 @@ export type Database = {
           brand?: string
           category?: string | null
           created_at?: string
+          deadline?: string | null
           description?: string | null
           features?: string[] | null
           gallery?: string[] | null
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          location_id?: string | null
           luxury_description?: string | null
+          max_participations?: number | null
           model?: string
           name?: string
+          participation_price?: number | null
           price?: number
+          remaining_participations?: number | null
           specifications?: Json | null
+          status?: string | null
+          technical_sheet?: Json | null
+          total_km?: number | null
           updated_at?: string
           year?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "cars_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       contacts: {
         Row: {
@@ -161,6 +292,77 @@ export type Database = {
         }
         Relationships: []
       }
+      contracts: {
+        Row: {
+          car_id: string
+          created_at: string
+          file_url: string | null
+          id: string
+          participation_id: string | null
+          requires_signature: boolean | null
+          signature_status: string | null
+          signed_at: string | null
+          type: string
+          uploaded_by: string | null
+          user_id: string
+        }
+        Insert: {
+          car_id: string
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          participation_id?: string | null
+          requires_signature?: boolean | null
+          signature_status?: string | null
+          signed_at?: string | null
+          type: string
+          uploaded_by?: string | null
+          user_id: string
+        }
+        Update: {
+          car_id?: string
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          participation_id?: string | null
+          requires_signature?: boolean | null
+          signature_status?: string | null
+          signed_at?: string | null
+          type?: string
+          uploaded_by?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contracts_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_participation_id_fkey"
+            columns: ["participation_id"]
+            isOneToOne: false
+            referencedRelation: "validated_participations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       featured_cars: {
         Row: {
           car_id: string
@@ -232,6 +434,57 @@ export type Database = {
         }
         Relationships: []
       }
+      kyc_documents: {
+        Row: {
+          created_at: string
+          file_url: string | null
+          id: string
+          notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kyc_documents_reviewed_by_fkey"
+            columns: ["reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "kyc_documents_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       locations: {
         Row: {
           created_at: string
@@ -264,6 +517,69 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      participation_requests: {
+        Row: {
+          car_id: string
+          created_at: string
+          id: string
+          num_participations: number | null
+          payment_amount: number | null
+          payment_proof_url: string | null
+          payment_status: string | null
+          questionnaire_answers: Json | null
+          score: number | null
+          score_notes: string | null
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          car_id: string
+          created_at?: string
+          id?: string
+          num_participations?: number | null
+          payment_amount?: number | null
+          payment_proof_url?: string | null
+          payment_status?: string | null
+          questionnaire_answers?: Json | null
+          score?: number | null
+          score_notes?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          car_id?: string
+          created_at?: string
+          id?: string
+          num_participations?: number | null
+          payment_amount?: number | null
+          payment_proof_url?: string | null
+          payment_status?: string | null
+          questionnaire_answers?: Json | null
+          score?: number | null
+          score_notes?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participation_requests_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "participation_requests_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       participations: {
         Row: {
@@ -312,9 +628,12 @@ export type Database = {
       profiles: {
         Row: {
           address: string | null
+          city_id: string | null
           created_at: string
           email: string | null
+          iban: string | null
           id: string
+          kyc_status: string | null
           linkedin: string | null
           name: string | null
           phone: string | null
@@ -323,9 +642,12 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          city_id?: string | null
           created_at?: string
           email?: string | null
+          iban?: string | null
           id: string
+          kyc_status?: string | null
           linkedin?: string | null
           name?: string | null
           phone?: string | null
@@ -334,16 +656,91 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          city_id?: string | null
           created_at?: string
           email?: string | null
+          iban?: string | null
           id?: string
+          kyc_status?: string | null
           linkedin?: string | null
           name?: string | null
           phone?: string | null
           surname?: string | null
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reservations: {
+        Row: {
+          car_id: string
+          created_at: string
+          credits_used: number | null
+          end_date: string
+          id: string
+          is_red_period: boolean | null
+          notes: string | null
+          participation_id: string
+          start_date: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          car_id: string
+          created_at?: string
+          credits_used?: number | null
+          end_date: string
+          id?: string
+          is_red_period?: boolean | null
+          notes?: string | null
+          participation_id: string
+          start_date: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          car_id?: string
+          created_at?: string
+          credits_used?: number | null
+          end_date?: string
+          id?: string
+          is_red_period?: boolean | null
+          notes?: string | null
+          participation_id?: string
+          start_date?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reservations_participation_id_fkey"
+            columns: ["participation_id"]
+            isOneToOne: false
+            referencedRelation: "validated_participations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reservations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -362,6 +759,160 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      validated_participations: {
+        Row: {
+          car_id: string
+          created_at: string
+          credits_remaining: number | null
+          id: string
+          participation_number: number
+          request_id: string
+          user_id: string
+        }
+        Insert: {
+          car_id: string
+          created_at?: string
+          credits_remaining?: number | null
+          id?: string
+          participation_number: number
+          request_id: string
+          user_id: string
+        }
+        Update: {
+          car_id?: string
+          created_at?: string
+          credits_remaining?: number | null
+          id?: string
+          participation_number?: number
+          request_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "validated_participations_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "validated_participations_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "participation_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "validated_participations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vehicle_inspections: {
+        Row: {
+          car_id: string
+          condition_after: string | null
+          condition_before: string | null
+          created_at: string
+          id: string
+          inspector_id: string | null
+          km_after: number | null
+          km_before: number | null
+          notes: string | null
+          photos_after: string[] | null
+          photos_before: string[] | null
+          reservation_id: string | null
+        }
+        Insert: {
+          car_id: string
+          condition_after?: string | null
+          condition_before?: string | null
+          created_at?: string
+          id?: string
+          inspector_id?: string | null
+          km_after?: number | null
+          km_before?: number | null
+          notes?: string | null
+          photos_after?: string[] | null
+          photos_before?: string[] | null
+          reservation_id?: string | null
+        }
+        Update: {
+          car_id?: string
+          condition_after?: string | null
+          condition_before?: string | null
+          created_at?: string
+          id?: string
+          inspector_id?: string | null
+          km_after?: number | null
+          km_before?: number | null
+          notes?: string | null
+          photos_after?: string[] | null
+          photos_before?: string[] | null
+          reservation_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicle_inspections_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_inspections_inspector_id_fkey"
+            columns: ["inspector_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_inspections_reservation_id_fkey"
+            columns: ["reservation_id"]
+            isOneToOne: false
+            referencedRelation: "reservations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      votes: {
+        Row: {
+          brand: string | null
+          car_model: string
+          comment: string | null
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          brand?: string | null
+          car_model: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          brand?: string | null
+          car_model?: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "votes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
