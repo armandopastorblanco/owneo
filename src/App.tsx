@@ -30,6 +30,20 @@ import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+import Unauthorized from "./pages/Unauthorized";
+import AdminGuard from "./components/admin/AdminGuard";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminVehiculos from "./pages/admin/AdminVehiculos";
+import AdminSolicitudes from "./pages/admin/AdminSolicitudes";
+import AdminParticipantes from "./pages/admin/AdminParticipantes";
+import AdminReservas from "./pages/admin/AdminReservas";
+import AdminKYC from "./pages/admin/AdminKYC";
+import AdminContratos from "./pages/admin/AdminContratos";
+import AdminPagos from "./pages/admin/AdminPagos";
+import AdminInspecciones from "./pages/admin/AdminInspecciones";
+import AdminUbicaciones from "./pages/admin/AdminUbicaciones";
+import AdminConfiguracion from "./pages/admin/AdminConfiguracion";
 
 const queryClient = new QueryClient();
 
