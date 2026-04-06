@@ -99,6 +99,21 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              {/* Admin routes */}
+              <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="vehiculos" element={<AdminVehiculos />} />
+                <Route path="solicitudes" element={<AdminSolicitudes />} />
+                <Route path="participantes" element={<AdminParticipantes />} />
+                <Route path="reservas" element={<AdminReservas />} />
+                <Route path="kyc" element={<AdminKYC />} />
+                <Route path="contratos" element={<AdminContratos />} />
+                <Route path="pagos" element={<AdminPagos />} />
+                <Route path="inspecciones" element={<AdminInspecciones />} />
+                <Route path="ubicaciones" element={<AdminUbicaciones />} />
+                <Route path="configuracion" element={<AdminConfiguracion />} />
+              </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
