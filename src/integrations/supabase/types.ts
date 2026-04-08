@@ -363,6 +363,57 @@ export type Database = {
           },
         ]
       }
+      credit_rules: {
+        Row: {
+          applies_to_all: boolean | null
+          car_ids: string[] | null
+          created_at: string | null
+          credits_per_day: number
+          description: string | null
+          end_date: string | null
+          id: string
+          is_active: boolean | null
+          is_recurring: boolean | null
+          months: number[] | null
+          multiplier: number
+          name: string
+          start_date: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          applies_to_all?: boolean | null
+          car_ids?: string[] | null
+          created_at?: string | null
+          credits_per_day?: number
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_recurring?: boolean | null
+          months?: number[] | null
+          multiplier?: number
+          name: string
+          start_date?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          applies_to_all?: boolean | null
+          car_ids?: string[] | null
+          created_at?: string | null
+          credits_per_day?: number
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_recurring?: boolean | null
+          months?: number[] | null
+          multiplier?: number
+          name?: string
+          start_date?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       featured_cars: {
         Row: {
           car_id: string
@@ -682,40 +733,46 @@ export type Database = {
         Row: {
           car_id: string
           created_at: string
-          credits_used: number | null
+          credit_multiplier: number | null
+          credits_used: number
           end_date: string
           id: string
-          is_red_period: boolean | null
+          is_peak_period: boolean | null
           notes: string | null
           participation_id: string
           start_date: string
           status: string | null
+          updated_at: string | null
           user_id: string
         }
         Insert: {
           car_id: string
           created_at?: string
-          credits_used?: number | null
+          credit_multiplier?: number | null
+          credits_used?: number
           end_date: string
           id?: string
-          is_red_period?: boolean | null
+          is_peak_period?: boolean | null
           notes?: string | null
           participation_id: string
           start_date: string
           status?: string | null
+          updated_at?: string | null
           user_id: string
         }
         Update: {
           car_id?: string
           created_at?: string
-          credits_used?: number | null
+          credit_multiplier?: number | null
+          credits_used?: number
           end_date?: string
           id?: string
-          is_red_period?: boolean | null
+          is_peak_period?: boolean | null
           notes?: string | null
           participation_id?: string
           start_date?: string
           status?: string | null
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: [
@@ -764,7 +821,10 @@ export type Database = {
         Row: {
           car_id: string
           created_at: string
+          credits_per_year: number | null
           credits_remaining: number | null
+          credits_reset_date: string | null
+          credits_used_this_year: number | null
           id: string
           participation_number: number
           request_id: string
@@ -773,7 +833,10 @@ export type Database = {
         Insert: {
           car_id: string
           created_at?: string
+          credits_per_year?: number | null
           credits_remaining?: number | null
+          credits_reset_date?: string | null
+          credits_used_this_year?: number | null
           id?: string
           participation_number: number
           request_id: string
@@ -782,7 +845,10 @@ export type Database = {
         Update: {
           car_id?: string
           created_at?: string
+          credits_per_year?: number | null
           credits_remaining?: number | null
+          credits_reset_date?: string | null
+          credits_used_this_year?: number | null
           id?: string
           participation_number?: number
           request_id?: string
