@@ -115,6 +115,7 @@ export type Database = {
       }
       cars: {
         Row: {
+          admin_notes: string | null
           available_in: string[] | null
           brand: string
           category: string | null
@@ -133,6 +134,7 @@ export type Database = {
           name: string
           participation_price: number | null
           price: number
+          promotion: Json | null
           remaining_participations: number | null
           specifications: Json | null
           status: string | null
@@ -142,6 +144,7 @@ export type Database = {
           year: number
         }
         Insert: {
+          admin_notes?: string | null
           available_in?: string[] | null
           brand: string
           category?: string | null
@@ -160,6 +163,7 @@ export type Database = {
           name: string
           participation_price?: number | null
           price: number
+          promotion?: Json | null
           remaining_participations?: number | null
           specifications?: Json | null
           status?: string | null
@@ -169,6 +173,7 @@ export type Database = {
           year: number
         }
         Update: {
+          admin_notes?: string | null
           available_in?: string[] | null
           brand?: string
           category?: string | null
@@ -187,6 +192,7 @@ export type Database = {
           name?: string
           participation_price?: number | null
           price?: number
+          promotion?: Json | null
           remaining_participations?: number | null
           specifications?: Json | null
           status?: string | null

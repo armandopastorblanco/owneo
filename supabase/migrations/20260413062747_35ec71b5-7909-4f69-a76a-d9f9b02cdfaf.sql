@@ -1,0 +1,3 @@
+ALTER TABLE public.cars
+  ADD COLUMN IF NOT EXISTS promotion JSONB,
+  ADD COLUMN IF NOT EXISTS admin_notes TEXT;
