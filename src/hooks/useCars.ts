@@ -3,6 +3,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { resolveAssetPath } from "@/lib/assetMap";
 import type { Tables } from "@/integrations/supabase/types";
 
+export interface CarPromotion {
+  type: "direct" | "volume";
+  discount_percent: number;
+  min_participations?: number;
+  start_date: string;
+  end_date: string;
+  badge_text: string;
+  is_active: boolean;
+}
+
 export interface Car {
   id: string;
   name: string;
@@ -10,6 +20,7 @@ export interface Car {
   model: string;
   year: number;
   price: string;
+  numericPrice: number;
   image: string;
   gallery?: string[];
   category: string;
@@ -18,10 +29,17 @@ export interface Car {
   specifications: Record<string, string>;
   features: string[];
   availableIn: string[];
+  maxParticipations: number;
+  remainingParticipations: number;
+  participationPrice: number;
+  promotion: CarPromotion | null;
+  status: string;
 }
 
 function mapDbCarToCar(row: Tables<"cars">): Car {
-  const priceFormatted = `€${Number(row.price).toLocaleString("en-US")}`;
+  const numPrice = Number(row.price);
+  const priceFormatted = `€${numPrice.toLocaleString("en-US")}`;
+  const rawPromo = (row as unknown as Record<string, unknown>).promotion as CarPromotion | null;
   return {
     id: row.id,
     name: row.name,
@@ -29,6 +47,7 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
     model: row.model,
     year: row.year,
     price: priceFormatted,
+    numericPrice: numPrice,
     image: resolveAssetPath(row.image_url),
     gallery: row.gallery?.map(resolveAssetPath),
     category: row.category || "",
@@ -37,6 +56,11 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
     specifications: (row.specifications as Record<string, string>) || {},
     features: row.features || [],
     availableIn: row.available_in || [],
+    maxParticipations: row.max_participations || 10,
+    remainingParticipations: row.remaining_participations ?? 10,
+    participationPrice: Number(row.participation_price) || Math.round(numPrice * 0.1),
+    promotion: rawPromo?.is_active ? rawPromo : null,
+    status: row.status || "active",
   };
 }
 
