@@ -135,10 +135,15 @@ const CarDetail = () => {
               alt={car.name}
               className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
             />
-            <div className="absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 bg-[hsl(var(--participation-available))] text-background">
+            <div className={`absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${isComplete ? "bg-blue-500/80" : "bg-[hsl(var(--participation-available))]"} text-background`}>
               <Users className="w-4 h-4" />
-              {availableParticipations}/10 participaciones disponibles
+              {isComplete ? "Completo — Lista de espera" : `${availableParticipations}/${maxParticipations} participaciones disponibles`}
             </div>
+            {isPromoActive && (
+              <div className="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-semibold bg-emerald-500 text-background">
+                {promotion.badge_text}
+              </div>
+            )}
           </div>
 
           <div className="mb-12">
@@ -171,13 +176,24 @@ const CarDetail = () => {
                     </TooltipProvider>
                   </div>
                   <p className="text-3xl font-bold text-foreground mb-2">
-                    {sharePrice.toLocaleString('es-ES')}€
+                    {isPromoActive && promotion.type === "direct" ? (
+                      <>
+                        <span className="line-through text-muted-foreground text-xl mr-2">
+                          {sharePrice.toLocaleString('es-ES')}€
+                        </span>
+                        {discountedPrice.toLocaleString('es-ES')}€
+                      </>
+                    ) : (
+                      <>{sharePrice.toLocaleString('es-ES')}€</>
+                    )}
                   </p>
+                  {isPromoActive && promotion.type === "volume" && (
+                    <p className="text-sm text-emerald-400 mb-2">
+                      Solicita {promotion.min_participations} o más y obtén {promotion.discount_percent}% de descuento
+                    </p>
+                  )}
                   <p className="text-lg text-muted-foreground line-through">
                     {car.price}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-3">
-                    Valor total del vehículo
                   </p>
                 </CardContent>
               </Card>
