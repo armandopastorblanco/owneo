@@ -55,15 +55,11 @@ const CarDetail = () => {
   const { id } = useParams();
   const { data: car, isLoading } = useCar(id);
 
-  const availableParticipations = useMemo(() => {
-    if (!id) return 5;
-    let hash = 0;
-    for (let i = 0; i < id.length; i++) {
-      hash = ((hash << 5) - hash) + id.charCodeAt(i);
-      hash |= 0;
-    }
-    return Math.abs(hash) % 11;
-  }, [id]);
+  const availableParticipations = car?.remainingParticipations ?? 0;
+  const maxParticipations = car?.maxParticipations ?? 10;
+  const isComplete = car?.status === "complete" || availableParticipations === 0;
+  const promotion = car?.promotion;
+  const isPromoActive = promotion && new Date(promotion.start_date) <= new Date() && new Date(promotion.end_date) >= new Date();
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -116,8 +112,11 @@ const CarDetail = () => {
     );
   }
 
-  const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
-  const sharePrice = Math.round(numericPrice * 0.1);
+  const numericPrice = car.numericPrice;
+  const sharePrice = car.participationPrice;
+  const discountedPrice = isPromoActive && promotion.type === "direct"
+    ? Math.round(sharePrice * (1 - promotion.discount_percent / 100))
+    : sharePrice;
 
   return (
     <div className="min-h-screen bg-background">
