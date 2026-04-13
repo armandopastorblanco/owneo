@@ -394,13 +394,22 @@ const CarDetail = () => {
 
           <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser copropietario de esta obra maestra?</h3>
-              <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
-              <ParticipationForm 
-                carName={car.name} 
-                availableParticipations={availableParticipations}
-                sharePrice={sharePrice}
-              />
+              {isComplete ? (
+                <>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">Este vehículo está completo</h3>
+                  <p className="text-muted-foreground">Todas las participaciones han sido vendidas. Puedes apuntarte a la lista de espera.</p>
+                </>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser copropietario de esta obra maestra?</h3>
+                  <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
+                  <ParticipationForm 
+                    carName={car.name} 
+                    availableParticipations={availableParticipations}
+                    sharePrice={sharePrice}
+                  />
+                </>
+              )}
             </CardContent>
           </Card>
         </div>
