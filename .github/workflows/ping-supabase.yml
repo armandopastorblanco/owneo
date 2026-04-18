@@ -23,7 +23,7 @@ jobs:
       - name: Ping Supabase
         env:
           SUPABASE_URL: https://arctexrzfqfqocghodpp.supabase.co
-          SUPABASE_KEY: sb_publishable_k2Z-4-XrDzfw_0Gner2zOA_aummgvF1
+          SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyY3RleHJ6ZnFmcW9jZ2hvZHBwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2ODQwNDcsImV4cCI6MjA4OTI2MDA0N30.S6cQxiNu9-x5-s86MAaaUgbR-7dG57EwC987mqjfms4
         run: |
           node -e "
           (async () => {
