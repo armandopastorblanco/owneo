@@ -15,22 +15,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Supabase Client
         run: npm install @supabase/supabase-js --force
 
       - name: Ping Supabase
         env:
-          SUPABASE_URL: https://arctexrzfqfqocghodpp.supabase.co
-          SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyY3RleHJ6ZnFmcW9jZ2hvZHBwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2ODQwNDcsImV4cCI6MjA4OTI2MDA0N30.S6cQxiNu9-x5-s86MAaaUgbR-7dG57EwC987mqjfms4
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           node -e "
           (async () => {
             try {
               const { createClient } = require('@supabase/supabase-js');
               const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
-              const { data, error } = await supabase.from('NOM_DE_TA_TABLE').select('*').limit(1);
+              const { data, error } = await supabase.from('public.profiles').select('*').limit(1);
               if (error) throw error;
               console.log('✅ Ping Supabase réussi !');
             } catch (err) {
