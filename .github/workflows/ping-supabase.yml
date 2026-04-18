@@ -30,7 +30,7 @@ jobs:
             try {
               const { createClient } = require('@supabase/supabase-js');
               const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
-              const { data, error } = await supabase.from('public.profiles').select('*').limit(1);
+              const { data, error } = await supabase.from('profiles').select('*').limit(1);
               if (error) throw error;
               console.log('✅ Ping Supabase réussi !');
             } catch (err) {
