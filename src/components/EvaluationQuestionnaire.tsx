@@ -103,7 +103,13 @@ const EvaluationQuestionnaire = ({
         if (leadInfo.address) profilePayload.address = leadInfo.address;
         if (leadInfo.linkedin) profilePayload.linkedin = leadInfo.linkedin;
       }
-      await supabase.from("profiles").upsert(profilePayload, { onConflict: "id" });
+      // Profile upsert is best-effort — must NOT block the participation insert
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .upsert(profilePayload, { onConflict: "id" });
+      if (profileError) {
+        console.warn("Profile upsert failed (continuing):", profileError);
+      }
 
       const paymentAmount = participationPrice * numParticipations;
 
