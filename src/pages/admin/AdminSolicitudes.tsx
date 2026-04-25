@@ -83,14 +83,44 @@ const AdminSolicitudes = () => {
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ["admin-solicitudes-full"],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // 1) Fetch raw requests (no PostgREST embeds — there are no FKs declared)
+      const { data: reqs, error } = await supabase
         .from("participation_requests")
-        .select(
-          "*, profiles:user_id(id,name,surname,email,phone,address,linkedin,kyc_status,iban,created_at), cars:car_id(id,name,brand,image_url,location_id,participation_price,max_participations,remaining_participations)"
-        )
+        .select("*")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return data || [];
+      const rows = reqs || [];
+      if (rows.length === 0) return [];
+
+      const userIds = Array.from(new Set(rows.map((r) => r.user_id).filter(Boolean)));
+      const carIds = Array.from(new Set(rows.map((r) => r.car_id).filter(Boolean)));
+
+      // 2) Fetch related profiles & cars in parallel
+      const [profilesRes, carsRes] = await Promise.all([
+        userIds.length
+          ? supabase
+              .from("profiles")
+              .select("id,name,surname,email,phone,address,linkedin,kyc_status,iban,created_at")
+              .in("id", userIds)
+          : Promise.resolve({ data: [], error: null }),
+        carIds.length
+          ? supabase
+              .from("cars")
+              .select(
+                "id,name,brand,image_url,location_id,participation_price,max_participations,remaining_participations"
+              )
+              .in("id", carIds)
+          : Promise.resolve({ data: [], error: null }),
+      ]);
+
+      const profilesById = new Map((profilesRes.data || []).map((p) => [p.id, p]));
+      const carsById = new Map((carsRes.data || []).map((c) => [c.id, c]));
+
+      return rows.map((r) => ({
+        ...r,
+        profiles: profilesById.get(r.user_id) || null,
+        cars: carsById.get(r.car_id) || null,
+      }));
     },
     refetchInterval: 30000,
   });
