@@ -211,6 +211,39 @@ export type Database = {
           },
         ]
       }
+      contact_logs: {
+        Row: {
+          admin_id: string
+          content: string
+          created_at: string
+          follow_up_date: string | null
+          id: string
+          request_id: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          admin_id: string
+          content: string
+          created_at?: string
+          follow_up_date?: string | null
+          id?: string
+          request_id?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          admin_id?: string
+          content?: string
+          created_at?: string
+          follow_up_date?: string | null
+          id?: string
+          request_id?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       contacts: {
         Row: {
           created_at: string
@@ -491,6 +524,33 @@ export type Database = {
         }
         Relationships: []
       }
+      internal_notes: {
+        Row: {
+          admin_id: string
+          content: string
+          created_at: string
+          highlighted_text: string | null
+          id: string
+          request_id: string
+        }
+        Insert: {
+          admin_id: string
+          content: string
+          created_at?: string
+          highlighted_text?: string | null
+          id?: string
+          request_id: string
+        }
+        Update: {
+          admin_id?: string
+          content?: string
+          created_at?: string
+          highlighted_text?: string | null
+          id?: string
+          request_id?: string
+        }
+        Relationships: []
+      }
       kyc_documents: {
         Row: {
           created_at: string
@@ -580,11 +640,15 @@ export type Database = {
           car_id: string
           created_at: string
           id: string
+          list_priority: number | null
           num_participations: number | null
+          num_participations_modified: boolean | null
           payment_amount: number | null
           payment_proof_url: string | null
           payment_status: string | null
           questionnaire_answers: Json | null
+          reopened_at: string | null
+          reopened_by: string | null
           score: number | null
           score_notes: string | null
           status: string | null
@@ -595,11 +659,15 @@ export type Database = {
           car_id: string
           created_at?: string
           id?: string
+          list_priority?: number | null
           num_participations?: number | null
+          num_participations_modified?: boolean | null
           payment_amount?: number | null
           payment_proof_url?: string | null
           payment_status?: string | null
           questionnaire_answers?: Json | null
+          reopened_at?: string | null
+          reopened_by?: string | null
           score?: number | null
           score_notes?: string | null
           status?: string | null
@@ -610,11 +678,15 @@ export type Database = {
           car_id?: string
           created_at?: string
           id?: string
+          list_priority?: number | null
           num_participations?: number | null
+          num_participations_modified?: boolean | null
           payment_amount?: number | null
           payment_proof_url?: string | null
           payment_status?: string | null
           questionnaire_answers?: Json | null
+          reopened_at?: string | null
+          reopened_by?: string | null
           score?: number | null
           score_notes?: string | null
           status?: string | null
@@ -735,6 +807,69 @@ export type Database = {
           },
         ]
       }
+      questionnaire_config: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          options: Json | null
+          order_index: number
+          question_key: string
+          question_text: string
+          question_type: string
+          section: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          options?: Json | null
+          order_index?: number
+          question_key: string
+          question_text: string
+          question_type?: string
+          section?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          options?: Json | null
+          order_index?: number
+          question_key?: string
+          question_text?: string
+          question_type?: string
+          section?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      request_tags: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          request_id: string
+          tag_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          request_id: string
+          tag_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          request_id?: string
+          tag_id?: string
+        }
+        Relationships: []
+      }
       reservations: {
         Row: {
           car_id: string
@@ -804,6 +939,66 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      scoring_config: {
+        Row: {
+          answer_value: string
+          created_at: string
+          excludent_type: string | null
+          id: string
+          is_excludent: boolean
+          points: number
+          question_key: string
+          risk_flag: string
+          updated_at: string
+        }
+        Insert: {
+          answer_value: string
+          created_at?: string
+          excludent_type?: string | null
+          id?: string
+          is_excludent?: boolean
+          points?: number
+          question_key: string
+          risk_flag?: string
+          updated_at?: string
+        }
+        Update: {
+          answer_value?: string
+          created_at?: string
+          excludent_type?: string | null
+          id?: string
+          is_excludent?: boolean
+          points?: number
+          question_key?: string
+          risk_flag?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tags: {
+        Row: {
+          color: string
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
