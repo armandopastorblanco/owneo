@@ -22,6 +22,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
+  const redirectParam = new URLSearchParams(location.search).get("redirect");
+  const from = redirectParam || (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
 
   useEffect(() => {
     pwa.triggerPrompt();
@@ -38,10 +40,8 @@ const Login = () => {
 
   // Redirect already authenticated users to dashboard
   if (user) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={from} replace />;
   }
-
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -150,7 +150,10 @@ const Login = () => {
 
           <p className="text-center text-sm text-muted-foreground mt-8">
             ¿No tienes cuenta?{" "}
-            <Link to="/registro" className="text-champagne hover:underline font-medium">
+            <Link
+              to={redirectParam ? `/registro?redirect=${encodeURIComponent(redirectParam)}` : "/registro"}
+              className="text-champagne hover:underline font-medium"
+            >
               Crear cuenta
             </Link>
           </p>
