@@ -9,9 +9,26 @@ const AdminGuard = ({ children }: { children: React.ReactNode }) => {
   const { data: isSuperadmin, isLoading: roleLoading } = useQuery({
     queryKey: ["is-superadmin", user?.id],
     queryFn: async () => {
-      const { data, error } = await supabase.rpc("is_superadmin", { _user_id: user!.id });
-      if (error) throw error;
-      return data as boolean;
+      if (!user) return false;
+
+      // Check 1: profiles.role
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if ((profile as { role?: string } | null)?.role === "superadmin") return true;
+
+      // Check 2: user_roles table
+      const { data: roleRow } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "superadmin")
+        .maybeSingle();
+
+      return !!roleRow;
     },
     enabled: !!user,
   });
