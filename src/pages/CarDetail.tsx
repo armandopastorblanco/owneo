@@ -410,10 +410,11 @@ const CarDetail = () => {
                 <>
                   <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser copropietario de esta obra maestra?</h3>
                   <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
-                  <ParticipationForm 
-                    carName={car.name} 
+                  <ParticipationForm
+                    carId={car.id}
+                    carName={car.name}
                     availableParticipations={availableParticipations}
-                    sharePrice={sharePrice}
+                    sharePrice={discountedPrice}
                   />
                 </>
               )}
