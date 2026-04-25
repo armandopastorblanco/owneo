@@ -87,7 +87,15 @@ const EvaluationQuestionnaire = ({
       }
 
       // Ensure profile exists / merge lead info
-      const profilePayload: Record<string, unknown> = { id: user.id, email: user.email };
+      const profilePayload: {
+        id: string;
+        email?: string;
+        name?: string;
+        surname?: string;
+        phone?: string;
+        address?: string;
+        linkedin?: string;
+      } = { id: user.id, email: user.email ?? undefined };
       if (leadInfo) {
         if (leadInfo.name) profilePayload.name = leadInfo.name;
         if (leadInfo.surname) profilePayload.surname = leadInfo.surname;
