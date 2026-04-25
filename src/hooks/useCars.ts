@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { resolveAssetPath } from "@/lib/assetMap";
+import { resolveCarImage } from "@/lib/resolveCarImage";
 import type { Tables } from "@/integrations/supabase/types";
 
 export interface CarPromotion {
@@ -48,8 +48,8 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
     year: row.year,
     price: priceFormatted,
     numericPrice: numPrice,
-    image: resolveAssetPath(row.image_url),
-    gallery: row.gallery?.map(resolveAssetPath),
+    image: resolveCarImage(row.image_url, row.brand),
+    gallery: row.gallery?.map((p) => resolveCarImage(p, row.brand)),
     category: row.category || "",
     description: row.description || "",
     luxuryDescription: row.luxury_description || "",
