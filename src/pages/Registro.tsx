@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,7 +18,10 @@ const Registro = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
+  const redirectParam = new URLSearchParams(location.search).get("redirect");
+  const loginHref = redirectParam ? `/login?redirect=${encodeURIComponent(redirectParam)}` : "/login";
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +60,7 @@ const Registro = () => {
         title: "Cuenta creada",
         description: "Revisa tu email para confirmar tu cuenta",
       });
-      navigate("/login");
+      navigate(loginHref);
     }
     setLoading(false);
   };
@@ -167,7 +170,7 @@ const Registro = () => {
 
           <p className="text-center text-sm text-muted-foreground mt-8">
             ¿Ya tienes cuenta?{" "}
-            <Link to="/login" className="text-champagne hover:underline font-medium">
+            <Link to={loginHref} className="text-champagne hover:underline font-medium">
               Iniciar sesión
             </Link>
           </p>
