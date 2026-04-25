@@ -62,6 +62,7 @@ const CarDetail = () => {
   const isPromoActive = promotion && new Date(promotion.start_date) <= new Date() && new Date(promotion.end_date) >= new Date();
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const navigateLightbox = useCallback((direction: number) => {
     if (lightboxIndex === null || !car?.gallery) return;
@@ -159,9 +160,15 @@ const CarDetail = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-sm text-muted-foreground uppercase tracking-wider">Cuota de participación</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
+                    <TooltipProvider delayDuration={150}>
+                      <Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
+                        <TooltipTrigger
+                          type="button"
+                          onClick={() => setTooltipOpen((v) => !v)}
+                          onMouseEnter={() => setTooltipOpen(true)}
+                          onMouseLeave={() => setTooltipOpen(false)}
+                          aria-label="Información sobre co-sharing"
+                        >
                           <Info className="w-4 h-4 text-muted-foreground cursor-help" />
                         </TooltipTrigger>
                         <TooltipContent className="max-w-xs p-4">
