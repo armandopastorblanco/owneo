@@ -766,6 +766,7 @@ export type Database = {
           linkedin: string | null
           name: string | null
           phone: string | null
+          role: string
           surname: string | null
           updated_at: string
         }
@@ -780,6 +781,7 @@ export type Database = {
           linkedin?: string | null
           name?: string | null
           phone?: string | null
+          role?: string
           surname?: string | null
           updated_at?: string
         }
@@ -794,6 +796,7 @@ export type Database = {
           linkedin?: string | null
           name?: string | null
           phone?: string | null
+          role?: string
           surname?: string | null
           updated_at?: string
         }
@@ -1196,12 +1199,11 @@ export type Database = {
         }
         Returns: string
       }
-      is_admin: { Args: { _user_id: string }; Returns: boolean }
       is_city_manager: { Args: { _user_id?: string }; Returns: boolean }
       is_superadmin: { Args: { _user_id?: string }; Returns: boolean }
     }
     Enums: {
-      app_role: "admin" | "superadmin" | "city_manager" | "user"
+      app_role: "superadmin" | "city_manager" | "user"
       contact_status: "new" | "contacted" | "closed"
       participation_status: "pending" | "approved" | "rejected"
     }
@@ -1331,7 +1333,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "superadmin", "city_manager", "user"],
+      app_role: ["superadmin", "city_manager", "user"],
       contact_status: ["new", "contacted", "closed"],
       participation_status: ["pending", "approved", "rejected"],
     },
