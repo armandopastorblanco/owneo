@@ -72,10 +72,15 @@ const EvaluationQuestionnaire = ({
     return false;
   };
 
-  const handleFinish = async () => {
+  const handleFinish = async (event?: React.MouseEvent<HTMLButtonElement>) => {
+    event?.preventDefault();
+    console.log("SUBMIT CLICKED");
     setIsSubmitting(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
+      console.log("car_id:", carId);
+      console.log("auth.uid:", user?.id);
+
       if (!user) {
         toast({
           title: "Inicia sesión",
@@ -124,17 +129,18 @@ const EvaluationQuestionnaire = ({
       };
       console.log("[participation_requests] inserting payload:", payload);
 
-      const { data: inserted, error: insertError } = await supabase
+      const { data, error } = await supabase
         .from("participation_requests")
         .insert(payload)
         .select()
         .single();
 
-      if (insertError) {
-        console.error("[participation_requests] insert error:", insertError);
-        throw insertError;
+      console.log("[participation_requests] inserted:", data);
+      console.log("[participation_requests] error:", error);
+
+      if (error) {
+        throw error;
       }
-      console.log("[participation_requests] inserted row:", inserted);
 
       sessionStorage.removeItem(STORAGE_KEY(carId));
 
@@ -265,7 +271,7 @@ const EvaluationQuestionnaire = ({
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         ) : (
-          <Button onClick={handleFinish} disabled={!canAdvance() || isSubmitting} className="bg-foreground text-background hover:bg-foreground/90">
+          <Button type="button" onClick={(event) => void handleFinish(event)} disabled={!canAdvance() || isSubmitting} className="bg-foreground text-background hover:bg-foreground/90">
             {isSubmitting ? "Enviando..." : (
               <>
                 <CheckCircle2 className="w-4 h-4 mr-1" />
