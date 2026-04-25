@@ -113,7 +113,7 @@ const EvaluationQuestionnaire = ({
 
       const paymentAmount = participationPrice * numParticipations;
 
-      const { error: insertError } = await supabase.from("participation_requests").insert({
+      const payload = {
         user_id: user.id,
         car_id: carId,
         num_participations: numParticipations,
@@ -121,9 +121,20 @@ const EvaluationQuestionnaire = ({
         questionnaire_answers: answers,
         payment_amount: paymentAmount,
         payment_status: "pending",
-      });
+      };
+      console.log("[participation_requests] inserting payload:", payload);
 
-      if (insertError) throw insertError;
+      const { data: inserted, error: insertError } = await supabase
+        .from("participation_requests")
+        .insert(payload)
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error("[participation_requests] insert error:", insertError);
+        throw insertError;
+      }
+      console.log("[participation_requests] inserted row:", inserted);
 
       sessionStorage.removeItem(STORAGE_KEY(carId));
 
