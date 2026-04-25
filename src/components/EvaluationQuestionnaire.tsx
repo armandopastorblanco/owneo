@@ -84,6 +84,7 @@ const EvaluationQuestionnaire = ({
         order_index: q.order_index,
         options: Array.isArray(q.options) ? (q.options as QuestionOption[]) : [],
       }));
+      console.log("[questions loaded]", data?.length, data?.[0]);
       setQuestions(normalized);
       setLoadingQuestions(false);
     };
@@ -104,9 +105,11 @@ const EvaluationQuestionnaire = ({
   };
 
   // Only radio questions are required; textareas are optional
-  const canSubmit = questions
-    .filter((q) => q.question_type === "radio")
-    .every((q) => Boolean(answers[q.question_key]));
+  const radioQuestions = questions.filter((q) => q.question_type === "radio");
+  console.log("[canSubmit] radio questions:", radioQuestions.length);
+  console.log("[canSubmit] answers:", answers);
+  const canSubmit = radioQuestions.every((q) => Boolean(answers[q.question_key]));
+  console.log("[canSubmit] result:", canSubmit);
 
   const handleSubmit = async (event?: React.MouseEvent<HTMLButtonElement>) => {
     event?.preventDefault();
@@ -281,7 +284,10 @@ const EvaluationQuestionnaire = ({
       <div className="pt-2 border-t border-border">
         <Button
           type="button"
-          onClick={(event) => void handleSubmit(event)}
+          onClick={(event) => {
+            console.log("BUTTON CLICKED - canSubmit:", canSubmit, "isSubmitting:", isSubmitting);
+            void handleSubmit(event);
+          }}
           disabled={!canSubmit || isSubmitting}
           className="w-full bg-foreground text-background hover:bg-foreground/90"
         >
