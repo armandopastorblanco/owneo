@@ -134,7 +134,7 @@ const AdminSolicitudes = () => {
   const { data: cars = [] } = useQuery({
     queryKey: ["admin-cars-list"],
     queryFn: async () =>
-      (await supabase.from("cars").select("id,name,location_id,image_url,max_participations,remaining_participations").order("name")).data || [],
+      (await supabase.from("cars").select("id,name,brand,location_id,image_url,max_participations,remaining_participations").order("name")).data || [],
   });
 
   const { data: scoringRules = [] } = useScoringConfig();
