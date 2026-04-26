@@ -168,7 +168,7 @@ const ExtraCostTypesManager = () => {
             <p className="text-xs text-muted-foreground mt-1">Multas, servicios y cargos adicionales aplicables a participantes.</p>
           </div>
           <div className="flex gap-2">
-            <Button size="sm" variant="outline" onClick={() => setCatDlgOpen(true) || openCatDlg()}><Tags className="h-4 w-4 mr-1" />Gestionar categorías</Button>
+            <Button size="sm" variant="outline" onClick={() => openCatDlg()}><Tags className="h-4 w-4 mr-1" />Nueva categoría</Button>
             <Button size="sm" onClick={() => openDlg()}><Plus className="h-4 w-4 mr-1" />Añadir</Button>
           </div>
         </CardHeader>
