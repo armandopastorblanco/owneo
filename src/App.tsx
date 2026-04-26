@@ -27,7 +27,7 @@ import NoticiaBugattiTourbillon from "./pages/NoticiaBugattiTourbillon";
 import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
 import NoticiaDetalle from "./pages/NoticiaDetalle";
 import Login from "./pages/Login";
-import Registro from "./pages/Registro";
+import Participar from "./pages/Participar";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
@@ -97,7 +97,7 @@ const App = () => (
               <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/registro" element={<Registro />} />
+              <Route path="/participar" element={<Participar />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
               {/* Admin routes */}
