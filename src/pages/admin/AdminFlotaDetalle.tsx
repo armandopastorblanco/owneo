@@ -207,7 +207,7 @@ const AdminFlotaDetalle = () => {
             </p>
             <div className="flex flex-wrap gap-4 mt-2 text-xs text-muted-foreground">
               <span><Gauge className="inline h-3 w-3 mr-1" />{(car.total_km ?? 0).toLocaleString()} km</span>
-              <span><Users className="inline h-3 w-3 mr-1" />{participants.length}/{car.max_participations ?? 10} participantes</span>
+              <span><Users className="inline h-3 w-3 mr-1" />{participants.reduce((s: number, p: any) => s + (p.participation_count || 1), 0)}/{car.max_participations ?? 10} participaciones · {participants.length} {participants.length === 1 ? "copropietario" : "copropietarios"}</span>
               <span><CalendarDays className="inline h-3 w-3 mr-1" />Ocupación mes: {monthMetrics.occupancy}%</span>
               <span><Wrench className="inline h-3 w-3 mr-1" />Próx. mant.: {nextMaintenance ? format(new Date(nextMaintenance.service_date), "dd MMM yyyy", { locale: es }) : "Sin programar"}</span>
             </div>
