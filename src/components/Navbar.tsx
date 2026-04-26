@@ -83,7 +83,7 @@ const Navbar = () => {
                 alt="OWNEO"
                 width="1576"
                 height="244"
-                className="block w-[176px] sm:w-[188px] md:w-[260px] lg:w-[320px] xl:w-[360px] h-auto max-w-none shrink-0 mix-blend-screen filter brightness-110"
+                className="block w-[160px] sm:w-[170px] md:w-[190px] lg:w-[220px] xl:w-[240px] h-auto max-w-none shrink-0 mix-blend-screen filter brightness-110"
                 style={{ aspectRatio: "1576 / 244" }}
               />
             </Link>
