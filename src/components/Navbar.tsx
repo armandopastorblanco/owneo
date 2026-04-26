@@ -76,7 +76,7 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBgClass}`}
       >
         <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
-          <div className="flex items-center justify-between">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10">
             <Link to="/" className="flex items-center">
               <img
                 src={owneoLogo}
@@ -85,13 +85,13 @@ const Navbar = () => {
               />
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Desktop Navigation - centered */}
+            <div className="hidden md:flex items-center justify-center gap-10 lg:gap-14">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-xs font-light tracking-[0.15em] transition-colors duration-300 ${
+                  className={`text-xs font-light tracking-[0.15em] whitespace-nowrap transition-colors duration-300 ${
                     isActive(link.path)
                       ? "text-foreground"
                       : "text-foreground/50 hover:text-foreground/80"
@@ -100,53 +100,54 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+            </div>
 
-              <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border/40">
-                <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
-                    <Globe className="w-3 h-3 mr-2" />
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background border-border">
-                    <SelectItem value="es" className="text-foreground/80">ES</SelectItem>
-                    <SelectItem value="en" className="text-foreground/80">EN</SelectItem>
-                  </SelectContent>
-                </Select>
+            {/* Right actions */}
+            <div className="hidden md:flex items-center gap-3 justify-end">
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
+                  <Globe className="w-3 h-3 mr-2" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-background border-border">
+                  <SelectItem value="es" className="text-foreground/80">ES</SelectItem>
+                  <SelectItem value="en" className="text-foreground/80">EN</SelectItem>
+                </SelectContent>
+              </Select>
 
-                {user ? (
-                  <>
-                    <Link to="/dashboard">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
-                      >
-                        <User className="w-3.5 h-3.5" />
-                        <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
-                      </Button>
-                    </Link>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleSignOut}
-                      className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs"
-                    >
-                      <LogOut className="w-3.5 h-3.5" />
-                    </Button>
-                  </>
-                ) : (
-                  <Link to="/login">
+              {user ? (
+                <>
+                  <Link to="/dashboard">
                     <Button
                       variant="ghost"
                       size="sm"
                       className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
                     >
                       <User className="w-3.5 h-3.5" />
-                      <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
                     </Button>
                   </Link>
-                )}
-              </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleSignOut}
+                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                  </Button>
+                </>
+              ) : (
+                <Link to="/login">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
+                  >
+                    <User className="w-3.5 h-3.5" />
+                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                  </Button>
+                </Link>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
