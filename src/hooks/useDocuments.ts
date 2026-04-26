@@ -79,7 +79,8 @@ export async function uploadParticipantDocument(params: {
 }) {
   const { userId, documentTypeId, file, uploadedBy } = params;
   const ext = file.name.split(".").pop() || "bin";
-  const path = `${userId}/${documentTypeId}-${Date.now()}.${ext}`;
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const path = `kyc/${userId}/${documentTypeId}-${Date.now()}-${safeName}`;
   const { error: upErr } = await supabase.storage
     .from("documents")
     .upload(path, file, { upsert: false });
