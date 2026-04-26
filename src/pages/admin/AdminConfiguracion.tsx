@@ -20,6 +20,8 @@ import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
 const AdminConfiguracion = () => {
   const qc = useQueryClient();
   const { data: types = [], refetch } = useDocumentTypes(true);
+  const [docsOpen, setDocsOpen] = useState(false);
+  const [extrasOpen, setExtrasOpen] = useState(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
