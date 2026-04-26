@@ -81,10 +81,10 @@ const Navbar = () => {
               <img
                 src={owneoLogo}
                 alt="OWNEO"
-                width="569"
-                height="100"
-                className="h-8 md:h-9 lg:h-10 w-auto shrink-0 mix-blend-screen filter brightness-110"
-                style={{ aspectRatio: "569 / 100" }}
+                width="1576"
+                height="244"
+                className="block w-[176px] sm:w-[188px] md:w-[260px] lg:w-[320px] xl:w-[360px] h-auto max-w-none shrink-0 mix-blend-screen filter brightness-110"
+                style={{ aspectRatio: "1576 / 244" }}
               />
             </Link>
 
@@ -178,10 +178,10 @@ const Navbar = () => {
               <img
                 src={owneoLogo}
                 alt="OWNEO"
-                width="569"
-                height="100"
-                className="h-8 w-auto shrink-0 mix-blend-screen filter brightness-110"
-                style={{ aspectRatio: "569 / 100" }}
+                width="1576"
+                height="244"
+                className="block w-[176px] h-auto max-w-none shrink-0 mix-blend-screen filter brightness-110"
+                style={{ aspectRatio: "1576 / 244" }}
               />
             </Link>
             <button
