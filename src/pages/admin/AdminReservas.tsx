@@ -571,7 +571,7 @@ const AdminReservas = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {grouped.map((g: any) => {
+                  {sorted.map((g: any) => {
                     const pct = g.total > 0 ? (g.remaining / g.total) * 100 : 0;
                     return (
                       <TableRow key={g.key}>
@@ -580,6 +580,7 @@ const AdminReservas = () => {
                           <div className="text-xs text-muted-foreground">{g.profile?.email}</div>
                         </TableCell>
                         <TableCell className="text-foreground">{g.car?.name}</TableCell>
+                        <TableCell className="text-foreground">{g.city}</TableCell>
                         <TableCell className="hidden md:table-cell text-foreground">
                           {g.numbers.length}× (#{g.numbers.sort((a: number, b: number) => a - b).join(", #")})
                         </TableCell>
