@@ -286,7 +286,7 @@ const AdminDashboard = () => {
     ? [
         { icon: DollarSign, label: "Total de ingresos", value: fmtCurrency(kpi.revenue), current: kpi.revenue, previous: kpi.revenuePrev },
         { icon: Users, label: "Participaciones vendidas", value: fmt(kpi.sold), current: kpi.sold, previous: kpi.soldPrev },
-        { icon: Car, label: "Vehículos activos", value: fmt(kpi.activeCars), current: kpi.activeCars, previous: kpi.activeCars },
+        { icon: Car, label: "Vehículos en vitrina", value: fmt(kpi.activeCars), current: kpi.activeCars, previous: kpi.activeCars },
         { icon: FileText, label: "Solicitudes pendientes", value: fmt(kpi.pendingReq), current: kpi.pendingReq, previous: kpi.pendingReq },
         { icon: ShieldCheck, label: "KYC pendientes", value: fmt(kpi.pendingKyc), current: kpi.pendingKyc, previous: kpi.pendingKyc },
         { icon: CalendarDays, label: "Reservas este mes", value: fmt(kpi.reservThis), current: kpi.reservThis, previous: kpi.reservPrev },
