@@ -179,7 +179,7 @@ export const QuestionnaireConfigModal = ({ open, onOpenChange }: Props) => {
   const updateLocal = (id: string, patch: Partial<ScoringRule>) =>
     setLocalRules((p) => ({ ...p, [id]: { ...p[id], ...patch } }));
 
-  const startEdit = (q: QuestionnaireQuestion) => {
+  const startEdit = (q: QuestionConfig) => {
     const opts = Array.isArray(q.options) ? (q.options as any[]) : [];
     setEditing({
       id: q.id,
