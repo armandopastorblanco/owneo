@@ -168,13 +168,13 @@ const HeroSlider = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.3 }}
           >
-            <Link to="/portfolio">
+            <Link to="/nuestro-modelo">
               <Button 
                 variant="ghost"
                 size="lg"
                 className="border border-white/20 text-white/80 hover:text-white hover:bg-white/5 hover:border-white/40 text-xs md:text-sm font-light tracking-[0.2em] px-10 py-6 group transition-all duration-500"
               >
-                EXPLORAR
+                DESCUBRIR
                 <ArrowRight className="ml-3 w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
               </Button>
             </Link>
