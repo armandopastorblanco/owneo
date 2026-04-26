@@ -145,7 +145,7 @@ const NuestroModelo = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Cómo Funciona la <span className="text-champagne">Co-sharing</span>: Explicado en 3 Minutos
+              Cómo Funciona el <span className="text-champagne">Co-sharing</span>: Explicado en 3 Minutos
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               En esta página encontrarás todo sobre el proceso de co-sharing, desde la solicitud de visualización hasta tu primera conducción como co-sharer.
