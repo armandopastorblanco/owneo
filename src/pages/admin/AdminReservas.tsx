@@ -129,10 +129,10 @@ const AdminReservas = () => {
     return result;
   })();
 
-  // Create rule mutation
+  // Create / update rule mutation
   const createRuleMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase.from("credit_rules").insert({
+      const payload = {
         name: ruleName,
         description: ruleDesc || null,
         is_recurring: ruleType === "months",
@@ -143,16 +143,35 @@ const AdminReservas = () => {
         credits_per_day: parseFloat(ruleCreditsPerDay),
         applies_to_all: ruleAppliesToAll,
         is_active: ruleActive,
-      });
+      };
+      if (editingRuleId) {
+        const { error } = await supabase.from("credit_rules").update(payload).eq("id", editingRuleId);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from("credit_rules").insert(payload);
+        if (error) throw error;
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["credit-rules"] });
+      toast.success(editingRuleId ? "Regla actualizada" : "Regla creada");
+      setShowRuleForm(false);
+      resetRuleForm();
+    },
+    onError: () => toast.error("Error al guardar la regla"),
+  });
+
+  const deleteRuleMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("credit_rules").delete().eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["credit-rules"] });
-      toast.success("Regla creada");
-      setShowRuleForm(false);
-      setRuleName(""); setRuleDesc(""); setRuleMonths([]); setRuleMultiplier("1.0"); setRuleCreditsPerDay("1.0");
+      toast.success("Regla eliminada");
+      setDeletingRuleId(null);
     },
-    onError: () => toast.error("Error al crear regla"),
+    onError: () => toast.error("Error al eliminar la regla"),
   });
 
   // Adjust credits mutation
