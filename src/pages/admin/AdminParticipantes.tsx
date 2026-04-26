@@ -238,7 +238,7 @@ const AdminParticipantes = () => {
                 <Card key={car.id}>
                   <CardContent className="p-4 space-y-4">
                     <div className="flex items-center gap-4">
-                      <img src={resolveCarImage(car)} alt={car.name} className="h-16 w-24 object-cover rounded" />
+                      <img src={resolveCarImage(car?.image_url, car?.brand)} alt={car?.name} className="h-16 w-24 object-cover rounded" />
                       <div className="flex-1">
                         <h3 className="font-semibold">{car.brand} {car.model}</h3>
                         <p className="text-xs text-muted-foreground">
