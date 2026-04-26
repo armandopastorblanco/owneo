@@ -453,6 +453,42 @@ export type Database = {
         }
         Relationships: []
       }
+      document_types: {
+        Row: {
+          applies_to: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          is_required: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          applies_to?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_required?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          applies_to?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_required?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       featured_cars: {
         Row: {
           car_id: string
@@ -634,6 +670,62 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      participant_documents: {
+        Row: {
+          created_at: string
+          document_type_id: string
+          file_name: string | null
+          file_size: number | null
+          file_url: string
+          id: string
+          notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+          uploaded_by: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_type_id: string
+          file_name?: string | null
+          file_size?: number | null
+          file_url: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          uploaded_by?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          document_type_id?: string
+          file_name?: string | null
+          file_size?: number | null
+          file_url?: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          uploaded_by?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participant_documents_document_type_id_fkey"
+            columns: ["document_type_id"]
+            isOneToOne: false
+            referencedRelation: "document_types"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       participation_requests: {
         Row: {

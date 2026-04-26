@@ -38,9 +38,8 @@ import AdminVehiculos from "./pages/admin/AdminVehiculos";
 import AdminSolicitudes from "./pages/admin/AdminSolicitudes";
 import AdminParticipantes from "./pages/admin/AdminParticipantes";
 import AdminReservas from "./pages/admin/AdminReservas";
-import AdminKYC from "./pages/admin/AdminKYC";
-import AdminContratos from "./pages/admin/AdminContratos";
 import AdminPagos from "./pages/admin/AdminPagos";
+import MisDocumentos from "./pages/dashboard/MisDocumentos";
 import AdminInspecciones from "./pages/admin/AdminInspecciones";
 import AdminUbicaciones from "./pages/admin/AdminUbicaciones";
 import AdminConfiguracion from "./pages/admin/AdminConfiguracion";
@@ -83,6 +82,7 @@ const App = () => (
               <Route path="/cities" element={<Cities />} />
               <Route path="/car/:id" element={<CarDetail />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/dashboard/documentos" element={<ProtectedRoute><MisDocumentos /></ProtectedRoute>} />
               <Route path="/calendar-showcase" element={<CalendarShowcase />} />
               <Route path="/quienes-somos" element={<QuienesSomos />} />
               <Route path="/nuestro-modelo" element={<NuestroModelo />} />
@@ -107,8 +107,6 @@ const App = () => (
                 <Route path="solicitudes" element={<AdminSolicitudes />} />
                 <Route path="participantes" element={<AdminParticipantes />} />
                 <Route path="reservas" element={<AdminReservas />} />
-                <Route path="kyc" element={<AdminKYC />} />
-                <Route path="contratos" element={<AdminContratos />} />
                 <Route path="pagos" element={<AdminPagos />} />
                 <Route path="inspecciones" element={<AdminInspecciones />} />
                 <Route path="ubicaciones" element={<AdminUbicaciones />} />
