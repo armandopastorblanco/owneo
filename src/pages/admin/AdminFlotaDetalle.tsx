@@ -124,7 +124,37 @@ const AdminFlotaDetalle = () => {
       const ids = [...new Set(vps.map((v: any) => v.user_id))];
       const { data: profs } = await supabase.from("profiles").select("id,name,surname,email,phone").in("id", ids);
       const pm = new Map((profs || []).map((p: any) => [p.id, p]));
-      return vps.map((v: any) => ({ ...v, profile: pm.get(v.user_id) }));
+      // Agrupar por user_id: acumular créditos y participaciones del mismo usuario
+      const grouped = new Map<string, any>();
+      for (const v of vps) {
+        const existing = grouped.get(v.user_id);
+        if (!existing) {
+          grouped.set(v.user_id, {
+            ...v,
+            profile: pm.get(v.user_id),
+            participation_numbers: [v.participation_number],
+            participation_count: 1,
+            credits_per_year: Number(v.credits_per_year ?? 28),
+            credits_used_this_year: Number(v.credits_used_this_year ?? 0),
+            credits_remaining: Number(v.credits_remaining ?? 0),
+            ids: [v.id],
+          });
+        } else {
+          existing.participation_numbers.push(v.participation_number);
+          existing.participation_count += 1;
+          existing.credits_per_year += Number(v.credits_per_year ?? 28);
+          existing.credits_used_this_year += Number(v.credits_used_this_year ?? 0);
+          existing.credits_remaining += Number(v.credits_remaining ?? 0);
+          existing.ids.push(v.id);
+          // Conservar la fecha de reset más temprana
+          if (v.credits_reset_date && (!existing.credits_reset_date || v.credits_reset_date < existing.credits_reset_date)) {
+            existing.credits_reset_date = v.credits_reset_date;
+          }
+        }
+      }
+      return Array.from(grouped.values()).sort(
+        (a, b) => Math.min(...a.participation_numbers) - Math.min(...b.participation_numbers)
+      );
     },
   });
 
