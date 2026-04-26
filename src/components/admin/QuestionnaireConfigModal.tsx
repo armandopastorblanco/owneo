@@ -13,7 +13,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowDown, ArrowUp, Pencil, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { useQuestionnaireConfig, useScoringConfig, type ScoringRule, type QuestionnaireQuestion } from "@/hooks/useSolicitudesData";
+import { useQuestionnaireConfig, useScoringConfig, type ScoringRule, type QuestionConfig } from "@/hooks/useSolicitudesData";
 
 const SECTION_LABELS: Record<number, string> = {
   1: "Historial",
