@@ -16,11 +16,13 @@ import { Plus, Pencil, Trash2, ArrowUp, ArrowDown, ChevronDown, ChevronRight } f
 import { toast } from "sonner";
 import { useDocumentTypes } from "@/hooks/useDocuments";
 import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
+import VehicleDocumentTypesManager from "@/components/admin/VehicleDocumentTypesManager";
 
 const AdminConfiguracion = () => {
   const qc = useQueryClient();
   const { data: types = [], refetch } = useDocumentTypes(true);
   const [docsOpen, setDocsOpen] = useState(false);
+  const [vehicleDocsOpen, setVehicleDocsOpen] = useState(false);
   const [extrasOpen, setExtrasOpen] = useState(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
