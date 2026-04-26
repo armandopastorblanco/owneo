@@ -5,7 +5,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCars, useCar, type Car } from "@/hooks/useCars";
 import { useLocations } from "@/hooks/useLocations";
-import { resolveCarImage } from "@/lib/resolveCarImage";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EvaluationQuestionnaire from "@/components/EvaluationQuestionnaire";
@@ -31,8 +30,6 @@ import {
   Lock,
   Mail,
   MapPin,
-  User,
-  Users,
 } from "lucide-react";
 
 const DRAFT_KEY = "owneo_participation_draft";
