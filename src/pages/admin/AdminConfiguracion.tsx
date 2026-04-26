@@ -11,7 +11,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Pencil, Trash2, ArrowUp, ArrowDown } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Plus, Pencil, Trash2, ArrowUp, ArrowDown, ChevronDown, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { useDocumentTypes } from "@/hooks/useDocuments";
 import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
@@ -19,6 +20,8 @@ import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
 const AdminConfiguracion = () => {
   const qc = useQueryClient();
   const { data: types = [], refetch } = useDocumentTypes(true);
+  const [docsOpen, setDocsOpen] = useState(false);
+  const [extrasOpen, setExtrasOpen] = useState(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
@@ -89,47 +92,69 @@ const AdminConfiguracion = () => {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Tipos de documentos</CardTitle>
-          <Button size="sm" onClick={() => open()}><Plus className="h-4 w-4 mr-1" />Añadir tipo</Button>
-        </CardHeader>
-        <CardContent>
-          <table className="w-full text-sm">
-            <thead className="text-xs text-muted-foreground uppercase border-b border-border/40">
-              <tr>
-                <th className="text-left py-2 font-normal">Orden</th>
-                <th className="text-left py-2 font-normal">Nombre</th>
-                <th className="text-left py-2 font-normal">Descripción</th>
-                <th className="text-left py-2 font-normal">Obligatorio</th>
-                <th className="text-left py-2 font-normal">Activo</th>
-                <th className="text-right py-2 font-normal">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {types.map((t, i) => (
-                <tr key={t.id} className="border-b border-border/20">
-                  <td className="py-2">
-                    <div className="flex gap-1">
-                      <Button size="icon" variant="ghost" className="h-6 w-6" disabled={i === 0} onClick={() => move(t, -1)}><ArrowUp className="h-3 w-3" /></Button>
-                      <Button size="icon" variant="ghost" className="h-6 w-6" disabled={i === types.length - 1} onClick={() => move(t, 1)}><ArrowDown className="h-3 w-3" /></Button>
-                    </div>
-                  </td>
-                  <td className="py-2 font-medium">{t.name}</td>
-                  <td className="py-2 text-muted-foreground text-xs max-w-xs truncate">{t.description}</td>
-                  <td className="py-2"><Switch checked={t.is_required} onCheckedChange={() => toggle(t, "is_required")} /></td>
-                  <td className="py-2"><Switch checked={t.is_active} onCheckedChange={() => toggle(t, "is_active")} /></td>
-                  <td className="py-2 text-right">
-                    <Button size="icon" variant="ghost" onClick={() => open(t)}><Pencil className="h-4 w-4" /></Button>
-                    <Button size="icon" variant="ghost" onClick={() => setDeletingId(t.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </CardContent>
+        <Collapsible open={docsOpen} onOpenChange={setDocsOpen}>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CollapsibleTrigger asChild>
+              <button className="flex items-center gap-2 text-left flex-1 hover:opacity-80">
+                {docsOpen ? <ChevronDown className="h-4 w-4 text-muted-foreground" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}
+                <CardTitle>Tipos de documentos</CardTitle>
+                <span className="text-xs text-muted-foreground ml-2">({types.length})</span>
+              </button>
+            </CollapsibleTrigger>
+            {docsOpen && (
+              <Button size="sm" onClick={() => open()}><Plus className="h-4 w-4 mr-1" />Añadir tipo</Button>
+            )}
+          </CardHeader>
+          <CollapsibleContent>
+            <CardContent>
+              <table className="w-full text-sm">
+                <thead className="text-xs text-muted-foreground uppercase border-b border-border/40">
+                  <tr>
+                    <th className="text-left py-2 font-normal">Orden</th>
+                    <th className="text-left py-2 font-normal">Nombre</th>
+                    <th className="text-left py-2 font-normal">Descripción</th>
+                    <th className="text-left py-2 font-normal">Obligatorio</th>
+                    <th className="text-left py-2 font-normal">Activo</th>
+                    <th className="text-right py-2 font-normal">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {types.map((t, i) => (
+                    <tr key={t.id} className="border-b border-border/20">
+                      <td className="py-2">
+                        <div className="flex gap-1">
+                          <Button size="icon" variant="ghost" className="h-6 w-6" disabled={i === 0} onClick={() => move(t, -1)}><ArrowUp className="h-3 w-3" /></Button>
+                          <Button size="icon" variant="ghost" className="h-6 w-6" disabled={i === types.length - 1} onClick={() => move(t, 1)}><ArrowDown className="h-3 w-3" /></Button>
+                        </div>
+                      </td>
+                      <td className="py-2 font-medium">{t.name}</td>
+                      <td className="py-2 text-muted-foreground text-xs max-w-xs truncate">{t.description}</td>
+                      <td className="py-2"><Switch checked={t.is_required} onCheckedChange={() => toggle(t, "is_required")} /></td>
+                      <td className="py-2"><Switch checked={t.is_active} onCheckedChange={() => toggle(t, "is_active")} /></td>
+                      <td className="py-2 text-right">
+                        <Button size="icon" variant="ghost" onClick={() => open(t)}><Pencil className="h-4 w-4" /></Button>
+                        <Button size="icon" variant="ghost" onClick={() => setDeletingId(t.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </CardContent>
+          </CollapsibleContent>
+        </Collapsible>
       </Card>
 
-      <ExtraCostTypesManager />
+      <Collapsible open={extrasOpen} onOpenChange={setExtrasOpen} className="rounded-lg border border-border bg-card">
+        <CollapsibleTrigger asChild>
+          <button className="flex items-center gap-2 text-left w-full hover:opacity-80 p-6">
+            {extrasOpen ? <ChevronDown className="h-4 w-4 text-muted-foreground" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}
+            <span className="text-lg font-semibold leading-none tracking-tight">Costes extra</span>
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <ExtraCostTypesManager />
+        </CollapsibleContent>
+      </Collapsible>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
