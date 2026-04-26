@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
-import owneoLogo from "@/assets/owneo-logo.jpg";
+import owneoLogo from "@/assets/owneo-logo.png";
 
 const Navbar = () => {
   const location = useLocation();

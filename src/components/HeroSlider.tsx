@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCars } from "@/hooks/useCars";
-import owneoLogo from "@/assets/owneo-logo.jpg";
+import owneoLogo from "@/assets/owneo-logo.png";
 
 const HeroSlider = () => {
   const { data: cars = [] } = useCars();
