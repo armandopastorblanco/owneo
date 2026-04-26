@@ -359,11 +359,34 @@ const AdminReservas = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowRuleForm(false)}>Cancelar</Button>
-            <Button onClick={() => createRuleMutation.mutate()} disabled={!ruleName}>Crear regla</Button>
+            <Button variant="outline" onClick={() => { setShowRuleForm(false); resetRuleForm(); }}>Cancelar</Button>
+            <Button onClick={() => createRuleMutation.mutate()} disabled={!ruleName || createRuleMutation.isPending}>
+              {editingRuleId ? "Guardar cambios" : "Crear regla"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Delete Rule Confirmation */}
+      <AlertDialog open={!!deletingRuleId} onOpenChange={(open) => !open && setDeletingRuleId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar esta regla de créditos?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer. Se eliminará permanentemente la regla y dejará de aplicarse al cálculo de créditos.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deletingRuleId && deleteRuleMutation.mutate(deletingRuleId)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Eliminar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* SECTION 2: Calendar */}
       <Card>
