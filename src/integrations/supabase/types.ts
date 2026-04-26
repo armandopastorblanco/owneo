@@ -127,7 +127,7 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean | null
-          location_id: string | null
+          location_id: string
           luxury_description: string | null
           max_participations: number | null
           model: string
@@ -156,7 +156,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
-          location_id?: string | null
+          location_id: string
           luxury_description?: string | null
           max_participations?: number | null
           model: string
@@ -185,7 +185,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
-          location_id?: string | null
+          location_id?: string
           luxury_description?: string | null
           max_participations?: number | null
           model?: string
