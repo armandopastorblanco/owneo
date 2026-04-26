@@ -77,11 +77,14 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center shrink-0">
               <img
                 src={owneoLogo}
                 alt="OWNEO"
-                className="h-6 sm:h-7 md:h-8 lg:h-9 w-auto mix-blend-screen filter brightness-110"
+                width="569"
+                height="100"
+                className="h-8 md:h-9 lg:h-10 w-auto shrink-0 mix-blend-screen filter brightness-110"
+                style={{ aspectRatio: "569 / 100" }}
               />
             </Link>
 
@@ -171,11 +174,14 @@ const Navbar = () => {
         <div className="fixed inset-0 z-[60] bg-background flex flex-col md:hidden animate-in fade-in duration-200">
           {/* Header with logo and close */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-border/40">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center shrink-0">
               <img
                 src={owneoLogo}
                 alt="OWNEO"
-                className="h-7 w-auto mix-blend-screen filter brightness-110"
+                width="569"
+                height="100"
+                className="h-8 w-auto shrink-0 mix-blend-screen filter brightness-110"
+                style={{ aspectRatio: "569 / 100" }}
               />
             </Link>
             <button
