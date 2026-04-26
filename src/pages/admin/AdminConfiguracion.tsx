@@ -100,7 +100,7 @@ const AdminConfiguracion = () => {
               <button className="flex items-center gap-2 text-left flex-1 hover:opacity-80">
                 {docsOpen ? <ChevronDown className="h-4 w-4 text-muted-foreground" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}
                 <span className="text-lg font-semibold leading-none tracking-tight">Documentación de usuario</span>
-                <span className="text-xs text-muted-foreground ml-2">({types.length})</span>
+                
               </button>
             </CollapsibleTrigger>
             {docsOpen && (
