@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { resolveCarImage } from "@/lib/resolveCarImage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -577,9 +578,11 @@ const AdminSolicitudes = () => {
               {Object.values(group.cars).map(({ car, reqs }) => (
                 <Card key={car?.id || "unknown"}>
                   <CardHeader className="flex-row items-center gap-3 space-y-0 pb-3">
-                    {car?.image_url && (
-                      <img src={car.image_url} alt="" className="w-16 h-12 object-cover rounded" />
-                    )}
+                    <img
+                      src={resolveCarImage(car?.image_url, car?.brand)}
+                      alt={car?.name || ""}
+                      className="w-16 h-12 object-cover rounded"
+                    />
                     <div className="flex-1 min-w-0">
                       <CardTitle className="text-base text-foreground">{car?.name || "—"}</CardTitle>
                       <div className="flex items-center gap-2 mt-1">
