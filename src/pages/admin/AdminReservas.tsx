@@ -287,10 +287,10 @@ const AdminReservas = () => {
         </CardContent>
       </Card>
 
-      {/* New Rule Dialog */}
-      <Dialog open={showRuleForm} onOpenChange={setShowRuleForm}>
+      {/* New / Edit Rule Dialog */}
+      <Dialog open={showRuleForm} onOpenChange={(open) => { setShowRuleForm(open); if (!open) resetRuleForm(); }}>
         <DialogContent className="max-w-lg">
-          <DialogHeader><DialogTitle>Nueva Regla de Créditos</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>{editingRuleId ? "Editar Regla de Créditos" : "Nueva Regla de Créditos"}</DialogTitle></DialogHeader>
           <div className="space-y-4">
             <div>
               <label className="text-sm text-muted-foreground">Nombre</label>
