@@ -174,11 +174,14 @@ const Navbar = () => {
         <div className="fixed inset-0 z-[60] bg-background flex flex-col md:hidden animate-in fade-in duration-200">
           {/* Header with logo and close */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-border/40">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center shrink-0">
               <img
                 src={owneoLogo}
                 alt="OWNEO"
-                className="h-7 w-auto mix-blend-screen filter brightness-110"
+                width="569"
+                height="100"
+                className="h-8 w-auto shrink-0 mix-blend-screen filter brightness-110"
+                style={{ aspectRatio: "569 / 100" }}
               />
             </Link>
             <button
