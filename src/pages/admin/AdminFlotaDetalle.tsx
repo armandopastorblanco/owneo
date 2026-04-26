@@ -124,7 +124,37 @@ const AdminFlotaDetalle = () => {
       const ids = [...new Set(vps.map((v: any) => v.user_id))];
       const { data: profs } = await supabase.from("profiles").select("id,name,surname,email,phone").in("id", ids);
       const pm = new Map((profs || []).map((p: any) => [p.id, p]));
-      return vps.map((v: any) => ({ ...v, profile: pm.get(v.user_id) }));
+      // Agrupar por user_id: acumular créditos y participaciones del mismo usuario
+      const grouped = new Map<string, any>();
+      for (const v of vps) {
+        const existing = grouped.get(v.user_id);
+        if (!existing) {
+          grouped.set(v.user_id, {
+            ...v,
+            profile: pm.get(v.user_id),
+            participation_numbers: [v.participation_number],
+            participation_count: 1,
+            credits_per_year: Number(v.credits_per_year ?? 28),
+            credits_used_this_year: Number(v.credits_used_this_year ?? 0),
+            credits_remaining: Number(v.credits_remaining ?? 0),
+            ids: [v.id],
+          });
+        } else {
+          existing.participation_numbers.push(v.participation_number);
+          existing.participation_count += 1;
+          existing.credits_per_year += Number(v.credits_per_year ?? 28);
+          existing.credits_used_this_year += Number(v.credits_used_this_year ?? 0);
+          existing.credits_remaining += Number(v.credits_remaining ?? 0);
+          existing.ids.push(v.id);
+          // Conservar la fecha de reset más temprana
+          if (v.credits_reset_date && (!existing.credits_reset_date || v.credits_reset_date < existing.credits_reset_date)) {
+            existing.credits_reset_date = v.credits_reset_date;
+          }
+        }
+      }
+      return Array.from(grouped.values()).sort(
+        (a, b) => Math.min(...a.participation_numbers) - Math.min(...b.participation_numbers)
+      );
     },
   });
 
@@ -177,7 +207,7 @@ const AdminFlotaDetalle = () => {
             </p>
             <div className="flex flex-wrap gap-4 mt-2 text-xs text-muted-foreground">
               <span><Gauge className="inline h-3 w-3 mr-1" />{(car.total_km ?? 0).toLocaleString()} km</span>
-              <span><Users className="inline h-3 w-3 mr-1" />{participants.length}/{car.max_participations ?? 10} participantes</span>
+              <span><Users className="inline h-3 w-3 mr-1" />{participants.reduce((s: number, p: any) => s + (p.participation_count || 1), 0)}/{car.max_participations ?? 10} participaciones · {participants.length} {participants.length === 1 ? "copropietario" : "copropietarios"}</span>
               <span><CalendarDays className="inline h-3 w-3 mr-1" />Ocupación mes: {monthMetrics.occupancy}%</span>
               <span><Wrench className="inline h-3 w-3 mr-1" />Próx. mant.: {nextMaintenance ? format(new Date(nextMaintenance.service_date), "dd MMM yyyy", { locale: es }) : "Sin programar"}</span>
             </div>
@@ -254,7 +284,16 @@ const ParticipantsTab = ({ carId, participants, reservations, nav }: any) => {
                   <div>{p.profile?.email || "—"}</div>
                   <div className="text-muted-foreground">{p.profile?.phone || "—"}</div>
                 </TableCell>
-                <TableCell><Badge variant="outline">#{p.participation_number}</Badge></TableCell>
+                <TableCell>
+                  <div className="flex flex-wrap gap-1">
+                    {(p.participation_numbers || [p.participation_number]).map((n: number) => (
+                      <Badge key={n} variant="outline">#{n}</Badge>
+                    ))}
+                    {p.participation_count > 1 && (
+                      <Badge className="bg-primary/15 text-primary border-0 text-[10px]">×{p.participation_count}</Badge>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell className="min-w-[160px]">
                   <div className="text-xs mb-1">{used} / {total} <span className="text-muted-foreground">({(p.credits_remaining ?? total - used)} restantes de {total})</span></div>
                   <Progress value={pct} className="h-1.5" />
