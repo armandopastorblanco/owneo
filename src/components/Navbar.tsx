@@ -81,7 +81,7 @@ const Navbar = () => {
               <img
                 src={owneoLogo}
                 alt="OWNEO"
-                className="h-12 sm:h-14 md:h-16 lg:h-[72px] w-auto mix-blend-screen filter brightness-110"
+                className="h-6 sm:h-7 md:h-8 lg:h-9 w-auto mix-blend-screen filter brightness-110"
               />
             </Link>
 
