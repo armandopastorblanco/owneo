@@ -84,7 +84,7 @@ const TwitterLanding = () => {
             <img
               src={owneoLogo}
               alt="OWNEO"
-              className="h-14 md:h-20 lg:h-24 w-auto mx-auto"
+              className="h-8 md:h-12 lg:h-14 w-auto mx-auto"
               style={{
                 filter: "brightness(2) contrast(0.9)",
                 mixBlendMode: "screen",
