@@ -55,11 +55,15 @@ export type Database = {
       bank_reconciliation: {
         Row: {
           created_at: string
+          description: string | null
+          due_date: string | null
           expected_amount: number | null
+          extra_cost_type_id: string | null
           iban_user: string | null
           id: string
           matched_at: string | null
-          participation_request_id: string
+          participation_request_id: string | null
+          payment_type: string
           reference_code: string | null
           status: string | null
           user_id: string
@@ -67,11 +71,15 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          description?: string | null
+          due_date?: string | null
           expected_amount?: number | null
+          extra_cost_type_id?: string | null
           iban_user?: string | null
           id?: string
           matched_at?: string | null
-          participation_request_id: string
+          participation_request_id?: string | null
+          payment_type?: string
           reference_code?: string | null
           status?: string | null
           user_id: string
@@ -79,17 +87,28 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          description?: string | null
+          due_date?: string | null
           expected_amount?: number | null
+          extra_cost_type_id?: string | null
           iban_user?: string | null
           id?: string
           matched_at?: string | null
-          participation_request_id?: string
+          participation_request_id?: string | null
+          payment_type?: string
           reference_code?: string | null
           status?: string | null
           user_id?: string
           validated_by?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "bank_reconciliation_extra_cost_type_id_fkey"
+            columns: ["extra_cost_type_id"]
+            isOneToOne: false
+            referencedRelation: "extra_cost_types"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "bank_reconciliation_participation_request_id_fkey"
             columns: ["participation_request_id"]
@@ -483,6 +502,42 @@ export type Database = {
           id?: string
           is_active?: boolean
           is_required?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      extra_cost_types: {
+        Row: {
+          category: string
+          created_at: string
+          default_amount: number | null
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          default_amount?: number | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          default_amount?: number | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
           name?: string
           sort_order?: number
           updated_at?: string

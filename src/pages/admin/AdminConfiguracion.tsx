@@ -10,9 +10,11 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Pencil, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 import { toast } from "sonner";
 import { useDocumentTypes } from "@/hooks/useDocuments";
+import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
 
 const AdminConfiguracion = () => {
   const qc = useQueryClient();
@@ -126,6 +128,8 @@ const AdminConfiguracion = () => {
           </table>
         </CardContent>
       </Card>
+
+      <ExtraCostTypesManager />
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
