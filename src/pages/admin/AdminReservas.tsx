@@ -111,6 +111,12 @@ const AdminReservas = () => {
 
   const [partsCityFilter, setPartsCityFilter] = useState("all");
   const [partsCarFilter, setPartsCarFilter] = useState("all");
+  const [partsSortKey, setPartsSortKey] = useState<"participant" | "city" | "car" | "count" | "total" | "used" | "remaining" | "reset">("participant");
+  const [partsSortDir, setPartsSortDir] = useState<"asc" | "desc">("asc");
+  const togglePartsSort = (k: typeof partsSortKey) => {
+    if (partsSortKey === k) setPartsSortDir(partsSortDir === "asc" ? "desc" : "asc");
+    else { setPartsSortKey(k); setPartsSortDir("asc"); }
+  };
 
   const { data: participations = [], isLoading: loadingParts } = useQuery({
     queryKey: ["admin-validated-parts"],
