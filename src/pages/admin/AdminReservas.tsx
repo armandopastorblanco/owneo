@@ -96,17 +96,28 @@ const AdminReservas = () => {
   const { data: cars = [] } = useQuery({
     queryKey: ["admin-cars-list"],
     queryFn: async () => {
-      const { data } = await supabase.from("cars").select("id,name,brand");
+      const { data } = await supabase.from("cars").select("id,name,brand,location_id");
       return data || [];
     },
   });
+
+  const { data: locations = [] } = useQuery({
+    queryKey: ["admin-locations-list"],
+    queryFn: async () => {
+      const { data } = await supabase.from("locations").select("id,name").order("name");
+      return data || [];
+    },
+  });
+
+  const [partsCityFilter, setPartsCityFilter] = useState("all");
+  const [partsCarFilter, setPartsCarFilter] = useState("all");
 
   const { data: participations = [], isLoading: loadingParts } = useQuery({
     queryKey: ["admin-validated-parts"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("validated_participations")
-        .select("*, profiles:user_id(name,surname,email), cars:car_id(name)")
+        .select("*, profiles:user_id(name,surname,email), cars:car_id(name,location_id)")
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data || [];
@@ -177,16 +188,22 @@ const AdminReservas = () => {
   // Adjust credits mutation
   const adjustMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from("validated_participations")
-        .update({ credits_remaining: parseFloat(adjustCredits) })
-        .eq("id", adjustModal.id);
-      if (error) throw error;
+      const newTotal = parseFloat(adjustCredits);
+      const ids: string[] = adjustModal._groupIds || [adjustModal.id];
+      // Distribute: full amount on first row, 0 on the rest
+      for (let i = 0; i < ids.length; i++) {
+        const value = i === 0 ? newTotal : 0;
+        const { error } = await supabase
+          .from("validated_participations")
+          .update({ credits_remaining: value })
+          .eq("id", ids[i]);
+        if (error) throw error;
+      }
       await supabase.rpc("insert_audit_log", {
         _action: "creditos_ajustados",
         _target_table: "validated_participations",
-        _target_id: adjustModal.id,
-        _details: { new_credits: parseFloat(adjustCredits), reason: adjustReason },
+        _target_id: ids.join(","),
+        _details: { new_credits: newTotal, reason: adjustReason, group_size: ids.length },
       });
     },
     onSuccess: () => {
@@ -454,59 +471,104 @@ const AdminReservas = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-foreground"><Users className="h-5 w-5" /> Participaciones y Créditos</CardTitle>
         </CardHeader>
-        <CardContent>
-          {loadingParts ? <Skeleton className="h-20 w-full" /> : participations.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-4">Sin participaciones validadas</p>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Participante</TableHead>
-                  <TableHead>Vehículo</TableHead>
-                  <TableHead className="hidden md:table-cell">#</TableHead>
-                  <TableHead>Créditos/año</TableHead>
-                  <TableHead>Usados</TableHead>
-                  <TableHead>Restantes</TableHead>
-                  <TableHead className="hidden lg:table-cell">Reset</TableHead>
-                  <TableHead></TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {participations.map((p: any) => {
-                  const total = p.credits_per_year || 28;
-                  const used = p.credits_used_this_year || 0;
-                  const remaining = p.credits_remaining ?? (total - used);
-                  const pct = (remaining / total) * 100;
-                  return (
-                    <TableRow key={p.id}>
-                      <TableCell>
-                        <div className="font-medium text-foreground">{(p.profiles as any)?.name} {(p.profiles as any)?.surname}</div>
-                        <div className="text-xs text-muted-foreground">{(p.profiles as any)?.email}</div>
-                      </TableCell>
-                      <TableCell className="text-foreground">{(p.cars as any)?.name}</TableCell>
-                      <TableCell className="hidden md:table-cell text-foreground">#{p.participation_number}</TableCell>
-                      <TableCell className="text-foreground">{total}</TableCell>
-                      <TableCell className="text-foreground">{used}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Progress value={pct} className={`w-16 h-2 ${pct > 50 ? "[&>div]:bg-green-500" : pct > 20 ? "[&>div]:bg-orange-500" : "[&>div]:bg-red-500"}`} />
-                          <span className="text-sm text-foreground">{remaining}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
-                        {p.credits_reset_date ? format(new Date(p.credits_reset_date), "dd/MM/yy") : "—"}
-                      </TableCell>
-                      <TableCell>
-                        <Button variant="ghost" size="sm" onClick={() => { setAdjustModal(p); setAdjustCredits(String(remaining)); setAdjustReason(""); }}>
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          )}
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <Select value={partsCityFilter} onValueChange={(v) => { setPartsCityFilter(v); setPartsCarFilter("all"); }}>
+              <SelectTrigger><SelectValue placeholder="Ciudad" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todas las ciudades</SelectItem>
+                {locations.map((l: any) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <Select value={partsCarFilter} onValueChange={setPartsCarFilter}>
+              <SelectTrigger><SelectValue placeholder="Vehículo" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos los vehículos</SelectItem>
+                {cars
+                  .filter((c: any) => partsCityFilter === "all" || c.location_id === partsCityFilter)
+                  .map((c: any) => <SelectItem key={c.id} value={c.id}>{c.brand} {c.name}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          {loadingParts ? <Skeleton className="h-20 w-full" /> : (() => {
+            const filtered = participations.filter((p: any) => {
+              if (partsCityFilter !== "all" && (p.cars as any)?.location_id !== partsCityFilter) return false;
+              if (partsCarFilter !== "all" && p.car_id !== partsCarFilter) return false;
+              return true;
+            });
+            const grouped = Array.from(filtered.reduce((acc: Map<string, any>, p: any) => {
+              const key = `${p.user_id}|${p.car_id}`;
+              if (!acc.has(key)) {
+                acc.set(key, {
+                  key, ids: [] as string[], rows: [] as any[],
+                  profile: p.profiles, car: p.cars, car_id: p.car_id, user_id: p.user_id,
+                  numbers: [] as number[],
+                  total: 0, used: 0, remaining: 0,
+                  reset_date: p.credits_reset_date,
+                });
+              }
+              const a = acc.get(key);
+              a.ids.push(p.id);
+              a.rows.push(p);
+              a.numbers.push(p.participation_number);
+              a.total += Number(p.credits_per_year || 28);
+              a.used += Number(p.credits_used_this_year || 0);
+              a.remaining += Number(p.credits_remaining ?? ((p.credits_per_year || 28) - (p.credits_used_this_year || 0)));
+              return acc;
+            }, new Map()).values());
+
+            return grouped.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-4">Sin participaciones validadas</p>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Participante</TableHead>
+                    <TableHead>Vehículo</TableHead>
+                    <TableHead className="hidden md:table-cell">Participaciones</TableHead>
+                    <TableHead>Créditos/año</TableHead>
+                    <TableHead>Usados</TableHead>
+                    <TableHead>Restantes</TableHead>
+                    <TableHead className="hidden lg:table-cell">Reset</TableHead>
+                    <TableHead></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {grouped.map((g: any) => {
+                    const pct = g.total > 0 ? (g.remaining / g.total) * 100 : 0;
+                    return (
+                      <TableRow key={g.key}>
+                        <TableCell>
+                          <div className="font-medium text-foreground">{g.profile?.name} {g.profile?.surname}</div>
+                          <div className="text-xs text-muted-foreground">{g.profile?.email}</div>
+                        </TableCell>
+                        <TableCell className="text-foreground">{g.car?.name}</TableCell>
+                        <TableCell className="hidden md:table-cell text-foreground">
+                          {g.numbers.length}× (#{g.numbers.sort((a: number, b: number) => a - b).join(", #")})
+                        </TableCell>
+                        <TableCell className="text-foreground">{g.total}</TableCell>
+                        <TableCell className="text-foreground">{g.used}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Progress value={pct} className={`w-16 h-2 ${pct > 50 ? "[&>div]:bg-green-500" : pct > 20 ? "[&>div]:bg-orange-500" : "[&>div]:bg-red-500"}`} />
+                            <span className="text-sm text-foreground">{g.remaining}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
+                          {g.reset_date ? format(new Date(g.reset_date), "dd/MM/yy") : "—"}
+                        </TableCell>
+                        <TableCell>
+                          <Button variant="ghost" size="sm" onClick={() => { setAdjustModal({ ...g.rows[0], _groupIds: g.ids, _groupRemaining: g.remaining }); setAdjustCredits(String(g.remaining)); setAdjustReason(""); }}>
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            );
+          })()}
         </CardContent>
       </Card>
 
