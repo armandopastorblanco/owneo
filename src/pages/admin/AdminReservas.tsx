@@ -505,9 +505,12 @@ const AdminReservas = () => {
             const grouped = Array.from(filtered.reduce((acc: Map<string, any>, p: any) => {
               const key = `${p.user_id}|${p.car_id}`;
               if (!acc.has(key)) {
+                const locId = (p.cars as any)?.location_id;
+                const cityName = locations.find((l: any) => l.id === locId)?.name || "—";
                 acc.set(key, {
                   key, ids: [] as string[], rows: [] as any[],
                   profile: p.profiles, car: p.cars, car_id: p.car_id, user_id: p.user_id,
+                  city: cityName,
                   numbers: [] as number[],
                   total: 0, used: 0, remaining: 0,
                   reset_date: p.credits_reset_date,
@@ -523,19 +526,47 @@ const AdminReservas = () => {
               return acc;
             }, new Map()).values());
 
-            return grouped.length === 0 ? (
+            const sorted = [...grouped].sort((a: any, b: any) => {
+              const dir = partsSortDir === "asc" ? 1 : -1;
+              const get = (g: any) => {
+                switch (partsSortKey) {
+                  case "participant": return `${g.profile?.name || ""} ${g.profile?.surname || ""}`.toLowerCase();
+                  case "city": return (g.city || "").toLowerCase();
+                  case "car": return (g.car?.name || "").toLowerCase();
+                  case "count": return g.numbers.length;
+                  case "total": return g.total;
+                  case "used": return g.used;
+                  case "remaining": return g.remaining;
+                  case "reset": return g.reset_date || "";
+                }
+              };
+              const va = get(a), vb = get(b);
+              if (va < vb) return -1 * dir;
+              if (va > vb) return 1 * dir;
+              return 0;
+            });
+
+            const SortBtn = ({ k, label }: { k: typeof partsSortKey; label: string }) => (
+              <button onClick={() => togglePartsSort(k)} className="flex items-center gap-1 hover:text-foreground transition-colors">
+                {label}
+                <ArrowUpDown className={`h-3 w-3 ${partsSortKey === k ? "text-foreground" : "opacity-40"}`} />
+              </button>
+            );
+
+            return sorted.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">Sin participaciones validadas</p>
             ) : (
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Participante</TableHead>
-                    <TableHead>Vehículo</TableHead>
-                    <TableHead className="hidden md:table-cell">Participaciones</TableHead>
-                    <TableHead>Créditos/año</TableHead>
-                    <TableHead>Usados</TableHead>
-                    <TableHead>Restantes</TableHead>
-                    <TableHead className="hidden lg:table-cell">Reset</TableHead>
+                    <TableHead><SortBtn k="participant" label="Participante" /></TableHead>
+                    <TableHead><SortBtn k="car" label="Vehículo" /></TableHead>
+                    <TableHead><SortBtn k="city" label="Ciudad" /></TableHead>
+                    <TableHead className="hidden md:table-cell"><SortBtn k="count" label="Participaciones" /></TableHead>
+                    <TableHead><SortBtn k="total" label="Créditos/año" /></TableHead>
+                    <TableHead><SortBtn k="used" label="Usados" /></TableHead>
+                    <TableHead><SortBtn k="remaining" label="Restantes" /></TableHead>
+                    <TableHead className="hidden lg:table-cell"><SortBtn k="reset" label="Reset" /></TableHead>
                     <TableHead></TableHead>
                   </TableRow>
                 </TableHeader>
