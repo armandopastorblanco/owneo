@@ -175,7 +175,7 @@ const CarDetail = () => {
                           <p className="font-semibold mb-2">¿Cómo funciona el co-sharing?</p>
                           <p className="text-sm text-muted-foreground">
                             La cuota de participación representa el 10% del valor total del vehículo. 
-                            Como co-propietario, disfrutas de acceso exclusivo al vehículo según tu participación, 
+                            Como co-sharer, disfrutas de acceso exclusivo al vehículo según tu participación, 
                             compartiendo los costes de mantenimiento, seguro y almacenamiento con otros miembros.
                           </p>
                         </TooltipContent>
@@ -322,7 +322,7 @@ const CarDetail = () => {
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
             <p className="text-muted-foreground mb-8">
-              Descubre cómo el modelo de copropiedad OWNEO te permite disfrutar de este {car.name} con una inversión significativamente menor.
+              Descubre cómo el modelo de co-sharing OWNEO te permite disfrutar de este {car.name} con una inversión significativamente menor.
             </p>
             
             <div className="overflow-x-auto">
@@ -358,7 +358,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Depreciación (5 años)</td>
                     <td className="py-4 px-4 text-center text-foreground">~30-40%</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">Compartida entre copropietarios</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">Compartida entre co-sharers</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Días de Uso Estimados/Año</td>
@@ -408,7 +408,7 @@ const CarDetail = () => {
                 </>
               ) : (
                 <>
-                  <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser copropietario de esta obra maestra?</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser co-sharer de esta obra maestra?</h3>
                   <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
                   <ParticipationForm
                     carId={car.id}

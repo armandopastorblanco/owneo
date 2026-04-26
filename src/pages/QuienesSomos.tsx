@@ -31,7 +31,7 @@ const QuienesSomos = () => {
       number: "02",
       icon: Share2,
       title: "Únete al Co-Sharing",
-      description: "Accede a nuestro modelo de copropiedad compartida. Disfruta de los beneficios de un supercar sin los costes completos de propiedad."
+      description: "Accede a nuestro modelo de co-sharing compartida. Disfruta de los beneficios de un supercar sin los costes completos de propiedad."
     },
     {
       number: "03",
@@ -172,7 +172,7 @@ const QuienesSomos = () => {
               <div className="prose prose-lg max-w-none">
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                   El <strong className="text-foreground">co-sharing de supercoches</strong> es un modelo 
-                  innovador de copropiedad compartida que permite a varios miembros acceder a un mismo 
+                  innovador de co-sharing compartida que permite a varios miembros acceder a un mismo 
                   vehículo de alta gama. A diferencia del alquiler tradicional, nuestros miembros forman 
                   parte de una comunidad exclusiva con acceso privilegiado a toda nuestra flota.
                 </p>

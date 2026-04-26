@@ -19,7 +19,7 @@ const values = [
     icon: Gem,
     title: "Exclusividad",
     description:
-      "Accede a supercoches que normalmente están fuera de alcance. Nuestro modelo de copropiedad te abre las puertas al mundo del ultra-lujo.",
+      "Accede a supercoches que normalmente están fuera de alcance. Nuestro modelo de co-sharing te abre las puertas al mundo del ultra-lujo.",
   },
   {
     icon: Users,
@@ -161,7 +161,7 @@ const TwitterLanding = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-8 text-base md:text-lg text-muted-foreground font-extralight tracking-wide leading-relaxed max-w-2xl mx-auto"
           >
-            Descubre el lujo en copropiedad. Owneo te permite acceder a los supercoches más exclusivos del mercado, compartiendo la inversión y disfrutando de la experiencia completa.
+            Descubre el lujo en co-sharing. Owneo te permite acceder a los supercoches más exclusivos del mercado, compartiendo la inversión y disfrutando de la experiencia completa.
           </motion.p>
 
           <motion.div
