@@ -32,14 +32,14 @@ const NuestroModelo = () => {
     {
       number: "01",
       icon: Users,
-      title: "Conviértete en Copropietario",
-      description: "Únete a nuestro exclusivo club de miembros. Buscamos grupos de 3 a 10 copropietarios para cada supercar. Explora nuestra flota y envía tu solicitud de copropiedad para el vehículo deseado."
+      title: "Conviértete en Co-sharer",
+      description: "Únete a nuestro exclusivo club de miembros. Buscamos grupos de 3 a 10 co-sharers para cada supercar. Explora nuestra flota y envía tu solicitud de co-sharing para el vehículo deseado."
     },
     {
       number: "02",
       icon: PiggyBank,
       title: "Financia el Vehículo",
-      description: "Una vez alcanzado el número de copropietarios, adquirimos el vehículo de concesionarios oficiales certificados. Cada copropietario invierte según su participación deseada."
+      description: "Una vez alcanzado el número de co-sharers, adquirimos el vehículo de concesionarios oficiales certificados. Cada co-sharer invierte según su participación deseada."
     },
     {
       number: "03",
@@ -57,7 +57,7 @@ const NuestroModelo = () => {
       number: "05",
       icon: Repeat,
       title: "Venta a 5 Años",
-      description: "Recupera hasta el 70% de tu inversión inicial. Al cabo de 5 años, vendemos el vehículo y distribuimos el valor entre los copropietarios según sus participaciones."
+      description: "Recupera hasta el 70% de tu inversión inicial. Al cabo de 5 años, vendemos el vehículo y distribuimos el valor entre los co-sharers según sus participaciones."
     }
   ];
 
@@ -128,13 +128,13 @@ const NuestroModelo = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-xs sm:text-sm font-medium mb-6">
-              Copropiedad con Respaldo de Activos
+              Co-sharing con Respaldo de Activos
             </span>
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
               Nuestro <span className="text-champagne">Modelo</span>
             </h1>
             <p className="text-base sm:text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              "La copropiedad con respaldo de activos es <strong className="text-foreground">la forma más eficiente de poseer un supercar</strong> hoy en día."
+              "La co-sharing con respaldo de activos es <strong className="text-foreground">la forma más eficiente de poseer un supercar</strong> hoy en día."
             </p>
           </div>
         </div>
@@ -145,10 +145,10 @@ const NuestroModelo = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Cómo Funciona la <span className="text-champagne">Copropiedad</span>: Explicado en 3 Minutos
+              Cómo Funciona la <span className="text-champagne">Co-sharing</span>: Explicado en 3 Minutos
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              En esta página encontrarás todo sobre el proceso de copropiedad, desde la solicitud de visualización hasta tu primera conducción como copropietario.
+              En esta página encontrarás todo sobre el proceso de co-sharing, desde la solicitud de visualización hasta tu primera conducción como co-sharer.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {processSteps.map((step, index) => (
@@ -238,7 +238,7 @@ const NuestroModelo = () => {
                 Compra Individual <span className="text-champagne">VS</span> OWNEO Co-Sharing
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Análisis transparente de los ahorros al utilizar nuestro sistema de copropiedad comparado con la compra convencional
+                Análisis transparente de los ahorros al utilizar nuestro sistema de co-sharing comparado con la compra convencional
               </p>
             </div>
 
@@ -262,7 +262,7 @@ const NuestroModelo = () => {
                     <Check className="w-5 h-5 text-champagne" />
                     <h4 className="text-lg font-bold text-champagne">OWNEO Co-Sharing</h4>
                   </div>
-                  <p className="text-sm text-muted-foreground">10 copropietarios (1 participación)</p>
+                  <p className="text-sm text-muted-foreground">10 co-sharers (1 participación)</p>
                 </div>
               </div>
 
@@ -366,7 +366,7 @@ const NuestroModelo = () => {
                 Ejemplo de <span className="text-champagne">Uso Real</span>
               </h2>
               <p className="text-lg text-muted-foreground">
-                Así funcionaría tu experiencia como copropietario
+                Así funcionaría tu experiencia como co-sharer
               </p>
             </div>
 
@@ -410,7 +410,7 @@ const NuestroModelo = () => {
                     <Sparkles className="w-8 h-8 text-champagne-foreground" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground">Tu Copropiedad</h3>
+                    <h3 className="text-2xl font-bold text-foreground">Tu Co-sharing</h3>
                     <p className="text-champagne font-medium">1 participación adquirida</p>
                   </div>
                 </div>
@@ -477,7 +477,7 @@ const NuestroModelo = () => {
             <div className="bg-card/50 backdrop-blur-sm rounded-3xl border border-border/50 p-8 md:p-12">
               <div className="prose prose-lg max-w-none">
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  En resumen: el <strong className="text-foreground">servicio, vacante, la a veces enorme pérdida de valor, cuidado, mantenimiento, almacenamiento, seguro y conservación</strong> se comparten con los demás copropietarios del supercar.
+                  En resumen: el <strong className="text-foreground">servicio, vacante, la a veces enorme pérdida de valor, cuidado, mantenimiento, almacenamiento, seguro y conservación</strong> se comparten con los demás co-sharers del supercar.
                 </p>
                 
                 <div className="grid md:grid-cols-3 gap-6 my-8">
@@ -513,7 +513,7 @@ const NuestroModelo = () => {
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Explora nuestra flota exclusiva y elige el supercar de tus sueños. 
-              Tu aventura en la copropiedad de lujo comienza aquí.
+              Tu aventura en la co-sharing de lujo comienza aquí.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8 bg-champagne text-champagne-foreground hover:bg-champagne/90">
