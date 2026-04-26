@@ -29,6 +29,8 @@ const AdminReservas = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [carFilter, setCarFilter] = useState("all");
   const [showRuleForm, setShowRuleForm] = useState(false);
+  const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
+  const [deletingRuleId, setDeletingRuleId] = useState<string | null>(null);
   const [adjustModal, setAdjustModal] = useState<any>(null);
   const [adjustCredits, setAdjustCredits] = useState("");
   const [adjustReason, setAdjustReason] = useState("");
@@ -44,6 +46,30 @@ const AdminReservas = () => {
   const [ruleCreditsPerDay, setRuleCreditsPerDay] = useState("1.0");
   const [ruleAppliesToAll, setRuleAppliesToAll] = useState(true);
   const [ruleActive, setRuleActive] = useState(true);
+
+  const resetRuleForm = () => {
+    setEditingRuleId(null);
+    setRuleName(""); setRuleDesc("");
+    setRuleType("months");
+    setRuleMonths([]); setRuleStartDate(""); setRuleEndDate("");
+    setRuleMultiplier("1.0"); setRuleCreditsPerDay("1.0");
+    setRuleAppliesToAll(true); setRuleActive(true);
+  };
+
+  const openEditRule = (rule: any) => {
+    setEditingRuleId(rule.id);
+    setRuleName(rule.name || "");
+    setRuleDesc(rule.description || "");
+    setRuleType(rule.months ? "months" : "dates");
+    setRuleMonths(rule.months || []);
+    setRuleStartDate(rule.start_date || "");
+    setRuleEndDate(rule.end_date || "");
+    setRuleMultiplier(String(rule.multiplier ?? "1.0"));
+    setRuleCreditsPerDay(String(rule.credits_per_day ?? "1.0"));
+    setRuleAppliesToAll(!!rule.applies_to_all);
+    setRuleActive(!!rule.is_active);
+    setShowRuleForm(true);
+  };
 
   // Data queries
   const { data: creditRules = [], isLoading: loadingRules } = useQuery({
