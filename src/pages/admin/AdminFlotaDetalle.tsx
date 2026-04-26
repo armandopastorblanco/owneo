@@ -284,7 +284,16 @@ const ParticipantsTab = ({ carId, participants, reservations, nav }: any) => {
                   <div>{p.profile?.email || "—"}</div>
                   <div className="text-muted-foreground">{p.profile?.phone || "—"}</div>
                 </TableCell>
-                <TableCell><Badge variant="outline">#{p.participation_number}</Badge></TableCell>
+                <TableCell>
+                  <div className="flex flex-wrap gap-1">
+                    {(p.participation_numbers || [p.participation_number]).map((n: number) => (
+                      <Badge key={n} variant="outline">#{n}</Badge>
+                    ))}
+                    {p.participation_count > 1 && (
+                      <Badge className="bg-primary/15 text-primary border-0 text-[10px]">×{p.participation_count}</Badge>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell className="min-w-[160px]">
                   <div className="text-xs mb-1">{used} / {total} <span className="text-muted-foreground">({(p.credits_remaining ?? total - used)} restantes de {total})</span></div>
                   <Progress value={pct} className="h-1.5" />
