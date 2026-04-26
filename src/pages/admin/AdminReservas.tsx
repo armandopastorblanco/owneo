@@ -188,16 +188,22 @@ const AdminReservas = () => {
   // Adjust credits mutation
   const adjustMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from("validated_participations")
-        .update({ credits_remaining: parseFloat(adjustCredits) })
-        .eq("id", adjustModal.id);
-      if (error) throw error;
+      const newTotal = parseFloat(adjustCredits);
+      const ids: string[] = adjustModal._groupIds || [adjustModal.id];
+      // Distribute: full amount on first row, 0 on the rest
+      for (let i = 0; i < ids.length; i++) {
+        const value = i === 0 ? newTotal : 0;
+        const { error } = await supabase
+          .from("validated_participations")
+          .update({ credits_remaining: value })
+          .eq("id", ids[i]);
+        if (error) throw error;
+      }
       await supabase.rpc("insert_audit_log", {
         _action: "creditos_ajustados",
         _target_table: "validated_participations",
-        _target_id: adjustModal.id,
-        _details: { new_credits: parseFloat(adjustCredits), reason: adjustReason },
+        _target_id: ids.join(","),
+        _details: { new_credits: newTotal, reason: adjustReason, group_size: ids.length },
       });
     },
     onSuccess: () => {
