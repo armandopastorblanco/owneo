@@ -149,12 +149,12 @@ const Login = () => {
           </form>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
-            ¿No tienes cuenta?{" "}
+            ¿Aún no eres cliente?{" "}
             <Link
-              to={redirectParam ? `/registro?redirect=${encodeURIComponent(redirectParam)}` : "/registro"}
+              to="/portfolio"
               className="text-champagne hover:underline font-medium"
             >
-              Crear cuenta
+              Solicita una participación
             </Link>
           </p>
         </div>
