@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/twitter-hero.jpg";
-import owneoLogo from "@/assets/owneo-logo.jpg";
+import owneoLogo from "@/assets/owneo-logo.png";
 import { useRef } from "react";
 
 const values = [

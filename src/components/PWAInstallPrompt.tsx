@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Share, Plus, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import owneoLogo from "@/assets/owneo-logo.jpg";
+import owneoLogo from "@/assets/owneo-logo.png";
 
 interface PWAInstallPromptProps {
   show: boolean;
