@@ -28,6 +28,7 @@ const AdminReservas = () => {
   const queryClient = useQueryClient();
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [carFilter, setCarFilter] = useState("all");
+  const [calCityFilter, setCalCityFilter] = useState("all");
   const [showRuleForm, setShowRuleForm] = useState(false);
   const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
   const [deletingRuleId, setDeletingRuleId] = useState<string | null>(null);
@@ -96,7 +97,7 @@ const AdminReservas = () => {
   const { data: cars = [] } = useQuery({
     queryKey: ["admin-cars-list"],
     queryFn: async () => {
-      const { data } = await supabase.from("cars").select("id,name,brand,location_id");
+      const { data } = await supabase.from("cars").select("id,name,brand,location_id,is_active").eq("is_active", true);
       return data || [];
     },
   });
@@ -225,9 +226,14 @@ const AdminReservas = () => {
   const days = eachDayOfInterval({ start: monthStart, end: monthEnd });
   const startPadding = (getDay(monthStart) + 6) % 7; // Monday = 0
 
-  const filteredReservations = reservations.filter((r: any) =>
-    carFilter === "all" || r.car_id === carFilter
-  );
+  const filteredReservations = reservations.filter((r: any) => {
+    if (carFilter !== "all" && r.car_id !== carFilter) return false;
+    if (calCityFilter !== "all") {
+      const car = cars.find((c: any) => c.id === r.car_id);
+      if (!car || car.location_id !== calCityFilter) return false;
+    }
+    return true;
+  });
 
   const getReservationsForDay = (day: Date) =>
     filteredReservations.filter((r: any) => {
@@ -415,12 +421,21 @@ const AdminReservas = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between flex-wrap gap-3">
           <CardTitle className="flex items-center gap-2 text-foreground"><CalendarDays className="h-5 w-5" /> Calendario de Reservas</CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <Select value={calCityFilter} onValueChange={(v) => { setCalCityFilter(v); setCarFilter("all"); }}>
+              <SelectTrigger className="w-40"><SelectValue placeholder="Ciudad" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todas las ciudades</SelectItem>
+                {locations.map((l: any) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
+              </SelectContent>
+            </Select>
             <Select value={carFilter} onValueChange={setCarFilter}>
               <SelectTrigger className="w-48"><SelectValue placeholder="Todos los vehículos" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Todos los vehículos</SelectItem>
-                {cars.map((c: any) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
+                {cars
+                  .filter((c: any) => calCityFilter === "all" || c.location_id === calCityFilter)
+                  .map((c: any) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
