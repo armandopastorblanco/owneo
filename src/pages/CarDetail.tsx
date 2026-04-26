@@ -105,7 +105,7 @@ const CarDetail = () => {
           <Link to="/portfolio">
             <Button variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
               <ArrowLeft className="mr-2 w-4 h-4" />
-              Volver al Portfolio
+              Volver a Nuestra Gama
             </Button>
           </Link>
         </div>
@@ -127,7 +127,7 @@ const CarDetail = () => {
         <div className="container mx-auto max-w-6xl">
           <Link to="/portfolio" className="inline-flex items-center text-foreground hover:text-foreground/80 mb-8 transition-colors">
             <ArrowLeft className="mr-2 w-4 h-4" />
-            Volver al Portfolio
+            Volver a Nuestra Gama
           </Link>
 
           <div className="relative aspect-[16/10] sm:aspect-[21/9] overflow-hidden rounded-lg mb-8 bg-gradient-to-b from-muted to-background">
