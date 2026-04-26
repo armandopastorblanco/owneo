@@ -43,6 +43,8 @@ import MisDocumentos from "./pages/dashboard/MisDocumentos";
 import AdminInspecciones from "./pages/admin/AdminInspecciones";
 import AdminUbicaciones from "./pages/admin/AdminUbicaciones";
 import AdminConfiguracion from "./pages/admin/AdminConfiguracion";
+import AdminFlota from "./pages/admin/AdminFlota";
+import AdminFlotaDetalle from "./pages/admin/AdminFlotaDetalle";
 
 const queryClient = new QueryClient();
 
@@ -106,6 +108,8 @@ const App = () => (
                 <Route path="vehiculos" element={<AdminVehiculos />} />
                 <Route path="solicitudes" element={<AdminSolicitudes />} />
                 <Route path="participantes" element={<AdminParticipantes />} />
+                <Route path="flota" element={<AdminFlota />} />
+                <Route path="flota/:carId" element={<AdminFlotaDetalle />} />
                 <Route path="reservas" element={<AdminReservas />} />
                 <Route path="pagos" element={<AdminPagos />} />
                 <Route path="inspecciones" element={<AdminInspecciones />} />
