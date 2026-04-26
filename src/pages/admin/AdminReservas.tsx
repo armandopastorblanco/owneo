@@ -12,13 +12,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { toast } from "sonner";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isSameDay, isWithinInterval, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit, Trash2 } from "lucide-react";
 
 const MONTHS_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const WEEKDAYS = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
@@ -28,6 +29,8 @@ const AdminReservas = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [carFilter, setCarFilter] = useState("all");
   const [showRuleForm, setShowRuleForm] = useState(false);
+  const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
+  const [deletingRuleId, setDeletingRuleId] = useState<string | null>(null);
   const [adjustModal, setAdjustModal] = useState<any>(null);
   const [adjustCredits, setAdjustCredits] = useState("");
   const [adjustReason, setAdjustReason] = useState("");
@@ -43,6 +46,30 @@ const AdminReservas = () => {
   const [ruleCreditsPerDay, setRuleCreditsPerDay] = useState("1.0");
   const [ruleAppliesToAll, setRuleAppliesToAll] = useState(true);
   const [ruleActive, setRuleActive] = useState(true);
+
+  const resetRuleForm = () => {
+    setEditingRuleId(null);
+    setRuleName(""); setRuleDesc("");
+    setRuleType("months");
+    setRuleMonths([]); setRuleStartDate(""); setRuleEndDate("");
+    setRuleMultiplier("1.0"); setRuleCreditsPerDay("1.0");
+    setRuleAppliesToAll(true); setRuleActive(true);
+  };
+
+  const openEditRule = (rule: any) => {
+    setEditingRuleId(rule.id);
+    setRuleName(rule.name || "");
+    setRuleDesc(rule.description || "");
+    setRuleType(rule.months ? "months" : "dates");
+    setRuleMonths(rule.months || []);
+    setRuleStartDate(rule.start_date || "");
+    setRuleEndDate(rule.end_date || "");
+    setRuleMultiplier(String(rule.multiplier ?? "1.0"));
+    setRuleCreditsPerDay(String(rule.credits_per_day ?? "1.0"));
+    setRuleAppliesToAll(!!rule.applies_to_all);
+    setRuleActive(!!rule.is_active);
+    setShowRuleForm(true);
+  };
 
   // Data queries
   const { data: creditRules = [], isLoading: loadingRules } = useQuery({
@@ -102,10 +129,10 @@ const AdminReservas = () => {
     return result;
   })();
 
-  // Create rule mutation
+  // Create / update rule mutation
   const createRuleMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase.from("credit_rules").insert({
+      const payload = {
         name: ruleName,
         description: ruleDesc || null,
         is_recurring: ruleType === "months",
@@ -116,16 +143,35 @@ const AdminReservas = () => {
         credits_per_day: parseFloat(ruleCreditsPerDay),
         applies_to_all: ruleAppliesToAll,
         is_active: ruleActive,
-      });
+      };
+      if (editingRuleId) {
+        const { error } = await supabase.from("credit_rules").update(payload).eq("id", editingRuleId);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from("credit_rules").insert(payload);
+        if (error) throw error;
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["credit-rules"] });
+      toast.success(editingRuleId ? "Regla actualizada" : "Regla creada");
+      setShowRuleForm(false);
+      resetRuleForm();
+    },
+    onError: () => toast.error("Error al guardar la regla"),
+  });
+
+  const deleteRuleMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("credit_rules").delete().eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["credit-rules"] });
-      toast.success("Regla creada");
-      setShowRuleForm(false);
-      setRuleName(""); setRuleDesc(""); setRuleMonths([]); setRuleMultiplier("1.0"); setRuleCreditsPerDay("1.0");
+      toast.success("Regla eliminada");
+      setDeletingRuleId(null);
     },
-    onError: () => toast.error("Error al crear regla"),
+    onError: () => toast.error("Error al eliminar la regla"),
   });
 
   // Adjust credits mutation
@@ -191,7 +237,7 @@ const AdminReservas = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-foreground"><Settings className="h-5 w-5" /> Configuración de Créditos</CardTitle>
-          <Button size="sm" onClick={() => setShowRuleForm(true)}><Plus className="h-4 w-4 mr-1" /> Nueva regla</Button>
+          <Button size="sm" onClick={() => { resetRuleForm(); setShowRuleForm(true); }}><Plus className="h-4 w-4 mr-1" /> Nueva regla</Button>
         </CardHeader>
         <CardContent>
           {loadingRules ? <Skeleton className="h-20 w-full" /> : creditRules.length === 0 ? (
@@ -206,6 +252,7 @@ const AdminReservas = () => {
                   <TableHead>Créditos/día</TableHead>
                   <TableHead>Aplica a</TableHead>
                   <TableHead>Estado</TableHead>
+                  <TableHead className="text-right">Acciones</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -222,6 +269,16 @@ const AdminReservas = () => {
                     <TableCell className="text-foreground">{rule.credits_per_day}</TableCell>
                     <TableCell className="text-muted-foreground">{rule.applies_to_all ? "Todos" : "Específicos"}</TableCell>
                     <TableCell><Badge variant={rule.is_active ? "default" : "secondary"}>{rule.is_active ? "Activa" : "Inactiva"}</Badge></TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-1">
+                        <Button variant="ghost" size="icon" onClick={() => openEditRule(rule)} title="Editar">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="icon" onClick={() => setDeletingRuleId(rule.id)} title="Eliminar" className="text-destructive hover:text-destructive">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -230,10 +287,10 @@ const AdminReservas = () => {
         </CardContent>
       </Card>
 
-      {/* New Rule Dialog */}
-      <Dialog open={showRuleForm} onOpenChange={setShowRuleForm}>
+      {/* New / Edit Rule Dialog */}
+      <Dialog open={showRuleForm} onOpenChange={(open) => { setShowRuleForm(open); if (!open) resetRuleForm(); }}>
         <DialogContent className="max-w-lg">
-          <DialogHeader><DialogTitle>Nueva Regla de Créditos</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>{editingRuleId ? "Editar Regla de Créditos" : "Nueva Regla de Créditos"}</DialogTitle></DialogHeader>
           <div className="space-y-4">
             <div>
               <label className="text-sm text-muted-foreground">Nombre</label>
@@ -302,11 +359,34 @@ const AdminReservas = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowRuleForm(false)}>Cancelar</Button>
-            <Button onClick={() => createRuleMutation.mutate()} disabled={!ruleName}>Crear regla</Button>
+            <Button variant="outline" onClick={() => { setShowRuleForm(false); resetRuleForm(); }}>Cancelar</Button>
+            <Button onClick={() => createRuleMutation.mutate()} disabled={!ruleName || createRuleMutation.isPending}>
+              {editingRuleId ? "Guardar cambios" : "Crear regla"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Delete Rule Confirmation */}
+      <AlertDialog open={!!deletingRuleId} onOpenChange={(open) => !open && setDeletingRuleId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar esta regla de créditos?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer. Se eliminará permanentemente la regla y dejará de aplicarse al cálculo de créditos.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deletingRuleId && deleteRuleMutation.mutate(deletingRuleId)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Eliminar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* SECTION 2: Calendar */}
       <Card>
