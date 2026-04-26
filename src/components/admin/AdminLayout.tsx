@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
-  LayoutDashboard, Car, FileText, Users, CalendarDays, ShieldCheck,
-  FileSignature, CreditCard, ClipboardCheck, MapPin, Settings,
+  LayoutDashboard, Car, FileText, Users, CalendarDays,
+  CreditCard, ClipboardCheck, MapPin, Settings,
   LogOut, Menu, X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -15,8 +15,6 @@ const navItems = [
   { label: "Solicitudes", path: "/admin/solicitudes", icon: FileText },
   { label: "Participantes", path: "/admin/participantes", icon: Users },
   { label: "Reservas", path: "/admin/reservas", icon: CalendarDays },
-  { label: "KYC", path: "/admin/kyc", icon: ShieldCheck },
-  { label: "Contratos", path: "/admin/contratos", icon: FileSignature },
   { label: "Pagos", path: "/admin/pagos", icon: CreditCard },
   { label: "Inspecciones", path: "/admin/inspecciones", icon: ClipboardCheck },
   { label: "Ubicaciones", path: "/admin/ubicaciones", icon: MapPin },
