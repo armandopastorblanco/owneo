@@ -96,17 +96,28 @@ const AdminReservas = () => {
   const { data: cars = [] } = useQuery({
     queryKey: ["admin-cars-list"],
     queryFn: async () => {
-      const { data } = await supabase.from("cars").select("id,name,brand");
+      const { data } = await supabase.from("cars").select("id,name,brand,location_id");
       return data || [];
     },
   });
+
+  const { data: locations = [] } = useQuery({
+    queryKey: ["admin-locations-list"],
+    queryFn: async () => {
+      const { data } = await supabase.from("locations").select("id,name").order("name");
+      return data || [];
+    },
+  });
+
+  const [partsCityFilter, setPartsCityFilter] = useState("all");
+  const [partsCarFilter, setPartsCarFilter] = useState("all");
 
   const { data: participations = [], isLoading: loadingParts } = useQuery({
     queryKey: ["admin-validated-parts"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("validated_participations")
-        .select("*, profiles:user_id(name,surname,email), cars:car_id(name)")
+        .select("*, profiles:user_id(name,surname,email), cars:car_id(name,location_id)")
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data || [];
