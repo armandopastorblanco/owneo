@@ -23,10 +23,10 @@ const Cities = () => {
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-foreground">
-              Premium <span className="text-foreground">Locations</span>
+              Ubicaciones <span className="text-foreground">Premium</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Discover our exclusive showrooms across Spain's most prestigious cities
+              Descubre nuestros showrooms exclusivos en las ciudades más prestigiosas de España
             </p>
           </div>
 
@@ -65,7 +65,7 @@ const Cities = () => {
                       </p>
                       <Link to={`/portfolio?city=${encodeURIComponent(city.name)}`}>
                         <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                          <span>Explore {carsCount} Vehicles</span>
+                          <span>Explorar {carsCount} {carsCount === 1 ? "vehículo" : "vehículos"}</span>
                           <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                         </Button>
                       </Link>
