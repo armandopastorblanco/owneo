@@ -237,7 +237,7 @@ const AdminReservas = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-foreground"><Settings className="h-5 w-5" /> Configuración de Créditos</CardTitle>
-          <Button size="sm" onClick={() => setShowRuleForm(true)}><Plus className="h-4 w-4 mr-1" /> Nueva regla</Button>
+          <Button size="sm" onClick={() => { resetRuleForm(); setShowRuleForm(true); }}><Plus className="h-4 w-4 mr-1" /> Nueva regla</Button>
         </CardHeader>
         <CardContent>
           {loadingRules ? <Skeleton className="h-20 w-full" /> : creditRules.length === 0 ? (
