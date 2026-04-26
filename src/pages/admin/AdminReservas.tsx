@@ -19,7 +19,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { toast } from "sonner";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isSameDay, isWithinInterval, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit, Trash2, ArrowUpDown } from "lucide-react";
 
 const MONTHS_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const WEEKDAYS = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
@@ -111,6 +111,12 @@ const AdminReservas = () => {
 
   const [partsCityFilter, setPartsCityFilter] = useState("all");
   const [partsCarFilter, setPartsCarFilter] = useState("all");
+  const [partsSortKey, setPartsSortKey] = useState<"participant" | "city" | "car" | "count" | "total" | "used" | "remaining" | "reset">("participant");
+  const [partsSortDir, setPartsSortDir] = useState<"asc" | "desc">("asc");
+  const togglePartsSort = (k: typeof partsSortKey) => {
+    if (partsSortKey === k) setPartsSortDir(partsSortDir === "asc" ? "desc" : "asc");
+    else { setPartsSortKey(k); setPartsSortDir("asc"); }
+  };
 
   const { data: participations = [], isLoading: loadingParts } = useQuery({
     queryKey: ["admin-validated-parts"],
@@ -499,9 +505,12 @@ const AdminReservas = () => {
             const grouped = Array.from(filtered.reduce((acc: Map<string, any>, p: any) => {
               const key = `${p.user_id}|${p.car_id}`;
               if (!acc.has(key)) {
+                const locId = (p.cars as any)?.location_id;
+                const cityName = locations.find((l: any) => l.id === locId)?.name || "—";
                 acc.set(key, {
                   key, ids: [] as string[], rows: [] as any[],
                   profile: p.profiles, car: p.cars, car_id: p.car_id, user_id: p.user_id,
+                  city: cityName,
                   numbers: [] as number[],
                   total: 0, used: 0, remaining: 0,
                   reset_date: p.credits_reset_date,
@@ -517,24 +526,52 @@ const AdminReservas = () => {
               return acc;
             }, new Map()).values());
 
-            return grouped.length === 0 ? (
+            const sorted = [...grouped].sort((a: any, b: any) => {
+              const dir = partsSortDir === "asc" ? 1 : -1;
+              const get = (g: any) => {
+                switch (partsSortKey) {
+                  case "participant": return `${g.profile?.name || ""} ${g.profile?.surname || ""}`.toLowerCase();
+                  case "city": return (g.city || "").toLowerCase();
+                  case "car": return (g.car?.name || "").toLowerCase();
+                  case "count": return g.numbers.length;
+                  case "total": return g.total;
+                  case "used": return g.used;
+                  case "remaining": return g.remaining;
+                  case "reset": return g.reset_date || "";
+                }
+              };
+              const va = get(a), vb = get(b);
+              if (va < vb) return -1 * dir;
+              if (va > vb) return 1 * dir;
+              return 0;
+            });
+
+            const SortBtn = ({ k, label }: { k: typeof partsSortKey; label: string }) => (
+              <button onClick={() => togglePartsSort(k)} className="flex items-center gap-1 hover:text-foreground transition-colors">
+                {label}
+                <ArrowUpDown className={`h-3 w-3 ${partsSortKey === k ? "text-foreground" : "opacity-40"}`} />
+              </button>
+            );
+
+            return sorted.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">Sin participaciones validadas</p>
             ) : (
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Participante</TableHead>
-                    <TableHead>Vehículo</TableHead>
-                    <TableHead className="hidden md:table-cell">Participaciones</TableHead>
-                    <TableHead>Créditos/año</TableHead>
-                    <TableHead>Usados</TableHead>
-                    <TableHead>Restantes</TableHead>
-                    <TableHead className="hidden lg:table-cell">Reset</TableHead>
+                    <TableHead><SortBtn k="participant" label="Participante" /></TableHead>
+                    <TableHead><SortBtn k="car" label="Vehículo" /></TableHead>
+                    <TableHead><SortBtn k="city" label="Ciudad" /></TableHead>
+                    <TableHead className="hidden md:table-cell"><SortBtn k="count" label="Participaciones" /></TableHead>
+                    <TableHead><SortBtn k="total" label="Créditos/año" /></TableHead>
+                    <TableHead><SortBtn k="used" label="Usados" /></TableHead>
+                    <TableHead><SortBtn k="remaining" label="Restantes" /></TableHead>
+                    <TableHead className="hidden lg:table-cell"><SortBtn k="reset" label="Reset" /></TableHead>
                     <TableHead></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {grouped.map((g: any) => {
+                  {sorted.map((g: any) => {
                     const pct = g.total > 0 ? (g.remaining / g.total) * 100 : 0;
                     return (
                       <TableRow key={g.key}>
@@ -543,6 +580,7 @@ const AdminReservas = () => {
                           <div className="text-xs text-muted-foreground">{g.profile?.email}</div>
                         </TableCell>
                         <TableCell className="text-foreground">{g.car?.name}</TableCell>
+                        <TableCell className="text-foreground">{g.city}</TableCell>
                         <TableCell className="hidden md:table-cell text-foreground">
                           {g.numbers.length}× (#{g.numbers.sort((a: number, b: number) => a - b).join(", #")})
                         </TableCell>
