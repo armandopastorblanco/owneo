@@ -252,6 +252,7 @@ const AdminReservas = () => {
                   <TableHead>Créditos/día</TableHead>
                   <TableHead>Aplica a</TableHead>
                   <TableHead>Estado</TableHead>
+                  <TableHead className="text-right">Acciones</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
