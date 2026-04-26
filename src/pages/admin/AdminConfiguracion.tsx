@@ -146,6 +146,18 @@ const AdminConfiguracion = () => {
         </Collapsible>
       </Card>
 
+      <Collapsible open={vehicleDocsOpen} onOpenChange={setVehicleDocsOpen} className="rounded-lg border border-border bg-card">
+        <CollapsibleTrigger asChild>
+          <button className="flex items-center gap-2 text-left w-full hover:opacity-80 p-6">
+            {vehicleDocsOpen ? <ChevronDown className="h-4 w-4 text-muted-foreground" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}
+            <span className="text-lg font-semibold leading-none tracking-tight">Documentación de Vehículos</span>
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <VehicleDocumentTypesManager />
+        </CollapsibleContent>
+      </Collapsible>
+
       <Collapsible open={extrasOpen} onOpenChange={setExtrasOpen} className="rounded-lg border border-border bg-card">
         <CollapsibleTrigger asChild>
           <button className="flex items-center gap-2 text-left w-full hover:opacity-80 p-6">
