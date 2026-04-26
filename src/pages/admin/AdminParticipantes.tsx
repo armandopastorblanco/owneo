@@ -264,28 +264,55 @@ const AdminParticipantes = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {rows.map(({ v, profile, docStatus, contractStatus }) => (
-                            <tr key={v.id} className="border-b border-border/20 hover:bg-muted/30">
+                          {Array.from(
+                            rows.reduce((acc: Map<string, any>, r: any) => {
+                              const key = r.profile.id;
+                              if (!acc.has(key)) {
+                                acc.set(key, {
+                                  profile: r.profile,
+                                  docStatus: r.docStatus,
+                                  contractStatus: r.contractStatus,
+                                  numbers: [] as number[],
+                                  credits_per_year: 0,
+                                  credits_used: 0,
+                                });
+                              }
+                              const agg = acc.get(key);
+                              agg.numbers.push(r.v.participation_number);
+                              agg.credits_per_year += Number(r.v.credits_per_year || 0);
+                              agg.credits_used += Number(r.v.credits_used_this_year || 0);
+                              return acc;
+                            }, new Map()).values()
+                          ).map((agg: any) => (
+                            <tr key={agg.profile.id} className="border-b border-border/20 hover:bg-muted/30">
                               <td className="py-2">
                                 <div className="flex items-center gap-2">
                                   <Avatar className="h-7 w-7">
                                     <AvatarFallback className="text-xs bg-primary/20 text-primary">
-                                      {initials(profile.name, profile.surname)}
+                                      {initials(agg.profile.name, agg.profile.surname)}
                                     </AvatarFallback>
                                   </Avatar>
-                                  <span>{profile.name || "—"} {profile.surname || ""}</span>
+                                  <span>{agg.profile.name || "—"} {agg.profile.surname || ""}</span>
                                 </div>
                               </td>
-                              <td className="py-2 text-muted-foreground">{profile.email}</td>
-                              <td className="py-2 text-muted-foreground">{profile.phone || "—"}</td>
-                              <td className="py-2">#{v.participation_number}</td>
-                              <td className="py-2"><Badge className={STATUS_BADGE[docStatus]}>{STATUS_LABEL[docStatus]}</Badge></td>
-                              <td className="py-2 text-muted-foreground">
-                                {Number(v.credits_per_year || 0) - Number(v.credits_used_this_year || 0)} / {v.credits_per_year || 0}
+                              <td className="py-2 text-muted-foreground">{agg.profile.email}</td>
+                              <td className="py-2 text-muted-foreground">{agg.profile.phone || "—"}</td>
+                              <td className="py-2">
+                                {agg.numbers.length > 1 ? (
+                                  <Badge variant="outline" className="text-xs">
+                                    {agg.numbers.length}× (#{agg.numbers.sort((a: number, b: number) => a - b).join(", #")})
+                                  </Badge>
+                                ) : (
+                                  <>#{agg.numbers[0]}</>
+                                )}
                               </td>
-                              <td className="py-2"><Badge className={DOC_STATUS_BADGE[contractStatus] || DOC_STATUS_BADGE.none}>{DOC_STATUS_LABEL[contractStatus] || "Sin subir"}</Badge></td>
+                              <td className="py-2"><Badge className={STATUS_BADGE[agg.docStatus]}>{STATUS_LABEL[agg.docStatus]}</Badge></td>
+                              <td className="py-2 text-muted-foreground">
+                                {agg.credits_per_year - agg.credits_used} / {agg.credits_per_year}
+                              </td>
+                              <td className="py-2"><Badge className={DOC_STATUS_BADGE[agg.contractStatus] || DOC_STATUS_BADGE.none}>{DOC_STATUS_LABEL[agg.contractStatus] || "Sin subir"}</Badge></td>
                               <td className="py-2 text-right">
-                                <Button variant="ghost" size="sm" onClick={() => setOpenUserId(profile.id)}>
+                                <Button variant="ghost" size="sm" onClick={() => setOpenUserId(agg.profile.id)}>
                                   <Eye className="h-4 w-4 mr-1" /> Ver ficha
                                 </Button>
                               </td>
