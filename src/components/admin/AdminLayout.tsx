@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import {
   LayoutDashboard, Car, FileText, Users, CalendarDays,
   CreditCard, ClipboardCheck, MapPin, Settings,
-  LogOut, Menu, X,
+  LogOut, Menu, X, Gauge,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ const navItems = [
   { label: "Vitrina", path: "/admin/vehiculos", icon: Car },
   { label: "Solicitudes", path: "/admin/solicitudes", icon: FileText },
   { label: "Participantes", path: "/admin/participantes", icon: Users },
+  { label: "Flota", path: "/admin/flota", icon: Gauge },
   { label: "Reservas", path: "/admin/reservas", icon: CalendarDays },
   { label: "Pagos", path: "/admin/pagos", icon: CreditCard },
   { label: "Inspecciones", path: "/admin/inspecciones", icon: ClipboardCheck },
