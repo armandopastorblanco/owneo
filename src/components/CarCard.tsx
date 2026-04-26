@@ -2,40 +2,38 @@ import { Link } from "react-router-dom";
 import { Car } from "@/hooks/useCars";
 import { ArrowRight, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useMemo } from "react";
 
 interface CarCardProps {
   car: Car;
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  // Generate a stable random number of available participations based on car id
-  const availableParticipations = useMemo(() => {
-    let hash = 0;
-    for (let i = 0; i < car.id.length; i++) {
-      hash = ((hash << 5) - hash) + car.id.charCodeAt(i);
-      hash |= 0;
-    }
-    return Math.abs(hash) % 11; // 0 to 10
-  }, [car.id]);
-
   const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
-  const sharePrice = Math.round(numericPrice * 0.1);
+  const sharePrice = car.participationPrice || Math.round(numericPrice * 0.1);
+  const isComplete = car.status === "complete" || car.remainingParticipations === 0;
+  const available = car.remainingParticipations ?? 0;
+  const max = car.maxParticipations ?? 10;
 
   return (
     <Link to={`/car/${car.id}`} className="h-full">
-      <Card className="overflow-hidden hover-lift group cursor-pointer bg-card border-border h-full flex flex-col">
+      <Card className={`overflow-hidden hover-lift group cursor-pointer bg-card border-border h-full flex flex-col ${isComplete ? "opacity-60" : ""}`}>
         <div className="aspect-[16/10] overflow-hidden bg-muted relative">
           <img
             src={car.image}
             alt={car.name}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          {/* Available participations badge */}
-          <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-[hsl(var(--participation-available))] text-background">
-            <Users className="w-3.5 h-3.5" />
-            {availableParticipations}/10 disponibles
-          </div>
+          {isComplete ? (
+            <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-destructive text-destructive-foreground">
+              <Users className="w-3.5 h-3.5" />
+              Participaciones agotadas
+            </div>
+          ) : (
+            <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-[hsl(var(--participation-available))] text-background">
+              <Users className="w-3.5 h-3.5" />
+              {available}/{max} disponibles
+            </div>
+          )}
         </div>
         <CardContent className="p-6 flex-1 flex flex-col">
           <div className="mb-2">
@@ -59,7 +57,11 @@ const CarCard = ({ car }: CarCardProps) => {
                 {car.price}
               </span>
             </div>
-            <ArrowRight className="w-5 h-5 text-foreground group-hover:translate-x-1 transition-transform" />
+            {isComplete ? (
+              <span className="text-xs font-semibold text-destructive uppercase tracking-wider">Completo</span>
+            ) : (
+              <ArrowRight className="w-5 h-5 text-foreground group-hover:translate-x-1 transition-transform" />
+            )}
           </div>
         </CardContent>
       </Card>

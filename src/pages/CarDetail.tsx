@@ -399,27 +399,33 @@ const CarDetail = () => {
             </div>
           </section>
 
-          <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
-            <CardContent className="p-8 text-center">
-              {isComplete ? (
-                <>
-                  <h3 className="text-2xl font-bold mb-4 text-foreground">Este vehículo está completo</h3>
-                  <p className="text-muted-foreground">Todas las participaciones han sido vendidas. Puedes apuntarte a la lista de espera.</p>
-                </>
-              ) : (
-                <>
-                  <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser co-sharer de esta obra maestra?</h3>
-                  <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
-                  <ParticipationForm
-                    carId={car.id}
-                    carName={car.name}
-                    availableParticipations={availableParticipations}
-                    sharePrice={discountedPrice}
-                  />
-                </>
-              )}
-            </CardContent>
-          </Card>
+          {isComplete ? (
+            <Card className="bg-gradient-to-r from-destructive/10 to-muted/10 border-destructive/30">
+              <CardContent className="p-8 text-center">
+                <Users className="w-12 h-12 mx-auto mb-4 text-destructive" />
+                <h3 className="text-2xl font-bold mb-3 text-foreground">Este vehículo ya tiene todos sus participantes</h3>
+                <p className="text-muted-foreground mb-6">Descubre otros vehículos disponibles en nuestra vitrina</p>
+                <Link to="/portfolio">
+                  <Button variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
+                    Ver otros vehículos
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
+              <CardContent className="p-8 text-center">
+                <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser co-sharer de esta obra maestra?</h3>
+                <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>
+                <ParticipationForm
+                  carId={car.id}
+                  carName={car.name}
+                  availableParticipations={availableParticipations}
+                  sharePrice={discountedPrice}
+                />
+              </CardContent>
+            </Card>
+          )}
         </div>
       </main>
 

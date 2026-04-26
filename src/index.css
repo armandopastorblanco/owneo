@@ -144,3 +144,14 @@ All colors MUST be HSL.
     min-height: 44px;
   }
 }
+
+/* react-big-calendar dark theme */
+.rbc-dark .rbc-calendar { background: transparent; color: hsl(var(--foreground)); }
+.rbc-dark .rbc-toolbar button { color: hsl(var(--foreground)); background: hsl(var(--card)); border-color: hsl(var(--border)); }
+.rbc-dark .rbc-toolbar button:hover, .rbc-dark .rbc-toolbar button.rbc-active { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.rbc-dark .rbc-month-view, .rbc-dark .rbc-time-view, .rbc-dark .rbc-agenda-view { border-color: hsl(var(--border)); background: hsl(var(--card)); }
+.rbc-dark .rbc-header, .rbc-dark .rbc-day-bg, .rbc-dark .rbc-month-row, .rbc-dark .rbc-time-header-content, .rbc-dark .rbc-time-content, .rbc-dark .rbc-timeslot-group { border-color: hsl(var(--border)); }
+.rbc-dark .rbc-today { background: hsl(var(--primary) / 0.1); }
+.rbc-dark .rbc-off-range-bg { background: hsl(var(--muted) / 0.3); }
+.rbc-dark .rbc-off-range { color: hsl(var(--muted-foreground)); }
+.rbc-dark .rbc-event { padding: 2px 4px; }
