@@ -129,6 +129,8 @@ const AdminConfiguracion = () => {
         </CardContent>
       </Card>
 
+      <ExtraCostTypesManager />
+
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader><DialogTitle>{editing ? "Editar tipo" : "Nuevo tipo de documento"}</DialogTitle></DialogHeader>
