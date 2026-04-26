@@ -132,6 +132,54 @@ export type Database = {
           },
         ]
       }
+      calendar_blocks: {
+        Row: {
+          block_type: string | null
+          car_id: string | null
+          created_at: string | null
+          created_by: string | null
+          end_date: string
+          id: string
+          reason: string
+          start_date: string
+        }
+        Insert: {
+          block_type?: string | null
+          car_id?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          end_date: string
+          id?: string
+          reason: string
+          start_date: string
+        }
+        Update: {
+          block_type?: string | null
+          car_id?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          end_date?: string
+          id?: string
+          reason?: string
+          start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_blocks_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calendar_blocks_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cars: {
         Row: {
           admin_notes: string | null
@@ -149,12 +197,15 @@ export type Database = {
           location_id: string
           luxury_description: string | null
           max_participations: number | null
+          max_reservation_days: number | null
+          min_reservation_days: number | null
           model: string
           name: string
           participation_price: number | null
           price: number
           promotion: Json | null
           remaining_participations: number | null
+          reservation_advance_days: number | null
           specifications: Json | null
           status: string | null
           technical_sheet: Json | null
@@ -178,12 +229,15 @@ export type Database = {
           location_id: string
           luxury_description?: string | null
           max_participations?: number | null
+          max_reservation_days?: number | null
+          min_reservation_days?: number | null
           model: string
           name: string
           participation_price?: number | null
           price: number
           promotion?: Json | null
           remaining_participations?: number | null
+          reservation_advance_days?: number | null
           specifications?: Json | null
           status?: string | null
           technical_sheet?: Json | null
@@ -207,12 +261,15 @@ export type Database = {
           location_id?: string
           luxury_description?: string | null
           max_participations?: number | null
+          max_reservation_days?: number | null
+          min_reservation_days?: number | null
           model?: string
           name?: string
           participation_price?: number | null
           price?: number
           promotion?: Json | null
           remaining_participations?: number | null
+          reservation_advance_days?: number | null
           specifications?: Json | null
           status?: string | null
           technical_sheet?: Json | null
@@ -1259,6 +1316,106 @@ export type Database = {
           },
         ]
       }
+      vehicle_document_types: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          has_expiry_date: boolean | null
+          id: string
+          is_active: boolean | null
+          is_required: boolean | null
+          name: string
+          sort_order: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          has_expiry_date?: boolean | null
+          id?: string
+          is_active?: boolean | null
+          is_required?: boolean | null
+          name: string
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          has_expiry_date?: boolean | null
+          id?: string
+          is_active?: boolean | null
+          is_required?: boolean | null
+          name?: string
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      vehicle_documents: {
+        Row: {
+          car_id: string | null
+          created_at: string | null
+          document_type_id: string | null
+          expiry_date: string | null
+          file_name: string | null
+          file_size: number | null
+          file_url: string
+          id: string
+          notes: string | null
+          updated_at: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          car_id?: string | null
+          created_at?: string | null
+          document_type_id?: string | null
+          expiry_date?: string | null
+          file_name?: string | null
+          file_size?: number | null
+          file_url: string
+          id?: string
+          notes?: string | null
+          updated_at?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          car_id?: string | null
+          created_at?: string | null
+          document_type_id?: string | null
+          expiry_date?: string | null
+          file_name?: string | null
+          file_size?: number | null
+          file_url?: string
+          id?: string
+          notes?: string | null
+          updated_at?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicle_documents_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_documents_document_type_id_fkey"
+            columns: ["document_type_id"]
+            isOneToOne: false
+            referencedRelation: "vehicle_document_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_documents_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       vehicle_inspections: {
         Row: {
           car_id: string
@@ -1322,6 +1479,69 @@ export type Database = {
             columns: ["reservation_id"]
             isOneToOne: false
             referencedRelation: "reservations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vehicle_maintenance: {
+        Row: {
+          car_id: string | null
+          cost: number | null
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          documents: string[] | null
+          id: string
+          maintenance_type: string
+          mileage_at_service: number | null
+          notes: string | null
+          provider: string | null
+          service_date: string
+          updated_at: string | null
+        }
+        Insert: {
+          car_id?: string | null
+          cost?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          documents?: string[] | null
+          id?: string
+          maintenance_type: string
+          mileage_at_service?: number | null
+          notes?: string | null
+          provider?: string | null
+          service_date: string
+          updated_at?: string | null
+        }
+        Update: {
+          car_id?: string | null
+          cost?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          documents?: string[] | null
+          id?: string
+          maintenance_type?: string
+          mileage_at_service?: number | null
+          notes?: string | null
+          provider?: string | null
+          service_date?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicle_maintenance_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_maintenance_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
