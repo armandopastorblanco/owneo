@@ -16,6 +16,8 @@ interface EvaluationQuestionnaireProps {
   participationPrice: number;
   leadInfo?: Record<string, string>;
   onComplete: () => void;
+  /** "submit" (default) inserts the participation_request; "next" only validates and forwards. */
+  submitMode?: "submit" | "next";
 }
 
 interface QuestionOption {
@@ -41,6 +43,7 @@ const EvaluationQuestionnaire = ({
   participationPrice,
   leadInfo,
   onComplete,
+  submitMode = "submit",
 }: EvaluationQuestionnaireProps) => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -116,6 +119,11 @@ const EvaluationQuestionnaire = ({
     console.log("SUBMIT CLICKED");
     setIsSubmitting(true);
     try {
+      // "next" mode: don't insert; the parent flow handles persistence on the final step
+      if (submitMode === "next") {
+        onComplete();
+        return;
+      }
       const { data: { user } } = await supabase.auth.getUser();
       console.log("user:", user?.id, "carId:", carId);
 
