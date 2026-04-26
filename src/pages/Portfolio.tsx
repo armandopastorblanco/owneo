@@ -15,10 +15,10 @@ const Portfolio = () => {
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-foreground">
-              Our <span className="text-foreground">Portfolio</span>
+              Nuestra <span className="text-foreground">Gama</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore our exclusive collection of the world's most prestigious supercars
+              Explora nuestra colección exclusiva de los supercoches más prestigiosos del mundo
             </p>
           </div>
 

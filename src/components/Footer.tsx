@@ -61,7 +61,7 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground">ENLACES</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <div><a href="/portfolio" className="hover:text-foreground transition-colors">Portfolio</a></div>
+              <div><a href="/portfolio" className="hover:text-foreground transition-colors">Nuestra Gama</a></div>
               <div><a href="/cities" className="hover:text-foreground transition-colors">Ubicaciones</a></div>
               <div><a href="/quienes-somos" className="hover:text-foreground transition-colors">Quiénes Somos</a></div>
               <div><a href="#" className="hover:text-foreground transition-colors">Contacto</a></div>
