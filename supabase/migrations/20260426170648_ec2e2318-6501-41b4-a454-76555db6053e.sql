@@ -1,0 +1,1 @@
+ALTER TABLE public.cars ALTER COLUMN location_id SET NOT NULL;

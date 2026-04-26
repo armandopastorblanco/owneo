@@ -166,6 +166,7 @@ const AdminVehiculos = () => {
         category: car.category || "",
         description: car.description || "",
         luxury_description: car.luxury_description || "",
+        location_id: (car as DbCar).location_id || "",
         available_in: car.available_in || [],
         is_active: car.is_active ?? false,
         price: car.price,
@@ -193,6 +194,7 @@ const AdminVehiculos = () => {
       setForm({
         name: "", brand: "", model: "", year: new Date().getFullYear(),
         category: "", description: "", luxury_description: "",
+        location_id: "",
         available_in: [], is_active: false, price: 0,
         max_participations: 10, participation_price: 0,
         remaining_participations: 10, specifications: {},
@@ -252,6 +254,7 @@ const AdminVehiculos = () => {
         category: (form.category as string) || null,
         description: (form.description as string) || null,
         luxury_description: (form.luxury_description as string) || null,
+        location_id: form.location_id as string,
         available_in: form.available_in as string[],
         is_active: form.is_active as boolean,
         price: Number(form.price),
@@ -610,7 +613,27 @@ const AdminVehiculos = () => {
                 <Textarea value={(form.luxury_description as string) || ""} onChange={(e) => setForm({ ...form, luxury_description: e.target.value })} rows={4} />
               </div>
               <div>
-                <Label className="mb-2 block">Ciudades disponibles</Label>
+                <Label>Ciudad principal <span className="text-destructive">*</span></Label>
+                <Select
+                  value={(form.location_id as string) || ""}
+                  onValueChange={(v) => {
+                    const loc = locations?.find((l) => l.id === v);
+                    const current = (form.available_in as string[]) || [];
+                    const available_in = loc && !current.includes(loc.name) ? [...current, loc.name] : current;
+                    setForm({ ...form, location_id: v, available_in });
+                  }}
+                >
+                  <SelectTrigger><SelectValue placeholder="Selecciona una ciudad" /></SelectTrigger>
+                  <SelectContent>
+                    {locations?.map((loc) => (
+                      <SelectItem key={loc.id} value={loc.id}>{loc.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground mt-1">Obligatoria. Cada vehículo debe estar asignado a una ciudad.</p>
+              </div>
+              <div>
+                <Label className="mb-2 block">Ciudades disponibles (adicionales)</Label>
                 <div className="grid grid-cols-3 gap-2">
                   {locations?.map((loc) => (
                     <label key={loc.id} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
@@ -1056,7 +1079,7 @@ const AdminVehiculos = () => {
             <Button variant="outline" onClick={() => setDrawerOpen(false)}>Cancelar</Button>
             <Button
               onClick={() => saveMutation.mutate()}
-              disabled={saveMutation.isPending || !(form.name && form.brand && form.model && form.year)}
+              disabled={saveMutation.isPending || !(form.name && form.brand && form.model && form.year && form.location_id)}
               className="gap-2"
             >
               <Save className="w-4 h-4" />
