@@ -317,7 +317,7 @@ const Dashboard = () => {
   }, [primary, reservations]);
 
   const usedPct = yearMetrics.perYear > 0 ? (yearMetrics.used / yearMetrics.perYear) * 100 : 0;
-  const barColor = usedPct < 50 ? "bg-emerald-500" : usedPct < 80 ? "bg-amber-400" : "bg-champagne";
+  const barColor = "bg-foreground";
 
   // ================== RENDER ==================
   if (authLoading || isLoading) {
@@ -426,7 +426,7 @@ const Dashboard = () => {
                       </div>
                     )}
                     <Button
-                      className="w-full bg-foreground hover:bg-foreground/90 text-background"
+                      className="w-full bg-champagne hover:bg-champagne/90 text-champagne-foreground"
                       onClick={() => createReservation.mutate()}
                       disabled={createReservation.isPending || !range?.from || !range?.to}
                     >
