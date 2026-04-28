@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Car, FileText, MapPin, Phone, Calendar as CalendarIcon, CreditCard, Info } from "lucide-react";
+import { ArrowLeft, Car, FileText, MapPin, Phone, Calendar as CalendarIcon, CreditCard, Info, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
@@ -10,8 +10,7 @@ import { format, addDays, differenceInDays, startOfDay } from "date-fns";
 import { es } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
-
-// Mock user data
+import { supabase } from "@/integrations/supabase/client";
 import ferrariPortofino from "@/assets/cars/ferrari-portofino.jpg";
 
 // Double credit periods (July, August, Christmas)
@@ -32,28 +31,78 @@ const isDoubleCredit = (date: Date) => {
 const MIN_DAYS = 7;
 const MAX_DAYS = 14;
 
-const mockUserData = {
-  name: "Carlos Méndez",
-  email: "carlos.mendez@example.com",
-  credits: 30,
-  vehicle: {
-    id: "ferrari-portofino",
-    name: "Ferrari Portofino",
-    brand: "Ferrari",
-    model: "Portofino",
-    year: 2024,
-    color: "Rosso Corsa",
-    licensePlate: "1234 ABC",
-    image: ferrariPortofino,
-    location: {
-      address: "Marina Port Vell, Barcelona",
-      coordinates: { lat: 41.3749, lng: 2.1844 }
-    }
-  }
-};
+interface UserVehicle {
+  id: string;
+  name: string;
+  brand: string;
+  model: string;
+  year: number;
+  image: string;
+  location: { address: string };
+  numParticipations: number;
+}
+
+interface UserData {
+  name: string;
+  email: string;
+  credits: number;
+  vehicle: UserVehicle | null;
+}
 
 const Dashboard = () => {
   const [range, setRange] = useState<DateRange | undefined>();
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("name, surname, email")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      const { data: validated } = await supabase
+        .from("validated_participations")
+        .select("car_id, credits_remaining, credits_per_year, credits_used_this_year, cars:car_id(id, name, brand, model, year, image_url, location_id, locations:location_id(name))")
+        .eq("user_id", user.id);
+
+      let vehicle: UserVehicle | null = null;
+      let credits = 0;
+      if (validated && validated.length > 0) {
+        const numParticipations = validated.length;
+        const car: any = validated[0].cars;
+        const totalPerYear = Number(validated[0].credits_per_year ?? 28);
+        const used = Number(validated[0].credits_used_this_year ?? 0);
+        credits = Math.max(0, Math.round((totalPerYear - used) * numParticipations));
+        if (car) {
+          vehicle = {
+            id: car.id,
+            name: car.name,
+            brand: car.brand,
+            model: car.model,
+            year: car.year,
+            image: car.image_url || ferrariPortofino,
+            location: { address: car.locations?.name ?? "" },
+            numParticipations,
+          };
+        }
+      }
+
+      const fullName = [profile?.name, profile?.surname].filter(Boolean).join(" ") || profile?.email || user.email || "Usuario";
+      setUserData({
+        name: fullName,
+        email: profile?.email ?? user.email ?? "",
+        credits,
+        vehicle,
+      });
+      setLoading(false);
+    };
+    loadData();
+  }, []);
   
   const handleSelect = (newRange: DateRange | undefined) => {
     if (!newRange?.from) {
@@ -87,6 +136,19 @@ const Dashboard = () => {
   const credits = calculateCredits();
   const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-foreground" />
+      </div>
+    );
+  }
+
+  const displayName = userData?.name ?? "Usuario";
+  const vehicle = userData?.vehicle;
+  const userCredits = userData?.credits ?? 0;
+  const maxCredits = Math.max(userCredits, 28);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -104,7 +166,7 @@ const Dashboard = () => {
           </div>
           <div className="flex flex-col items-start sm:items-end sm:text-right">
             <span className="text-sm text-muted-foreground">Bienvenido,</span>
-            <span className="font-semibold text-foreground">{mockUserData.name}</span>
+            <span className="font-semibold text-foreground">{displayName}</span>
           </div>
         </div>
       </header>
@@ -127,35 +189,35 @@ const Dashboard = () => {
                 <div className="grid md:grid-cols-2">
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
-                      src={mockUserData.vehicle.image}
-                      alt={mockUserData.vehicle.name}
+                      src={vehicle?.image}
+                      alt={vehicle?.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-6 flex flex-col justify-center space-y-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Vehículo</p>
-                      <p className="text-2xl font-bold text-foreground">{mockUserData.vehicle.name}</p>
+                      <p className="text-2xl font-bold text-foreground">{vehicle?.name}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Año</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.year}</p>
+                        <p className="font-semibold text-foreground">{vehicle?.year}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Color</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.color}</p>
+                        <p className="font-semibold text-foreground">{""}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Matrícula</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.licensePlate}</p>
+                        <p className="font-semibold text-foreground">{"—"}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Marca</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.brand}</p>
+                        <p className="font-semibold text-foreground">{vehicle?.brand}</p>
                       </div>
                     </div>
-                    <Link to={`/car/${mockUserData.vehicle.id}`}>
+                    <Link to={`/car/${vehicle?.id}`}>
                       <Button variant="outline" className="w-full mt-2">
                         Ver Detalles Completos
                       </Button>
@@ -242,10 +304,7 @@ const Dashboard = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-muted to-background flex items-center justify-center">
                       <div className="text-center">
                         <MapPin className="w-12 h-12 text-foreground mx-auto mb-3" />
-                        <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Coordenadas: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
-                      </p>
+                        <p className="text-lg font-semibold text-foreground">{vehicle?.location.address}</p>
                     </div>
                   </div>
                 </div>
@@ -268,12 +327,12 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-center py-6">
-                  <div className="text-6xl font-bold text-foreground mb-2">{mockUserData.credits}</div>
+                  <div className="text-6xl font-bold text-foreground mb-2">{userCredits}</div>
                   <p className="text-muted-foreground">créditos disponibles</p>
                   <div className="mt-4 w-full bg-muted rounded-full h-3">
                     <div 
                       className="bg-foreground h-3 rounded-full transition-all duration-500"
-                      style={{ width: `${(mockUserData.credits / 30) * 100}%` }}
+                      style={{ width: `${Math.min(100, (userCredits / maxCredits) * 100)}%` }}
                     />
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">1 crédito = 1 día de uso</p>
