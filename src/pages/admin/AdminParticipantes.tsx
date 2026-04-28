@@ -577,11 +577,20 @@ const DocRow = ({ type, doc, userId }: any) => {
               <ExternalLink className="h-3 w-3 mr-1" /> Ver
             </Button>
             <Button size="sm" variant="outline" onClick={async () => {
-              const url = await getSignedUrl(doc.file_url, 60);
-              if (!url) { toast.error("No se pudo descargar el documento."); return; }
-              const a = document.createElement("a");
-              a.href = url; a.download = doc.file_name || "documento";
-              document.body.appendChild(a); a.click(); document.body.removeChild(a);
+              const signed = await getSignedUrl(doc.file_url, 60);
+              if (!signed) { toast.error("No se pudo descargar el documento."); return; }
+              try {
+                const res = await fetch(signed);
+                if (!res.ok) throw new Error("fetch failed");
+                const blob = await res.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = blobUrl; a.download = doc.file_name || "documento";
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+              } catch {
+                toast.error("No se pudo descargar el documento.");
+              }
             }}>
               <Download className="h-3 w-3 mr-1" />Descargar
             </Button>

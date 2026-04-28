@@ -30,11 +30,21 @@ const viewSignedDoc = async (fileUrl: string, carId?: string | null) => {
   else sonnerToast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
 };
 const downloadSignedDoc = async (fileUrl: string, fileName?: string, carId?: string | null) => {
-  const url = await getSignedUrl(fileUrl, 60, { carId });
-  if (!url) { sonnerToast.error("No se pudo descargar el documento."); return; }
-  const a = document.createElement("a");
-  a.href = url; a.download = fileName || "documento";
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  const signed = await getSignedUrl(fileUrl, 60, { carId });
+  if (!signed) { sonnerToast.error("No se pudo descargar el documento."); return; }
+  try {
+    const res = await fetch(signed);
+    if (!res.ok) throw new Error("fetch failed");
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = fileName || "documento";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+  } catch {
+    sonnerToast.error("No se pudo descargar el documento.");
+  }
 };
 import {
   ArrowLeft, ExternalLink, MapPin, Users, CalendarDays, Wrench,
