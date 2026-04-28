@@ -7,13 +7,26 @@ import { parseStorageObjectRef } from "@/lib/storageObject";
  */
 export const getSignedUrl = async (
   fileUrl: string,
-  expiresIn: number = 300
+  expiresIn: number = 300,
+  options?: { carId?: string | null }
 ): Promise<string | null> => {
   try {
     if (!fileUrl) return null;
 
     const ref = parseStorageObjectRef(fileUrl);
     if (!ref) return null;
+
+    const { data: functionData, error: functionError } = await supabase.functions.invoke("document-signed-url", {
+      body: {
+        fileUrl,
+        expiresIn,
+        carId: options?.carId ?? null,
+      },
+    });
+
+    if (!functionError && functionData?.signedUrl) {
+      return functionData.signedUrl;
+    }
 
     const { data, error } = await supabase.storage
       .from(ref.bucket)
