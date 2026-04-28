@@ -9,6 +9,9 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  define: {
+    "import.meta.env.VITE_BUILD_ID": JSON.stringify(String(Date.now())),
+  },
   plugins: [
     react(),
     mode === "development" && componentTagger(),
