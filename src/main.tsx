@@ -5,24 +5,71 @@ import { initPostHog } from "./lib/posthog";
 
 initPostHog();
 
-// Ensure users always see the latest version on the Lovable preview / dev:
-// unregister any stale Service Worker and clear its caches.
 const host = window.location.hostname;
+const isInIframe = (() => {
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+})();
+
 const isPreviewOrDev =
-  host.includes("lovable.app") === false || // custom dev hosts
+  isInIframe ||
+  host.includes("id-preview--") ||
+  host.includes("lovableproject.com") ||
   host.includes("preview") ||
-  host.includes("lovableproject") ||
   host.includes("localhost") ||
   host === "127.0.0.1";
 
-if (isPreviewOrDev && "serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .getRegistrations()
-    .then((regs) => regs.forEach((r) => r.unregister()))
-    .catch(() => {});
-  if (window.caches) {
-    caches.keys().then((keys) => keys.forEach((k) => caches.delete(k))).catch(() => {});
+async function clearStalePreviewCaches() {
+  let clearedSomething = false;
+
+  if ("serviceWorker" in navigator) {
+    try {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(
+        registrations.map(async (registration) => {
+          const unregistered = await registration.unregister();
+          clearedSomething = clearedSomething || unregistered;
+        }),
+      );
+    } catch {
+      // noop
+    }
   }
+
+  if ("caches" in window) {
+    try {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys.map(async (key) => {
+          const deleted = await caches.delete(key);
+          clearedSomething = clearedSomething || deleted;
+        }),
+      );
+    } catch {
+      // noop
+    }
+  }
+
+  return clearedSomething;
+}
+
+if (isPreviewOrDev) {
+  const reloadKey = `preview-cache-cleared:${window.location.pathname}`;
+
+  clearStalePreviewCaches().then((clearedSomething) => {
+    if (clearedSomething && !sessionStorage.getItem(reloadKey)) {
+      sessionStorage.setItem(reloadKey, "true");
+      window.location.reload();
+      return;
+    }
+
+    if (!clearedSomething) {
+      sessionStorage.removeItem(reloadKey);
+    }
+  });
 }
 
 createRoot(document.getElementById("root")!).render(<App />);
