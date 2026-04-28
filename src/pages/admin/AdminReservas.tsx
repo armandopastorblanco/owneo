@@ -35,6 +35,8 @@ const AdminReservas = () => {
   const [adjustModal, setAdjustModal] = useState<any>(null);
   const [adjustCredits, setAdjustCredits] = useState("");
   const [adjustReason, setAdjustReason] = useState("");
+  const [rejectModal, setRejectModal] = useState<any>(null);
+  const [rejectReason, setRejectReason] = useState("");
 
   // New rule form state
   const [ruleName, setRuleName] = useState("");
@@ -220,6 +222,64 @@ const AdminReservas = () => {
     },
   });
 
+  const acceptReservation = useMutation({
+    mutationFn: async (reservationId: string) => {
+      const { error } = await supabase.from("reservations").update({ status: "confirmed" }).eq("id", reservationId);
+      if (error) throw error;
+      await supabase.rpc("insert_audit_log", { _action: "accept_reservation", _target_table: "reservations", _target_id: reservationId });
+    },
+    onSuccess: () => {
+      toast.success("Reserva confirmada");
+      queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-pending-reservations-count"] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const rejectReservation = useMutation({
+    mutationFn: async () => {
+      if (!rejectModal) throw new Error("Sin reserva");
+      if (rejectReason.trim().length < 10) throw new Error("El motivo debe tener al menos 10 caracteres");
+      const { data: { user } } = await supabase.auth.getUser();
+      const { error } = await supabase.from("reservations").update({
+        status: "cancelled",
+        rejection_reason: rejectReason,
+        rejected_at: new Date().toISOString(),
+        rejected_by: user?.id,
+      }).eq("id", rejectModal.id);
+      if (error) throw error;
+      // Restore credits
+      const { data: vps } = await supabase
+        .from("validated_participations")
+        .select("id, credits_remaining, credits_used_this_year")
+        .eq("user_id", rejectModal.user_id)
+        .eq("car_id", rejectModal.car_id)
+        .limit(1);
+      if (vps && vps.length > 0) {
+        const vp = vps[0];
+        await supabase.from("validated_participations").update({
+          credits_remaining: Number(vp.credits_remaining || 0) + Number(rejectModal.credits_used || 0),
+          credits_used_this_year: Math.max(0, Number(vp.credits_used_this_year || 0) - Number(rejectModal.credits_used || 0)),
+        }).eq("id", vp.id);
+      }
+      await supabase.rpc("insert_audit_log", {
+        _action: "reject_reservation",
+        _target_table: "reservations",
+        _target_id: rejectModal.id,
+        _details: { reason: rejectReason },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Reserva rechazada y créditos restituidos");
+      setRejectModal(null);
+      setRejectReason("");
+      queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-validated-parts"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-pending-reservations-count"] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   // Calendar rendering
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
@@ -258,9 +318,65 @@ const AdminReservas = () => {
     return <Badge variant="secondary">×{m}</Badge>;
   };
 
+  const pendingReservations = (reservations as any[]).filter((r) => r.status === "pending");
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-foreground">Reservas y Créditos</h1>
+
+      {/* PENDING RESERVATIONS */}
+      {pendingReservations.length > 0 && (
+        <Card className="border-amber-500/40">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-foreground">
+              <AlertTriangle className="h-5 w-5 text-amber-400" />
+              Solicitudes pendientes ({pendingReservations.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Usuario</TableHead>
+                  <TableHead>Vehículo</TableHead>
+                  <TableHead>Fechas</TableHead>
+                  <TableHead>Créditos</TableHead>
+                  <TableHead className="text-right">Acciones</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pendingReservations.map((r: any) => (
+                  <TableRow key={r.id}>
+                    <TableCell className="text-foreground">{r.profiles?.name} {r.profiles?.surname}</TableCell>
+                    <TableCell className="text-foreground">{r.cars?.name}</TableCell>
+                    <TableCell className="text-muted-foreground text-sm">{r.start_date} → {r.end_date}</TableCell>
+                    <TableCell><Badge variant="secondary">{r.credits_used}</Badge></TableCell>
+                    <TableCell className="text-right space-x-2">
+                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)} disabled={acceptReservation.isPending}>Aceptar</Button>
+                      <Button size="sm" variant="destructive" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Reject Modal */}
+      <Dialog open={!!rejectModal} onOpenChange={(o) => { if (!o) { setRejectModal(null); setRejectReason(""); } }}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Rechazar reserva</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">Indica el motivo del rechazo. Los créditos serán restituidos al usuario.</p>
+            <Textarea value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} rows={4} placeholder="Motivo del rechazo (mínimo 10 caracteres)" />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setRejectModal(null); setRejectReason(""); }}>Cancelar</Button>
+            <Button variant="destructive" onClick={() => rejectReservation.mutate()} disabled={rejectReservation.isPending}>Confirmar rechazo</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* SECTION 1: Credit Rules */}
       <Card>
@@ -467,14 +583,20 @@ const AdminReservas = () => {
                             {(r.profiles as any)?.name?.[0]}{(r.profiles as any)?.surname?.[0]} · {(r.cars as any)?.name?.split(" ").pop()}
                           </button>
                         </PopoverTrigger>
-                        <PopoverContent className="w-64 text-sm space-y-1">
+                        <PopoverContent className="w-64 text-sm space-y-2">
                           <p className="font-semibold text-foreground">{(r.profiles as any)?.name} {(r.profiles as any)?.surname}</p>
                           <p className="text-muted-foreground">{(r.cars as any)?.name}</p>
                           <p className="text-muted-foreground">{r.start_date} → {r.end_date}</p>
-                          <div className="flex gap-2">
+                          <div className="flex gap-2 flex-wrap">
                             <Badge variant="secondary">{r.credits_used} créditos</Badge>
                             <Badge variant={r.status === "confirmed" ? "default" : "secondary"}>{r.status}</Badge>
                           </div>
+                          {r.status === "pending" && (
+                            <div className="flex gap-2 pt-2">
+                              <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)}>Aceptar</Button>
+                              <Button size="sm" variant="destructive" className="flex-1" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
+                            </div>
+                          )}
                         </PopoverContent>
                       </Popover>
                     ))}

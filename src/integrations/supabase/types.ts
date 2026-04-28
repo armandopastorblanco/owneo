@@ -1109,6 +1109,8 @@ export type Database = {
       }
       reservations: {
         Row: {
+          cancelled_at: string | null
+          cancelled_by: string | null
           car_id: string
           created_at: string
           credit_multiplier: number | null
@@ -1118,12 +1120,17 @@ export type Database = {
           is_peak_period: boolean | null
           notes: string | null
           participation_id: string
+          rejected_at: string | null
+          rejected_by: string | null
+          rejection_reason: string | null
           start_date: string
           status: string | null
           updated_at: string | null
           user_id: string
         }
         Insert: {
+          cancelled_at?: string | null
+          cancelled_by?: string | null
           car_id: string
           created_at?: string
           credit_multiplier?: number | null
@@ -1133,12 +1140,17 @@ export type Database = {
           is_peak_period?: boolean | null
           notes?: string | null
           participation_id: string
+          rejected_at?: string | null
+          rejected_by?: string | null
+          rejection_reason?: string | null
           start_date: string
           status?: string | null
           updated_at?: string | null
           user_id: string
         }
         Update: {
+          cancelled_at?: string | null
+          cancelled_by?: string | null
           car_id?: string
           created_at?: string
           credit_multiplier?: number | null
@@ -1148,12 +1160,22 @@ export type Database = {
           is_peak_period?: boolean | null
           notes?: string | null
           participation_id?: string
+          rejected_at?: string | null
+          rejected_by?: string | null
+          rejection_reason?: string | null
           start_date?: string
           status?: string | null
           updated_at?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "reservations_cancelled_by_fkey"
+            columns: ["cancelled_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "reservations_car_id_fkey"
             columns: ["car_id"]
@@ -1166,6 +1188,13 @@ export type Database = {
             columns: ["participation_id"]
             isOneToOne: false
             referencedRelation: "validated_participations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reservations_rejected_by_fkey"
+            columns: ["rejected_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
@@ -1323,6 +1352,7 @@ export type Database = {
           has_expiry_date: boolean | null
           id: string
           is_active: boolean | null
+          is_public: boolean | null
           is_required: boolean | null
           name: string
           sort_order: number | null
@@ -1334,6 +1364,7 @@ export type Database = {
           has_expiry_date?: boolean | null
           id?: string
           is_active?: boolean | null
+          is_public?: boolean | null
           is_required?: boolean | null
           name: string
           sort_order?: number | null
@@ -1345,6 +1376,7 @@ export type Database = {
           has_expiry_date?: boolean | null
           id?: string
           is_active?: boolean | null
+          is_public?: boolean | null
           is_required?: boolean | null
           name?: string
           sort_order?: number | null

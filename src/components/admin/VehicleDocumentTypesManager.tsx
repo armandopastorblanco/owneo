@@ -29,14 +29,14 @@ const VehicleDocumentTypesManager = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [form, setForm] = useState<any>({ name: "", description: "", has_expiry_date: false, is_required: true, is_active: true });
+  const [form, setForm] = useState<any>({ name: "", description: "", has_expiry_date: false, is_required: true, is_active: true, is_public: false });
 
   const open = (t: any = null) => {
     setEditing(t);
     setForm(t ? {
       name: t.name, description: t.description || "",
-      has_expiry_date: !!t.has_expiry_date, is_required: !!t.is_required, is_active: !!t.is_active,
-    } : { name: "", description: "", has_expiry_date: false, is_required: true, is_active: true });
+      has_expiry_date: !!t.has_expiry_date, is_required: !!t.is_required, is_active: !!t.is_active, is_public: !!t.is_public,
+    } : { name: "", description: "", has_expiry_date: false, is_required: true, is_active: true, is_public: false });
     setDialogOpen(true);
   };
 
@@ -75,7 +75,7 @@ const VehicleDocumentTypesManager = () => {
     refetch();
   };
 
-  const toggle = async (t: any, field: "has_expiry_date" | "is_required" | "is_active") => {
+  const toggle = async (t: any, field: "has_expiry_date" | "is_required" | "is_active" | "is_public") => {
     const v = !t[field];
     const { error } = await supabase.from("vehicle_document_types" as any).update({ [field]: v }).eq("id", t.id);
     if (error) return toast.error(error.message);
@@ -106,13 +106,14 @@ const VehicleDocumentTypesManager = () => {
               <th className="text-left py-2 font-normal">Descripción</th>
               <th className="text-left py-2 font-normal">Vencimiento</th>
               <th className="text-left py-2 font-normal">Obligatorio</th>
+              <th className="text-left py-2 font-normal">Público</th>
               <th className="text-left py-2 font-normal">Activo</th>
               <th className="text-right py-2 font-normal">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {types.length === 0 ? (
-              <tr><td colSpan={7} className="text-center py-6 text-muted-foreground">Sin tipos de documento de vehículo.</td></tr>
+              <tr><td colSpan={8} className="text-center py-6 text-muted-foreground">Sin tipos de documento de vehículo.</td></tr>
             ) : types.map((t, i) => (
               <tr key={t.id} className="border-b border-border/20">
                 <td className="py-2">
@@ -125,6 +126,7 @@ const VehicleDocumentTypesManager = () => {
                 <td className="py-2 text-muted-foreground text-xs max-w-xs truncate">{t.description}</td>
                 <td className="py-2"><Switch checked={!!t.has_expiry_date} onCheckedChange={() => toggle(t, "has_expiry_date")} /></td>
                 <td className="py-2"><Switch checked={!!t.is_required} onCheckedChange={() => toggle(t, "is_required")} /></td>
+                <td className="py-2"><Switch checked={!!t.is_public} onCheckedChange={() => toggle(t, "is_public")} /></td>
                 <td className="py-2"><Switch checked={!!t.is_active} onCheckedChange={() => toggle(t, "is_active")} /></td>
                 <td className="py-2 text-right">
                   <Button size="icon" variant="ghost" onClick={() => open(t)}><Pencil className="h-4 w-4" /></Button>
@@ -144,6 +146,7 @@ const VehicleDocumentTypesManager = () => {
             <div><Label>Descripción</Label><Textarea maxLength={200} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></div>
             <div className="flex items-center gap-2"><Switch checked={form.has_expiry_date} onCheckedChange={(v) => setForm({ ...form, has_expiry_date: v })} /><Label>¿Tiene fecha de vencimiento?</Label></div>
             <div className="flex items-center gap-2"><Switch checked={form.is_required} onCheckedChange={(v) => setForm({ ...form, is_required: v })} /><Label>Obligatorio</Label></div>
+            <div className="flex items-center gap-2"><Switch checked={form.is_public} onCheckedChange={(v) => setForm({ ...form, is_public: v })} /><Label>Visible para el usuario (público)</Label></div>
             <div className="flex items-center gap-2"><Switch checked={form.is_active} onCheckedChange={(v) => setForm({ ...form, is_active: v })} /><Label>Activo</Label></div>
           </div>
           <DialogFooter>

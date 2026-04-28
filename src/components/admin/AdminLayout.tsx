@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, Car, FileText, Users, CalendarDays,
   CreditCard, ClipboardCheck, MapPin, Settings,
@@ -15,7 +17,7 @@ const navItems = [
   { label: "Solicitudes", path: "/admin/solicitudes", icon: FileText },
   { label: "Participantes", path: "/admin/participantes", icon: Users },
   { label: "Flota", path: "/admin/flota", icon: Gauge },
-  { label: "Reservas", path: "/admin/reservas", icon: CalendarDays },
+  { label: "Reservas", path: "/admin/reservas", icon: CalendarDays, badgeKey: "pending_reservations" as const },
   { label: "Pagos", path: "/admin/pagos", icon: CreditCard },
   { label: "Inspecciones", path: "/admin/inspecciones", icon: ClipboardCheck },
   { label: "Ubicaciones", path: "/admin/ubicaciones", icon: MapPin },
@@ -27,6 +29,20 @@ const AdminLayout = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { data: pendingReservations = 0 } = useQuery({
+    queryKey: ["admin-pending-reservations-count"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("reservations")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "pending");
+      return count ?? 0;
+    },
+    refetchInterval: 60000,
+  });
+
+  const badgeMap: Record<string, number> = { pending_reservations: pendingReservations };
 
   const handleSignOut = async () => {
     await signOut();
@@ -44,21 +60,30 @@ const AdminLayout = () => {
       </div>
 
       <nav className="flex-1 overflow-y-auto p-3 space-y-1">
-        {navItems.map(({ label, path, icon: Icon }) => (
-          <button
-            key={path}
-            onClick={() => { navigate(path); setSidebarOpen(false); }}
-            className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
-              isActive(path)
-                ? "bg-primary/20 text-primary font-medium"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            <Icon className="h-4 w-4 shrink-0" />
-            <span>{label}</span>
-          </button>
-        ))}
+        {navItems.map((item) => {
+          const { label, path, icon: Icon } = item;
+          const badgeCount = item.badgeKey ? badgeMap[item.badgeKey] : 0;
+          return (
+            <button
+              key={path}
+              onClick={() => { navigate(path); setSidebarOpen(false); }}
+              className={cn(
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
+                isActive(path)
+                  ? "bg-primary/20 text-primary font-medium"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              <Icon className="h-4 w-4 shrink-0" />
+              <span className="flex-1 text-left">{label}</span>
+              {badgeCount > 0 && (
+                <span className="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-red-500 text-white text-[10px] font-semibold">
+                  {badgeCount}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </nav>
 
       <div className="p-3 border-t border-border/40">
