@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Car, FileText, MapPin, Phone, Calendar as CalendarIcon, CreditCard, Info } from "lucide-react";
+import { ArrowLeft, Car, FileText, MapPin, Phone, Calendar as CalendarIcon, CreditCard, Info, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
@@ -10,8 +10,7 @@ import { format, addDays, differenceInDays, startOfDay } from "date-fns";
 import { es } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
-
-// Mock user data
+import { supabase } from "@/integrations/supabase/client";
 import ferrariPortofino from "@/assets/cars/ferrari-portofino.jpg";
 
 // Double credit periods (July, August, Christmas)
