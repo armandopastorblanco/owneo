@@ -138,18 +138,33 @@ const AdminPagos = () => {
         const { error: e2 } = await supabase.from("participation_requests").update({ payment_status: "validated" }).eq("id", payment.participation_request_id);
         if (e2) throw e2;
 
+        // Check if a validated_participation already exists for this user+car (avoid duplicates)
+        const { data: existingVps } = await supabase
+          .from("validated_participations")
+          .select("id, participation_number")
+          .eq("user_id", payment.user_id)
+          .eq("car_id", req.car_id);
+
+        const existingNumbers = new Set((existingVps || []).map((v: any) => v.participation_number));
+        const baseNumber = (car?.max_participations || 10) - (car?.remaining_participations || 10);
+
         const partEntries = Array.from({ length: numParts }, (_, i) => ({
           request_id: payment.participation_request_id,
           user_id: payment.user_id,
           car_id: req.car_id,
-          participation_number: (car?.max_participations || 10) - (car?.remaining_participations || 10) + i + 1,
+          participation_number: baseNumber + i + 1,
           credits_per_year: 28,
           credits_remaining: 28,
           credits_used_this_year: 0,
           credits_reset_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-        }));
-        const { error: e3 } = await supabase.from("validated_participations").insert(partEntries);
-        if (e3) throw e3;
+        })).filter((entry) => !existingNumbers.has(entry.participation_number));
+
+        if (partEntries.length > 0) {
+          const { error: e3 } = await supabase
+            .from("validated_participations")
+            .upsert(partEntries, { onConflict: "user_id,car_id,participation_number", ignoreDuplicates: true });
+          if (e3) throw e3;
+        }
 
         const newRemaining = Math.max(0, (car?.remaining_participations || 10) - numParts);
         const updates: any = { remaining_participations: newRemaining };
