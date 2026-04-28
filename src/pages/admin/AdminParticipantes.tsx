@@ -449,6 +449,9 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
                   <p className="text-xs text-muted-foreground mt-2">
                     Inscrito: {format(new Date(profile.created_at), "d MMM yyyy", { locale: es })}
                   </p>
+                  <Button variant="outline" size="sm" className="mt-3" onClick={sendPasswordReset}>
+                    Restablecer contraseña
+                  </Button>
                 </div>
                 <div className="border-t border-border/40 pt-4">
                   <p className="text-xs uppercase text-muted-foreground mb-2">Vehículos ({userCars.length})</p>
