@@ -158,10 +158,71 @@ const Dashboard = () => {
     },
   });
 
+  // Credit rules (seasonal multipliers)
+  const { data: creditRules = [] } = useQuery({
+    queryKey: ["dashboard-credit-rules"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("credit_rules")
+        .select("*")
+        .eq("is_active", true);
+      return data || [];
+    },
+    refetchOnWindowFocus: true,
+  });
+
   // ================== RESERVATION LOGIC ==================
   const minDays = primary?.car?.min_reservation_days ?? 1;
   const maxDays = primary?.car?.max_reservation_days ?? 14;
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
+
+  // Compute credits for a single day applying active rules (max multiplier wins)
+  const creditsForDay = (date: Date): { credits: number; multiplier: number; isPeak: boolean } => {
+    const d = startOfDay(date);
+    const month = d.getMonth() + 1; // 1-12
+    let perDay = 1;
+    let multiplier = 1;
+    let matched = false;
+    for (const r of creditRules as any[]) {
+      if (!r.is_active) continue;
+      if (!r.applies_to_all && Array.isArray(r.car_ids) && carId && !r.car_ids.includes(carId)) continue;
+      let inRange = false;
+      if (r.months && Array.isArray(r.months) && r.months.length > 0) {
+        if (r.months.includes(month)) inRange = true;
+      } else if (r.start_date && r.end_date) {
+        const s = startOfDay(new Date(r.start_date));
+        const e = startOfDay(new Date(r.end_date));
+        if (d >= s && d <= e) inRange = true;
+      }
+      if (!inRange) continue;
+      const m = Number(r.multiplier ?? 1);
+      const cpd = Number(r.credits_per_day ?? 1);
+      // Apply the strongest (highest cost) rule
+      if (m * cpd > multiplier * perDay) {
+        multiplier = m;
+        perDay = cpd;
+        matched = true;
+      }
+    }
+    return { credits: perDay * multiplier, multiplier, isPeak: matched && multiplier > 1 };
+  };
+
+  // Compute total credits + peak info for a range
+  const computeRangeCredits = (from: Date, to: Date) => {
+    let total = 0;
+    let maxMult = 1;
+    let anyPeak = false;
+    let cur = startOfDay(from);
+    const end = startOfDay(to);
+    while (cur <= end) {
+      const info = creditsForDay(cur);
+      total += info.credits;
+      if (info.multiplier > maxMult) maxMult = info.multiplier;
+      if (info.isPeak) anyPeak = true;
+      cur = addDays(cur, 1);
+    }
+    return { total, maxMult, anyPeak };
+  };
 
   const isDateUnavailable = (date: Date) => {
     const t = startOfDay(date);
@@ -187,6 +248,12 @@ const Dashboard = () => {
   };
 
   const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
+  const rangeCreditInfo = useMemo(() => {
+    if (!range?.from || !range?.to) return { total: 0, maxMult: 1, anyPeak: false };
+    return computeRangeCredits(range.from, range.to);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [range?.from, range?.to, creditRules, carId]);
+  const totalCredits = rangeCreditInfo.total;
 
   const createReservation = useMutation({
     mutationFn: async () => {
@@ -197,7 +264,11 @@ const Dashboard = () => {
       if (range.from < minStart) throw new Error(`La reserva debe ser con al menos ${advanceDays} días de antelación`);
       if (days < minDays) throw new Error(`Mínimo ${minDays} días`);
       if (days > maxDays) throw new Error(`Máximo ${maxDays} días`);
-      if (days > primary.credits_remaining) throw new Error(`Solo te quedan ${primary.credits_remaining} créditos`);
+
+      const { total: creditsToUse, maxMult, anyPeak } = computeRangeCredits(range.from, range.to);
+      if (creditsToUse > primary.credits_remaining) {
+        throw new Error(`Solo te quedan ${primary.credits_remaining} créditos (esta reserva requiere ${creditsToUse})`);
+      }
 
       // Re-check conflicts
       let cur = range.from;
@@ -213,7 +284,9 @@ const Dashboard = () => {
         participation_id: primary.ids[0],
         start_date: format(range.from, "yyyy-MM-dd"),
         end_date: format(range.to, "yyyy-MM-dd"),
-        credits_used: days,
+        credits_used: creditsToUse,
+        credit_multiplier: maxMult,
+        is_peak_period: anyPeak,
         status: "pending",
       }).select().single();
       if (error) throw error;
@@ -228,8 +301,8 @@ const Dashboard = () => {
         .maybeSingle();
       const curRem = Number(vpRow?.credits_remaining ?? primary.credits_remaining);
       const curUsed = Number(vpRow?.credits_used_this_year ?? primary.credits_used_this_year);
-      const newRemaining = Math.max(0, curRem - days);
-      const newUsed = curUsed + days;
+      const newRemaining = Math.max(0, curRem - creditsToUse);
+      const newUsed = curUsed + creditsToUse;
       await supabase.from("validated_participations").update({
         credits_remaining: newRemaining,
         credits_used_this_year: newUsed,
@@ -239,7 +312,7 @@ const Dashboard = () => {
         _action: "create_reservation",
         _target_table: "reservations",
         _target_id: res.id,
-        _details: { days, start: range.from.toISOString(), end: range.to.toISOString() },
+        _details: { days, credits: creditsToUse, multiplier: maxMult, peak: anyPeak, start: range.from.toISOString(), end: range.to.toISOString() },
       });
     },
     onSuccess: () => {
@@ -411,6 +484,12 @@ const Dashboard = () => {
                       onSelect={handleSelect}
                       locale={es}
                       disabled={(date) => date < addDays(startOfDay(new Date()), advanceDays) || isDateUnavailable(date)}
+                      modifiers={{
+                        peak: (date) => creditsForDay(date).isPeak,
+                      }}
+                      modifiersClassNames={{
+                        peak: "ring-1 ring-champagne/60 text-champagne",
+                      }}
                       className="rounded-md border border-border pointer-events-auto"
                     />
                     {range?.from && range?.to && (
@@ -420,8 +499,10 @@ const Dashboard = () => {
                           <p className="font-bold text-foreground">{totalDays}</p>
                         </div>
                         <div className="p-2 rounded bg-foreground/10">
-                          <p className="text-xs text-muted-foreground">Créditos a usar</p>
-                          <p className="font-bold text-foreground text-lg">{totalDays}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Créditos a usar{rangeCreditInfo.maxMult > 1 ? ` (×${rangeCreditInfo.maxMult} temp. alta)` : ""}
+                          </p>
+                          <p className="font-bold text-foreground text-lg">{totalCredits}</p>
                         </div>
                       </div>
                     )}
