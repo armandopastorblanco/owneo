@@ -96,12 +96,27 @@ Deno.serve(async (req) => {
       .eq("user_id", userId);
 
     const roles = new Set((roleRows || []).map((row: any) => row.role));
-    const isAdmin = roles.has("superadmin") || roles.has("city_manager");
+    const isSuperadmin = roles.has("superadmin");
+    const isCityManager = roles.has("city_manager");
 
     let authorized = false;
 
-    if (isAdmin) {
+    if (isSuperadmin) {
       authorized = true;
+    } else if (isCityManager && carId) {
+      const { data: profile } = await serviceClient
+        .from("profiles")
+        .select("city_id")
+        .eq("id", userId)
+        .maybeSingle();
+
+      const { data: car } = await serviceClient
+        .from("cars")
+        .select("location_id")
+        .eq("id", carId)
+        .maybeSingle();
+
+      authorized = !!profile?.city_id && profile.city_id === car?.location_id;
     } else if (carId) {
       const { data: accessRow } = await serviceClient
         .from("validated_participations")
