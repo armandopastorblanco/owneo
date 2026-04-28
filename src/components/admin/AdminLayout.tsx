@@ -30,6 +30,20 @@ const AdminLayout = () => {
   const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const { data: pendingReservations = 0 } = useQuery({
+    queryKey: ["admin-pending-reservations-count"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("reservations")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "pending");
+      return count ?? 0;
+    },
+    refetchInterval: 60000,
+  });
+
+  const badgeMap: Record<string, number> = { pending_reservations: pendingReservations };
+
   const handleSignOut = async () => {
     await signOut();
     navigate("/login");
