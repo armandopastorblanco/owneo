@@ -136,6 +136,19 @@ const Dashboard = () => {
   const credits = calculateCredits();
   const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-foreground" />
+      </div>
+    );
+  }
+
+  const displayName = userData?.name ?? "Usuario";
+  const vehicle = userData?.vehicle;
+  const userCredits = userData?.credits ?? 0;
+  const maxCredits = Math.max(userCredits, 28);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
