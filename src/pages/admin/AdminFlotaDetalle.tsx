@@ -21,15 +21,16 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import { getSignedUrl } from "@/lib/getSignedUrl";
+import { parseStorageObjectRef } from "@/lib/storageObject";
 import { toast as sonnerToast } from "sonner";
 
-const viewSignedDoc = async (fileUrl: string) => {
-  const url = await getSignedUrl(fileUrl, 300);
+const viewSignedDoc = async (fileUrl: string, carId?: string | null) => {
+  const url = await getSignedUrl(fileUrl, 300, { carId });
   if (url) window.open(url, "_blank");
   else sonnerToast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
 };
-const downloadSignedDoc = async (fileUrl: string, fileName?: string) => {
-  const url = await getSignedUrl(fileUrl, 60);
+const downloadSignedDoc = async (fileUrl: string, fileName?: string, carId?: string | null) => {
+  const url = await getSignedUrl(fileUrl, 60, { carId });
   if (!url) { sonnerToast.error("No se pudo descargar el documento."); return; }
   const a = document.createElement("a");
   a.href = url; a.download = fileName || "documento";
@@ -598,19 +599,18 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
       const path = `vehicles/${carId}/${Date.now()}_${file.name}`;
       const { error: upErr } = await supabase.storage.from("documents").upload(path, file);
       if (upErr) throw upErr;
-      const { data: { publicUrl } } = supabase.storage.from("documents").getPublicUrl(path);
       const { data: { user } } = await supabase.auth.getUser();
 
       if (doc) {
         const { error } = await supabase.from("vehicle_documents").update({
-          file_url: publicUrl, file_name: file.name, file_size: file.size,
+          file_url: path, file_name: file.name, file_size: file.size,
           uploaded_by: user?.id, expiry_date: expiry || null, notes: notes || null,
         }).eq("id", doc.id);
         if (error) throw error;
         await auditLog("replace_vehicle_document", doc.id, { file_name: file.name });
       } else {
         const { data, error } = await supabase.from("vehicle_documents").insert({
-          car_id: carId, document_type_id: type.id, file_url: publicUrl,
+          car_id: carId, document_type_id: type.id, file_url: path,
           file_name: file.name, file_size: file.size, uploaded_by: user?.id,
           expiry_date: expiry || null, notes: notes || null,
         }).select().single();
@@ -632,11 +632,9 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
     try {
       // Try to remove the file from storage (best effort)
       if (doc.file_url) {
-        const marker = "/documents/";
-        const idx = doc.file_url.indexOf(marker);
-        if (idx >= 0) {
-          const path = decodeURIComponent(doc.file_url.substring(idx + marker.length));
-          await supabase.storage.from("documents").remove([path]);
+        const ref = parseStorageObjectRef(doc.file_url);
+        if (ref?.bucket === "documents") {
+          await supabase.storage.from("documents").remove([ref.filePath]);
         }
       }
       const { error } = await supabase.from("vehicle_documents").delete().eq("id", doc.id);
@@ -696,8 +694,8 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
               <div>{format(new Date(doc.created_at), "dd MMM yyyy HH:mm", { locale: es })}</div>
             </div>
             <div className="flex gap-1 flex-wrap">
-              <Button size="sm" variant="outline" onClick={() => viewSignedDoc(doc.file_url)}><Eye className="h-3 w-3 mr-1" />Ver</Button>
-              <Button size="sm" variant="outline" onClick={() => downloadSignedDoc(doc.file_url, doc.file_name)}><Download className="h-3 w-3 mr-1" />Descargar</Button>
+              <Button size="sm" variant="outline" onClick={() => viewSignedDoc(doc.file_url, carId)}><Eye className="h-3 w-3 mr-1" />Ver</Button>
+              <Button size="sm" variant="outline" onClick={() => downloadSignedDoc(doc.file_url, doc.file_name, carId)}><Download className="h-3 w-3 mr-1" />Descargar</Button>
               <label className="inline-flex">
                 <Button size="sm" variant="outline" asChild><span><Upload className="h-3 w-3 mr-1" />Reemplazar</span></Button>
                 <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />

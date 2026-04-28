@@ -85,11 +85,10 @@ export async function uploadParticipantDocument(params: {
     .from("documents")
     .upload(path, file, { upsert: false });
   if (upErr) throw upErr;
-  const { data: urlData } = supabase.storage.from("documents").getPublicUrl(path);
   const { error: insErr } = await supabase.from("participant_documents" as any).insert({
     user_id: userId,
     document_type_id: documentTypeId,
-    file_url: urlData.publicUrl,
+    file_url: path,
     file_name: file.name,
     file_size: file.size,
     status: "pending",
