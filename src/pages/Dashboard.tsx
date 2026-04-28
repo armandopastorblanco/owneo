@@ -261,14 +261,21 @@ const Dashboard = () => {
         cancelled_by: userId,
       }).eq("id", reservationId);
       if (error) throw error;
-      // Restore credits
-      if (primary && r.credits_used > 0) {
-        const newRemaining = primary.credits_remaining + Number(r.credits_used);
-        const newUsed = Math.max(0, Number(primary.credits_used_this_year) - Number(r.credits_used));
-        await supabase.from("validated_participations").update({
-          credits_remaining: newRemaining,
-          credits_used_this_year: newUsed,
-        }).eq("id", primary.ids[0]);
+      // Restore credits using user_id + car_id of the cancelled reservation (not primary.ids[0])
+      if (r.credits_used > 0) {
+        const { data: vpRow } = await supabase
+          .from("validated_participations")
+          .select("credits_remaining, credits_used_this_year")
+          .eq("user_id", r.user_id)
+          .eq("car_id", r.car_id)
+          .limit(1)
+          .maybeSingle();
+        if (vpRow) {
+          await supabase.from("validated_participations").update({
+            credits_remaining: Number(vpRow.credits_remaining || 0) + Number(r.credits_used),
+            credits_used_this_year: Math.max(0, Number(vpRow.credits_used_this_year || 0) - Number(r.credits_used)),
+          }).eq("user_id", r.user_id).eq("car_id", r.car_id);
+        }
       }
       await supabase.rpc("insert_audit_log", {
         _action: "cancel_reservation",
