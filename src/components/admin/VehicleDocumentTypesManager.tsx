@@ -106,13 +106,14 @@ const VehicleDocumentTypesManager = () => {
               <th className="text-left py-2 font-normal">Descripción</th>
               <th className="text-left py-2 font-normal">Vencimiento</th>
               <th className="text-left py-2 font-normal">Obligatorio</th>
+              <th className="text-left py-2 font-normal">Público</th>
               <th className="text-left py-2 font-normal">Activo</th>
               <th className="text-right py-2 font-normal">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {types.length === 0 ? (
-              <tr><td colSpan={7} className="text-center py-6 text-muted-foreground">Sin tipos de documento de vehículo.</td></tr>
+              <tr><td colSpan={8} className="text-center py-6 text-muted-foreground">Sin tipos de documento de vehículo.</td></tr>
             ) : types.map((t, i) => (
               <tr key={t.id} className="border-b border-border/20">
                 <td className="py-2">
@@ -125,6 +126,7 @@ const VehicleDocumentTypesManager = () => {
                 <td className="py-2 text-muted-foreground text-xs max-w-xs truncate">{t.description}</td>
                 <td className="py-2"><Switch checked={!!t.has_expiry_date} onCheckedChange={() => toggle(t, "has_expiry_date")} /></td>
                 <td className="py-2"><Switch checked={!!t.is_required} onCheckedChange={() => toggle(t, "is_required")} /></td>
+                <td className="py-2"><Switch checked={!!t.is_public} onCheckedChange={() => toggle(t, "is_public")} /></td>
                 <td className="py-2"><Switch checked={!!t.is_active} onCheckedChange={() => toggle(t, "is_active")} /></td>
                 <td className="py-2 text-right">
                   <Button size="icon" variant="ghost" onClick={() => open(t)}><Pencil className="h-4 w-4" /></Button>
