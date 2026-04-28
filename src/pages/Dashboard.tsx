@@ -452,6 +452,10 @@ const Dashboard = () => {
                       onSelect={handleSelect}
                       locale={es}
                       disabled={(date) => date < addDays(startOfDay(new Date()), advanceDays) || isDateUnavailable(date)}
+                      modifiers={{ peak: (date) => isPeakDate(date) }}
+                      modifiersClassNames={{
+                        peak: "bg-champagne/25 text-champagne font-semibold ring-1 ring-champagne/60 rounded-md",
+                      }}
                       className="rounded-md border border-border pointer-events-auto"
                     />
                     {range?.from && range?.to && (
