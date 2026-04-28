@@ -332,7 +332,7 @@ const Dashboard = () => {
                   <div className="mt-4 w-full bg-muted rounded-full h-3">
                     <div 
                       className="bg-foreground h-3 rounded-full transition-all duration-500"
-                      style={{ width: `${(userCredits / 30) * 100}%` }}
+                      style={{ width: `${Math.min(100, (userCredits / maxCredits) * 100)}%` }}
                     />
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">1 crédito = 1 día de uso</p>
