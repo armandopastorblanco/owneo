@@ -218,13 +218,22 @@ const Dashboard = () => {
       }).select().single();
       if (error) throw error;
 
-      // Decrement credits on first participation row
-      const newRemaining = Math.max(0, primary.credits_remaining - days);
-      const newUsed = Number(primary.credits_used_this_year) + days;
+      // Decrement credits using user_id + car_id (not id) to operate on the right row
+      const { data: vpRow } = await supabase
+        .from("validated_participations")
+        .select("credits_remaining, credits_used_this_year")
+        .eq("user_id", userId)
+        .eq("car_id", carId)
+        .limit(1)
+        .maybeSingle();
+      const curRem = Number(vpRow?.credits_remaining ?? primary.credits_remaining);
+      const curUsed = Number(vpRow?.credits_used_this_year ?? primary.credits_used_this_year);
+      const newRemaining = Math.max(0, curRem - days);
+      const newUsed = curUsed + days;
       await supabase.from("validated_participations").update({
         credits_remaining: newRemaining,
         credits_used_this_year: newUsed,
-      }).eq("id", primary.ids[0]);
+      }).eq("user_id", userId).eq("car_id", carId);
 
       await supabase.rpc("insert_audit_log", {
         _action: "create_reservation",
