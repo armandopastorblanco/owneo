@@ -35,6 +35,8 @@ const AdminReservas = () => {
   const [adjustModal, setAdjustModal] = useState<any>(null);
   const [adjustCredits, setAdjustCredits] = useState("");
   const [adjustReason, setAdjustReason] = useState("");
+  const [rejectModal, setRejectModal] = useState<any>(null);
+  const [rejectReason, setRejectReason] = useState("");
 
   // New rule form state
   const [ruleName, setRuleName] = useState("");
