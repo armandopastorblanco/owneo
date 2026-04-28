@@ -21,32 +21,7 @@ import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
-import { getSignedUrl } from "@/lib/getSignedUrl";
-
-const handleViewSigned = async (fileUrl: string, carId?: string | null) => {
-  const url = await getSignedUrl(fileUrl, 300, { carId });
-  if (url) window.open(url, "_blank");
-  else toast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
-};
-const handleDownloadSigned = async (fileUrl: string, fileName?: string, carId?: string | null) => {
-  const signed = await getSignedUrl(fileUrl, 60, { carId });
-  if (!signed) { toast.error("No se pudo descargar el documento."); return; }
-  try {
-    const res = await fetch(signed);
-    if (!res.ok) throw new Error("fetch failed");
-    const blob = await res.blob();
-    const blobUrl = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    a.download = fileName || "documento";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-  } catch {
-    toast.error("No se pudo descargar el documento.");
-  }
-};
+import DocumentsBlock, { type DocItem } from "@/components/dashboard/DocumentsBlock";
 
 const Dashboard = () => {
   const qc = useQueryClient();
