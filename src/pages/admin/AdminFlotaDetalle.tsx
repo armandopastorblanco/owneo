@@ -687,6 +687,7 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
                 <Button size="sm" variant="outline" asChild><span><Upload className="h-3 w-3 mr-1" />Reemplazar</span></Button>
                 <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
               </label>
+              <Button size="sm" variant="outline" onClick={removeDoc}><Trash2 className="h-3 w-3 mr-1 text-destructive" />Eliminar</Button>
             </div>
             {type.has_expiry_date && (
               <div><Label className="text-xs">Vencimiento</Label><Input type="date" value={expiry} onChange={(e) => setExpiry(e.target.value)} /></div>
