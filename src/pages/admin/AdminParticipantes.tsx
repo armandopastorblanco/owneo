@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Search, Users, FileCheck, Clock, FileSignature, MapPin, Car as CarIcon, Eye, Upload, Download, ExternalLink } from "lucide-react";
 import { resolveCarImage } from "@/lib/resolveCarImage";
+import { getSignedUrl } from "@/lib/getSignedUrl";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -568,11 +569,21 @@ const DocRow = ({ type, doc, userId }: any) => {
             {doc.file_name} · subido por {doc.uploaded_by} · {format(new Date(doc.created_at), "d MMM yyyy", { locale: es })}
           </div>
           <div className="flex gap-2">
-            <Button size="sm" variant="outline" onClick={() => window.open(doc.file_url, "_blank")}>
+            <Button size="sm" variant="outline" onClick={async () => {
+              const url = await getSignedUrl(doc.file_url, 300);
+              if (url) window.open(url, "_blank");
+              else toast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
+            }}>
               <ExternalLink className="h-3 w-3 mr-1" /> Ver
             </Button>
-            <Button size="sm" variant="outline" asChild>
-              <a href={doc.file_url} download><Download className="h-3 w-3 mr-1" />Descargar</a>
+            <Button size="sm" variant="outline" onClick={async () => {
+              const url = await getSignedUrl(doc.file_url, 60);
+              if (!url) { toast.error("No se pudo descargar el documento."); return; }
+              const a = document.createElement("a");
+              a.href = url; a.download = doc.file_name || "documento";
+              document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            }}>
+              <Download className="h-3 w-3 mr-1" />Descargar
             </Button>
             <label className="cursor-pointer">
               <input type="file" className="hidden" accept=".pdf,.jpg,.jpeg,.png,.webp"

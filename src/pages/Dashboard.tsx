@@ -21,6 +21,20 @@ import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
+import { getSignedUrl } from "@/lib/getSignedUrl";
+
+const handleViewSigned = async (fileUrl: string) => {
+  const url = await getSignedUrl(fileUrl, 300);
+  if (url) window.open(url, "_blank");
+  else toast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
+};
+const handleDownloadSigned = async (fileUrl: string, fileName?: string) => {
+  const url = await getSignedUrl(fileUrl, 60);
+  if (!url) { toast.error("No se pudo descargar el documento."); return; }
+  const a = document.createElement("a");
+  a.href = url; a.download = fileName || "documento";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+};
 
 const Dashboard = () => {
   const qc = useQueryClient();
@@ -478,8 +492,8 @@ const Dashboard = () => {
                               <p className="text-xs text-muted-foreground">{format(new Date(d.created_at), "d MMM yyyy", { locale: es })}</p>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => window.open(d.file_url, "_blank")}><Eye className="w-3 h-3 mr-1" />Ver</Button>
-                              <Button size="sm" variant="outline" onClick={() => { const a = document.createElement("a"); a.href = d.file_url; a.download = d.file_name || "doc"; a.click(); }}><Download className="w-3 h-3 mr-1" />Descargar</Button>
+                              <Button size="sm" variant="outline" onClick={() => handleViewSigned(d.file_url)}><Eye className="w-3 h-3 mr-1" />Ver</Button>
+                              <Button size="sm" variant="outline" onClick={() => handleDownloadSigned(d.file_url, d.file_name)}><Download className="w-3 h-3 mr-1" />Descargar</Button>
                             </div>
                           </li>
                         );

@@ -20,6 +20,21 @@ import {
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { resolveCarImage } from "@/lib/resolveCarImage";
+import { getSignedUrl } from "@/lib/getSignedUrl";
+import { toast as sonnerToast } from "sonner";
+
+const viewSignedDoc = async (fileUrl: string) => {
+  const url = await getSignedUrl(fileUrl, 300);
+  if (url) window.open(url, "_blank");
+  else sonnerToast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
+};
+const downloadSignedDoc = async (fileUrl: string, fileName?: string) => {
+  const url = await getSignedUrl(fileUrl, 60);
+  if (!url) { sonnerToast.error("No se pudo descargar el documento."); return; }
+  const a = document.createElement("a");
+  a.href = url; a.download = fileName || "documento";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+};
 import {
   ArrowLeft, ExternalLink, MapPin, Users, CalendarDays, Wrench,
   Gauge, FileText, ClipboardCheck, BarChart3, Plus, Trash2, Download,
@@ -681,8 +696,8 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
               <div>{format(new Date(doc.created_at), "dd MMM yyyy HH:mm", { locale: es })}</div>
             </div>
             <div className="flex gap-1 flex-wrap">
-              <Button size="sm" variant="outline" onClick={() => window.open(doc.file_url, "_blank")}><Eye className="h-3 w-3 mr-1" />Ver</Button>
-              <Button size="sm" variant="outline" onClick={() => { const a = document.createElement("a"); a.href = doc.file_url; a.download = doc.file_name || "doc"; a.click(); }}><Download className="h-3 w-3 mr-1" />Descargar</Button>
+              <Button size="sm" variant="outline" onClick={() => viewSignedDoc(doc.file_url)}><Eye className="h-3 w-3 mr-1" />Ver</Button>
+              <Button size="sm" variant="outline" onClick={() => downloadSignedDoc(doc.file_url, doc.file_name)}><Download className="h-3 w-3 mr-1" />Descargar</Button>
               <label className="inline-flex">
                 <Button size="sm" variant="outline" asChild><span><Upload className="h-3 w-3 mr-1" />Reemplazar</span></Button>
                 <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
