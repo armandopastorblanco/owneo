@@ -540,6 +540,36 @@ const DocRow = ({ type, doc, userId }: any) => {
   const [notes, setNotes] = useState(doc?.notes || "");
   const [uploading, setUploading] = useState(false);
 
+  const handleViewDocument = async () => {
+    const url = await getSignedUrl(doc.file_url, 300);
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+    else toast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
+  };
+
+  const handleDownloadDocument = async () => {
+    const signed = await getSignedUrl(doc.file_url, 60);
+    if (!signed) {
+      toast.error("No se pudo descargar el documento.");
+      return;
+    }
+
+    try {
+      const res = await fetch(signed);
+      if (!res.ok) throw new Error("fetch failed");
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = doc.file_name || "documento";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    } catch {
+      toast.error("No se pudo descargar el documento.");
+    }
+  };
+
   const onFile = async (f: File) => {
     if (f.size > 10 * 1024 * 1024) return toast.error("Máx. 10MB");
     setUploading(true);
@@ -569,29 +599,10 @@ const DocRow = ({ type, doc, userId }: any) => {
             {doc.file_name} · subido por {doc.uploaded_by} · {format(new Date(doc.created_at), "d MMM yyyy", { locale: es })}
           </div>
           <div className="flex gap-2">
-            <Button size="sm" variant="outline" onClick={async () => {
-              const url = await getSignedUrl(doc.file_url, 300);
-              if (url) window.open(url, "_blank");
-              else toast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
-            }}>
+            <Button size="sm" variant="outline" onClick={handleViewDocument}>
               <ExternalLink className="h-3 w-3 mr-1" /> Ver
             </Button>
-            <Button size="sm" variant="outline" onClick={async () => {
-              const signed = await getSignedUrl(doc.file_url, 60);
-              if (!signed) { toast.error("No se pudo descargar el documento."); return; }
-              try {
-                const res = await fetch(signed);
-                if (!res.ok) throw new Error("fetch failed");
-                const blob = await res.blob();
-                const blobUrl = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = blobUrl; a.download = doc.file_name || "documento";
-                document.body.appendChild(a); a.click(); document.body.removeChild(a);
-                setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-              } catch {
-                toast.error("No se pudo descargar el documento.");
-              }
-            }}>
+            <Button size="sm" variant="outline" onClick={handleDownloadDocument}>
               <Download className="h-3 w-3 mr-1" />Descargar
             </Button>
             <label className="cursor-pointer">
