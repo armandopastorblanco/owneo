@@ -62,16 +62,12 @@ Deno.serve(async (req) => {
     }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const publishableKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
-    const userClient = createClient(supabaseUrl, publishableKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
 
     const serviceClient = createClient(supabaseUrl, serviceRoleKey);
 
-    const { data: userData, error: userError } = await userClient.auth.getUser();
+    const token = authHeader.replace(/^Bearer\s+/i, "").trim();
+    const { data: userData, error: userError } = await serviceClient.auth.getUser(token);
     if (userError || !userData.user) {
       return new Response(JSON.stringify({ error: "Sesión no válida" }), {
         status: 401,
