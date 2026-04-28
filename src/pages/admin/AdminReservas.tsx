@@ -318,9 +318,65 @@ const AdminReservas = () => {
     return <Badge variant="secondary">×{m}</Badge>;
   };
 
+  const pendingReservations = (reservations as any[]).filter((r) => r.status === "pending");
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-foreground">Reservas y Créditos</h1>
+
+      {/* PENDING RESERVATIONS */}
+      {pendingReservations.length > 0 && (
+        <Card className="border-amber-500/40">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-foreground">
+              <AlertTriangle className="h-5 w-5 text-amber-400" />
+              Solicitudes pendientes ({pendingReservations.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Usuario</TableHead>
+                  <TableHead>Vehículo</TableHead>
+                  <TableHead>Fechas</TableHead>
+                  <TableHead>Créditos</TableHead>
+                  <TableHead className="text-right">Acciones</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pendingReservations.map((r: any) => (
+                  <TableRow key={r.id}>
+                    <TableCell className="text-foreground">{r.profiles?.name} {r.profiles?.surname}</TableCell>
+                    <TableCell className="text-foreground">{r.cars?.name}</TableCell>
+                    <TableCell className="text-muted-foreground text-sm">{r.start_date} → {r.end_date}</TableCell>
+                    <TableCell><Badge variant="secondary">{r.credits_used}</Badge></TableCell>
+                    <TableCell className="text-right space-x-2">
+                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)} disabled={acceptReservation.isPending}>Aceptar</Button>
+                      <Button size="sm" variant="destructive" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Reject Modal */}
+      <Dialog open={!!rejectModal} onOpenChange={(o) => { if (!o) { setRejectModal(null); setRejectReason(""); } }}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Rechazar reserva</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">Indica el motivo del rechazo. Los créditos serán restituidos al usuario.</p>
+            <Textarea value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} rows={4} placeholder="Motivo del rechazo (mínimo 10 caracteres)" />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setRejectModal(null); setRejectReason(""); }}>Cancelar</Button>
+            <Button variant="destructive" onClick={() => rejectReservation.mutate()} disabled={rejectReservation.isPending}>Confirmar rechazo</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* SECTION 1: Credit Rules */}
       <Card>
