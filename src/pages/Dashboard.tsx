@@ -158,10 +158,71 @@ const Dashboard = () => {
     },
   });
 
+  // Credit rules (seasonal multipliers)
+  const { data: creditRules = [] } = useQuery({
+    queryKey: ["dashboard-credit-rules"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("credit_rules")
+        .select("*")
+        .eq("is_active", true);
+      return data || [];
+    },
+    refetchOnWindowFocus: true,
+  });
+
   // ================== RESERVATION LOGIC ==================
   const minDays = primary?.car?.min_reservation_days ?? 1;
   const maxDays = primary?.car?.max_reservation_days ?? 14;
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
+
+  // Compute credits for a single day applying active rules (max multiplier wins)
+  const creditsForDay = (date: Date): { credits: number; multiplier: number; isPeak: boolean } => {
+    const d = startOfDay(date);
+    const month = d.getMonth() + 1; // 1-12
+    let perDay = 1;
+    let multiplier = 1;
+    let matched = false;
+    for (const r of creditRules as any[]) {
+      if (!r.is_active) continue;
+      if (!r.applies_to_all && Array.isArray(r.car_ids) && carId && !r.car_ids.includes(carId)) continue;
+      let inRange = false;
+      if (r.months && Array.isArray(r.months) && r.months.length > 0) {
+        if (r.months.includes(month)) inRange = true;
+      } else if (r.start_date && r.end_date) {
+        const s = startOfDay(new Date(r.start_date));
+        const e = startOfDay(new Date(r.end_date));
+        if (d >= s && d <= e) inRange = true;
+      }
+      if (!inRange) continue;
+      const m = Number(r.multiplier ?? 1);
+      const cpd = Number(r.credits_per_day ?? 1);
+      // Apply the strongest (highest cost) rule
+      if (m * cpd > multiplier * perDay) {
+        multiplier = m;
+        perDay = cpd;
+        matched = true;
+      }
+    }
+    return { credits: perDay * multiplier, multiplier, isPeak: matched && multiplier > 1 };
+  };
+
+  // Compute total credits + peak info for a range
+  const computeRangeCredits = (from: Date, to: Date) => {
+    let total = 0;
+    let maxMult = 1;
+    let anyPeak = false;
+    let cur = startOfDay(from);
+    const end = startOfDay(to);
+    while (cur <= end) {
+      const info = creditsForDay(cur);
+      total += info.credits;
+      if (info.multiplier > maxMult) maxMult = info.multiplier;
+      if (info.isPeak) anyPeak = true;
+      cur = addDays(cur, 1);
+    }
+    return { total, maxMult, anyPeak };
+  };
 
   const isDateUnavailable = (date: Date) => {
     const t = startOfDay(date);
