@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import { useDocumentTypes, useParticipantDocuments, uploadParticipantDocument } from "@/hooks/useDocuments";
+import { getSignedUrl } from "@/lib/getSignedUrl";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -88,8 +89,12 @@ const MisDocumentos = () => {
                       <div className="flex items-center gap-2 text-sm">
                         <CheckCircle2 className="h-4 w-4 text-emerald-300" />
                         <span className="text-muted-foreground">{doc.file_name}</span>
-                        <Button variant="ghost" size="sm" asChild>
-                          <a href={doc.file_url} target="_blank" rel="noreferrer"><ExternalLink className="h-3 w-3" /></a>
+                        <Button variant="ghost" size="sm" onClick={async () => {
+                          const url = await getSignedUrl(doc.file_url, 300);
+                          if (url) window.open(url, "_blank", "noopener,noreferrer");
+                          else toast.error("No se pudo abrir el documento.");
+                        }}>
+                          <ExternalLink className="h-3 w-3" />
                         </Button>
                       </div>
                     )}
