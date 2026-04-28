@@ -484,6 +484,12 @@ const Dashboard = () => {
                       onSelect={handleSelect}
                       locale={es}
                       disabled={(date) => date < addDays(startOfDay(new Date()), advanceDays) || isDateUnavailable(date)}
+                      modifiers={{
+                        peak: (date) => creditsForDay(date).isPeak,
+                      }}
+                      modifiersClassNames={{
+                        peak: "ring-1 ring-champagne/60 text-champagne",
+                      }}
                       className="rounded-md border border-border pointer-events-auto"
                     />
                     {range?.from && range?.to && (
@@ -493,8 +499,10 @@ const Dashboard = () => {
                           <p className="font-bold text-foreground">{totalDays}</p>
                         </div>
                         <div className="p-2 rounded bg-foreground/10">
-                          <p className="text-xs text-muted-foreground">Créditos a usar</p>
-                          <p className="font-bold text-foreground text-lg">{totalDays}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Créditos a usar{rangeCreditInfo.maxMult > 1 ? ` (×${rangeCreditInfo.maxMult} temp. alta)` : ""}
+                          </p>
+                          <p className="font-bold text-foreground text-lg">{totalCredits}</p>
                         </div>
                       </div>
                     )}
