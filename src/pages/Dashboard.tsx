@@ -157,17 +157,6 @@ const Dashboard = () => {
       return data || [];
     },
   });
-    queryKey: ["dashboard-user-docs", userId],
-    enabled: !!userId,
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("participant_documents")
-        .select("*, document_types:document_type_id(name)")
-        .eq("user_id", userId!)
-        .order("created_at", { ascending: false });
-      return data || [];
-    },
-  });
 
   // ================== RESERVATION LOGIC ==================
   const minDays = primary?.car?.min_reservation_days ?? 1;
