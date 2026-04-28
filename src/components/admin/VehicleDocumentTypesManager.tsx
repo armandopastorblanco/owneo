@@ -146,6 +146,7 @@ const VehicleDocumentTypesManager = () => {
             <div><Label>Descripción</Label><Textarea maxLength={200} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></div>
             <div className="flex items-center gap-2"><Switch checked={form.has_expiry_date} onCheckedChange={(v) => setForm({ ...form, has_expiry_date: v })} /><Label>¿Tiene fecha de vencimiento?</Label></div>
             <div className="flex items-center gap-2"><Switch checked={form.is_required} onCheckedChange={(v) => setForm({ ...form, is_required: v })} /><Label>Obligatorio</Label></div>
+            <div className="flex items-center gap-2"><Switch checked={form.is_public} onCheckedChange={(v) => setForm({ ...form, is_public: v })} /><Label>Visible para el usuario (público)</Label></div>
             <div className="flex items-center gap-2"><Switch checked={form.is_active} onCheckedChange={(v) => setForm({ ...form, is_active: v })} /><Label>Activo</Label></div>
           </div>
           <DialogFooter>
