@@ -31,28 +31,78 @@ const isDoubleCredit = (date: Date) => {
 const MIN_DAYS = 7;
 const MAX_DAYS = 14;
 
-const mockUserData = {
-  name: "Carlos Méndez",
-  email: "carlos.mendez@example.com",
-  credits: 30,
-  vehicle: {
-    id: "ferrari-portofino",
-    name: "Ferrari Portofino",
-    brand: "Ferrari",
-    model: "Portofino",
-    year: 2024,
-    color: "Rosso Corsa",
-    licensePlate: "1234 ABC",
-    image: ferrariPortofino,
-    location: {
-      address: "Marina Port Vell, Barcelona",
-      coordinates: { lat: 41.3749, lng: 2.1844 }
-    }
-  }
-};
+interface UserVehicle {
+  id: string;
+  name: string;
+  brand: string;
+  model: string;
+  year: number;
+  image: string;
+  location: { address: string };
+  numParticipations: number;
+}
+
+interface UserData {
+  name: string;
+  email: string;
+  credits: number;
+  vehicle: UserVehicle | null;
+}
 
 const Dashboard = () => {
   const [range, setRange] = useState<DateRange | undefined>();
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("name, surname, email")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      const { data: validated } = await supabase
+        .from("validated_participations")
+        .select("car_id, credits_remaining, credits_per_year, credits_used_this_year, cars:car_id(id, name, brand, model, year, image_url, location_id, locations:location_id(name))")
+        .eq("user_id", user.id);
+
+      let vehicle: UserVehicle | null = null;
+      let credits = 0;
+      if (validated && validated.length > 0) {
+        const numParticipations = validated.length;
+        const car: any = validated[0].cars;
+        const totalPerYear = Number(validated[0].credits_per_year ?? 28);
+        const used = Number(validated[0].credits_used_this_year ?? 0);
+        credits = Math.max(0, Math.round((totalPerYear - used) * numParticipations));
+        if (car) {
+          vehicle = {
+            id: car.id,
+            name: car.name,
+            brand: car.brand,
+            model: car.model,
+            year: car.year,
+            image: car.image_url || ferrariPortofino,
+            location: { address: car.locations?.name ?? "" },
+            numParticipations,
+          };
+        }
+      }
+
+      const fullName = [profile?.name, profile?.surname].filter(Boolean).join(" ") || profile?.email || user.email || "Usuario";
+      setUserData({
+        name: fullName,
+        email: profile?.email ?? user.email ?? "",
+        credits,
+        vehicle,
+      });
+      setLoading(false);
+    };
+    loadData();
+  }, []);
   
   const handleSelect = (newRange: DateRange | undefined) => {
     if (!newRange?.from) {
