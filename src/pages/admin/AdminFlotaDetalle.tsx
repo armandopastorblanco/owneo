@@ -223,7 +223,7 @@ const AdminFlotaDetalle = () => {
           <TabsTrigger value="participantes"><Users className="h-4 w-4 mr-1" />Participantes</TabsTrigger>
           <TabsTrigger value="calendario"><CalendarDays className="h-4 w-4 mr-1" />Calendario</TabsTrigger>
           <TabsTrigger value="documentos"><FileText className="h-4 w-4 mr-1" />Documentos</TabsTrigger>
-          <TabsTrigger value="inspecciones"><ClipboardCheck className="h-4 w-4 mr-1" />Estados de lugares</TabsTrigger>
+          <TabsTrigger value="inspecciones"><ClipboardCheck className="h-4 w-4 mr-1" />Registro de entrada/salida</TabsTrigger>
           <TabsTrigger value="mantenimiento"><Wrench className="h-4 w-4 mr-1" />Mantenimiento</TabsTrigger>
           <TabsTrigger value="kpis"><BarChart3 className="h-4 w-4 mr-1" />KPIs</TabsTrigger>
         </TabsList>
@@ -685,7 +685,7 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
 };
 
 // ============================================================
-// TAB 4 — ESTADOS DE LUGARES (INSPECTIONS)
+// TAB 4 — REGISTRO DE ENTRADA/SALIDA (INSPECTIONS)
 // ============================================================
 const condColor: Record<string, string> = {
   perfect: "bg-emerald-500/20 text-emerald-300",
@@ -712,7 +712,7 @@ const InspectionsTab = ({ carId, car, reservations, qc }: any) => {
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button onClick={() => setOpen(true)}><Plus className="h-4 w-4 mr-1" />Nuevo estado de lugares</Button>
+        <Button onClick={() => setOpen(true)}><Plus className="h-4 w-4 mr-1" />Nuevo registro de entrada/salida</Button>
       </div>
       {inspections.length === 0 ? (
         <Card><CardContent className="p-8 text-center text-muted-foreground">Sin estados registrados.</CardContent></Card>
@@ -823,7 +823,7 @@ const NewInspectionDialog = ({ open, onOpenChange, carId, car, reservations, qc 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader><DialogTitle>Nuevo estado de lugares</DialogTitle></DialogHeader>
+        <DialogHeader><DialogTitle>Nuevo registro de entrada/salida</DialogTitle></DialogHeader>
         <div className="space-y-4">
           <div>
             <Label>Tipo</Label>
