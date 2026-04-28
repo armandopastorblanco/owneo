@@ -21,32 +21,7 @@ import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
-import { getSignedUrl } from "@/lib/getSignedUrl";
-
-const handleViewSigned = async (fileUrl: string, carId?: string | null) => {
-  const url = await getSignedUrl(fileUrl, 300, { carId });
-  if (url) window.open(url, "_blank");
-  else toast.error("No se pudo acceder al documento. Inténtalo de nuevo.");
-};
-const handleDownloadSigned = async (fileUrl: string, fileName?: string, carId?: string | null) => {
-  const signed = await getSignedUrl(fileUrl, 60, { carId });
-  if (!signed) { toast.error("No se pudo descargar el documento."); return; }
-  try {
-    const res = await fetch(signed);
-    if (!res.ok) throw new Error("fetch failed");
-    const blob = await res.blob();
-    const blobUrl = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    a.download = fileName || "documento";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-  } catch {
-    toast.error("No se pudo descargar el documento.");
-  }
-};
+import DocumentsBlock, { type DocItem } from "@/components/dashboard/DocumentsBlock";
 
 const Dashboard = () => {
   const qc = useQueryClient();
@@ -166,6 +141,19 @@ const Dashboard = () => {
         .select("*, document_types:document_type_id(name)")
         .eq("user_id", userId!)
         .order("created_at", { ascending: false });
+      return data || [];
+    },
+  });
+
+  // Active document types (so we can list pending ones)
+  const { data: docTypes = [] } = useQuery({
+    queryKey: ["dashboard-doc-types"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("document_types")
+        .select("id, name, sort_order, is_required, is_active")
+        .eq("is_active", true)
+        .order("sort_order");
       return data || [];
     },
   });
@@ -480,77 +468,39 @@ const Dashboard = () => {
               </Card>
 
               {/* Vehicle Public Documents */}
-              <Card className="border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-foreground">
-                    <FileText className="w-5 h-5" /> Documentos del Vehículo
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {vehicleDocs.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center py-4">No hay documentos disponibles por el momento.</p>
-                  ) : (
-                    <ul className="space-y-2">
-                      {(vehicleDocs as any[]).map((d) => {
-                        const isPdf = d.file_name?.toLowerCase().endsWith(".pdf");
-                        return (
-                          <li key={d.id} className="p-3 rounded-lg border border-border bg-background/40 flex flex-col sm:flex-row sm:items-center gap-3">
-                            <div className="shrink-0">
-                              {isPdf ? <FileTextIcon className="w-8 h-8 text-foreground/70" /> : <FileImage className="w-8 h-8 text-foreground/70" />}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-foreground truncate">{d.vehicle_document_types?.name}</p>
-                              <p className="text-xs text-muted-foreground truncate">{d.file_name}</p>
-                              <p className="text-xs text-muted-foreground">{format(new Date(d.created_at), "d MMM yyyy", { locale: es })}</p>
-                            </div>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => handleViewSigned(d.file_url, carId)}><Eye className="w-3 h-3 mr-1" />Ver</Button>
-                              <Button size="sm" variant="outline" onClick={() => handleDownloadSigned(d.file_url, d.file_name, carId)}><Download className="w-3 h-3 mr-1" />Descargar</Button>
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </CardContent>
-              </Card>
+              <DocumentsBlock
+                variant="vehicle"
+                title="Documentos del vehículo"
+                carId={carId}
+                emptyText="No hay documentos disponibles por el momento."
+                items={(vehicleDocs as any[])
+                  .filter((d) => !!d.file_url)
+                  .map<DocItem>((d) => ({
+                    id: d.id,
+                    typeName: d.vehicle_document_types?.name || d.file_name || "Documento",
+                    fileUrl: d.file_url,
+                    fileName: d.file_name,
+                  }))}
+              />
 
               {/* My Documents */}
-              <Card className="border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-foreground">
-                    <FileText className="w-5 h-5" /> Mis Documentos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {userDocs.length === 0 ? (
-                    <div className="text-center py-4">
-                      <p className="text-sm text-muted-foreground mb-3">Aún no has subido ningún documento.</p>
-                      <Link to="/dashboard/documentos"><Button variant="outline" size="sm">Gestionar documentos</Button></Link>
-                    </div>
-                  ) : (
-                    <>
-                      <ul className="space-y-2 mb-3">
-                        {(userDocs as any[]).slice(0, 5).map((d) => (
-                          <li key={d.id} className="p-2 rounded border border-border bg-background/40 flex items-center justify-between gap-2 text-sm">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-foreground truncate">{d.document_types?.name || d.file_name}</p>
-                              <p className="text-xs text-muted-foreground">{format(new Date(d.created_at), "d MMM yyyy", { locale: es })}</p>
-                            </div>
-                            <Badge
-                              variant={d.status === "validated" ? "default" : d.status === "rejected" ? "destructive" : "secondary"}
-                              className="text-[10px]"
-                            >
-                              {d.status === "validated" ? "Validado" : d.status === "rejected" ? "Rechazado" : "Pendiente"}
-                            </Badge>
-                          </li>
-                        ))}
-                      </ul>
-                      <Link to="/dashboard/documentos"><Button variant="outline" size="sm" className="w-full">Gestionar mis documentos</Button></Link>
-                    </>
-                  )}
-                </CardContent>
-              </Card>
+              <DocumentsBlock
+                variant="user"
+                title="Mis documentos"
+                manageHref="/dashboard/documentos"
+                emptyText="Aún no hay documentos configurados."
+                items={(docTypes as any[]).map<DocItem>((t) => {
+                  const d = (userDocs as any[]).find((x) => x.document_type_id === t.id);
+                  return {
+                    id: t.id,
+                    typeName: t.name,
+                    fileUrl: d?.file_url ?? null,
+                    fileName: d?.file_name ?? null,
+                    status: d?.status ?? null,
+                    notes: d?.notes ?? null,
+                  };
+                })}
+              />
 
               {/* Location */}
               <Card className="border-border bg-card">
