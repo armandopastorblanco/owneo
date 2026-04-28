@@ -117,6 +117,47 @@ const Dashboard = () => {
     },
   });
 
+  // Peak season rules (credit_rules with multiplier > 1)
+  const { data: peakRules = [] } = useQuery({
+    queryKey: ["dashboard-peak-rules", carId],
+    enabled: !!carId,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("credit_rules")
+        .select("*")
+        .eq("is_active", true);
+      return (data || []).filter(
+        (r: any) =>
+          Number(r.multiplier ?? 1) > 1 &&
+          (r.applies_to_all || (Array.isArray(r.car_ids) && r.car_ids.includes(carId)))
+      );
+    },
+  });
+
+  const isPeakDate = (date: Date) => {
+    const t = startOfDay(date);
+    for (const r of peakRules as any[]) {
+      // Date range rule
+      if (r.start_date && r.end_date) {
+        const s = startOfDay(new Date(r.start_date));
+        const e = startOfDay(new Date(r.end_date));
+        if (r.is_recurring) {
+          // Compare month-day across years
+          const md = (d: Date) => d.getMonth() * 100 + d.getDate();
+          const tmd = md(t), smd = md(s), emd = md(e);
+          if (smd <= emd ? (tmd >= smd && tmd <= emd) : (tmd >= smd || tmd <= emd)) return true;
+        } else {
+          if (t >= s && t <= e) return true;
+        }
+      }
+      // Months array rule (1-12)
+      if (Array.isArray(r.months) && r.months.length > 0) {
+        if (r.months.includes(t.getMonth() + 1)) return true;
+      }
+    }
+    return false;
+  };
+
   // Public vehicle documents
   const { data: vehicleDocs = [] } = useQuery({
     queryKey: ["dashboard-vehicle-docs", carId],
