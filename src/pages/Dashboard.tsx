@@ -248,6 +248,12 @@ const Dashboard = () => {
   };
 
   const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
+  const rangeCreditInfo = useMemo(() => {
+    if (!range?.from || !range?.to) return { total: 0, maxMult: 1, anyPeak: false };
+    return computeRangeCredits(range.from, range.to);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [range?.from, range?.to, creditRules, carId]);
+  const totalCredits = rangeCreditInfo.total;
 
   const createReservation = useMutation({
     mutationFn: async () => {
@@ -258,7 +264,11 @@ const Dashboard = () => {
       if (range.from < minStart) throw new Error(`La reserva debe ser con al menos ${advanceDays} días de antelación`);
       if (days < minDays) throw new Error(`Mínimo ${minDays} días`);
       if (days > maxDays) throw new Error(`Máximo ${maxDays} días`);
-      if (days > primary.credits_remaining) throw new Error(`Solo te quedan ${primary.credits_remaining} créditos`);
+
+      const { total: creditsToUse, maxMult, anyPeak } = computeRangeCredits(range.from, range.to);
+      if (creditsToUse > primary.credits_remaining) {
+        throw new Error(`Solo te quedan ${primary.credits_remaining} créditos (esta reserva requiere ${creditsToUse})`);
+      }
 
       // Re-check conflicts
       let cur = range.from;
@@ -274,7 +284,9 @@ const Dashboard = () => {
         participation_id: primary.ids[0],
         start_date: format(range.from, "yyyy-MM-dd"),
         end_date: format(range.to, "yyyy-MM-dd"),
-        credits_used: days,
+        credits_used: creditsToUse,
+        credit_multiplier: maxMult,
+        is_peak_period: anyPeak,
         status: "pending",
       }).select().single();
       if (error) throw error;
@@ -289,8 +301,8 @@ const Dashboard = () => {
         .maybeSingle();
       const curRem = Number(vpRow?.credits_remaining ?? primary.credits_remaining);
       const curUsed = Number(vpRow?.credits_used_this_year ?? primary.credits_used_this_year);
-      const newRemaining = Math.max(0, curRem - days);
-      const newUsed = curUsed + days;
+      const newRemaining = Math.max(0, curRem - creditsToUse);
+      const newUsed = curUsed + creditsToUse;
       await supabase.from("validated_participations").update({
         credits_remaining: newRemaining,
         credits_used_this_year: newUsed,
@@ -300,7 +312,7 @@ const Dashboard = () => {
         _action: "create_reservation",
         _target_table: "reservations",
         _target_id: res.id,
-        _details: { days, start: range.from.toISOString(), end: range.to.toISOString() },
+        _details: { days, credits: creditsToUse, multiplier: maxMult, peak: anyPeak, start: range.from.toISOString(), end: range.to.toISOString() },
       });
     },
     onSuccess: () => {
