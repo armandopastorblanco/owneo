@@ -458,6 +458,12 @@ const Dashboard = () => {
                       }}
                       className="rounded-md border border-border pointer-events-auto"
                     />
+                    {peakRules.length > 0 && (
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground w-full justify-center">
+                        <span className="inline-block w-3 h-3 rounded bg-champagne/25 ring-1 ring-champagne/60" />
+                        Temporada alta (consume más créditos)
+                      </div>
+                    )}
                     {range?.from && range?.to && (
                       <div className="w-full grid grid-cols-2 gap-2 text-center">
                         <div className="p-2 rounded bg-muted/50">
