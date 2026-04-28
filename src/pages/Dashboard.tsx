@@ -166,7 +166,7 @@ const Dashboard = () => {
           </div>
           <div className="flex flex-col items-start sm:items-end sm:text-right">
             <span className="text-sm text-muted-foreground">Bienvenido,</span>
-            <span className="font-semibold text-foreground">{mockUserData.name}</span>
+            <span className="font-semibold text-foreground">{displayName}</span>
           </div>
         </div>
       </header>
@@ -189,35 +189,35 @@ const Dashboard = () => {
                 <div className="grid md:grid-cols-2">
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
-                      src={mockUserData.vehicle.image}
-                      alt={mockUserData.vehicle.name}
+                      src={vehicle?.image}
+                      alt={vehicle?.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-6 flex flex-col justify-center space-y-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Vehículo</p>
-                      <p className="text-2xl font-bold text-foreground">{mockUserData.vehicle.name}</p>
+                      <p className="text-2xl font-bold text-foreground">{vehicle?.name}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Año</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.year}</p>
+                        <p className="font-semibold text-foreground">{vehicle?.year}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Color</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.color}</p>
+                        <p className="font-semibold text-foreground">{""}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Matrícula</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.licensePlate}</p>
+                        <p className="font-semibold text-foreground">{"—"}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Marca</p>
-                        <p className="font-semibold text-foreground">{mockUserData.vehicle.brand}</p>
+                        <p className="font-semibold text-foreground">{vehicle?.brand}</p>
                       </div>
                     </div>
-                    <Link to={`/car/${mockUserData.vehicle.id}`}>
+                    <Link to={`/car/${vehicle?.id}`}>
                       <Button variant="outline" className="w-full mt-2">
                         Ver Detalles Completos
                       </Button>
@@ -304,9 +304,9 @@ const Dashboard = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-muted to-background flex items-center justify-center">
                       <div className="text-center">
                         <MapPin className="w-12 h-12 text-foreground mx-auto mb-3" />
-                        <p className="text-lg font-semibold text-foreground">{mockUserData.vehicle.location.address}</p>
+                        <p className="text-lg font-semibold text-foreground">{vehicle?.location.address}</p>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Coordenadas: {mockUserData.vehicle.location.coordinates.lat}, {mockUserData.vehicle.location.coordinates.lng}
+                        Coordenadas: {""}, {""}
                       </p>
                     </div>
                   </div>
@@ -330,12 +330,12 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-center py-6">
-                  <div className="text-6xl font-bold text-foreground mb-2">{mockUserData.credits}</div>
+                  <div className="text-6xl font-bold text-foreground mb-2">{userCredits}</div>
                   <p className="text-muted-foreground">créditos disponibles</p>
                   <div className="mt-4 w-full bg-muted rounded-full h-3">
                     <div 
                       className="bg-foreground h-3 rounded-full transition-all duration-500"
-                      style={{ width: `${(mockUserData.credits / 30) * 100}%` }}
+                      style={{ width: `${(userCredits / 30) * 100}%` }}
                     />
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">1 crédito = 1 día de uso</p>
