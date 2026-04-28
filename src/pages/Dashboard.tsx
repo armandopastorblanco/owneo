@@ -313,7 +313,7 @@ const Dashboard = () => {
   }, [primary, reservations]);
 
   const usedPct = yearMetrics.perYear > 0 ? (yearMetrics.used / yearMetrics.perYear) * 100 : 0;
-  const barColor = usedPct < 50 ? "bg-emerald-500" : usedPct < 80 ? "bg-orange-400" : "bg-red-500";
+  const barColor = usedPct < 50 ? "bg-emerald-500" : usedPct < 80 ? "bg-amber-400" : "bg-champagne";
 
   // ================== RENDER ==================
   if (authLoading || isLoading) {
