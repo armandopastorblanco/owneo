@@ -1,6 +1,16 @@
 import { supabase } from "@/integrations/supabase/client";
 import { parseStorageObjectRef } from "@/lib/storageObject";
 
+const toAbsoluteSignedUrl = (signedUrl: string | null | undefined): string | null => {
+  if (!signedUrl) return null;
+  if (/^https?:\/\//i.test(signedUrl)) return signedUrl;
+
+  const baseUrl = import.meta.env.VITE_SUPABASE_URL;
+  if (!baseUrl) return signedUrl;
+
+  return `${baseUrl.replace(/\/$/, "")}/${signedUrl.replace(/^\//, "")}`;
+};
+
 /**
  * Genera una signed URL para un archivo del bucket privado.
  * Acepta tanto URLs públicas completas como paths directos del bucket.
@@ -25,7 +35,7 @@ export const getSignedUrl = async (
     });
 
     if (!functionError && functionData?.signedUrl) {
-      return functionData.signedUrl;
+      return toAbsoluteSignedUrl(functionData.signedUrl);
     }
 
     const { data, error } = await supabase.storage
@@ -33,7 +43,7 @@ export const getSignedUrl = async (
       .createSignedUrl(ref.filePath, expiresIn);
 
     if (error || !data) return null;
-    return data.signedUrl;
+    return toAbsoluteSignedUrl(data.signedUrl);
   } catch {
     return null;
   }
