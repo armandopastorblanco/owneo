@@ -75,7 +75,7 @@ const VehicleDocumentTypesManager = () => {
     refetch();
   };
 
-  const toggle = async (t: any, field: "has_expiry_date" | "is_required" | "is_active") => {
+  const toggle = async (t: any, field: "has_expiry_date" | "is_required" | "is_active" | "is_public") => {
     const v = !t[field];
     const { error } = await supabase.from("vehicle_document_types" as any).update({ [field]: v }).eq("id", t.id);
     if (error) return toast.error(error.message);
