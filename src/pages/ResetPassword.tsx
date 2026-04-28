@@ -14,14 +14,52 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [isRecovery, setIsRecovery] = useState(false);
+  const [checking, setChecking] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.includes("type=recovery")) {
-      setIsRecovery(true);
-    }
+    // Listen for PASSWORD_RECOVERY event (fired when user lands from recovery email)
+    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setIsRecovery(true);
+        setChecking(false);
+      }
+    });
+
+    // Also check existing session (in case event already fired or user has a valid session from the link)
+    (async () => {
+      const hash = window.location.hash;
+      const search = window.location.search;
+      const hasRecoveryHint =
+        hash.includes("type=recovery") ||
+        hash.includes("access_token") ||
+        search.includes("code=") ||
+        search.includes("token=");
+
+      // If URL has a code param, exchange it for a session
+      const urlParams = new URLSearchParams(search);
+      const code = urlParams.get("code");
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
+        if (!error) {
+          setIsRecovery(true);
+          setChecking(false);
+          return;
+        }
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session && hasRecoveryHint) {
+        setIsRecovery(true);
+      } else if (session) {
+        // Already logged in, allow password update anyway
+        setIsRecovery(true);
+      }
+      setChecking(false);
+    })();
+
+    return () => sub.subscription.unsubscribe();
   }, []);
 
   const handleReset = async (e: React.FormEvent) => {
@@ -37,17 +75,35 @@ const ResetPassword = () => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "Contraseña actualizada", description: "Ya puedes iniciar sesión con tu nueva contraseña" });
+      await supabase.auth.signOut();
       navigate("/login");
     }
     setLoading(false);
   };
 
-  if (!isRecovery) {
+  if (checking) {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Navbar />
         <div className="flex items-center justify-center px-6 py-32">
-          <p className="text-muted-foreground">Enlace de recuperación no válido.</p>
+          <p className="text-muted-foreground">Verificando enlace…</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!isRecovery) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <Navbar />
+        <div className="flex flex-col items-center justify-center px-6 py-32 gap-4">
+          <p className="text-muted-foreground text-center">
+            Enlace de recuperación no válido o expirado.
+          </p>
+          <Button variant="outline" onClick={() => navigate("/login")}>
+            Volver a iniciar sesión
+          </Button>
         </div>
         <Footer />
       </div>
