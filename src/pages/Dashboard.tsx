@@ -305,9 +305,6 @@ const Dashboard = () => {
                       <div className="text-center">
                         <MapPin className="w-12 h-12 text-foreground mx-auto mb-3" />
                         <p className="text-lg font-semibold text-foreground">{vehicle?.location.address}</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Coordenadas: {""}, {""}
-                      </p>
                     </div>
                   </div>
                 </div>
