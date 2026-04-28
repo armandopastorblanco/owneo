@@ -145,6 +145,30 @@ const Dashboard = () => {
     },
   });
 
+  // Active document types (so we can list pending ones)
+  const { data: docTypes = [] } = useQuery({
+    queryKey: ["dashboard-doc-types"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("document_types")
+        .select("id, name, sort_order, is_required, is_active")
+        .eq("is_active", true)
+        .order("sort_order");
+      return data || [];
+    },
+  });
+    queryKey: ["dashboard-user-docs", userId],
+    enabled: !!userId,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("participant_documents")
+        .select("*, document_types:document_type_id(name)")
+        .eq("user_id", userId!)
+        .order("created_at", { ascending: false });
+      return data || [];
+    },
+  });
+
   // ================== RESERVATION LOGIC ==================
   const minDays = primary?.car?.min_reservation_days ?? 1;
   const maxDays = primary?.car?.max_reservation_days ?? 14;
