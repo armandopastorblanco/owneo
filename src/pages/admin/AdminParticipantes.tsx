@@ -406,6 +406,20 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
     qc.invalidateQueries({ queryKey: ["profile-detail"] });
   };
 
+  const sendPasswordReset = async () => {
+    if (!profile?.email) return toast.error("El usuario no tiene email");
+    if (!window.confirm(`¿Enviar email de restablecimiento de contraseña a ${profile.email}?`)) return;
+    const { error } = await supabase.auth.resetPasswordForEmail(profile.email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) return toast.error(error.message);
+    await supabase.rpc("insert_audit_log", {
+      _action: "send_password_reset", _target_table: "profiles", _target_id: userId,
+      _details: { email: profile.email },
+    });
+    toast.success("Email de restablecimiento enviado");
+  };
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full sm:max-w-4xl overflow-y-auto">
