@@ -11,7 +11,6 @@ import { usePostHogPageView } from "@/hooks/usePostHogPageView";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import Cities from "./pages/Cities";
-import CityDetail from "./pages/CityDetail";
 import CarDetail from "./pages/CarDetail";
 import Dashboard from "./pages/Dashboard";
 import CalendarShowcase from "./pages/CalendarShowcase";
@@ -83,7 +82,6 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/cities" element={<Cities />} />
-              <Route path="/cities/:slug" element={<CityDetail />} />
               <Route path="/car/:id" element={<CarDetail />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/dashboard/documentos" element={<ProtectedRoute><MisDocumentos /></ProtectedRoute>} />

@@ -14,9 +14,9 @@ import { Button } from "@/components/ui/button";
 const navItems = [
   { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
   { label: "Vitrina", path: "/admin/vehiculos", icon: Car },
-  { label: "Flota", path: "/admin/flota", icon: Gauge },
   { label: "Solicitudes", path: "/admin/solicitudes", icon: FileText },
   { label: "Participantes", path: "/admin/participantes", icon: Users },
+  { label: "Flota", path: "/admin/flota", icon: Gauge },
   { label: "Reservas", path: "/admin/reservas", icon: CalendarDays, badgeKey: "pending_reservations" as const },
   { label: "Pagos", path: "/admin/pagos", icon: CreditCard },
   { label: "Inspecciones", path: "/admin/inspecciones", icon: ClipboardCheck },
