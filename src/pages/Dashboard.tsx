@@ -358,7 +358,7 @@ const Dashboard = () => {
   }, [primary, reservations]);
 
   const usedPct = yearMetrics.perYear > 0 ? (yearMetrics.used / yearMetrics.perYear) * 100 : 0;
-  const barColor = "bg-foreground";
+  const barColor = "bg-white";
 
   // ================== RENDER ==================
   if (authLoading || isLoading) {
