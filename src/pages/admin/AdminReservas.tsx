@@ -222,6 +222,64 @@ const AdminReservas = () => {
     },
   });
 
+  const acceptReservation = useMutation({
+    mutationFn: async (reservationId: string) => {
+      const { error } = await supabase.from("reservations").update({ status: "confirmed" }).eq("id", reservationId);
+      if (error) throw error;
+      await supabase.rpc("insert_audit_log", { _action: "accept_reservation", _target_table: "reservations", _target_id: reservationId });
+    },
+    onSuccess: () => {
+      toast.success("Reserva confirmada");
+      queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-pending-reservations-count"] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const rejectReservation = useMutation({
+    mutationFn: async () => {
+      if (!rejectModal) throw new Error("Sin reserva");
+      if (rejectReason.trim().length < 10) throw new Error("El motivo debe tener al menos 10 caracteres");
+      const { data: { user } } = await supabase.auth.getUser();
+      const { error } = await supabase.from("reservations").update({
+        status: "cancelled",
+        rejection_reason: rejectReason,
+        rejected_at: new Date().toISOString(),
+        rejected_by: user?.id,
+      }).eq("id", rejectModal.id);
+      if (error) throw error;
+      // Restore credits
+      const { data: vps } = await supabase
+        .from("validated_participations")
+        .select("id, credits_remaining, credits_used_this_year")
+        .eq("user_id", rejectModal.user_id)
+        .eq("car_id", rejectModal.car_id)
+        .limit(1);
+      if (vps && vps.length > 0) {
+        const vp = vps[0];
+        await supabase.from("validated_participations").update({
+          credits_remaining: Number(vp.credits_remaining || 0) + Number(rejectModal.credits_used || 0),
+          credits_used_this_year: Math.max(0, Number(vp.credits_used_this_year || 0) - Number(rejectModal.credits_used || 0)),
+        }).eq("id", vp.id);
+      }
+      await supabase.rpc("insert_audit_log", {
+        _action: "reject_reservation",
+        _target_table: "reservations",
+        _target_id: rejectModal.id,
+        _details: { reason: rejectReason },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Reserva rechazada y créditos restituidos");
+      setRejectModal(null);
+      setRejectReason("");
+      queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-validated-parts"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-pending-reservations-count"] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   // Calendar rendering
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
