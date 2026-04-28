@@ -583,14 +583,20 @@ const AdminReservas = () => {
                             {(r.profiles as any)?.name?.[0]}{(r.profiles as any)?.surname?.[0]} · {(r.cars as any)?.name?.split(" ").pop()}
                           </button>
                         </PopoverTrigger>
-                        <PopoverContent className="w-64 text-sm space-y-1">
+                        <PopoverContent className="w-64 text-sm space-y-2">
                           <p className="font-semibold text-foreground">{(r.profiles as any)?.name} {(r.profiles as any)?.surname}</p>
                           <p className="text-muted-foreground">{(r.cars as any)?.name}</p>
                           <p className="text-muted-foreground">{r.start_date} → {r.end_date}</p>
-                          <div className="flex gap-2">
+                          <div className="flex gap-2 flex-wrap">
                             <Badge variant="secondary">{r.credits_used} créditos</Badge>
                             <Badge variant={r.status === "confirmed" ? "default" : "secondary"}>{r.status}</Badge>
                           </div>
+                          {r.status === "pending" && (
+                            <div className="flex gap-2 pt-2">
+                              <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)}>Aceptar</Button>
+                              <Button size="sm" variant="destructive" className="flex-1" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
+                            </div>
+                          )}
                         </PopoverContent>
                       </Popover>
                     ))}
