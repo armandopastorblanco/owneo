@@ -63,7 +63,7 @@ const Cities = () => {
                       <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                         {city.description}
                       </p>
-                      <Link to={`/portfolio?city=${encodeURIComponent(city.name)}`}>
+                      <Link to={`/cities/${city.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}>
                         <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
                           <span>Explorar {carsCount} {carsCount === 1 ? "vehículo" : "vehículos"}</span>
                           <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
