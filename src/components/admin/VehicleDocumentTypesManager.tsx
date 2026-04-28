@@ -29,14 +29,14 @@ const VehicleDocumentTypesManager = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [form, setForm] = useState<any>({ name: "", description: "", has_expiry_date: false, is_required: true, is_active: true });
+  const [form, setForm] = useState<any>({ name: "", description: "", has_expiry_date: false, is_required: true, is_active: true, is_public: false });
 
   const open = (t: any = null) => {
     setEditing(t);
     setForm(t ? {
       name: t.name, description: t.description || "",
-      has_expiry_date: !!t.has_expiry_date, is_required: !!t.is_required, is_active: !!t.is_active,
-    } : { name: "", description: "", has_expiry_date: false, is_required: true, is_active: true });
+      has_expiry_date: !!t.has_expiry_date, is_required: !!t.is_required, is_active: !!t.is_active, is_public: !!t.is_public,
+    } : { name: "", description: "", has_expiry_date: false, is_required: true, is_active: true, is_public: false });
     setDialogOpen(true);
   };
 
