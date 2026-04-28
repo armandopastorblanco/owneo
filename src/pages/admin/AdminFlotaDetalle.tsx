@@ -611,6 +611,29 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
     }
   };
 
+  const removeDoc = async () => {
+    if (!doc) return;
+    if (!window.confirm(`¿Eliminar el documento "${type.name}"? Esta acción no se puede deshacer.`)) return;
+    try {
+      // Try to remove the file from storage (best effort)
+      if (doc.file_url) {
+        const marker = "/documents/";
+        const idx = doc.file_url.indexOf(marker);
+        if (idx >= 0) {
+          const path = decodeURIComponent(doc.file_url.substring(idx + marker.length));
+          await supabase.storage.from("documents").remove([path]);
+        }
+      }
+      const { error } = await supabase.from("vehicle_documents").delete().eq("id", doc.id);
+      if (error) throw error;
+      await auditLog("delete_vehicle_document", doc.id, { file_name: doc.file_name });
+      toast.success("Documento eliminado");
+      qc.invalidateQueries({ queryKey: ["fleet-documents", carId] });
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  };
+
   const saveMeta = async () => {
     if (!doc) return;
     const { error } = await supabase.from("vehicle_documents").update({
@@ -664,6 +687,7 @@ const DocumentCard = ({ carId, type, doc, qc }: any) => {
                 <Button size="sm" variant="outline" asChild><span><Upload className="h-3 w-3 mr-1" />Reemplazar</span></Button>
                 <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
               </label>
+              <Button size="sm" variant="outline" onClick={removeDoc}><Trash2 className="h-3 w-3 mr-1 text-destructive" />Eliminar</Button>
             </div>
             {type.has_expiry_date && (
               <div><Label className="text-xs">Vencimiento</Label><Input type="date" value={expiry} onChange={(e) => setExpiry(e.target.value)} /></div>
