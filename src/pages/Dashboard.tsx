@@ -443,7 +443,7 @@ const Dashboard = () => {
                 <CardContent className="p-0">
                   <div className="grid md:grid-cols-2">
                     <div className="aspect-[4/3] overflow-hidden bg-muted">
-                      <img src={carImage} alt={car.name} className="w-full h-full object-cover" />
+                      <img src={carImage} alt={car.name} loading="lazy" className="w-full h-full object-cover" />
                     </div>
                     <div className="p-6 flex flex-col justify-center space-y-4">
                       <div>

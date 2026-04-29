@@ -19,7 +19,7 @@ const NoticiaDetalle = () => {
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+        <img src={article.image} alt={article.title} loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">

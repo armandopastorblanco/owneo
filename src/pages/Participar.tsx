@@ -247,7 +247,7 @@ const Step0VehicleSelection = ({
                   }`}
                 >
                   <div className="aspect-video bg-muted">
-                    <img src={c.image} alt={c.name} className="w-full h-full object-cover" />
+                    <img src={c.image} alt={c.name} loading="lazy" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-3 space-y-1 bg-card">
                     <h4 className="font-semibold text-foreground text-sm">{c.name}</h4>
@@ -672,7 +672,7 @@ const Step3Summary = ({
 
       <Card className="bg-card border-border overflow-hidden">
         <div className="aspect-video bg-muted">
-          <img src={car.image} alt={car.name} className="w-full h-full object-cover" />
+          <img src={car.image} alt={car.name} loading="lazy" className="w-full h-full object-cover" />
         </div>
         <CardContent className="p-5 space-y-2">
           <h3 className="font-semibold text-foreground">{car.name}</h3>
