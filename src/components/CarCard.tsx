@@ -21,6 +21,7 @@ const CarCard = ({ car }: CarCardProps) => {
           <img
             src={car.image}
             alt={car.name}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           {isComplete ? (
