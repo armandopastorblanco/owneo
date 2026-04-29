@@ -23,7 +23,7 @@ const NoticiaMcLarenW1 = () => {
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={heroImg} alt="McLaren W1 hypercar" className="w-full h-full object-cover" />
+        <img src={heroImg} alt="McLaren W1 hypercar" loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
@@ -63,7 +63,7 @@ const NoticiaMcLarenW1 = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg1} alt="McLaren W1 con puertas de mariposa abiertas" className="w-full rounded-2xl" />
+            <img src={detailImg1} alt="McLaren W1 con puertas de mariposa abiertas" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               Las icónicas puertas diedro del W1 revelan un monocasco de carbono ultraligero
             </p>
@@ -90,7 +90,7 @@ const NoticiaMcLarenW1 = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg2} alt="Interior del McLaren W1" className="w-full rounded-2xl" />
+            <img src={detailImg2} alt="Interior del McLaren W1" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               Un cockpit minimalista y centrado en el conductor, heredero directo de la filosofía McLaren F1
             </p>
@@ -107,7 +107,7 @@ const NoticiaMcLarenW1 = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg3} alt="McLaren W1 en circuito a velocidad" className="w-full rounded-2xl" />
+            <img src={detailImg3} alt="McLaren W1 en circuito a velocidad" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El sistema Active Long Tail desplegado durante las pruebas de alta velocidad
             </p>
