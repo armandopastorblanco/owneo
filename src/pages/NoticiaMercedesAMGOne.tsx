@@ -23,7 +23,7 @@ const NoticiaMercedesAMGOne = () => {
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={heroImg} alt="Mercedes-AMG ONE actualización" className="w-full h-full object-cover" />
+        <img src={heroImg} alt="Mercedes-AMG ONE actualización" loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
@@ -63,7 +63,7 @@ const NoticiaMercedesAMGOne = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg1} alt="Mercedes-AMG ONE vista frontal" className="w-full rounded-2xl" />
+            <img src={detailImg1} alt="Mercedes-AMG ONE vista frontal" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El Mercedes-AMG ONE mantiene su silueta inconfundible con la actualización 2026
             </p>
@@ -90,7 +90,7 @@ const NoticiaMercedesAMGOne = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg2} alt="Interior del Mercedes-AMG ONE" className="w-full rounded-2xl" />
+            <img src={detailImg2} alt="Interior del Mercedes-AMG ONE" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El cockpit del AMG ONE recibe nuevas funcionalidades de software con la actualización
             </p>
@@ -107,7 +107,7 @@ const NoticiaMercedesAMGOne = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg3} alt="Mercedes-AMG ONE en circuito" className="w-full rounded-2xl" />
+            <img src={detailImg3} alt="Mercedes-AMG ONE en circuito" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El sistema aerodinámico activo del AMG ONE desplegado durante una sesión en circuito
             </p>

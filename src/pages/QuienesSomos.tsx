@@ -100,7 +100,7 @@ const QuienesSomos = () => {
       {/* Hero Section */}
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 overflow-hidden min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
-          <img src={quienesSomosHero} alt="OWNEO showroom" className="w-full h-full object-cover" />
+          <img src={quienesSomosHero} alt="OWNEO showroom" loading="eager" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-background/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
         </div>

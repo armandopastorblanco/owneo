@@ -23,7 +23,7 @@ const NoticiaBugattiTourbillon = () => {
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={heroImg} alt="Bugatti Tourbillon hypercar" className="w-full h-full object-cover" />
+        <img src={heroImg} alt="Bugatti Tourbillon hypercar" loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
@@ -63,7 +63,7 @@ const NoticiaBugattiTourbillon = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg1} alt="Bugatti Tourbillon vista superior con motor V16" className="w-full rounded-2xl" />
+            <img src={detailImg1} alt="Bugatti Tourbillon vista superior con motor V16" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El impresionante motor V16 de 8,3 litros visible a través del cristal trasero del Tourbillon
             </p>
@@ -90,7 +90,7 @@ const NoticiaBugattiTourbillon = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg2} alt="Interior del Bugatti Tourbillon" className="w-full rounded-2xl" />
+            <img src={detailImg2} alt="Interior del Bugatti Tourbillon" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El cuadro de instrumentos mecánico del Tourbillon, inspirado en la alta relojería suiza
             </p>
@@ -107,7 +107,7 @@ const NoticiaBugattiTourbillon = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg3} alt="Bugatti Tourbillon en carretera costera" className="w-full rounded-2xl" />
+            <img src={detailImg3} alt="Bugatti Tourbillon en carretera costera" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El Tourbillon en su elemento natural: gran turismo en las carreteras costeras más exclusivas
             </p>

@@ -24,7 +24,7 @@ const NoticiaFerrariLuce = () => {
 
       {/* Hero */}
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={heroImg} alt="Ferrari Luce EV" className="w-full h-full object-cover" />
+        <img src={heroImg} alt="Ferrari Luce EV" loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
@@ -77,7 +77,7 @@ const NoticiaFerrariLuce = () => {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <img src={detailImg1} alt="Ferrari Luce EV vista lateral" className="w-full rounded-2xl" />
+            <img src={detailImg1} alt="Ferrari Luce EV vista lateral" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               Render conceptual del Ferrari Luce EV basado en las filtraciones más recientes
             </p>
@@ -124,7 +124,7 @@ const NoticiaFerrariLuce = () => {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <img src={detailImg2} alt="Interior del Ferrari Luce EV" className="w-full rounded-2xl" />
+            <img src={detailImg2} alt="Interior del Ferrari Luce EV" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El habitáculo del Luce combina artesanía italiana con tecnología de vanguardia
             </p>
@@ -154,7 +154,7 @@ const NoticiaFerrariLuce = () => {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <img src={detailImg3} alt="Ferrari Luce EV en circuito" className="w-full rounded-2xl" />
+            <img src={detailImg3} alt="Ferrari Luce EV en circuito" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               Primeras pruebas dinámicas del Luce en el circuito de Fiorano
             </p>

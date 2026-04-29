@@ -788,7 +788,7 @@ const InspectionsTab = ({ carId, car, reservations, qc }: any) => {
                     <div className="grid grid-cols-4 gap-2">
                       {[...(i.photos_before || []), ...(i.photos_after || [])].slice(0, 8).map((url: string, idx: number) => (
                         <a key={idx} href={url} target="_blank" rel="noreferrer">
-                          <img src={url} alt="" className="w-full h-16 object-cover rounded" />
+                          <img src={url} alt="" loading="lazy" className="w-full h-16 object-cover rounded" />
                         </a>
                       ))}
                     </div>
@@ -935,7 +935,7 @@ const NewInspectionDialog = ({ open, onOpenChange, carId, car, reservations, qc 
               <div className="grid grid-cols-5 gap-2 mt-2">
                 {files.map((f, i) => (
                   <div key={i} className="relative">
-                    <img src={URL.createObjectURL(f)} alt="" className="w-full h-16 object-cover rounded" />
+                    <img src={URL.createObjectURL(f)} alt="" loading="lazy" className="w-full h-16 object-cover rounded" />
                     <button onClick={() => setFiles(files.filter((_, x) => x !== i))} className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground rounded-full p-0.5">
                       <X className="h-3 w-3" />
                     </button>

@@ -23,7 +23,7 @@ const NoticiaPorscheGT3RS = () => {
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={heroImg} alt="Porsche 911 GT3 RS 2026" className="w-full h-full object-cover" />
+        <img src={heroImg} alt="Porsche 911 GT3 RS 2026" loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
@@ -63,7 +63,7 @@ const NoticiaPorscheGT3RS = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg1} alt="Porsche 911 GT3 RS en Nürburgring" className="w-full rounded-2xl" />
+            <img src={detailImg1} alt="Porsche 911 GT3 RS en Nürburgring" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El GT3 RS atacando el Karussell del Nordschleife durante la vuelta récord
             </p>
@@ -90,7 +90,7 @@ const NoticiaPorscheGT3RS = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg2} alt="Interior del Porsche 911 GT3 RS" className="w-full rounded-2xl" />
+            <img src={detailImg2} alt="Interior del Porsche 911 GT3 RS" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               Habitáculo orientado 100% a la conducción en circuito, con jaula antivuelco y asientos de competición
             </p>
@@ -107,7 +107,7 @@ const NoticiaPorscheGT3RS = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={detailImg3} alt="Porsche 911 GT3 RS vista trasera" className="w-full rounded-2xl" />
+            <img src={detailImg3} alt="Porsche 911 GT3 RS vista trasera" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
               El imponente alerón trasero del GT3 RS genera hasta 860 kg de carga aerodinámica
             </p>
