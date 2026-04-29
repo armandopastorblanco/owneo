@@ -53,7 +53,7 @@
     "posthog-js": "^1.363.4",
     "react": "^18.3.1",
     "react-big-calendar": "^1.19.4",
-    "react-day-picker": "^8.10.1",
+    "react-day-picker": "^9",
     "react-dom": "^18.3.1",
     "react-dropzone": "^15.0.0",
     "react-hook-form": "^7.61.1",
