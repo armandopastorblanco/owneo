@@ -50,8 +50,8 @@ const HeroSlider = () => {
     <section className="relative h-screen w-full overflow-hidden bg-black">
       {/* Preload next images */}
       <div className="hidden">
-        <img src={heroSlides[nextSlide]?.image} alt="" />
-        <img src={heroSlides[(nextSlide + 1) % heroSlides.length]?.image} alt="" />
+        <img src={heroSlides[nextSlide]?.image} alt="" loading="eager" />
+        <img src={heroSlides[(nextSlide + 1) % heroSlides.length]?.image} alt="" loading="eager" />
       </div>
 
       {/* Background layer - next slide (visible during crossfade) */}
@@ -124,6 +124,7 @@ const HeroSlider = () => {
         <img 
           src={owneoLogo} 
           alt="OWNEO" 
+          loading="eager"
           className="h-7 sm:h-8 md:h-10 lg:h-12 w-auto mix-blend-screen opacity-80"
           style={{
             filter: 'brightness(1.3) contrast(1.2)',
