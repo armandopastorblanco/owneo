@@ -42,7 +42,8 @@ export interface Car {
 function mapDbCarToCar(row: Tables<"cars">): Car {
   const numPrice = Number(row.price);
   const priceFormatted = `€${numPrice.toLocaleString("en-US")}`;
-  const rawPromo = (row as unknown as Record<string, unknown>).promotion as CarPromotion | null;
+  const promoParsed = CarPromotionSchema.safeParse(row.promotion);
+  const rawPromo = promoParsed.success ? promoParsed.data : null;
   return {
     id: row.id,
     name: row.name,
