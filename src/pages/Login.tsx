@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -13,7 +13,11 @@ import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
-  const pwa = usePWAInstall();
+  const pwaRaw = usePWAInstall();
+  const pwa = useMemo(
+    () => pwaRaw,
+    [pwaRaw.showPrompt, pwaRaw.isIOS, pwaRaw.canInstallNatively, pwaRaw.triggerPrompt, pwaRaw.install, pwaRaw.dismiss],
+  );
   const { user, loading: authLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +31,7 @@ const Login = () => {
 
   useEffect(() => {
     pwa.triggerPrompt();
-  }, []);
+  }, [pwa]);
 
   // Show spinner while checking auth
   if (authLoading) {
