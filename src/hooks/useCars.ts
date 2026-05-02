@@ -1,17 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import type { Tables } from "@/integrations/supabase/types";
 
-export interface CarPromotion {
-  type: "direct" | "volume";
-  discount_percent: number;
-  min_participations?: number;
-  start_date: string;
-  end_date: string;
-  badge_text: string;
-  is_active: boolean;
-}
+export const CarPromotionSchema = z.object({
+  type: z.enum(["direct", "volume"]),
+  discount_percent: z.number(),
+  min_participations: z.number().optional(),
+  start_date: z.string(),
+  end_date: z.string(),
+  badge_text: z.string(),
+  is_active: z.boolean(),
+});
+
+export type CarPromotion = z.infer<typeof CarPromotionSchema>;
 
 export interface Car {
   id: string;
@@ -39,7 +42,8 @@ export interface Car {
 function mapDbCarToCar(row: Tables<"cars">): Car {
   const numPrice = Number(row.price);
   const priceFormatted = `€${numPrice.toLocaleString("en-US")}`;
-  const rawPromo = (row as unknown as Record<string, unknown>).promotion as CarPromotion | null;
+  const promoParsed = CarPromotionSchema.safeParse(row.promotion);
+  const rawPromo = promoParsed.success ? promoParsed.data : null;
   return {
     id: row.id,
     name: row.name,
