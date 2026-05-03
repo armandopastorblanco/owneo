@@ -176,7 +176,267 @@ const AdminReservas = () => {
     },
   });
 
-  // Conflicts: overlapping reservations for same car
+  // Calendar blocks for selected vehicle
+  const { data: calendarBlocks = [] } = useQuery({
+    queryKey: ["calendar-blocks", carFilter],
+    enabled: carFilter !== "all",
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("calendar_blocks")
+        .select("*")
+        .eq("car_id", carFilter)
+        .gte("end_date", new Date().toISOString().slice(0, 10))
+        .order("start_date");
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
+  // Confirmed reservations filtered by city + car (same as calendar)
+  const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  const confirmedReservations = useMemo(() => {
+    return (reservations as any[]).filter((r) => {
+      if (r.status !== "confirmed") return false;
+      if (carFilter !== "all" && r.car_id !== carFilter) return false;
+      if (calCityFilter !== "all") {
+        const car = (cars as any[]).find((c) => c.id === r.car_id);
+        if (!car || car.location_id !== calCityFilter) return false;
+      }
+      return true;
+    });
+  }, [reservations, cars, carFilter, calCityFilter]);
+
+  const confirmedGroups = useMemo(() => ({
+    past: confirmedReservations.filter((r: any) => r.end_date < today),
+    current: confirmedReservations.filter((r: any) => r.start_date <= today && r.end_date >= today),
+    future: confirmedReservations.filter((r: any) => r.start_date > today),
+  }), [confirmedReservations, today]);
+
+  // ===== Mutations: edit/cancel confirmed reservation =====
+  const editReservationMutation = useMutation({
+    mutationFn: async () => {
+      if (!editResModal) throw new Error("Sin reserva");
+      if (!editResStart || !editResEnd) throw new Error("Fechas obligatorias");
+      if (editResEnd < editResStart) throw new Error("La fecha fin debe ser >= fecha inicio");
+      const oldCredits = Number(editResModal.credits_used || 0);
+      const days = differenceInCalendarDays(parseISO(editResEnd), parseISO(editResStart)) + 1;
+      const newCredits = days; // simple recompute (1 credit per day)
+      const { error } = await supabase
+        .from("reservations")
+        .update({ start_date: editResStart, end_date: editResEnd, credits_used: newCredits })
+        .eq("id", editResModal.id);
+      if (error) throw error;
+      // adjust validated_participations
+      const { data: vps } = await supabase
+        .from("validated_participations")
+        .select("id, credits_remaining, credits_used_this_year")
+        .eq("user_id", editResModal.user_id)
+        .eq("car_id", editResModal.car_id)
+        .limit(1);
+      if (vps && vps.length > 0) {
+        const vp = vps[0];
+        await supabase.from("validated_participations").update({
+          credits_remaining: Number(vp.credits_remaining || 0) + oldCredits - newCredits,
+          credits_used_this_year: Math.max(0, Number(vp.credits_used_this_year || 0) - oldCredits + newCredits),
+        }).eq("id", vp.id);
+      }
+      await supabase.rpc("insert_audit_log", {
+        _action: "edit_reservation",
+        _target_table: "reservations",
+        _target_id: editResModal.id,
+        _details: { old_start: editResModal.start_date, old_end: editResModal.end_date, new_start: editResStart, new_end: editResEnd, old_credits: oldCredits, new_credits: newCredits },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Reserva actualizada");
+      setEditResModal(null);
+      queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-validated-parts"] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const cancelConfirmedMutation = useMutation({
+    mutationFn: async () => {
+      if (!cancelResModal) throw new Error("Sin reserva");
+      const { data: { user } } = await supabase.auth.getUser();
+      const { error } = await supabase.from("reservations").update({
+        status: "cancelled",
+        cancelled_at: new Date().toISOString(),
+        cancelled_by: user?.id,
+      }).eq("id", cancelResModal.id);
+      if (error) throw error;
+      const credits = Number(cancelResModal.credits_used || 0);
+      const { data: vps } = await supabase
+        .from("validated_participations")
+        .select("id, credits_remaining, credits_used_this_year")
+        .eq("user_id", cancelResModal.user_id)
+        .eq("car_id", cancelResModal.car_id)
+        .limit(1);
+      if (vps && vps.length > 0) {
+        const vp = vps[0];
+        await supabase.from("validated_participations").update({
+          credits_remaining: Number(vp.credits_remaining || 0) + credits,
+          credits_used_this_year: Math.max(0, Number(vp.credits_used_this_year || 0) - credits),
+        }).eq("id", vp.id);
+      }
+      await supabase.rpc("insert_audit_log", {
+        _action: "cancel_confirmed_reservation",
+        _target_table: "reservations",
+        _target_id: cancelResModal.id,
+        _details: { credits_restored: credits },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Reserva cancelada y créditos restituidos");
+      setCancelResModal(null);
+      queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-validated-parts"] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  // ===== Vehicle-specific credit_rules =====
+  const vehicleRules = useMemo(() => {
+    if (carFilter === "all") return [];
+    return (creditRules as any[]).filter((r) => r.is_active && !r.applies_to_all && Array.isArray(r.car_ids) && r.car_ids.includes(carFilter));
+  }, [creditRules, carFilter]);
+
+  const resetVehicleRuleForm = () => {
+    setVrName(""); setVrDesc(""); setVrType("months"); setVrMonths([]);
+    setVrStart(""); setVrEnd(""); setVrMultiplier("1.0"); setVrCreditsPerDay("1.0");
+  };
+
+  const openEditVehicleRule = (rule: any) => {
+    setVrName(rule.name || "");
+    setVrDesc(rule.description || "");
+    setVrType(rule.months ? "months" : "dates");
+    setVrMonths(rule.months || []);
+    setVrStart(rule.start_date || "");
+    setVrEnd(rule.end_date || "");
+    setVrMultiplier(String(rule.multiplier ?? "1.0"));
+    setVrCreditsPerDay(String(rule.credits_per_day ?? "1.0"));
+    setVehicleRuleModal({ open: true, editingId: rule.id });
+  };
+
+  const saveVehicleRuleMutation = useMutation({
+    mutationFn: async () => {
+      if (!vrName.trim()) throw new Error("Nombre obligatorio");
+      const payload: any = {
+        name: vrName,
+        description: vrDesc || null,
+        is_recurring: vrType === "months",
+        months: vrType === "months" ? vrMonths : null,
+        start_date: vrType === "dates" ? vrStart : null,
+        end_date: vrType === "dates" ? vrEnd : null,
+        multiplier: parseFloat(vrMultiplier),
+        credits_per_day: parseFloat(vrCreditsPerDay),
+        applies_to_all: false,
+        car_ids: [carFilter],
+        is_active: true,
+      };
+      if (vehicleRuleModal.editingId) {
+        const { error } = await supabase.from("credit_rules").update(payload).eq("id", vehicleRuleModal.editingId);
+        if (error) throw error;
+        await supabase.rpc("insert_audit_log", { _action: "edit_vehicle_credit_rule", _target_table: "credit_rules", _target_id: vehicleRuleModal.editingId });
+      } else {
+        const { data, error } = await supabase.from("credit_rules").insert(payload).select().single();
+        if (error) throw error;
+        await supabase.rpc("insert_audit_log", { _action: "create_vehicle_credit_rule", _target_table: "credit_rules", _target_id: data?.id, _details: { car_id: carFilter } });
+      }
+    },
+    onSuccess: () => {
+      toast.success(vehicleRuleModal.editingId ? "Regla actualizada" : "Fecha especial añadida");
+      queryClient.invalidateQueries({ queryKey: ["credit-rules"] });
+      setVehicleRuleModal({ open: false, editingId: null });
+      resetVehicleRuleForm();
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const deleteVehicleRuleMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const rule = (creditRules as any[]).find((r) => r.id === id);
+      if (!rule) throw new Error("Regla no encontrada");
+      const otherCars = (rule.car_ids || []).filter((c: string) => c !== carFilter);
+      if (otherCars.length === 0) {
+        const { error } = await supabase.from("credit_rules").delete().eq("id", id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from("credit_rules").update({ car_ids: otherCars }).eq("id", id);
+        if (error) throw error;
+      }
+      await supabase.rpc("insert_audit_log", { _action: "remove_vehicle_credit_rule", _target_table: "credit_rules", _target_id: id, _details: { car_id: carFilter } });
+    },
+    onSuccess: () => {
+      toast.success("Regla eliminada");
+      queryClient.invalidateQueries({ queryKey: ["credit-rules"] });
+      setDeletingVehicleRuleId(null);
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  // ===== Calendar block mutations =====
+  const openNewBlock = () => {
+    setBkStart(""); setBkEnd(""); setBkType("maintenance"); setBkReason("");
+    setBlockModal({ open: true, editing: null });
+  };
+  const openEditBlock = (b: any) => {
+    setBkStart(b.start_date); setBkEnd(b.end_date); setBkType(b.block_type || "maintenance"); setBkReason(b.reason || "");
+    setBlockModal({ open: true, editing: b });
+  };
+
+  const saveBlockMutation = useMutation({
+    mutationFn: async () => {
+      if (!bkStart || !bkEnd) throw new Error("Fechas obligatorias");
+      if (bkEnd < bkStart) throw new Error("La fecha fin debe ser >= fecha inicio");
+      if (bkReason.trim().length < 5) throw new Error("El motivo debe tener al menos 5 caracteres");
+      const { data: { user } } = await supabase.auth.getUser();
+      if (blockModal.editing) {
+        const { error } = await supabase.from("calendar_blocks").update({
+          start_date: bkStart, end_date: bkEnd, block_type: bkType, reason: bkReason,
+        }).eq("id", blockModal.editing.id);
+        if (error) throw error;
+        await supabase.rpc("insert_audit_log", { _action: "edit_calendar_block", _target_table: "calendar_blocks", _target_id: blockModal.editing.id });
+      } else {
+        const { data, error } = await supabase.from("calendar_blocks").insert({
+          car_id: carFilter, start_date: bkStart, end_date: bkEnd, block_type: bkType, reason: bkReason, created_by: user?.id,
+        }).select().single();
+        if (error) throw error;
+        await supabase.rpc("insert_audit_log", { _action: "create_calendar_block", _target_table: "calendar_blocks", _target_id: data?.id, _details: { car_id: carFilter } });
+      }
+    },
+    onSuccess: () => {
+      toast.success(blockModal.editing ? "Bloqueo actualizado" : "Bloqueo creado");
+      queryClient.invalidateQueries({ queryKey: ["calendar-blocks", carFilter] });
+      setBlockModal({ open: false, editing: null });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const deleteBlockMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("calendar_blocks").delete().eq("id", id);
+      if (error) throw error;
+      await supabase.rpc("insert_audit_log", { _action: "delete_calendar_block", _target_table: "calendar_blocks", _target_id: id });
+    },
+    onSuccess: () => {
+      toast.success("Bloqueo eliminado");
+      queryClient.invalidateQueries({ queryKey: ["calendar-blocks", carFilter] });
+      setDeletingBlockId(null);
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const isBlockedDay = (day: Date) => {
+    if (carFilter === "all") return false;
+    return (calendarBlocks as any[]).some((b) =>
+      isWithinInterval(day, { start: parseISO(b.start_date), end: parseISO(b.end_date) }) ||
+      isSameDay(day, parseISO(b.start_date)) || isSameDay(day, parseISO(b.end_date))
+    );
+  };
+
+
   const conflicts = (() => {
     const sorted = [...reservations].filter((r: any) => r.status === "confirmed").sort((a: any, b: any) => a.start_date.localeCompare(b.start_date));
     const result: any[] = [];
