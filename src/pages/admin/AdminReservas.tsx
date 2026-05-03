@@ -40,6 +40,7 @@ const initials = (n?: string, s?: string) => `${(n?.[0] || "").toUpperCase()}${(
 
 const AdminReservas = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [carFilter, setCarFilter] = useState("all");
   const [calCityFilter, setCalCityFilter] = useState("all");
@@ -51,6 +52,34 @@ const AdminReservas = () => {
   const [adjustReason, setAdjustReason] = useState("");
   const [rejectModal, setRejectModal] = useState<any>(null);
   const [rejectReason, setRejectReason] = useState("");
+
+  // Confirmed reservations block
+  const [confirmedTab, setConfirmedTab] = useState<"current" | "future" | "past">("current");
+  const [editResModal, setEditResModal] = useState<any>(null);
+  const [editResStart, setEditResStart] = useState("");
+  const [editResEnd, setEditResEnd] = useState("");
+  const [cancelResModal, setCancelResModal] = useState<any>(null);
+
+  // Vehicle special rule modal
+  const [vehicleRuleModal, setVehicleRuleModal] = useState<{ open: boolean; editingId: string | null }>({ open: false, editingId: null });
+  const [vrName, setVrName] = useState("");
+  const [vrDesc, setVrDesc] = useState("");
+  const [vrType, setVrType] = useState<"months" | "dates">("months");
+  const [vrMonths, setVrMonths] = useState<number[]>([]);
+  const [vrStart, setVrStart] = useState("");
+  const [vrEnd, setVrEnd] = useState("");
+  const [vrMultiplier, setVrMultiplier] = useState("1.0");
+  const [vrCreditsPerDay, setVrCreditsPerDay] = useState("1.0");
+  const [deletingVehicleRuleId, setDeletingVehicleRuleId] = useState<string | null>(null);
+
+  // Calendar block modal
+  const [blockModal, setBlockModal] = useState<{ open: boolean; editing: any | null }>({ open: false, editing: null });
+  const [bkStart, setBkStart] = useState("");
+  const [bkEnd, setBkEnd] = useState("");
+  const [bkType, setBkType] = useState("maintenance");
+  const [bkReason, setBkReason] = useState("");
+  const [deletingBlockId, setDeletingBlockId] = useState<string | null>(null);
+
 
   // New rule form state
   const [ruleName, setRuleName] = useState("");
