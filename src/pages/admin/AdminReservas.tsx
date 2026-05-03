@@ -836,81 +836,379 @@ const AdminReservas = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* SECTION 2: Calendar */}
+      {/* SECTION 2: Calendar (+ optional side panel for vehicle) */}
+      <div className={carFilter !== "all" ? "grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-4" : ""}>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between flex-wrap gap-3">
+            <CardTitle className="flex items-center gap-2 text-foreground"><CalendarDays className="h-5 w-5" /> Calendario de Reservas</CardTitle>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Select value={calCityFilter} onValueChange={(v) => { setCalCityFilter(v); setCarFilter("all"); }}>
+                <SelectTrigger className="w-40"><SelectValue placeholder="Ciudad" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas las ciudades</SelectItem>
+                  {locations.map((l: any) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
+                </SelectContent>
+              </Select>
+              <Select value={carFilter} onValueChange={setCarFilter}>
+                <SelectTrigger className="w-48"><SelectValue placeholder="Todos los vehículos" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos los vehículos</SelectItem>
+                  {cars
+                    .filter((c: any) => calCityFilter === "all" || c.location_id === calCityFilter)
+                    .map((c: any) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between mb-4">
+              <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}><ChevronLeft className="h-5 w-5" /></Button>
+              <h3 className="text-lg font-semibold text-foreground">{MONTHS_ES[currentMonth.getMonth()]} {currentMonth.getFullYear()}</h3>
+              <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}><ChevronRight className="h-5 w-5" /></Button>
+            </div>
+            <div className="grid grid-cols-7 gap-px bg-border rounded-lg overflow-hidden">
+              {WEEKDAYS.map((d) => (
+                <div key={d} className="bg-muted p-2 text-center text-xs font-medium text-muted-foreground">{d}</div>
+              ))}
+              {Array.from({ length: startPadding }).map((_, i) => (
+                <div key={`pad-${i}`} className="bg-card p-2 min-h-[80px]" />
+              ))}
+              {days.map((day) => {
+                const dayReservations = getReservationsForDay(day);
+                const peak = isPeakDay(day);
+                const blocked = isBlockedDay(day);
+                return (
+                  <div key={day.toISOString()} className={`bg-card p-1.5 min-h-[80px] ${blocked ? "bg-destructive/10" : peak ? "bg-orange-500/5" : ""}`}>
+                    <span className={`text-xs font-medium ${blocked ? "text-destructive" : peak ? "text-orange-400" : "text-muted-foreground"}`}>{day.getDate()}</span>
+                    <div className="space-y-0.5 mt-1">
+                      {blocked && <span className="block text-[9px] text-destructive font-medium">Bloqueado</span>}
+                      {dayReservations.slice(0, 3).map((r: any) => (
+                        <Popover key={r.id}>
+                          <PopoverTrigger asChild>
+                            <button className="w-full text-left text-[10px] px-1 py-0.5 rounded bg-primary/20 text-primary truncate hover:bg-primary/30 transition-colors">
+                              {(r.profiles as any)?.name?.[0]}{(r.profiles as any)?.surname?.[0]} · {(r.cars as any)?.name?.split(" ").pop()}
+                            </button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-64 text-sm space-y-2">
+                            <p className="font-semibold text-foreground">{(r.profiles as any)?.name} {(r.profiles as any)?.surname}</p>
+                            <p className="text-muted-foreground">{(r.cars as any)?.name}</p>
+                            <p className="text-muted-foreground">{r.start_date} → {r.end_date}</p>
+                            <div className="flex gap-2 flex-wrap">
+                              <Badge variant="secondary">{r.credits_used} créditos</Badge>
+                              <Badge variant={r.status === "confirmed" ? "default" : "secondary"}>{r.status}</Badge>
+                            </div>
+                            {r.status === "pending" && (
+                              <div className="flex gap-2 pt-2">
+                                <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)}>Aceptar</Button>
+                                <Button size="sm" variant="destructive" className="flex-1" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
+                              </div>
+                            )}
+                          </PopoverContent>
+                        </Popover>
+                      ))}
+                      {dayReservations.length > 3 && <span className="text-[10px] text-muted-foreground">+{dayReservations.length - 3}</span>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
+        {carFilter !== "all" && (
+          <aside className="space-y-4">
+            {/* Special vehicle dates */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-foreground text-base"><Star className="h-4 w-4 text-amber-400" /> Fechas especiales</CardTitle>
+                <Button size="sm" variant="outline" onClick={() => { resetVehicleRuleForm(); setVehicleRuleModal({ open: true, editingId: null }); }}><Plus className="h-3 w-3 mr-1" /> Añadir</Button>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {vehicleRules.length === 0 ? (
+                  <p className="text-xs text-muted-foreground">Sin fechas especiales para este vehículo.</p>
+                ) : vehicleRules.map((rule: any) => (
+                  <div key={rule.id} className="p-2 rounded border border-border space-y-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-sm font-medium text-foreground truncate">{rule.name}</span>
+                      <div className="flex gap-1 shrink-0">
+                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditVehicleRule(rule)}><Edit className="h-3 w-3" /></Button>
+                        <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setDeletingVehicleRuleId(rule.id)}><Trash2 className="h-3 w-3" /></Button>
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground">
+                      {rule.months ? rule.months.map((m: number) => MONTHS_ES[m - 1].slice(0, 3)).join(", ") : `${rule.start_date} → ${rule.end_date}`}
+                    </p>
+                    <div className="flex gap-1 flex-wrap">
+                      {multiplierBadge(rule.multiplier)}
+                      <Badge variant="secondary" className="text-[10px]">{rule.credits_per_day} cr/día</Badge>
+                    </div>
+                  </div>
+                ))}
+                <p className="text-[11px] text-muted-foreground italic pt-2 border-t border-border">
+                  Las reglas globales también se aplican a este vehículo. Gestiónelas en Configuración de Créditos.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Active blocks */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-foreground text-base"><Ban className="h-4 w-4 text-destructive" /> Bloqueos activos</CardTitle>
+                <Button size="sm" variant="outline" onClick={openNewBlock}><Plus className="h-3 w-3 mr-1" /> Añadir bloqueo</Button>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {calendarBlocks.length === 0 ? (
+                  <p className="text-xs text-muted-foreground">Sin bloqueos activos</p>
+                ) : (calendarBlocks as any[]).map((b) => {
+                  const meta = blockTypeMeta(b.block_type);
+                  const Icon = meta.icon;
+                  return (
+                    <div key={b.id} className="p-2 rounded border border-border space-y-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <Icon className="h-4 w-4 text-muted-foreground shrink-0" />
+                          <span className="text-xs text-foreground">{b.start_date} → {b.end_date}</span>
+                        </div>
+                        <div className="flex gap-1 shrink-0">
+                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditBlock(b)}><Edit className="h-3 w-3" /></Button>
+                          <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setDeletingBlockId(b.id)}><Trash2 className="h-3 w-3" /></Button>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <Badge className={`text-[10px] ${meta.color}`}>{meta.label}</Badge>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="text-[11px] text-muted-foreground truncate max-w-[180px]">{b.reason}</span>
+                            </TooltipTrigger>
+                            <TooltipContent>{b.reason}</TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                    </div>
+                  );
+                })}
+              </CardContent>
+            </Card>
+          </aside>
+        )}
+      </div>
+
+      {/* SECTION 2.5: Confirmed Reservations */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between flex-wrap gap-3">
-          <CardTitle className="flex items-center gap-2 text-foreground"><CalendarDays className="h-5 w-5" /> Calendario de Reservas</CardTitle>
-          <div className="flex items-center gap-2 flex-wrap">
-            <Select value={calCityFilter} onValueChange={(v) => { setCalCityFilter(v); setCarFilter("all"); }}>
-              <SelectTrigger className="w-40"><SelectValue placeholder="Ciudad" /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Todas las ciudades</SelectItem>
-                {locations.map((l: any) => <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>)}
-              </SelectContent>
-            </Select>
-            <Select value={carFilter} onValueChange={setCarFilter}>
-              <SelectTrigger className="w-48"><SelectValue placeholder="Todos los vehículos" /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Todos los vehículos</SelectItem>
-                {cars
-                  .filter((c: any) => calCityFilter === "all" || c.location_id === calCityFilter)
-                  .map((c: any) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
-              </SelectContent>
-            </Select>
-          </div>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-foreground"><CalendarCheck className="h-5 w-5" /> Reservas Confirmadas</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center justify-between mb-4">
-            <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}><ChevronLeft className="h-5 w-5" /></Button>
-            <h3 className="text-lg font-semibold text-foreground">{MONTHS_ES[currentMonth.getMonth()]} {currentMonth.getFullYear()}</h3>
-            <Button variant="ghost" size="icon" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}><ChevronRight className="h-5 w-5" /></Button>
-          </div>
-          <div className="grid grid-cols-7 gap-px bg-border rounded-lg overflow-hidden">
-            {WEEKDAYS.map((d) => (
-              <div key={d} className="bg-muted p-2 text-center text-xs font-medium text-muted-foreground">{d}</div>
-            ))}
-            {Array.from({ length: startPadding }).map((_, i) => (
-              <div key={`pad-${i}`} className="bg-card p-2 min-h-[80px]" />
-            ))}
-            {days.map((day) => {
-              const dayReservations = getReservationsForDay(day);
-              const peak = isPeakDay(day);
-              return (
-                <div key={day.toISOString()} className={`bg-card p-1.5 min-h-[80px] ${peak ? "bg-orange-500/5" : ""}`}>
-                  <span className={`text-xs font-medium ${peak ? "text-orange-400" : "text-muted-foreground"}`}>{day.getDate()}</span>
-                  <div className="space-y-0.5 mt-1">
-                    {dayReservations.slice(0, 3).map((r: any) => (
-                      <Popover key={r.id}>
-                        <PopoverTrigger asChild>
-                          <button className="w-full text-left text-[10px] px-1 py-0.5 rounded bg-primary/20 text-primary truncate hover:bg-primary/30 transition-colors">
-                            {(r.profiles as any)?.name?.[0]}{(r.profiles as any)?.surname?.[0]} · {(r.cars as any)?.name?.split(" ").pop()}
-                          </button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-64 text-sm space-y-2">
-                          <p className="font-semibold text-foreground">{(r.profiles as any)?.name} {(r.profiles as any)?.surname}</p>
-                          <p className="text-muted-foreground">{(r.cars as any)?.name}</p>
-                          <p className="text-muted-foreground">{r.start_date} → {r.end_date}</p>
-                          <div className="flex gap-2 flex-wrap">
-                            <Badge variant="secondary">{r.credits_used} créditos</Badge>
-                            <Badge variant={r.status === "confirmed" ? "default" : "secondary"}>{r.status}</Badge>
+          <Tabs value={confirmedTab} onValueChange={(v) => setConfirmedTab(v as any)}>
+            <TabsList>
+              <TabsTrigger value="past">Pasadas ({confirmedGroups.past.length})</TabsTrigger>
+              <TabsTrigger value="current">En curso ({confirmedGroups.current.length})</TabsTrigger>
+              <TabsTrigger value="future">Futuras ({confirmedGroups.future.length})</TabsTrigger>
+            </TabsList>
+            {(["past", "current", "future"] as const).map((tab) => (
+              <TabsContent key={tab} value={tab} className="mt-4">
+                {confirmedGroups[tab].length === 0 ? (
+                  <p className="text-sm text-muted-foreground text-center py-6">Sin reservas en esta categoría</p>
+                ) : (
+                  <div className="space-y-2">
+                    {confirmedGroups[tab].map((r: any) => {
+                      const partNumbers = (participations as any[])
+                        .filter((p) => p.user_id === r.user_id && p.car_id === r.car_id)
+                        .map((p) => p.participation_number);
+                      return (
+                        <div key={r.id} className="flex items-center gap-3 p-3 rounded-lg border border-border bg-card hover:bg-muted/30 transition-colors flex-wrap">
+                          <Avatar className="h-9 w-9 shrink-0">
+                            <AvatarFallback className="text-xs">{initials(r.profiles?.name, r.profiles?.surname)}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-[160px]">
+                            <p className="text-sm font-medium text-foreground">{r.profiles?.name} {r.profiles?.surname}</p>
+                            <p className="text-xs text-muted-foreground">{r.cars?.name}</p>
                           </div>
-                          {r.status === "pending" && (
-                            <div className="flex gap-2 pt-2">
-                              <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)}>Aceptar</Button>
-                              <Button size="sm" variant="destructive" className="flex-1" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
-                            </div>
-                          )}
-                        </PopoverContent>
-                      </Popover>
-                    ))}
-                    {dayReservations.length > 3 && <span className="text-[10px] text-muted-foreground">+{dayReservations.length - 3}</span>}
+                          <span className="text-xs text-muted-foreground">{r.start_date} → {r.end_date}</span>
+                          <Badge variant="secondary">{r.credits_used} cr</Badge>
+                          {partNumbers.length > 0 && <Badge variant="outline">#{partNumbers.join(", #")}</Badge>}
+                          <div className="flex gap-1 ml-auto">
+                            <Button size="sm" variant="ghost" onClick={() => navigate(`/admin/participantes?userId=${r.user_id}`)}>
+                              <Eye className="h-4 w-4 mr-1" /> Ver perfil
+                            </Button>
+                            <Button size="icon" variant="ghost" onClick={() => { setEditResModal(r); setEditResStart(r.start_date); setEditResEnd(r.end_date); }}>
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                            <Button size="icon" variant="ghost" className="text-destructive hover:text-destructive" onClick={() => setCancelResModal(r)}>
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
         </CardContent>
       </Card>
+
+      {/* Edit confirmed reservation modal */}
+      <Dialog open={!!editResModal} onOpenChange={(o) => !o && setEditResModal(null)}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Editar reserva</DialogTitle></DialogHeader>
+          {editResModal && (() => {
+            const oldCredits = Number(editResModal.credits_used || 0);
+            const valid = editResStart && editResEnd && editResEnd >= editResStart;
+            const days = valid ? differenceInCalendarDays(parseISO(editResEnd), parseISO(editResStart)) + 1 : 0;
+            const diff = days - oldCredits;
+            return (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label>Fecha inicio</Label>
+                    <Input type="date" value={editResStart} onChange={(e) => setEditResStart(e.target.value)} />
+                  </div>
+                  <div>
+                    <Label>Fecha fin</Label>
+                    <Input type="date" value={editResEnd} onChange={(e) => setEditResEnd(e.target.value)} />
+                  </div>
+                </div>
+                {valid && (
+                  <div className="text-sm p-3 rounded bg-muted/40 border border-border">
+                    <p className="text-foreground">Nuevos créditos: <strong>{days}</strong> (antes: {oldCredits})</p>
+                    {diff !== 0 && (
+                      <p className={diff > 0 ? "text-amber-400 mt-1" : "text-emerald-400 mt-1"}>
+                        {diff > 0 ? `Este cambio usará ${diff} crédito(s) adicional(es)` : `Este cambio liberará ${Math.abs(diff)} crédito(s)`}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditResModal(null)}>Cancelar</Button>
+            <Button onClick={() => editReservationMutation.mutate()} disabled={editReservationMutation.isPending}>Guardar cambios</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Cancel confirmed reservation */}
+      <AlertDialog open={!!cancelResModal} onOpenChange={(o) => !o && setCancelResModal(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Cancelar esta reserva?</AlertDialogTitle>
+            <AlertDialogDescription>Los créditos serán restituidos al participante.</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>No</AlertDialogCancel>
+            <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90" onClick={() => cancelConfirmedMutation.mutate()}>
+              Sí, cancelar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Vehicle special date modal */}
+      <Dialog open={vehicleRuleModal.open} onOpenChange={(o) => { if (!o) { setVehicleRuleModal({ open: false, editingId: null }); resetVehicleRuleForm(); } }}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader><DialogTitle>{vehicleRuleModal.editingId ? "Editar fecha especial" : "Añadir fecha especial para este vehículo"}</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <div>
+              <Label>Nombre</Label>
+              <Input value={vrName} onChange={(e) => setVrName(e.target.value)} placeholder="Ej: Semana Santa" />
+            </div>
+            <div>
+              <Label>Descripción (opcional)</Label>
+              <Textarea value={vrDesc} onChange={(e) => setVrDesc(e.target.value)} rows={2} />
+            </div>
+            <div>
+              <Label>Tipo de período</Label>
+              <RadioGroup value={vrType} onValueChange={(v: any) => setVrType(v)} className="flex gap-4 mt-2">
+                <label className="flex items-center gap-2 text-sm text-foreground"><RadioGroupItem value="months" /> Meses recurrentes</label>
+                <label className="flex items-center gap-2 text-sm text-foreground"><RadioGroupItem value="dates" /> Fechas fijas</label>
+              </RadioGroup>
+            </div>
+            {vrType === "months" ? (
+              <div className="grid grid-cols-4 gap-2">
+                {MONTHS_ES.map((m, i) => (
+                  <label key={i} className="flex items-center gap-2 text-sm text-foreground">
+                    <Checkbox checked={vrMonths.includes(i + 1)} onCheckedChange={(c) => setVrMonths(c ? [...vrMonths, i + 1] : vrMonths.filter((x) => x !== i + 1))} />
+                    {m.slice(0, 3)}
+                  </label>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                <div><Label>Inicio</Label><Input type="date" value={vrStart} onChange={(e) => setVrStart(e.target.value)} /></div>
+                <div><Label>Fin</Label><Input type="date" value={vrEnd} onChange={(e) => setVrEnd(e.target.value)} /></div>
+              </div>
+            )}
+            <div className="grid grid-cols-2 gap-3">
+              <div><Label>Multiplicador</Label><Input type="number" step="0.1" min="1.0" value={vrMultiplier} onChange={(e) => setVrMultiplier(e.target.value)} /></div>
+              <div><Label>Créditos/día</Label><Input type="number" step="0.1" min="0.5" value={vrCreditsPerDay} onChange={(e) => setVrCreditsPerDay(e.target.value)} /></div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setVehicleRuleModal({ open: false, editingId: null }); resetVehicleRuleForm(); }}>Cancelar</Button>
+            <Button onClick={() => saveVehicleRuleMutation.mutate()} disabled={saveVehicleRuleMutation.isPending}>Guardar</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={!!deletingVehicleRuleId} onOpenChange={(o) => !o && setDeletingVehicleRuleId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar esta fecha especial?</AlertDialogTitle>
+            <AlertDialogDescription>Si otros vehículos también la usan, se desvincula sólo este. En caso contrario, se eliminará por completo.</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90" onClick={() => deletingVehicleRuleId && deleteVehicleRuleMutation.mutate(deletingVehicleRuleId)}>Eliminar</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Calendar block modal */}
+      <Dialog open={blockModal.open} onOpenChange={(o) => !o && setBlockModal({ open: false, editing: null })}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>{blockModal.editing ? "Editar bloqueo" : "Añadir bloqueo"}</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3">
+              <div><Label>Fecha inicio</Label><Input type="date" value={bkStart} onChange={(e) => setBkStart(e.target.value)} /></div>
+              <div><Label>Fecha fin</Label><Input type="date" value={bkEnd} onChange={(e) => setBkEnd(e.target.value)} /></div>
+            </div>
+            <div>
+              <Label>Tipo</Label>
+              <Select value={bkType} onValueChange={setBkType}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {BLOCK_TYPES.map((t) => <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Motivo</Label>
+              <Textarea value={bkReason} onChange={(e) => setBkReason(e.target.value)} rows={3} placeholder="Mínimo 5 caracteres" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setBlockModal({ open: false, editing: null })}>Cancelar</Button>
+            <Button onClick={() => saveBlockMutation.mutate()} disabled={saveBlockMutation.isPending}>Guardar</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={!!deletingBlockId} onOpenChange={(o) => !o && setDeletingBlockId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar este bloqueo?</AlertDialogTitle>
+            <AlertDialogDescription>Esta acción no se puede deshacer.</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90" onClick={() => deletingBlockId && deleteBlockMutation.mutate(deletingBlockId)}>Eliminar</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* SECTION 3: Participations & Credits */}
       <Card>
