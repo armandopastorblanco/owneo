@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,13 +17,26 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isSameDay, isWithinInterval, parseISO } from "date-fns";
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isSameDay, isWithinInterval, parseISO, differenceInCalendarDays } from "date-fns";
 import { es } from "date-fns/locale";
-import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit, Trash2, ArrowUpDown } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit, Trash2, ArrowUpDown, CalendarCheck, Star, Ban, Wrench, ClipboardCheck, Hammer, AlertCircle, Eye } from "lucide-react";
 
 const MONTHS_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const WEEKDAYS = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+
+const BLOCK_TYPES = [
+  { value: "maintenance", label: "Mantenimiento", icon: Wrench, color: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
+  { value: "itv", label: "ITV", icon: ClipboardCheck, color: "bg-purple-500/20 text-purple-300 border-purple-500/30" },
+  { value: "repair", label: "Reparación", icon: Hammer, color: "bg-orange-500/20 text-orange-300 border-orange-500/30" },
+  { value: "other", label: "Otro", icon: AlertCircle, color: "bg-muted text-muted-foreground" },
+];
+const blockTypeMeta = (t?: string) => BLOCK_TYPES.find((b) => b.value === t) || BLOCK_TYPES[3];
+const initials = (n?: string, s?: string) => `${(n?.[0] || "").toUpperCase()}${(s?.[0] || "").toUpperCase()}` || "?";
 
 const AdminReservas = () => {
   const queryClient = useQueryClient();
