@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
@@ -56,6 +57,16 @@ const AdminParticipantes = () => {
   const [carFilter, setCarFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [openUserId, setOpenUserId] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    const uid = searchParams.get("userId");
+    if (uid) {
+      setOpenUserId(uid);
+      const next = new URLSearchParams(searchParams);
+      next.delete("userId");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const { data: validated = [], isLoading: l1 } = useQuery({
     queryKey: ["validated_participations"],
