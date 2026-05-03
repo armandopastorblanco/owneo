@@ -54,7 +54,7 @@ const downloadSignedDoc = async (fileUrl: string, fileName?: string, carId?: str
 import {
   ArrowLeft, ExternalLink, MapPin, Users, CalendarDays, Wrench,
   Gauge, FileText, ClipboardCheck, BarChart3, Plus, Trash2, Download,
-  Eye, Upload, AlertTriangle, X,
+  Eye, Upload, AlertTriangle, X, Star, Edit, Ban, CalendarCheck, UserRound,
 } from "lucide-react";
 import {
   format, startOfMonth, endOfMonth, differenceInDays, addDays, startOfYear,
