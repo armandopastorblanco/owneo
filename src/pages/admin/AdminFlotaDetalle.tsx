@@ -19,6 +19,11 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import { getSignedUrl } from "@/lib/getSignedUrl";
 import { parseStorageObjectRef } from "@/lib/storageObject";
@@ -49,7 +54,7 @@ const downloadSignedDoc = async (fileUrl: string, fileName?: string, carId?: str
 import {
   ArrowLeft, ExternalLink, MapPin, Users, CalendarDays, Wrench,
   Gauge, FileText, ClipboardCheck, BarChart3, Plus, Trash2, Download,
-  Eye, Upload, AlertTriangle, X,
+  Eye, Upload, AlertTriangle, X, Star, Edit, Ban, CalendarCheck, UserRound,
 } from "lucide-react";
 import {
   format, startOfMonth, endOfMonth, differenceInDays, addDays, startOfYear,
@@ -341,13 +346,59 @@ const ParticipantsTab = ({ carId, participants, reservations, nav }: any) => {
 // ============================================================
 // TAB 2 — CALENDARIO
 // ============================================================
+const MONTHS_CAL = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
 const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
+  const nav = useNavigate();
   const [blockDialog, setBlockDialog] = useState<{ open: boolean; date?: Date }>({ open: false });
   const [blockForm, setBlockForm] = useState({ start_date: "", end_date: "", block_type: "maintenance", reason: "" });
+  const [editBlockDialog, setEditBlockDialog] = useState<{ open: boolean; block?: any }>({ open: false });
+  const [editBlockForm, setEditBlockForm] = useState({ start_date: "", end_date: "", block_type: "maintenance", reason: "" });
   const [config, setConfig] = useState({
     min_reservation_days: car.min_reservation_days ?? 1,
     max_reservation_days: car.max_reservation_days ?? 7,
     reservation_advance_days: car.reservation_advance_days ?? 7,
+  });
+
+  const [ruleDialog, setRuleDialog] = useState<{ open: boolean; editing?: any }>({ open: false });
+  const [ruleForm, setRuleForm] = useState({
+    name: "", description: "", type: "months" as "months" | "dates",
+    months: [] as number[], start_date: "", end_date: "",
+    multiplier: "1.5", credits_per_day: "1.5",
+  });
+  const [ruleDeleteDialog, setRuleDeleteDialog] = useState<{ open: boolean; rule?: any }>({ open: false });
+
+  const [resvTab, setResvTab] = useState<"past" | "current" | "future">("future");
+  const [editResvDialog, setEditResvDialog] = useState<{ open: boolean; resv?: any }>({ open: false });
+  const [editResvForm, setEditResvForm] = useState({ start_date: "", end_date: "" });
+  const [cancelResvDialog, setCancelResvDialog] = useState<{ open: boolean; resv?: any }>({ open: false });
+
+  const { data: vehicleRules = [] } = useQuery({
+    queryKey: ["vehicle-credit-rules", carId],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("credit_rules")
+        .select("*")
+        .eq("applies_to_all", false)
+        .eq("is_active", true)
+        .contains("car_ids", [carId]);
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
+  const { data: allReservations = [] } = useQuery({
+    queryKey: ["fleet-reservations-detail", carId],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("reservations")
+        .select(`*, profiles:user_id(name, surname, email), validated_participations!inner(participation_number, credits_per_year)`)
+        .eq("car_id", carId)
+        .eq("status", "confirmed")
+        .order("start_date", { ascending: false });
+      if (error) throw error;
+      return data || [];
+    },
   });
 
   const events = useMemo(() => {
@@ -387,6 +438,11 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
     setBlockDialog({ open: true, date: d });
   };
 
+  const openEditBlock = (b: any) => {
+    setEditBlockForm({ start_date: b.start_date, end_date: b.end_date, block_type: b.block_type, reason: b.reason });
+    setEditBlockDialog({ open: true, block: b });
+  };
+
   const saveBlock = useMutation({
     mutationFn: async () => {
       if (!blockForm.reason.trim()) throw new Error("El motivo es obligatorio");
@@ -405,6 +461,27 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
       toast.success("Bloqueo creado");
       qc.invalidateQueries({ queryKey: ["fleet-blocks", carId] });
       setBlockDialog({ open: false });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const updateBlock = useMutation({
+    mutationFn: async () => {
+      if (!editBlockDialog.block) return;
+      if (!editBlockForm.reason.trim()) throw new Error("El motivo es obligatorio");
+      const { error } = await supabase.from("calendar_blocks").update({
+        start_date: editBlockForm.start_date,
+        end_date: editBlockForm.end_date,
+        block_type: editBlockForm.block_type,
+        reason: editBlockForm.reason,
+      }).eq("id", editBlockDialog.block.id);
+      if (error) throw error;
+      await auditLog("update_calendar_block", editBlockDialog.block.id, editBlockForm);
+    },
+    onSuccess: () => {
+      toast.success("Bloqueo actualizado");
+      qc.invalidateQueries({ queryKey: ["fleet-blocks", carId] });
+      setEditBlockDialog({ open: false });
     },
     onError: (e: any) => toast.error(e.message),
   });
@@ -435,6 +512,144 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
     onError: (e: any) => toast.error(e.message),
   });
 
+  const saveVehicleRule = useMutation({
+    mutationFn: async () => {
+      const payload: any = {
+        name: ruleForm.name,
+        description: ruleForm.description || null,
+        is_recurring: ruleForm.type === "months",
+        months: ruleForm.type === "months" ? ruleForm.months : null,
+        start_date: ruleForm.type === "dates" ? ruleForm.start_date : null,
+        end_date: ruleForm.type === "dates" ? ruleForm.end_date : null,
+        multiplier: parseFloat(ruleForm.multiplier),
+        credits_per_day: parseFloat(ruleForm.credits_per_day),
+        applies_to_all: false,
+        car_ids: [carId],
+        is_active: true,
+      };
+      if (ruleDialog.editing) {
+        const { error } = await (supabase as any).from("credit_rules").update(payload).eq("id", ruleDialog.editing.id);
+        if (error) throw error;
+      } else {
+        const { error } = await (supabase as any).from("credit_rules").insert(payload);
+        if (error) throw error;
+      }
+      await auditLog(ruleDialog.editing ? "update_vehicle_credit_rule" : "create_vehicle_credit_rule", carId, payload);
+    },
+    onSuccess: () => {
+      toast.success(ruleDialog.editing ? "Fecha especial actualizada" : "Fecha especial añadida");
+      qc.invalidateQueries({ queryKey: ["vehicle-credit-rules", carId] });
+      setRuleDialog({ open: false });
+      setRuleForm({ name: "", description: "", type: "months", months: [], start_date: "", end_date: "", multiplier: "1.5", credits_per_day: "1.5" });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const deleteVehicleRule = useMutation({
+    mutationFn: async () => {
+      const rule = ruleDeleteDialog.rule;
+      if (!rule) return;
+      if ((rule.car_ids || []).length <= 1) {
+        const { error } = await (supabase as any).from("credit_rules").delete().eq("id", rule.id);
+        if (error) throw error;
+      } else {
+        const newIds = (rule.car_ids || []).filter((x: string) => x !== carId);
+        const { error } = await (supabase as any).from("credit_rules").update({ car_ids: newIds }).eq("id", rule.id);
+        if (error) throw error;
+      }
+      await auditLog("delete_vehicle_credit_rule", rule.id);
+    },
+    onSuccess: () => {
+      toast.success("Fecha especial eliminada");
+      qc.invalidateQueries({ queryKey: ["vehicle-credit-rules", carId] });
+      setRuleDeleteDialog({ open: false });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const openEditRule = (rule: any) => {
+    setRuleForm({
+      name: rule.name || "",
+      description: rule.description || "",
+      type: rule.months && rule.months.length ? "months" : "dates",
+      months: rule.months || [],
+      start_date: rule.start_date || "",
+      end_date: rule.end_date || "",
+      multiplier: String(rule.multiplier ?? "1.5"),
+      credits_per_day: String(rule.credits_per_day ?? "1.5"),
+    });
+    setRuleDialog({ open: true, editing: rule });
+  };
+
+  const editResv = useMutation({
+    mutationFn: async () => {
+      const r = editResvDialog.resv;
+      if (!r) return;
+      const newCredits = differenceInDays(new Date(editResvForm.end_date), new Date(editResvForm.start_date)) + 1;
+      const oldCredits = r.credits_used || 0;
+      const diff = newCredits - oldCredits;
+      const { error: e1 } = await supabase.from("reservations").update({
+        start_date: editResvForm.start_date,
+        end_date: editResvForm.end_date,
+        credits_used: newCredits,
+      }).eq("id", r.id);
+      if (e1) throw e1;
+      const { data: vp } = await supabase.from("validated_participations")
+        .select("id, credits_remaining, credits_used_this_year")
+        .eq("user_id", r.user_id).eq("car_id", carId).single();
+      if (vp) {
+        await supabase.from("validated_participations").update({
+          credits_remaining: (vp.credits_remaining || 0) - diff,
+          credits_used_this_year: (vp.credits_used_this_year || 0) + diff,
+        }).eq("id", vp.id);
+      }
+      await auditLog("edit_reservation", r.id, {
+        old: { start: r.start_date, end: r.end_date, credits: oldCredits },
+        new: { start: editResvForm.start_date, end: editResvForm.end_date, credits: newCredits },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Reserva actualizada");
+      qc.invalidateQueries({ queryKey: ["fleet-reservations-detail", carId] });
+      qc.invalidateQueries({ queryKey: ["fleet-participants", carId] });
+      qc.invalidateQueries({ queryKey: ["fleet-reservations", carId] });
+      setEditResvDialog({ open: false });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const cancelResv = useMutation({
+    mutationFn: async () => {
+      const r = cancelResvDialog.resv;
+      if (!r) return;
+      const { data: { user } } = await supabase.auth.getUser();
+      const { error: e1 } = await supabase.from("reservations").update({
+        status: "cancelled",
+        cancelled_at: new Date().toISOString(),
+        cancelled_by: user?.id,
+      }).eq("id", r.id);
+      if (e1) throw e1;
+      const { data: vp } = await supabase.from("validated_participations")
+        .select("id, credits_remaining, credits_used_this_year")
+        .eq("user_id", r.user_id).eq("car_id", carId).single();
+      if (vp) {
+        await supabase.from("validated_participations").update({
+          credits_remaining: (vp.credits_remaining || 0) + (r.credits_used || 0),
+          credits_used_this_year: Math.max(0, (vp.credits_used_this_year || 0) - (r.credits_used || 0)),
+        }).eq("id", vp.id);
+      }
+      await auditLog("cancel_reservation", r.id, { credits_restored: r.credits_used });
+    },
+    onSuccess: () => {
+      toast.success("Reserva cancelada y créditos restituidos");
+      qc.invalidateQueries({ queryKey: ["fleet-reservations-detail", carId] });
+      qc.invalidateQueries({ queryKey: ["fleet-reservations", carId] });
+      qc.invalidateQueries({ queryKey: ["fleet-participants", carId] });
+      setCancelResvDialog({ open: false });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   const upcomingBlocks = useMemo(() => {
     const limit = addDays(new Date(), 30);
     return blocks
@@ -442,52 +657,202 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
       .sort((a: any, b: any) => a.start_date.localeCompare(b.start_date));
   }, [blocks]);
 
+  const today = new Date().toISOString().slice(0, 10);
+  const pastRes = (allReservations as any[]).filter((r) => r.end_date < today);
+  const currentRes = (allReservations as any[]).filter((r) => r.start_date <= today && r.end_date >= today);
+  const futureRes = (allReservations as any[]).filter((r) => r.start_date > today);
+  const visibleRes = resvTab === "past" ? pastRes : resvTab === "current" ? currentRes : futureRes;
+
+  const formatRulePeriod = (rule: any) => {
+    if (rule.months && rule.months.length) {
+      return rule.months.map((m: number) => MONTHS_CAL[m - 1]).join(", ");
+    }
+    if (rule.start_date && rule.end_date) {
+      return `${format(new Date(rule.start_date), "dd MMM", { locale: es })} → ${format(new Date(rule.end_date), "dd MMM", { locale: es })}`;
+    }
+    return "—";
+  };
+
+  const multiplierBadgeClass = (m: number) => {
+    if (m >= 2) return "bg-destructive/20 text-destructive";
+    if (m >= 1.5) return "bg-orange-500/20 text-orange-300";
+    return "";
+  };
+
   return (
     <div className="grid lg:grid-cols-[1fr_320px] gap-4">
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-wrap gap-3 mb-4 text-xs">
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-emerald-500" /> Confirmadas</span>
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-amber-500" /> Pendientes</span>
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-destructive" /> Bloqueos</span>
-          </div>
-          <div style={{ height: 600 }} className="rbc-dark">
-            <BigCalendar
-              localizer={localizer}
-              events={events}
-              messages={messages}
-              culture="es"
-              eventPropGetter={eventStyleGetter}
-              selectable
-              onSelectSlot={openNewBlock}
-              onSelectEvent={(ev: any) => {
-                if (ev.resource?.type === "block") {
-                  if (confirm(`¿Eliminar bloqueo "${ev.resource.data.reason}"?`)) deleteBlock.mutate(ev.resource.data.id);
-                }
-              }}
-              views={["month", "week", "agenda"]}
-              defaultView="month"
-            />
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-4">
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex flex-wrap gap-3 mb-4 text-xs">
+              <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-emerald-500" /> Confirmadas</span>
+              <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-amber-500" /> Pendientes</span>
+              <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-destructive" /> Bloqueos</span>
+            </div>
+            <div style={{ height: 600 }} className="rbc-dark">
+              <BigCalendar
+                localizer={localizer}
+                events={events}
+                messages={messages}
+                culture="es"
+                eventPropGetter={eventStyleGetter}
+                selectable
+                onSelectSlot={openNewBlock}
+                onSelectEvent={(ev: any) => {
+                  if (ev.resource?.type === "block") {
+                    if (confirm(`¿Eliminar bloqueo "${ev.resource.data.reason}"?`)) deleteBlock.mutate(ev.resource.data.id);
+                  }
+                }}
+                views={["month", "week", "agenda"]}
+                defaultView="month"
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4 space-y-4">
+            <div className="flex items-center gap-2">
+              <CalendarCheck className="h-4 w-4" />
+              <h3 className="font-semibold text-sm">Reservas</h3>
+            </div>
+
+            <div className="inline-flex bg-muted/40 rounded-lg p-1 gap-1">
+              {[
+                { key: "past", label: `Pasadas (${pastRes.length})` },
+                { key: "current", label: `En curso (${currentRes.length})` },
+                { key: "future", label: `Futuras (${futureRes.length})` },
+              ].map((t) => (
+                <button
+                  key={t.key}
+                  onClick={() => setResvTab(t.key as any)}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                    resvTab === t.key ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+
+            {visibleRes.length === 0 ? (
+              <p className="text-xs text-muted-foreground py-6 text-center">
+                Sin reservas {resvTab === "past" ? "pasadas" : resvTab === "current" ? "en curso" : "futuras"}.
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {visibleRes.map((r: any) => {
+                  const profile = r.profiles || {};
+                  const vp = r.validated_participations?.[0];
+                  return (
+                    <li key={r.id} className="flex items-center gap-3 p-2 rounded bg-muted/30">
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="text-[10px]">{initials(profile.name, profile.surname)}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium text-sm truncate">{profile.name} {profile.surname}</div>
+                        <div className="text-xs text-muted-foreground truncate">{profile.email}</div>
+                      </div>
+                      <div className="hidden md:flex flex-col items-end gap-1 text-xs">
+                        <span className="text-muted-foreground">{r.start_date} → {r.end_date}</span>
+                        <div className="flex gap-1">
+                          <Badge variant="secondary" className="text-[10px]">{r.credits_used} créditos</Badge>
+                          {vp && <Badge variant="outline" className="text-[10px]">#{vp.participation_number}</Badge>}
+                        </div>
+                      </div>
+                      <div className="flex gap-1">
+                        <Button size="icon" variant="ghost" className="h-8 w-8" title="Ver perfil"
+                          onClick={() => nav(`/admin/participantes?user=${r.user_id}`)}>
+                          <UserRound className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="ghost" className="h-8 w-8" title="Editar"
+                          onClick={() => {
+                            setEditResvForm({ start_date: r.start_date, end_date: r.end_date });
+                            setEditResvDialog({ open: true, resv: r });
+                          }}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="ghost" className="h-8 w-8" title="Cancelar"
+                          onClick={() => setCancelResvDialog({ open: true, resv: r })}>
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </CardContent>
+        </Card>
+      </div>
 
       <Card>
         <CardContent className="p-4 space-y-4">
-          <h3 className="font-semibold text-sm">Configuración de reservas</h3>
           <div>
-            <Label className="text-xs">Días mínimos por reserva</Label>
-            <Input type="number" min={1} value={config.min_reservation_days} onChange={(e) => setConfig({ ...config, min_reservation_days: Number(e.target.value) })} />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Star className="h-4 w-4" />
+                <h3 className="font-semibold text-sm">Fechas especiales</h3>
+              </div>
+              <Button size="sm" variant="outline" onClick={() => {
+                setRuleForm({ name: "", description: "", type: "months", months: [], start_date: "", end_date: "", multiplier: "1.5", credits_per_day: "1.5" });
+                setRuleDialog({ open: true });
+              }}>
+                <Plus className="h-3 w-3 mr-1" /> Añadir
+              </Button>
+            </div>
+
+            {vehicleRules.length === 0 ? (
+              <p className="text-xs text-muted-foreground">Sin fechas especiales para este vehículo.</p>
+            ) : (
+              <ul className="space-y-2">
+                {(vehicleRules as any[]).map((rule) => (
+                  <li key={rule.id} className="text-xs p-2 rounded bg-muted/30 space-y-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium truncate">{rule.name}</div>
+                        <div className="text-muted-foreground text-[11px]">{formatRulePeriod(rule)}</div>
+                      </div>
+                      <div className="flex gap-1">
+                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => openEditRule(rule)}>
+                          <Edit className="h-3 w-3" />
+                        </Button>
+                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => setRuleDeleteDialog({ open: true, rule })}>
+                          <Trash2 className="h-3 w-3 text-destructive" />
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge className={multiplierBadgeClass(Number(rule.multiplier))} variant={multiplierBadgeClass(Number(rule.multiplier)) ? undefined : "secondary"}>
+                        ×{rule.multiplier}
+                      </Badge>
+                      <span className="text-muted-foreground">{rule.credits_per_day} cr/día</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p className="text-[11px] text-muted-foreground mt-2">
+              Las reglas globales también aplican a este vehículo. Gestiónelas en Reservas → Configuración de Créditos.
+            </p>
           </div>
-          <div>
-            <Label className="text-xs">Días máximos por reserva</Label>
-            <Input type="number" min={1} value={config.max_reservation_days} onChange={(e) => setConfig({ ...config, max_reservation_days: Number(e.target.value) })} />
+
+          <div className="border-t border-border/40 pt-4 space-y-3">
+            <h3 className="font-semibold text-sm">Configuración de reservas</h3>
+            <div>
+              <Label className="text-xs">Días mínimos por reserva</Label>
+              <Input type="number" min={1} value={config.min_reservation_days} onChange={(e) => setConfig({ ...config, min_reservation_days: Number(e.target.value) })} />
+            </div>
+            <div>
+              <Label className="text-xs">Días máximos por reserva</Label>
+              <Input type="number" min={1} value={config.max_reservation_days} onChange={(e) => setConfig({ ...config, max_reservation_days: Number(e.target.value) })} />
+            </div>
+            <div>
+              <Label className="text-xs">Días de antelación mínima</Label>
+              <Input type="number" min={0} value={config.reservation_advance_days} onChange={(e) => setConfig({ ...config, reservation_advance_days: Number(e.target.value) })} />
+            </div>
+            <Button size="sm" className="w-full" onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending}>Guardar</Button>
           </div>
-          <div>
-            <Label className="text-xs">Días de antelación mínima</Label>
-            <Input type="number" min={0} value={config.reservation_advance_days} onChange={(e) => setConfig({ ...config, reservation_advance_days: Number(e.target.value) })} />
-          </div>
-          <Button size="sm" className="w-full" onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending}>Guardar</Button>
 
           <div className="border-t border-border/40 pt-3">
             <h4 className="font-semibold text-xs mb-2">Bloqueos activos (próximos 30 días)</h4>
@@ -501,9 +866,14 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
                       <div className="font-medium">{format(new Date(b.start_date), "dd MMM", { locale: es })} → {format(new Date(b.end_date), "dd MMM", { locale: es })}</div>
                       <div className="text-muted-foreground">{b.block_type} · {b.reason}</div>
                     </div>
-                    <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => deleteBlock.mutate(b.id)}>
-                      <Trash2 className="h-3 w-3 text-destructive" />
-                    </Button>
+                    <div className="flex gap-1">
+                      <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => openEditBlock(b)}>
+                        <Edit className="h-3 w-3" />
+                      </Button>
+                      <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => deleteBlock.mutate(b.id)}>
+                        <Trash2 className="h-3 w-3 text-destructive" />
+                      </Button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -543,6 +913,177 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <Dialog open={editBlockDialog.open} onOpenChange={(o) => setEditBlockDialog({ open: o })}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Editar bloqueo</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              <div><Label>Inicio</Label><Input type="date" value={editBlockForm.start_date} onChange={(e) => setEditBlockForm({ ...editBlockForm, start_date: e.target.value })} /></div>
+              <div><Label>Fin</Label><Input type="date" value={editBlockForm.end_date} onChange={(e) => setEditBlockForm({ ...editBlockForm, end_date: e.target.value })} /></div>
+            </div>
+            <div>
+              <Label>Tipo</Label>
+              <Select value={editBlockForm.block_type} onValueChange={(v) => setEditBlockForm({ ...editBlockForm, block_type: v })}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="maintenance">Mantenimiento</SelectItem>
+                  <SelectItem value="itv">ITV</SelectItem>
+                  <SelectItem value="repair">Reparación</SelectItem>
+                  <SelectItem value="other">Otro</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div><Label>Motivo *</Label><Textarea value={editBlockForm.reason} onChange={(e) => setEditBlockForm({ ...editBlockForm, reason: e.target.value })} /></div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditBlockDialog({ open: false })}>Cancelar</Button>
+            <Button onClick={() => updateBlock.mutate()} disabled={updateBlock.isPending}>Guardar cambios</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={ruleDialog.open} onOpenChange={(o) => setRuleDialog({ open: o })}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{ruleDialog.editing ? "Editar fecha especial" : "Nueva fecha especial"}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div>
+              <Label className="text-xs">Nombre *</Label>
+              <Input value={ruleForm.name} onChange={(e) => setRuleForm({ ...ruleForm, name: e.target.value })} placeholder="Temporada Alta Verano" />
+            </div>
+            <div>
+              <Label className="text-xs">Tipo de período</Label>
+              <RadioGroup value={ruleForm.type} onValueChange={(v: any) => setRuleForm({ ...ruleForm, type: v })} className="flex gap-4 mt-1">
+                {(["months", "dates"] as const).map((t) => (
+                  <label key={t} className="flex items-center gap-2 text-sm">
+                    <RadioGroupItem value={t} />
+                    {t === "months" ? "Meses recurrentes" : "Fechas fijas"}
+                  </label>
+                ))}
+              </RadioGroup>
+            </div>
+            {ruleForm.type === "months" ? (
+              <div>
+                <Label className="text-xs">Meses</Label>
+                <div className="grid grid-cols-4 gap-2 mt-1">
+                  {MONTHS_CAL.map((m, i) => (
+                    <label key={m} className="flex items-center gap-1 text-xs">
+                      <Checkbox
+                        checked={ruleForm.months.includes(i + 1)}
+                        onCheckedChange={(c) => setRuleForm({
+                          ...ruleForm,
+                          months: c ? [...ruleForm.months, i + 1] : ruleForm.months.filter((x) => x !== i + 1),
+                        })}
+                      />
+                      {m.slice(0, 3)}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label className="text-xs">Inicio</Label>
+                  <Input type="date" value={ruleForm.start_date} onChange={(e) => setRuleForm({ ...ruleForm, start_date: e.target.value })} />
+                </div>
+                <div>
+                  <Label className="text-xs">Fin</Label>
+                  <Input type="date" value={ruleForm.end_date} onChange={(e) => setRuleForm({ ...ruleForm, end_date: e.target.value })} />
+                </div>
+              </div>
+            )}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label className="text-xs">Multiplicador</Label>
+                <Input type="number" step="0.1" value={ruleForm.multiplier} onChange={(e) => setRuleForm({ ...ruleForm, multiplier: e.target.value })} />
+              </div>
+              <div>
+                <Label className="text-xs">Créditos/día</Label>
+                <Input type="number" step="0.1" value={ruleForm.credits_per_day} onChange={(e) => setRuleForm({ ...ruleForm, credits_per_day: e.target.value })} />
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setRuleDialog({ open: false })}>Cancelar</Button>
+            <Button onClick={() => saveVehicleRule.mutate()} disabled={!ruleForm.name || saveVehicleRule.isPending}>
+              {ruleDialog.editing ? "Guardar cambios" : "Añadir fecha especial"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={ruleDeleteDialog.open} onOpenChange={(o) => setRuleDeleteDialog({ open: o })}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar esta fecha especial?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={() => deleteVehicleRule.mutate()} className="bg-destructive text-destructive-foreground">
+              Eliminar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <Dialog open={editResvDialog.open} onOpenChange={(o) => setEditResvDialog({ open: o })}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Modificar reserva</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label className="text-xs">Fecha inicio</Label>
+                <Input type="date" value={editResvForm.start_date} onChange={(e) => setEditResvForm({ ...editResvForm, start_date: e.target.value })} />
+              </div>
+              <div>
+                <Label className="text-xs">Fecha fin</Label>
+                <Input type="date" value={editResvForm.end_date} onChange={(e) => setEditResvForm({ ...editResvForm, end_date: e.target.value })} />
+              </div>
+            </div>
+            {editResvForm.start_date && editResvForm.end_date && (() => {
+              const newC = differenceInDays(new Date(editResvForm.end_date), new Date(editResvForm.start_date)) + 1;
+              const oldC = editResvDialog.resv?.credits_used || 0;
+              const diff = newC - oldC;
+              return (
+                <p className={`text-xs ${diff > 0 ? "text-destructive" : diff < 0 ? "text-emerald-400" : "text-muted-foreground"}`}>
+                  {diff > 0
+                    ? `Este cambio usará ${diff} créditos adicionales`
+                    : diff < 0
+                      ? `Este cambio liberará ${Math.abs(diff)} créditos`
+                      : "Sin cambio en créditos"}
+                </p>
+              );
+            })()}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditResvDialog({ open: false })}>Cancelar</Button>
+            <Button onClick={() => editResv.mutate()} disabled={editResv.isPending}>Guardar cambios</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={cancelResvDialog.open} onOpenChange={(o) => setCancelResvDialog({ open: o })}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Cancelar esta reserva?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Los {cancelResvDialog.resv?.credits_used || 0} créditos serán restituidos al participante.
+              Esta acción no se puede deshacer.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Volver</AlertDialogCancel>
+            <AlertDialogAction onClick={() => cancelResv.mutate()} className="bg-destructive text-destructive-foreground">
+              Confirmar cancelación
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
