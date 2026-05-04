@@ -119,7 +119,11 @@ const AdminFlotaDetalle = () => {
     queryKey: ["fleet-reservations", carId],
     enabled: !!carId,
     queryFn: async () => {
-      const { data, error } = await supabase.from("reservations").select("*").eq("car_id", carId);
+      const { data, error } = await supabase
+        .from("reservations")
+        .select("*")
+        .eq("car_id", carId)
+        .in("status", ["confirmed", "pending"]);
       if (error) throw error;
       return data || [];
     },
