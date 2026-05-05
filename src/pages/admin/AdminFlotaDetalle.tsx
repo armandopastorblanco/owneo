@@ -27,6 +27,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import { getSignedUrl } from "@/lib/getSignedUrl";
 import { parseStorageObjectRef } from "@/lib/storageObject";
+import { restoreCredits } from "@/lib/restoreCredits";
 import { toast as sonnerToast } from "sonner";
 
 const viewSignedDoc = async (fileUrl: string, carId?: string | null) => {
