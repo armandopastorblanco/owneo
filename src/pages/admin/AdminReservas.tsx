@@ -552,20 +552,8 @@ const AdminReservas = () => {
         rejected_by: user?.id,
       }).eq("id", rejectModal.id);
       if (error) throw error;
-      // Restore credits
-      const { data: vps } = await supabase
-        .from("validated_participations")
-        .select("id, credits_remaining, credits_used_this_year")
-        .eq("user_id", rejectModal.user_id)
-        .eq("car_id", rejectModal.car_id)
-        .limit(1);
-      if (vps && vps.length > 0) {
-        const vp = vps[0];
-        await supabase.from("validated_participations").update({
-          credits_remaining: Number(vp.credits_remaining || 0) + Number(rejectModal.credits_used || 0),
-          credits_used_this_year: Math.max(0, Number(vp.credits_used_this_year || 0) - Number(rejectModal.credits_used || 0)),
-        }).eq("id", vp.id);
-      }
+      // Restore credits via shared utility
+      await restoreCredits(rejectModal.user_id, rejectModal.car_id, Number(rejectModal.credits_used || 0));
       await supabase.rpc("insert_audit_log", {
         _action: "reject_reservation",
         _target_table: "reservations",
