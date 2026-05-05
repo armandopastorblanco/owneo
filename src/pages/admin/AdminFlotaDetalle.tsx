@@ -634,15 +634,7 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
         cancelled_by: user?.id,
       }).eq("id", r.id);
       if (e1) throw e1;
-      const { data: vp } = await supabase.from("validated_participations")
-        .select("id, credits_remaining, credits_used_this_year")
-        .eq("user_id", r.user_id).eq("car_id", carId).single();
-      if (vp) {
-        await supabase.from("validated_participations").update({
-          credits_remaining: (vp.credits_remaining || 0) + (r.credits_used || 0),
-          credits_used_this_year: Math.max(0, (vp.credits_used_this_year || 0) - (r.credits_used || 0)),
-        }).eq("id", vp.id);
-      }
+      await restoreCredits(r.user_id, carId!, Number(r.credits_used || 0));
       await auditLog("cancel_reservation", r.id, { credits_restored: r.credits_used });
     },
     onSuccess: () => {
