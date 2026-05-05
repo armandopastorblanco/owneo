@@ -312,6 +312,10 @@ const Dashboard = () => {
       setRange(undefined);
       qc.invalidateQueries({ queryKey: ["dashboard-reservations"] });
       qc.invalidateQueries({ queryKey: ["dashboard"] });
+      qc.invalidateQueries({ queryKey: ["user-reservations"] });
+      qc.invalidateQueries({ queryKey: ["user-participations"] });
+      qc.invalidateQueries({ queryKey: ["validated-participations"] });
+      qc.invalidateQueries({ queryKey: ["fleet-participants"] });
     },
     onError: (e: any) => toast.error(e.message),
   });
