@@ -293,22 +293,12 @@ const Dashboard = () => {
       }).select().single();
       if (error) throw error;
 
-      // Decrement credits using user_id + car_id (not id) to operate on the right row
-      const { data: vpRow } = await supabase
-        .from("validated_participations")
-        .select("credits_remaining, credits_used_this_year")
-        .eq("user_id", userId)
-        .eq("car_id", carId)
-        .limit(1)
-        .maybeSingle();
-      const curRem = Number(vpRow?.credits_remaining ?? primary.credits_remaining);
-      const curUsed = Number(vpRow?.credits_used_this_year ?? primary.credits_used_this_year);
-      const newRemaining = Math.max(0, curRem - creditsToUse);
-      const newUsed = curUsed + creditsToUse;
-      await supabase.from("validated_participations").update({
-        credits_remaining: newRemaining,
-        credits_used_this_year: newUsed,
-      }).eq("user_id", userId).eq("car_id", carId);
+      // Deduct credits via shared utility; revert reservation on failure
+      const deduct = await deductCredits(userId, carId, creditsToUse);
+      if (!deduct.success) {
+        await supabase.from("reservations").delete().eq("id", res.id);
+        throw new Error(deduct.error || "No se pudieron descontar los créditos");
+      }
 
       await supabase.rpc("insert_audit_log", {
         _action: "create_reservation",
