@@ -22,6 +22,8 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import DocumentsBlock, { type DocItem } from "@/components/dashboard/DocumentsBlock";
+import { deductCredits } from "@/lib/deductCredits";
+import { restoreCredits } from "@/lib/restoreCredits";
 
 const Dashboard = () => {
   const qc = useQueryClient();
