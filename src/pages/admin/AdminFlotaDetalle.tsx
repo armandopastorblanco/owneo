@@ -27,7 +27,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import { getSignedUrl } from "@/lib/getSignedUrl";
 import { parseStorageObjectRef } from "@/lib/storageObject";
-import { restoreCredits } from "@/lib/restoreCredits";
+
 import { toast as sonnerToast } from "sonner";
 
 const viewSignedDoc = async (fileUrl: string, carId?: string | null) => {
@@ -634,7 +634,7 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
         cancelled_by: user?.id,
       }).eq("id", r.id);
       if (e1) throw e1;
-      await restoreCredits(r.user_id, carId!, Number(r.credits_used || 0));
+      // Credits are restored automatically by the DB trigger trg_reservation_credits
       await auditLog("cancel_reservation", r.id, { credits_restored: r.credits_used });
     },
     onSuccess: () => {
@@ -642,6 +642,10 @@ const CalendarTab = ({ carId, car, reservations, blocks, qc }: any) => {
       qc.invalidateQueries({ queryKey: ["fleet-reservations-detail", carId] });
       qc.invalidateQueries({ queryKey: ["fleet-reservations", carId] });
       qc.invalidateQueries({ queryKey: ["fleet-participants", carId] });
+      qc.invalidateQueries({ queryKey: ["validated-participations"] });
+      qc.invalidateQueries({ queryKey: ["user-reservations"] });
+      qc.invalidateQueries({ queryKey: ["user-participations"] });
+      qc.invalidateQueries({ queryKey: ["admin-reservations"] });
       setCancelResvDialog({ open: false });
     },
     onError: (e: any) => toast.error(e.message),
