@@ -384,9 +384,37 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
   });
 
   const userParticipations = (validated as any[]).filter((v) => v.user_id === userId);
-  const userCars = userParticipations.map((v) => ({
-    v, car: cars.find((c: any) => c.id === v.car_id),
-  })).filter((x: any) => x.car);
+  // Group by car_id
+  const groupedByCar = userParticipations.reduce((acc: Record<string, any>, v: any) => {
+    const key = v.car_id;
+    const car = cars.find((c: any) => c.id === v.car_id);
+    if (!car) return acc;
+    if (!acc[key]) {
+      acc[key] = {
+        car_id: v.car_id,
+        car,
+        total_credits_per_year: 0,
+        total_credits_remaining: 0,
+        total_credits_used_this_year: 0,
+        nb_participations: 0,
+        credits_reset_date: v.credits_reset_date,
+        participation_ids: [],
+        participation_numbers: [],
+      };
+    }
+    acc[key].total_credits_per_year += Number(v.credits_per_year || 0);
+    acc[key].total_credits_remaining += Number(v.credits_remaining || 0);
+    acc[key].total_credits_used_this_year += Number(v.credits_used_this_year || 0);
+    acc[key].nb_participations += 1;
+    acc[key].participation_ids.push(v.id);
+    if (v.participation_number != null) acc[key].participation_numbers.push(v.participation_number);
+    if (v.credits_reset_date && (!acc[key].credits_reset_date || v.credits_reset_date < acc[key].credits_reset_date)) {
+      acc[key].credits_reset_date = v.credits_reset_date;
+    }
+    return acc;
+  }, {});
+  const userCars: any[] = Object.values(groupedByCar);
+  userCars.forEach((g) => g.participation_numbers.sort((a: number, b: number) => a - b));
 
   const { data: docTypes = [] } = useDocumentTypes();
   const { data: docs = [] } = useParticipantDocuments(userId || undefined);
