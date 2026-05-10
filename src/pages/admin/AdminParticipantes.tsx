@@ -496,18 +496,20 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
                 <div className="border-t border-border/40 pt-4">
                   <p className="text-xs uppercase text-muted-foreground mb-2">Vehículos ({userCars.length})</p>
                   <div className="space-y-2">
-                    {userCars.map(({ v, car }: any) => {
-                      const loc = locations.find((l: any) => l.id === car.location_id);
+                    {userCars.map((g: any) => {
+                      const loc = locations.find((l: any) => l.id === g.car.location_id);
+                      const remaining = g.total_credits_remaining;
                       return (
-                        <a key={v.id} href={`/car/${car.id}`} target="_blank" rel="noreferrer"
+                        <a key={g.car_id} href={`/car/${g.car.id}`} target="_blank" rel="noreferrer"
                           className="flex items-center justify-between p-2 rounded hover:bg-muted/50">
                           <div>
-                            <p className="text-sm font-medium">{car.brand} {car.model}</p>
-                            <p className="text-xs text-muted-foreground">{loc?.name || "—"} · #{v.participation_number}</p>
+                            <p className="text-sm font-medium">{g.car.brand} {g.car.model}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {loc?.name || "—"} · Nº {g.participation_numbers.join(", ")}
+                              {g.nb_participations > 1 && ` · ${g.nb_participations} participaciones`}
+                            </p>
                           </div>
-                          <span className="text-xs text-primary">
-                            {Number(v.credits_per_year || 0) - Number(v.credits_used_this_year || 0)} cr.
-                          </span>
+                          <span className="text-xs text-primary">{remaining} cr.</span>
                         </a>
                       );
                     })}
