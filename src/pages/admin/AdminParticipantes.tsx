@@ -384,9 +384,37 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
   });
 
   const userParticipations = (validated as any[]).filter((v) => v.user_id === userId);
-  const userCars = userParticipations.map((v) => ({
-    v, car: cars.find((c: any) => c.id === v.car_id),
-  })).filter((x: any) => x.car);
+  // Group by car_id
+  const groupedByCar = userParticipations.reduce((acc: Record<string, any>, v: any) => {
+    const key = v.car_id;
+    const car = cars.find((c: any) => c.id === v.car_id);
+    if (!car) return acc;
+    if (!acc[key]) {
+      acc[key] = {
+        car_id: v.car_id,
+        car,
+        total_credits_per_year: 0,
+        total_credits_remaining: 0,
+        total_credits_used_this_year: 0,
+        nb_participations: 0,
+        credits_reset_date: v.credits_reset_date,
+        participation_ids: [],
+        participation_numbers: [],
+      };
+    }
+    acc[key].total_credits_per_year += Number(v.credits_per_year || 0);
+    acc[key].total_credits_remaining += Number(v.credits_remaining || 0);
+    acc[key].total_credits_used_this_year += Number(v.credits_used_this_year || 0);
+    acc[key].nb_participations += 1;
+    acc[key].participation_ids.push(v.id);
+    if (v.participation_number != null) acc[key].participation_numbers.push(v.participation_number);
+    if (v.credits_reset_date && (!acc[key].credits_reset_date || v.credits_reset_date < acc[key].credits_reset_date)) {
+      acc[key].credits_reset_date = v.credits_reset_date;
+    }
+    return acc;
+  }, {});
+  const userCars: any[] = Object.values(groupedByCar);
+  userCars.forEach((g) => g.participation_numbers.sort((a: number, b: number) => a - b));
 
   const { data: docTypes = [] } = useDocumentTypes();
   const { data: docs = [] } = useParticipantDocuments(userId || undefined);
@@ -468,18 +496,20 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
                 <div className="border-t border-border/40 pt-4">
                   <p className="text-xs uppercase text-muted-foreground mb-2">Vehículos ({userCars.length})</p>
                   <div className="space-y-2">
-                    {userCars.map(({ v, car }: any) => {
-                      const loc = locations.find((l: any) => l.id === car.location_id);
+                    {userCars.map((g: any) => {
+                      const loc = locations.find((l: any) => l.id === g.car.location_id);
+                      const remaining = g.total_credits_remaining;
                       return (
-                        <a key={v.id} href={`/car/${car.id}`} target="_blank" rel="noreferrer"
+                        <a key={g.car_id} href={`/car/${g.car.id}`} target="_blank" rel="noreferrer"
                           className="flex items-center justify-between p-2 rounded hover:bg-muted/50">
                           <div>
-                            <p className="text-sm font-medium">{car.brand} {car.model}</p>
-                            <p className="text-xs text-muted-foreground">{loc?.name || "—"} · #{v.participation_number}</p>
+                            <p className="text-sm font-medium">{g.car.brand} {g.car.model}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {loc?.name || "—"} · Nº {g.participation_numbers.join(", ")}
+                              {g.nb_participations > 1 && ` · ${g.nb_participations} participaciones`}
+                            </p>
                           </div>
-                          <span className="text-xs text-primary">
-                            {Number(v.credits_per_year || 0) - Number(v.credits_used_this_year || 0)} cr.
-                          </span>
+                          <span className="text-xs text-primary">{remaining} cr.</span>
                         </a>
                       );
                     })}
@@ -524,8 +554,8 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
 
             {/* RESERVAS */}
             <TabsContent value="reservas" className="mt-4 space-y-4">
-              {userCars.map(({ v, car }: any) => (
-                <ReservasBlock key={v.id} validated={v} car={car} userId={userId} />
+              {userCars.map((g: any) => (
+                <ReservasBlock key={g.car_id} group={g} userId={userId} />
               ))}
               {userCars.length === 0 && <p className="text-sm text-muted-foreground">Sin participaciones validadas.</p>}
             </TabsContent>
@@ -650,7 +680,8 @@ const DocRow = ({ type, doc, userId }: any) => {
   );
 };
 
-const ReservasBlock = ({ validated, car, userId }: any) => {
+const ReservasBlock = ({ group, userId }: any) => {
+  const car = group.car;
   const { data: reservas = [] } = useQuery({
     queryKey: ["reservations-user-car", userId, car.id],
     queryFn: async () => {
@@ -660,20 +691,29 @@ const ReservasBlock = ({ validated, car, userId }: any) => {
       return data;
     },
   });
-  const used = Number(validated.credits_used_this_year || 0);
-  const total = Number(validated.credits_per_year || 0);
-  const remaining = total - used;
+  const used = group.total_credits_used_this_year;
+  const total = group.total_credits_per_year;
+  const remaining = group.total_credits_remaining;
   return (
     <Card><CardContent className="p-4 space-y-3">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-start gap-2">
         <div>
           <h4 className="font-semibold">{car.brand} {car.model}</h4>
+          <div className="flex items-center gap-2 mt-1 flex-wrap">
+            <Badge variant="secondary">
+              {group.nb_participations} {group.nb_participations > 1 ? "participaciones" : "participación"}
+            </Badge>
+            {group.participation_numbers.length > 0 && (
+              <span className="text-xs text-muted-foreground">Nº {group.participation_numbers.join(", ")}</span>
+            )}
+          </div>
         </div>
-        <span className="text-sm">{remaining} / {total} créditos</span>
+        <span className="text-sm whitespace-nowrap">{remaining} / {total} créditos</span>
       </div>
       <Progress value={total ? (used / total) * 100 : 0} />
-      {validated.credits_reset_date && (
-        <p className="text-xs text-muted-foreground">Reset: {format(new Date(validated.credits_reset_date), "d MMM yyyy", { locale: es })}</p>
+      <p className="text-xs text-muted-foreground">Utilizados este año: {used}</p>
+      {group.credits_reset_date && (
+        <p className="text-xs text-muted-foreground">Próximo reset: {format(new Date(group.credits_reset_date), "d MMM yyyy", { locale: es })}</p>
       )}
       {reservas.length > 0 && (
         <table className="w-full text-xs">
