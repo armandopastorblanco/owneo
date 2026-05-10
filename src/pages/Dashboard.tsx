@@ -22,8 +22,6 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import DocumentsBlock, { type DocItem } from "@/components/dashboard/DocumentsBlock";
-import { deductCredits } from "@/lib/deductCredits";
-import { restoreCredits } from "@/lib/restoreCredits";
 
 const Dashboard = () => {
   const qc = useQueryClient();
@@ -293,12 +291,7 @@ const Dashboard = () => {
       }).select().single();
       if (error) throw error;
 
-      // Deduct credits via shared utility; revert reservation on failure
-      const deduct = await deductCredits(userId, carId, creditsToUse);
-      if (!deduct.success) {
-        await supabase.from("reservations").delete().eq("id", res.id);
-        throw new Error(deduct.error || "No se pudieron descontar los créditos");
-      }
+      // Credits are deducted automatically by the DB trigger trg_reservation_credits
 
       await supabase.rpc("insert_audit_log", {
         _action: "create_reservation",
@@ -330,8 +323,7 @@ const Dashboard = () => {
         cancelled_by: userId,
       }).eq("id", reservationId);
       if (error) throw error;
-      // Restore credits via shared utility
-      await restoreCredits(r.user_id || userId!, r.car_id, Number(r.credits_used || 0));
+      // Credits are restored automatically by the DB trigger trg_reservation_credits
       await supabase.rpc("insert_audit_log", {
         _action: "cancel_reservation",
         _target_table: "reservations",
@@ -344,6 +336,11 @@ const Dashboard = () => {
       setCancellingId(null);
       qc.invalidateQueries({ queryKey: ["dashboard-reservations"] });
       qc.invalidateQueries({ queryKey: ["dashboard"] });
+      qc.invalidateQueries({ queryKey: ["user-reservations"] });
+      qc.invalidateQueries({ queryKey: ["user-participations"] });
+      qc.invalidateQueries({ queryKey: ["validated-participations"] });
+      qc.invalidateQueries({ queryKey: ["fleet-participants"] });
+      qc.invalidateQueries({ queryKey: ["admin-reservations"] });
     },
     onError: (e: any) => { toast.error(e.message); setCancellingId(null); },
   });

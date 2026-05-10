@@ -22,7 +22,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { restoreCredits } from "@/lib/restoreCredits";
+
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isSameDay, isWithinInterval, parseISO, differenceInCalendarDays } from "date-fns";
 import { es } from "date-fns/locale";
 import { ChevronLeft, ChevronRight, Plus, Settings, CalendarDays, Users, AlertTriangle, Edit, Trash2, ArrowUpDown, CalendarCheck, Star, Ban, Wrench, ClipboardCheck, Hammer, AlertCircle, Eye } from "lucide-react";
@@ -268,19 +268,7 @@ const AdminReservas = () => {
       }).eq("id", cancelResModal.id);
       if (error) throw error;
       const credits = Number(cancelResModal.credits_used || 0);
-      const { data: vps } = await supabase
-        .from("validated_participations")
-        .select("id, credits_remaining, credits_used_this_year")
-        .eq("user_id", cancelResModal.user_id)
-        .eq("car_id", cancelResModal.car_id)
-        .limit(1);
-      if (vps && vps.length > 0) {
-        const vp = vps[0];
-        await supabase.from("validated_participations").update({
-          credits_remaining: Number(vp.credits_remaining || 0) + credits,
-          credits_used_this_year: Math.max(0, Number(vp.credits_used_this_year || 0) - credits),
-        }).eq("id", vp.id);
-      }
+      // Credits are restored automatically by the DB trigger trg_reservation_credits
       await supabase.rpc("insert_audit_log", {
         _action: "cancel_confirmed_reservation",
         _target_table: "reservations",
@@ -293,6 +281,10 @@ const AdminReservas = () => {
       setCancelResModal(null);
       queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
       queryClient.invalidateQueries({ queryKey: ["admin-validated-parts"] });
+      queryClient.invalidateQueries({ queryKey: ["validated-participations"] });
+      queryClient.invalidateQueries({ queryKey: ["user-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["user-participations"] });
+      queryClient.invalidateQueries({ queryKey: ["fleet-participants"] });
     },
     onError: (e: any) => toast.error(e.message),
   });
@@ -552,8 +544,7 @@ const AdminReservas = () => {
         rejected_by: user?.id,
       }).eq("id", rejectModal.id);
       if (error) throw error;
-      // Restore credits via shared utility
-      await restoreCredits(rejectModal.user_id, rejectModal.car_id, Number(rejectModal.credits_used || 0));
+      // Credits are restored automatically by the DB trigger trg_reservation_credits
       await supabase.rpc("insert_audit_log", {
         _action: "reject_reservation",
         _target_table: "reservations",
@@ -568,6 +559,10 @@ const AdminReservas = () => {
       queryClient.invalidateQueries({ queryKey: ["admin-reservations"] });
       queryClient.invalidateQueries({ queryKey: ["admin-validated-parts"] });
       queryClient.invalidateQueries({ queryKey: ["admin-pending-reservations-count"] });
+      queryClient.invalidateQueries({ queryKey: ["validated-participations"] });
+      queryClient.invalidateQueries({ queryKey: ["user-reservations"] });
+      queryClient.invalidateQueries({ queryKey: ["user-participations"] });
+      queryClient.invalidateQueries({ queryKey: ["fleet-participants"] });
     },
     onError: (e: any) => toast.error(e.message),
   });
