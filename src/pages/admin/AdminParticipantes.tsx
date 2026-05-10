@@ -680,7 +680,8 @@ const DocRow = ({ type, doc, userId }: any) => {
   );
 };
 
-const ReservasBlock = ({ validated, car, userId }: any) => {
+const ReservasBlock = ({ group, userId }: any) => {
+  const car = group.car;
   const { data: reservas = [] } = useQuery({
     queryKey: ["reservations-user-car", userId, car.id],
     queryFn: async () => {
@@ -690,20 +691,29 @@ const ReservasBlock = ({ validated, car, userId }: any) => {
       return data;
     },
   });
-  const used = Number(validated.credits_used_this_year || 0);
-  const total = Number(validated.credits_per_year || 0);
-  const remaining = total - used;
+  const used = group.total_credits_used_this_year;
+  const total = group.total_credits_per_year;
+  const remaining = group.total_credits_remaining;
   return (
     <Card><CardContent className="p-4 space-y-3">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-start gap-2">
         <div>
           <h4 className="font-semibold">{car.brand} {car.model}</h4>
+          <div className="flex items-center gap-2 mt-1 flex-wrap">
+            <Badge variant="secondary">
+              {group.nb_participations} {group.nb_participations > 1 ? "participaciones" : "participación"}
+            </Badge>
+            {group.participation_numbers.length > 0 && (
+              <span className="text-xs text-muted-foreground">Nº {group.participation_numbers.join(", ")}</span>
+            )}
+          </div>
         </div>
-        <span className="text-sm">{remaining} / {total} créditos</span>
+        <span className="text-sm whitespace-nowrap">{remaining} / {total} créditos</span>
       </div>
       <Progress value={total ? (used / total) * 100 : 0} />
-      {validated.credits_reset_date && (
-        <p className="text-xs text-muted-foreground">Reset: {format(new Date(validated.credits_reset_date), "d MMM yyyy", { locale: es })}</p>
+      <p className="text-xs text-muted-foreground">Utilizados este año: {used}</p>
+      {group.credits_reset_date && (
+        <p className="text-xs text-muted-foreground">Próximo reset: {format(new Date(group.credits_reset_date), "d MMM yyyy", { locale: es })}</p>
       )}
       {reservas.length > 0 && (
         <table className="w-full text-xs">
