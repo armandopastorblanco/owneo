@@ -554,8 +554,8 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
 
             {/* RESERVAS */}
             <TabsContent value="reservas" className="mt-4 space-y-4">
-              {userCars.map(({ v, car }: any) => (
-                <ReservasBlock key={v.id} validated={v} car={car} userId={userId} />
+              {userCars.map((g: any) => (
+                <ReservasBlock key={g.car_id} group={g} userId={userId} />
               ))}
               {userCars.length === 0 && <p className="text-sm text-muted-foreground">Sin participaciones validadas.</p>}
             </TabsContent>
