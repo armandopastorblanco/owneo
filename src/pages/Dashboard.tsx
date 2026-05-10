@@ -433,7 +433,7 @@ const Dashboard = () => {
                         <div><p className="text-sm text-muted-foreground">Marca</p><p className="font-semibold text-foreground">{car.brand}</p></div>
                         <div><p className="text-sm text-muted-foreground">Modelo</p><p className="font-semibold text-foreground">{car.model}</p></div>
                         <div><p className="text-sm text-muted-foreground">Año</p><p className="font-semibold text-foreground">{car.year}</p></div>
-                        <div><p className="text-sm text-muted-foreground">Participaciones</p><p className="font-semibold text-foreground">×{primary.num}</p></div>
+                        <div><p className="text-sm text-muted-foreground">Participaciones</p><p className="font-semibold text-foreground">{primary.num} {primary.num > 1 ? "participaciones" : "participación"}</p></div>
                       </div>
                       <Link to={`/car/${car.id}`}>
                         <Button variant="outline" className="w-full mt-2">Ver Detalles Completos</Button>
