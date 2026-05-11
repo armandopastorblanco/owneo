@@ -1,540 +1,747 @@
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { 
-  Users, 
-  Share2, 
-  Shield, 
-  Sparkles, 
-  Car, 
-  Calendar, 
-  CheckCircle2, 
-  TrendingUp,
-  BadgeCheck,
-  Lock,
-  FileCheck,
-  Percent,
-  Repeat,
-  ArrowRight,
-  X,
-  Check,
-  Calculator,
-  PiggyBank,
-  Clock,
-  MapPin,
-  Key,
-  Wrench
+import {
+  Shield, Car, Sparkles, CalendarDays, Gauge, Percent,
+  ShoppingCart, FileCheck, Wrench, Key, TrendingUp, BadgeCheck,
+  Calculator, Check, X, Calendar, FileText, MessageCircle, BarChart,
+  TrendingDown, RefreshCw, ArrowRight, ChevronDown,
 } from "lucide-react";
 
-const NuestroModelo = () => {
-  const processSteps = [
-    {
-      number: "01",
-      icon: Users,
-      title: "Conviértete en Co-sharer",
-      description: "Únete a nuestro exclusivo club de miembros. Buscamos grupos de 3 a 10 co-sharers para cada supercar. Explora nuestra flota y envía tu solicitud de co-sharing para el vehículo deseado."
-    },
-    {
-      number: "02",
-      icon: PiggyBank,
-      title: "Financia el Vehículo",
-      description: "Una vez alcanzado el número de co-sharers, adquirimos el vehículo de concesionarios oficiales certificados. Cada co-sharer invierte según su participación deseada."
-    },
-    {
-      number: "03",
-      icon: Shield,
-      title: "Seguro y Garantía",
-      description: "Proporcionamos un seguro integral que cubre completamente a cada conductor. Además, garantizamos cobertura de fábrica o garantía adicional para motor y electrónica."
-    },
-    {
-      number: "04",
-      icon: Key,
-      title: "Uso y Recogida",
-      description: "Los vehículos se gestionan en nuestras ubicaciones exclusivas. Reserva a través del calendario digital y recoge tu supercar impecablemente preparado."
-    },
-    {
-      number: "05",
-      icon: Repeat,
-      title: "Venta a 5 Años",
-      description: "Recupera hasta el 70% de tu inversión inicial. Al cabo de 5 años, vendemos el vehículo y distribuimos el valor entre los co-sharers según sus participaciones."
-    }
-  ];
+/* ---------------- helpers ---------------- */
 
-  const securityFeatures = [
-    { icon: Car, title: "Vehículos Verificados", description: "Inspección técnica completa" },
-    { icon: BadgeCheck, title: "Miembros Verificados", description: "Proceso de verificación riguroso" },
-    { icon: Lock, title: "Datos Encriptados", description: "Máxima seguridad digital" },
-    { icon: Wrench, title: "Garantía del Vehículo", description: "Cobertura completa incluida" },
-    { icon: FileCheck, title: "Costes Transparentes", description: "Sin sorpresas ni costes ocultos" },
-    { icon: Repeat, title: "Venta a 5 Años", description: "Recupera hasta el 70% de tu inversión" }
-  ];
+function useReducedMotion() {
+  const [r, setR] = useState(false);
+  useEffect(() => {
+    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setR(m.matches);
+    const fn = () => setR(m.matches);
+    m.addEventListener("change", fn);
+    return () => m.removeEventListener("change", fn);
+  }, []);
+  return r;
+}
 
-  const comparisonData = {
-    vehiclePrice: 250000,
-    shares: 10,
-    sharePrice: 25000,
-    resaleValue: {
-      individual: 175000, // 70% del valor original
-      cosharing: 17500 // 70% de la participación
-    },
-    annualCosts: {
-      individual: {
-        insurance: 5000,
-        maintenance: 8000,
-        storage: 3600,
-        depreciation: 25000,
-        registration: 1200,
-        cleaning: 1200,
-        total: 44000
-      },
-      cosharing: {
-        insurance: 500,
-        maintenance: 800,
-        storage: 360,
-        depreciation: 2500,
-        registration: 120,
-        cleaning: 120,
-        total: 4400
-      }
-    },
-    usage: {
-      daysPerShare: 36,
-      kmPerShare: 2500
-    }
-  };
+function CountUp({
+  end, duration = 1400, prefix = "", suffix = "", decimals = 0,
+}: { end: number; duration?: number; prefix?: string; suffix?: string; decimals?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const [val, setVal] = useState(0);
+  const reduced = useReducedMotion();
 
-  const practicalExample = {
-    vehicle: "Porsche 911 Turbo S",
-    totalShares: 10,
-    yourShares: 1,
-    daysPerYear: 36,
-    kmPerYear: 2500,
-    pricePerShare: 25000,
-    yourInvestment: 25000,
-    resaleValue: 17500
-  };
+  useEffect(() => {
+    if (!inView) return;
+    if (reduced) { setVal(end); return; }
+    let raf = 0;
+    const start = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(end * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, end, duration, reduced]);
 
+  const formatted = val.toLocaleString("es-ES", {
+    minimumFractionDigits: decimals, maximumFractionDigits: decimals,
+  });
+  return <span ref={ref}>{prefix}{formatted}{suffix}</span>;
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24, scale: 0.98 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
+
+function Reveal({
+  children, delay = 0, className = "", as: As = "div",
+}: { children: React.ReactNode; delay?: number; className?: string; as?: any }) {
+  const MotionTag = (motion as any)[typeof As === "string" ? As : "div"];
   return (
-    <div className="min-h-screen bg-background">
+    <MotionTag
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-10%" }}
+      variants={fadeUp}
+      transition={{ delay }}
+      className={className}
+    >
+      {children}
+    </MotionTag>
+  );
+}
+
+/* ---------------- page ---------------- */
+
+export default function NuestroModelo() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-champagne/5 via-transparent to-transparent" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-champagne/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-champagne/10 rounded-full blur-3xl" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-xs sm:text-sm font-medium mb-6">
-              Co-sharing con Respaldo de Activos
+
+      {/* shared blob keyframes */}
+      <style>{`
+        @keyframes owneo-float { 0%,100% { transform: translateY(-12px) } 50% { transform: translateY(12px) } }
+        @keyframes owneo-shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+        @keyframes owneo-draw { from { transform: scaleY(0) } to { transform: scaleY(1) } }
+        @keyframes owneo-bounce { 0%,100% { transform: translateY(0) } 50% { transform: translateY(8px) } }
+      `}</style>
+
+      {/* ============ HERO ============ */}
+      <section className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+        <div
+          className="pointer-events-none absolute top-10 -left-20 w-96 h-96 rounded-full bg-champagne/5 blur-3xl"
+          style={{ animation: "owneo-float 8s ease-in-out infinite alternate" }}
+        />
+        <div
+          className="pointer-events-none absolute bottom-0 -right-20 w-96 h-96 rounded-full bg-champagne/5 blur-3xl"
+          style={{ animation: "owneo-float 10s ease-in-out infinite alternate-reverse" }}
+        />
+
+        <div className="container relative mx-auto px-4 text-center">
+          <Reveal>
+            <span
+              className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, transparent 0%, hsl(var(--champagne)/0.18) 50%, transparent 100%)",
+                backgroundSize: "200% 100%",
+                animation: "owneo-shimmer 3s linear infinite",
+              }}
+            >
+              Derecho de uso · Todo incluido · Sin cargas
             </span>
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-              Nuestro <span className="text-champagne">Modelo</span>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+              El acceso más inteligente al
+              <br />
+              <span className="text-champagne">automovilismo de lujo</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              "La co-sharing con respaldo de activos es <strong className="text-foreground">la forma más eficiente de poseer un supercar</strong> hoy en día."
-            </p>
-          </div>
-        </div>
-      </section>
+          </Reveal>
 
-      {/* Video/Intro Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Cómo Funciona el <span className="text-champagne">Co-sharing</span>: Explicado en 3 Minutos
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              En esta página encontrarás todo sobre el proceso de co-sharing, desde la solicitud de visualización hasta tu primera conducción como co-sharer.
+          <Reveal delay={0.4}>
+            <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
+              OWNEO reinventa la relación con los coches de alta gama. No compras un coche. No lo alquilas.
+              Adquieres el derecho a disfrutarlo como si fuera tuyo — con todo el servicio, sin ninguna de las cargas.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {processSteps.map((step, index) => (
-                <a 
-                  key={index}
-                  href={`#step-${index + 1}`}
-                  className="px-4 py-2 bg-card border border-border rounded-full text-sm font-medium text-muted-foreground hover:text-champagne hover:border-champagne transition-all"
-                >
-                  {step.number}. {step.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+          </Reveal>
 
-      {/* Process Steps */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto space-y-12">
-            {processSteps.map((step, index) => (
-              <div 
-                key={index} 
-                id={`step-${index + 1}`}
-                className="scroll-mt-24 bg-card/50 backdrop-blur-sm rounded-3xl border border-border/50 p-8 md:p-12 hover:border-champagne/30 transition-all duration-300"
-              >
-                <div className="flex flex-col md:flex-row gap-6 items-start">
-                  <div className="flex-shrink-0">
-                    <div className="w-20 h-20 bg-champagne/10 rounded-2xl flex items-center justify-center relative">
-                      <step.icon className="w-10 h-10 text-champagne" />
-                      <span className="absolute -top-3 -left-3 w-8 h-8 bg-champagne text-champagne-foreground rounded-full flex items-center justify-center font-bold text-sm">
-                        {step.number}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-sm text-muted-foreground mb-2 block">Paso {index + 1} de 5</span>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">{step.title}</h3>
-                    <p className="text-lg text-muted-foreground leading-relaxed">{step.description}</p>
-                  </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            {[
+              { icon: Shield, label: "Contrato garantizado" },
+              { icon: Car, label: "Vehículos premium" },
+              { icon: Sparkles, label: "Cero gestión" },
+            ].map((p, i) => (
+              <Reveal key={p.label} delay={0.6 + i * 0.1}>
+                <div className="bg-card border border-border/50 rounded-full px-4 py-2 text-sm flex items-center gap-2 text-muted-foreground">
+                  <p.icon className="w-4 h-4 text-champagne" />
+                  {p.label}
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Security Features */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-4">
-              Protección del Comprador
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Nuestros Servicios de <span className="text-champagne">Seguridad</span>
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
-            {securityFeatures.map((feature, index) => (
-              <div 
-                key={index}
-                className="bg-card/50 backdrop-blur-sm rounded-xl border border-border/50 p-4 text-center hover:border-champagne/30 transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-champagne/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <feature.icon className="w-6 h-6 text-champagne" />
-                </div>
-                <h4 className="text-sm font-semibold text-foreground mb-1">{feature.title}</h4>
-                <p className="text-xs text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
+          <div className="mt-16 flex justify-center text-muted-foreground/60">
+            <ChevronDown className="w-6 h-6" style={{ animation: "owneo-bounce 2s ease-in-out infinite" }} />
           </div>
         </div>
       </section>
 
-      {/* Comparison Section */}
-      <section className="py-20">
+      {/* ============ SECTION 2 — ¿QUÉ ES UNA PARTICIPACIÓN? ============ */}
+      <section className="bg-card/30 border-y border-border py-20 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-4">
-                <Calculator className="w-4 h-4 inline-block mr-2" />
-                Comparativa de Costes
+          <div className="text-center max-w-3xl mx-auto">
+            <Reveal>
+              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+                Participación OWNEO
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Compra Individual <span className="text-champagne">VS</span> OWNEO Co-Sharing
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">
+                Todo lo que incluye tu participación
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Análisis transparente de los ahorros al utilizar nuestro sistema de co-sharing comparado con la compra convencional
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="mt-4 text-muted-foreground">
+                Una participación OWNEO es un contrato de derecho de uso sobre un vehículo específico.
+                Tú eliges el coche, adquieres tu participación, y OWNEO se encarga de absolutamente todo lo demás.
               </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: CalendarDays, number: 4, suffix: "", unit: "semanas",
+                title: "Por participación al año",
+                desc: "¿Quieres más tiempo? Adquiere más participaciones en el mismo vehículo o en otros modelos de la flota.",
+                badge: "= 28 días garantizados",
+              },
+              {
+                icon: Gauge, number: 2000, suffix: "", unit: "km",
+                title: "Incluidos por participación",
+                desc: "Kilómetros garantizados por participación y por año, con el vehículo siempre impecable y a punto.",
+              },
+              {
+                icon: Percent, number: 10, suffix: "%", unit: "",
+                title: "Del valor del vehículo",
+                desc: "Precio de entrada claro y único. Sin letra pequeña, sin sorpresas. El resto lo gestiona OWNEO.",
+              },
+              {
+                icon: Shield, number: null, fixed: "Cuota", unit: "anual fija",
+                title: "Todo incluido",
+                desc: "Una cuota anual cubre seguro, mantenimiento, parking y toda la gestión. Tú no gestionas absolutamente nada.",
+                badge: "Seguro · Parking · Mantenimiento",
+              },
+            ].map((c: any, i) => (
+              <Reveal key={i} delay={i * 0.15}>
+                <div className="group h-full bg-background rounded-2xl p-8 border border-border/50 text-center transition-all duration-300 hover:scale-105 hover:border-champagne/50 hover:shadow-[0_0_40px_-10px_hsl(var(--champagne)/0.3)]">
+                  <c.icon className="w-10 h-10 text-champagne mx-auto mb-4" />
+                  <div className="text-4xl font-bold text-foreground">
+                    {c.number !== null ? (
+                      <CountUp end={c.number} suffix={c.suffix} />
+                    ) : (
+                      c.fixed
+                    )}
+                  </div>
+                  <div className="text-sm text-muted-foreground mt-1">{c.unit}</div>
+                  <h3 className="mt-4 text-lg font-semibold">{c.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+                  {c.badge && (
+                    <div className="mt-4 text-xs text-champagne">{c.badge}</div>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SECTION 3 — TIMELINE ============ */}
+      <section className="bg-background py-20 sm:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <Reveal>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+                Tú conduces.<br />
+                <span className="text-champagne">Nosotros nos encargamos de todo lo demás.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-4 text-muted-foreground">
+                Desde la compra del vehículo hasta su reventa, pasando por cada revisión, cada seguro y cada entrega
+                — OWNEO gestiona cada detalle para que tú solo tengas que disfrutar.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="relative mt-16 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.4, ease: "easeOut" }}
+              style={{ transformOrigin: "top" }}
+              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-champagne/30 md:-translate-x-1/2"
+            />
+
+            <div className="space-y-12">
+              {[
+                { icon: ShoppingCart, title: "Compra del vehículo", desc: "OWNEO adquiere el vehículo de concesionarios oficiales certificados. Tú no te preocupas por la negociación ni los trámites." },
+                { icon: FileCheck, title: "Contrato y documentación", desc: "Contrato claro que garantiza tus 4 semanas anuales por participación y todos los derechos de uso." },
+                { icon: Shield, title: "Seguro a todo riesgo", desc: "Cobertura completa con aseguradora premium. Cada participante está cubierto como conductor habitual." },
+                { icon: Wrench, title: "Mantenimiento y revisiones", desc: "Todas las revisiones programadas y reparaciones gestionadas por OWNEO. El vehículo siempre en perfectas condiciones." },
+                { icon: Key, title: "Entrega profesional", desc: "Un gestor OWNEO te entrega el vehículo en persona, impecablemente preparado, revisado y documentado." },
+                { icon: TrendingUp, title: "Reventa gestionada", desc: "Al término del período acordado (indicado en la ficha de cada vehículo), OWNEO gestiona la venta y redistribuye el valor entre los participantes." },
+              ].map((it, i) => {
+                const right = i % 2 === 1;
+                return (
+                  <Reveal key={i} delay={i * 0.15}>
+                    <div className={`relative flex md:items-center ${right ? "md:flex-row-reverse" : ""}`}>
+                      <div className="hidden md:block w-1/2" />
+                      <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-8 h-8 rounded-full bg-champagne/20 border border-champagne/50 flex items-center justify-center">
+                        <it.icon className="w-4 h-4 text-champagne" />
+                      </div>
+                      <div className={`pl-16 md:pl-0 md:w-1/2 ${right ? "md:pr-16" : "md:pl-16"}`}>
+                        <div className="bg-card border border-border/50 rounded-2xl p-6 hover:border-champagne/30 transition-colors">
+                          <h3 className="text-lg font-semibold">{it.title}</h3>
+                          <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Cost Comparison Table */}
-            <div className="bg-card/50 backdrop-blur-sm rounded-3xl border border-border/50 overflow-hidden mb-12">
-              <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
-                {/* Header */}
-                <div className="p-6 bg-muted/30">
-                  <h4 className="text-lg font-bold text-foreground mb-2">Concepto</h4>
-                  <p className="text-sm text-muted-foreground">Costes anuales estimados para un vehículo de €250.000</p>
-                </div>
-                <div className="p-6 bg-muted/50">
-                  <div className="flex items-center gap-2 mb-2">
-                    <X className="w-5 h-5 text-destructive" />
-                    <h4 className="text-lg font-bold text-foreground">Compra Individual</h4>
-                  </div>
-                  <p className="text-sm text-muted-foreground">Propietario único del vehículo</p>
-                </div>
-                <div className="p-6 bg-champagne/5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Check className="w-5 h-5 text-champagne" />
-                    <h4 className="text-lg font-bold text-champagne">OWNEO Co-Sharing</h4>
-                  </div>
-                  <p className="text-sm text-muted-foreground">10 co-sharers (1 participación)</p>
-                </div>
+      {/* ============ SECTION 4 — ENTREGA ============ */}
+      <section className="bg-card/30 border-y border-border py-20 sm:py-24">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <Reveal>
+            <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+              Cada entrega, una experiencia
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">
+              Cada vez que recoges tu coche, está impecable.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Antes de cada entrega, nuestro equipo prepara el vehículo de forma profesional: limpieza integral,
+              revisión técnica, documentación fotográfica del estado. Un gestor OWNEO te hace entrega en persona.
+              Tú solo tienes que sentarte al volante.
+            </p>
+            <ul className="mt-6 space-y-3">
+              {[
+                "Vehículo verificado y documentado fotográficamente",
+                "Limpieza y preparación profesional antes de cada uso",
+                "Entrega y recogida en mano por gestor OWNEO",
+                "Check-out documentado tras cada uso",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <Check className="w-5 h-5 text-champagne shrink-0 mt-0.5" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <div className="bg-card rounded-3xl border border-champagne/20 p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="font-semibold">Protocolo de entrega OWNEO</h3>
+                <span className="text-xs bg-champagne/10 text-champagne rounded-full px-3 py-1 border border-champagne/20">
+                  Verificado
+                </span>
               </div>
+              <ul className="space-y-3">
+                {[
+                  "Estado exterior documentado",
+                  "Interior revisado",
+                  "Nivel de combustible verificado",
+                  "Kilometraje registrado",
+                  "Documentación en regla",
+                  "Vehículo listo para entrega",
+                ].map((t, i) => (
+                  <motion.li
+                    key={t}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15 }}
+                    className="flex items-center gap-3 text-sm"
+                  >
+                    <span className="w-6 h-6 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-green-500" />
+                    </span>
+                    <span className="text-foreground">{t}</span>
+                  </motion.li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-6 border-t border-border/50 flex items-center gap-2 text-xs text-muted-foreground">
+                <BadgeCheck className="w-4 h-4 text-champagne" />
+                Firmado por gestor OWNEO
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-              {/* Cost Rows */}
-              <div className="divide-y divide-border">
-                {/* Initial Cost Row */}
-                <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border bg-champagne/5">
-                  <div className="p-4 flex items-center">
-                    <span className="text-sm font-bold text-foreground">💰 Coste inicial de compra</span>
-                  </div>
-                  <div className="p-4 bg-muted/30 flex items-center justify-center">
-                    <span className="text-lg font-bold text-foreground">€{comparisonData.vehiclePrice.toLocaleString()}</span>
-                  </div>
-                  <div className="p-4 bg-champagne/5 flex items-center justify-center">
-                    <span className="text-lg font-bold text-champagne">€{comparisonData.sharePrice.toLocaleString()}</span>
-                  </div>
+      {/* ============ SECTION 5 — COMPARATIVA ============ */}
+      <section className="bg-background py-20 sm:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+                <Calculator className="w-4 h-4" /> Comparativa de costes
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">La decisión más inteligente</h2>
+              <p className="mt-2 text-champagne">Números reales, comparativa honesta.</p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="mt-4 text-muted-foreground">
+                Análisis transparente de los costes anuales de gestión (sin incluir precio de adquisición ni depreciación)
+                comparado con la propiedad tradicional.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border">
+              <div className="grid grid-cols-[1.4fr_1fr_1fr] text-sm">
+                <div className="bg-muted/20 p-4 font-semibold">Concepto</div>
+                <div className="bg-red-500/5 p-4 font-semibold flex items-center gap-2">
+                  <X className="w-4 h-4 text-red-500" /> Propietario único
+                </div>
+                <div className="bg-champagne/5 p-4 font-semibold flex items-center gap-2 ring-1 ring-champagne/30">
+                  <Check className="w-4 h-4 text-champagne" /> OWNEO
                 </div>
 
                 {[
-                  { label: "Seguro anual", individual: comparisonData.annualCosts.individual.insurance, cosharing: comparisonData.annualCosts.cosharing.insurance },
-                  { label: "Mantenimiento y servicio", individual: comparisonData.annualCosts.individual.maintenance, cosharing: comparisonData.annualCosts.cosharing.maintenance },
-                  { label: "Almacenamiento / Garaje", individual: comparisonData.annualCosts.individual.storage, cosharing: comparisonData.annualCosts.cosharing.storage },
-                  { label: "Depreciación estimada", individual: comparisonData.annualCosts.individual.depreciation, cosharing: comparisonData.annualCosts.cosharing.depreciation },
-                  { label: "Registro e impuestos", individual: comparisonData.annualCosts.individual.registration, cosharing: comparisonData.annualCosts.cosharing.registration },
-                  { label: "Limpieza y cuidado", individual: comparisonData.annualCosts.individual.cleaning, cosharing: comparisonData.annualCosts.cosharing.cleaning },
-                ].map((row, index) => (
-                  <div key={index} className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
-                    <div className="p-4 flex items-center">
-                      <span className="text-sm font-medium text-foreground">{row.label}</span>
-                    </div>
-                    <div className="p-4 bg-muted/30 flex items-center justify-center">
-                      <span className="text-lg font-semibold text-foreground">€{row.individual.toLocaleString()}</span>
-                    </div>
-                    <div className="p-4 bg-champagne/5 flex items-center justify-center">
-                      <span className="text-lg font-semibold text-champagne">€{row.cosharing.toLocaleString()}</span>
-                    </div>
-                  </div>
+                  { label: "Seguro anual", owner: 5000, owneo: 500, maxBar: 5000 },
+                  { label: "Mantenimiento", owner: 8000, owneo: 800, maxBar: 8000 },
+                  { label: "Parking/Garaje", owner: 3600, owneo: 360, maxBar: 8000 },
+                  { label: "Limpieza/Preparación", owner: 1200, owneo: 120, maxBar: 8000 },
+                ].map((row) => (
+                  <RowCompare key={row.label} row={row} />
                 ))}
 
-                {/* Total Row */}
-                <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border bg-muted/50">
-                  <div className="p-6 flex items-center">
-                    <span className="text-lg font-bold text-foreground">TOTAL ANUAL</span>
-                  </div>
-                  <div className="p-6 bg-muted/50 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-foreground">€{comparisonData.annualCosts.individual.total.toLocaleString()}</span>
-                  </div>
-                  <div className="p-6 bg-champagne/10 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-champagne">€{comparisonData.annualCosts.cosharing.total.toLocaleString()}</span>
-                  </div>
+                <div className="bg-muted/30 p-4 font-bold border-t border-border">TOTAL</div>
+                <div className="bg-red-500/10 p-4 font-bold border-t border-border">
+                  <CountUp end={17800} prefix="€" />/año
                 </div>
-
-                {/* Resale Value Row */}
-                <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border bg-green-500/5">
-                  <div className="p-4 flex items-center">
-                    <span className="text-sm font-bold text-foreground">🔄 Precio de reventa (5 años)</span>
-                  </div>
-                  <div className="p-4 bg-muted/30 flex items-center justify-center">
-                    <span className="text-lg font-bold text-green-600">+€{comparisonData.resaleValue.individual.toLocaleString()}</span>
-                  </div>
-                  <div className="p-4 bg-champagne/5 flex items-center justify-center">
-                    <span className="text-lg font-bold text-green-600">+€{comparisonData.resaleValue.cosharing.toLocaleString()}</span>
-                  </div>
+                <div className="bg-champagne/10 p-4 font-bold border-t border-border ring-1 ring-champagne/30 text-champagne">
+                  <CountUp end={1780} prefix="€" />/año
                 </div>
               </div>
             </div>
+          </Reveal>
 
-            {/* Savings Highlight */}
-            <div className="bg-gradient-to-r from-champagne/10 via-champagne/5 to-champagne/10 rounded-3xl border border-champagne/20 p-8 text-center">
-              <Percent className="w-12 h-12 text-champagne mx-auto mb-4" />
-              <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                Ahorro del <span className="text-champagne">80%</span>
-              </h3>
-              <p className="text-lg text-muted-foreground mb-4">
-                En costes anuales con OWNEO Co-Sharing
+          <Reveal delay={0.2}>
+            <div className="mt-12 text-center">
+              <div className="text-6xl sm:text-7xl font-bold text-champagne">
+                <CountUp end={90} suffix="%" />
+              </div>
+              <p className="mt-2 text-lg text-muted-foreground">de ahorro en costes anuales de gestión</p>
+              <p className="mt-1 text-sm text-muted-foreground">10x menos caro a lo largo de 5 años</p>
+              <p className="mt-6 italic text-xs text-muted-foreground/70 max-w-2xl mx-auto">
+                Estimación basada en un vehículo de €250.000 con kilometraje controlado. Los valores reales varían
+                según el modelo. Depreciación y costes de adquisición no incluidos en este cálculo anual.
               </p>
-              <div className="flex flex-wrap justify-center gap-6 text-sm">
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-champagne" />
-                  <span className="text-foreground">€{(comparisonData.annualCosts.individual.total - comparisonData.annualCosts.cosharing.total).toLocaleString()} de ahorro anual</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-champagne" />
-                  <span className="text-foreground">Recupera tu inversión al vender</span>
-                </div>
-              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Practical Example */}
-      <section className="py-20 bg-muted/30">
+      {/* ============ SECTION 6 — CASO PRÁCTICO ============ */}
+      <section className="bg-card/30 border-y border-border py-20 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="inline-block px-4 py-2 bg-champagne/10 text-champagne rounded-full text-sm font-medium mb-4">
-                Caso Práctico
+          <div className="text-center">
+            <Reveal>
+              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+                Caso práctico
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ejemplo de <span className="text-champagne">Uso Real</span>
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Así funcionaría tu experiencia como co-sharer
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Así funciona en la realidad</h2>
+            </Reveal>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <Reveal>
+              <div className="bg-card rounded-3xl border border-border/50 p-8">
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-champagne/20 blur-2xl rounded-full" />
+                    <Car className="w-16 h-16 text-champagne relative" />
+                  </div>
+                </div>
+                <h3 className="mt-4 text-2xl font-bold text-center">Porsche 911 Turbo S</h3>
+                <p className="text-center text-sm text-muted-foreground">Ejemplo de participación</p>
+
+                <ul className="mt-6 divide-y divide-border/50 text-sm">
+                  {[
+                    ["Precio del vehículo", "€250.000"],
+                    ["Participaciones disponibles", "10"],
+                    ["Precio por participación", <span key="p" className="text-champagne font-bold">€25.000</span>],
+                    ["Semanas/año por participación", "4"],
+                    ["Km/año por participación", "2.000"],
+                    ["Duración", "según ficha del vehículo"],
+                  ].map(([k, v], i) => (
+                    <li key={i} className="flex justify-between py-3">
+                      <span className="text-muted-foreground">{k}</span>
+                      <span className="font-medium">{v}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <div className="bg-gradient-to-br from-champagne/10 via-card to-champagne/10 rounded-3xl border border-champagne/20 p-8 h-full">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-champagne" />
+                    <h3 className="font-bold">Tu participación</h3>
+                  </div>
+                  <span className="text-xs bg-champagne/15 text-champagne rounded-full px-3 py-1 border border-champagne/20">
+                    1 participación
+                  </span>
+                </div>
+
+                <ul className="mt-6 space-y-4 text-sm">
+                  <li className="flex items-center justify-between">
+                    <span className="text-muted-foreground">💰 Tu inversión</span>
+                    <span className="font-bold text-champagne text-lg"><CountUp end={25000} prefix="€" /></span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="text-muted-foreground">📅 Semanas al año</span>
+                    <span className="font-medium"><CountUp end={4} /> semanas</span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="text-muted-foreground">🛣️ Km incluidos</span>
+                    <span className="font-medium"><CountUp end={2000} /> km</span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="text-muted-foreground">📱 Reserva</span>
+                    <span className="font-medium">Digital · 24/7</span>
+                  </li>
+                  <li className="flex items-start justify-between gap-4">
+                    <span className="text-muted-foreground">🔄 Valor recuperado</span>
+                    <div className="text-right">
+                      <div className="font-bold text-green-500"><CountUp end={17500} prefix="hasta €" /></div>
+                      <div className="text-xs text-muted-foreground">al término del período · kilometraje controlado</div>
+                    </div>
+                  </li>
+                </ul>
+
+                <div className="mt-6 rounded-2xl bg-champagne/5 border border-champagne/20 p-4 text-sm text-muted-foreground">
+                  Con 1 participación, disfrutas 4 semanas al año de un Porsche 911 Turbo S por €25.000
+                  — y OWNEO gestiona absolutamente todo lo demás.
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.2}>
+            <div className="mt-10 max-w-3xl mx-auto bg-card rounded-2xl border border-champagne/20 p-6 text-center">
+              <p className="text-muted-foreground">
+                ¿Quieres más tiempo al volante? Adquiere 2 participaciones y disfruta de 8 semanas al año —
+                o participa en varios vehículos de la flota OWNEO.
               </p>
+              <Button asChild className="mt-4 bg-champagne text-champagne-foreground hover:bg-champagne/90">
+                <Link to="/portfolio">Ver la flota <ArrowRight className="ml-2 w-4 h-4" /></Link>
+              </Button>
             </div>
+          </Reveal>
+        </div>
+      </section>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Vehicle Card */}
-              <div className="bg-card/50 backdrop-blur-sm rounded-3xl border border-border/50 p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 bg-champagne/10 rounded-2xl flex items-center justify-center">
-                    <Car className="w-8 h-8 text-champagne" />
+      {/* ============ SECTION 7 — APP ============ */}
+      <section className="bg-background py-20 sm:py-24">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+          <div className="md:col-span-3">
+            <Reveal>
+              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+                App OWNEO · Acceso exclusivo participantes
+              </span>
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Todo en la palma de tu mano.</h2>
+              <p className="mt-4 text-muted-foreground">
+                Una vez participante, accedes a la app OWNEO — disponible como aplicación web desde cualquier dispositivo.
+                Sin descargas adicionales, siempre disponible.
+              </p>
+            </Reveal>
+
+            <ul className="mt-8 space-y-4">
+              {[
+                { icon: Calendar, t: "Reserva tus semanas directamente desde la app" },
+                { icon: Car, t: "Consulta el estado de tu vehículo en tiempo real" },
+                { icon: FileText, t: "Accede a todos los documentos del coche" },
+                { icon: MessageCircle, t: "Contacta con tu gestor OWNEO en cualquier momento" },
+                { icon: BarChart, t: "Consulta tu historial de usos y semanas disponibles" },
+              ].map((f, i) => (
+                <Reveal key={i} delay={i * 0.1}>
+                  <div className="flex items-center gap-3">
+                    <span className="w-10 h-10 rounded-xl bg-champagne/10 border border-champagne/20 flex items-center justify-center">
+                      <f.icon className="w-5 h-5 text-champagne" />
+                    </span>
+                    <span className="text-sm text-muted-foreground">{f.t}</span>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-foreground">{practicalExample.vehicle}</h3>
-                    <p className="text-muted-foreground">Vehículo de ejemplo</p>
+                </Reveal>
+              ))}
+            </ul>
+
+            <Reveal delay={0.3}>
+              <div className="mt-6 inline-block text-xs bg-card border border-border/50 rounded-full px-3 py-1 text-muted-foreground">
+                PWA · Compatible iOS & Android · Sin instalación
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="md:col-span-2 relative flex justify-center">
+            <div className="absolute bg-champagne/20 blur-3xl w-64 h-64 rounded-full -z-0" />
+            <Reveal delay={0.2}>
+              <div className="relative bg-card border-4 border-foreground/20 rounded-[2.5rem] p-3 overflow-hidden shadow-2xl shadow-champagne/10 w-[260px] aspect-[9/19]">
+                <div className="h-6 flex items-center justify-center text-[10px] text-muted-foreground bg-background rounded-t-2xl">
+                  OWNEO
+                </div>
+                <div className="mt-2 p-3 space-y-3">
+                  <div className="rounded-xl bg-background border border-border/50 overflow-hidden">
+                    <div className="h-24 bg-gradient-to-br from-champagne/30 to-card flex items-center justify-center">
+                      <Car className="w-10 h-10 text-champagne" />
+                    </div>
+                    <div className="p-2">
+                      <p className="text-xs font-semibold">Porsche 911 Turbo S</p>
+                      <p className="text-[10px] text-muted-foreground">Madrid · 4 semanas disponibles</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl bg-background border border-border/50 p-2">
+                    <p className="text-[10px] text-muted-foreground">Semanas restantes</p>
+                    <div className="mt-1 h-2 bg-muted/40 rounded-full overflow-hidden">
+                      <div className="h-full w-3/4 bg-champagne" />
+                    </div>
+                    <p className="text-[10px] mt-1 text-champagne">3 / 4</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="text-[10px] text-center bg-champagne text-champagne-foreground rounded-lg py-1.5 font-semibold">
+                      Reservar
+                    </div>
+                    <div className="text-[10px] text-center bg-background border border-border/50 rounded-lg py-1.5">
+                      Documentos
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-border/50">
-                    <span className="text-muted-foreground">Total de participaciones</span>
-                    <span className="text-lg font-semibold text-foreground">{practicalExample.totalShares}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-border/50">
-                    <span className="text-muted-foreground">Días por participación/año</span>
-                    <span className="text-lg font-semibold text-foreground">{comparisonData.usage.daysPerShare} días</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-border/50">
-                    <span className="text-muted-foreground">Km por participación/año</span>
-                    <span className="text-lg font-semibold text-foreground">{comparisonData.usage.kmPerShare.toLocaleString()} km</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-muted-foreground">Precio por participación</span>
-                    <span className="text-lg font-semibold text-champagne">€{practicalExample.pricePerShare.toLocaleString()}</span>
-                  </div>
+                <div className="absolute bottom-0 left-0 right-0 h-10 bg-background border-t border-border/50 flex items-center justify-around">
+                  {[Calendar, Car, FileText, MessageCircle].map((I, i) => (
+                    <I key={i} className="w-4 h-4 text-muted-foreground" />
+                  ))}
                 </div>
               </div>
-
-              {/* Your Ownership */}
-              <div className="bg-gradient-to-br from-champagne/10 via-card to-champagne/10 rounded-3xl border border-champagne/20 p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 bg-champagne rounded-2xl flex items-center justify-center">
-                    <Sparkles className="w-8 h-8 text-champagne-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-foreground">Tu Co-sharing</h3>
-                    <p className="text-champagne font-medium">1 participación adquirida</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-border/30">
-                    <div className="flex items-center gap-2">
-                      <PiggyBank className="w-4 h-4 text-champagne" />
-                      <span className="text-foreground">Tu inversión</span>
-                    </div>
-                    <span className="text-xl font-bold text-champagne">€{practicalExample.yourInvestment.toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-border/30">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-champagne" />
-                      <span className="text-foreground">Días de uso al año</span>
-                    </div>
-                    <span className="text-xl font-bold text-foreground">{practicalExample.daysPerYear} días</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-border/30">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-champagne" />
-                      <span className="text-foreground">Kilómetros al año</span>
-                    </div>
-                    <span className="text-xl font-bold text-foreground">{practicalExample.kmPerYear.toLocaleString()} km</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-border/30">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-champagne" />
-                      <span className="text-foreground">Reserva flexible</span>
-                    </div>
-                    <span className="text-sm font-medium text-champagne">Calendario digital 24/7</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4 text-green-600" />
-                      <span className="text-foreground">Recuperas al vender</span>
-                    </div>
-                    <span className="text-xl font-bold text-green-600">€{practicalExample.resaleValue.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                <div className="mt-6 p-4 bg-background/50 rounded-xl">
-                  <p className="text-sm text-muted-foreground text-center">
-                    Con 1 participación, disfrutas <strong className="text-foreground">{practicalExample.daysPerYear} días al año</strong> de un {practicalExample.vehicle} por solo <strong className="text-champagne">€{practicalExample.yourInvestment.toLocaleString()}</strong> y <strong className="text-green-600">recuperas hasta €{practicalExample.resaleValue.toLocaleString()}</strong> al cabo de 5 años.
-                  </p>
-                </div>
-              </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Key Benefits Summary */}
-      <section className="py-20">
+      {/* ============ SECTION 8 — CHIFFRES CLÉS ============ */}
+      <section className="bg-card/30 border-y border-border py-20 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Resumen de <span className="text-champagne">Ventajas</span>
-              </h2>
-            </div>
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">OWNEO en cifras</h2>
+          </Reveal>
 
-            <div className="bg-card/50 backdrop-blur-sm rounded-3xl border border-border/50 p-8 md:p-12">
-              <div className="prose prose-lg max-w-none">
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  En resumen: el <strong className="text-foreground">servicio, vacante, la a veces enorme pérdida de valor, cuidado, mantenimiento, almacenamiento, seguro y conservación</strong> se comparten con los demás co-sharers del supercar.
-                </p>
-                
-                <div className="grid md:grid-cols-3 gap-6 my-8">
-                  <div className="text-center p-6 bg-champagne/5 rounded-2xl border border-champagne/20">
-                    <div className="text-4xl font-bold text-champagne mb-2">5-10x</div>
-                    <p className="text-sm text-muted-foreground">Menos costes anuales</p>
-                  </div>
-                  <div className="text-center p-6 bg-champagne/5 rounded-2xl border border-champagne/20">
-                    <div className="text-4xl font-bold text-champagne mb-2">100%</div>
-                    <p className="text-sm text-muted-foreground">Recuperación de inversión al vender</p>
-                  </div>
-                  <div className="text-center p-6 bg-champagne/5 rounded-2xl border border-champagne/20">
-                    <div className="text-4xl font-bold text-champagne mb-2">0</div>
-                    <p className="text-sm text-muted-foreground">Riesgos de depreciación total</p>
-                  </div>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: TrendingDown, big: <>~<CountUp end={90} suffix="%" /></>, title: "Menos costes de gestión", desc: "Frente a la propiedad tradicional, tu cuota anual divide todos los gastos de gestión entre los participantes." },
+              { icon: RefreshCw, big: <>hasta <CountUp end={70} suffix="%" /></>, title: "Del valor recuperado", desc: "Al revender el vehículo al término del período acordado, recuperas hasta el 70% de tu participación inicial gracias al kilometraje controlado." },
+              { icon: Sparkles, big: "0", title: "Cargas de gestión", desc: "OWNEO gestiona compra, seguro, mantenimiento, parking, entrega y reventa. Tu única responsabilidad es disfrutar." },
+            ].map((c, i) => (
+              <Reveal key={i} delay={i * 0.15}>
+                <div className="h-full bg-background rounded-3xl p-10 border border-border/50 text-center transition-all hover:border-champagne/30">
+                  <c.icon className="w-8 h-8 text-champagne mx-auto" />
+                  <div className="mt-4 text-5xl sm:text-6xl font-bold text-champagne">{c.big}</div>
+                  <h3 className="mt-4 text-lg font-semibold">{c.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
                 </div>
-
-                <p className="text-lg text-foreground leading-relaxed font-medium text-center">
-                  Con nuestra solución garantizamos lo óptimo: <span className="text-champagne">solo puedes ganar con nosotros.</span>
-                </p>
-              </div>
-            </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-muted/30">
+      {/* ============ SECTION 9 — SEGURIDAD ============ */}
+      <section className="bg-background py-20 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center bg-gradient-to-br from-champagne/10 via-card to-champagne/10 rounded-3xl border border-border/50 p-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              ¿Listo para <span className="text-champagne">Unirte</span>?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Explora nuestra flota exclusiva y elige el supercar de tus sueños. 
-              Tu aventura en la co-sharing de lujo comienza aquí.
+          <div className="text-center max-w-3xl mx-auto">
+            <Reveal>
+              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+                Protección del participante
+              </span>
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Tu inversión, protegida.</h2>
+              <p className="mt-4 text-muted-foreground">
+                Cada participación OWNEO está respaldada por un contrato, un seguro y un protocolo de verificación riguroso.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {[
+              { icon: Car, title: "Vehículos verificados", desc: "Inspección técnica completa antes de cada uso" },
+              { icon: BadgeCheck, title: "Participantes verificados", desc: "Proceso de admisión riguroso" },
+              { icon: FileCheck, title: "Contrato garantizado", desc: "Tus derechos de uso por escrito" },
+              { icon: Shield, title: "Seguro premium", desc: "Cobertura completa con aseguradora reconocida" },
+              { icon: FileText, title: "Costes transparentes", desc: "Sin sorpresas ni cargos ocultos" },
+              { icon: RefreshCw, title: "Reventa gestionada", desc: "OWNEO gestiona la salida de tu inversión" },
+            ].map((it, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div className="bg-card/50 rounded-2xl border border-border/50 p-6 text-center transition-all hover:border-champagne/30 h-full">
+                  <it.icon className="w-8 h-8 text-champagne mx-auto" />
+                  <h3 className="mt-4 font-semibold text-sm">{it.title}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground">{it.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SECTION 10 — CTA ============ */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-card via-background to-card border-y border-border py-20 sm:py-28">
+        <div
+          className="pointer-events-none absolute inset-0 m-auto w-[600px] h-[600px] rounded-full bg-champagne/10 blur-3xl"
+          style={{ animation: "owneo-float 9s ease-in-out infinite alternate" }}
+        />
+        <div className="container relative mx-auto px-4 text-center">
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">¿Listo para vivir la experiencia?</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+              Explora nuestra flota, elige tu vehículo y solicita tu participación. OWNEO se encarga del resto.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="text-lg px-8 bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                <Link to="/portfolio">
-                  Ver Ofertas
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="mt-8 flex flex-wrap gap-4 justify-center">
+              <Button asChild size="lg" className="bg-champagne text-champagne-foreground hover:bg-champagne/90">
+                <Link to="/portfolio">Ver la flota <ArrowRight className="ml-2 w-5 h-5" /></Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="text-lg px-8 border-champagne/30 hover:bg-champagne/10">
-                <Link to="/quienes-somos">
-                  Conocer Más
-                </Link>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/portfolio">Solicitar participación</Link>
               </Button>
             </div>
-          </div>
+          </Reveal>
+          <Reveal delay={0.3}>
+            <p className="mt-6 text-xs text-muted-foreground">
+              Sin compromiso · Proceso 100% digital · Respuesta en 24h
+            </p>
+          </Reveal>
         </div>
       </section>
 
       <Footer />
     </div>
   );
-};
+}
 
-export default NuestroModelo;
+/* ---------------- row compare ---------------- */
+
+function RowCompare({
+  row,
+}: { row: { label: string; owner: number; owneo: number; maxBar: number } }) {
+  return (
+    <>
+      <div className="p-4 border-t border-border bg-muted/10 text-sm text-muted-foreground">{row.label}</div>
+      <BarCell value={row.owner} max={row.maxBar} bg="bg-red-500/5" barClass="bg-red-500/70" />
+      <BarCell value={row.owneo} max={row.maxBar} bg="bg-champagne/5 ring-1 ring-champagne/30" barClass="bg-champagne" />
+    </>
+  );
+}
+
+function BarCell({
+  value, max, bg, barClass,
+}: { value: number; max: number; bg: string; barClass: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const pct = Math.min((value / max) * 100, 100);
+  return (
+    <div ref={ref} className={`p-4 border-t border-border ${bg}`}>
+      <div className="text-sm font-medium">€{value.toLocaleString("es-ES")}</div>
+      <div className="mt-2 h-1.5 bg-muted/40 rounded-full overflow-hidden">
+        <div
+          className={`h-full ${barClass} rounded-full transition-[width] duration-1000 ease-out`}
+          style={{ width: inView ? `${pct}%` : "0%" }}
+        />
+      </div>
+    </div>
+  );
+}
