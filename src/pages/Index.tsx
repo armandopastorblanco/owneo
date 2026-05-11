@@ -22,6 +22,140 @@ const Index = () => {
       {/* Hero Slider Section */}
       <HeroSlider />
 
+      {/* Nuestro Modelo */}
+      <section className="py-20 sm:py-24 px-4 sm:px-6 bg-card/30 border-y border-border">
+        <div className="container mx-auto max-w-6xl">
+          {/* Header */}
+          <div className="text-center">
+            <span className="inline-block text-xs uppercase tracking-widest text-muted-foreground border border-border rounded-full px-4 py-1 mb-6">
+              Nuestro modelo
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
+              El lujo que se comparte
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              Una marca que redefine el acceso a los coches de alta gama a trav&eacute;s de la multipropiedad: un modelo eficiente, moderno y aspiracional, alineado con la nueva manera de entender la movilidad.
+            </p>
+          </div>
+
+          {/* 3 M&eacute;tricas */}
+          <div className="grid md:grid-cols-3 gap-6 mt-16">
+            <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
+              <Percent className="w-8 h-8 text-foreground mb-4 mx-auto" />
+              <div className="text-5xl font-bold text-foreground mb-2">10%</div>
+              <div className="font-semibold text-foreground mb-2">Del valor del veh&iacute;culo</div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Tu participaci&oacute;n, calculada sobre el precio de mercado. Sin letra peque&ntilde;a, sin sorpresas.
+              </p>
+            </div>
+            <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
+              <CalendarDays className="w-8 h-8 text-foreground mb-4 mx-auto" />
+              <div className="text-5xl font-bold text-foreground mb-2">28 d&iacute;as</div>
+              <div className="font-semibold text-foreground mb-2">Garantizados al a&ntilde;o</div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Cuatro semanas al volante del coche de tus sue&ntilde;os. Cuando quieras, donde quieras.
+              </p>
+            </div>
+            <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
+              <Users className="w-8 h-8 text-foreground mb-4 mx-auto" />
+              <div className="text-5xl font-bold text-foreground mb-2">&divide;10</div>
+              <div className="font-semibold text-foreground mb-2">Los gastos compartidos</div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real est&aacute; en compartir los costes, no en eliminarlos.
+              </p>
+            </div>
+          </div>
+
+          {/* Comparativa Ferrari Roma */}
+          <div className="mt-16">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 text-center">
+              El mismo coche. Una decisi&oacute;n diferente.
+            </h3>
+            <p className="text-muted-foreground text-center mb-10 text-sm uppercase tracking-widest">
+              Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o
+            </p>
+            <div className="grid md:grid-cols-3 gap-4">
+              {/* Comprarlo */}
+              <div className="rounded-2xl p-6 border border-red-500/20 bg-red-500/5 text-center">
+                <span className="text-xs text-red-400 border border-red-500/30 rounded-full px-3 py-1 mb-4 inline-block">
+                  Opci&oacute;n tradicional
+                </span>
+                <TrendingUp className="w-6 h-6 text-red-400 mb-3 mx-auto" />
+                <div className="text-3xl font-bold text-foreground mb-1">~330.000&euro;</div>
+                <div className="text-sm text-muted-foreground mb-4">+ ~25.000&euro;/a&ntilde;o en gastos</div>
+                <ul className="space-y-2 text-left inline-block">
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-red-400 shrink-0" /> Seguro a tu cargo
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-red-400 shrink-0" /> Mantenimiento a tu cargo
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-red-400 shrink-0" /> Depreciaci&oacute;n inmediata
+                  </li>
+                </ul>
+              </div>
+              {/* Alquilarlo */}
+              <div className="rounded-2xl p-6 border border-yellow-500/20 bg-yellow-500/5 text-center">
+                <span className="text-xs text-yellow-400 border border-yellow-500/30 rounded-full px-3 py-1 mb-4 inline-block">
+                  Alquiler cl&aacute;sico
+                </span>
+                <Clock className="w-6 h-6 text-yellow-400 mb-3 mx-auto" />
+                <div className="text-3xl font-bold text-foreground mb-1">~36.000&euro;</div>
+                <div className="text-sm text-muted-foreground mb-4">por 28 d&iacute;as &middot; cada a&ntilde;o</div>
+                <ul className="space-y-2 text-left inline-block">
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin propiedad ni v&iacute;nculo
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-yellow-400 shrink-0" /> Precio variable seg&uacute;n demanda
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin continuidad garantizada
+                  </li>
+                </ul>
+              </div>
+              {/* OWNEO */}
+              <div className="rounded-2xl p-6 border border-foreground/40 bg-foreground/5 text-center ring-1 ring-foreground/20">
+                <span className="text-xs text-foreground border border-foreground/40 rounded-full px-3 py-1 mb-4 inline-block font-semibold">
+                  Modelo OWNEO
+                </span>
+                <Star className="w-6 h-6 text-foreground mb-3 mx-auto" />
+                <div className="text-3xl font-bold text-foreground mb-1">~33.000&euro;</div>
+                <div className="text-sm text-muted-foreground mb-4">una sola vez &middot; todo gestionado</div>
+                <ul className="space-y-2 text-left inline-block">
+                  <li className="flex items-center gap-2 text-sm text-foreground">
+                    <Check className="w-4 h-4 text-green-400 shrink-0" /> Seguro, garaje y mantenimiento &divide;10
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-foreground">
+                    <Check className="w-4 h-4 text-green-400 shrink-0" /> 28 d&iacute;as garantizados cada a&ntilde;o
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-foreground">
+                    <Check className="w-4 h-4 text-green-400 shrink-0" /> Acceso a toda la flota OWNEO
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-muted-foreground text-sm italic text-center mt-8">
+              Los mismos 28 d&iacute;as al volante de un Ferrari Roma. Una decisi&oacute;n diferente.
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-14 text-center">
+            <Link to="/nuestro-modelo">
+              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
+                DESCUBRIR EL MODELO
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <p className="text-xs text-muted-foreground mt-4">
+              Sin compromiso. Sin permanencia. Solo experiencia.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Collection */}
       <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
