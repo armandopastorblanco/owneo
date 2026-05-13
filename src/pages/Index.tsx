@@ -7,6 +7,7 @@ import HeroSlider from "@/components/HeroSlider";
 import PressSection from "@/components/PressSection";
 import { useCars } from "@/hooks/useCars";
 import { useLocations } from "@/hooks/useLocations";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 

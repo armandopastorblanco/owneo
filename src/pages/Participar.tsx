@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCars, useCar, type Car } from "@/hooks/useCars";
 import { useLocations } from "@/hooks/useLocations";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EvaluationQuestionnaire from "@/components/EvaluationQuestionnaire";

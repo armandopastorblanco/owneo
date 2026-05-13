@@ -3,6 +3,7 @@ import { useMemo, useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCar } from "@/hooks/useCars";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, MapPin, CheckCircle2, Users, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
