@@ -731,6 +731,7 @@ const Participar = () => {
   const [params] = useSearchParams();
   const carIdFromUrl = params.get("carId") || undefined;
   const { user, loading: authLoading } = useAuth();
+  const { trackEvent } = useAnalytics();
 
   const [draft, setDraftState] = useState<Draft>(() => {
     const d = loadDraft();
@@ -743,6 +744,13 @@ const Participar = () => {
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    trackEvent("begin_checkout", {
+      car_id: carIdFromUrl,
+      source: carIdFromUrl ? "from_car_detail" : "direct",
+    });
+  }, []);
 
   useEffect(() => {
     saveDraft(draft);
