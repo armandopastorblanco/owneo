@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,6 +20,7 @@ const Login = () => {
     [pwaRaw.showPrompt, pwaRaw.isIOS, pwaRaw.canInstallNatively, pwaRaw.triggerPrompt, pwaRaw.install, pwaRaw.dismiss],
   );
   const { user, loading: authLoading } = useAuth();
+  const { trackEvent } = useAnalytics();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +57,9 @@ const Login = () => {
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
 
     if (error) {
+      trackEvent("login_error", {
+        error_type: error.message,
+      });
       toast({
         title: "Error al iniciar sesión",
         description: error.message === "Invalid login credentials"
@@ -63,6 +68,9 @@ const Login = () => {
         variant: "destructive",
       });
     } else {
+      trackEvent("login", {
+        method: "email",
+      });
       toast({ title: "Bienvenido", description: "Has iniciado sesión correctamente" });
       navigate(from, { replace: true });
     }
@@ -81,6 +89,7 @@ const Login = () => {
     if (error) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
+      trackEvent("password_reset_request", {});
       toast({ title: "Email enviado", description: "Revisa tu bandeja de entrada para restablecer tu contraseña" });
     }
     setLoading(false);

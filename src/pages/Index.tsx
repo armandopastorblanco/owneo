@@ -7,12 +7,14 @@ import HeroSlider from "@/components/HeroSlider";
 import PressSection from "@/components/PressSection";
 import { useCars } from "@/hooks/useCars";
 import { useLocations } from "@/hooks/useLocations";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const { data: cars = [], isLoading: carsLoading } = useCars();
   const { data: cities = [] } = useLocations();
+  const { trackEvent } = useAnalytics();
   const featuredCars = cars.slice(0, 4);
 
   return (
@@ -144,7 +146,15 @@ const Index = () => {
           {/* CTA */}
           <div className="mt-14 text-center">
             <Link to="/nuestro-modelo">
-              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-foreground text-foreground hover:bg-foreground hover:text-background"
+                onClick={() => trackEvent("click_cta_modele", {
+                  cta_text: "DESCUBRIR EL MODELO",
+                  destination: "/nuestro-modelo",
+                })}
+              >
                 DESCUBRIR EL MODELO
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -188,6 +198,9 @@ const Index = () => {
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
+                onClick={() => trackEvent("click_ver_todos_vehiculos", {
+                  section: "featured_collection",
+                })}
               >
                 VER TODOS LOS VEHÍCULOS
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -215,6 +228,9 @@ const Index = () => {
                 key={city.id}
                 to="/cities"
                 className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
+                onClick={() => trackEvent("click_city_card", {
+                  city_name: city.name,
+                })}
               >
                 <img
                   src={city.image}
@@ -246,6 +262,7 @@ const Index = () => {
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
+                onClick={() => trackEvent("click_ver_ubicaciones", {})}
               >
                 VER TODAS LAS UBICACIONES
                 <ArrowRight className="ml-2 w-5 h-5" />

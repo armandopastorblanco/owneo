@@ -3,6 +3,7 @@ import { useMemo, useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCar } from "@/hooks/useCars";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, MapPin, CheckCircle2, Users, Info, X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -54,6 +55,7 @@ const specLabels: Record<string, string> = {
 const CarDetail = () => {
   const { id } = useParams();
   const { data: car, isLoading } = useCar(id);
+  const { trackEvent } = useAnalytics();
 
   const availableParticipations = car?.remainingParticipations ?? 0;
   const maxParticipations = car?.maxParticipations ?? 10;
@@ -69,6 +71,19 @@ const CarDetail = () => {
     const total = car.gallery.length;
     setLightboxIndex((lightboxIndex + direction + total) % total);
   }, [lightboxIndex, car]);
+
+  useEffect(() => {
+    if (car) {
+      trackEvent("view_car_detail", {
+        car_name: car.name,
+        car_brand: car.brand,
+        car_id: car.id,
+        car_participation_price: car.participationPrice,
+        remaining_participations: car.remainingParticipations,
+        car_city: car.availableIn?.join(", "),
+      });
+    }
+  }, [car?.id]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -226,7 +241,13 @@ const CarDetail = () => {
                   <div
                     key={index}
                     className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-b from-muted to-background cursor-pointer"
-                    onClick={() => setLightboxIndex(index)}
+                    onClick={() => {
+                      setLightboxIndex(index);
+                      trackEvent("view_car_gallery", {
+                        car_name: car.name,
+                        image_index: index,
+                      });
+                    }}
                   >
                     <img
                       src={image}
@@ -413,7 +434,17 @@ const CarDetail = () => {
               </CardContent>
             </Card>
           ) : (
-            <Card className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20">
+            <Card
+              className="bg-gradient-to-r from-foreground/10 to-muted/10 border-foreground/20 cursor-pointer"
+              onClick={() => {
+                trackEvent("click_participate_cta", {
+                  car_name: car.name,
+                  car_id: car.id,
+                  participation_price: car.participationPrice,
+                  remaining_participations: car.remainingParticipations,
+                });
+              }}
+            >
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4 text-foreground">¿Listo para ser co-sharer de esta obra maestra?</h3>
                 <p className="text-muted-foreground mb-6">Completa el formulario para solicitar tu participación</p>

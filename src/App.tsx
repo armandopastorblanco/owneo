@@ -69,6 +69,19 @@ const PostHogPageTracker = () => {
   return null;
 };
 
+const GaPageTracker = () => {
+  const location = useLocation();
+  useEffect(() => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "page_view", {
+        page_path: location.pathname + location.search,
+        page_title: document.title,
+      });
+    }
+  }, [location]);
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -77,6 +90,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <PostHogPageTracker />
+        <GaPageTracker />
         <AuthProvider>
           <div className="pb-bottom-nav md:pb-0">
             <Routes>
