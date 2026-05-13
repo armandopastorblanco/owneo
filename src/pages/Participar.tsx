@@ -767,10 +767,25 @@ const Participar = () => {
   const handleStep0 = (car: Car) => {
     setSelectedCar(car);
     setDraftState((d) => ({ ...d, carId: car.id, step: 1 }));
+    trackEvent("select_vehicle", {
+      car_name: car.name,
+      car_brand: car.brand,
+      car_id: car.id,
+      city_name: car.availableIn?.[0],
+      participation_price: car.participationPrice,
+    });
   };
 
   const handleStep1 = (personal: Draft["personal"]) => {
     setDraftState((d) => ({ ...d, personal, step: 2 }));
+    trackEvent("checkout_progress_step3", {
+      car_name: selectedCar?.name,
+      car_id: selectedCar?.id,
+      num_participations: personal?.numParticipations,
+      total_amount:
+        (selectedCar?.participationPrice ?? 0) *
+        (personal?.numParticipations ?? 1),
+    });
   };
 
   const handleQuestionnaireComplete = () => {
@@ -780,6 +795,10 @@ const Participar = () => {
       const raw = sessionStorage.getItem(`owneo:questionnaire:${selectedCar.id}`);
       const answers = raw ? JSON.parse(raw) : {};
       setDraftState((d) => ({ ...d, answers, step: 3 }));
+      trackEvent("checkout_progress_step4", {
+        car_name: selectedCar?.name,
+        car_id: selectedCar?.id,
+      });
     } catch {
       setDraftState((d) => ({ ...d, answers: {}, step: 3 }));
     }
@@ -814,6 +833,15 @@ const Participar = () => {
         return;
       }
       toast({ title: "¡Solicitud enviada correctamente!" });
+      trackEvent("purchase", {
+        transaction_id: `owneo_${Date.now()}`,
+        car_name: selectedCar.name,
+        car_id: selectedCar.id,
+        num_participations: draft.personal.numParticipations,
+        value:
+          selectedCar.participationPrice * draft.personal.numParticipations,
+        currency: "EUR",
+      });
       clearDraft();
       sessionStorage.removeItem(`owneo:questionnaire:${selectedCar.id}`);
       setSubmitted(true);
