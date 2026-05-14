@@ -613,6 +613,15 @@ const AdminVehiculos = () => {
                 <Textarea value={(form.luxury_description as string) || ""} onChange={(e) => setForm({ ...form, luxury_description: e.target.value })} rows={4} />
               </div>
               <div>
+                <Label>Descripción de lujo (override manual)</Label>
+                <Textarea
+                  value={(form.luxury_description_override as string) || ""}
+                  onChange={(e) => setForm({ ...form, luxury_description_override: e.target.value })}
+                  rows={5}
+                  placeholder="Dejar vacío para usar la descripción autogenerada"
+                />
+              </div>
+              <div>
                 <Label>Ciudad principal <span className="text-destructive">*</span></Label>
                 <Select
                   value={(form.location_id as string) || ""}
