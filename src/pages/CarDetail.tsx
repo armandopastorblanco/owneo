@@ -731,28 +731,33 @@ const CarDetail = () => {
           {/* ─── BLOQUE G: SPECS ─── */}
           <Reveal className="mb-16" >
             <div ref={specsRef}>
-              <h2 className="text-3xl font-bold mb-6 text-foreground">Especificaciones técnicas</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">Especificaciones técnicas</h2>
               <Tabs value={specTab} onValueChange={setSpecTab}>
-                <TabsList className="overflow-x-auto flex w-full sm:w-auto justify-start">
-                  <TabsTrigger value="motor">Motor</TabsTrigger>
-                  <TabsTrigger value="prestaciones">Prestaciones</TabsTrigger>
-                  <TabsTrigger value="dimensiones">Dimensiones</TabsTrigger>
-                  <TabsTrigger value="equipamiento">Equipamiento</TabsTrigger>
-                </TabsList>
+                <div className="-mx-4 sm:mx-0 mb-4">
+                  <TabsList className="flex w-max sm:w-auto mx-4 sm:mx-0 gap-1 overflow-x-auto no-scrollbar">
+                    <TabsTrigger value="motor" className="text-xs sm:text-sm whitespace-nowrap">Motor</TabsTrigger>
+                    <TabsTrigger value="prestaciones" className="text-xs sm:text-sm whitespace-nowrap">Prestaciones</TabsTrigger>
+                    <TabsTrigger value="dimensiones" className="text-xs sm:text-sm whitespace-nowrap">Dimensiones</TabsTrigger>
+                    <TabsTrigger value="equipamiento" className="text-xs sm:text-sm whitespace-nowrap">Equipamiento</TabsTrigger>
+                  </TabsList>
+                </div>
                 {Object.entries(SPEC_CATEGORIES).map(([cat, keys]) => {
                   const items = keys.filter((k) => car.specifications?.[k]);
                   return (
                     <TabsContent key={cat} value={cat}>
                       <Card className="bg-card border-border rounded-2xl">
-                        <CardContent className="p-6">
+                        <CardContent className="p-4 sm:p-6">
                           {items.length === 0 ? (
                             <p className="text-muted-foreground text-sm text-center py-6">Sin datos disponibles para esta categoría.</p>
                           ) : (
-                            <div className="grid md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-8">
                               {items.map((k) => (
-                                <div key={k} className="flex justify-between items-center border-b border-border/40 pb-3">
-                                  <span className="text-muted-foreground text-sm">{specLabels[k] || k}</span>
-                                  <span className={`font-semibold ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
+                                <div
+                                  key={k}
+                                  className="flex justify-between items-center gap-3 py-3 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
+                                >
+                                  <span className="text-muted-foreground text-xs sm:text-sm flex-1 min-w-0">{specLabels[k] || k}</span>
+                                  <span className={`font-semibold text-sm sm:text-base text-right break-words ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
                                     {car.specifications[k]}
                                   </span>
                                 </div>
