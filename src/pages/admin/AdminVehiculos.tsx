@@ -732,6 +732,67 @@ const AdminVehiculos = () => {
                 </p>
               </div>
 
+              {/* ── Cuota anual de gestión ── */}
+              <div className="border-t border-border pt-4 space-y-4">
+                <h4 className="font-semibold text-foreground">Cuota anual de gestión</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label>Cuota anual de gestión (%)</Label>
+                    <Input
+                      type="number" min={0} max={100} step="0.1"
+                      value={(form.annual_fee_percent as number) ?? 10}
+                      onChange={(e) => setForm({ ...form, annual_fee_percent: Number(e.target.value) })}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Porcentaje del precio de participación cobrado anualmente por la gestión integral del vehículo.
+                    </p>
+                  </div>
+                  <div>
+                    <Label>Cuota anual fija (€) — opcional</Label>
+                    <Input
+                      type="number" min={0}
+                      value={(form.annual_fee_override as number | null) ?? ""}
+                      onChange={(e) => setForm({ ...form, annual_fee_override: e.target.value === "" ? null : Number(e.target.value) })}
+                      placeholder="—"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Si se rellena, sobreescribe el cálculo porcentual.
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label>Duración de la participación</Label>
+                    <Select
+                      value={String((form.participation_duration_years as number) ?? 5)}
+                      onValueChange={(v) => setForm({ ...form, participation_duration_years: Number(v) })}
+                    >
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="3">3 años</SelectItem>
+                        <SelectItem value="5">5 años</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label>Semanas por participación / año</Label>
+                    <Input
+                      type="number" min={1}
+                      value={(form.weeks_per_participation as number) ?? 4}
+                      onChange={(e) => setForm({ ...form, weeks_per_participation: Number(e.target.value) })}
+                    />
+                  </div>
+                  <div>
+                    <Label>Km por participación / año</Label>
+                    <Input
+                      type="number" min={0}
+                      value={(form.km_per_participation as number) ?? 2000}
+                      onChange={(e) => setForm({ ...form, km_per_participation: Number(e.target.value) })}
+                    />
+                  </div>
+                </div>
+              </div>
+
               {/* Promotions */}
               <div className="border-t border-border pt-4">
                 <div className="flex items-center gap-3 mb-4">
