@@ -11,16 +11,7 @@ const AdminGuard = ({ children }: { children: React.ReactNode }) => {
     queryFn: async () => {
       if (!user) return false;
 
-      // Check 1: profiles.role
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .maybeSingle();
-
-      if ((profile as { role?: string } | null)?.role === "superadmin") return true;
-
-      // Check 2: user_roles table
+      // Authoritative check: user_roles table (RLS-protected, cannot be self-promoted)
       const { data: roleRow } = await supabase
         .from("user_roles")
         .select("role")
