@@ -483,56 +483,54 @@ const CarDetail = () => {
                       </span>
                     </div>
                     <div className="grid grid-cols-2 divide-x divide-border/50">
+                      {/* Colonne Compra individual */}
                       <div className="p-4 bg-muted/10">
-                        <div className="flex items-center gap-1.5 mb-3">
-                          <div className="w-2 h-2 rounded-full bg-red-400/70" />
-                          <span className="text-xs text-muted-foreground font-medium">Compra individual</span>
+                        <div className="flex items-center gap-1.5 mb-4 h-6">
+                          <div className="w-2 h-2 rounded-full bg-red-400/70 flex-shrink-0" />
+                          <span className="text-xs text-muted-foreground font-medium leading-none">Compra individual</span>
                         </div>
-                        <div className="space-y-1.5 mb-3">
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Precio compra</span>
-                            <span>{car.numericPrice.toLocaleString('es-ES')}€</span>
+                        <div className="space-y-0">
+                          <div className="flex justify-between items-center h-9 border-b border-border/20">
+                            <span className="text-xs text-muted-foreground">Precio compra</span>
+                            <span className="text-xs text-foreground font-medium">{car.numericPrice.toLocaleString('es-ES')}€</span>
                           </div>
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Gastos {durationYears} años</span>
-                            <span>+{(ownerAnnualTotal * durationYears).toLocaleString('es-ES')}€</span>
+                          <div className="flex justify-between items-center h-9 border-b border-border/20">
+                            <span className="text-xs text-muted-foreground">Gastos {durationYears} años</span>
+                            <span className="text-xs text-foreground font-medium">+{(ownerAnnualTotal * durationYears).toLocaleString('es-ES')}€</span>
                           </div>
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Reventa estimada</span>
-                            <span className="text-green-500/70">-{ownerResaleValue.toLocaleString('es-ES')}€</span>
+                          <div className="flex justify-between items-center h-9">
+                            <span className="text-xs text-muted-foreground">Reventa estimada</span>
+                            <span className="text-xs text-green-500/70 font-medium">-{ownerResaleValue.toLocaleString('es-ES')}€</span>
                           </div>
                         </div>
-                        <div className="pt-2 border-t border-border/30">
-                          <div className="text-xs text-muted-foreground mb-0.5">Coste neto</div>
-                          <div className="text-xl font-bold text-foreground">
-                            {ownerNetCost.toLocaleString('es-ES')}€
-                          </div>
+                        <div className="pt-3 mt-3 border-t border-border/40">
+                          <div className="text-xs text-muted-foreground mb-1">Coste neto</div>
+                          <div className="text-xl font-bold text-foreground">{ownerNetCost.toLocaleString('es-ES')}€</div>
                         </div>
                       </div>
+                      {/* Colonne OWNEO */}
                       <div className="p-4 bg-champagne/5">
-                        <div className="flex items-center gap-1.5 mb-3">
-                          <div className="w-2 h-2 rounded-full bg-champagne" />
-                          <span className="text-xs text-champagne font-medium">OWNEO</span>
+                        <div className="flex items-center gap-1.5 mb-4 h-6">
+                          <div className="w-2 h-2 rounded-full bg-champagne flex-shrink-0" />
+                          <span className="text-xs text-champagne font-medium leading-none">OWNEO</span>
                         </div>
-                        <div className="space-y-1.5 mb-3">
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Participación</span>
-                            <span>{sharePrice.toLocaleString('es-ES')}€</span>
+                        <div className="space-y-0">
+                          <div className="flex justify-between items-center h-9 border-b border-border/20">
+                            <span className="text-xs text-muted-foreground">Participación</span>
+                            <span className="text-xs text-foreground font-medium">{sharePrice.toLocaleString('es-ES')}€</span>
                           </div>
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Gestión {durationYears} años</span>
-                            <span>+{(annualFee * durationYears).toLocaleString('es-ES')}€</span>
+                          <div className="flex justify-between items-center h-9 border-b border-border/20">
+                            <span className="text-xs text-muted-foreground">Gestión {durationYears} años</span>
+                            <span className="text-xs text-foreground font-medium">+{(annualFee * durationYears).toLocaleString('es-ES')}€</span>
                           </div>
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Reventa estimada</span>
-                            <span className="text-green-500">-{estimatedResale.toLocaleString('es-ES')}€</span>
+                          <div className="flex justify-between items-center h-9">
+                            <span className="text-xs text-muted-foreground">Reventa estimada</span>
+                            <span className="text-xs text-green-500 font-medium">-{estimatedResale.toLocaleString('es-ES')}€</span>
                           </div>
                         </div>
-                        <div className="pt-2 border-t border-champagne/20">
-                          <div className="text-xs text-muted-foreground mb-0.5">Coste neto</div>
-                          <div className="text-xl font-bold text-champagne">
-                            {netCost.toLocaleString('es-ES')}€
-                          </div>
+                        <div className="pt-3 mt-3 border-t border-champagne/20">
+                          <div className="text-xs text-muted-foreground mb-1">Coste neto</div>
+                          <div className="text-xl font-bold text-champagne">{netCost.toLocaleString('es-ES')}€</div>
                         </div>
                       </div>
                     </div>
