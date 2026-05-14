@@ -21,7 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {
   ArrowLeft, ArrowRight, MapPin, CheckCircle2, Users, Info, X,
   ChevronLeft, ChevronRight, Shield, Wrench, Sparkles, Zap, Gauge, Car as CarIcon,
-  MessageCircle, Calendar, Clock, TrendingUp, RefreshCw, FileCheck, Loader2, Check,
+  MessageCircle, Calendar, Clock, TrendingUp, TrendingDown, RefreshCw, FileCheck, Loader2, Check,
 } from "lucide-react";
 import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
