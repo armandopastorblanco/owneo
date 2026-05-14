@@ -1047,7 +1047,7 @@ const CarDetail = () => {
                     ))}
                   </div>
 
-                  <div onClick={() => trackEvent("click_participate_cta", { car_name: car.name, car_id: car.id, participation_price: car.participationPrice, remaining_participations: car.remainingParticipations })}>
+                  <div className="flex justify-center sm:justify-start" onClick={() => trackEvent("click_participate_cta", { car_name: car.name, car_id: car.id, participation_price: car.participationPrice, remaining_participations: car.remainingParticipations })}>
                     <ParticipationForm
                       carId={car.id}
                       carName={car.name}
