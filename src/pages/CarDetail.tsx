@@ -21,7 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {
   ArrowLeft, ArrowRight, MapPin, CheckCircle2, Users, Info, X,
   ChevronLeft, ChevronRight, Shield, Wrench, Sparkles, Zap, Gauge, Car as CarIcon,
-  MessageCircle, Calendar, Clock, TrendingUp, RefreshCw, FileCheck, Loader2, Check,
+  MessageCircle, Calendar, Clock, TrendingUp, TrendingDown, RefreshCw, FileCheck, Loader2, Check,
 } from "lucide-react";
 import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
@@ -255,6 +255,17 @@ const CarDetail = () => {
   const estimatedResale = Math.round(sharePrice * 0.7);
   const netCost = totalCostOverLife - estimatedResale;
 
+  // Costes anuales propietario único
+  const ownerAnnualInsurance = Math.round(car.numericPrice * 0.03);
+  const ownerAnnualMaintenance = Math.round(car.numericPrice * 0.02);
+  const ownerAnnualParking = 3000;
+  const ownerAnnualCleaning = 1200;
+  const ownerAnnualTotal = ownerAnnualInsurance + ownerAnnualMaintenance + ownerAnnualParking + ownerAnnualCleaning;
+  const ownerTotalCost = car.numericPrice + ownerAnnualTotal * durationYears;
+  const ownerResaleValue = Math.round(car.numericPrice * 0.65);
+  const ownerNetCost = ownerTotalCost - ownerResaleValue;
+  const saving = ownerNetCost - netCost;
+
   /* ─── allocation rows ─── */
   const allocationRows = [1, 2, 3, 4, 5].map((n) => ({
     n, weeks: n * weeksPerParticipation, days: n * weeksPerParticipation * 7,
@@ -414,6 +425,14 @@ const CarDetail = () => {
                         </Tooltip>
                       </TooltipProvider>
                     </div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="text-muted-foreground line-through text-lg">
+                        {car.price}
+                      </span>
+                      <span className="text-xs text-muted-foreground bg-card border border-border/50 rounded-full px-2 py-0.5">
+                        Valor del vehículo
+                      </span>
+                    </div>
                     {isPromoActive && promotion?.type === "direct" ? (
                       <p>
                         <span className="line-through text-muted-foreground text-xl mr-2">{sharePrice.toLocaleString("es-ES")}€</span>
@@ -451,23 +470,81 @@ const CarDetail = () => {
 
                   <div className="border-t border-border/30" />
 
-                  {/* Sección 3 — Resumen inversión */}
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Coste total {durationYears} años</span>
-                      <span className="text-foreground font-medium">{totalCostOverLife.toLocaleString("es-ES")}€</span>
+                  {/* Sección 3 — Resumen comparativo */}
+                  <div className="mt-4 rounded-xl overflow-hidden border border-border/50">
+                    <div className="bg-muted/30 px-4 py-2 border-b border-border/50">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Coste neto estimado a {durationYears} años
+                      </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Valor estimado reventa</span>
-                      <span className="text-emerald-500 font-medium">−{estimatedResale.toLocaleString("es-ES")}€</span>
+                    <div className="grid grid-cols-2 divide-x divide-border/50">
+                      <div className="p-4 bg-muted/10">
+                        <div className="flex items-center gap-1.5 mb-3">
+                          <div className="w-2 h-2 rounded-full bg-red-400/70" />
+                          <span className="text-xs text-muted-foreground font-medium">Compra individual</span>
+                        </div>
+                        <div className="space-y-1.5 mb-3">
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>Precio compra</span>
+                            <span>{car.numericPrice.toLocaleString('es-ES')}€</span>
+                          </div>
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>Gastos {durationYears} años</span>
+                            <span>+{(ownerAnnualTotal * durationYears).toLocaleString('es-ES')}€</span>
+                          </div>
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>Reventa estimada</span>
+                            <span className="text-green-500/70">-{ownerResaleValue.toLocaleString('es-ES')}€</span>
+                          </div>
+                        </div>
+                        <div className="pt-2 border-t border-border/30">
+                          <div className="text-xs text-muted-foreground mb-0.5">Coste neto</div>
+                          <div className="text-xl font-bold text-foreground">
+                            {ownerNetCost.toLocaleString('es-ES')}€
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-4 bg-champagne/5">
+                        <div className="flex items-center gap-1.5 mb-3">
+                          <div className="w-2 h-2 rounded-full bg-champagne" />
+                          <span className="text-xs text-champagne font-medium">OWNEO</span>
+                        </div>
+                        <div className="space-y-1.5 mb-3">
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>Participación</span>
+                            <span>{sharePrice.toLocaleString('es-ES')}€</span>
+                          </div>
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>Gestión {durationYears} años</span>
+                            <span>+{(annualFee * durationYears).toLocaleString('es-ES')}€</span>
+                          </div>
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>Reventa estimada</span>
+                            <span className="text-green-500">-{estimatedResale.toLocaleString('es-ES')}€</span>
+                          </div>
+                        </div>
+                        <div className="pt-2 border-t border-champagne/20">
+                          <div className="text-xs text-muted-foreground mb-0.5">Coste neto</div>
+                          <div className="text-xl font-bold text-champagne">
+                            {netCost.toLocaleString('es-ES')}€
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="border-t border-border/30 pt-2 flex justify-between">
-                      <span className="text-foreground font-semibold">Coste neto estimado</span>
-                      <span className="text-champagne font-bold text-lg">{netCost.toLocaleString("es-ES")}€</span>
+                    <div className="px-4 py-3 bg-champagne/10 border-t border-champagne/20 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <TrendingDown className="w-4 h-4 text-champagne flex-shrink-0" />
+                        <span className="text-xs text-foreground font-medium">Ahorras con OWNEO</span>
+                      </div>
+                      <span className="text-base font-bold text-champagne">
+                        ~{saving.toLocaleString('es-ES')}€
+                      </span>
                     </div>
-                    <p className="text-xs text-muted-foreground italic pt-1">
-                      Estimación orientativa. Sujeta a condiciones del mercado.
-                    </p>
+                    <div className="px-4 py-2 bg-muted/10 border-t border-border/30">
+                      <p className="text-xs text-muted-foreground italic">
+                        Estimación orientativa basada en costes medios de mercado. Sujeta a condiciones reales del vehículo.
+                      </p>
+                    </div>
                   </div>
 
                   {/* CTA principal */}
