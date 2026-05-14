@@ -746,18 +746,20 @@ const CarDetail = () => {
                   return (
                     <TabsContent key={cat} value={cat}>
                       <Card className="bg-card border-border rounded-2xl">
-                        <CardContent className="p-4 sm:p-6">
+                        <CardContent className="p-5 sm:p-6">
                           {items.length === 0 ? (
                             <p className="text-muted-foreground text-sm text-center py-6">Sin datos disponibles para esta categoría.</p>
                           ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
                               {items.map((k) => (
                                 <div
                                   key={k}
-                                  className="flex justify-between items-center gap-3 py-3 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
+                                  className="flex justify-between items-start gap-4 py-4 sm:py-3.5 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
                                 >
-                                  <span className="text-muted-foreground text-xs sm:text-sm flex-1 min-w-0">{specLabels[k] || k}</span>
-                                  <span className={`font-semibold text-sm sm:text-base text-right break-words ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
+                                  <span className="text-muted-foreground text-[11px] sm:text-sm uppercase tracking-wide leading-snug flex-1 min-w-0">
+                                    {specLabels[k] || k}
+                                  </span>
+                                  <span className={`font-semibold text-sm sm:text-base text-right break-words leading-snug ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
                                     {car.specifications[k]}
                                   </span>
                                 </div>
