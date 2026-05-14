@@ -754,12 +754,12 @@ const CarDetail = () => {
                               {items.map((k) => (
                                 <div
                                   key={k}
-                                  className="flex justify-between items-start gap-4 py-4 sm:py-3.5 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
+                                  className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4 py-3 sm:py-3.5 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
                                 >
-                                  <span className="text-muted-foreground text-[11px] sm:text-sm uppercase tracking-wide leading-snug flex-1 min-w-0">
+                                  <span className="text-muted-foreground text-[11px] sm:text-sm uppercase tracking-wide leading-snug sm:flex-1 sm:min-w-0">
                                     {specLabels[k] || k}
                                   </span>
-                                  <span className={`font-semibold text-sm sm:text-base text-right break-words leading-snug ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
+                                  <span className={`font-semibold text-sm sm:text-base text-left sm:text-right break-words leading-snug ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
                                     {car.specifications[k]}
                                   </span>
                                 </div>
