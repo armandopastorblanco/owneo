@@ -43,6 +43,7 @@ export interface Car {
   weeks_per_participation: number;
   km_per_participation: number;
   luxury_description_override: string | null;
+  consultation_enabled: boolean;
 }
 
 function mapDbCarToCar(row: Tables<"cars">): Car {
