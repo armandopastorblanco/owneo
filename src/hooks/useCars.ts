@@ -37,6 +37,12 @@ export interface Car {
   participationPrice: number;
   promotion: CarPromotion | null;
   status: string;
+  annual_fee_percent: number;
+  annual_fee_override: number | null;
+  participation_duration_years: number;
+  weeks_per_participation: number;
+  km_per_participation: number;
+  luxury_description_override: string | null;
 }
 
 function mapDbCarToCar(row: Tables<"cars">): Car {
@@ -65,6 +71,12 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
     participationPrice: Number(row.participation_price) || Math.round(numPrice * 0.1),
     promotion: rawPromo?.is_active ? rawPromo : null,
     status: row.status || "active",
+    annual_fee_percent: Number(row.annual_fee_percent ?? 10),
+    annual_fee_override: row.annual_fee_override != null ? Number(row.annual_fee_override) : null,
+    participation_duration_years: row.participation_duration_years ?? 5,
+    weeks_per_participation: row.weeks_per_participation ?? 4,
+    km_per_participation: row.km_per_participation ?? 2000,
+    luxury_description_override: row.luxury_description_override ?? null,
   };
 }
 

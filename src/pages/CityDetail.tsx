@@ -35,6 +35,12 @@ function mapRowToCar(row: Tables<"cars">): Car {
     participationPrice: Number(row.participation_price) || Math.round(numPrice * 0.1),
     promotion: null,
     status: row.status || "active",
+    annual_fee_percent: Number(row.annual_fee_percent ?? 10),
+    annual_fee_override: row.annual_fee_override != null ? Number(row.annual_fee_override) : null,
+    participation_duration_years: row.participation_duration_years ?? 5,
+    weeks_per_participation: row.weeks_per_participation ?? 4,
+    km_per_participation: row.km_per_participation ?? 2000,
+    luxury_description_override: row.luxury_description_override ?? null,
   };
 }
 

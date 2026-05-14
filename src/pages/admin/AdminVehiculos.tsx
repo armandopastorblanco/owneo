@@ -166,6 +166,12 @@ const AdminVehiculos = () => {
         category: car.category || "",
         description: car.description || "",
         luxury_description: car.luxury_description || "",
+        luxury_description_override: (car as DbCar & { luxury_description_override?: string }).luxury_description_override || "",
+        annual_fee_percent: (car as DbCar & { annual_fee_percent?: number }).annual_fee_percent ?? 10,
+        annual_fee_override: (car as DbCar & { annual_fee_override?: number | null }).annual_fee_override ?? null,
+        participation_duration_years: (car as DbCar & { participation_duration_years?: number }).participation_duration_years ?? 5,
+        weeks_per_participation: (car as DbCar & { weeks_per_participation?: number }).weeks_per_participation ?? 4,
+        km_per_participation: (car as DbCar & { km_per_participation?: number }).km_per_participation ?? 2000,
         location_id: (car as DbCar).location_id || "",
         available_in: car.available_in || [],
         is_active: car.is_active ?? false,
@@ -194,6 +200,9 @@ const AdminVehiculos = () => {
       setForm({
         name: "", brand: "", model: "", year: new Date().getFullYear(),
         category: "", description: "", luxury_description: "",
+        luxury_description_override: "",
+        annual_fee_percent: 10, annual_fee_override: null,
+        participation_duration_years: 5, weeks_per_participation: 4, km_per_participation: 2000,
         location_id: "",
         available_in: [], is_active: false, price: 0,
         max_participations: 10, participation_price: 0,
@@ -254,6 +263,12 @@ const AdminVehiculos = () => {
         category: (form.category as string) || null,
         description: (form.description as string) || null,
         luxury_description: (form.luxury_description as string) || null,
+        luxury_description_override: (form.luxury_description_override as string) || null,
+        annual_fee_percent: Number(form.annual_fee_percent ?? 10),
+        annual_fee_override: form.annual_fee_override == null ? null : Number(form.annual_fee_override),
+        participation_duration_years: Number(form.participation_duration_years ?? 5),
+        weeks_per_participation: Number(form.weeks_per_participation ?? 4),
+        km_per_participation: Number(form.km_per_participation ?? 2000),
         location_id: form.location_id as string,
         available_in: form.available_in as string[],
         is_active: form.is_active as boolean,
@@ -613,6 +628,15 @@ const AdminVehiculos = () => {
                 <Textarea value={(form.luxury_description as string) || ""} onChange={(e) => setForm({ ...form, luxury_description: e.target.value })} rows={4} />
               </div>
               <div>
+                <Label>Descripción de lujo (override manual)</Label>
+                <Textarea
+                  value={(form.luxury_description_override as string) || ""}
+                  onChange={(e) => setForm({ ...form, luxury_description_override: e.target.value })}
+                  rows={5}
+                  placeholder="Dejar vacío para usar la descripción autogenerada"
+                />
+              </div>
+              <div>
                 <Label>Ciudad principal <span className="text-destructive">*</span></Label>
                 <Select
                   value={(form.location_id as string) || ""}
@@ -721,6 +745,67 @@ const AdminVehiculos = () => {
                 <p className="text-xs text-muted-foreground mt-1">
                   Equivale a {Math.round(28 / 7)} semanas de uso al año
                 </p>
+              </div>
+
+              {/* ── Cuota anual de gestión ── */}
+              <div className="border-t border-border pt-4 space-y-4">
+                <h4 className="font-semibold text-foreground">Cuota anual de gestión</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label>Cuota anual de gestión (%)</Label>
+                    <Input
+                      type="number" min={0} max={100} step="0.1"
+                      value={(form.annual_fee_percent as number) ?? 10}
+                      onChange={(e) => setForm({ ...form, annual_fee_percent: Number(e.target.value) })}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Porcentaje del precio de participación cobrado anualmente por la gestión integral del vehículo.
+                    </p>
+                  </div>
+                  <div>
+                    <Label>Cuota anual fija (€) — opcional</Label>
+                    <Input
+                      type="number" min={0}
+                      value={(form.annual_fee_override as number | null) ?? ""}
+                      onChange={(e) => setForm({ ...form, annual_fee_override: e.target.value === "" ? null : Number(e.target.value) })}
+                      placeholder="—"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Si se rellena, sobreescribe el cálculo porcentual.
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label>Duración de la participación</Label>
+                    <Select
+                      value={String((form.participation_duration_years as number) ?? 5)}
+                      onValueChange={(v) => setForm({ ...form, participation_duration_years: Number(v) })}
+                    >
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="3">3 años</SelectItem>
+                        <SelectItem value="5">5 años</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label>Semanas por participación / año</Label>
+                    <Input
+                      type="number" min={1}
+                      value={(form.weeks_per_participation as number) ?? 4}
+                      onChange={(e) => setForm({ ...form, weeks_per_participation: Number(e.target.value) })}
+                    />
+                  </div>
+                  <div>
+                    <Label>Km por participación / año</Label>
+                    <Input
+                      type="number" min={0}
+                      value={(form.km_per_participation as number) ?? 2000}
+                      onChange={(e) => setForm({ ...form, km_per_participation: Number(e.target.value) })}
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Promotions */}
