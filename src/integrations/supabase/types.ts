@@ -183,9 +183,12 @@ export type Database = {
       cars: {
         Row: {
           admin_notes: string | null
+          annual_fee_override: number | null
+          annual_fee_percent: number | null
           available_in: string[] | null
           brand: string
           category: string | null
+          consultation_enabled: boolean | null
           created_at: string
           deadline: string | null
           description: string | null
@@ -194,13 +197,16 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean | null
+          km_per_participation: number | null
           location_id: string
           luxury_description: string | null
+          luxury_description_override: string | null
           max_participations: number | null
           max_reservation_days: number | null
           min_reservation_days: number | null
           model: string
           name: string
+          participation_duration_years: number | null
           participation_price: number | null
           price: number
           promotion: Json | null
@@ -211,13 +217,17 @@ export type Database = {
           technical_sheet: Json | null
           total_km: number | null
           updated_at: string
+          weeks_per_participation: number | null
           year: number
         }
         Insert: {
           admin_notes?: string | null
+          annual_fee_override?: number | null
+          annual_fee_percent?: number | null
           available_in?: string[] | null
           brand: string
           category?: string | null
+          consultation_enabled?: boolean | null
           created_at?: string
           deadline?: string | null
           description?: string | null
@@ -226,13 +236,16 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          km_per_participation?: number | null
           location_id: string
           luxury_description?: string | null
+          luxury_description_override?: string | null
           max_participations?: number | null
           max_reservation_days?: number | null
           min_reservation_days?: number | null
           model: string
           name: string
+          participation_duration_years?: number | null
           participation_price?: number | null
           price: number
           promotion?: Json | null
@@ -243,13 +256,17 @@ export type Database = {
           technical_sheet?: Json | null
           total_km?: number | null
           updated_at?: string
+          weeks_per_participation?: number | null
           year: number
         }
         Update: {
           admin_notes?: string | null
+          annual_fee_override?: number | null
+          annual_fee_percent?: number | null
           available_in?: string[] | null
           brand?: string
           category?: string | null
+          consultation_enabled?: boolean | null
           created_at?: string
           deadline?: string | null
           description?: string | null
@@ -258,13 +275,16 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          km_per_participation?: number | null
           location_id?: string
           luxury_description?: string | null
+          luxury_description_override?: string | null
           max_participations?: number | null
           max_reservation_days?: number | null
           min_reservation_days?: number | null
           model?: string
           name?: string
+          participation_duration_years?: number | null
           participation_price?: number | null
           price?: number
           promotion?: Json | null
@@ -275,6 +295,7 @@ export type Database = {
           technical_sheet?: Json | null
           total_km?: number | null
           updated_at?: string
+          weeks_per_participation?: number | null
           year?: number
         }
         Relationships: [
