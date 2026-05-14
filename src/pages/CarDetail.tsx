@@ -378,7 +378,7 @@ const CarDetail = () => {
 
           {/* ─── BLOQUE C: HEADER + PRECIO ─── */}
           <div ref={pricingRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div className="space-y-10 lg:space-y-12">
             <Reveal className="space-y-6">
               <span className="inline-block text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-3 py-1">
                 {car.category}
@@ -403,7 +403,7 @@ const CarDetail = () => {
               </div>
             </Reveal>
 
-            <div className="lg:sticky lg:top-24">
+            <div className="max-w-2xl mx-auto w-full">
             <Reveal delay={0.1}>
               <Card className="bg-card border border-champagne/20 rounded-2xl shadow-lg shadow-champagne/5">
                 <CardContent className="p-6 space-y-5">
