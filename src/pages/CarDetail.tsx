@@ -425,6 +425,14 @@ const CarDetail = () => {
                         </Tooltip>
                       </TooltipProvider>
                     </div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="text-muted-foreground line-through text-lg">
+                        {car.price}
+                      </span>
+                      <span className="text-xs text-muted-foreground bg-card border border-border/50 rounded-full px-2 py-0.5">
+                        Valor del vehículo
+                      </span>
+                    </div>
                     {isPromoActive && promotion?.type === "direct" ? (
                       <p>
                         <span className="line-through text-muted-foreground text-xl mr-2">{sharePrice.toLocaleString("es-ES")}€</span>
