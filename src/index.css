@@ -155,3 +155,7 @@ All colors MUST be HSL.
 .rbc-dark .rbc-off-range-bg { background: hsl(var(--muted) / 0.3); }
 .rbc-dark .rbc-off-range { color: hsl(var(--muted-foreground)); }
 .rbc-dark .rbc-event { padding: 2px 4px; }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
