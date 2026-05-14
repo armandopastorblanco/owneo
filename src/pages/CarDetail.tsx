@@ -482,7 +482,7 @@ const CarDetail = () => {
                         Coste neto estimado a {durationYears} años
                       </span>
                     </div>
-                    <div className="grid grid-cols-2 divide-x divide-border/50">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border/50">
                       {/* Colonne Compra individual */}
                       <div className="p-4 bg-muted/10">
                         <div className="flex items-center gap-1.5 mb-4 h-6">
