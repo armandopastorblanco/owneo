@@ -255,6 +255,17 @@ const CarDetail = () => {
   const estimatedResale = Math.round(sharePrice * 0.7);
   const netCost = totalCostOverLife - estimatedResale;
 
+  // Costes anuales propietario único
+  const ownerAnnualInsurance = Math.round(car.numericPrice * 0.03);
+  const ownerAnnualMaintenance = Math.round(car.numericPrice * 0.02);
+  const ownerAnnualParking = 3000;
+  const ownerAnnualCleaning = 1200;
+  const ownerAnnualTotal = ownerAnnualInsurance + ownerAnnualMaintenance + ownerAnnualParking + ownerAnnualCleaning;
+  const ownerTotalCost = car.numericPrice + ownerAnnualTotal * durationYears;
+  const ownerResaleValue = Math.round(car.numericPrice * 0.65);
+  const ownerNetCost = ownerTotalCost - ownerResaleValue;
+  const saving = ownerNetCost - netCost;
+
   /* ─── allocation rows ─── */
   const allocationRows = [1, 2, 3, 4, 5].map((n) => ({
     n, weeks: n * weeksPerParticipation, days: n * weeksPerParticipation * 7,
