@@ -21,7 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {
   ArrowLeft, ArrowRight, MapPin, CheckCircle2, Users, Info, X,
   ChevronLeft, ChevronRight, Shield, Wrench, Sparkles, Zap, Gauge, Car as CarIcon,
-  MessageCircle, Calendar, Clock, TrendingUp, TrendingDown, RefreshCw, FileCheck, Loader2, Check,
+  MessageCircle, Calendar, CalendarDays, Clock, TrendingUp, TrendingDown, RefreshCw, FileCheck, Loader2, Check,
 } from "lucide-react";
 import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
@@ -336,39 +336,42 @@ const CarDetail = () => {
           </Link>
 
           {/* ─── BLOQUE A: HERO ─── */}
-          <div ref={heroRef} className="relative aspect-[16/10] sm:aspect-[21/9] overflow-hidden rounded-2xl mb-10 bg-gradient-to-b from-muted to-background">
-            <img
-              src={car.image}
-              alt={car.name}
-              className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+          <div ref={heroRef} className="relative mb-10">
+            <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] overflow-hidden rounded-2xl bg-gradient-to-b from-muted to-background">
+              <img
+                src={car.image}
+                alt={car.name}
+                className="w-full h-full object-cover animate-[subtle-zoom_20s_ease-in-out_infinite]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
 
-            <div className={`absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${isComplete ? "bg-blue-500/80" : "bg-[hsl(var(--participation-available))]"} text-background`}>
-              <Users className="w-4 h-4" />
-              {isComplete ? "Completo — Lista de espera" : `${availableParticipations}/${maxParticipations} participaciones disponibles`}
+              <div className={`absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${isComplete ? "bg-blue-500/80" : "bg-[hsl(var(--participation-available))]"} text-background`}>
+                <Users className="w-4 h-4" />
+                {isComplete ? "Completo — Lista de espera" : `${availableParticipations}/${maxParticipations} participaciones disponibles`}
+              </div>
+              {isPromoActive && (
+                <div className="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-semibold bg-emerald-500 text-background">
+                  {promotion.badge_text}
+                </div>
+              )}
             </div>
-            {isPromoActive && (
-              <div className="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-semibold bg-emerald-500 text-background">
-                {promotion.badge_text}
-              </div>
-            )}
 
-            {/* Bottom-left summary */}
-            <div className="absolute bottom-4 left-4 right-4 sm:right-auto bg-background/80 backdrop-blur-sm rounded-xl px-4 py-3 border border-border/50 flex gap-4 justify-center sm:justify-start">
-              <div className="text-center">
-                <div className="text-champagne font-bold text-lg">{weeksPerParticipation} sem.</div>
-                <div className="text-muted-foreground text-xs">por participación</div>
+            {/* Badges stats — flux normal sur mobile, absolu sur sm+ */}
+            <div className="grid grid-cols-3 gap-3 px-0 py-4 sm:absolute sm:bottom-4 sm:left-4 sm:right-4 sm:px-0 sm:py-0">
+              <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
+                <CalendarDays className="w-4 h-4 mx-auto mb-1 text-champagne" />
+                <div className="text-sm font-bold text-foreground">{weeksPerParticipation} sem.</div>
+                <div className="text-xs text-muted-foreground">por año</div>
               </div>
-              <div className="border-l border-border/50" />
-              <div className="text-center">
-                <div className="text-champagne font-bold text-lg">{kmPerParticipation.toLocaleString("es-ES")} km</div>
-                <div className="text-muted-foreground text-xs">incluidos/año</div>
+              <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
+                <Gauge className="w-4 h-4 mx-auto mb-1 text-champagne" />
+                <div className="text-sm font-bold text-foreground">{kmPerParticipation.toLocaleString("es-ES")} km</div>
+                <div className="text-xs text-muted-foreground">incluidos</div>
               </div>
-              <div className="border-l border-border/50" />
-              <div className="text-center">
-                <div className="text-champagne font-bold text-lg">{durationYears} años</div>
-                <div className="text-muted-foreground text-xs">duración</div>
+              <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
+                <Clock className="w-4 h-4 mx-auto mb-1 text-champagne" />
+                <div className="text-sm font-bold text-foreground">{durationYears} años</div>
+                <div className="text-xs text-muted-foreground">duración</div>
               </div>
             </div>
           </div>
