@@ -16,6 +16,7 @@ function mapRowToCar(row: Tables<"cars">): Car {
   const numPrice = Number(row.price);
   return {
     id: row.id,
+    slug: (row as any).slug ?? "",
     name: row.name,
     brand: row.brand,
     model: row.model,
@@ -46,25 +47,27 @@ function mapRowToCar(row: Tables<"cars">): Car {
 }
 
 const CityDetail = () => {
-  const { cityId } = useParams<{ cityId: string }>();
+  const params = useParams<{ slug?: string; cityId?: string }>();
+  const slug = params.slug;
+  const cityId = params.cityId;
+  const key = slug ?? cityId;
 
   const { data: city, isLoading: cityLoading } = useQuery({
-    queryKey: ["city-detail", cityId],
-    enabled: !!cityId,
+    queryKey: ["city-detail", key],
+    enabled: !!key,
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("locations")
-        .select("*")
-        .eq("id", cityId!)
-        .maybeSingle();
+      const q = supabase.from("locations").select("*");
+      const { data, error } = await (slug
+        ? q.eq("slug", slug).maybeSingle()
+        : q.eq("id", cityId!).maybeSingle());
       if (error) throw error;
       return data;
     },
   });
 
   const { data: cars = [], isLoading: carsLoading } = useQuery({
-    queryKey: ["city-cars", cityId, city?.name],
-    enabled: !!cityId && !!city,
+    queryKey: ["city-cars", key, city?.name],
+    enabled: !!key && !!city,
     queryFn: async () => {
       // Filter by city name in available_in array (cars don't store location_id directly)
       const { data, error } = await supabase

@@ -114,8 +114,10 @@ const consultaSchema = z.object({
 type ConsultaForm = z.infer<typeof consultaSchema>;
 
 const CarDetail = () => {
-  const { id } = useParams();
-  const { data: car, isLoading } = useCar(id);
+  const params = useParams<{ slug?: string; id?: string }>();
+  const slug = params.slug;
+  const id = params.id;
+  const { data: car, isLoading } = useCar(slug ?? id, { bySlug: !!slug });
   const { trackEvent } = useAnalytics();
 
   /* ─── refs ─── */
@@ -163,8 +165,11 @@ const CarDetail = () => {
 
   useEffect(() => {
     if (car) {
+      document.title = `${car.name} — OWNEO`;
       trackEvent("view_car_detail", {
         car_name: car.name, car_brand: car.brand, car_id: car.id,
+        car_slug: car.slug,
+        page_url: `/voitures/${car.slug}`,
         car_participation_price: car.participationPrice,
         remaining_participations: car.remainingParticipations,
         car_city: car.availableIn?.join(", "),

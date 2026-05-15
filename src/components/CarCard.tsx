@@ -15,7 +15,7 @@ const CarCard = ({ car }: CarCardProps) => {
   const max = car.maxParticipations ?? 10;
 
   return (
-    <Link to={`/car/${car.id}`} className="h-full">
+    <Link to={car.slug ? `/voitures/${car.slug}` : `/car/${car.id}`} className="h-full">
       <Card className={`overflow-hidden hover-lift group cursor-pointer bg-card border-border h-full flex flex-col ${isComplete ? "opacity-60" : ""}`}>
         <div className="aspect-[16/10] overflow-hidden bg-muted relative">
           <img
