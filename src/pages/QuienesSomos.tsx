@@ -209,7 +209,7 @@ const QuienesSomos = () => {
                 { label: "Sin compromiso" },
               ].map((p, i) => (
                 <Reveal key={p.label} delay={0.5 + i * 0.1}>
-                  <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-foreground/80 px-4 py-2 rounded-full border border-border/60 bg-card/40 backdrop-blur-sm">
+                  <span className="text-xs sm:text-sm uppercase tracking-[0.2em] font-medium text-foreground/80 px-4 py-2 rounded-full border border-border/60 bg-card/40 backdrop-blur-sm">
                     {p.label}
                   </span>
                 </Reveal>
