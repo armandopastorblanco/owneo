@@ -226,7 +226,7 @@ const QuienesSomos = () => {
             transition={{ delay: 1, duration: 2, repeat: Infinity }}
             className="flex flex-col items-center gap-2 text-champagne/70"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em]">Descubrir</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Descubrir</span>
             <ChevronDown className="w-4 h-4" />
           </motion.div>
         </div>
