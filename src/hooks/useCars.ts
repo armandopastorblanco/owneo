@@ -54,6 +54,7 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
   const rawPromo = promoParsed.success ? promoParsed.data : null;
   return {
     id: row.id,
+    slug: (row as any).slug ?? "",
     name: row.name,
     brand: row.brand,
     model: row.model,
