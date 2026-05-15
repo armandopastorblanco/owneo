@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import BottomNav from "@/components/BottomNav";
+import CookieBanner from "@/components/CookieBanner";
 import { usePostHogPageView } from "@/hooks/usePostHogPageView";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
