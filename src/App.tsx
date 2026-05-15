@@ -138,6 +138,7 @@ const App = () => (
             </Routes>
           </div>
           <BottomNav />
+          <CookieBanner />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
