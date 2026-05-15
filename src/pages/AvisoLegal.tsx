@@ -106,7 +106,7 @@ const AvisoLegal = () => {
         <a href="mailto:info@owneo.es">info@owneo.es</a>
       </p>
     </LegalLayout>
-  </>
-);
+  );
+};
 
 export default AvisoLegal;
