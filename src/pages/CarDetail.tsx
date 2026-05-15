@@ -226,7 +226,7 @@ const CarDetail = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 text-foreground">Vehículo no encontrado</h1>
-          <Link to="/portfolio">
+          <Link to="/coches">
             <Button variant="outline">
               <ArrowLeft className="mr-2 w-4 h-4" />
               Volver a Nuestra Gama
@@ -336,7 +336,7 @@ const CarDetail = () => {
 
       <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
-          <Link to="/portfolio" className="inline-flex items-center text-foreground hover:text-champagne mb-6 transition-colors">
+          <Link to="/coches" className="inline-flex items-center text-foreground hover:text-champagne mb-6 transition-colors">
             <ArrowLeft className="mr-2 w-4 h-4" /> Volver a Nuestra Gama
           </Link>
 
@@ -1020,7 +1020,7 @@ const CarDetail = () => {
                   <p className="text-muted-foreground mb-6">
                     Descubre otros vehículos disponibles en nuestra vitrina
                   </p>
-                  <Link to="/portfolio">
+                  <Link to="/coches">
                     <Button variant="outline">Ver otros vehículos</Button>
                   </Link>
                 </CardContent>

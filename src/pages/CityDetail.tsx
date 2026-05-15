@@ -99,7 +99,7 @@ const CityDetail = () => {
         <main className="pt-24 pb-12 px-6 container mx-auto text-center">
           <h1 className="text-3xl font-bold text-foreground mb-4">Ciudad no encontrada</h1>
           <p className="text-muted-foreground mb-6">La ciudad que buscas no existe o ya no está disponible.</p>
-          <Link to="/cities">
+          <Link to="/ubicaciones">
             <Button variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" /> Volver a ciudades
             </Button>
@@ -123,7 +123,7 @@ const CityDetail = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
         </div>
         <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-28 pb-10">
-          <Link to="/cities" className="inline-flex items-center text-sm text-foreground/80 hover:text-foreground mb-4">
+          <Link to="/ubicaciones" className="inline-flex items-center text-sm text-foreground/80 hover:text-foreground mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" /> Volver a ciudades
           </Link>
           <div className="flex items-center gap-2 mb-3">

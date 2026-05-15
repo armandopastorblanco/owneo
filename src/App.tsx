@@ -99,8 +99,8 @@ const App = () => (
           <div className="pb-bottom-nav md:pb-0">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/cities" element={<Cities />} />
+              <Route path="/coches" element={<Portfolio />} />
+              <Route path="/ubicaciones" element={<Cities />} />
               <Route path="/cities/:cityId" element={<CityDetail />} />
               <Route path="/ubicaciones/:slug" element={<CityDetail />} />
               <Route path="/car/:id" element={<CarDetail />} />

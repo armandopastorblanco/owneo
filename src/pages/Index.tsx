@@ -193,7 +193,7 @@ const Index = () => {
           )}
 
           <div className="text-center mt-12">
-            <Link to="/portfolio">
+            <Link to="/coches">
               <Button
                 size="lg"
                 variant="outline"
@@ -226,7 +226,7 @@ const Index = () => {
             {cities.slice(0, 4).map((city) => (
               <Link
                 key={city.id}
-                to="/cities"
+                to="/ubicaciones"
                 className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
                 onClick={() => trackEvent("click_city_card", {
                   city_name: city.name,
@@ -257,7 +257,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/cities">
+            <Link to="/ubicaciones">
               <Button
                 size="lg"
                 variant="outline"
@@ -329,7 +329,7 @@ const Index = () => {
                 <strong className="text-foreground">Porsche</strong>: el 911 Turbo S, el Taycan eléctrico y los SUV deportivos Cayenne y Macan.
               </p>
               <Link
-                to="/portfolio"
+                to="/coches"
                 className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline"
               >
                 Ver más <ArrowRight className="w-4 h-4" />
@@ -352,7 +352,7 @@ const Index = () => {
                 <strong className="text-foreground">Mercedes-AMG GT R</strong>, conocido como "La Bestia del Infierno Verde".
               </p>
               <Link
-                to="/portfolio"
+                to="/coches"
                 className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline"
               >
                 Ver más <ArrowRight className="w-4 h-4" />
@@ -393,7 +393,7 @@ const Index = () => {
               </div>
               <div className="text-center">
                 <Link
-                  to="/cities"
+                  to="/ubicaciones"
                   className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline"
                 >
                   Ver ubicaciones <ArrowRight className="w-4 h-4" />
@@ -415,7 +415,7 @@ const Index = () => {
               <strong className="text-foreground"> supercar experiences</strong> en España.
             </p>
             <Link
-              to="/portfolio"
+              to="/coches"
               className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline"
             >
               Explorar colección completa <ArrowRight className="w-4 h-4" />

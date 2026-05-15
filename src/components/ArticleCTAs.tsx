@@ -24,7 +24,7 @@ const ArticleCTAs = ({ vehicleName = "este vehículo" }: ArticleCTAsProps) => {
     <div className="pt-10 border-t border-border/30">
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button asChild size="lg" className="text-lg px-8 bg-champagne text-champagne-foreground hover:bg-champagne/90">
-          <Link to="/portfolio">
+          <Link to="/coches">
             Ver la Gama OWNEO
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
