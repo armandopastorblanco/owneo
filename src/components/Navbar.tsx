@@ -120,6 +120,18 @@ const Navbar = () => {
 
               {user ? (
                 <>
+                  {isAdmin && (
+                    <Link to="/admin">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex items-center gap-2 text-champagne/70 hover:text-champagne hover:bg-champagne/5 text-xs font-light tracking-wider"
+                      >
+                        <Shield className="w-3.5 h-3.5" />
+                        <span>ADMIN</span>
+                      </Button>
+                    </Link>
+                  )}
                   <Link to="/dashboard">
                     <Button
                       variant="ghost"
