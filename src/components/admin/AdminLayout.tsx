@@ -93,7 +93,7 @@ const AdminLayout = () => {
               <Icon className="h-4 w-4 shrink-0" />
               <span className="flex-1 text-left">{label}</span>
               {badgeCount > 0 && (
-                <span className="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-red-500 text-white text-[10px] font-semibold">
+                <span className="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-semibold">
                   {badgeCount}
                 </span>
               )}
