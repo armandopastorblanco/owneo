@@ -721,7 +721,7 @@ function RowCompare({
 }: { row: { label: string; owner: number; owneo: number; maxBar: number } }) {
   return (
     <>
-      <div className="p-4 border-t border-border bg-muted/10 text-sm text-muted-foreground">{row.label}</div>
+      <div className="p-2.5 sm:p-4 border-t border-border bg-muted/10 text-xs sm:text-sm text-muted-foreground leading-tight self-center">{row.label}</div>
       <BarCell value={row.owner} max={row.maxBar} bg="bg-red-500/5" barClass="bg-red-500/70" />
       <BarCell value={row.owneo} max={row.maxBar} bg="bg-champagne/5 ring-1 ring-champagne/30" barClass="bg-champagne" />
     </>
@@ -735,9 +735,9 @@ function BarCell({
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const pct = Math.min((value / max) * 100, 100);
   return (
-    <div ref={ref} className={`p-4 border-t border-border ${bg}`}>
-      <div className="text-sm font-medium">€{value.toLocaleString("es-ES")}</div>
-      <div className="mt-2 h-1.5 bg-muted/40 rounded-full overflow-hidden">
+    <div ref={ref} className={`p-2.5 sm:p-4 border-t border-border ${bg}`}>
+      <div className="text-xs sm:text-sm font-medium whitespace-nowrap">€{value.toLocaleString("es-ES")}</div>
+      <div className="mt-1.5 sm:mt-2 h-1 sm:h-1.5 bg-muted/40 rounded-full overflow-hidden">
         <div
           className={`h-full ${barClass} rounded-full transition-[width] duration-1000 ease-out`}
           style={{ width: inView ? `${pct}%` : "0%" }}
