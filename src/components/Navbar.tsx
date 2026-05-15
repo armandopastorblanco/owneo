@@ -15,7 +15,7 @@ import owneoLogo from "@/assets/owneo-logo.png";
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, signOut, isAdmin } = useAuth();
   const [language, setLanguage] = useState("es");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
