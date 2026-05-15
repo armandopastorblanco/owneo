@@ -50,6 +50,7 @@ import AdminUbicaciones from "./pages/admin/AdminUbicaciones";
 import AdminConfiguracion from "./pages/admin/AdminConfiguracion";
 import AdminFlota from "./pages/admin/AdminFlota";
 import AdminFlotaDetalle from "./pages/admin/AdminFlotaDetalle";
+import AdminConsultas from "./pages/admin/AdminConsultas";
 
 const queryClient = new QueryClient();
 
