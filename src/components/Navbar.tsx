@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { User, Globe, Menu, X, LogOut } from "lucide-react";
+import { User, Globe, Menu, X, LogOut, Shield } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,7 @@ import owneoLogo from "@/assets/owneo-logo.png";
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, signOut, isAdmin } = useAuth();
   const [language, setLanguage] = useState("es");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -120,6 +120,18 @@ const Navbar = () => {
 
               {user ? (
                 <>
+                  {isAdmin && (
+                    <Link to="/admin">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex items-center gap-2 text-champagne/70 hover:text-champagne hover:bg-champagne/5 text-xs font-light tracking-wider"
+                      >
+                        <Shield className="w-3.5 h-3.5" />
+                        <span>ADMIN</span>
+                      </Button>
+                    </Link>
+                  )}
                   <Link to="/dashboard">
                     <Button
                       variant="ghost"
@@ -213,6 +225,21 @@ const Navbar = () => {
 
           {/* Bottom actions */}
           <div className="px-6 pb-8 pt-4 border-t border-border/40 space-y-3">
+            {user && isAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full"
+              >
+                <Button
+                  variant="outline"
+                  className="w-full min-h-[48px] flex items-center gap-2 text-champagne border-champagne/30 hover:bg-champagne/10 text-sm"
+                >
+                  <Shield className="w-4 h-4" />
+                  <span>PANEL ADMIN</span>
+                </Button>
+              </Link>
+            )}
             <div className="flex items-center gap-3">
               <Select value={language} onValueChange={setLanguage}>
                 <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs min-h-[48px]">

@@ -50,6 +50,7 @@ import AdminUbicaciones from "./pages/admin/AdminUbicaciones";
 import AdminConfiguracion from "./pages/admin/AdminConfiguracion";
 import AdminFlota from "./pages/admin/AdminFlota";
 import AdminFlotaDetalle from "./pages/admin/AdminFlotaDetalle";
+import AdminConsultas from "./pages/admin/AdminConsultas";
 
 const queryClient = new QueryClient();
 
@@ -139,6 +140,7 @@ const App = () => (
                 <Route path="pagos" element={<AdminPagos />} />
                 <Route path="inspecciones" element={<AdminInspecciones />} />
                 <Route path="ubicaciones" element={<AdminUbicaciones />} />
+                <Route path="consultas" element={<AdminConsultas />} />
                 <Route path="configuracion" element={<AdminConfiguracion />} />
               </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

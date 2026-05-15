@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, Car, FileText, Users, CalendarDays,
   CreditCard, ClipboardCheck, MapPin, Settings,
-  LogOut, Menu, X, Gauge,
+  LogOut, Menu, X, Gauge, MessageCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ const navItems = [
   { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
   { label: "Vitrina", path: "/admin/vehiculos", icon: Car },
   { label: "Solicitudes", path: "/admin/solicitudes", icon: FileText },
+  { label: "Consultas", path: "/admin/consultas", icon: MessageCircle, badgeKey: "unread_consultas" as const },
   { label: "Participantes", path: "/admin/participantes", icon: Users },
   { label: "Flota", path: "/admin/flota", icon: Gauge },
   { label: "Reservas", path: "/admin/reservas", icon: CalendarDays, badgeKey: "pending_reservations" as const },
@@ -42,7 +43,22 @@ const AdminLayout = () => {
     refetchInterval: 60000,
   });
 
-  const badgeMap: Record<string, number> = { pending_reservations: pendingReservations };
+  const { data: unreadConsultas = 0 } = useQuery({
+    queryKey: ["admin-consultas-unread"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("consultation_requests")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "pending");
+      return count ?? 0;
+    },
+    refetchInterval: 30000,
+  });
+
+  const badgeMap: Record<string, number> = {
+    pending_reservations: pendingReservations,
+    unread_consultas: unreadConsultas,
+  };
 
   const handleSignOut = async () => {
     await signOut();
@@ -77,7 +93,7 @@ const AdminLayout = () => {
               <Icon className="h-4 w-4 shrink-0" />
               <span className="flex-1 text-left">{label}</span>
               {badgeCount > 0 && (
-                <span className="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-red-500 text-white text-[10px] font-semibold">
+                <span className="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-semibold">
                   {badgeCount}
                 </span>
               )}

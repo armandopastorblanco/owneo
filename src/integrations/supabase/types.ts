@@ -313,36 +313,48 @@ export type Database = {
       }
       consultation_requests: {
         Row: {
+          admin_notes: string | null
           car_id: string | null
           car_name: string | null
           created_at: string
           email: string
           id: string
+          is_read: boolean | null
           message: string | null
           name: string
           phone: string | null
+          responded_at: string | null
+          source: string | null
           status: string
         }
         Insert: {
+          admin_notes?: string | null
           car_id?: string | null
           car_name?: string | null
           created_at?: string
           email: string
           id?: string
+          is_read?: boolean | null
           message?: string | null
           name: string
           phone?: string | null
+          responded_at?: string | null
+          source?: string | null
           status?: string
         }
         Update: {
+          admin_notes?: string | null
           car_id?: string | null
           car_name?: string | null
           created_at?: string
           email?: string
           id?: string
+          is_read?: boolean | null
           message?: string | null
           name?: string
           phone?: string | null
+          responded_at?: string | null
+          source?: string | null
           status?: string
         }
         Relationships: [
