@@ -182,13 +182,13 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10 pt-28 sm:pt-32 pb-20">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
-              <span className="inline-block text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90 px-3 py-1.5 rounded-full border border-champagne/30 bg-background/30 backdrop-blur-sm">
+              <span className="inline-block text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90 px-3 py-1.5 rounded-full border border-champagne/30 bg-background/30 backdrop-blur-sm">
                 El lujo que se comparte
               </span>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight leading-[1.05] tracking-tight">
+              <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight">
                 No es un coche.
                 <br />
                 <span className="text-champagne italic">Es una decisión.</span>
