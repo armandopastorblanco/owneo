@@ -1,17 +1,12 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 import LegalLayout from "@/components/LegalLayout";
 
-const AvisoLegal = () => (
-  <>
-    <Helmet>
-      <title>Aviso Legal | OWNEO</title>
-      <meta
-        name="description"
-        content="Aviso Legal de OWNEO SL conforme a la LSSI-CE. Datos del titular, condiciones de uso, propiedad intelectual y jurisdicción aplicable."
-      />
-      <link rel="canonical" href="https://www.owneo.es/aviso-legal" />
-    </Helmet>
+const AvisoLegal = () => {
+  useEffect(() => {
+    document.title = "Aviso Legal | OWNEO";
+  }, []);
 
+  return (
     <LegalLayout title="Aviso Legal">
       <h2>I. Datos identificativos del titular del sitio web</h2>
       <p>
