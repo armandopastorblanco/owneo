@@ -543,6 +543,42 @@ export type Database = {
           },
         ]
       }
+      cookie_consents: {
+        Row: {
+          analytics: boolean
+          consent_version: string
+          consented_at: string
+          id: string
+          marketing: boolean
+          personalization: boolean
+          session_id: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          analytics?: boolean
+          consent_version?: string
+          consented_at?: string
+          id?: string
+          marketing?: boolean
+          personalization?: boolean
+          session_id: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          analytics?: boolean
+          consent_version?: string
+          consented_at?: string
+          id?: string
+          marketing?: boolean
+          personalization?: boolean
+          session_id?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       credit_rules: {
         Row: {
           applies_to_all: boolean | null
