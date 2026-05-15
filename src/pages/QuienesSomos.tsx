@@ -278,10 +278,10 @@ const QuienesSomos = () => {
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
                     <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-champagne" />
                   </div>
-                  <span className="text-[11px] uppercase tracking-[0.3em] text-champagne/90">
+                  <span className="text-[11px] uppercase tracking-[0.3em] font-medium text-champagne/90">
                     {item.label}
                   </span>
-                  <h3 className="mt-3 text-2xl sm:text-3xl font-extralight leading-tight tracking-tight">
+                  <h3 className="mt-3 text-2xl sm:text-3xl font-semibold leading-tight tracking-tight">
                     {item.title}
                   </h3>
                   <p className="mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
