@@ -16,6 +16,7 @@ function mapRowToCar(row: Tables<"cars">): Car {
   const numPrice = Number(row.price);
   return {
     id: row.id,
+    slug: (row as any).slug ?? "",
     name: row.name,
     brand: row.brand,
     model: row.model,
