@@ -163,7 +163,7 @@ const QuienesSomos = () => {
             alt="OWNEO — el lujo que se comparte"
             loading="eager"
             className="w-full h-full object-cover will-change-transform"
-            style={{ animation: "ken-burns 18s ease-out forwards" }}
+            style={{ animation: "ken-burns 20s ease-in-out infinite alternate" }}
           />
           <div className="absolute inset-0 bg-background/60" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
@@ -182,13 +182,13 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10 pt-28 sm:pt-32 pb-20">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
-              <span className="inline-block text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90 px-3 py-1.5 rounded-full border border-champagne/30 bg-background/30 backdrop-blur-sm">
+              <span className="inline-block text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90 px-3 py-1.5 rounded-full border border-champagne/30 bg-background/30 backdrop-blur-sm">
                 El lujo que se comparte
               </span>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight leading-[1.05] tracking-tight">
+              <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight">
                 No es un coche.
                 <br />
                 <span className="text-champagne italic">Es una decisión.</span>
@@ -209,7 +209,7 @@ const QuienesSomos = () => {
                 { label: "Sin compromiso" },
               ].map((p, i) => (
                 <Reveal key={p.label} delay={0.5 + i * 0.1}>
-                  <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-foreground/80 px-4 py-2 rounded-full border border-border/60 bg-card/40 backdrop-blur-sm">
+                  <span className="text-xs sm:text-sm uppercase tracking-[0.2em] font-medium text-foreground/80 px-4 py-2 rounded-full border border-border/60 bg-card/40 backdrop-blur-sm">
                     {p.label}
                   </span>
                 </Reveal>
@@ -226,7 +226,7 @@ const QuienesSomos = () => {
             transition={{ delay: 1, duration: 2, repeat: Infinity }}
             className="flex flex-col items-center gap-2 text-champagne/70"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em]">Descubrir</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Descubrir</span>
             <ChevronDown className="w-4 h-4" />
           </motion.div>
         </div>
@@ -237,13 +237,13 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 Nuestra historia
               </span>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mt-8 text-2xl sm:text-3xl md:text-4xl font-extralight leading-[1.3] tracking-tight">
+              <p className="mt-8 text-2xl sm:text-3xl md:text-4xl font-black leading-[1.3] tracking-tight">
                 Creemos que los coches más extraordinarios del mundo no deberían estar
                 reservados a unos pocos. No por falta de pasión —{" "}
                 <span className="text-champagne">
@@ -278,10 +278,10 @@ const QuienesSomos = () => {
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
                     <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-champagne" />
                   </div>
-                  <span className="text-[11px] uppercase tracking-[0.3em] text-champagne/90">
+                  <span className="text-[11px] uppercase tracking-[0.3em] font-medium text-champagne/90">
                     {item.label}
                   </span>
-                  <h3 className="mt-3 text-2xl sm:text-3xl font-extralight leading-tight tracking-tight">
+                  <h3 className="mt-3 text-2xl sm:text-3xl font-semibold leading-tight tracking-tight">
                     {item.title}
                   </h3>
                   <p className="mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -299,10 +299,10 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 Nuestros participantes
               </span>
-              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-extralight tracking-tight leading-[1.1]">
+              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
                 ¿Para quién es <span className="text-champagne italic">OWNEO</span>?
               </h2>
             </div>
@@ -313,15 +313,15 @@ const QuienesSomos = () => {
               <Reveal key={p.number} delay={p.delay}>
                 <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-start border-t border-border pt-10 sm:pt-12">
                   <div className="md:col-span-3">
-                    <span className="block text-5xl sm:text-6xl font-extralight text-champagne/80 tabular-nums">
+                    <span className="block text-5xl sm:text-6xl font-black text-champagne/80 tabular-nums">
                       {p.number}
                     </span>
                   </div>
                   <div className="md:col-span-9 space-y-5">
-                    <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-light">
+                    <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
                       {p.profile}
                     </h3>
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-extralight leading-[1.25] tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
                       {p.hook}
                     </p>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
@@ -340,10 +340,10 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 Lo que nos define
               </span>
-              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-extralight tracking-tight leading-[1.1]">
+              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
                 Nuestros <span className="text-champagne italic">valores</span>
               </h2>
             </div>
@@ -354,7 +354,7 @@ const QuienesSomos = () => {
               <Reveal key={v.word} delay={v.delay}>
                 <div className="h-full bg-background/80 p-8 sm:p-10 hover:bg-background transition-colors duration-500 group">
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl sm:text-3xl font-extralight tracking-[0.25em] text-champagne">
+                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
                       {v.word}
                     </span>
                     <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors">
@@ -383,13 +383,13 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 El siguiente paso
               </span>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <h2 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extralight leading-[1.1] tracking-tight">
+              <h2 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
                 ¿Listo para tomar
                 <br />
                 <span className="text-champagne italic">la decisión inteligente?</span>
@@ -427,7 +427,7 @@ const QuienesSomos = () => {
             </Reveal>
 
             <Reveal delay={0.55}>
-              <p className="mt-8 text-xs sm:text-sm uppercase tracking-[0.25em] text-muted-foreground/80">
+              <p className="mt-8 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium text-muted-foreground/80">
                 Sin compromiso · Proceso 100% digital · Respuesta en 24h
               </p>
             </Reveal>
