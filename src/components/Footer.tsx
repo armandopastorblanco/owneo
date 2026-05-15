@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import { openConsentManager } from "@/lib/consent";
 
 const AndroidIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
