@@ -378,30 +378,31 @@ export default function NuestroModelo() {
 
           <Reveal delay={0.1}>
             <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border">
-              <div className="grid grid-cols-[1.4fr_1fr_1fr] text-sm">
-                <div className="bg-muted/20 p-4 font-semibold">Concepto</div>
-                <div className="bg-red-500/5 p-4 font-semibold flex items-center gap-2">
-                  <X className="w-4 h-4 text-red-500" /> Propietario único
+              <div className="grid grid-cols-[1.2fr_1fr_1fr] sm:grid-cols-[1.4fr_1fr_1fr] text-xs sm:text-sm">
+                <div className="bg-muted/20 p-2.5 sm:p-4 font-semibold">Concepto</div>
+                <div className="bg-red-500/5 p-2.5 sm:p-4 font-semibold flex items-center gap-1.5 sm:gap-2">
+                  <X className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-500 shrink-0" />
+                  <span className="leading-tight">Propietario<span className="hidden sm:inline"> único</span></span>
                 </div>
-                <div className="bg-champagne/5 p-4 font-semibold flex items-center gap-2 ring-1 ring-champagne/30">
-                  <Check className="w-4 h-4 text-champagne" /> OWNEO
+                <div className="bg-champagne/5 p-2.5 sm:p-4 font-semibold flex items-center gap-1.5 sm:gap-2 ring-1 ring-champagne/30">
+                  <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-champagne shrink-0" /> OWNEO
                 </div>
 
                 {[
                   { label: "Seguro anual", owner: 5000, owneo: 500, maxBar: 5000 },
                   { label: "Mantenimiento", owner: 8000, owneo: 800, maxBar: 8000 },
                   { label: "Parking/Garaje", owner: 3600, owneo: 360, maxBar: 8000 },
-                  { label: "Limpieza/Preparación", owner: 1200, owneo: 120, maxBar: 8000 },
+                  { label: "Limpieza", owner: 1200, owneo: 120, maxBar: 8000 },
                 ].map((row) => (
                   <RowCompare key={row.label} row={row} />
                 ))}
 
-                <div className="bg-muted/30 p-4 font-bold border-t border-border">TOTAL</div>
-                <div className="bg-red-500/10 p-4 font-bold border-t border-border">
-                  <CountUp end={17800} prefix="€" />/año
+                <div className="bg-muted/30 p-2.5 sm:p-4 font-bold border-t border-border">TOTAL</div>
+                <div className="bg-red-500/10 p-2.5 sm:p-4 font-bold border-t border-border whitespace-nowrap">
+                  <CountUp end={17800} prefix="€" /><span className="text-muted-foreground font-normal">/año</span>
                 </div>
-                <div className="bg-champagne/10 p-4 font-bold border-t border-border ring-1 ring-champagne/30 text-champagne">
-                  <CountUp end={1780} prefix="€" />/año
+                <div className="bg-champagne/10 p-2.5 sm:p-4 font-bold border-t border-border ring-1 ring-champagne/30 text-champagne whitespace-nowrap">
+                  <CountUp end={1780} prefix="€" /><span className="text-champagne/70 font-normal">/año</span>
                 </div>
               </div>
             </div>
@@ -720,7 +721,7 @@ function RowCompare({
 }: { row: { label: string; owner: number; owneo: number; maxBar: number } }) {
   return (
     <>
-      <div className="p-4 border-t border-border bg-muted/10 text-sm text-muted-foreground">{row.label}</div>
+      <div className="p-2.5 sm:p-4 border-t border-border bg-muted/10 text-xs sm:text-sm text-muted-foreground leading-tight self-center">{row.label}</div>
       <BarCell value={row.owner} max={row.maxBar} bg="bg-red-500/5" barClass="bg-red-500/70" />
       <BarCell value={row.owneo} max={row.maxBar} bg="bg-champagne/5 ring-1 ring-champagne/30" barClass="bg-champagne" />
     </>
@@ -734,9 +735,9 @@ function BarCell({
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const pct = Math.min((value / max) * 100, 100);
   return (
-    <div ref={ref} className={`p-4 border-t border-border ${bg}`}>
-      <div className="text-sm font-medium">€{value.toLocaleString("es-ES")}</div>
-      <div className="mt-2 h-1.5 bg-muted/40 rounded-full overflow-hidden">
+    <div ref={ref} className={`p-2.5 sm:p-4 border-t border-border ${bg}`}>
+      <div className="text-xs sm:text-sm font-medium whitespace-nowrap">€{value.toLocaleString("es-ES")}</div>
+      <div className="mt-1.5 sm:mt-2 h-1 sm:h-1.5 bg-muted/40 rounded-full overflow-hidden">
         <div
           className={`h-full ${barClass} rounded-full transition-[width] duration-1000 ease-out`}
           style={{ width: inView ? `${pct}%` : "0%" }}
