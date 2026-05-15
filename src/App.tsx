@@ -102,9 +102,9 @@ const App = () => (
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/cities" element={<Cities />} />
               <Route path="/cities/:cityId" element={<CityDetail />} />
-              <Route path="/locations/:slug" element={<CityDetail />} />
+              <Route path="/ubicaciones/:slug" element={<CityDetail />} />
               <Route path="/car/:id" element={<CarDetail />} />
-              <Route path="/voitures/:slug" element={<CarDetail />} />
+              <Route path="/coches/:slug" element={<CarDetail />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/dashboard/documentos" element={<ProtectedRoute><MisDocumentos /></ProtectedRoute>} />
               <Route path="/calendar-showcase" element={<CalendarShowcase />} />
