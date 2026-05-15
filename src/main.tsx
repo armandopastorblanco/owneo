@@ -1,9 +1,17 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { initPostHog } from "./lib/posthog";
+import { applyConsent, getStoredConsent } from "./lib/consent";
 
-initPostHog();
+// Re-apply previously granted consent (loads GA + PostHog only if accepted).
+const stored = getStoredConsent();
+if (stored) {
+  applyConsent({
+    analytics: stored.analytics,
+    marketing: stored.marketing,
+    personalization: stored.personalization,
+  });
+}
 
 const host = window.location.hostname;
 const isInIframe = (() => {
