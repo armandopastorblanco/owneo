@@ -340,10 +340,10 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 Lo que nos define
               </span>
-              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-extralight tracking-tight leading-[1.1]">
+              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
                 Nuestros <span className="text-champagne italic">valores</span>
               </h2>
             </div>
