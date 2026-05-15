@@ -114,8 +114,10 @@ const consultaSchema = z.object({
 type ConsultaForm = z.infer<typeof consultaSchema>;
 
 const CarDetail = () => {
-  const { id } = useParams();
-  const { data: car, isLoading } = useCar(id);
+  const params = useParams<{ slug?: string; id?: string }>();
+  const slug = params.slug;
+  const id = params.id;
+  const { data: car, isLoading } = useCar(slug ?? id, { bySlug: !!slug });
   const { trackEvent } = useAnalytics();
 
   /* ─── refs ─── */
