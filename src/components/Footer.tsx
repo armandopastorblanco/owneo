@@ -117,8 +117,21 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="mt-8 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© 2025 OWNEO. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <a href="/politica-de-cookies" className="hover:text-foreground transition-colors">
+              Política de Cookies
+            </a>
+            <button
+              type="button"
+              onClick={openConsentManager}
+              className="hover:text-foreground transition-colors underline-offset-2 hover:underline"
+              aria-label="Abrir gestor de preferencias de cookies"
+            >
+              Gestionar preferencias de cookies
+            </button>
+          </div>
         </div>
       </div>
 
