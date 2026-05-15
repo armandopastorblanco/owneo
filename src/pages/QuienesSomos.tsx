@@ -237,13 +237,13 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 Nuestra historia
               </span>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mt-8 text-2xl sm:text-3xl md:text-4xl font-extralight leading-[1.3] tracking-tight">
+              <p className="mt-8 text-2xl sm:text-3xl md:text-4xl font-black leading-[1.3] tracking-tight">
                 Creemos que los coches más extraordinarios del mundo no deberían estar
                 reservados a unos pocos. No por falta de pasión —{" "}
                 <span className="text-champagne">
