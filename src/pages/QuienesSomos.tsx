@@ -191,7 +191,7 @@ const QuienesSomos = () => {
               <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight">
                 No es un coche.
                 <br />
-                <span className="text-champagne italic">Es una decisión.</span>
+                <span className="text-champagne">Es una decisión.</span>
               </h1>
             </Reveal>
 
@@ -303,7 +303,7 @@ const QuienesSomos = () => {
                 Nuestros participantes
               </span>
               <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
-                ¿Para quién es <span className="text-champagne italic">OWNEO</span>?
+                ¿Para quién es <span className="text-champagne">OWNEO</span>?
               </h2>
             </div>
           </Reveal>
@@ -344,7 +344,7 @@ const QuienesSomos = () => {
                 Lo que nos define
               </span>
               <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
-                Nuestros <span className="text-champagne italic">valores</span>
+                Nuestros <span className="text-champagne">valores</span>
               </h2>
             </div>
           </Reveal>
@@ -392,7 +392,7 @@ const QuienesSomos = () => {
               <h2 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
                 ¿Listo para tomar
                 <br />
-                <span className="text-champagne italic">la decisión inteligente?</span>
+                <span className="text-champagne">la decisión inteligente?</span>
               </h2>
             </Reveal>
 
