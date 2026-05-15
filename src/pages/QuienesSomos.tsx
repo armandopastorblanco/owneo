@@ -383,13 +383,13 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-champagne/90">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
                 El siguiente paso
               </span>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <h2 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extralight leading-[1.1] tracking-tight">
+              <h2 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
                 ¿Listo para tomar
                 <br />
                 <span className="text-champagne italic">la decisión inteligente?</span>
