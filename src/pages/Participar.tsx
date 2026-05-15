@@ -881,7 +881,7 @@ const Participar = () => {
               <Button onClick={() => navigate("/dashboard")} className="bg-foreground text-background hover:bg-foreground/90">
                 Ir al dashboard
               </Button>
-              <Button variant="outline" onClick={() => navigate("/portfolio")}>
+              <Button variant="outline" onClick={() => navigate("/coches")}>
                 Volver al portfolio
               </Button>
             </div>

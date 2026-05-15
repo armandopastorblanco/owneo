@@ -521,7 +521,7 @@ export default function NuestroModelo() {
                 o participa en varios vehículos de la flota OWNEO.
               </p>
               <Button asChild className="mt-4 bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                <Link to="/portfolio">Ver la flota <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                <Link to="/coches">Ver la flota <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
             </div>
           </Reveal>
@@ -747,10 +747,10 @@ export default function NuestroModelo() {
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" className="bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                <Link to="/portfolio">Ver la flota <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                <Link to="/coches">Ver la flota <ArrowRight className="ml-2 w-5 h-5" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/portfolio">Solicitar participación</Link>
+                <Link to="/coches">Solicitar participación</Link>
               </Button>
             </div>
           </Reveal>

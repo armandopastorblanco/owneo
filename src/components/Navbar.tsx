@@ -52,9 +52,9 @@ const Navbar = () => {
       path: "/nuestro-modelo",
       label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT",
     },
-    { path: "/portfolio", label: "NUESTRA GAMA" },
+    { path: "/coches", label: "NUESTRA GAMA" },
     {
-      path: "/cities",
+      path: "/ubicaciones",
       label: language === "es" ? "UBICACIONES" : "LOCATIONS",
     },
     {

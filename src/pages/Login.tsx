@@ -164,7 +164,7 @@ const Login = () => {
           <p className="text-center text-sm text-muted-foreground mt-8">
             ¿Aún no eres cliente?{" "}
             <Link
-              to="/portfolio"
+              to="/coches"
               className="text-champagne hover:underline font-medium"
             >
               Solicita una participación

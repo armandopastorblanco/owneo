@@ -410,7 +410,7 @@ const QuienesSomos = () => {
                   size="lg"
                   className="text-base px-8 h-12 bg-champagne text-champagne-foreground hover:bg-champagne/90"
                 >
-                  <Link to="/portfolio">
+                  <Link to="/coches">
                     Ver la flota
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>

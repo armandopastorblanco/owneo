@@ -128,7 +128,7 @@ const TikTokLanding = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center"
           >
-            <Link to="/portfolio">
+            <Link to="/coches">
               <Button
                 variant="ghost"
                 size="lg"

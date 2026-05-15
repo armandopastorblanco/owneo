@@ -108,7 +108,7 @@ const TwitterLanding = () => {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="mt-8"
           >
-            <Link to="/portfolio">
+            <Link to="/coches">
               <Button
                 variant="ghost"
                 className="border border-foreground/20 text-foreground/80 hover:bg-foreground/5 hover:border-foreground/40 text-xs font-light tracking-[0.25em] px-10 py-5 group transition-all duration-500"
@@ -252,7 +252,7 @@ const TwitterLanding = () => {
           <p className="text-sm text-muted-foreground font-extralight mb-8">
             Explora nuestra flota y encuentra tu próximo supercar.
           </p>
-          <Link to="/portfolio">
+          <Link to="/coches">
             <Button
               variant="ghost"
               size="lg"
