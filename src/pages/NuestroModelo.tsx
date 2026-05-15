@@ -10,6 +10,8 @@ import {
   Calculator, Check, X, Calendar, FileText, MessageCircle, BarChart,
   TrendingDown, RefreshCw, ArrowRight, ChevronDown,
 } from "lucide-react";
+import owneoLogo from "@/assets/owneo-logo.png";
+import porsche911 from "@/assets/cars/porsche-911-turbo-s.jpg";
 
 /* ---------------- helpers ---------------- */
 
