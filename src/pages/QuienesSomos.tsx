@@ -313,15 +313,15 @@ const QuienesSomos = () => {
               <Reveal key={p.number} delay={p.delay}>
                 <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-start border-t border-border pt-10 sm:pt-12">
                   <div className="md:col-span-3">
-                    <span className="block text-5xl sm:text-6xl font-extralight text-champagne/80 tabular-nums">
+                    <span className="block text-5xl sm:text-6xl font-black text-champagne/80 tabular-nums">
                       {p.number}
                     </span>
                   </div>
                   <div className="md:col-span-9 space-y-5">
-                    <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-light">
+                    <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
                       {p.profile}
                     </h3>
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-extralight leading-[1.25] tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
                       {p.hook}
                     </p>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
