@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, Car, FileText, Users, CalendarDays,
   CreditCard, ClipboardCheck, MapPin, Settings,
-  LogOut, Menu, X, Gauge,
+  LogOut, Menu, X, Gauge, MessageCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
