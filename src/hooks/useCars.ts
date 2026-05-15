@@ -18,6 +18,7 @@ export type CarPromotion = z.infer<typeof CarPromotionSchema>;
 
 export interface Car {
   id: string;
+  slug: string;
   name: string;
   brand: string;
   model: string;
