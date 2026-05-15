@@ -4,6 +4,7 @@ import { resolveAssetPath } from "@/lib/assetMap";
 
 export interface City {
   id: string;
+  slug: string;
   name: string;
   description: string;
   image: string;
@@ -21,6 +22,7 @@ export function useLocations() {
       if (error) throw error;
       return data.map((row): City => ({
         id: row.id,
+        slug: (row as any).slug ?? "",
         name: row.name,
         description: row.description || "",
         image: resolveAssetPath(row.image_url),
