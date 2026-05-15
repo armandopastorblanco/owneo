@@ -163,7 +163,7 @@ const QuienesSomos = () => {
             alt="OWNEO — el lujo que se comparte"
             loading="eager"
             className="w-full h-full object-cover will-change-transform"
-            style={{ animation: "ken-burns 18s ease-out forwards" }}
+            style={{ animation: "ken-burns 20s ease-in-out infinite alternate" }}
           />
           <div className="absolute inset-0 bg-background/60" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
