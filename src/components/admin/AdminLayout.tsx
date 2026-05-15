@@ -43,7 +43,22 @@ const AdminLayout = () => {
     refetchInterval: 60000,
   });
 
-  const badgeMap: Record<string, number> = { pending_reservations: pendingReservations };
+  const { data: unreadConsultas = 0 } = useQuery({
+    queryKey: ["admin-consultas-unread"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("consultation_requests")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "pending");
+      return count ?? 0;
+    },
+    refetchInterval: 30000,
+  });
+
+  const badgeMap: Record<string, number> = {
+    pending_reservations: pendingReservations,
+    unread_consultas: unreadConsultas,
+  };
 
   const handleSignOut = async () => {
     await signOut();
