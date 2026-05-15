@@ -169,7 +169,7 @@ const CarDetail = () => {
       trackEvent("view_car_detail", {
         car_name: car.name, car_brand: car.brand, car_id: car.id,
         car_slug: car.slug,
-        page_url: `/voitures/${car.slug}`,
+        page_url: `/coches/${car.slug}`,
         car_participation_price: car.participationPrice,
         remaining_participations: car.remainingParticipations,
         car_city: car.availableIn?.join(", "),
