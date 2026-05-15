@@ -48,11 +48,11 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { path: "/portfolio", label: "NUESTRA GAMA" },
     {
       path: "/nuestro-modelo",
       label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT",
     },
+    { path: "/portfolio", label: "NUESTRA GAMA" },
     {
       path: "/cities",
       label: language === "es" ? "UBICACIONES" : "LOCATIONS",
