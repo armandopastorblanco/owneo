@@ -117,21 +117,47 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© 2025 OWNEO. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            <a href="/politica-de-cookies" className="hover:text-foreground transition-colors">
+        <div className="mt-8 pt-8 border-t border-border space-y-4 text-sm text-muted-foreground">
+          <nav
+            aria-label="Enlaces legales"
+            className="flex flex-col items-center gap-3 md:flex-row md:flex-wrap md:justify-center md:gap-x-3 md:gap-y-2"
+          >
+            <a
+              href="/aviso-legal"
+              aria-label="Leer el Aviso Legal"
+              className="hover:text-foreground transition-colors"
+            >
+              Aviso Legal
+            </a>
+            <span aria-hidden="true" className="hidden md:inline text-border">|</span>
+            <a
+              href="/politica-de-privacidad"
+              aria-label="Leer la Política de Privacidad"
+              className="hover:text-foreground transition-colors"
+            >
+              Política de Privacidad
+            </a>
+            <span aria-hidden="true" className="hidden md:inline text-border">|</span>
+            <a
+              href="/politica-de-cookies"
+              aria-label="Leer la Política de Cookies"
+              className="hover:text-foreground transition-colors"
+            >
               Política de Cookies
             </a>
+            <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <button
               type="button"
               onClick={openConsentManager}
-              className="hover:text-foreground transition-colors underline-offset-2 hover:underline"
               aria-label="Abrir gestor de preferencias de cookies"
+              className="hover:text-foreground transition-colors underline-offset-2 hover:underline"
             >
               Gestionar preferencias de cookies
             </button>
-          </div>
+          </nav>
+          <p className="text-center text-xs text-muted-foreground/80">
+            © 2026 OWNEO SL — Todos los derechos reservados
+          </p>
         </div>
       </div>
 

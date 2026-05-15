@@ -32,6 +32,9 @@ import Login from "./pages/Login";
 import Participar from "./pages/Participar";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+import AvisoLegal from "./pages/AvisoLegal";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
+import PoliticaCookies from "./pages/PoliticaCookies";
 import Unauthorized from "./pages/Unauthorized";
 import AdminGuard from "./components/admin/AdminGuard";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -119,6 +122,9 @@ const App = () => (
               <Route path="/participar" element={<Participar />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/aviso-legal" element={<AvisoLegal />} />
+              <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
+              <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
               {/* Admin routes */}
               <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
                 <Route index element={<AdminDashboard />} />
