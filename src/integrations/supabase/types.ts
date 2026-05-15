@@ -212,6 +212,7 @@ export type Database = {
           promotion: Json | null
           remaining_participations: number | null
           reservation_advance_days: number | null
+          slug: string | null
           specifications: Json | null
           status: string | null
           technical_sheet: Json | null
@@ -251,6 +252,7 @@ export type Database = {
           promotion?: Json | null
           remaining_participations?: number | null
           reservation_advance_days?: number | null
+          slug?: string | null
           specifications?: Json | null
           status?: string | null
           technical_sheet?: Json | null
@@ -290,6 +292,7 @@ export type Database = {
           promotion?: Json | null
           remaining_participations?: number | null
           reservation_advance_days?: number | null
+          slug?: string | null
           specifications?: Json | null
           status?: string | null
           technical_sheet?: Json | null
