@@ -572,43 +572,94 @@ export default function NuestroModelo() {
           <div className="md:col-span-2 relative flex justify-center">
             <div className="absolute bg-champagne/20 blur-3xl w-64 h-64 rounded-full -z-0" />
             <Reveal delay={0.2}>
-              <div className="relative bg-card border-4 border-foreground/20 rounded-[2.5rem] p-3 overflow-hidden shadow-2xl shadow-champagne/10 w-[260px] aspect-[9/19]">
-                <div className="h-6 flex items-center justify-center text-[10px] text-muted-foreground bg-background rounded-t-2xl">
-                  OWNEO
-                </div>
-                <div className="mt-2 p-3 space-y-3">
-                  <div className="rounded-xl bg-background border border-border/50 overflow-hidden">
-                    <div className="h-24 bg-gradient-to-br from-champagne/30 to-card flex items-center justify-center">
-                      <Car className="w-10 h-10 text-champagne" />
+              <div className="relative bg-gradient-to-b from-card to-background border-[6px] border-foreground/10 rounded-[2.8rem] p-2.5 overflow-hidden shadow-2xl shadow-champagne/20 w-[270px] aspect-[9/19.5]">
+                {/* notch */}
+                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-5 bg-foreground/90 rounded-full z-20" />
+
+                <div className="relative h-full w-full bg-background rounded-[2.2rem] overflow-hidden flex flex-col">
+                  {/* status bar */}
+                  <div className="pt-7 px-4 pb-2 flex items-center justify-between text-[9px] text-foreground/70 font-medium">
+                    <span>9:41</span>
+                    <img src={owneoLogo} alt="OWNEO" className="h-3 w-auto opacity-90 mix-blend-screen" />
+                    <span>100%</span>
+                  </div>
+
+                  <div className="px-3 pb-2 space-y-2.5 flex-1 overflow-hidden">
+                    {/* product card */}
+                    <div className="rounded-2xl bg-card border border-border/50 overflow-hidden">
+                      <div className="relative h-24 overflow-hidden">
+                        <img src={porsche911} alt="Porsche 911 Turbo S" className="absolute inset-0 w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                        <span className="absolute top-1.5 right-1.5 text-[8px] bg-champagne/90 text-champagne-foreground px-1.5 py-0.5 rounded-full font-semibold tracking-wide">VIP</span>
+                      </div>
+                      <div className="p-2">
+                        <p className="text-[10px] font-semibold leading-tight">Porsche 911 Turbo S</p>
+                        <p className="text-[9px] text-muted-foreground mt-0.5">Madrid · 4 semanas</p>
+                      </div>
                     </div>
-                    <div className="p-2">
-                      <p className="text-xs font-semibold">Porsche 911 Turbo S</p>
-                      <p className="text-[10px] text-muted-foreground">Madrid · 4 semanas disponibles</p>
+
+                    {/* progress */}
+                    <div className="rounded-2xl bg-card border border-border/50 p-2">
+                      <div className="flex items-center justify-between">
+                        <p className="text-[9px] text-muted-foreground">Semanas restantes</p>
+                        <p className="text-[9px] text-champagne font-semibold">3 / 4</p>
+                      </div>
+                      <div className="mt-1.5 h-1.5 bg-muted/40 rounded-full overflow-hidden">
+                        <div className="h-full w-3/4 bg-gradient-to-r from-champagne/70 to-champagne rounded-full" />
+                      </div>
+                    </div>
+
+                    {/* calendar */}
+                    <div className="rounded-2xl bg-card border border-border/50 p-2">
+                      <div className="flex items-center justify-between">
+                        <p className="text-[9px] font-semibold">Junio 2026</p>
+                        <Calendar className="w-2.5 h-2.5 text-champagne" />
+                      </div>
+                      <div className="grid grid-cols-7 gap-[3px] mt-1.5 text-[7px] text-muted-foreground/60 text-center">
+                        {["L","M","X","J","V","S","D"].map((d) => (
+                          <span key={d} className="leading-none">{d}</span>
+                        ))}
+                      </div>
+                      <div className="grid grid-cols-7 gap-[3px] mt-1 text-[7px] text-center">
+                        {Array.from({ length: 28 }, (_, i) => {
+                          const day = i + 1;
+                          const booked = [8, 9, 10, 11, 12, 13, 14].includes(day);
+                          const selected = [22, 23, 24, 25, 26, 27, 28].includes(day);
+                          return (
+                            <span
+                              key={day}
+                              className={`aspect-square flex items-center justify-center rounded-[3px] leading-none ${
+                                selected
+                                  ? "bg-champagne text-champagne-foreground font-semibold"
+                                  : booked
+                                  ? "bg-muted/40 text-muted-foreground/50 line-through"
+                                  : "text-foreground/70"
+                              }`}
+                            >
+                              {day}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="grid grid-cols-2 gap-1.5">
+                      <div className="text-[10px] text-center bg-champagne text-champagne-foreground rounded-lg py-1.5 font-semibold">
+                        Reservar
+                      </div>
+                      <div className="text-[10px] text-center bg-card border border-border/50 rounded-lg py-1.5">
+                        Documentos
+                      </div>
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-background border border-border/50 p-2">
-                    <p className="text-[10px] text-muted-foreground">Semanas restantes</p>
-                    <div className="mt-1 h-2 bg-muted/40 rounded-full overflow-hidden">
-                      <div className="h-full w-3/4 bg-champagne" />
-                    </div>
-                    <p className="text-[10px] mt-1 text-champagne">3 / 4</p>
+                  {/* bottom nav */}
+                  <div className="h-9 bg-card border-t border-border/50 flex items-center justify-around shrink-0">
+                    {[Calendar, Car, FileText, MessageCircle].map((I, i) => (
+                      <I key={i} className={`w-3.5 h-3.5 ${i === 0 ? "text-champagne" : "text-muted-foreground/60"}`} />
+                    ))}
                   </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="text-[10px] text-center bg-champagne text-champagne-foreground rounded-lg py-1.5 font-semibold">
-                      Reservar
-                    </div>
-                    <div className="text-[10px] text-center bg-background border border-border/50 rounded-lg py-1.5">
-                      Documentos
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 h-10 bg-background border-t border-border/50 flex items-center justify-around">
-                  {[Calendar, Car, FileText, MessageCircle].map((I, i) => (
-                    <I key={i} className="w-4 h-4 text-muted-foreground" />
-                  ))}
                 </div>
               </div>
             </Reveal>
