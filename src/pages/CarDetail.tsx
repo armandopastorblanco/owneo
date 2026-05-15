@@ -165,8 +165,11 @@ const CarDetail = () => {
 
   useEffect(() => {
     if (car) {
+      document.title = `${car.name} — OWNEO`;
       trackEvent("view_car_detail", {
         car_name: car.name, car_brand: car.brand, car_id: car.id,
+        car_slug: car.slug,
+        page_url: `/voitures/${car.slug}`,
         car_participation_price: car.participationPrice,
         remaining_participations: car.remainingParticipations,
         car_city: car.availableIn?.join(", "),
