@@ -66,8 +66,8 @@ const CityDetail = () => {
   });
 
   const { data: cars = [], isLoading: carsLoading } = useQuery({
-    queryKey: ["city-cars", slug, city?.name],
-    enabled: !!slug && !!city,
+    queryKey: ["city-cars", key, city?.name],
+    enabled: !!key && !!city,
     queryFn: async () => {
       // Filter by city name in available_in array (cars don't store location_id directly)
       const { data, error } = await supabase
