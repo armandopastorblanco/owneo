@@ -238,21 +238,38 @@ const Navbar = () => {
               </Select>
 
               {user ? (
-                <div className="flex items-center gap-2 flex-1">
-                  <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex-1">
-                    <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
-                      <User className="w-4 h-4" />
-                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                <>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block w-full"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full min-h-[48px] flex items-center gap-2 text-champagne border-champagne/30 hover:bg-champagne/10 text-sm mb-2"
+                      >
+                        <Shield className="w-4 h-4" />
+                        <span>PANEL ADMIN</span>
+                      </Button>
+                    </Link>
+                  )}
+                  <div className="flex items-center gap-2 flex-1">
+                    <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex-1">
+                      <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
+                        <User className="w-4 h-4" />
+                        <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="outline"
+                      onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
+                      className="min-h-[48px] min-w-[48px] text-foreground/60"
+                    >
+                      <LogOut className="w-4 h-4" />
                     </Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
-                    className="min-h-[48px] min-w-[48px] text-foreground/60"
-                  >
-                    <LogOut className="w-4 h-4" />
-                  </Button>
-                </div>
+                  </div>
+                </>
               ) : (
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1">
                   <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
