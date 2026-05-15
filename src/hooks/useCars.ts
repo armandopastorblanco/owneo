@@ -99,20 +99,19 @@ export function useCars() {
   });
 }
 
-export function useCar(id: string | undefined) {
+export function useCar(idOrSlug: string | undefined, opts?: { bySlug?: boolean }) {
+  const bySlug = opts?.bySlug ?? false;
   return useQuery({
-    queryKey: ["car", id],
+    queryKey: ["car", bySlug ? "slug" : "id", idOrSlug],
     queryFn: async () => {
-      if (!id) return null;
-      const { data, error } = await supabase
-        .from("cars")
-        .select("*")
-        .eq("id", id)
-        .eq("is_active", true)
-        .maybeSingle();
+      if (!idOrSlug) return null;
+      const q = supabase.from("cars").select("*").eq("is_active", true);
+      const { data, error } = await (bySlug
+        ? q.eq("slug", idOrSlug).maybeSingle()
+        : q.eq("id", idOrSlug).maybeSingle());
       if (error) throw error;
       return data ? mapDbCarToCar(data) : null;
     },
-    enabled: !!id,
+    enabled: !!idOrSlug,
   });
 }
