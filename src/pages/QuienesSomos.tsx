@@ -354,7 +354,7 @@ const QuienesSomos = () => {
               <Reveal key={v.word} delay={v.delay}>
                 <div className="h-full bg-background/80 p-8 sm:p-10 hover:bg-background transition-colors duration-500 group">
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl sm:text-3xl font-extralight tracking-[0.25em] text-champagne">
+                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
                       {v.word}
                     </span>
                     <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors">
