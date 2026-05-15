@@ -541,7 +541,7 @@ const Dashboard = () => {
             {participations.length > 1 && (
               <section className="px-4 pt-5">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Mis vehículos</p>
-                <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-3 -mx-4 px-4 pb-2">
+                <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-3 -mx-4 px-4 pb-2">
                   {participations.map((p: any, i: number) => {
                     const active = i === selectedIdx;
                     const img = resolveCarImage(p.car?.image_url, p.car?.brand);
