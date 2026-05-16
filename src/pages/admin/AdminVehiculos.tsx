@@ -291,20 +291,22 @@ const AdminVehiculos = () => {
         deadline: (form.deadline as string) || null,
       };
 
-      // Add promotion and admin_notes as raw fields since they may not be in generated types yet
+      // Promotion stays on cars; admin_notes now lives in car_admin_notes
       const fullPayload = {
         ...payload,
         promotion: promo,
-        admin_notes: (form.admin_notes as string) || null,
       } as Record<string, unknown>;
 
+      const adminNotesValue = (form.admin_notes as string) || null;
+      let carId: string;
+
       if (editingCar) {
+        carId = editingCar.id;
         const { error } = await supabase
           .from("cars")
           .update(fullPayload as never)
           .eq("id", editingCar.id);
         if (error) throw error;
-        // Audit log
         await supabase.rpc("insert_audit_log", {
           _action: "car_updated",
           _target_table: "cars",
@@ -318,6 +320,7 @@ const AdminVehiculos = () => {
           .select("id")
           .single();
         if (error) throw error;
+        carId = data.id;
         await supabase.rpc("insert_audit_log", {
           _action: "car_created",
           _target_table: "cars",
@@ -325,6 +328,10 @@ const AdminVehiculos = () => {
           _details: { name: payload.name } as never,
         });
       }
+
+      await supabase
+        .from("car_admin_notes" as never)
+        .upsert({ car_id: carId, notes: adminNotesValue, updated_at: new Date().toISOString() } as never);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-cars"] });
