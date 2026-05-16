@@ -155,9 +155,16 @@ const AdminVehiculos = () => {
   }, [cars, search, statusFilter, cityFilter, brandFilter]);
 
   /* ── open drawer ── */
-  const openDrawer = (car?: DbCar) => {
+  const openDrawer = async (car?: DbCar) => {
     if (car) {
       setEditingCar(car);
+      let adminNotes = "";
+      const { data: noteRow } = await supabase
+        .from("car_admin_notes" as never)
+        .select("notes")
+        .eq("car_id", car.id)
+        .maybeSingle();
+      adminNotes = ((noteRow as { notes?: string } | null)?.notes) || "";
       setForm({
         name: car.name,
         brand: car.brand,
