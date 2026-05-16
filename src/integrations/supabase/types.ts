@@ -180,9 +180,37 @@ export type Database = {
           },
         ]
       }
+      car_admin_notes: {
+        Row: {
+          car_id: string
+          notes: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          car_id: string
+          notes?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          car_id?: string
+          notes?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "car_admin_notes_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: true
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cars: {
         Row: {
-          admin_notes: string | null
           annual_fee_override: number | null
           annual_fee_percent: number | null
           available_in: string[] | null
@@ -222,7 +250,6 @@ export type Database = {
           year: number
         }
         Insert: {
-          admin_notes?: string | null
           annual_fee_override?: number | null
           annual_fee_percent?: number | null
           available_in?: string[] | null
@@ -262,7 +289,6 @@ export type Database = {
           year: number
         }
         Update: {
-          admin_notes?: string | null
           annual_fee_override?: number | null
           annual_fee_percent?: number | null
           available_in?: string[] | null

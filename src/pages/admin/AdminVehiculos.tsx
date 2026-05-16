@@ -40,7 +40,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import type { Tables } from "@/integrations/supabase/types";
 
-type DbCar = Tables<"cars"> & { promotion?: Record<string, unknown> | null; admin_notes?: string | null };
+type DbCar = Tables<"cars"> & { promotion?: Record<string, unknown> | null };
 
 /* ═══════ DATA HOOKS ═══════ */
 
@@ -155,9 +155,16 @@ const AdminVehiculos = () => {
   }, [cars, search, statusFilter, cityFilter, brandFilter]);
 
   /* ── open drawer ── */
-  const openDrawer = (car?: DbCar) => {
+  const openDrawer = async (car?: DbCar) => {
     if (car) {
       setEditingCar(car);
+      let adminNotes = "";
+      const { data: noteRow } = await supabase
+        .from("car_admin_notes" as never)
+        .select("notes")
+        .eq("car_id", car.id)
+        .maybeSingle();
+      adminNotes = ((noteRow as { notes?: string } | null)?.notes) || "";
       setForm({
         name: car.name,
         brand: car.brand,
@@ -185,7 +192,7 @@ const AdminVehiculos = () => {
         gallery: car.gallery || [],
         status: car.status || "active",
         deadline: car.deadline || "",
-        admin_notes: (car as DbCar).admin_notes || "",
+        admin_notes: adminNotes,
         promotion: (car as DbCar).promotion || null,
         promotion_active: !!((car as DbCar).promotion as Record<string, unknown>)?.is_active,
         promotion_type: ((car as DbCar).promotion as Record<string, unknown>)?.type || "direct",
@@ -284,20 +291,22 @@ const AdminVehiculos = () => {
         deadline: (form.deadline as string) || null,
       };
 
-      // Add promotion and admin_notes as raw fields since they may not be in generated types yet
+      // Promotion stays on cars; admin_notes now lives in car_admin_notes
       const fullPayload = {
         ...payload,
         promotion: promo,
-        admin_notes: (form.admin_notes as string) || null,
       } as Record<string, unknown>;
 
+      const adminNotesValue = (form.admin_notes as string) || null;
+      let carId: string;
+
       if (editingCar) {
+        carId = editingCar.id;
         const { error } = await supabase
           .from("cars")
           .update(fullPayload as never)
           .eq("id", editingCar.id);
         if (error) throw error;
-        // Audit log
         await supabase.rpc("insert_audit_log", {
           _action: "car_updated",
           _target_table: "cars",
@@ -311,6 +320,7 @@ const AdminVehiculos = () => {
           .select("id")
           .single();
         if (error) throw error;
+        carId = data.id;
         await supabase.rpc("insert_audit_log", {
           _action: "car_created",
           _target_table: "cars",
@@ -318,6 +328,10 @@ const AdminVehiculos = () => {
           _details: { name: payload.name } as never,
         });
       }
+
+      await supabase
+        .from("car_admin_notes" as never)
+        .upsert({ car_id: carId, notes: adminNotesValue, updated_at: new Date().toISOString() } as never);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-cars"] });
