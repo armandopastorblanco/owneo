@@ -51,6 +51,7 @@ import AdminConfiguracion from "./pages/admin/AdminConfiguracion";
 import AdminFlota from "./pages/admin/AdminFlota";
 import AdminFlotaDetalle from "./pages/admin/AdminFlotaDetalle";
 import AdminConsultas from "./pages/admin/AdminConsultas";
+import AdminCreditReminders from "./pages/admin/AdminCreditReminders";
 
 const queryClient = new QueryClient();
 
@@ -142,6 +143,7 @@ const App = () => (
                 <Route path="ubicaciones" element={<AdminUbicaciones />} />
                 <Route path="consultas" element={<AdminConsultas />} />
                 <Route path="configuracion" element={<AdminConfiguracion />} />
+                <Route path="settings/credit-reminders" element={<AdminCreditReminders />} />
               </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

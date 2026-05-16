@@ -193,6 +193,9 @@ const AdminVehiculos = () => {
         status: car.status || "active",
         deadline: car.deadline || "",
         admin_notes: adminNotes,
+        manager_name: (car as DbCar & { manager_name?: string }).manager_name || "",
+        manager_email: (car as DbCar & { manager_email?: string }).manager_email || "",
+        manager_phone: (car as DbCar & { manager_phone?: string }).manager_phone || "",
         promotion: (car as DbCar).promotion || null,
         promotion_active: !!((car as DbCar).promotion as Record<string, unknown>)?.is_active,
         promotion_type: ((car as DbCar).promotion as Record<string, unknown>)?.type || "direct",
@@ -215,7 +218,9 @@ const AdminVehiculos = () => {
         max_participations: 10, participation_price: 0,
         remaining_participations: 10, specifications: {},
         features: [], image_url: "", gallery: [], status: "active",
-        deadline: "", admin_notes: "", promotion: null,
+        deadline: "", admin_notes: "",
+        manager_name: "", manager_email: "", manager_phone: "",
+        promotion: null,
         promotion_active: false, promotion_type: "direct",
         promotion_discount: 10, promotion_min_parts: 2,
         promotion_start: "", promotion_end: "", promotion_badge: "",
@@ -289,6 +294,9 @@ const AdminVehiculos = () => {
         gallery: form.gallery as string[],
         status: form.status as string,
         deadline: (form.deadline as string) || null,
+        manager_name: (form.manager_name as string) || null,
+        manager_email: (form.manager_email as string) || null,
+        manager_phone: (form.manager_phone as string) || null,
       };
 
       // Promotion stays on cars; admin_notes now lives in car_admin_notes
@@ -1108,6 +1116,42 @@ const AdminVehiculos = () => {
                   className="mt-1"
                 />
               </div>
+
+              {/* Manager section */}
+              <details className="border border-border rounded-md group">
+                <summary className="cursor-pointer px-4 py-3 font-semibold text-foreground select-none flex items-center justify-between">
+                  <span>Gestionnaire du véhicule</span>
+                  <span className="text-xs text-muted-foreground group-open:hidden">Mostrar</span>
+                  <span className="text-xs text-muted-foreground hidden group-open:inline">Ocultar</span>
+                </summary>
+                <div className="p-4 pt-2 space-y-3">
+                  <div>
+                    <Label>Nom du gestionnaire</Label>
+                    <Input
+                      value={(form.manager_name as string) || ""}
+                      onChange={(e) => setForm({ ...form, manager_name: e.target.value })}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Email</Label>
+                    <Input
+                      type="email"
+                      value={(form.manager_email as string) || ""}
+                      onChange={(e) => setForm({ ...form, manager_email: e.target.value })}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Téléphone</Label>
+                    <Input
+                      value={(form.manager_phone as string) || ""}
+                      onChange={(e) => setForm({ ...form, manager_phone: e.target.value })}
+                      className="mt-1"
+                    />
+                  </div>
+                </div>
+              </details>
 
               {/* Danger zone */}
               {editingCar && (

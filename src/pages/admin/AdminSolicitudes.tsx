@@ -1173,13 +1173,21 @@ const AdminSolicitudes = () => {
                     details: { score: manualScore || autoScore.normalized, before: selected.status, after: "approved" },
                   });
                 } else if (confirmAction === "reject") {
-                  if (!actionReason.trim()) { toast.error("Motivo obligatorio"); return; }
-                  updateStatus.mutate({
-                    id: selected.id, status: "rejected",
-                    extra: { score_notes: `${scoreNotes}\nMotivo: ${actionReason}` },
-                    action: "solicitud_rechazada",
-                    details: { reason: actionReason, before: selected.status, after: "rejected" },
-                  });
+                  if (!actionReason.trim()) { toast.error("Motivo de rechazo obligatorio"); return; }
+                  (async () => {
+                    const uid = (await supabase.auth.getUser()).data.user?.id;
+                    updateStatus.mutate({
+                      id: selected.id, status: "rejected",
+                      extra: {
+                        score_notes: `${scoreNotes}\nMotivo: ${actionReason}`,
+                        rejection_reason: actionReason,
+                        rejected_at: new Date().toISOString(),
+                        rejected_by: uid,
+                      },
+                      action: "solicitud_rechazada",
+                      details: { reason: actionReason, before: selected.status, after: "rejected" },
+                    });
+                  })();
                 } else if (confirmAction === "waitlist") {
                   updateStatus.mutate({
                     id: selected.id, status: "waitlist",
