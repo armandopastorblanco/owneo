@@ -193,6 +193,9 @@ const AdminVehiculos = () => {
         status: car.status || "active",
         deadline: car.deadline || "",
         admin_notes: adminNotes,
+        manager_name: (car as DbCar & { manager_name?: string }).manager_name || "",
+        manager_email: (car as DbCar & { manager_email?: string }).manager_email || "",
+        manager_phone: (car as DbCar & { manager_phone?: string }).manager_phone || "",
         promotion: (car as DbCar).promotion || null,
         promotion_active: !!((car as DbCar).promotion as Record<string, unknown>)?.is_active,
         promotion_type: ((car as DbCar).promotion as Record<string, unknown>)?.type || "direct",
@@ -215,7 +218,9 @@ const AdminVehiculos = () => {
         max_participations: 10, participation_price: 0,
         remaining_participations: 10, specifications: {},
         features: [], image_url: "", gallery: [], status: "active",
-        deadline: "", admin_notes: "", promotion: null,
+        deadline: "", admin_notes: "",
+        manager_name: "", manager_email: "", manager_phone: "",
+        promotion: null,
         promotion_active: false, promotion_type: "direct",
         promotion_discount: 10, promotion_min_parts: 2,
         promotion_start: "", promotion_end: "", promotion_badge: "",
@@ -289,6 +294,9 @@ const AdminVehiculos = () => {
         gallery: form.gallery as string[],
         status: form.status as string,
         deadline: (form.deadline as string) || null,
+        manager_name: (form.manager_name as string) || null,
+        manager_email: (form.manager_email as string) || null,
+        manager_phone: (form.manager_phone as string) || null,
       };
 
       // Promotion stays on cars; admin_notes now lives in car_admin_notes
