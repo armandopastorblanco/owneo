@@ -229,6 +229,9 @@ export type Database = {
           location_id: string
           luxury_description: string | null
           luxury_description_override: string | null
+          manager_email: string | null
+          manager_name: string | null
+          manager_phone: string | null
           max_participations: number | null
           max_reservation_days: number | null
           min_reservation_days: number | null
@@ -268,6 +271,9 @@ export type Database = {
           location_id: string
           luxury_description?: string | null
           luxury_description_override?: string | null
+          manager_email?: string | null
+          manager_name?: string | null
+          manager_phone?: string | null
           max_participations?: number | null
           max_reservation_days?: number | null
           min_reservation_days?: number | null
@@ -307,6 +313,9 @@ export type Database = {
           location_id?: string
           luxury_description?: string | null
           luxury_description_override?: string | null
+          manager_email?: string | null
+          manager_name?: string | null
+          manager_phone?: string | null
           max_participations?: number | null
           max_reservation_days?: number | null
           min_reservation_days?: number | null
@@ -617,6 +626,33 @@ export type Database = {
           session_id?: string
           user_agent?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      credit_reminder_rules: {
+        Row: {
+          created_at: string | null
+          days_before_reset: number
+          id: string
+          is_active: boolean
+          label: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          days_before_reset?: number
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          days_before_reset?: number
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1026,6 +1062,9 @@ export type Database = {
           payment_proof_url: string | null
           payment_status: string | null
           questionnaire_answers: Json | null
+          rejected_at: string | null
+          rejected_by: string | null
+          rejection_reason: string | null
           reopened_at: string | null
           reopened_by: string | null
           score: number | null
@@ -1045,6 +1084,9 @@ export type Database = {
           payment_proof_url?: string | null
           payment_status?: string | null
           questionnaire_answers?: Json | null
+          rejected_at?: string | null
+          rejected_by?: string | null
+          rejection_reason?: string | null
           reopened_at?: string | null
           reopened_by?: string | null
           score?: number | null
@@ -1064,6 +1106,9 @@ export type Database = {
           payment_proof_url?: string | null
           payment_status?: string | null
           questionnaire_answers?: Json | null
+          rejected_at?: string | null
+          rejected_by?: string | null
+          rejection_reason?: string | null
           reopened_at?: string | null
           reopened_by?: string | null
           score?: number | null
