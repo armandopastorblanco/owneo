@@ -40,7 +40,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import type { Tables } from "@/integrations/supabase/types";
 
-type DbCar = Tables<"cars"> & { promotion?: Record<string, unknown> | null; admin_notes?: string | null };
+type DbCar = Tables<"cars"> & { promotion?: Record<string, unknown> | null };
 
 /* ═══════ DATA HOOKS ═══════ */
 
