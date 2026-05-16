@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, Car, FileText, Users, CalendarDays,
   CreditCard, ClipboardCheck, MapPin, Settings,
-  LogOut, Menu, X, Gauge, MessageCircle,
+  LogOut, Menu, X, Gauge, MessageCircle, Bell,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ const navItems = [
   { label: "Pagos", path: "/admin/pagos", icon: CreditCard },
   { label: "Inspecciones", path: "/admin/inspecciones", icon: ClipboardCheck },
   { label: "Ubicaciones", path: "/admin/ubicaciones", icon: MapPin },
+  { label: "Recordatorios créditos", path: "/admin/settings/credit-reminders", icon: Bell },
   { label: "Configuración", path: "/admin/configuracion", icon: Settings },
 ];
 
