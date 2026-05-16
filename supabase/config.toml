@@ -1,1 +1,31 @@
 project_id = "deafxtmgcqovwqlvktte"
+
+[functions.send-welcome-email]
+verify_jwt = false
+
+[functions.send-consultation-received]
+verify_jwt = false
+
+[functions.send-participation-approved]
+verify_jwt = false
+
+[functions.send-participation-rejected]
+verify_jwt = false
+
+[functions.send-reservation-confirmed]
+verify_jwt = false
+
+[functions.send-reservation-rejected]
+verify_jwt = false
+
+[functions.send-reservation-cancelled]
+verify_jwt = false
+
+[functions.send-credit-reminder]
+verify_jwt = false
+
+[functions.send-admin-new-reservation]
+verify_jwt = false
+
+[functions.send-admin-new-participation]
+verify_jwt = false
