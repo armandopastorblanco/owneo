@@ -1117,6 +1117,42 @@ const AdminVehiculos = () => {
                 />
               </div>
 
+              {/* Manager section */}
+              <details className="border border-border rounded-md group">
+                <summary className="cursor-pointer px-4 py-3 font-semibold text-foreground select-none flex items-center justify-between">
+                  <span>Gestionnaire du véhicule</span>
+                  <span className="text-xs text-muted-foreground group-open:hidden">Mostrar</span>
+                  <span className="text-xs text-muted-foreground hidden group-open:inline">Ocultar</span>
+                </summary>
+                <div className="p-4 pt-2 space-y-3">
+                  <div>
+                    <Label>Nom du gestionnaire</Label>
+                    <Input
+                      value={(form.manager_name as string) || ""}
+                      onChange={(e) => setForm({ ...form, manager_name: e.target.value })}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Email</Label>
+                    <Input
+                      type="email"
+                      value={(form.manager_email as string) || ""}
+                      onChange={(e) => setForm({ ...form, manager_email: e.target.value })}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Téléphone</Label>
+                    <Input
+                      value={(form.manager_phone as string) || ""}
+                      onChange={(e) => setForm({ ...form, manager_phone: e.target.value })}
+                      className="mt-1"
+                    />
+                  </div>
+                </div>
+              </details>
+
               {/* Danger zone */}
               {editingCar && (
                 <div className="border-t border-destructive/30 pt-4 space-y-3">
