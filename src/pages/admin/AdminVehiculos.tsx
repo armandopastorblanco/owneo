@@ -192,7 +192,7 @@ const AdminVehiculos = () => {
         gallery: car.gallery || [],
         status: car.status || "active",
         deadline: car.deadline || "",
-        admin_notes: (car as DbCar).admin_notes || "",
+        admin_notes: adminNotes,
         promotion: (car as DbCar).promotion || null,
         promotion_active: !!((car as DbCar).promotion as Record<string, unknown>)?.is_active,
         promotion_type: ((car as DbCar).promotion as Record<string, unknown>)?.type || "direct",
