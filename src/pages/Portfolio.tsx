@@ -30,9 +30,15 @@ const Portfolio = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-              {cars.map((car) => (
-                <CarCard key={car.id} car={car} />
-              ))}
+              {[...cars]
+                .sort((a, b) => {
+                  const aComplete = a.status === "complete" || a.remainingParticipations === 0 ? 1 : 0;
+                  const bComplete = b.status === "complete" || b.remainingParticipations === 0 ? 1 : 0;
+                  return aComplete - bComplete;
+                })
+                .map((car) => (
+                  <CarCard key={car.id} car={car} />
+                ))}
             </div>
           )}
         </div>
