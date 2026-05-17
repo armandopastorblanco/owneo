@@ -74,17 +74,17 @@ const Index = () => {
               El mismo coche. Una decisi&oacute;n diferente.
             </h3>
             <p className="text-muted-foreground text-center mb-10 text-sm uppercase tracking-widest">
-              Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o
+              Ejemplo para un Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o durante 5 a&ntilde;os
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {/* Comprarlo */}
               <div className="rounded-2xl p-6 border border-red-500/20 bg-red-500/5 text-center">
                 <span className="text-xs text-red-400 border border-red-500/30 rounded-full px-3 py-1 mb-4 inline-block">
-                  Opci&oacute;n tradicional
+                  Compra tradicional
                 </span>
                 <TrendingUp className="w-6 h-6 text-red-400 mb-3 mx-auto" />
                 <div className="text-3xl font-bold text-foreground mb-1">~330.000&euro;</div>
-                <div className="text-sm text-muted-foreground mb-4">+ ~25.000&euro;/a&ntilde;o en gastos</div>
+                <div className="text-sm text-muted-foreground mb-4">+ ~125.000&euro; en gastos (5 a&ntilde;os)</div>
                 <ul className="space-y-2 text-left inline-block">
                   <li className="flex items-center gap-2 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-red-400 shrink-0" /> Seguro a tu cargo
@@ -96,6 +96,10 @@ const Index = () => {
                     <X className="w-4 h-4 text-red-400 shrink-0" /> Depreciaci&oacute;n inmediata
                   </li>
                 </ul>
+                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                  <div className="text-sm text-muted-foreground">💰 Valor de reventa estimado: ~214.500&euro;</div>
+                  <div className="text-sm text-muted-foreground">📊 Coste total estimado: ~240.500&euro;</div>
+                </div>
               </div>
               {/* Alquilarlo */}
               <div className="rounded-2xl p-6 border border-yellow-500/20 bg-yellow-500/5 text-center">
@@ -103,8 +107,8 @@ const Index = () => {
                   Alquiler cl&aacute;sico
                 </span>
                 <Clock className="w-6 h-6 text-yellow-400 mb-3 mx-auto" />
-                <div className="text-3xl font-bold text-foreground mb-1">~36.000&euro;</div>
-                <div className="text-sm text-muted-foreground mb-4">por 28 d&iacute;as &middot; cada a&ntilde;o</div>
+                <div className="text-3xl font-bold text-foreground mb-1">~180.000&euro;</div>
+                <div className="text-sm text-muted-foreground mb-4">por 28 d&iacute;as &middot; durante 5 a&ntilde;os (36.000&euro;/a&ntilde;o)</div>
                 <ul className="space-y-2 text-left inline-block">
                   <li className="flex items-center gap-2 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin propiedad ni v&iacute;nculo
@@ -116,6 +120,10 @@ const Index = () => {
                     <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin continuidad garantizada
                   </li>
                 </ul>
+                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                  <div className="text-sm text-muted-foreground">💰 Valor de reventa estimado: 0&euro;</div>
+                  <div className="text-sm text-muted-foreground">📊 Coste total estimado: ~180.000&euro;</div>
+                </div>
               </div>
               {/* OWNEO */}
               <div className="rounded-2xl p-6 border border-foreground/40 bg-foreground/5 text-center ring-1 ring-foreground/20">
@@ -124,7 +132,7 @@ const Index = () => {
                 </span>
                 <Star className="w-6 h-6 text-foreground mb-3 mx-auto" />
                 <div className="text-3xl font-bold text-foreground mb-1">~33.000&euro;</div>
-                <div className="text-sm text-muted-foreground mb-4">una sola vez &middot; todo gestionado</div>
+                <div className="text-sm text-muted-foreground mb-4">+ 3.300&euro; de gesti&oacute;n al a&ntilde;o</div>
                 <ul className="space-y-2 text-left inline-block">
                   <li className="flex items-center gap-2 text-sm text-foreground">
                     <Check className="w-4 h-4 text-green-400 shrink-0" /> Seguro, garaje y mantenimiento &divide;10
@@ -136,10 +144,14 @@ const Index = () => {
                     <Check className="w-4 h-4 text-green-400 shrink-0" /> Acceso a toda la flota OWNEO
                   </li>
                 </ul>
+                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                  <div className="text-sm text-foreground">💰 Valor de reventa estimado: ~23.100&euro;</div>
+                  <div className="text-sm text-foreground">📊 Coste total estimado: ~26.400&euro;</div>
+                </div>
               </div>
             </div>
             <p className="text-muted-foreground text-sm italic text-center mt-8">
-              Los mismos 28 d&iacute;as al volante de un Ferrari Roma. Una decisi&oacute;n diferente.
+              Los mismos 28 d&iacute;as al volante de un Ferrari Roma. Una decisi&oacute;n muy diferente.
             </p>
           </div>
 
