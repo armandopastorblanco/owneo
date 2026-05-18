@@ -132,9 +132,21 @@ const Index = () => {
                     <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin continuidad garantizada
                   </li>
                 </ul>
-                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                  <div className="text-sm text-muted-foreground">💰 Valor de reventa estimado: 0&euro;</div>
-                  <div className="text-sm text-muted-foreground">📊 Coste total estimado: ~180.000&euro;</div>
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <TrendingDown className="w-3 h-3" /> Reventa est.
+                      </span>
+                      <span className="text-sm font-semibold text-muted-foreground">0&euro;</span>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <Calculator className="w-3 h-3" /> Coste neto
+                      </span>
+                      <span className="text-sm font-semibold text-foreground">~180.000&euro;</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* OWNEO */}
