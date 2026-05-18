@@ -17,6 +17,10 @@ const Index = () => {
   const { data: cities = [] } = useLocations();
   const { trackEvent } = useAnalytics();
   const featuredCars = cars.slice(0, 4);
+  const [flippedCard, setFlippedCard] = useState<number | null>(null);
+  const toggleCard = (index: number) => {
+    setFlippedCard(flippedCard === index ? null : index);
+  };
 
   return (
     <div className="min-h-screen bg-background">
