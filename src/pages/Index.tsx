@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Star, MapPin, Percent, CalendarDays, Users, TrendingUp, Clock, Check, X } from "lucide-react";
+import { ArrowRight, Star, MapPin, Percent, CalendarDays, Users, TrendingUp, Clock, Check, X, TrendingDown, Calculator } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
@@ -96,9 +96,21 @@ const Index = () => {
                     <X className="w-4 h-4 text-red-400 shrink-0" /> Depreciaci&oacute;n inmediata
                   </li>
                 </ul>
-                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                  <div className="text-sm text-muted-foreground">💰 Valor de reventa estimado: ~214.500&euro;</div>
-                  <div className="text-sm text-muted-foreground">📊 Coste total estimado: ~240.500&euro;</div>
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <TrendingDown className="w-3 h-3" /> Reventa est.
+                      </span>
+                      <span className="text-sm font-semibold text-foreground">~214.500&euro;</span>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <Calculator className="w-3 h-3" /> Coste neto
+                      </span>
+                      <span className="text-sm font-semibold text-foreground">~240.500&euro;</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* Alquilarlo */}
@@ -120,9 +132,21 @@ const Index = () => {
                     <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin continuidad garantizada
                   </li>
                 </ul>
-                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                  <div className="text-sm text-muted-foreground">💰 Valor de reventa estimado: 0&euro;</div>
-                  <div className="text-sm text-muted-foreground">📊 Coste total estimado: ~180.000&euro;</div>
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <TrendingDown className="w-3 h-3" /> Reventa est.
+                      </span>
+                      <span className="text-sm font-semibold text-muted-foreground">0&euro;</span>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <Calculator className="w-3 h-3" /> Coste neto
+                      </span>
+                      <span className="text-sm font-semibold text-foreground">~180.000&euro;</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* OWNEO */}
@@ -144,9 +168,26 @@ const Index = () => {
                     <Check className="w-4 h-4 text-green-400 shrink-0" /> Acceso a toda la flota OWNEO
                   </li>
                 </ul>
-                <div className="mt-3 pt-3 text-left inline-block w-full" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                  <div className="text-sm text-foreground">💰 Valor de reventa estimado: ~23.100&euro;</div>
-                  <div className="text-sm text-foreground">📊 Coste total estimado: ~26.400&euro;</div>
+                <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(201,168,76,0.3)" }}>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <TrendingDown className="w-3 h-3" /> Reventa est.
+                      </span>
+                      <span className="text-sm font-semibold" style={{ color: "#c9a84c" }}>~23.100&euro;</span>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                        <Calculator className="w-3 h-3" /> Coste neto
+                      </span>
+                      <span className="text-sm font-semibold" style={{ color: "#c9a84c" }}>~26.400&euro;</span>
+                    </div>
+                  </div>
+                  <div className="rounded-lg p-3 text-center border" style={{ backgroundColor: "rgba(201,168,76,0.1)", borderColor: "rgba(201,168,76,0.3)" }}>
+                    <span className="text-[10px] uppercase tracking-widest" style={{ color: "rgba(201,168,76,0.7)" }}>Ahorro vs compra tradicional</span>
+                    <p className="text-base font-black mt-0.5" style={{ color: "#c9a84c" }}>~214.100&euro;</p>
+                    <span className="text-[10px] text-muted-foreground">(240.500&euro; &minus; 26.400&euro;)</span>
+                  </div>
                 </div>
               </div>
             </div>
