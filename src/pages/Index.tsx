@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { ArrowRight, Star, MapPin, Percent, CalendarDays, Users, TrendingUp, Clock, Check, X, TrendingDown, Calculator } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
