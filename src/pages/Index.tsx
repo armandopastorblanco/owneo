@@ -75,131 +75,174 @@ const Index = () => {
 
           {/* Comparativa Ferrari Roma */}
           <div className="mt-16">
+            <style>{`
+              .flip-card { perspective: 1200px; cursor: pointer; }
+              .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+              .flip-card.flipped .flip-card-inner,
+              .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+              .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 1rem; overflow: hidden; }
+              .flip-card-back { transform: rotateY(180deg); }
+              @keyframes champagne-glow {
+                0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.15), 0 0 40px rgba(201,168,76,0.05); }
+                50% { box-shadow: 0 0 30px rgba(201,168,76,0.25), 0 0 60px rgba(201,168,76,0.1); }
+              }
+              .owneo-glow { animation: champagne-glow 3s ease-in-out infinite; }
+            `}</style>
             <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 text-center">
               El mismo coche. Una decisi&oacute;n diferente.
             </h3>
             <p className="text-muted-foreground text-center mb-10 text-sm uppercase tracking-widest">
-              Ejemplo para un Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o durante 5 a&ntilde;os
+              5 a&ntilde;os. Tres caminos. Una sola respuesta.
             </p>
-            <div className="grid md:grid-cols-3 gap-4">
-              {/* Comprarlo */}
-              <div className="rounded-2xl p-6 border border-red-500/20 bg-red-500/5 text-center">
-                <span className="text-xs text-red-400 border border-red-500/30 rounded-full px-3 py-1 mb-4 inline-block">
-                  Compra tradicional
-                </span>
-                <TrendingUp className="w-6 h-6 text-red-400 mb-3 mx-auto" />
-                <div className="text-3xl font-bold text-foreground mb-1">~330.000&euro;</div>
-                <div className="text-sm text-muted-foreground mb-4">+ ~125.000&euro; en gastos (5 a&ntilde;os)</div>
-                <ul className="space-y-2 text-left inline-block">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <X className="w-4 h-4 text-red-400 shrink-0" /> Seguro a tu cargo
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <X className="w-4 h-4 text-red-400 shrink-0" /> Mantenimiento a tu cargo
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <X className="w-4 h-4 text-red-400 shrink-0" /> Depreciaci&oacute;n inmediata
-                  </li>
-                </ul>
-                <div className="mt-4 pt-4 border-t border-white/10">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                        <TrendingDown className="w-3 h-3" /> Reventa est.
-                      </span>
-                      <span className="text-sm font-semibold text-foreground">~214.500&euro;</span>
+            <div className="grid md:grid-cols-3 gap-4 items-start">
+              {/* CARD 1 — Compra tradicional */}
+              <div
+                className={`flip-card h-[480px] md:h-[520px] ${flippedCard === 0 ? "flipped" : ""}`}
+                onClick={() => toggleCard(0)}
+              >
+                <div className="flip-card-inner">
+                  <div className="flip-card-front bg-red-500/5 border border-white/10 p-6 flex flex-col items-center text-center">
+                    <span className="text-xs text-red-400 border border-red-500/30 rounded-full px-3 py-1 inline-block">
+                      Compra tradicional
+                    </span>
+                    <div className="flex-1 flex flex-col items-center justify-center">
+                      <TrendingUp className="w-8 h-8 text-red-400 mb-4" />
+                      <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Lo que realmente pagas</p>
+                      <p className="text-5xl font-bold text-foreground mb-2">~240.500&euro;</p>
+                      <p className="text-sm text-muted-foreground">en 5 a&ntilde;os &middot; todo incluido</p>
                     </div>
-                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                        <Calculator className="w-3 h-3" /> Coste neto
-                      </span>
-                      <span className="text-sm font-semibold text-foreground">~240.500&euro;</span>
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      Ver detalle <ArrowRight className="w-3 h-3" />
                     </div>
+                  </div>
+                  <div className="flip-card-back bg-red-500/5 border border-white/10 p-6 flex flex-col text-left">
+                    <span className="text-xs text-red-400 border border-red-500/30 rounded-full px-3 py-1 inline-block self-center mb-4">
+                      Compra tradicional
+                    </span>
+                    <div className="space-y-2 text-sm mb-4">
+                      <div className="flex justify-between text-muted-foreground"><span>Precio de compra</span><span className="text-foreground">330.000&euro;</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span>Gastos 5 a&ntilde;os</span><span className="text-foreground">+ 125.000&euro;</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span>Recuperas (reventa 65%)</span><span className="text-foreground">&minus; 214.500&euro;</span></div>
+                      <div className="flex justify-between pt-2 border-t border-white/10 font-semibold"><span className="text-foreground">Lo que realmente pagas</span><span className="text-foreground">240.500&euro;</span></div>
+                    </div>
+                    <ul className="space-y-2 mt-auto">
+                      <li className="flex items-center gap-2 text-xs text-muted-foreground"><X className="w-4 h-4 text-red-400 shrink-0" /> Seguro a tu cargo</li>
+                      <li className="flex items-center gap-2 text-xs text-muted-foreground"><X className="w-4 h-4 text-red-400 shrink-0" /> Mantenimiento a tu cargo</li>
+                      <li className="flex items-center gap-2 text-xs text-muted-foreground"><X className="w-4 h-4 text-red-400 shrink-0" /> Depreciaci&oacute;n inmediata</li>
+                    </ul>
                   </div>
                 </div>
               </div>
-              {/* Alquilarlo */}
-              <div className="rounded-2xl p-6 border border-yellow-500/20 bg-yellow-500/5 text-center">
-                <span className="text-xs text-yellow-400 border border-yellow-500/30 rounded-full px-3 py-1 mb-4 inline-block">
-                  Alquiler cl&aacute;sico
-                </span>
-                <Clock className="w-6 h-6 text-yellow-400 mb-3 mx-auto" />
-                <div className="text-3xl font-bold text-foreground mb-1">~180.000&euro;</div>
-                <div className="text-sm text-muted-foreground mb-4">por 28 d&iacute;as &middot; durante 5 a&ntilde;os (36.000&euro;/a&ntilde;o)</div>
-                <ul className="space-y-2 text-left inline-block">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin propiedad ni v&iacute;nculo
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <X className="w-4 h-4 text-yellow-400 shrink-0" /> Precio variable seg&uacute;n demanda
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin continuidad garantizada
-                  </li>
-                </ul>
-                <div className="mt-4 pt-4 border-t border-white/10">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                        <TrendingDown className="w-3 h-3" /> Reventa est.
-                      </span>
-                      <span className="text-sm font-semibold text-muted-foreground">0&euro;</span>
+
+              {/* CARD 2 — Alquiler cl&aacute;sico */}
+              <div
+                className={`flip-card h-[480px] md:h-[520px] ${flippedCard === 1 ? "flipped" : ""}`}
+                onClick={() => toggleCard(1)}
+              >
+                <div className="flip-card-inner">
+                  <div className="flip-card-front bg-yellow-500/5 border border-white/10 p-6 flex flex-col items-center text-center">
+                    <span className="text-xs text-yellow-400 border border-yellow-500/30 rounded-full px-3 py-1 inline-block">
+                      Alquiler cl&aacute;sico
+                    </span>
+                    <div className="flex-1 flex flex-col items-center justify-center">
+                      <Clock className="w-8 h-8 text-yellow-400 mb-4" />
+                      <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Lo que realmente pagas</p>
+                      <p className="text-5xl font-bold text-foreground mb-2">~180.000&euro;</p>
+                      <p className="text-sm text-muted-foreground">en 5 a&ntilde;os &middot; sin nada a cambio</p>
                     </div>
-                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                        <Calculator className="w-3 h-3" /> Coste neto
-                      </span>
-                      <span className="text-sm font-semibold text-foreground">~180.000&euro;</span>
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      Ver detalle <ArrowRight className="w-3 h-3" />
                     </div>
+                  </div>
+                  <div className="flip-card-back bg-yellow-500/5 border border-white/10 p-6 flex flex-col text-left">
+                    <span className="text-xs text-yellow-400 border border-yellow-500/30 rounded-full px-3 py-1 inline-block self-center mb-4">
+                      Alquiler cl&aacute;sico
+                    </span>
+                    <div className="space-y-2 text-sm mb-4">
+                      <div className="flex justify-between text-muted-foreground"><span>Alquiler anual (28 d&iacute;as)</span><span className="text-foreground">36.000&euro;/a&ntilde;o</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span>Total 5 a&ntilde;os</span><span className="text-foreground">180.000&euro;</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span>Recuperas</span><span className="text-foreground">0&euro;</span></div>
+                      <div className="flex justify-between pt-2 border-t border-white/10 font-semibold"><span className="text-foreground">Lo que realmente pagas</span><span className="text-foreground">180.000&euro;</span></div>
+                    </div>
+                    <ul className="space-y-2 mt-auto">
+                      <li className="flex items-center gap-2 text-xs text-muted-foreground"><X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin propiedad ni v&iacute;nculo</li>
+                      <li className="flex items-center gap-2 text-xs text-muted-foreground"><X className="w-4 h-4 text-yellow-400 shrink-0" /> Precio variable seg&uacute;n demanda</li>
+                      <li className="flex items-center gap-2 text-xs text-muted-foreground"><X className="w-4 h-4 text-yellow-400 shrink-0" /> Sin continuidad garantizada</li>
+                    </ul>
                   </div>
                 </div>
               </div>
-              {/* OWNEO */}
-              <div className="rounded-2xl p-6 border border-foreground/40 bg-foreground/5 text-center ring-1 ring-foreground/20">
-                <span className="text-xs text-foreground border border-foreground/40 rounded-full px-3 py-1 mb-4 inline-block font-semibold">
-                  Modelo OWNEO
-                </span>
-                <Star className="w-6 h-6 text-foreground mb-3 mx-auto" />
-                <div className="text-3xl font-bold text-foreground mb-1">~33.000&euro;</div>
-                <div className="text-sm text-muted-foreground mb-4">+ 3.300&euro; de gesti&oacute;n al a&ntilde;o</div>
-                <ul className="space-y-2 text-left inline-block">
-                  <li className="flex items-center gap-2 text-sm text-foreground">
-                    <Check className="w-4 h-4 text-green-400 shrink-0" /> Seguro, garaje y mantenimiento &divide;10
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-foreground">
-                    <Check className="w-4 h-4 text-green-400 shrink-0" /> 28 d&iacute;as garantizados cada a&ntilde;o
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-foreground">
-                    <Check className="w-4 h-4 text-green-400 shrink-0" /> Acceso a toda la flota OWNEO
-                  </li>
-                </ul>
-                <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(201,168,76,0.3)" }}>
-                  <div className="grid grid-cols-2 gap-3 mb-3">
-                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                        <TrendingDown className="w-3 h-3" /> Reventa est.
+
+              {/* CARD 3 — Modelo OWNEO */}
+              <div
+                className={`flip-card owneo-glow h-[520px] md:h-[560px] rounded-2xl ${flippedCard === 2 ? "flipped" : ""}`}
+                style={{ border: "1px solid rgba(201,168,76,0.4)" }}
+                onClick={() => toggleCard(2)}
+              >
+                <div className="flip-card-inner">
+                  <div className="flip-card-front p-6 flex flex-col items-center text-center" style={{ backgroundColor: "rgba(201,168,76,0.05)" }}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-semibold border rounded-full px-3 py-1 inline-block" style={{ color: "#c9a84c", borderColor: "rgba(201,168,76,0.4)" }}>
+                        Modelo OWNEO
                       </span>
-                      <span className="text-sm font-semibold" style={{ color: "#c9a84c" }}>~23.100&euro;</span>
+                      <span className="text-[10px] font-bold rounded-full px-2 py-1" style={{ backgroundColor: "#c9a84c", color: "#0a0a0a" }}>
+                        MEJOR OPCI&Oacute;N
+                      </span>
                     </div>
-                    <div className="bg-white/5 rounded-lg p-3 flex flex-col gap-1">
-                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                        <Calculator className="w-3 h-3" /> Coste neto
-                      </span>
-                      <span className="text-sm font-semibold" style={{ color: "#c9a84c" }}>~26.400&euro;</span>
+                    <div className="flex-1 flex flex-col items-center justify-center">
+                      <Star className="w-8 h-8 mb-4" style={{ color: "#c9a84c" }} />
+                      <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Lo que realmente pagas</p>
+                      <p className="text-5xl font-bold mb-2" style={{ color: "#c9a84c" }}>~26.400&euro;</p>
+                      <p className="text-sm text-muted-foreground">en 5 a&ntilde;os &middot; todo gestionado</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 w-full mb-3">
+                      <div className="rounded-lg p-2" style={{ backgroundColor: "rgba(201,168,76,0.1)" }}>
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">vs Compra</p>
+                        <p className="text-lg font-bold" style={{ color: "#c9a84c" }}>&minus;89%</p>
+                      </div>
+                      <div className="rounded-lg p-2" style={{ backgroundColor: "rgba(201,168,76,0.1)" }}>
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">vs Alquiler</p>
+                        <p className="text-lg font-bold" style={{ color: "#c9a84c" }}>&minus;85%</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs" style={{ color: "#c9a84c" }}>
+                      Ver detalle <ArrowRight className="w-3 h-3" />
                     </div>
                   </div>
-                  <div className="rounded-lg p-3 text-center border" style={{ backgroundColor: "rgba(201,168,76,0.1)", borderColor: "rgba(201,168,76,0.3)" }}>
-                    <span className="text-[10px] uppercase tracking-widest" style={{ color: "rgba(201,168,76,0.7)" }}>Ahorro vs compra tradicional</span>
-                    <p className="text-base font-black mt-0.5" style={{ color: "#c9a84c" }}>~214.100&euro;</p>
-                    <span className="text-[10px] text-muted-foreground">(240.500&euro; &minus; 26.400&euro;)</span>
+                  <div className="flip-card-back p-6 flex flex-col text-left" style={{ backgroundColor: "rgba(201,168,76,0.05)" }}>
+                    <span className="text-xs font-semibold border rounded-full px-3 py-1 inline-block self-center mb-4" style={{ color: "#c9a84c", borderColor: "rgba(201,168,76,0.4)" }}>
+                      Modelo OWNEO
+                    </span>
+                    <div className="space-y-2 text-sm mb-3">
+                      <div className="flex justify-between text-muted-foreground"><span>Participaci&oacute;n (&uacute;nica)</span><span className="text-foreground">33.000&euro;</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span>Gesti&oacute;n 5 a&ntilde;os (3.300&euro;/a&ntilde;o)</span><span className="text-foreground">+ 16.500&euro;</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span>Recuperas (reventa 70%)</span><span className="text-foreground">&minus; 23.100&euro;</span></div>
+                      <div className="flex justify-between pt-2 border-t font-semibold" style={{ borderColor: "rgba(201,168,76,0.3)" }}><span style={{ color: "#c9a84c" }}>Lo que realmente pagas</span><span style={{ color: "#c9a84c" }}>26.400&euro;</span></div>
+                    </div>
+                    <ul className="space-y-2 mb-3">
+                      <li className="flex items-center gap-2 text-xs text-foreground"><Check className="w-4 h-4 shrink-0" style={{ color: "#c9a84c" }} /> Seguro, garaje y mantenimiento &divide;10</li>
+                      <li className="flex items-center gap-2 text-xs text-foreground"><Check className="w-4 h-4 shrink-0" style={{ color: "#c9a84c" }} /> 28 d&iacute;as garantizados cada a&ntilde;o</li>
+                      <li className="flex items-center gap-2 text-xs text-foreground"><Check className="w-4 h-4 shrink-0" style={{ color: "#c9a84c" }} /> Acceso a toda la flota OWNEO</li>
+                    </ul>
+                    <div className="grid grid-cols-2 gap-2 mt-auto">
+                      <div className="rounded-lg p-2 text-center" style={{ backgroundColor: "rgba(201,168,76,0.1)" }}>
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Ahorras vs Compra</p>
+                        <p className="text-base font-bold" style={{ color: "#c9a84c" }}>214.100&euro;</p>
+                      </div>
+                      <div className="rounded-lg p-2 text-center" style={{ backgroundColor: "rgba(201,168,76,0.1)" }}>
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Ahorras vs Alquiler</p>
+                        <p className="text-base font-bold" style={{ color: "#c9a84c" }}>153.600&euro;</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <p className="text-muted-foreground text-sm italic text-center mt-8">
-              Los mismos 28 d&iacute;as al volante de un Ferrari Roma. Una decisi&oacute;n muy diferente.
+              C&aacute;lculo estimado sobre 5 a&ntilde;os &middot; Basado en un Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o
             </p>
           </div>
+
 
           {/* CTA */}
           <div className="mt-14 text-center">
