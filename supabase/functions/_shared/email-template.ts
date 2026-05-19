@@ -15,8 +15,8 @@ export function owneoEmailTemplate(title: string, preheader: string, bodyHtml: s
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0a0a0a;">
   <tr><td align="center" style="padding:32px 16px;">
     <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#111111;border:1px solid #c9a84c;border-radius:6px;overflow:hidden;">
-      <tr><td align="center" style="padding:32px 24px 16px 24px;border-bottom:1px solid rgba(201,168,76,0.3);">
-        <div style="font-family:'Encode Sans Expanded', Arial, sans-serif;font-weight:200;font-size:28px;letter-spacing:6px;color:#c9a84c;">OWNEO</div>
+      <tr><td align="center" style="padding:28px 24px 20px 24px;border-bottom:1px solid rgba(201,168,76,0.3);background-color:#0a0a0a;">
+        <img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" height="32" style="display:block;height:32px;width:auto;border:0;outline:none;text-decoration:none;">
       </td></tr>
       <tr><td style="padding:32px 32px 24px 32px;color:#ffffff;font-family:'Encode Sans Expanded', Arial, sans-serif;font-weight:300;font-size:15px;line-height:1.6;">
         ${bodyHtml}
