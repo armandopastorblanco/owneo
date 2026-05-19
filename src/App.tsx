@@ -27,6 +27,15 @@ import NoticiaPorscheGT3RS from "./pages/NoticiaPorscheGT3RS";
 import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
 import NoticiaBugattiTourbillon from "./pages/NoticiaBugattiTourbillon";
 import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
+import NoticiaLamborghiniRevueltoSpider from "./pages/NoticiaLamborghiniRevueltoSpider";
+import NoticiaFerrari12CilindriSpider from "./pages/NoticiaFerrari12CilindriSpider";
+import NoticiaPorscheGt3Rs2026 from "./pages/NoticiaPorscheGt3Rs2026";
+import NoticiaMcLarenW1Spider from "./pages/NoticiaMcLarenW1Spider";
+import NoticiaAstonMartinVantageGt3 from "./pages/NoticiaAstonMartinVantageGt3";
+import NoticiaLamborghiniUrusSe from "./pages/NoticiaLamborghiniUrusSe";
+import NoticiaBugattiBolide from "./pages/NoticiaBugattiBolide";
+import NoticiaRollsRoyceDroptail from "./pages/NoticiaRollsRoyceDroptail";
+import NoticiaPorsche718Ev from "./pages/NoticiaPorsche718Ev";
 import NoticiaDetalle from "./pages/NoticiaDetalle";
 import Login from "./pages/Login";
 import Participar from "./pages/Participar";
@@ -120,7 +129,17 @@ const App = () => (
               <Route path="/noticias/porsche-911-gt3-rs-2026" element={<NoticiaPorscheGT3RS />} />
               <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
               <Route path="/noticias/bugatti-tourbillon" element={<NoticiaBugattiTourbillon />} />
+              <Route path="/noticias/bugatti-tourbillon-lanzamiento" element={<NoticiaBugattiTourbillon />} />
               <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
+              <Route path="/noticias/lamborghini-revuelto-spider" element={<NoticiaLamborghiniRevueltoSpider />} />
+              <Route path="/noticias/ferrari-12cilindri-spider-circuito" element={<NoticiaFerrari12CilindriSpider />} />
+              <Route path="/noticias/porsche-911-gt3-rs-2026-especificaciones" element={<NoticiaPorscheGt3Rs2026 />} />
+              <Route path="/noticias/mclaren-w1-spider-confirmacion" element={<NoticiaMcLarenW1Spider />} />
+              <Route path="/noticias/aston-martin-vantage-gt3-2026" element={<NoticiaAstonMartinVantageGt3 />} />
+              <Route path="/noticias/lamborghini-urus-se-actualizado" element={<NoticiaLamborghiniUrusSe />} />
+              <Route path="/noticias/bugatti-bolide-primeras-entregas" element={<NoticiaBugattiBolide />} />
+              <Route path="/noticias/rolls-royce-droptail-edicion-final" element={<NoticiaRollsRoyceDroptail />} />
+              <Route path="/noticias/porsche-718-cayman-gt4-rs-electrico" element={<NoticiaPorsche718Ev />} />
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
               <Route path="/login" element={<Login />} />
               <Route path="/participar" element={<Participar />} />
