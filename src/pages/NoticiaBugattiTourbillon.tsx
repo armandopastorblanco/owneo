@@ -124,12 +124,16 @@ const NoticiaBugattiTourbillon = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Precio y exclusividad del Bugatti Tourbillon</h2>
             <p className="text-base leading-relaxed mb-6">
-              El Bugatti Tourbillon tiene un precio base de 3,8 millones de euros, aunque la configuración media con personalizaciones se sitúa en torno a los 4,5 millones. La producción estará limitada a 250 unidades, y Bugatti ya ha recibido depósitos para más de la mitad de la serie. Las entregas comenzarán en 2027 desde el histórico Atelier de Molsheim, Francia.
+              El Bugatti Tourbillon tiene un precio base de 3,8 millones de euros, aunque la configuración media con personalizaciones se sitúa en torno a los 4,5 millones e incluso supera con frecuencia los cinco millones cuando el cliente elige opciones únicas del programa Sur Mesure. La producción estará limitada a 250 unidades repartidas en seis años, y Bugatti ya ha recibido depósitos para más de la mitad de la serie incluso antes del estreno público en el Concorso d'Eleganza Villa d'Este. Las entregas comenzarán en 2027 desde el histórico Atelier de Molsheim, en Alsacia, donde cada unidad será ensamblada a mano por un equipo de menos de veinte artesanos especializados, siguiendo el ritual establecido por la marca desde la época de Ettore Bugatti.
+            </p>
+            <p className="text-base leading-relaxed mb-6">
+              La lista de espera, como es habitual en los proyectos más exclusivos de Molsheim, se ha gestionado a través de invitación directa: cada futuro propietario ha sido seleccionado personalmente por la marca atendiendo a criterios como su colección actual, su relación histórica con Bugatti y su compromiso con el patrimonio del automóvil. Muchos de ellos ya poseen un Chiron, una Divo o incluso un Centodieci, y ven en el Tourbillon la pieza definitiva de su garaje. Es una estrategia comercial que recuerda a la del coachbuilding clásico y que Bugatti ha sabido modernizar con la introducción reciente del programa Solitaire, dedicado a creaciones únicas para clientes especiales que aspiran a poseer un Bugatti literalmente irrepetible.
             </p>
             <p className="text-base leading-relaxed mb-8">
-              Con el Tourbillon, Bugatti no solo ha creado el sucesor digno del Chiron, sino que ha redefinido lo que significa ser el pináculo absoluto del automóvil. En un mundo que avanza inevitablemente hacia la electrificación total, el V16 atmosférico del Tourbillon es un canto del cisne extraordinario para la combustión interna — y posiblemente el motor más especial que jamás existirá.
+              Con el Tourbillon, Bugatti no solo ha creado el sucesor digno del Chiron, sino que ha redefinido lo que significa ser el pináculo absoluto del automóvil. En un mundo que avanza inevitablemente hacia la electrificación total y la conducción autónoma, el V16 atmosférico del Tourbillon es un canto del cisne extraordinario para la combustión interna — y posiblemente el motor más especial que jamás existirá. Lo que Mate Rimac y su equipo han logrado en Molsheim es una declaración de principios: la electrificación no tiene por qué borrar la emoción mecánica, y la innovación más radical puede convivir con el respeto a la tradición artesanal. El Tourbillon es la prueba viviente de esta filosofía, y probablemente sea recordado dentro de cincuenta años como uno de los grandes hitos del automóvil del siglo XXI.
             </p>
           </motion.div>
+
 
           <ArticleCTAs vehicleName="Bugatti Tourbillon" />
         </div>
