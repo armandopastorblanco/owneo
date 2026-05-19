@@ -13,8 +13,11 @@ interface SignupEmailProps {
   confirmationUrl: string
 }
 
-const CHAMPAGNE = '#bd9c94' // hsl(12, 24%, 66%) — matches site --champagne CTA token
+// Champagne color — extracted from tailwind config / index.css token --champagne: 12 24% 66%
+const CHAMPAGNE = '#bd9c94'
 const CHAMPAGNE_60 = 'rgba(189,156,148,0.6)'
+const CHAMPAGNE_20 = 'rgba(201,168,76,0.2)'
+const FONT = '"Encode Sans Expanded", Arial, sans-serif'
 
 export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
   const base = siteUrl?.replace(/\/$/, '') || ''
@@ -25,64 +28,162 @@ export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
     <Html lang="es" dir="ltr">
       <Head />
       <Preview>Un solo paso te separa del lujo que se comparte.</Preview>
-      <Body style={main}>
-        <Container style={container}>
-          {/* Header */}
-          <Section style={header}>
-            <Img src={logoUrl} alt="OWNEO" width="140" style={logoImg} />
+      <Body style={{ backgroundColor: '#ffffff', fontFamily: FONT, margin: 0, padding: 0 }}>
+        <Container style={{ maxWidth: '600px', width: '100%', margin: '0 auto', backgroundColor: '#ffffff' }}>
+          {/* Section 1 — Header band */}
+          <Section style={{
+            backgroundColor: '#0a0a0a',
+            padding: '28px 40px',
+            textAlign: 'center' as const,
+            borderBottom: `1px solid ${CHAMPAGNE_20}`,
+          }}>
+            <Img src={logoUrl} alt="OWNEO" width="120" style={{ display: 'block', margin: '0 auto', width: '120px', height: 'auto' as const }} />
           </Section>
 
-          {/* Hero */}
-          <Section style={heroWrap}>
-            <Img src={heroUrl} alt="" width="600" style={heroImg} />
+          {/* Section 2 — Hero vehicle photo */}
+          <Section style={{ padding: 0, fontSize: 0, lineHeight: 0, backgroundColor: '#0a0a0a' }}>
+            <Img
+              src={heroUrl}
+              alt=""
+              width="600"
+              height="240"
+              style={{ display: 'block', width: '100%', maxWidth: '600px', height: '240px', objectFit: 'cover' as const, margin: 0 }}
+            />
           </Section>
 
-          {/* Body */}
-          <Section style={content}>
-            <Text style={heading}>Bienvenido al círculo.</Text>
+          {/* Section 3 — Main content */}
+          <Section style={{ backgroundColor: '#fafafa', padding: '52px 48px 40px 48px' }}>
+            <Text style={{
+              color: '#0a0a0a',
+              fontFamily: FONT,
+              fontSize: '30px',
+              fontWeight: 900 as const,
+              letterSpacing: '-0.3px',
+              textAlign: 'center' as const,
+              margin: '0 0 20px 0',
+              lineHeight: 1.2,
+            }}>
+              Bienvenido al círculo.
+            </Text>
 
-            <Section style={dividerWrap}>
-              <Section style={divider}>&nbsp;</Section>
+            <Section style={{ textAlign: 'center' as const, margin: '0 auto 28px auto' }}>
+              <Section style={{
+                width: '36px',
+                height: '1px',
+                backgroundColor: CHAMPAGNE,
+                margin: '0 auto',
+                lineHeight: '1px',
+                fontSize: '1px',
+              }}>&nbsp;</Section>
             </Section>
 
-            <Text style={tagline}>
+            <Text style={{
+              color: '#888888',
+              fontFamily: FONT,
+              fontSize: '15px',
+              lineHeight: 2.2,
+              fontWeight: 300 as const,
+              fontStyle: 'italic' as const,
+              textAlign: 'center' as const,
+              margin: '0 0 36px 0',
+            }}>
               El coche que siempre quisiste.<br />
               Sin las cargas que nunca quisiste.<br />
               Bienvenido.
             </Text>
 
-            <Section style={{ height: '40px', lineHeight: '40px' }}>&nbsp;</Section>
+            <Section style={{ borderTop: '1px solid #eeeeee', margin: '0 0 36px 0', lineHeight: '1px', fontSize: '1px' }}>&nbsp;</Section>
 
-            <Text style={instruction}>
+            <Text style={{
+              color: '#444444',
+              fontFamily: FONT,
+              fontSize: '14px',
+              lineHeight: 1.8,
+              fontWeight: 400 as const,
+              textAlign: 'center' as const,
+              maxWidth: '340px',
+              margin: '0 auto 36px auto',
+            }}>
               Confirma tu dirección de correo para completar tu acceso a OWNEO.
             </Text>
 
-            <Section style={{ height: '40px', lineHeight: '40px' }}>&nbsp;</Section>
-
             <Section style={{ textAlign: 'center' as const }}>
-              <Button style={button} href={confirmationUrl}>Confirmar mi acceso</Button>
+              <Button
+                href={confirmationUrl}
+                style={{
+                  backgroundColor: CHAMPAGNE,
+                  color: '#000000',
+                  fontFamily: FONT,
+                  fontSize: '12px',
+                  fontWeight: 800 as const,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase' as const,
+                  padding: '16px 52px',
+                  borderRadius: '2px',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                }}
+              >
+                Confirmar mi acceso
+              </Button>
             </Section>
           </Section>
 
-          {/* Footer */}
-          <Section style={footer}>
-            <Text style={footerTagline}>EL LUJO QUE SE COMPARTE</Text>
+          {/* Section 4 — Footer */}
+          <Section style={{
+            backgroundColor: '#f5f5f5',
+            borderTop: '1px solid #e8e8e8',
+            padding: '32px 40px',
+            textAlign: 'center' as const,
+          }}>
+            <Section style={{
+              width: '32px',
+              height: '1px',
+              backgroundColor: CHAMPAGNE_60,
+              margin: '0 auto 20px auto',
+              lineHeight: '1px',
+              fontSize: '1px',
+            }}>&nbsp;</Section>
 
-            <Section style={{ height: '16px', lineHeight: '16px' }}>&nbsp;</Section>
+            <Text style={{
+              color: '#aaaaaa',
+              fontFamily: FONT,
+              fontSize: '10px',
+              letterSpacing: '0.35em',
+              textTransform: 'uppercase' as const,
+              fontWeight: 600 as const,
+              textAlign: 'center' as const,
+              margin: '0 0 14px 0',
+            }}>
+              EL LUJO QUE SE COMPARTE
+            </Text>
 
-            <Section style={{ textAlign: 'center' as const }}>
-              <Link href="#" style={socialLink}>Instagram</Link>
-              <span style={socialSep}>·</span>
-              <Link href="#" style={socialLink}>LinkedIn</Link>
-              <span style={socialSep}>·</span>
-              <Link href="#" style={socialLink}>Facebook</Link>
+            <Section style={{ textAlign: 'center' as const, margin: '0 0 20px 0' }}>
+              <Link href="#" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>IG</Link>
+              <span style={{ color: '#dddddd', fontSize: '11px' }}>·</span>
+              <Link href="#" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>LI</Link>
+              <span style={{ color: '#dddddd', fontSize: '11px' }}>·</span>
+              <Link href="#" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>FB</Link>
             </Section>
 
-            <Section style={{ height: '20px', lineHeight: '20px' }}>&nbsp;</Section>
-
-            <Text style={footerCopyright}>© 2025 OWNEO. Todos los derechos reservados.</Text>
-            <Section style={{ height: '8px', lineHeight: '8px' }}>&nbsp;</Section>
-            <Text style={footerDisclaimer}>Si no creaste esta cuenta, puedes ignorar este mensaje.</Text>
+            <Text style={{
+              color: '#bbbbbb',
+              fontFamily: FONT,
+              fontSize: '11px',
+              textAlign: 'center' as const,
+              margin: '0 0 6px 0',
+            }}>
+              © 2025 OWNEO. Todos los derechos reservados.
+            </Text>
+            <Text style={{
+              color: '#cccccc',
+              fontFamily: FONT,
+              fontSize: '10px',
+              textAlign: 'center' as const,
+              margin: 0,
+            }}>
+              Si no creaste esta cuenta, puedes ignorar este mensaje.
+            </Text>
           </Section>
         </Container>
       </Body>
@@ -91,141 +192,3 @@ export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
 }
 
 export default SignupEmail
-
-const FONT = '"Encode Sans Expanded", Arial, sans-serif'
-
-const main = {
-  backgroundColor: '#ffffff',
-  fontFamily: FONT,
-  margin: 0,
-  padding: '0',
-}
-const container = {
-  maxWidth: '600px',
-  width: '100%',
-  margin: '0 auto',
-  backgroundColor: '#0a0a0a',
-}
-const header = {
-  backgroundColor: '#0a0a0a',
-  padding: '32px 0',
-  textAlign: 'center' as const,
-  borderBottom: '1px solid rgba(201,168,76,0.25)',
-}
-const logoImg = {
-  display: 'block',
-  margin: '0 auto',
-  width: '140px',
-  height: 'auto' as const,
-}
-const heroWrap = {
-  backgroundColor: '#0a0a0a',
-  padding: 0,
-  fontSize: 0,
-  lineHeight: 0,
-}
-const heroImg = {
-  display: 'block',
-  width: '100%',
-  maxWidth: '600px',
-  height: 'auto' as const,
-  margin: 0,
-}
-const content = {
-  backgroundColor: '#0a0a0a',
-  padding: '48px 40px',
-}
-const heading = {
-  color: '#ffffff',
-  fontFamily: FONT,
-  fontSize: '32px',
-  fontWeight: 900 as const,
-  letterSpacing: '-0.5px',
-  textAlign: 'center' as const,
-  margin: '0 0 24px 0',
-  lineHeight: 1.2,
-}
-const dividerWrap = { textAlign: 'center' as const, margin: '0 auto 32px auto' }
-const divider = {
-  width: '40px',
-  height: '1px',
-  backgroundColor: CHAMPAGNE,
-  margin: '0 auto',
-  lineHeight: '1px',
-  fontSize: '1px',
-}
-const tagline = {
-  color: '#888888',
-  fontFamily: FONT,
-  fontSize: '15px',
-  lineHeight: 2,
-  fontWeight: 300 as const,
-  fontStyle: 'italic' as const,
-  textAlign: 'center' as const,
-  margin: '0 auto',
-}
-const instruction = {
-  color: '#ffffff',
-  fontFamily: FONT,
-  fontSize: '14px',
-  lineHeight: 1.7,
-  fontWeight: 400 as const,
-  textAlign: 'center' as const,
-  maxWidth: '360px',
-  margin: '0 auto',
-}
-const button = {
-  backgroundColor: CHAMPAGNE,
-  color: '#000000',
-  fontFamily: FONT,
-  fontSize: '13px',
-  fontWeight: 800 as const,
-  letterSpacing: '0.15em',
-  textTransform: 'uppercase' as const,
-  padding: '16px 48px',
-  borderRadius: '2px',
-  textDecoration: 'none',
-  display: 'inline-block',
-}
-const footer = {
-  backgroundColor: '#0a0a0a',
-  padding: '32px 40px',
-  textAlign: 'center' as const,
-  borderTop: '1px solid rgba(201,168,76,0.15)',
-}
-const footerTagline = {
-  color: CHAMPAGNE_60,
-  fontFamily: FONT,
-  fontSize: '10px',
-  letterSpacing: '0.35em',
-  textTransform: 'uppercase' as const,
-  fontWeight: 600 as const,
-  textAlign: 'center' as const,
-  margin: 0,
-}
-const socialLink = {
-  color: 'rgba(255,255,255,0.25)',
-  fontFamily: FONT,
-  fontSize: '11px',
-  textDecoration: 'none',
-  margin: '0 8px',
-  letterSpacing: '0.1em',
-}
-const socialSep = {
-  color: 'rgba(255,255,255,0.15)',
-  fontSize: '11px',
-}
-const footerCopyright = {
-  color: '#333333',
-  fontFamily: FONT,
-  fontSize: '11px',
-  textAlign: 'center' as const,
-  margin: 0,
-}
-const footerDisclaimer = {
-  color: '#222222',
-  fontFamily: FONT,
-  fontSize: '10px',
-  textAlign: 'center' as const,
-  margin: 0,
-}
