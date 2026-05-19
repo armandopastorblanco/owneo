@@ -11,7 +11,7 @@ export const MagicLinkEmail = ({ confirmationUrl }: MagicLinkEmailProps) => (
     <Preview>Tu enlace de acceso OWNEO</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Section style={header}><Img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" width="220" height="56" style={{ display: "block", margin: "0 auto", height: "56px", width: "auto" }} /></Section>
+        <Section style={header}><Img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" width="440" height="112" style={{ display: "block", margin: "0 auto", height: "112px", width: "auto" }} /></Section>
         <Section style={content}>
           <Heading style={h1}>Tu enlace de acceso</Heading>
           <Text style={text}>Haz clic en el botón para iniciar sesión en OWNEO. Este enlace caducará en breve.</Text>
