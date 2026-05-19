@@ -32,7 +32,7 @@ export default RecoveryEmail
 
 const main = { backgroundColor: '#ffffff', fontFamily: '"Encode Sans Expanded", Arial, sans-serif', margin: 0, padding: '24px 12px' }
 const container = { maxWidth: '600px', margin: '0 auto', border: '1px solid #e5e5e5', borderRadius: '6px', overflow: 'hidden' as const }
-const header = { backgroundColor: '#0a0a0a', padding: '28px 24px', textAlign: 'center' as const }
+const header = { backgroundColor: '#0a0a0a', padding: '14px 24px', textAlign: 'center' as const }
 const brand = { color: '#bda095', fontSize: '24px', letterSpacing: '6px', fontWeight: 200 as const, margin: 0 }
 const content = { padding: '32px 32px 16px 32px' }
 const h1 = { fontSize: '22px', fontWeight: 600 as const, color: '#0a0a0a', margin: '0 0 20px' }
