@@ -242,10 +242,10 @@ const EvaluationQuestionnaire = ({
       </div>
 
       <div className="space-y-6 max-h-[55vh] overflow-y-auto pr-2">
-        {questions.map((q) => (
+        {questions.map((q, idx) => (
           <div className="space-y-3" key={q.id}>
             <Label className="text-foreground text-sm font-semibold leading-snug block">
-              {q.order_index}. {q.question_text}
+              {idx + 1}. {q.question_text}
               {q.question_type === "textarea" && (
                 <span className="text-xs text-muted-foreground italic ml-1">(opcional)</span>
               )}
