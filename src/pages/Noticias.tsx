@@ -87,7 +87,7 @@ const MONTHS_ES: Record<string, number> = {
 };
 
 const parseSpanishDate = (date: string): number => {
-  const match = date.toLowerCase().match(/(\d{1,2})\s+de?\s*([a-záéíóú]+)\s+(?:de\s+)?(\d{4})/);
+  const match = date.toLowerCase().match(/(\d{1,2})\s+(?:de\s+)?([a-záéíóú]+)\s+(?:de\s+)?(\d{4})/);
   if (!match) return 0;
   const [, day, month, year] = match;
   const m = MONTHS_ES[month] ?? 0;
