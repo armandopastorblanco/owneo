@@ -16,7 +16,9 @@ const Index = () => {
   const { data: cars = [], isLoading: carsLoading } = useCars();
   const { data: cities = [] } = useLocations();
   const { trackEvent } = useAnalytics();
-  const featuredCars = cars.slice(0, 4);
+  const featuredCars = cars
+    .filter((c) => c.status !== "complete" && (c.remainingParticipations ?? 0) > 0)
+    .slice(0, 4);
 
   return (
     <div className="min-h-screen bg-background">
