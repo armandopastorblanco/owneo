@@ -70,154 +70,131 @@ const Index = () => {
           </div>
 
           {/* Comparativa Ferrari Roma */}
-          <section className="py-24 px-4 bg-background">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-[#c9a84c] mb-4">
-                  An&aacute;lisis comparativo &middot; 5 a&ntilde;os
-                </p>
-                <h2 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-4">
-                  El mismo coche.<br />Una decisi&oacute;n diferente.
+          <section className="py-24 px-4 sm:px-6 bg-background">
+            <div className="max-w-5xl mx-auto">
+
+              {/* Header émotionnel */}
+              <div className="text-center mb-20">
+                <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6"
+                  style={{color:"rgba(201,168,76,0.7)"}}>
+                  Ejemplo real · Ferrari Roma
+                </span>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-6">
+                  Llevas años mirando<br />ese Ferrari.
+                  <span className="block mt-2" style={{color:"#c9a84c"}}>Ya es hora.</span>
                 </h2>
-                <div className="w-16 h-px bg-[#c9a84c] mx-auto mb-6" />
-                <p className="text-sm text-muted-foreground">
-                  Ejemplo basado en un Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o &middot; durante 5 a&ntilde;os
+                <div className="w-12 h-px mx-auto mb-8" style={{backgroundColor:"#c9a84c"}} />
+                <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+                  No se trata de gastar menos. Se trata de tomar
+                  la decisión más inteligente.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch mb-8">
-                {/* CARD 1 — Compra tradicional */}
-                <div className="bg-[#111111] border border-white/10 rounded-2xl p-8 flex flex-col justify-between min-h-[560px]">
-                  <div>
-                    <span className="inline-block text-[10px] uppercase tracking-[0.25em] text-muted-foreground border border-white/15 rounded-full px-4 py-1.5 mb-8">
-                      Compra tradicional
-                    </span>
-                    <div className="mb-8">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                        Lo que realmente pagas
-                      </p>
-                      <p className="text-6xl font-black text-foreground leading-none mb-2">~240.500&euro;</p>
-                      <p className="text-xs text-muted-foreground">coste neto en 5 a&ntilde;os</p>
-                    </div>
-                    <div className="space-y-0 border-t border-white/8">
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Precio de compra</span>
-                        <span className="text-xs font-semibold text-foreground">330.000&euro;</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Gastos gesti&oacute;n 5 a&ntilde;os</span>
-                        <span className="text-xs font-semibold text-foreground">+ 125.000&euro;</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Valor de reventa (65%)</span>
-                        <span className="text-xs font-semibold text-green-400/80">&minus; 214.500&euro;</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3">
-                        <span className="text-xs font-bold text-foreground">Coste neto total</span>
-                        <span className="text-sm font-black text-foreground">240.500&euro;</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-6 space-y-2.5">
-                    {["Seguro a tu cargo", "Mantenimiento a tu cargo", "Depreciaci\u00f3n inmediata"].map(item => (
-                      <div key={item} className="flex items-center gap-2.5">
-                        <X className="w-3.5 h-3.5 text-red-400/60 flex-shrink-0" />
-                        <span className="text-xs text-muted-foreground">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {/* Choc financier — deux chiffres */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 items-stretch">
 
-                {/* CARD 2 — Alquiler cl\u00e1sico */}
-                <div className="bg-[#111111] border border-white/10 rounded-2xl p-8 flex flex-col justify-between min-h-[560px]">
+                {/* Compra tradicional */}
+                <div className="bg-[#0d0d0d] border border-white/8 rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
                   <div>
-                    <span className="inline-block text-[10px] uppercase tracking-[0.25em] text-muted-foreground border border-white/15 rounded-full px-4 py-1.5 mb-8">
-                      Alquiler cl&aacute;sico
+                    <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground border border-white/10 rounded-full px-4 py-1.5 mb-10">
+                      Comprándolo
                     </span>
                     <div className="mb-8">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                        Lo que realmente pagas
+                      <p className="text-5xl sm:text-6xl font-black text-foreground/40 leading-none mb-3">
+                        ~240.500€
                       </p>
-                      <p className="text-6xl font-black text-foreground leading-none mb-2">~180.000&euro;</p>
-                      <p className="text-xs text-muted-foreground">coste neto en 5 a&ntilde;os</p>
-                    </div>
-                    <div className="space-y-0 border-t border-white/8">
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Alquiler anual (28 d&iacute;as)</span>
-                        <span className="text-xs font-semibold text-foreground">36.000&euro;/a&ntilde;o</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Total 5 a&ntilde;os</span>
-                        <span className="text-xs font-semibold text-foreground">180.000&euro;</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Valor de reventa</span>
-                        <span className="text-xs font-semibold text-muted-foreground">0&euro;</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3">
-                        <span className="text-xs font-bold text-foreground">Coste neto total</span>
-                        <span className="text-sm font-black text-foreground">180.000&euro;</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-6 space-y-2.5">
-                    {["Sin propiedad ni v\u00ednculo", "Precio variable seg\u00fan demanda", "Sin continuidad garantizada"].map(item => (
-                      <div key={item} className="flex items-center gap-2.5">
-                        <X className="w-3.5 h-3.5 text-red-400/60 flex-shrink-0" />
-                        <span className="text-xs text-muted-foreground">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* CARD 3 — Modelo OWNEO */}
-                <div
-                  className="bg-[#111111] border border-[#c9a84c]/50 rounded-2xl p-8 flex flex-col justify-between min-h-[560px] relative"
-                  style={{ boxShadow: "0 0 40px rgba(201,168,76,0.08), 0 0 80px rgba(201,168,76,0.04)" }}
-                >
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="bg-[#c9a84c] text-black text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full whitespace-nowrap">
-                      Mejor opci&oacute;n
-                    </span>
-                  </div>
-                  <div>
-                    <span className="inline-block text-[10px] uppercase tracking-[0.25em] text-[#c9a84c] border border-[#c9a84c]/30 rounded-full px-4 py-1.5 mb-8">
-                      Modelo OWNEO
-                    </span>
-                    <div className="mb-8">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]/70 mb-3">
-                        Lo que realmente pagas
+                      <p className="text-sm text-muted-foreground">
+                        coste real en 5 años
                       </p>
-                      <p className="text-6xl font-black text-[#c9a84c] leading-none mb-2">~26.400&euro;</p>
-                      <p className="text-xs text-muted-foreground">coste neto en 5 a&ntilde;os &middot; todo gestionado</p>
                     </div>
-                    <div className="space-y-0 border-t border-[#c9a84c]/15">
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Participaci&oacute;n (&uacute;nica)</span>
-                        <span className="text-xs font-semibold text-foreground">33.000&euro;</span>
+                    <div className="space-y-3 border-t border-white/6 pt-6">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-muted-foreground/70">Precio de compra</span>
+                        <span className="text-xs text-muted-foreground">330.000€</span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Gesti&oacute;n 5 a&ntilde;os (3.300&euro;/a&ntilde;o)</span>
-                        <span className="text-xs font-semibold text-foreground">+ 16.500&euro;</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-muted-foreground/70">Gastos 5 años</span>
+                        <span className="text-xs text-muted-foreground">+ 125.000€</span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-white/8">
-                        <span className="text-xs text-muted-foreground">Valor de reventa (70%)</span>
-                        <span className="text-xs font-semibold text-green-400/80">&minus; 23.100&euro;</span>
-                      </div>
-                      <div className="flex justify-between items-center py-3">
-                        <span className="text-xs font-bold text-[#c9a84c]">Coste neto total</span>
-                        <span className="text-sm font-black text-[#c9a84c]">26.400&euro;</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-muted-foreground/70">Reventa estimada (65%)</span>
+                        <span className="text-xs text-muted-foreground">− 214.500€</span>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-6 space-y-2.5">
+                  <div className="mt-8 pt-6 border-t border-white/6 space-y-2.5">
                     {[
-                      "Seguro, garaje y mantenimiento \u00d710",
-                      "28 d\u00edas garantizados cada a\u00f1o",
-                      "Acceso a toda la flota OWNEO",
+                      "Seguro y mantenimiento a tu cargo",
+                      "Depreciación inmediata",
+                      "Inmovilización de capital"
                     ].map(item => (
                       <div key={item} className="flex items-center gap-2.5">
-                        <Check className="w-3.5 h-3.5 text-[#c9a84c] flex-shrink-0" />
+                        <X className="w-3 h-3 flex-shrink-0" style={{color:"rgba(239,68,68,0.5)"}} />
+                        <span className="text-xs text-muted-foreground/60">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* OWNEO */}
+                <div
+                  className="rounded-2xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
+                  style={{
+                    backgroundColor:"#0d0d0d",
+                    border:"1px solid rgba(201,168,76,0.4)",
+                    boxShadow:"0 0 60px rgba(201,168,76,0.07), 0 0 120px rgba(201,168,76,0.03)"
+                  }}>
+
+                  {/* Badge */}
+                  <div className="absolute top-0 right-0">
+                    <div
+                      className="text-[9px] font-black uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl"
+                      style={{backgroundColor:"#c9a84c", color:"#000000"}}>
+                      La decisión inteligente
+                    </div>
+                  </div>
+
+                  <div>
+                    <span
+                      className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10"
+                      style={{color:"#c9a84c", borderColor:"rgba(201,168,76,0.3)"}}>
+                      Con OWNEO
+                    </span>
+                    <div className="mb-8">
+                      <p className="text-5xl sm:text-6xl font-black leading-none mb-3"
+                        style={{color:"#c9a84c"}}>
+                        ~26.400€
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        coste real en 5 años · todo gestionado
+                      </p>
+                    </div>
+                    <div className="space-y-3 border-t pt-6"
+                      style={{borderColor:"rgba(201,168,76,0.12)"}}>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-muted-foreground/70">Participación única</span>
+                        <span className="text-xs text-muted-foreground">33.000€</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-muted-foreground/70">Gestión 5 años</span>
+                        <span className="text-xs text-muted-foreground">+ 16.500€</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-muted-foreground/70">Recuperas (reventa 70%)</span>
+                        <span className="text-xs" style={{color:"rgba(134,239,172,0.8)"}}>− 23.100€</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t space-y-2.5"
+                    style={{borderColor:"rgba(201,168,76,0.12)"}}>
+                    {[
+                      "Seguro, garaje y mantenimiento ×10",
+                      "28 días garantizados al año",
+                      "Hasta un 70% de tu inversión recuperada"
+                    ].map(item => (
+                      <div key={item} className="flex items-center gap-2.5">
+                        <Check className="w-3 h-3 flex-shrink-0" style={{color:"#c9a84c"}} />
                         <span className="text-xs text-muted-foreground">{item}</span>
                       </div>
                     ))}
@@ -225,30 +202,51 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Savings banner */}
-              <div className="border border-[#c9a84c]/20 rounded-2xl p-6 bg-[#c9a84c]/5">
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-[#c9a84c]/60 mb-1">
-                      OWNEO vs Compra tradicional
-                    </p>
-                    <p className="text-2xl sm:text-3xl font-black text-[#c9a84c]">Ahorras ~214.100&euro;</p>
-                    <p className="text-xs text-muted-foreground mt-1">un 89% menos</p>
-                  </div>
-                  <div className="w-px h-10 bg-[#c9a84c]/20 hidden sm:block" />
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-[#c9a84c]/60 mb-1">
-                      OWNEO vs Alquiler cl&aacute;sico
-                    </p>
-                    <p className="text-2xl sm:text-3xl font-black text-[#c9a84c]">Ahorras ~153.600&euro;</p>
-                    <p className="text-xs text-muted-foreground mt-1">un 85% menos</p>
-                  </div>
-                </div>
+              {/* Révélation finale */}
+              <div
+                className="rounded-2xl px-8 py-10 text-center"
+                style={{
+                  backgroundColor:"rgba(201,168,76,0.04)",
+                  border:"1px solid rgba(201,168,76,0.15)"
+                }}>
+                <p className="text-[10px] uppercase tracking-[0.35em] mb-4"
+                  style={{color:"rgba(201,168,76,0.5)"}}>
+                  La diferencia
+                </p>
+                <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-3">
+                  El mismo Ferrari Roma.
+                </p>
+                <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6"
+                  style={{color:"#c9a84c"}}>
+                  214.100€ de diferencia.
+                </p>
+                <p className="text-sm text-muted-foreground max-w-md mx-auto mb-8 leading-relaxed">
+                  No es magia. Es una estructura de propiedad compartida
+                  diseñada para los que entienden que el lujo inteligente
+                  no tiene nada que envidiarle al lujo tradicional.
+                </p>
+                <Link to="/nuestro-modelo">
+                  <button
+                    className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] px-8 py-4 rounded-full transition-all duration-300"
+                    style={{
+                      backgroundColor:"#c9a84c",
+                      color:"#000000"
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(201,168,76,0.85)";
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#c9a84c";
+                    }}>
+                    Quiero conducirlo
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </Link>
+                <p className="text-xs mt-5" style={{color:"rgba(255,255,255,0.2)"}}>
+                  Cálculo estimado · Ferrari Roma · 28 días al año · 5 años
+                </p>
               </div>
 
-              <p className="text-center text-xs text-muted-foreground/50 mt-6 italic">
-                C&aacute;lculo estimado sobre 5 a&ntilde;os &middot; Basado en un Ferrari Roma &middot; 28 d&iacute;as al a&ntilde;o
-              </p>
             </div>
           </section>
 
