@@ -55,7 +55,7 @@ const Index = () => {
             </div>
             <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
               <CalendarDays className="w-8 h-8 text-foreground mb-4 mx-auto" />
-              <div className="text-5xl font-bold text-foreground mb-2">4 <span className="text-base font-semibold align-middle">semanas</span></div>
+              <div className="text-5xl font-bold text-foreground mb-2 leading-none">4<div className="text-base font-semibold mt-1">semanas</div></div>
               <div className="font-semibold text-foreground mb-2">Garantizadas al a&ntilde;o</div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Cuatro semanas al volante del coche de tus sue&ntilde;os. Cuando quieras, donde quieras.
