@@ -8,7 +8,10 @@ import owneoLogo from "@/assets/owneo-logo.png";
 
 const HeroSlider = () => {
   const { data: cars = [] } = useCars();
-  const heroSlides = useMemo(() => cars.length > 0 ? cars : [], [cars]);
+  const heroSlides = useMemo(() => {
+    const excluded = ["aston martin", "bentley", "rolls-royce", "rolls royce"];
+    return cars.filter((c) => !excluded.includes((c.brand || "").toLowerCase().trim()));
+  }, [cars]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [nextSlide, setNextSlide] = useState(1);
