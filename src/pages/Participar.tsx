@@ -192,12 +192,7 @@ const Step0VehicleSelection = ({
   }
 
   // Context B: no preselected car
-  const carsInCity = useMemo(() => {
-    if (!selectedCityId) return [];
-    const cityName = cityById.get(selectedCityId);
-    if (!cityName) return [];
-    return availableCars.filter((c) => c.availableIn?.includes(cityName));
-  }, [selectedCityId, cityById, availableCars]);
+
 
   if (carsLoading || locsLoading) {
     return (
