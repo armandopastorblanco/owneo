@@ -76,14 +76,14 @@ const Index = () => {
               {/* Header émotionnel */}
               <div className="text-center mb-20">
                 <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6"
-                  style={{color:"rgba(201,168,76,0.7)"}}>
+                  style={{color:"rgba(188,159,148,0.7)"}}>
                   Ejemplo real · Ferrari Roma
                 </span>
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-6">
                   Llevas años mirando<br />ese Ferrari.
-                  <span className="block mt-2" style={{color:"#c9a84c"}}>Ya es hora.</span>
+                  <span className="block mt-2" style={{color:"#bc9f94"}}>Ya es hora.</span>
                 </h2>
-                <div className="w-12 h-px mx-auto mb-8" style={{backgroundColor:"#c9a84c"}} />
+                <div className="w-12 h-px mx-auto mb-8" style={{backgroundColor:"#bc9f94"}} />
                 <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
                   No se trata de gastar menos. Se trata de tomar
                   la decisión más inteligente.
@@ -141,15 +141,15 @@ const Index = () => {
                   className="rounded-2xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
                   style={{
                     backgroundColor:"#0d0d0d",
-                    border:"1px solid rgba(201,168,76,0.4)",
-                    boxShadow:"0 0 60px rgba(201,168,76,0.07), 0 0 120px rgba(201,168,76,0.03)"
+                    border:"1px solid rgba(188,159,148,0.4)",
+                    boxShadow:"0 0 60px rgba(188,159,148,0.07), 0 0 120px rgba(188,159,148,0.03)"
                   }}>
 
                   {/* Badge */}
                   <div className="absolute top-0 right-0">
                     <div
                       className="text-[9px] font-black uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl"
-                      style={{backgroundColor:"#c9a84c", color:"#000000"}}>
+                      style={{backgroundColor:"#bc9f94", color:"#000000"}}>
                       La decisión inteligente
                     </div>
                   </div>
@@ -157,12 +157,12 @@ const Index = () => {
                   <div>
                     <span
                       className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10"
-                      style={{color:"#c9a84c", borderColor:"rgba(201,168,76,0.3)"}}>
+                      style={{color:"#bc9f94", borderColor:"rgba(188,159,148,0.3)"}}>
                       Con OWNEO
                     </span>
                     <div className="mb-8">
                       <p className="text-5xl sm:text-6xl font-black leading-none mb-3"
-                        style={{color:"#c9a84c"}}>
+                        style={{color:"#bc9f94"}}>
                         ~26.400€
                       </p>
                       <p className="text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ const Index = () => {
                       </p>
                     </div>
                     <div className="space-y-3 border-t pt-6"
-                      style={{borderColor:"rgba(201,168,76,0.12)"}}>
+                      style={{borderColor:"rgba(188,159,148,0.12)"}}>
                       <div className="flex justify-between items-center">
                         <span className="text-xs text-muted-foreground/70">Participación única</span>
                         <span className="text-xs text-muted-foreground">33.000€</span>
@@ -187,14 +187,14 @@ const Index = () => {
                   </div>
 
                   <div className="mt-8 pt-6 border-t space-y-2.5"
-                    style={{borderColor:"rgba(201,168,76,0.12)"}}>
+                    style={{borderColor:"rgba(188,159,148,0.12)"}}>
                     {[
                       "Seguro, garaje y mantenimiento ×10",
                       "28 días garantizados al año",
                       "Hasta un 70% de tu inversión recuperada"
                     ].map(item => (
                       <div key={item} className="flex items-center gap-2.5">
-                        <Check className="w-3 h-3 flex-shrink-0" style={{color:"#c9a84c"}} />
+                        <Check className="w-3 h-3 flex-shrink-0" style={{color:"#bc9f94"}} />
                         <span className="text-xs text-muted-foreground">{item}</span>
                       </div>
                     ))}
@@ -206,18 +206,18 @@ const Index = () => {
               <div
                 className="rounded-2xl px-8 py-10 text-center"
                 style={{
-                  backgroundColor:"rgba(201,168,76,0.04)",
-                  border:"1px solid rgba(201,168,76,0.15)"
+                  backgroundColor:"rgba(188,159,148,0.04)",
+                  border:"1px solid rgba(188,159,148,0.15)"
                 }}>
                 <p className="text-[10px] uppercase tracking-[0.35em] mb-4"
-                  style={{color:"rgba(201,168,76,0.5)"}}>
+                  style={{color:"rgba(188,159,148,0.5)"}}>
                   La diferencia
                 </p>
                 <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-3">
                   El mismo Ferrari Roma.
                 </p>
                 <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6"
-                  style={{color:"#c9a84c"}}>
+                  style={{color:"#bc9f94"}}>
                   214.100€ de diferencia.
                 </p>
                 <p className="text-sm text-muted-foreground max-w-md mx-auto mb-8 leading-relaxed">
@@ -229,14 +229,14 @@ const Index = () => {
                   <button
                     className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] px-8 py-4 rounded-full transition-all duration-300"
                     style={{
-                      backgroundColor:"#c9a84c",
+                      backgroundColor:"#bc9f94",
                       color:"#000000"
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(201,168,76,0.85)";
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(188,159,148,0.85)";
                     }}
                     onMouseLeave={e => {
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#c9a84c";
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#bc9f94";
                     }}>
                     Quiero conducirlo
                     <ArrowRight className="w-4 h-4" />
