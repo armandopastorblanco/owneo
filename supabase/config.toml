@@ -29,3 +29,6 @@ verify_jwt = false
 
 [functions.send-admin-new-participation]
 verify_jwt = false
+
+[functions.process-email-queue]
+verify_jwt = true
