@@ -288,17 +288,32 @@ const Step0VehicleSelection = ({
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
+const fieldLabels: Record<string, string> = {
+  name: "Nombre",
+  surname: "Apellidos",
+  email: "Email",
+  password: "Contraseña",
+  confirmPassword: "Confirmar contraseña",
+  phone: "Teléfono",
+  address: "Dirección",
+  linkedin: "LinkedIn",
+  cityId: "Ciudad",
+  numParticipations: "Número de participaciones",
+};
+
 const personalSchemaGuest = z
   .object({
-    name: z.string().trim().min(2),
-    surname: z.string().trim().min(2),
-    email: z.string().trim().email(),
-    password: z.string().regex(passwordRegex),
+    name: z.string().trim().min(2, { message: "El nombre debe tener al menos 2 caracteres" }),
+    surname: z.string().trim().min(2, { message: "Los apellidos deben tener al menos 2 caracteres" }),
+    email: z.string().trim().email({ message: "Introduce un email válido" }),
+    password: z.string().regex(passwordRegex, {
+      message: "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número",
+    }),
     confirmPassword: z.string(),
-    phone: z.string().trim().min(6),
+    phone: z.string().trim().min(6, { message: "Introduce un teléfono válido" }),
     address: z.string().trim().optional().or(z.literal("")),
     linkedin: z.string().trim().optional().or(z.literal("")),
-    cityId: z.string().min(1),
+    cityId: z.string().min(1, { message: "Selecciona una ciudad" }),
     numParticipations: z.number().int().min(1),
   })
   .refine((d) => d.password === d.confirmPassword, {
