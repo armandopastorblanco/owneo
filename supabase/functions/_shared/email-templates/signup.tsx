@@ -20,7 +20,7 @@ export const SignupEmail = ({ siteName, siteUrl, recipient, confirmationUrl }: S
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
-          <Text style={brand}>OWNEO</Text>
+          <Img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" width="140" height="32" style={{ display: "block", margin: "0 auto", height: "32px", width: "auto" }} />
         </Section>
         <Section style={content}>
           <Heading style={h1}>Confirma tu email</Heading>
