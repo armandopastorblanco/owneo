@@ -80,10 +80,23 @@ const additionalNewsItems = additionalNews.map((a) => ({
 }));
 
 const allNews = [...originalNews, ...additionalNewsItems];
-const porscheIndex = allNews.findIndex(item => item.link === '/noticias/porsche-911-turbo-s-2026');
-const newsItems = porscheIndex !== -1 
-  ? [allNews[porscheIndex], ...allNews.slice(0, porscheIndex), ...allNews.slice(porscheIndex + 1)]
-  : allNews;
+
+const MONTHS_ES: Record<string, number> = {
+  enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
+  julio: 6, agosto: 7, septiembre: 8, octubre: 9, noviembre: 10, diciembre: 11,
+};
+
+const parseSpanishDate = (date: string): number => {
+  const match = date.toLowerCase().match(/(\d{1,2})\s+de?\s*([a-záéíóú]+)\s+(?:de\s+)?(\d{4})/);
+  if (!match) return 0;
+  const [, day, month, year] = match;
+  const m = MONTHS_ES[month] ?? 0;
+  return new Date(Number(year), m, Number(day)).getTime();
+};
+
+const newsItems = [...allNews].sort(
+  (a, b) => parseSpanishDate(b.date) - parseSpanishDate(a.date)
+);
 
 const Noticias = () => {
   return (
