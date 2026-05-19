@@ -1,7 +1,7 @@
 /// <reference types="npm:@types/react@18.3.1" />
 
 import * as React from 'npm:react@18.3.1'
-import { Body, Button, Container, Head, Heading, Hr, Html, Preview, Section, Text } from 'npm:@react-email/components@0.0.22'
+import { Body, Button, Container, Head, Heading, Hr, Html, Preview, Section, Text, Img } from 'npm:@react-email/components@0.0.22'
 
 interface MagicLinkEmailProps { siteName: string; confirmationUrl: string }
 
@@ -11,7 +11,7 @@ export const MagicLinkEmail = ({ confirmationUrl }: MagicLinkEmailProps) => (
     <Preview>Tu enlace de acceso OWNEO</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Section style={header}><Text style={brand}>OWNEO</Text></Section>
+        <Section style={header}><Img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" width="140" height="32" style={{ display: "block", margin: "0 auto", height: "32px", width: "auto" }} /></Section>
         <Section style={content}>
           <Heading style={h1}>Tu enlace de acceso</Heading>
           <Text style={text}>Haz clic en el botón para iniciar sesión en OWNEO. Este enlace caducará en breve.</Text>
