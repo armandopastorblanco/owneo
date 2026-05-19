@@ -108,6 +108,15 @@ const Step0VehicleSelection = ({
     );
   }, [cars]);
 
+  const carsInCity = useMemo(() => {
+    if (!selectedCityId) return [];
+    const cityName = cityById.get(selectedCityId);
+    if (!cityName) return [];
+    return availableCars.filter((c) => c.availableIn?.includes(cityName));
+  }, [selectedCityId, cityById, availableCars]);
+
+
+
   // Context A: came with carId — show summary + alternative cities for same brand+model
   if (initialCarId && initialCar) {
     const sameModelCars = availableCars.filter(
