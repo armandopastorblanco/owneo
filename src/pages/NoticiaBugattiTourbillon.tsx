@@ -5,10 +5,10 @@ import { Calendar, ArrowLeft, Zap, Gauge, Timer, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import ArticleCTAs from "@/components/ArticleCTAs";
 
-import heroImg from "@/assets/news/bugatti-tourbillon.jpg";
-import detailImg1 from "@/assets/news/bugatti-tourbillon-detail-1.jpg";
-import detailImg2 from "@/assets/news/bugatti-tourbillon-detail-2.jpg";
-import detailImg3 from "@/assets/news/bugatti-tourbillon-detail-3.jpg";
+const heroImg = "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1600&q=80";
+const detailImg1 = "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=1200&q=80";
+const detailImg2 = "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80";
+const detailImg3 = "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1200&q=80";
 
 const specs = [
   { icon: Zap, label: "Potencia total", value: "1.800 CV" },
