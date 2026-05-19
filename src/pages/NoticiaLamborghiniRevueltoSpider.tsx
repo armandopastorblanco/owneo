@@ -5,10 +5,10 @@ import { Calendar, ArrowLeft, Zap, Gauge, Timer, Crown } from "lucide-react";
 import ArticleCTAs from "@/components/ArticleCTAs";
 import { Link } from "react-router-dom";
 
-import heroImg from "@/assets/news/lamborghini-revuelto-spider.jpg";
-const detailImg1 = heroImg;
-const detailImg2 = heroImg;
-const detailImg3 = heroImg;
+const heroImg = "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1600&q=80";
+const detailImg1 = "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80";
+const detailImg2 = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80";
+const detailImg3 = "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80";
 
 const specs = [
   { icon: Zap, label: "Potencia", value: "1.015 CV" },
