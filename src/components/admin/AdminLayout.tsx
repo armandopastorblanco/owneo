@@ -71,10 +71,13 @@ const AdminLayout = () => {
 
   const SidebarContent = () => (
     <>
-      <div className="p-5 border-b border-border/40">
+      <button
+        onClick={() => { navigate("/"); setSidebarOpen(false); }}
+        className="p-5 border-b border-border/40 text-left w-full hover:bg-muted/40 transition-colors"
+      >
         <span className="text-xl font-bold tracking-wider text-foreground">OWNEO</span>
         <span className="ml-2 text-xs text-muted-foreground uppercase tracking-widest">Admin</span>
-      </div>
+      </button>
 
       <nav className="flex-1 overflow-y-auto p-3 space-y-1">
         {navItems.map((item) => {
