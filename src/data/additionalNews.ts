@@ -22,6 +22,16 @@ import porsche911TurboS2026 from "@/assets/news/porsche-911-turbo-s-2026.jpg";
 import porscheTurboSDetail1 from "@/assets/news/porsche-turbo-s-detail-1.jpg";
 import porscheTurboSDetail2 from "@/assets/news/porsche-turbo-s-detail-2.jpg";
 import porscheTurboSDetail3 from "@/assets/news/porsche-turbo-s-detail-3.jpg";
+import bugattiTourbillonLaunch from "@/assets/news/bugatti-tourbillon-launch.jpg";
+import lamborghiniRevueltoSpider from "@/assets/news/lamborghini-revuelto-spider.jpg";
+import ferrari12CilindriSpider from "@/assets/news/ferrari-12cilindri-spider.jpg";
+import porscheGt3Rs2026 from "@/assets/news/porsche-gt3-rs-2026.jpg";
+import mclarenW1Spider from "@/assets/news/mclaren-w1-spider.jpg";
+import astonMartinVantageGt3 from "@/assets/news/aston-martin-vantage-gt3.jpg";
+import lamborghiniUrusSe from "@/assets/news/lamborghini-urus-se.jpg";
+import bugattiBolide from "@/assets/news/bugatti-bolide.jpg";
+import rollsRoyceDroptail from "@/assets/news/rolls-royce-droptail.jpg";
+import porsche718CaymanElectric from "@/assets/news/porsche-718-cayman-electric.jpg";
 
 export interface NewsArticle {
   id: number;
