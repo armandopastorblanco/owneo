@@ -3,15 +3,7 @@
 import * as React from 'npm:react@18.3.1'
 
 import {
-  Body,
-  Button,
-  Container,
-  Head,
-  Heading,
-  Html,
-  Link,
-  Preview,
-  Text,
+  Body, Button, Container, Head, Heading, Hr, Html, Link, Preview, Section, Text,
 } from 'npm:@react-email/components@0.0.22'
 
 interface SignupEmailProps {
@@ -21,38 +13,31 @@ interface SignupEmailProps {
   confirmationUrl: string
 }
 
-export const SignupEmail = ({
-  siteName,
-  siteUrl,
-  recipient,
-  confirmationUrl,
-}: SignupEmailProps) => (
-  <Html lang="en" dir="ltr">
+export const SignupEmail = ({ siteName, siteUrl, recipient, confirmationUrl }: SignupEmailProps) => (
+  <Html lang="es" dir="ltr">
     <Head />
-    <Preview>Confirm your email for {siteName}</Preview>
+    <Preview>Confirma tu email para acceder a OWNEO</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={h1}>Confirm your email</Heading>
-        <Text style={text}>
-          Thanks for signing up for{' '}
-          <Link href={siteUrl} style={link}>
-            <strong>{siteName}</strong>
-          </Link>
-          !
-        </Text>
-        <Text style={text}>
-          Please confirm your email address (
-          <Link href={`mailto:${recipient}`} style={link}>
-            {recipient}
-          </Link>
-          ) by clicking the button below:
-        </Text>
-        <Button style={button} href={confirmationUrl}>
-          Verify Email
-        </Button>
-        <Text style={footer}>
-          If you didn't create an account, you can safely ignore this email.
-        </Text>
+        <Section style={header}>
+          <Text style={brand}>OWNEO</Text>
+        </Section>
+        <Section style={content}>
+          <Heading style={h1}>Confirma tu email</Heading>
+          <Text style={text}>
+            Gracias por unirte a <Link href={siteUrl} style={link}>OWNEO</Link>. El lujo que se comparte comienza con un solo gesto: confirmar tu dirección de correo.
+          </Text>
+          <Text style={text}>
+            Confirma <strong style={{ color: '#0a0a0a' }}>{recipient}</strong> haciendo clic en el botón a continuación:
+          </Text>
+          <Section style={{ textAlign: 'center' }}>
+            <Button style={button} href={confirmationUrl}>Verificar mi email</Button>
+          </Section>
+          <Text style={footer}>Si no creaste esta cuenta, puedes ignorar este mensaje.</Text>
+        </Section>
+        <Hr style={hr} />
+        <Text style={signature}>El equipo OWNEO</Text>
+        <Text style={legal}>© 2025 OWNEO. Todos los derechos reservados.</Text>
       </Container>
     </Body>
   </Html>
@@ -60,27 +45,16 @@ export const SignupEmail = ({
 
 export default SignupEmail
 
-const main = { backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }
-const container = { padding: '20px 25px' }
-const h1 = {
-  fontSize: '22px',
-  fontWeight: 'bold' as const,
-  color: '#000000',
-  margin: '0 0 20px',
-}
-const text = {
-  fontSize: '14px',
-  color: '#55575d',
-  lineHeight: '1.5',
-  margin: '0 0 25px',
-}
-const link = { color: 'inherit', textDecoration: 'underline' }
-const button = {
-  backgroundColor: '#000000',
-  color: '#ffffff',
-  fontSize: '14px',
-  borderRadius: '8px',
-  padding: '12px 20px',
-  textDecoration: 'none',
-}
-const footer = { fontSize: '12px', color: '#999999', margin: '30px 0 0' }
+const main = { backgroundColor: '#ffffff', fontFamily: '"Encode Sans Expanded", Arial, sans-serif', margin: 0, padding: '24px 12px' }
+const container = { maxWidth: '600px', margin: '0 auto', border: '1px solid #e5e5e5', borderRadius: '6px', overflow: 'hidden' as const }
+const header = { backgroundColor: '#0a0a0a', padding: '28px 24px', textAlign: 'center' as const }
+const brand = { color: '#c9a84c', fontSize: '24px', letterSpacing: '6px', fontWeight: 200 as const, margin: 0 }
+const content = { padding: '32px 32px 16px 32px' }
+const h1 = { fontSize: '22px', fontWeight: 600 as const, color: '#0a0a0a', margin: '0 0 20px' }
+const text = { fontSize: '15px', color: '#333333', lineHeight: '1.6', margin: '0 0 16px' }
+const link = { color: '#c9a84c', textDecoration: 'none', fontWeight: 600 as const }
+const button = { backgroundColor: '#c9a84c', color: '#0a0a0a', fontSize: '14px', fontWeight: 700 as const, padding: '14px 32px', borderRadius: '4px', textDecoration: 'none', letterSpacing: '1px', display: 'inline-block', margin: '12px 0 8px' }
+const footer = { fontSize: '12px', color: '#888888', margin: '24px 0 0' }
+const hr = { border: 'none', borderTop: '1px solid #c9a84c', margin: '0 32px' }
+const signature = { fontSize: '13px', color: '#0a0a0a', textAlign: 'center' as const, margin: '16px 0 4px' }
+const legal = { fontSize: '11px', color: '#999999', textAlign: 'center' as const, margin: '0 0 20px' }
