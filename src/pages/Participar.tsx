@@ -389,14 +389,19 @@ const Step1PersonalInfo = ({
     setLoading(true);
 
     try {
-      // Validate
-      if (!form.name.trim() || !form.surname.trim() || !form.phone.trim()) {
-        toast({ title: "Faltan campos obligatorios", variant: "destructive" });
-        setLoading(false);
-        return;
-      }
-      if (!form.cityId) {
-        toast({ title: "Selecciona una ciudad", variant: "destructive" });
+      // Validate required fields one by one for clearer errors
+      const missing: string[] = [];
+      if (!form.name.trim()) missing.push(fieldLabels.name);
+      if (!form.surname.trim()) missing.push(fieldLabels.surname);
+      if (!form.email.trim()) missing.push(fieldLabels.email);
+      if (!form.phone.trim()) missing.push(fieldLabels.phone);
+      if (!form.cityId) missing.push(fieldLabels.cityId);
+      if (missing.length) {
+        toast({
+          title: missing.length === 1 ? `Falta el campo: ${missing[0]}` : "Faltan campos obligatorios",
+          description: missing.length > 1 ? missing.join(", ") : undefined,
+          variant: "destructive",
+        });
         setLoading(false);
         return;
       }
@@ -415,8 +420,10 @@ const Step1PersonalInfo = ({
         const parsed = personalSchemaGuest.safeParse(form);
         if (!parsed.success) {
           const first = parsed.error.errors[0];
+          const fieldKey = String(first.path[0] ?? "");
+          const label = fieldLabels[fieldKey];
           toast({
-            title: "Datos inválidos",
+            title: label ? `Error en el campo: ${label}` : "Datos inválidos",
             description: first.message || "Revisa el formulario",
             variant: "destructive",
           });
