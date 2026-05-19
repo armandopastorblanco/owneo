@@ -288,17 +288,32 @@ const Step0VehicleSelection = ({
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
+const fieldLabels: Record<string, string> = {
+  name: "Nombre",
+  surname: "Apellidos",
+  email: "Email",
+  password: "Contraseña",
+  confirmPassword: "Confirmar contraseña",
+  phone: "Teléfono",
+  address: "Dirección",
+  linkedin: "LinkedIn",
+  cityId: "Ciudad",
+  numParticipations: "Número de participaciones",
+};
+
 const personalSchemaGuest = z
   .object({
-    name: z.string().trim().min(2),
-    surname: z.string().trim().min(2),
-    email: z.string().trim().email(),
-    password: z.string().regex(passwordRegex),
+    name: z.string().trim().min(2, { message: "El nombre debe tener al menos 2 caracteres" }),
+    surname: z.string().trim().min(2, { message: "Los apellidos deben tener al menos 2 caracteres" }),
+    email: z.string().trim().email({ message: "Introduce un email válido" }),
+    password: z.string().regex(passwordRegex, {
+      message: "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número",
+    }),
     confirmPassword: z.string(),
-    phone: z.string().trim().min(6),
+    phone: z.string().trim().min(6, { message: "Introduce un teléfono válido" }),
     address: z.string().trim().optional().or(z.literal("")),
     linkedin: z.string().trim().optional().or(z.literal("")),
-    cityId: z.string().min(1),
+    cityId: z.string().min(1, { message: "Selecciona una ciudad" }),
     numParticipations: z.number().int().min(1),
   })
   .refine((d) => d.password === d.confirmPassword, {
@@ -374,14 +389,19 @@ const Step1PersonalInfo = ({
     setLoading(true);
 
     try {
-      // Validate
-      if (!form.name.trim() || !form.surname.trim() || !form.phone.trim()) {
-        toast({ title: "Faltan campos obligatorios", variant: "destructive" });
-        setLoading(false);
-        return;
-      }
-      if (!form.cityId) {
-        toast({ title: "Selecciona una ciudad", variant: "destructive" });
+      // Validate required fields one by one for clearer errors
+      const missing: string[] = [];
+      if (!form.name.trim()) missing.push(fieldLabels.name);
+      if (!form.surname.trim()) missing.push(fieldLabels.surname);
+      if (!form.email.trim()) missing.push(fieldLabels.email);
+      if (!form.phone.trim()) missing.push(fieldLabels.phone);
+      if (!form.cityId) missing.push(fieldLabels.cityId);
+      if (missing.length) {
+        toast({
+          title: missing.length === 1 ? `Falta el campo: ${missing[0]}` : "Faltan campos obligatorios",
+          description: missing.length > 1 ? missing.join(", ") : undefined,
+          variant: "destructive",
+        });
         setLoading(false);
         return;
       }
@@ -400,8 +420,10 @@ const Step1PersonalInfo = ({
         const parsed = personalSchemaGuest.safeParse(form);
         if (!parsed.success) {
           const first = parsed.error.errors[0];
+          const fieldKey = String(first.path[0] ?? "");
+          const label = fieldLabels[fieldKey];
           toast({
-            title: "Datos inválidos",
+            title: label ? `Error en el campo: ${label}` : "Datos inválidos",
             description: first.message || "Revisa el formulario",
             variant: "destructive",
           });
