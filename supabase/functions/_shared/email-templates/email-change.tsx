@@ -17,7 +17,7 @@ export const EmailChangeEmail = ({ oldEmail, newEmail, confirmationUrl }: EmailC
     <Preview>Confirma el cambio de email en OWNEO</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Section style={header}><Img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" width="220" height="56" style={{ display: "block", margin: "0 auto", height: "56px", width: "auto" }} /></Section>
+        <Section style={header}><Img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" width="440" height="112" style={{ display: "block", margin: "0 auto", height: "112px", width: "auto" }} /></Section>
         <Section style={content}>
           <Heading style={h1}>Confirma el cambio de email</Heading>
           <Text style={text}>
