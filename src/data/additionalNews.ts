@@ -22,6 +22,16 @@ import porsche911TurboS2026 from "@/assets/news/porsche-911-turbo-s-2026.jpg";
 import porscheTurboSDetail1 from "@/assets/news/porsche-turbo-s-detail-1.jpg";
 import porscheTurboSDetail2 from "@/assets/news/porsche-turbo-s-detail-2.jpg";
 import porscheTurboSDetail3 from "@/assets/news/porsche-turbo-s-detail-3.jpg";
+import bugattiTourbillonLaunch from "@/assets/news/bugatti-tourbillon-launch.jpg";
+import lamborghiniRevueltoSpider from "@/assets/news/lamborghini-revuelto-spider.jpg";
+import ferrari12CilindriSpider from "@/assets/news/ferrari-12cilindri-spider.jpg";
+import porscheGt3Rs2026 from "@/assets/news/porsche-gt3-rs-2026.jpg";
+import mclarenW1Spider from "@/assets/news/mclaren-w1-spider.jpg";
+import astonMartinVantageGt3 from "@/assets/news/aston-martin-vantage-gt3.jpg";
+import lamborghiniUrusSe from "@/assets/news/lamborghini-urus-se.jpg";
+import bugattiBolide from "@/assets/news/bugatti-bolide.jpg";
+import rollsRoyceDroptail from "@/assets/news/rolls-royce-droptail.jpg";
+import porsche718CaymanElectric from "@/assets/news/porsche-718-cayman-electric.jpg";
 
 export interface NewsArticle {
   id: number;
@@ -301,5 +311,214 @@ export const additionalNews: NewsArticle[] = [
       { src: porscheTurboSDetail2, alt: "Porsche 911 Turbo S 2026 - Interior y cockpit" },
       { src: porscheTurboSDetail3, alt: "Porsche 911 Turbo S 2026 - Vista trasera en carretera" }
     ]
+  }
+  ,
+  {
+    id: 28, slug: "bugatti-tourbillon-lanzamiento", image: bugattiTourbillonLaunch, date: "21 Marzo 2026", category: "Hypercars",
+    title: "Bugatti Tourbillon: lanzamiento oficial del V16 híbrido de 1.800 CV",
+    excerpt: "Molsheim levanta el telón sobre el sucesor del Chiron. El Tourbillon combina un V16 atmosférico de 8.3 litros con tres motores eléctricos para alcanzar los 1.800 CV. Solo 250 unidades a 3,8 millones de euros.",
+    readTime: "8 min",
+    content: {
+      intro: "Bugatti inaugura una nueva era con el Tourbillon, el primer modelo enteramente concebido bajo la dirección de Mate Rimac. La marca alsaciana ha optado por una arquitectura completamente inédita: un V16 atmosférico desarrollado junto a Cosworth complementado por tres motores eléctricos, capaz de entregar 1.800 CV sin sacrificar la pureza emocional de un motor de aspiración natural. Una declaración de principios que marca el inicio del próximo capítulo en Molsheim.",
+      sections: [
+        { title: "El renacer del aspirado: V16 de 8.3 litros", paragraphs: [
+          "El corazón del Tourbillon es un V16 atmosférico de 8.3 litros con bancada en V a 90°, capaz de girar hasta 9.000 rpm y entregar 1.000 CV por sí solo. Cosworth ha desarrollado esta unidad partiendo de cero, prescindiendo de turbocompresores para devolver a Bugatti la respuesta inmediata y el sonido orgánico que caracterizaron a los grandes deportivos del siglo XX.",
+          "Tres motores eléctricos (dos delanteros y uno integrado en la transmisión DCT de 8 velocidades) aportan 800 CV adicionales, alimentados por una batería estructural de 25 kWh con tecnología de 800 voltios. El conjunto eleva la potencia total a 1.800 CV con un par superior a 1.600 Nm, y permite hasta 60 km de autonomía 100% eléctrica."
+        ]},
+        { title: "Diseño analógico en la era digital", paragraphs: [
+          "El interior del Tourbillon rompe con la tendencia general del sector: en lugar de pantallas gigantes, Bugatti ha colaborado con relojeros suizos para crear un cuadro de instrumentos enteramente mecánico, mecanizado en titanio y zafiro, con más de 600 componentes que recuerdan a la complicación de un tourbillon de alta relojería.",
+          "Las puertas elitra se abren hacia arriba para facilitar el acceso, y la carrocería de fibra de carbono integra elementos aerodinámicos activos que se despliegan a alta velocidad. La silueta mantiene la firma visual Bugatti –línea central, herradura frontal, dos tonos opcionales– pero introduce proporciones más compactas y atléticas."
+        ]},
+        { title: "Prestaciones y exclusividad", paragraphs: [
+          "El Tourbillon acelera de 0 a 100 km/h en 2,0 segundos, alcanza los 300 km/h en menos de 10 segundos y se desboca hasta una velocidad máxima de 445 km/h con la llave Speed Key. Cifras que lo sitúan como uno de los coches de calle más rápidos jamás homologados.",
+          "Bugatti producirá únicamente 250 unidades a partir de 2026, con un precio de entrada de 3,8 millones de euros antes de impuestos y opciones. La lista de espera ya está cerrada: cada futuro propietario ha sido seleccionado personalmente por la marca para preservar el carácter exclusivo del programa."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "1.800 CV" }, { label: "0-100 km/h", value: "2,0 s" }, { label: "Velocidad máx.", value: "445 km/h" }, { label: "Producción", value: "250 unidades" }]
+  },
+  {
+    id: 29, slug: "lamborghini-revuelto-spider", image: lamborghiniRevueltoSpider, date: "28 Marzo 2026", category: "Lanzamientos",
+    title: "Lamborghini Revuelto Spider: entregada la primera unidad del V12 híbrido descapotable",
+    excerpt: "Sant'Agata Bolognese entrega oficialmente el primer Revuelto Spider a un cliente europeo. 1.015 CV, techo de carbono retráctil y el último V12 atmosférico al aire libre. Una experiencia sensorial sin filtros.",
+    readTime: "7 min",
+    content: {
+      intro: "Lamborghini abre una nueva etapa para su buque insignia con la versión Spider del Revuelto. El primer ejemplar ha sido entregado este mes a un coleccionista alemán durante una ceremonia privada en la fábrica de Sant'Agata Bolognese. Con 1.015 CV combinados, el Revuelto Spider es el descapotable más potente jamás producido por la marca italiana, y también el más cargado de simbolismo: probablemente sea el último Lamborghini con motor V12 atmosférico capaz de respirar el aire libre.",
+      sections: [
+        { title: "V12 atmosférico de 825 CV con asistencia eléctrica", paragraphs: [
+          "El propulsor central trasero conserva la arquitectura V12 a 60° de 6.5 litros del Revuelto coupé: 825 CV a 9.250 rpm, una zona roja que sigue erizando la piel y un sonido que ha sido especialmente afinado para apreciarse con el techo abierto. Tres motores eléctricos suman 190 CV adicionales, llevando la potencia total a 1.015 CV.",
+          "La estructura reforzada para compensar la ausencia de techo apenas añade 95 kg respecto al coupé. El monocasco íntegramente en fibra de carbono garantiza la rigidez torsional necesaria para que el comportamiento dinámico siga siendo el de un superdeportivo de referencia."
+        ]},
+        { title: "Techo de carbono y artesanía", paragraphs: [
+          "El techo rígido se compone de dos paneles de fibra de carbono que se almacenan en el frontal en apenas 12 segundos, a velocidades de hasta 50 km/h. Con el techo cerrado, el coeficiente aerodinámico se mantiene prácticamente intacto respecto al coupé.",
+          "El primer cliente ha optado por una librea Verde Selvans con interiores en cuero Nero Cosmos y costuras en hilo verde. El programa Ad Personam ha permitido personalizar más de 40 detalles, desde el bordado de los reposacabezas hasta la firma del propietario grabada en el umbral."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "1.015 CV" }, { label: "0-100 km/h", value: "2,6 s" }, { label: "Motor", value: "V12 6.5 PHEV" }, { label: "Precio", value: "640.000 €" }]
+  },
+  {
+    id: 30, slug: "ferrari-12cilindri-spider-circuito", image: ferrari12CilindriSpider, date: "4 Abril 2026", category: "Gran Turismo",
+    title: "Ferrari 12Cilindri Spider: debut dinámico en Fiorano con 830 CV",
+    excerpt: "El descapotable más reciente de Maranello ha completado sus primeras vueltas oficiales en el circuito de Fiorano. Manteniendo el V12 atmosférico de 6.5 litros y 830 CV, el 12Cilindri Spider promete una experiencia única.",
+    readTime: "6 min",
+    content: {
+      intro: "Ferrari ha presentado oficialmente el 12Cilindri Spider en una sesión privada en el circuito de Fiorano, con periodistas internacionales invitados a observar las primeras vueltas dinámicas del nuevo descapotable. La versión Spider mantiene íntegro el espíritu del coupé presentado en 2024: un V12 atmosférico de 6.5 litros con 830 CV, dispuesto en posición delantera-central y asociado a una transmisión DCT de 8 velocidades.",
+      sections: [
+        { title: "V12 de aspiración natural sin compromiso", paragraphs: [
+          "El propulsor F140HD entrega 830 CV a 9.250 rpm y 678 Nm de par. Ferrari ha trabajado meticulosamente la respiración, los conductos de admisión y el escape para que el sonido característico de los doce cilindros de Maranello pueda disfrutarse en toda su pureza con el techo bajado.",
+          "Las prestaciones se mantienen prácticamente intactas respecto al coupé: 0 a 100 km/h en 2,9 segundos, 0 a 200 km/h en menos de 8 segundos y una velocidad máxima superior a 340 km/h. Una rareza absoluta entre los descapotables actuales, casi todos abocados al downsizing y al híbrido."
+        ]},
+        { title: "Techo retráctil de aluminio", paragraphs: [
+          "El techo rígido retráctil, fabricado íntegramente en aluminio, se pliega en 14 segundos y permite una operación incluso en marcha hasta 45 km/h. Una vez plegado, libera completamente el habitáculo manteniendo un maletero perfectamente aprovechable para escapadas de fin de semana.",
+          "El interior recoge la filosofía neo-clásica del coupé, con dos pantallas digitales para conductor y pasajero, controles físicos en el volante y materiales premium aplicados con la habitual maestría de Maranello. El precio se sitúa en torno a los 425.000 euros y las entregas comenzarán a finales de 2026."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "830 CV" }, { label: "0-100 km/h", value: "2,9 s" }, { label: "Motor", value: "V12 6.5 atmosférico" }, { label: "Precio", value: "425.000 €" }]
+  },
+  {
+    id: 31, slug: "porsche-911-gt3-rs-2026-especificaciones", image: porscheGt3Rs2026, date: "11 Abril 2026", category: "Competición",
+    title: "Porsche 911 GT3 RS 2026: nuevas especificaciones y aerodinámica activa evolucionada",
+    excerpt: "Porsche actualiza el 911 GT3 RS con un paquete aerodinámico revisado, suspensión recalibrada y una electrónica más permisiva en circuito. El bóxer atmosférico de 4.0 litros sube hasta 535 CV.",
+    readTime: "7 min",
+    content: {
+      intro: "Porsche ha revelado las especificaciones definitivas del 911 GT3 RS 2026, una evolución que afina aún más uno de los GT más capaces del mercado. Las modificaciones se centran en tres ejes: aerodinámica activa, electrónica de chasis y un ligero incremento de potencia del seis cilindros bóxer atmosférico, que ahora ronda los 535 CV.",
+      sections: [
+        { title: "Bóxer atmosférico afinado al milímetro", paragraphs: [
+          "El bóxer de 4.0 litros de aspiración natural mantiene su esencia pero estrena nueva gestión electrónica, un sistema de admisión revisado y un escape de titanio aligerado en 6 kg. Estas modificaciones permiten extraer 535 CV a 8.500 rpm, con la zona roja situada en 9.000 rpm, y un par máximo de 470 Nm.",
+          "Asociado a una caja PDK de 7 velocidades específicamente programada para uso en circuito, el GT3 RS 2026 firma un 0 a 100 km/h en 3,0 segundos y una velocidad máxima de 312 km/h. La relación potencia/peso baja hasta 2,68 kg/CV gracias a un peso en orden de marcha de 1.435 kg."
+        ]},
+        { title: "Aerodinámica activa de inspiración LMDh", paragraphs: [
+          "El alerón trasero adopta ahora un sistema DRS de dos posiciones que se gestiona automáticamente en función del modo de conducción, mejorando tanto la velocidad punta como la carga aerodinámica en curva. La carga aerodinámica máxima alcanza los 920 kg a 285 km/h, superando con creces a la generación anterior.",
+          "El paquete Weissach opcional (estimado en 30.000 euros) sustituye numerosos elementos por fibra de carbono expuesta, incluyendo el techo, el capó delantero, la barra antivuelco y los retrovisores. Permite reducir 18 kg adicionales y desbloquea ajustes específicos de la suspensión KW para uso intensivo en pista."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "535 CV" }, { label: "0-100 km/h", value: "3,0 s" }, { label: "Velocidad máx.", value: "312 km/h" }, { label: "Peso", value: "1.435 kg" }]
+  },
+  {
+    id: 32, slug: "mclaren-w1-spider-confirmacion", image: mclarenW1Spider, date: "18 Abril 2026", category: "Hypercars",
+    title: "McLaren W1 Spider: confirmación oficial del hypercar a cielo abierto",
+    excerpt: "Woking confirma la versión Spider del W1. Mantiene los 1.275 CV del híbrido V8 y añade un techo de carbono desmontable manualmente. Solo 99 unidades a 2,5 millones de libras.",
+    readTime: "6 min",
+    content: {
+      intro: "McLaren ha confirmado oficialmente la existencia del W1 Spider, una variante a cielo abierto del hypercar que sucede al P1 y al Speedtail. La marca británica producirá únicamente 99 unidades del Spider, todas ellas ya reservadas por clientes seleccionados del programa W1 original. Las entregas comenzarán a finales de 2027 una vez completada la producción del coupé.",
+      sections: [
+        { title: "Híbrido V8 de 1.275 CV intacto", paragraphs: [
+          "El tren motriz del W1 Spider conserva íntegramente el del coupé: un V8 biturbo de 4.0 litros de diseño completamente nuevo, asistido por un motor eléctrico radial integrado en la transmisión, para una potencia combinada de 1.275 CV y un par de 1.340 Nm. La batería de 1,4 kWh permite 2 km de autonomía eléctrica en maniobras de baja velocidad.",
+          "A pesar del refuerzo estructural necesario para la ausencia de techo, el peso solo aumenta en 35 kg respecto al coupé, gracias al monocasco de carbono Aerocell desarrollado para soportar las cargas aerodinámicas extremas del W1 sin necesitar barras adicionales."
+        ]},
+        { title: "Techo de carbono extraíble", paragraphs: [
+          "A diferencia de otros hypercars, McLaren ha optado por un techo rígido de fibra de carbono extraíble manualmente, almacenable en el frontal. Esta solución preserva la pureza estética y reduce el peso respecto a un techo plegable motorizado.",
+          "Las puertas Dihedral con apertura hacia arriba se mantienen, y la aerodinámica activa Active Long Tail funciona exactamente como en el coupé, generando hasta 1.000 kg de carga aerodinámica a 280 km/h. El precio de entrada se sitúa en 2,5 millones de libras."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "1.275 CV" }, { label: "0-100 km/h", value: "2,7 s" }, { label: "Motor", value: "V8 4.0 PHEV" }, { label: "Producción", value: "99 unidades" }]
+  },
+  {
+    id: 33, slug: "aston-martin-vantage-gt3-2026", image: astonMartinVantageGt3, date: "25 Abril 2026", category: "Competición",
+    title: "Aston Martin Vantage GT3 2026: nueva era para la marca en resistencia",
+    excerpt: "Aston Martin Racing presenta el nuevo Vantage GT3 homologado para la temporada 2026 de competiciones GT. V8 biturbo derivado del modelo de calle, aerodinámica optimizada y nuevo paquete electrónico de competición.",
+    readTime: "5 min",
+    content: {
+      intro: "Aston Martin Racing ha desvelado el nuevo Vantage GT3 2026, sucesor de uno de los GT3 más exitosos de los últimos años. La nueva generación llega con una evolución profunda de la aerodinámica, una nueva electrónica de control y un V8 biturbo afinado para superar el complejo reglamento de Balance of Performance vigente en el campeonato del mundo de resistencia y el IMSA.",
+      sections: [
+        { title: "V8 biturbo de origen Mercedes-AMG optimizado", paragraphs: [
+          "El motor sigue siendo el V8 biturbo de 4.0 litros desarrollado en colaboración con Mercedes-AMG, pero la electrónica de gestión es completamente nueva. El nuevo Vantage GT3 entrega cerca de 590 CV (variable según BoP) con una entrega de par mucho más lineal, particularmente útil en categorías Pro-Am donde la conducción suave es prioritaria.",
+          "La caja de cambios secuencial Xtrac de 6 velocidades, refrigerada por aceite y accionada mediante levas, ha sido reforzada para soportar las altas cargas de las 24 Horas de Le Mans, prueba estrella del programa oficial de Aston Martin Racing."
+        ]},
+        { title: "Chasis y aerodinámica de nueva generación", paragraphs: [
+          "El monocasco proviene del Vantage de calle pero recibe una jaula de seguridad FIA, ventanas de policarbonato y una arquitectura aerodinámica completamente nueva: capó con extractores, splitter ajustable, difusor extendido y alerón trasero de doble plano que permite ajustes precisos para cada circuito.",
+          "El precio del coche cliente se sitúa en 575.000 euros, con entregas escalonadas a partir de junio de 2026 para los equipos privados que disputarán el GT World Challenge y los nuevos campeonatos GT3 nacionales."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "590 CV (BoP)" }, { label: "Motor", value: "V8 4.0 biturbo" }, { label: "Caja", value: "Xtrac 6 vel." }, { label: "Precio", value: "575.000 €" }]
+  },
+  {
+    id: 34, slug: "lamborghini-urus-se-actualizado", image: lamborghiniUrusSe, date: "2 Mayo 2026", category: "Lanzamientos",
+    title: "Lamborghini Urus SE: la versión híbrida enchufable actualizada llega a Europa",
+    excerpt: "Lamborghini renueva el Urus SE para 2026 con un sistema PHEV recalibrado, 800 CV combinados, hasta 60 km de autonomía 100% eléctrica y una electrónica de chasis derivada del Revuelto.",
+    readTime: "6 min",
+    content: {
+      intro: "Lamborghini ha confirmado para 2026 una actualización significativa del Urus SE, la primera versión híbrida enchufable del Super SUV de Sant'Agata. Las modificaciones se centran en mejorar la integración entre el V8 biturbo y el motor eléctrico, aumentar la autonomía 100% eléctrica y heredar parte de la electrónica de chasis desarrollada para el Revuelto.",
+      sections: [
+        { title: "V8 biturbo más motor eléctrico: 800 CV", paragraphs: [
+          "El V8 biturbo de 4.0 litros mantiene los 620 CV, mientras que el motor eléctrico síncrono integrado en la transmisión automática de 8 velocidades aporta 192 CV adicionales y 483 Nm de par. La potencia combinada alcanza los 800 CV con un par máximo de 950 Nm, disponible desde apenas 1.750 rpm.",
+          "La batería de iones de litio de 25,9 kWh permite una autonomía eléctrica WLTP de hasta 60 km y acepta cargas en corriente alterna a 7,4 kW. Esto convierte al Urus SE en una opción real para quienes quieren un Lamborghini compatible con las nuevas restricciones de circulación en grandes ciudades europeas."
+        ]},
+        { title: "Chasis activo y modos de conducción ampliados", paragraphs: [
+          "La nueva generación introduce el sistema LDVI 2.0 de control central, derivado del Revuelto, que integra suspensión neumática activa, barras estabilizadoras eléctricas y vectorización de par trasero. Resultado: un SUV de 2.500 kg capaz de comportarse con la agilidad de una berlina deportiva en carreteras de montaña.",
+          "El nuevo modo Città prioriza el uso eléctrico en entorno urbano, mientras que los modos Strada, Sport, Corsa, Neve, Terra y Sabbia se mantienen. El Urus SE acelera de 0 a 100 km/h en 3,4 segundos y alcanza los 312 km/h con un precio de partida de 248.000 euros."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "800 CV" }, { label: "0-100 km/h", value: "3,4 s" }, { label: "Autonomía EV", value: "60 km" }, { label: "Precio", value: "248.000 €" }]
+  },
+  {
+    id: 35, slug: "bugatti-bolide-primeras-entregas", image: bugattiBolide, date: "9 Mayo 2026", category: "Hypercars",
+    title: "Bugatti Bolide: comienzan las primeras entregas del hypercar exclusivo para pista",
+    excerpt: "Molsheim entrega las primeras unidades del Bolide a sus selectos clientes. W16 atmosférico de 1.600 CV, peso de solo 1.450 kg y aerodinámica de prototipo Le Mans. Una experiencia track-only sin concesiones.",
+    readTime: "7 min",
+    content: {
+      intro: "Bugatti ha comenzado la entrega de las primeras unidades del Bolide a sus clientes durante un evento privado celebrado en el circuito Paul Ricard. Concebido como un hypercar exclusivamente para pista, el Bolide es el coche más ligero y radical jamás construido por la marca alsaciana: un manifiesto técnico que despide al icónico motor W16 con una expresión sin compromisos.",
+      sections: [
+        { title: "El último W16 atmosférico de Bugatti", paragraphs: [
+          "El propulsor W16 de 8.0 litros que equipa al Bolide es una versión profundamente modificada respecto al Chiron. Adaptado para funcionar con combustible 110 octanos de competición y revisado en su gestión electrónica, entrega 1.600 CV a 7.000 rpm y 1.600 Nm de par sostenido. La caja de cambios secuencial de 7 velocidades es específica para uso en pista.",
+          "Es, oficialmente, el último Bugatti con motor W16, después de más de 20 años de servicio. Cada cliente recibe junto al coche un certificado firmado por los ingenieros responsables del proyecto y una pieza original del banco de pruebas como recuerdo."
+        ]},
+        { title: "Peso pluma y aerodinámica de LMP1", paragraphs: [
+          "Con solo 1.450 kg en orden de marcha y un coeficiente de carga aerodinámica de 1.800 kg a 320 km/h, el Bolide ofrece una relación peso/potencia de 0,91 kg/CV. Esta cifra lo sitúa al nivel de un prototipo LMP1, con la diferencia de que el cliente lo conduce él mismo.",
+          "El precio anunciado es de 4 millones de euros antes de impuestos, y la producción se limita a 40 unidades. Bugatti incluye en el paquete un programa de uso en circuito de tres años, con asistencia técnica completa durante los eventos exclusivos organizados por la marca en Le Mans, Spa-Francorchamps y Nardò."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "1.600 CV" }, { label: "Peso", value: "1.450 kg" }, { label: "Carga aero", value: "1.800 kg" }, { label: "Producción", value: "40 unidades" }]
+  },
+  {
+    id: 36, slug: "rolls-royce-droptail-edicion-final", image: rollsRoyceDroptail, date: "16 Mayo 2026", category: "Lujo",
+    title: "Rolls-Royce Droptail: presentada la cuarta y última edición coachbuilt",
+    excerpt: "Rolls-Royce desvela la cuarta y última unidad del programa Droptail, el coachbuilding más exclusivo de Goodwood. Cuatro coches únicos, V12 de 6.75 litros y un precio estimado superior a 25 millones de euros por unidad.",
+    readTime: "6 min",
+    content: {
+      intro: "Rolls-Royce ha presentado oficialmente la cuarta y última unidad de la serie Droptail, el programa coachbuilt más exclusivo de la historia reciente de la marca británica. Tras La Rose Noire, Amethyst Droptail y Arcadia, esta última pieza cierra una saga iniciada en 2021 que ha redefinido los límites del lujo automovilístico contemporáneo y consolidado el departamento Coachbuild de Goodwood como referencia mundial.",
+      sections: [
+        { title: "V12 de 6.75 litros y arquitectura única", paragraphs: [
+          "Bajo el largo capó del Droptail se encuentra el legendario motor V12 biturbo de 6.75 litros de Rolls-Royce, recalibrado para entregar 600 CV con una entrega absolutamente suave. La transmisión automática de 8 velocidades y la suspensión activa Magic Carpet Ride garantizan un confort de marcha sin parangón.",
+          "Cada Droptail se construye sobre una plataforma específica que comparte muy pocos elementos con el resto de la gama. La carrocería, completamente exclusiva, está fabricada artesanalmente en aluminio conformado a mano por los maestros de Goodwood, en un proceso que requiere más de 6.000 horas de trabajo por unidad."
+        ]},
+        { title: "Coachbuilding en su expresión más pura", paragraphs: [
+          "Cada uno de los cuatro Droptail ha sido concebido a medida para su propietario, con códigos cromáticos, materiales y motivos decorativos únicos. La cuarta edición integra marquetería de madera elaborada con más de 1.600 piezas, un reloj específico desarrollado con una manufactura suiza y un sistema de techo rígido desmontable inspirado en los Rolls-Royce del periodo de entreguerras.",
+          "El precio no se ha hecho público pero las estimaciones sitúan cada Droptail por encima de los 25 millones de euros, lo que lo convertiría en uno de los coches nuevos más caros jamás producidos. Con esta cuarta unidad, Rolls-Royce cierra el capítulo Droptail y se prepara para anunciar un nuevo programa coachbuild en 2027."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "600 CV" }, { label: "Motor", value: "V12 6.75 biturbo" }, { label: "Producción", value: "4 unidades únicas" }, { label: "Precio est.", value: ">25 M€" }]
+  },
+  {
+    id: 37, slug: "porsche-718-cayman-gt4-rs-electrico", image: porsche718CaymanElectric, date: "23 Mayo 2026", category: "Eléctricos",
+    title: "Porsche 718 Cayman GT4 RS Eléctrico: debut oficial del primer GT eléctrico de la marca",
+    excerpt: "Porsche desvela en Weissach el primer Cayman GT4 RS 100% eléctrico. Dos motores síncronos, 700 CV, 0 a 100 km/h en 2,8 segundos y una arquitectura de 900 V diseñada para resistencia en circuito.",
+    readTime: "8 min",
+    content: {
+      intro: "Porsche ha desvelado oficialmente en el centro de desarrollo de Weissach el nuevo 718 Cayman GT4 RS eléctrico, el primer GT 100% eléctrico de la marca. Esta versión inaugura una nueva familia de modelos puramente eléctricos del 718 Cayman y Boxster, diseñados desde el principio para entregar prestaciones dignas de un GT de Stuttgart sin recurrir al motor de combustión.",
+      sections: [
+        { title: "Dos motores síncronos y arquitectura de 900 V", paragraphs: [
+          "El nuevo GT4 RS eléctrico utiliza dos motores síncronos de imanes permanentes, uno en cada eje, para una potencia combinada de 700 CV y un par instantáneo de 850 Nm. Porsche ha desarrollado una arquitectura de 900 voltios, superior incluso a la del Taycan, que permite cargas ultra-rápidas y minimiza las pérdidas térmicas durante las sesiones de circuito.",
+          "El 0 a 100 km/h se completa en 2,8 segundos y la velocidad máxima se sitúa en 295 km/h. Pero el verdadero objetivo del programa no es la cifra absoluta, sino la capacidad de mantener prestaciones constantes durante 30 minutos seguidos en circuito, problema clásico de los deportivos eléctricos que Porsche asegura haber resuelto."
+        ]},
+        { title: "Refrigeración derivada del Mission R", paragraphs: [
+          "El sistema de refrigeración utiliza tecnología directa heredada del prototipo de competición Mission R: refrigeración directa de las celdas por aceite dieléctrico y un intercambiador específico para los motores eléctricos. Resultado: el coche puede repetir tiempos al límite durante 25 vueltas en Nürburgring sin caída de prestaciones.",
+          "El peso se ha contenido en 1.685 kg gracias a un nuevo subchasis trasero en aluminio fundido y un pack de baterías estructural de 85 kWh. La autonomía WLTP se sitúa en 380 km, una cifra más que suficiente para un GT pensado para uso mixto carretera-circuito."
+        ]},
+        { title: "Precio y disponibilidad", paragraphs: [
+          "El precio anunciado para el 718 Cayman GT4 RS eléctrico es de 195.000 euros, con las primeras entregas previstas para el primer trimestre de 2027. Porsche producirá el modelo en paralelo con la versión de combustión durante un periodo de transición hasta 2030.",
+          "Con este lanzamiento, la marca de Stuttgart envía un mensaje claro: la electrificación no es un compromiso para el GT, sino una oportunidad para reinterpretar el ADN deportivo desde una base técnica completamente nueva, sin renunciar a la esencia que ha hecho del Cayman uno de los deportivos más equilibrados del mercado."
+        ]}
+      ]
+    },
+    specs: [{ label: "Potencia", value: "700 CV" }, { label: "0-100 km/h", value: "2,8 s" }, { label: "Batería", value: "85 kWh / 900 V" }, { label: "Autonomía", value: "380 km WLTP" }]
   }
 ];
