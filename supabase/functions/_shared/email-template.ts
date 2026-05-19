@@ -14,22 +14,22 @@ export function owneoEmailTemplate(title: string, preheader: string, bodyHtml: s
 <div style="display:none;font-size:1px;color:#0a0a0a;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">${escapeHtml(preheader)}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0a0a0a;">
   <tr><td align="center" style="padding:32px 16px;">
-    <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#111111;border:1px solid #c9a84c;border-radius:6px;overflow:hidden;">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#111111;border:1px solid #bda095;border-radius:6px;overflow:hidden;">
       <tr><td align="center" style="padding:28px 24px 20px 24px;border-bottom:1px solid rgba(201,168,76,0.3);background-color:#0a0a0a;">
-        <img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" height="32" style="display:block;height:32px;width:auto;border:0;outline:none;text-decoration:none;">
+        <img src="https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png" alt="OWNEO" height="56" style="display:block;height:56px;width:auto;border:0;outline:none;text-decoration:none;">
       </td></tr>
       <tr><td style="padding:32px 32px 24px 32px;color:#ffffff;font-family:'Encode Sans Expanded', Arial, sans-serif;font-weight:300;font-size:15px;line-height:1.6;">
         ${bodyHtml}
       </td></tr>
       <tr><td style="padding:16px 32px 8px 32px;">
-        <hr style="border:none;border-top:1px solid #c9a84c;margin:0;">
+        <hr style="border:none;border-top:1px solid #bda095;margin:0;">
       </td></tr>
       <tr><td align="center" style="padding:16px 32px 24px 32px;color:#888888;font-size:13px;font-family:'Encode Sans Expanded', Arial, sans-serif;">
         <p style="margin:0 0 12px 0;color:#ffffff;">El equipo OWNEO</p>
         <p style="margin:0 0 16px 0;">
-          <a href="#" style="color:#c9a84c;text-decoration:none;margin:0 8px;font-size:18px;">Ig</a>
-          <a href="#" style="color:#c9a84c;text-decoration:none;margin:0 8px;font-size:18px;">In</a>
-          <a href="#" style="color:#c9a84c;text-decoration:none;margin:0 8px;font-size:18px;">Fb</a>
+          <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">Ig</a>
+          <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">In</a>
+          <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">Fb</a>
         </p>
         <p style="margin:0;font-size:11px;color:#666666;">© 2025 OWNEO. Todos los derechos reservados.</p>
       </td></tr>
@@ -40,7 +40,7 @@ export function owneoEmailTemplate(title: string, preheader: string, bodyHtml: s
 }
 
 export function ctaButton(label: string, href: string): string {
-  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;"><tr><td style="background:#c9a84c;border-radius:4px;"><a href="${href}" style="display:inline-block;background:#c9a84c;color:#0a0a0a;font-weight:700;padding:14px 32px;border-radius:4px;text-decoration:none;font-family:'Encode Sans Expanded', Arial, sans-serif;font-size:14px;letter-spacing:1px;">${escapeHtml(label)}</a></td></tr></table>`;
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;"><tr><td style="background:#bda095;border-radius:4px;"><a href="${href}" style="display:inline-block;background:#bda095;color:#0a0a0a;font-weight:700;padding:14px 32px;border-radius:4px;text-decoration:none;font-family:'Encode Sans Expanded', Arial, sans-serif;font-size:14px;letter-spacing:1px;">${escapeHtml(label)}</a></td></tr></table>`;
 }
 
 function escapeHtml(s: string): string {
