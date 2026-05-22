@@ -102,7 +102,7 @@ const Index = () => {
                       Comprándolo
                     </span>
                     <div className="mb-8">
-                      <p className="text-5xl sm:text-6xl font-black text-foreground/40 leading-none mb-3">
+                      <p className="sm:text-6xl font-black text-foreground/40 leading-none mb-3 text-4xl">
                         ~240.500€
                       </p>
                       <p className="text-sm text-muted-foreground">
@@ -163,7 +163,7 @@ const Index = () => {
                       Con OWNEO
                     </span>
                     <div className="mb-8">
-                      <p className="text-5xl sm:text-6xl font-black leading-none mb-3"
+                      <p className="sm:text-6xl font-black leading-none mb-3 text-4xl"
                         style={{color:"#bc9f94"}}>
                         ~26.400€
                       </p>
