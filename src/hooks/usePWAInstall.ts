@@ -49,6 +49,12 @@ export const usePWAInstall = () => {
     if (canShow()) setShowPrompt(true);
   }, [canShow]);
 
+  const forcePrompt = useCallback(() => {
+    if (isStandalone) return;
+    localStorage.removeItem(DISMISS_KEY);
+    setShowPrompt(true);
+  }, [isStandalone]);
+
   const install = useCallback(async () => {
     if (deferredPrompt) {
       await deferredPrompt.prompt();
@@ -71,6 +77,7 @@ export const usePWAInstall = () => {
     isIOS,
     canInstallNatively: !!deferredPrompt,
     triggerPrompt,
+    forcePrompt,
     install,
     dismiss,
   };
