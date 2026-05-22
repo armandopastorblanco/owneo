@@ -77,6 +77,7 @@ export const usePWAInstall = () => {
     isIOS,
     canInstallNatively: !!deferredPrompt,
     triggerPrompt,
+    forcePrompt,
     install,
     dismiss,
   };
