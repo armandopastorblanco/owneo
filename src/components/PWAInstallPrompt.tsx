@@ -104,8 +104,43 @@ const PWAInstallPrompt = ({
                     Entendido
                   </Button>
                 </div>
+              ) : !canInstallNatively ? (
+                /* Android fallback: manual instructions */
+                <div className="space-y-3">
+                  <p className="text-sm text-muted-foreground font-light mb-3">
+                    Para instalar en tu Android:
+                  </p>
+                  <div className="space-y-2.5">
+                    <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Plus className="w-4 h-4 text-primary" />
+                      </div>
+                      <p className="text-sm text-foreground/80">
+                        <span className="font-medium">1.</span> Abre el menú{" "}
+                        <span className="font-medium">⋮</span> de tu navegador
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Download className="w-4 h-4 text-primary" />
+                      </div>
+                      <p className="text-sm text-foreground/80">
+                        <span className="font-medium">2.</span> Selecciona{" "}
+                        <span className="font-medium">"Instalar app"</span> o{" "}
+                        <span className="font-medium">"Añadir a pantalla de inicio"</span>
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={onDismiss}
+                    className="w-full mt-3 min-h-[48px] text-sm font-light tracking-wider border-border/40"
+                  >
+                    Entendido
+                  </Button>
+                </div>
               ) : (
-                /* Android / Chrome install */
+                /* Android / Chrome native install */
                 <div className="flex gap-3">
                   <Button
                     onClick={onInstall}
