@@ -22,12 +22,12 @@ const Footer = () => {
     if (pwa.canInstallNatively) {
       pwa.install();
     } else {
-      pwa.triggerPrompt();
+      pwa.forcePrompt();
     }
   };
 
   const handleIOSInstall = () => {
-    pwa.triggerPrompt();
+    pwa.forcePrompt();
   };
 
   return (
