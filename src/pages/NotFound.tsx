@@ -1,12 +1,18 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 const NotFound = () => {
   const location = useLocation();
+  const { trackEvent } = useAnalytics();
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
+    trackEvent("page_not_found", {
+      missing_path: location.pathname,
+      referrer: document.referrer || "direct",
+    });
+  }, [location.pathname, trackEvent]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">

@@ -448,6 +448,7 @@ const Step1PersonalInfo = ({
           setLoading(false);
           return;
         }
+        trackEvent("sign_up", { method: "email", source: "participar_flow" });
 
         // Try to ensure session: signIn if not auto-confirmed session
         if (!signUpData.session) {
@@ -804,6 +805,14 @@ const Participar = () => {
 
   const handleStep1 = (personal: Draft["personal"]) => {
     setDraftState((d) => ({ ...d, personal, step: 2 }));
+    trackEvent("generate_lead", {
+      car_name: selectedCar?.name,
+      car_id: selectedCar?.id,
+      currency: "EUR",
+      value:
+        (selectedCar?.participationPrice ?? 0) *
+        (personal?.numParticipations ?? 1),
+    });
     trackEvent("checkout_progress_step3", {
       car_name: selectedCar?.name,
       car_id: selectedCar?.id,
@@ -859,14 +868,25 @@ const Participar = () => {
         return;
       }
       toast({ title: "¡Solicitud enviada correctamente!" });
+      const txnValue =
+        selectedCar.participationPrice * draft.personal.numParticipations;
       trackEvent("purchase", {
         transaction_id: `owneo_${Date.now()}`,
         car_name: selectedCar.name,
         car_id: selectedCar.id,
         num_participations: draft.personal.numParticipations,
-        value:
-          selectedCar.participationPrice * draft.personal.numParticipations,
+        value: txnValue,
         currency: "EUR",
+        items: [
+          {
+            item_id: selectedCar.id,
+            item_name: selectedCar.name,
+            item_brand: selectedCar.brand,
+            item_category: "participation",
+            price: selectedCar.participationPrice,
+            quantity: draft.personal.numParticipations,
+          },
+        ],
       });
       clearDraft();
       sessionStorage.removeItem(`owneo:questionnaire:${selectedCar.id}`);
