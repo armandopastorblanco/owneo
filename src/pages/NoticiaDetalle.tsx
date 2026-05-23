@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -5,12 +6,25 @@ import { Calendar, ArrowLeft, Zap, Gauge, Timer, Crown } from "lucide-react";
 import ArticleCTAs from "@/components/ArticleCTAs";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { additionalNews, type NewsArticle } from "@/data/additionalNews";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 const iconMap = [Zap, Gauge, Timer, Crown];
 
 const NoticiaDetalle = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = additionalNews.find((a) => a.slug === slug);
+  const { trackEvent } = useAnalytics();
+
+  useEffect(() => {
+    if (article) {
+      trackEvent("view_item", {
+        content_type: "news_article",
+        item_id: article.slug,
+        item_name: article.title,
+        item_category: article.category,
+      });
+    }
+  }, [article, trackEvent]);
 
   if (!article) return <Navigate to="/noticias" replace />;
 

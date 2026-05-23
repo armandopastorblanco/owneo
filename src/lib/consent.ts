@@ -56,17 +56,30 @@ export function getOrCreateSessionId(): string {
 
 const GA_ID = "G-90KY76FQMY";
 
-function loadGtag() {
-  if (typeof window === "undefined") return;
-  if (document.getElementById("ga-gtag-script")) return;
-
+function ensureGtagStub() {
   const w = window as typeof window & { dataLayer?: unknown[] };
   w.dataLayer = w.dataLayer || [];
+  if (typeof (window as unknown as { gtag?: unknown }).gtag !== "function") {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const gtag: (...args: any[]) => void = function (...args) {
+      w.dataLayer!.push(args);
+    };
+    (window as unknown as { gtag: typeof gtag }).gtag = gtag;
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const gtag: (...args: any[]) => void = function (...args) {
-    w.dataLayer!.push(args);
-  };
-  (window as unknown as { gtag: typeof gtag }).gtag = gtag;
+  return (window as unknown as { gtag: (...args: any[]) => void }).gtag;
+}
+
+function loadGtag() {
+  if (typeof window === "undefined") return;
+  const gtag = ensureGtagStub();
+
+  // Always grant analytics consent (user accepted)
+  gtag("consent", "update", {
+    analytics_storage: "granted",
+  });
+
+  if (document.getElementById("ga-gtag-script")) return;
 
   const s = document.createElement("script");
   s.id = "ga-gtag-script";
@@ -75,11 +88,24 @@ function loadGtag() {
   document.head.appendChild(s);
 
   gtag("js", new Date());
-  gtag("consent", "default", {
-    ad_storage: "denied",
-    analytics_storage: "granted",
+  // SPA: we send page_view manually from GaPageTracker on every route change
+  gtag("config", GA_ID, { anonymize_ip: true, send_page_view: false });
+}
+
+function updateConsentSignals(consent: ConsentCategories) {
+  if (typeof window === "undefined") return;
+  const gtag = ensureGtagStub();
+  gtag("consent", "update", {
+    analytics_storage: consent.analytics ? "granted" : "denied",
+    ad_storage: consent.marketing ? "granted" : "denied",
+    ad_user_data: consent.marketing ? "granted" : "denied",
+    ad_personalization: consent.personalization ? "granted" : "denied",
   });
-  gtag("config", GA_ID, { anonymize_ip: true });
+  gtag("event", consent.analytics ? "cookie_consent_granted" : "cookie_consent_denied", {
+    analytics: consent.analytics,
+    marketing: consent.marketing,
+    personalization: consent.personalization,
+  });
 }
 
 async function loadPosthog() {
@@ -94,6 +120,7 @@ async function loadPosthog() {
 
 export function applyConsent(consent: ConsentCategories) {
   if (typeof window === "undefined") return;
+  updateConsentSignals(consent);
   if (consent.analytics) {
     loadGtag();
     loadPosthog();
