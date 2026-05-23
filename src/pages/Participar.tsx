@@ -332,6 +332,7 @@ const Step1PersonalInfo = ({
 }) => {
   const { user } = useAuth();
   const { data: locations = [] } = useLocations();
+  const { trackEvent } = useAnalytics();
   const [showPwd, setShowPwd] = useState(false);
   const [loading, setLoading] = useState(false);
 
