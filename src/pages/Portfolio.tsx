@@ -1,11 +1,30 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
 import { useCars } from "@/hooks/useCars";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Portfolio = () => {
   const { data: cars = [], isLoading } = useCars();
+  const { trackEvent } = useAnalytics();
+
+  useEffect(() => {
+    if (!isLoading && cars.length) {
+      trackEvent("view_item_list", {
+        item_list_name: "Portfolio",
+        item_list_id: "portfolio",
+        items: cars.slice(0, 20).map((c, i) => ({
+          item_id: c.id,
+          item_name: c.name,
+          item_brand: c.brand,
+          index: i,
+          price: c.participationPrice,
+        })),
+      });
+    }
+  }, [isLoading, cars, trackEvent]);
 
   return (
     <div className="min-h-screen bg-background">
