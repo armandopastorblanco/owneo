@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { additionalNews } from "@/data/additionalNews";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 import ferrariEv from "@/assets/news/ferrari-ev.jpg";
 import lamborghiniReveal from "@/assets/news/lamborghini-reveal.jpg";
@@ -99,6 +101,16 @@ const newsItems = [...allNews].sort(
 );
 
 const Noticias = () => {
+  const { trackEvent } = useAnalytics();
+
+  useEffect(() => {
+    trackEvent("view_item_list", {
+      item_list_name: "Noticias",
+      item_list_id: "noticias",
+      items_count: newsItems.length,
+    });
+  }, [trackEvent]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
