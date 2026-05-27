@@ -396,6 +396,10 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
         total_credits_per_year: 0,
         total_credits_remaining: 0,
         total_credits_used_this_year: 0,
+        std_per_year: 0,
+        std_remaining: 0,
+        prem_per_year: 0,
+        prem_remaining: 0,
         nb_participations: 0,
         credits_reset_date: v.credits_reset_date,
         participation_ids: [],
@@ -405,6 +409,10 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
     acc[key].total_credits_per_year += Number(v.credits_per_year || 0);
     acc[key].total_credits_remaining += Number(v.credits_remaining || 0);
     acc[key].total_credits_used_this_year += Number(v.credits_used_this_year || 0);
+    acc[key].std_per_year += Number(v.standard_credits_per_year ?? 21);
+    acc[key].std_remaining += Number(v.standard_credits_remaining ?? 21);
+    acc[key].prem_per_year += Number(v.premium_credits_per_year ?? 7);
+    acc[key].prem_remaining += Number(v.premium_credits_remaining ?? 7);
     acc[key].nb_participations += 1;
     acc[key].participation_ids.push(v.id);
     if (v.participation_number != null) acc[key].participation_numbers.push(v.participation_number);
@@ -691,9 +699,12 @@ const ReservasBlock = ({ group, userId }: any) => {
       return data;
     },
   });
-  const used = group.total_credits_used_this_year;
-  const total = group.total_credits_per_year;
-  const remaining = group.total_credits_remaining;
+  const stdRemaining = group.std_remaining ?? 0;
+  const stdTotal = group.std_per_year ?? 0;
+  const premRemaining = group.prem_remaining ?? 0;
+  const premTotal = group.prem_per_year ?? 0;
+  const stdUsed = Math.max(0, stdTotal - stdRemaining);
+  const premUsed = Math.max(0, premTotal - premRemaining);
   return (
     <Card><CardContent className="p-4 space-y-3">
       <div className="flex justify-between items-start gap-2">
@@ -708,24 +719,46 @@ const ReservasBlock = ({ group, userId }: any) => {
             )}
           </div>
         </div>
-        <span className="text-sm whitespace-nowrap">{remaining} / {total} créditos</span>
       </div>
-      <Progress value={total ? (used / total) * 100 : 0} />
-      <p className="text-xs text-muted-foreground">Utilizados este año: {used}</p>
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-foreground">Std : {stdRemaining} / {stdTotal} días</span>
+        </div>
+        <Progress value={stdTotal ? (stdUsed / stdTotal) * 100 : 0} className="[&>div]:bg-foreground/60" />
+      </div>
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-[#bda095]">Prem : {premRemaining} / {premTotal} días</span>
+        </div>
+        <Progress value={premTotal ? (premUsed / premTotal) * 100 : 0} className="[&>div]:bg-[#bda095]" />
+      </div>
       {group.credits_reset_date && (
         <p className="text-xs text-muted-foreground">Próximo reset: {format(new Date(group.credits_reset_date), "d MMM yyyy", { locale: es })}</p>
       )}
       {reservas.length > 0 && (
         <table className="w-full text-xs">
-          <thead><tr className="text-muted-foreground"><th className="text-left py-1">Inicio</th><th className="text-left">Fin</th><th className="text-left">Cr.</th><th className="text-left">Estado</th></tr></thead>
+          <thead><tr className="text-muted-foreground"><th className="text-left py-1">Inicio</th><th className="text-left">Fin</th><th className="text-left">Tipo</th><th className="text-left">Cr.</th><th className="text-left">Estado</th></tr></thead>
           <tbody>{reservas.map((r: any) => (
-            <tr key={r.id} className="border-t border-border/20"><td className="py-1">{r.start_date}</td><td>{r.end_date}</td><td>{r.credits_used}</td><td>{r.status}</td></tr>
+            <tr key={r.id} className="border-t border-border/20">
+              <td className="py-1">{r.start_date}</td>
+              <td>{r.end_date}</td>
+              <td>
+                {r.reservation_type === "premium" ? (
+                  <Badge variant="outline" className="border-[#bda095]/40 text-[#bda095] text-[10px] px-1 py-0">Premium</Badge>
+                ) : (
+                  <Badge variant="outline" className="border-border/40 text-foreground text-[10px] px-1 py-0">Estándar</Badge>
+                )}
+              </td>
+              <td>{r.credits_used}</td>
+              <td>{r.status}</td>
+            </tr>
           ))}</tbody>
         </table>
       )}
     </CardContent></Card>
   );
 };
+
 
 const HistorialTab = ({ userId }: { userId: string }) => {
   const { data: logs = [] } = useQuery({

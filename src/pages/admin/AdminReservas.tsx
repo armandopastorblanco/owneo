@@ -49,7 +49,8 @@ const AdminReservas = () => {
   const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
   const [deletingRuleId, setDeletingRuleId] = useState<string | null>(null);
   const [adjustModal, setAdjustModal] = useState<any>(null);
-  const [adjustCredits, setAdjustCredits] = useState("");
+  const [adjustStdDelta, setAdjustStdDelta] = useState("0");
+  const [adjustPremDelta, setAdjustPremDelta] = useState("0");
   const [adjustReason, setAdjustReason] = useState("");
   const [rejectModal, setRejectModal] = useState<any>(null);
   const [rejectReason, setRejectReason] = useState("");
@@ -493,14 +494,26 @@ const AdminReservas = () => {
   // Adjust credits mutation
   const adjustMutation = useMutation({
     mutationFn: async () => {
-      const newTotal = parseFloat(adjustCredits);
+      const stdDelta = parseInt(adjustStdDelta || "0", 10) || 0;
+      const premDelta = parseInt(adjustPremDelta || "0", 10) || 0;
       const ids: string[] = adjustModal._groupIds || [adjustModal.id];
-      // Distribute: full amount on first row, 0 on the rest
+      // Apply full delta on first row, 0 on the rest
       for (let i = 0; i < ids.length; i++) {
-        const value = i === 0 ? newTotal : 0;
+        if (i !== 0) continue;
+        const { data: current, error: fetchErr } = await supabase
+          .from("validated_participations")
+          .select("standard_credits_remaining, premium_credits_remaining")
+          .eq("id", ids[i])
+          .single();
+        if (fetchErr) throw fetchErr;
+        const newStd = Number((current as any)?.standard_credits_remaining || 0) + stdDelta;
+        const newPrem = Number((current as any)?.premium_credits_remaining || 0) + premDelta;
         const { error } = await supabase
           .from("validated_participations")
-          .update({ credits_remaining: value })
+          .update({
+            standard_credits_remaining: newStd,
+            premium_credits_remaining: newPrem,
+          })
           .eq("id", ids[i]);
         if (error) throw error;
       }
@@ -508,7 +521,7 @@ const AdminReservas = () => {
         _action: "creditos_ajustados",
         _target_table: "validated_participations",
         _target_id: ids.join(","),
-        _details: { new_credits: newTotal, reason: adjustReason, group_size: ids.length },
+        _details: { std_delta: stdDelta, prem_delta: premDelta, reason: adjustReason, group_size: ids.length },
       });
     },
     onSuccess: () => {
@@ -517,6 +530,7 @@ const AdminReservas = () => {
       setAdjustModal(null);
     },
   });
+
 
   const acceptReservation = useMutation({
     mutationFn: async (reservationId: string) => {
@@ -627,6 +641,7 @@ const AdminReservas = () => {
                   <TableHead>Usuario</TableHead>
                   <TableHead>Vehículo</TableHead>
                   <TableHead>Fechas</TableHead>
+                  <TableHead>Tipo</TableHead>
                   <TableHead>Créditos</TableHead>
                   <TableHead className="text-right">Acciones</TableHead>
                 </TableRow>
@@ -637,7 +652,26 @@ const AdminReservas = () => {
                     <TableCell className="text-foreground">{r.profiles?.name} {r.profiles?.surname}</TableCell>
                     <TableCell className="text-foreground">{r.cars?.name}</TableCell>
                     <TableCell className="text-muted-foreground text-sm">{r.start_date} → {r.end_date}</TableCell>
-                    <TableCell><Badge variant="secondary">{r.credits_used}</Badge></TableCell>
+                    <TableCell>
+                      {r.reservation_type === "premium" ? (
+                        <Badge variant="outline" className="border-[#bda095]/40 text-[#bda095]">Premium</Badge>
+                      ) : (
+                        <Badge variant="outline" className="border-border/40 text-foreground">Estándar</Badge>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1 flex-wrap">
+                        {Number(r.standard_credits_used || 0) > 0 && (
+                          <Badge variant="secondary">Std {r.standard_credits_used}</Badge>
+                        )}
+                        {Number(r.premium_credits_used || 0) > 0 && (
+                          <Badge className="bg-[#bda095]/10 border-[#bda095]/30 text-[#bda095]">Prem {r.premium_credits_used}</Badge>
+                        )}
+                        {!Number(r.standard_credits_used || 0) && !Number(r.premium_credits_used || 0) && (
+                          <Badge variant="secondary">{r.credits_used}</Badge>
+                        )}
+                      </div>
+                    </TableCell>
                     <TableCell className="text-right space-x-2">
                       <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)} disabled={acceptReservation.isPending}>Aceptar</Button>
                       <Button size="sm" variant="destructive" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
@@ -1234,7 +1268,8 @@ const AdminReservas = () => {
                   profile: p.profiles, car: p.cars, car_id: p.car_id, user_id: p.user_id,
                   city: cityName,
                   numbers: [] as number[],
-                  total: 0, used: 0, remaining: 0,
+                  std_total: 0, std_remaining: 0,
+                  prem_total: 0, prem_remaining: 0,
                   reset_date: p.credits_reset_date,
                 });
               }
@@ -1242,9 +1277,10 @@ const AdminReservas = () => {
               a.ids.push(p.id);
               a.rows.push(p);
               a.numbers.push(p.participation_number);
-              a.total += Number(p.credits_per_year || 28);
-              a.used += Number(p.credits_used_this_year || 0);
-              a.remaining += Number(p.credits_remaining ?? ((p.credits_per_year || 28) - (p.credits_used_this_year || 0)));
+              a.std_total += Number(p.standard_credits_per_year ?? 21);
+              a.std_remaining += Number(p.standard_credits_remaining ?? 21);
+              a.prem_total += Number(p.premium_credits_per_year ?? 7);
+              a.prem_remaining += Number(p.premium_credits_remaining ?? 7);
               return acc;
             }, new Map()).values());
 
@@ -1256,9 +1292,9 @@ const AdminReservas = () => {
                   case "city": return (g.city || "").toLowerCase();
                   case "car": return (g.car?.name || "").toLowerCase();
                   case "count": return g.numbers.length;
-                  case "total": return g.total;
-                  case "used": return g.used;
-                  case "remaining": return g.remaining;
+                  case "total": return g.std_remaining;
+                  case "used": return g.prem_remaining;
+                  case "remaining": return g.std_remaining;
                   case "reset": return g.reset_date || "";
                 }
               };
@@ -1285,16 +1321,16 @@ const AdminReservas = () => {
                     <TableHead><SortBtn k="car" label="Vehículo" /></TableHead>
                     <TableHead><SortBtn k="city" label="Ciudad" /></TableHead>
                     <TableHead className="hidden md:table-cell"><SortBtn k="count" label="Participaciones" /></TableHead>
-                    <TableHead><SortBtn k="total" label="Créditos/año" /></TableHead>
-                    <TableHead><SortBtn k="used" label="Usados" /></TableHead>
-                    <TableHead><SortBtn k="remaining" label="Restantes" /></TableHead>
+                    <TableHead><SortBtn k="total" label="Std" /></TableHead>
+                    <TableHead><SortBtn k="used" label="Prem" /></TableHead>
                     <TableHead className="hidden lg:table-cell"><SortBtn k="reset" label="Reset" /></TableHead>
                     <TableHead></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {sorted.map((g: any) => {
-                    const pct = g.total > 0 ? (g.remaining / g.total) * 100 : 0;
+                    const stdPct = g.std_total > 0 ? (g.std_remaining / g.std_total) * 100 : 0;
+                    const premPct = g.prem_total > 0 ? (g.prem_remaining / g.prem_total) * 100 : 0;
                     return (
                       <TableRow key={g.key}>
                         <TableCell>
@@ -1306,19 +1342,23 @@ const AdminReservas = () => {
                         <TableCell className="hidden md:table-cell text-foreground">
                           {g.numbers.length}× (#{g.numbers.sort((a: number, b: number) => a - b).join(", #")})
                         </TableCell>
-                        <TableCell className="text-foreground">{g.total}</TableCell>
-                        <TableCell className="text-foreground">{g.used}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <Progress value={pct} className={`w-16 h-2 ${pct > 50 ? "[&>div]:bg-green-500" : pct > 20 ? "[&>div]:bg-orange-500" : "[&>div]:bg-red-500"}`} />
-                            <span className="text-sm text-foreground">{g.remaining}</span>
+                            <Progress value={stdPct} className="w-16 h-2 [&>div]:bg-foreground/60" />
+                            <span className="text-sm text-foreground whitespace-nowrap">{g.std_remaining} / {g.std_total}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Progress value={premPct} className="w-16 h-2 [&>div]:bg-[#bda095]" />
+                            <span className="text-sm text-[#bda095] whitespace-nowrap">{g.prem_remaining} / {g.prem_total}</span>
                           </div>
                         </TableCell>
                         <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
                           {g.reset_date ? format(new Date(g.reset_date), "dd/MM/yy") : "—"}
                         </TableCell>
                         <TableCell>
-                          <Button variant="ghost" size="sm" onClick={() => { setAdjustModal({ ...g.rows[0], _groupIds: g.ids, _groupRemaining: g.remaining }); setAdjustCredits(String(g.remaining)); setAdjustReason(""); }}>
+                          <Button variant="ghost" size="sm" onClick={() => { setAdjustModal({ ...g.rows[0], _groupIds: g.ids, _groupStdRemaining: g.std_remaining, _groupPremRemaining: g.prem_remaining }); setAdjustStdDelta("0"); setAdjustPremDelta("0"); setAdjustReason(""); }}>
                             <Edit className="h-4 w-4" />
                           </Button>
                         </TableCell>
@@ -1329,6 +1369,7 @@ const AdminReservas = () => {
               </Table>
             );
           })()}
+
         </CardContent>
       </Card>
 
@@ -1337,15 +1378,27 @@ const AdminReservas = () => {
         <DialogContent>
           <DialogHeader><DialogTitle>Ajustar Créditos</DialogTitle></DialogHeader>
           <div className="space-y-4">
+            {adjustModal && (
+              <div className="rounded-md border border-border/40 bg-muted/20 p-3 text-xs space-y-1">
+                <div className="text-foreground">Std restantes actuales: <strong>{adjustModal._groupStdRemaining ?? 0}</strong></div>
+                <div className="text-[#bda095]">Prem restantes actuales: <strong>{adjustModal._groupPremRemaining ?? 0}</strong></div>
+                <p className="text-muted-foreground pt-1">Introduce un delta (positivo para añadir, negativo para debitar).</p>
+              </div>
+            )}
             <div>
-              <label className="text-sm text-muted-foreground">Créditos restantes</label>
-              <Input type="number" value={adjustCredits} onChange={(e) => setAdjustCredits(e.target.value)} />
+              <label className="text-sm text-foreground">Créditos estándar (delta)</label>
+              <Input type="number" step="1" value={adjustStdDelta} onChange={(e) => setAdjustStdDelta(e.target.value)} />
+            </div>
+            <div>
+              <label className="text-sm text-[#bda095]">Créditos premium (delta)</label>
+              <Input type="number" step="1" value={adjustPremDelta} onChange={(e) => setAdjustPremDelta(e.target.value)} />
             </div>
             <div>
               <label className="text-sm text-muted-foreground">Justificación (obligatoria)</label>
               <Textarea value={adjustReason} onChange={(e) => setAdjustReason(e.target.value)} placeholder="Motivo del ajuste..." rows={3} />
             </div>
           </div>
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setAdjustModal(null)}>Cancelar</Button>
             <Button onClick={() => { if (!adjustReason.trim()) return toast.error("Justificación obligatoria"); adjustMutation.mutate(); }} disabled={adjustMutation.isPending}>
