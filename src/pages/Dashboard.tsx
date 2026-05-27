@@ -218,53 +218,35 @@ const Dashboard = () => {
   });
 
   // ================== RESERVATION LOGIC ==================
-  const minDays = primary?.car?.min_reservation_days ?? 1;
-  const maxDays = primary?.car?.max_reservation_days ?? 14;
+  const minDays = Math.max(7, primary?.car?.min_reservation_days ?? 7);
+  const maxDays = Math.min(14, primary?.car?.max_reservation_days ?? 14);
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
 
-  const creditsForDay = (date: Date): { credits: number; multiplier: number; isPeak: boolean } => {
+  const isPeakDay = (date: Date): boolean => {
     const d = startOfDay(date);
     const month = d.getMonth() + 1;
-    let perDay = 1;
-    let multiplier = 1;
-    let matched = false;
-    for (const r of creditRules as any[]) {
-      if (!r.is_active) continue;
-      if (!r.applies_to_all && Array.isArray(r.car_ids) && carId && !r.car_ids.includes(carId)) continue;
+    for (const rule of creditRules as any[]) {
+      if (!rule.is_active || !rule.is_premium_period) continue;
       let inRange = false;
-      if (r.months && Array.isArray(r.months) && r.months.length > 0) {
-        if (r.months.includes(month)) inRange = true;
-      } else if (r.start_date && r.end_date) {
-        const s = startOfDay(new Date(r.start_date));
-        const e = startOfDay(new Date(r.end_date));
+      if (rule.months && Array.isArray(rule.months) && rule.months.includes(month)) inRange = true;
+      if (rule.start_date && rule.end_date) {
+        const s = startOfDay(new Date(rule.start_date));
+        const e = startOfDay(new Date(rule.end_date));
         if (d >= s && d <= e) inRange = true;
       }
-      if (!inRange) continue;
-      const m = Number(r.multiplier ?? 1);
-      const cpd = Number(r.credits_per_day ?? 1);
-      if (m * cpd > multiplier * perDay) {
-        multiplier = m;
-        perDay = cpd;
-        matched = true;
-      }
+      if (inRange) return true;
     }
-    return { credits: perDay * multiplier, multiplier, isPeak: matched && multiplier > 1 };
+    return false;
   };
 
-  const computeRangeCredits = (from: Date, to: Date) => {
-    let total = 0;
-    let maxMult = 1;
-    let anyPeak = false;
+  const detectReservationType = (from: Date, to: Date): 'standard' | 'premium' | null => {
     let cur = startOfDay(from);
     const end = startOfDay(to);
     while (cur <= end) {
-      const info = creditsForDay(cur);
-      total += info.credits;
-      if (info.multiplier > maxMult) maxMult = info.multiplier;
-      if (info.isPeak) anyPeak = true;
+      if (isPeakDay(cur)) return 'premium';
       cur = addDays(cur, 1);
     }
-    return { total, maxMult, anyPeak };
+    return 'standard';
   };
 
   const isDateUnavailable = (date: Date) => {
@@ -289,12 +271,16 @@ const Dashboard = () => {
   };
 
   const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
-  const rangeCreditInfo = useMemo(() => {
-    if (!range?.from || !range?.to) return { total: 0, maxMult: 1, anyPeak: false };
-    return computeRangeCredits(range.from, range.to);
+  const reservationType = useMemo<'standard' | 'premium' | null>(() => {
+    if (!range?.from || !range?.to) return null;
+    return detectReservationType(range.from, range.to);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range?.from, range?.to, creditRules, carId]);
-  const totalCredits = rangeCreditInfo.total;
+  }, [range?.from, range?.to, creditRules]);
+
+  const availableForType = reservationType === 'premium'
+    ? Number(primary?.premium_credits_remaining ?? 0)
+    : Number(primary?.standard_credits_remaining ?? 0);
+  const hasEnoughCredits = !reservationType || totalDays <= availableForType;
 
   const createReservation = useMutation({
     mutationFn: async () => {
