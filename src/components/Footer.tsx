@@ -155,7 +155,7 @@ const Footer = () => {
               Gestionar preferencias de cookies
             </button>
           </nav>
-          <p className="text-center text-xs text-muted-foreground/80">
+          <p className="text-center text-xs text-muted-foreground">
             © 2026 OWNEO SL — Todos los derechos reservados
           </p>
         </div>

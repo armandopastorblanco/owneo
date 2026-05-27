@@ -226,7 +226,7 @@ export default function AdminConsultas() {
 
   const EmptyState = ({ label }: { label: string }) => (
     <div className="text-center py-16">
-      <MessageCircle className="w-12 h-12 text-muted-foreground/20 mx-auto mb-4" />
+      <MessageCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
       <p className="text-muted-foreground">{label}</p>
     </div>
   );

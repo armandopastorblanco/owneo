@@ -150,7 +150,7 @@ export default function NuestroModelo() {
             ))}
           </div>
 
-          <div className="mt-16 flex justify-center text-muted-foreground/60">
+          <div className="mt-16 flex justify-center text-muted-foreground">
             <ChevronDown className="w-6 h-6" style={{ animation: "owneo-bounce 2s ease-in-out infinite" }} />
           </div>
         </div>
@@ -417,7 +417,7 @@ export default function NuestroModelo() {
               </div>
               <p className="mt-2 text-lg text-muted-foreground">de ahorro en costes anuales de gestión</p>
               <p className="mt-1 text-sm text-muted-foreground">10x menos caro a lo largo de 5 años</p>
-              <p className="mt-6 italic text-xs text-muted-foreground/70 max-w-2xl mx-auto">
+              <p className="mt-6 italic text-xs text-muted-foreground max-w-2xl mx-auto">
                 Estimación basada en un vehículo de €250.000 con kilometraje controlado. Los valores reales varían
                 según el modelo. Depreciación y costes de adquisición no incluidos en este cálculo anual.
               </p>
@@ -615,7 +615,7 @@ export default function NuestroModelo() {
                         <p className="text-[9px] font-semibold">Junio 2026</p>
                         <Calendar className="w-2.5 h-2.5 text-champagne" />
                       </div>
-                      <div className="grid grid-cols-7 gap-[3px] mt-1.5 text-[7px] text-muted-foreground/60 text-center">
+                      <div className="grid grid-cols-7 gap-[3px] mt-1.5 text-[7px] text-muted-foreground text-center">
                         {["L","M","X","J","V","S","D"].map((d) => (
                           <span key={d} className="leading-none">{d}</span>
                         ))}
@@ -632,7 +632,7 @@ export default function NuestroModelo() {
                                 selected
                                   ? "bg-champagne text-champagne-foreground font-semibold"
                                   : booked
-                                  ? "bg-muted/40 text-muted-foreground/50 line-through"
+                                  ? "bg-muted/40 text-muted-foreground line-through"
                                   : "text-foreground/70"
                               }`}
                             >
@@ -657,7 +657,7 @@ export default function NuestroModelo() {
                   {/* bottom nav */}
                   <div className="h-9 bg-card border-t border-border/50 flex items-center justify-around shrink-0">
                     {[Calendar, Car, FileText, MessageCircle].map((I, i) => (
-                      <I key={i} className={`w-3.5 h-3.5 ${i === 0 ? "text-champagne" : "text-muted-foreground/60"}`} />
+                      <I key={i} className={`w-3.5 h-3.5 ${i === 0 ? "text-champagne" : "text-muted-foreground"}`} />
                     ))}
                   </div>
                 </div>

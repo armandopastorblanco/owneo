@@ -730,7 +730,7 @@ const Dashboard = () => {
               </h2>
               {reservations.length === 0 ? (
                 <div className="rounded-2xl border border-border/50 bg-card p-8 text-center">
-                  <CalendarIcon className="w-10 h-10 text-muted-foreground/30 mx-auto mb-2" />
+                  <CalendarIcon className="w-10 h-10 text-muted-foreground mx-auto mb-2" />
                   <p className="text-sm text-muted-foreground">Aún no tienes reservas.</p>
                 </div>
               ) : (
