@@ -2,20 +2,33 @@ import { Link } from "react-router-dom";
 import { Car } from "@/hooks/useCars";
 import { ArrowRight, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 interface CarCardProps {
   car: Car;
+  pageSource?: string;
 }
 
-const CarCard = ({ car }: CarCardProps) => {
+const CarCard = ({ car, pageSource = "unknown" }: CarCardProps) => {
+  const { trackEvent } = useAnalytics();
   const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
   const sharePrice = car.participationPrice || Math.round(numericPrice * 0.1);
   const isComplete = car.status === "complete" || car.remainingParticipations === 0;
   const available = car.remainingParticipations ?? 0;
   const max = car.maxParticipations ?? 10;
 
+  const handleClick = () => {
+    trackEvent("select_item", {
+      car_id: car.id,
+      car_name: car.name,
+      page_source: pageSource,
+      item_list_name: pageSource,
+      price: sharePrice,
+    });
+  };
+
   return (
-    <Link to={car.slug ? `/coches/${car.slug}` : `/car/${car.id}`} className="h-full">
+    <Link to={car.slug ? `/coches/${car.slug}` : `/car/${car.id}`} className="h-full" onClick={handleClick}>
       <Card className={`overflow-hidden hover-lift group cursor-pointer bg-card border-border h-full flex flex-col ${isComplete ? "opacity-60" : ""}`}>
         <div className="aspect-[16/10] overflow-hidden bg-muted relative">
           <img
