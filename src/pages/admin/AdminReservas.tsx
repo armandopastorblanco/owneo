@@ -1378,15 +1378,27 @@ const AdminReservas = () => {
         <DialogContent>
           <DialogHeader><DialogTitle>Ajustar Créditos</DialogTitle></DialogHeader>
           <div className="space-y-4">
+            {adjustModal && (
+              <div className="rounded-md border border-border/40 bg-muted/20 p-3 text-xs space-y-1">
+                <div className="text-foreground">Std restantes actuales: <strong>{adjustModal._groupStdRemaining ?? 0}</strong></div>
+                <div className="text-[#bda095]">Prem restantes actuales: <strong>{adjustModal._groupPremRemaining ?? 0}</strong></div>
+                <p className="text-muted-foreground pt-1">Introduce un delta (positivo para añadir, negativo para debitar).</p>
+              </div>
+            )}
             <div>
-              <label className="text-sm text-muted-foreground">Créditos restantes</label>
-              <Input type="number" value={adjustCredits} onChange={(e) => setAdjustCredits(e.target.value)} />
+              <label className="text-sm text-foreground">Créditos estándar (delta)</label>
+              <Input type="number" step="1" value={adjustStdDelta} onChange={(e) => setAdjustStdDelta(e.target.value)} />
+            </div>
+            <div>
+              <label className="text-sm text-[#bda095]">Créditos premium (delta)</label>
+              <Input type="number" step="1" value={adjustPremDelta} onChange={(e) => setAdjustPremDelta(e.target.value)} />
             </div>
             <div>
               <label className="text-sm text-muted-foreground">Justificación (obligatoria)</label>
               <Textarea value={adjustReason} onChange={(e) => setAdjustReason(e.target.value)} placeholder="Motivo del ajuste..." rows={3} />
             </div>
           </div>
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setAdjustModal(null)}>Cancelar</Button>
             <Button onClick={() => { if (!adjustReason.trim()) return toast.error("Justificación obligatoria"); adjustMutation.mutate(); }} disabled={adjustMutation.isPending}>
