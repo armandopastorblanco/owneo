@@ -56,7 +56,7 @@ const Portfolio = () => {
                   return aComplete - bComplete;
                 })
                 .map((car) => (
-                  <CarCard key={car.id} car={car} />
+                  <CarCard key={car.id} car={car} pageSource="portfolio" />
                 ))}
             </div>
           )}

@@ -297,7 +297,7 @@ const Index = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {featuredCars.map((car) => (
-                <CarCard key={car.id} car={car} />
+                <CarCard key={car.id} car={car} pageSource="home" />
               ))}
             </div>
           )}
