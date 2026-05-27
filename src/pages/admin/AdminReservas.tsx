@@ -641,6 +641,7 @@ const AdminReservas = () => {
                   <TableHead>Usuario</TableHead>
                   <TableHead>Vehículo</TableHead>
                   <TableHead>Fechas</TableHead>
+                  <TableHead>Tipo</TableHead>
                   <TableHead>Créditos</TableHead>
                   <TableHead className="text-right">Acciones</TableHead>
                 </TableRow>
@@ -651,7 +652,26 @@ const AdminReservas = () => {
                     <TableCell className="text-foreground">{r.profiles?.name} {r.profiles?.surname}</TableCell>
                     <TableCell className="text-foreground">{r.cars?.name}</TableCell>
                     <TableCell className="text-muted-foreground text-sm">{r.start_date} → {r.end_date}</TableCell>
-                    <TableCell><Badge variant="secondary">{r.credits_used}</Badge></TableCell>
+                    <TableCell>
+                      {r.reservation_type === "premium" ? (
+                        <Badge variant="outline" className="border-[#bda095]/40 text-[#bda095]">Premium</Badge>
+                      ) : (
+                        <Badge variant="outline" className="border-border/40 text-foreground">Estándar</Badge>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1 flex-wrap">
+                        {Number(r.standard_credits_used || 0) > 0 && (
+                          <Badge variant="secondary">Std {r.standard_credits_used}</Badge>
+                        )}
+                        {Number(r.premium_credits_used || 0) > 0 && (
+                          <Badge className="bg-[#bda095]/10 border-[#bda095]/30 text-[#bda095]">Prem {r.premium_credits_used}</Badge>
+                        )}
+                        {!Number(r.standard_credits_used || 0) && !Number(r.premium_credits_used || 0) && (
+                          <Badge variant="secondary">{r.credits_used}</Badge>
+                        )}
+                      </div>
+                    </TableCell>
                     <TableCell className="text-right space-x-2">
                       <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => acceptReservation.mutate(r.id)} disabled={acceptReservation.isPending}>Aceptar</Button>
                       <Button size="sm" variant="destructive" onClick={() => { setRejectModal(r); setRejectReason(""); }}>Rechazar</Button>
