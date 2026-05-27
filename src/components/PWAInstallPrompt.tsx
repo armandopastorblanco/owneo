@@ -43,9 +43,9 @@ const PWAInstallPrompt = ({
               {/* App info */}
               <div className="flex items-center gap-4 mb-4">
                 <img
-                  src="/owneo-symbol.jpg"
+                  src="/pwa-icon-192.png"
                   alt="OWNEO"
-                  className="w-16 h-16 rounded-xl bg-black object-contain flex-shrink-0"
+                  className="w-16 h-16 rounded-xl object-contain"
                 />
                 <div>
                   <h3 className="text-foreground font-medium text-base tracking-wide">
