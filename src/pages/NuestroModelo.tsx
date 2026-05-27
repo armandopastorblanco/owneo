@@ -181,10 +181,10 @@ export default function NuestroModelo() {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: CalendarDays, number: 4, suffix: "", unit: "semanas",
+                icon: CalendarDays, number: 4, suffix: "", unit: "semanas (3 estándar + 1 premium)",
                 title: "Por participación al año",
                 desc: "¿Quieres más tiempo? Adquiere más participaciones en el mismo vehículo o en otros modelos de la flota.",
-                badge: "= 28 días garantizados",
+                badge: "= 21 días estándar + 7 días premium",
               },
               {
                 icon: Gauge, number: 2000, suffix: "", unit: "km",
