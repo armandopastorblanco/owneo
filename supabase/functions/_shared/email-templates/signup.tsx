@@ -20,9 +20,8 @@ const CHAMPAGNE_20 = 'rgba(201,168,76,0.2)'
 const FONT = '"Encode Sans Expanded", Arial, sans-serif'
 
 export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
-  const base = siteUrl?.replace(/\/$/, '') || ''
-  const logoUrl = `${base}/email/owneo-logo.png`
-  const heroUrl = `${base}/email/hero.jpg`
+  const logoUrl = 'https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png'
+  const heroUrl = 'https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/hero.jpg'
 
   return (
     <Html lang="es" dir="ltr">
