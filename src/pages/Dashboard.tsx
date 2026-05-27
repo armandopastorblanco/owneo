@@ -606,15 +606,26 @@ const Dashboard = () => {
               </div>
             </section>
 
-            {/* ============ 4 METRICS ============ */}
-            <section className="grid grid-cols-2 sm:grid-cols-4 gap-3 px-4 mt-4">
+            {/* ============ METRICS (5) ============ */}
+            <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 mt-4">
               {[
                 {
-                  label: "Créditos disponibles",
-                  value: yearMetrics.remaining,
-                  icon: <CreditCard className="w-4 h-4 text-champagne" />,
+                  label: "Semanas estándar",
+                  value: `${Math.floor(Number(primary.standard_credits_remaining ?? 0) / 7)} sem. (${Number(primary.standard_credits_remaining ?? 0)} días)`,
+                  icon: <CalendarIcon className="w-4 h-4 text-champagne" />,
                   cls: "bg-champagne/10 border-champagne/30",
                   valueCls: "text-champagne",
+                },
+                {
+                  label: "Semana premium",
+                  value: `${Math.floor(Number(primary.premium_credits_remaining ?? 0) / 7)} sem. (${Number(primary.premium_credits_remaining ?? 0)} días)`,
+                  icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-amber-400"}`} />,
+                  cls: Number(primary.premium_credits_remaining ?? 0) === 0
+                    ? "bg-card border-border/50"
+                    : "bg-amber-500/10 border-amber-500/30",
+                  valueCls: Number(primary.premium_credits_remaining ?? 0) === 0
+                    ? "text-muted-foreground line-through"
+                    : "text-amber-400",
                 },
                 {
                   label: "Km restantes",
@@ -639,48 +650,89 @@ const Dashboard = () => {
                   cls: "bg-card border-border/50",
                   valueCls: "text-foreground",
                 },
-              ].map((m, i) => (
+              ].map((m, i, arr) => (
                 <motion.div
                   key={m.label}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className={`rounded-2xl border p-3 sm:p-4 ${m.cls}`}
+                  className={`rounded-2xl border p-3 sm:p-4 ${m.cls} ${
+                    i === arr.length - 1 && arr.length % 2 === 1 ? "col-span-2 sm:col-span-1" : ""
+                  }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[11px] uppercase tracking-wider text-muted-foreground">{m.label}</span>
                     {m.icon}
                   </div>
-                  <p className={`text-xl sm:text-2xl font-bold truncate ${m.valueCls}`}>{m.value}</p>
+                  <p className={`text-base sm:text-lg font-bold truncate ${m.valueCls}`}>{m.value}</p>
                 </motion.div>
               ))}
             </section>
 
-            {/* ============ CREDITS PROGRESS ============ */}
-            <section className="mx-4 mt-4 p-4 bg-card rounded-2xl border border-border/50">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-muted-foreground">Créditos utilizados este año</span>
-                <span className="text-sm font-semibold text-foreground">
-                  {yearMetrics.used} / {yearMetrics.perYear}
-                </span>
+            {/* ============ CREDITS PROGRESS (2 BARS) ============ */}
+            <section className="mx-4 mt-4 p-4 bg-card rounded-2xl border border-border/50 space-y-5">
+              {/* Standard */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Créditos estándar utilizados</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {Number(primary.standard_credits_used_this_year ?? 0)} / {Number(primary.standard_credits_per_year ?? 21)} días
+                  </span>
+                </div>
+                <div className="bg-muted rounded-full h-2 overflow-hidden">
+                  <motion.div
+                    className="h-2 bg-champagne rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: `${Number(primary.standard_credits_per_year ?? 0) > 0
+                        ? Math.min(100, (Number(primary.standard_credits_used_this_year ?? 0) / Number(primary.standard_credits_per_year)) * 100)
+                        : 0}%`,
+                    }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                </div>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xs text-muted-foreground">
+                    {primary.credits_reset_date
+                      ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
+                      : "Renovación anual"}
+                  </span>
+                  <span className="text-xs text-champagne font-medium">
+                    {Number(primary.standard_credits_remaining ?? 0)} restantes
+                  </span>
+                </div>
               </div>
-              <div className="bg-muted rounded-full h-2 overflow-hidden">
-                <motion.div
-                  className="h-2 bg-champagne rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${usedPct}%` }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                />
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <span className="text-xs text-muted-foreground">
-                  {primary.credits_reset_date
-                    ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
-                    : "Renovación anual"}
-                </span>
-                <span className="text-xs text-champagne font-medium">
-                  {yearMetrics.remaining} restantes
-                </span>
+
+              {/* Premium */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Crédito premium utilizado</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {Number(primary.premium_credits_used_this_year ?? 0)} / {Number(primary.premium_credits_per_year ?? 7)} días
+                  </span>
+                </div>
+                <div className="bg-muted rounded-full h-2 overflow-hidden">
+                  <motion.div
+                    className="h-2 bg-amber-400 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: `${Number(primary.premium_credits_per_year ?? 0) > 0
+                        ? Math.min(100, (Number(primary.premium_credits_used_this_year ?? 0) / Number(primary.premium_credits_per_year)) * 100)
+                        : 0}%`,
+                    }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                </div>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xs text-muted-foreground">
+                    {primary.credits_reset_date
+                      ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
+                      : "Renovación anual"}
+                  </span>
+                  <span className="text-xs text-amber-400 font-medium">
+                    {Number(primary.premium_credits_remaining ?? 0)} restantes
+                  </span>
+                </div>
               </div>
             </section>
 
@@ -696,6 +748,22 @@ const Dashboard = () => {
                   <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Máx. {maxDays}d</Badge>
                   <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Antelación {advanceDays}d</Badge>
                 </div>
+
+                {/* Info banner */}
+                <div className="rounded-xl bg-card border border-border/50 p-3 mb-4 text-xs text-muted-foreground space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full ring-1 ring-champagne/60 bg-champagne/20" />
+                    <span>Fechas en <span className="text-champagne">champagne</span> = período premium (consume créditos premium)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-muted" />
+                    <span>Resto del año = período estándar (consume créditos estándar)</span>
+                  </div>
+                  <p className="text-muted-foreground/70 pt-1">
+                    Una reserva que incluya al menos 1 día premium consume créditos premium completos.
+                  </p>
+                </div>
+
                 <div className="flex justify-center">
                   <Calendar
                     mode="range"
@@ -703,34 +771,65 @@ const Dashboard = () => {
                     onSelect={handleSelect}
                     locale={es}
                     disabled={(date) => date < addDays(startOfDay(new Date()), advanceDays) || isDateUnavailable(date)}
-                    modifiers={{ peak: (date) => creditsForDay(date).isPeak }}
+                    modifiers={{ peak: (date) => isPeakDay(date) }}
                     modifiersClassNames={{ peak: "ring-1 ring-champagne/60 text-champagne" }}
                     className="rounded-md border border-border pointer-events-auto"
                   />
                 </div>
                 {range?.from && range?.to && (
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    <div className="rounded-xl bg-muted/50 p-3 text-center">
-                      <p className="text-xs text-muted-foreground">Días</p>
-                      <p className="text-lg font-bold text-foreground">{totalDays}</p>
-                    </div>
-                    <div className="rounded-xl bg-champagne/10 border border-champagne/20 p-3 text-center">
-                      <p className="text-xs text-muted-foreground">
-                        Créditos{rangeCreditInfo.maxMult > 1 ? ` (×${rangeCreditInfo.maxMult})` : ""}
-                      </p>
-                      <p className="text-lg font-bold text-champagne">{totalCredits}</p>
-                    </div>
+                  <div className="mt-4 space-y-2">
+                    {reservationType === 'premium' ? (
+                      <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 p-3">
+                        <p className="text-sm font-semibold text-amber-400">
+                          Semana premium · {totalDays} días · {totalDays} créditos premium
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Créditos premium disponibles: {Number(primary.premium_credits_remaining ?? 0)}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="rounded-xl bg-muted/50 border border-border/50 p-3">
+                        <p className="text-sm font-semibold text-foreground">
+                          Semana estándar · {totalDays} días · {totalDays} créditos estándar
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Créditos estándar disponibles: {Number(primary.standard_credits_remaining ?? 0)}
+                        </p>
+                      </div>
+                    )}
+                    {!hasEnoughCredits && (
+                      <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3">
+                        <p className="text-sm font-semibold text-red-400">
+                          No tienes suficientes créditos {reservationType === 'premium' ? 'premium' : 'estándar'} disponibles
+                          (necesitas {totalDays}, tienes {availableForType})
+                        </p>
+                      </div>
+                    )}
+                    {totalDays < minDays && (
+                      <p className="text-xs text-red-400">Mínimo {minDays} días por reserva</p>
+                    )}
+                    {totalDays > maxDays && (
+                      <p className="text-xs text-red-400">Máximo {maxDays} días por reserva</p>
+                    )}
                   </div>
                 )}
                 <Button
                   className="w-full mt-4 bg-champagne hover:bg-champagne/90 text-champagne-foreground"
                   onClick={() => createReservation.mutate()}
-                  disabled={createReservation.isPending || !range?.from || !range?.to}
+                  disabled={
+                    createReservation.isPending ||
+                    !range?.from ||
+                    !range?.to ||
+                    !hasEnoughCredits ||
+                    totalDays < minDays ||
+                    totalDays > maxDays
+                  }
                 >
                   {createReservation.isPending ? "Enviando..." : "Solicitar Reserva"}
                 </Button>
               </div>
             </section>
+
 
             {/* ============ RESERVATIONS HISTORY ============ */}
             <section className="mx-4 mt-6">
