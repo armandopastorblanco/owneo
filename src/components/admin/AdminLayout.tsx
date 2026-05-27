@@ -69,7 +69,7 @@ const AdminLayout = () => {
   const isActive = (path: string) =>
     path === "/admin" ? pathname === "/admin" : pathname.startsWith(path);
 
-  const SidebarContent = () => (
+  const SidebarContent = ({ mobile = false }: { mobile?: boolean }) => (
     <>
       <button
         onClick={() => { navigate("/"); setSidebarOpen(false); }}
@@ -88,13 +88,14 @@ const AdminLayout = () => {
               key={path}
               onClick={() => { navigate(path); setSidebarOpen(false); }}
               className={cn(
-                "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
+                "w-full flex items-center gap-3 px-3 rounded-lg transition-colors",
+                mobile ? "py-3 min-h-[48px] text-base" : "py-2.5 text-sm",
                 isActive(path)
                   ? "bg-primary/20 text-primary font-medium"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
-              <Icon className="h-4 w-4 shrink-0" />
+              <Icon className={cn("shrink-0", mobile ? "h-5 w-5" : "h-4 w-4")} />
               <span className="flex-1 text-left">{label}</span>
               {badgeCount > 0 && (
                 <span className="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-semibold">
@@ -109,9 +110,12 @@ const AdminLayout = () => {
       <div className="p-3 border-t border-border/40">
         <button
           onClick={handleSignOut}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:bg-destructive/20 hover:text-destructive transition-colors"
+          className={cn(
+            "w-full flex items-center gap-3 px-3 rounded-lg text-muted-foreground hover:bg-destructive/20 hover:text-destructive transition-colors",
+            mobile ? "py-3 min-h-[48px] text-base" : "py-2.5 text-sm"
+          )}
         >
-          <LogOut className="h-4 w-4" />
+          <LogOut className={cn(mobile ? "h-5 w-5" : "h-4 w-4")} />
           <span>Cerrar sesión</span>
         </button>
       </div>
@@ -125,34 +129,40 @@ const AdminLayout = () => {
         <SidebarContent />
       </aside>
 
-      {/* Mobile overlay */}
+      {/* Mobile fullscreen overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setSidebarOpen(false)} />
-          <aside className="absolute left-0 top-0 bottom-0 w-64 bg-card flex flex-col animate-in slide-in-from-left">
-            <div className="absolute right-2 top-2">
-              <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)}>
-                <X className="h-5 w-5" />
+        <div className="fixed inset-0 z-50 md:hidden">
+          <aside className="absolute inset-0 bg-card flex flex-col animate-in slide-in-from-left">
+            <div className="absolute right-3 top-3 z-10">
+              <Button variant="ghost" size="icon" className="h-11 w-11" onClick={() => setSidebarOpen(false)}>
+                <X className="h-6 w-6" />
               </Button>
             </div>
-            <SidebarContent />
+            <SidebarContent mobile />
           </aside>
         </div>
       )}
 
       {/* Main content */}
-      <div className="flex-1 md:ml-60 flex flex-col min-h-screen">
-        <header className="sticky top-0 z-20 flex items-center justify-between h-14 px-4 border-b border-border/40 bg-card/80 backdrop-blur-sm">
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSidebarOpen(true)}>
-            <Menu className="h-5 w-5" />
-          </Button>
-          <div className="hidden md:block" />
-          <span className="text-sm text-muted-foreground truncate">
+      <div className="flex-1 md:ml-60 flex flex-col min-h-screen min-w-0">
+        <header className="sticky top-0 z-20 flex items-center justify-between h-14 px-3 md:px-4 border-b border-border/40 bg-card/80 backdrop-blur-sm gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Button variant="ghost" size="icon" className="md:hidden h-11 w-11 shrink-0" onClick={() => setSidebarOpen(true)} aria-label="Abrir menú">
+              <Menu className="h-6 w-6" />
+            </Button>
+            <span className="md:hidden text-sm font-bold tracking-wider text-foreground">
+              OWNEO <span className="text-muted-foreground text-[10px] uppercase tracking-widest ml-1">Admin</span>
+            </span>
+          </div>
+          <span className="hidden md:block text-sm text-muted-foreground truncate">
             {user?.email}
+          </span>
+          <span className="md:hidden text-muted-foreground" title={user?.email}>
+            <Users className="h-5 w-5" />
           </span>
         </header>
 
-        <main className="flex-1 p-4 md:p-6">
+        <main className="admin-shell flex-1 p-4 md:p-6 min-w-0 overflow-x-hidden">
           <Outlet />
         </main>
       </div>
@@ -161,3 +171,4 @@ const AdminLayout = () => {
 };
 
 export default AdminLayout;
+
