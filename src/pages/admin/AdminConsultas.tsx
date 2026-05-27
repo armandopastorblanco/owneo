@@ -251,8 +251,17 @@ export default function AdminConsultas() {
         </p>
       </div>
 
-      <Tabs defaultValue="contacto">
+      <Tabs defaultValue="landing">
         <TabsList className="mb-6">
+          <TabsTrigger value="landing" className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4" />
+            Landing
+            {unreadLanding > 0 && (
+              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                {unreadLanding}
+              </span>
+            )}
+          </TabsTrigger>
           <TabsTrigger value="contacto" className="flex items-center gap-2">
             <Inbox className="w-4 h-4" />
             Contacto
@@ -281,6 +290,20 @@ export default function AdminConsultas() {
             )}
           </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="landing">
+          {isLoading ? (
+            <p className="text-muted-foreground text-sm">Cargando...</p>
+          ) : landing.length === 0 ? (
+            <EmptyState label="No hay solicitudes desde la landing beta todavía." />
+          ) : (
+            <div className="space-y-3">
+              {landing.map((c: any) => (
+                <ConsultaCard key={c.id} c={c} />
+              ))}
+            </div>
+          )}
+        </TabsContent>
 
         <TabsContent value="contacto">
           {isLoading ? (
