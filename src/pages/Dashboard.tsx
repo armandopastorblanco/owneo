@@ -868,8 +868,14 @@ const Dashboard = () => {
                             <p className="text-sm font-semibold text-foreground">
                               {format(new Date(r.start_date), "d MMM", { locale: es })} → {format(new Date(r.end_date), "d MMM yyyy", { locale: es })}
                             </p>
-                            <p className="text-xs text-muted-foreground mt-0.5">
-                              {days} día{days > 1 ? "s" : ""} · {r.credits_used ?? 0} créditos
+                            <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1.5 flex-wrap">
+                              <span>{days} día{days > 1 ? "s" : ""}</span>
+                              <span>·</span>
+                              {r.reservation_type === 'premium' ? (
+                                <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30">Premium</Badge>
+                              ) : (
+                                <Badge variant="outline">Estándar</Badge>
+                              )}
                             </p>
                             {r.rejection_reason && (
                               <p className="text-xs italic text-muted-foreground mt-1">Motivo: {r.rejection_reason}</p>
