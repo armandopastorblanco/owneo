@@ -396,6 +396,10 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
         total_credits_per_year: 0,
         total_credits_remaining: 0,
         total_credits_used_this_year: 0,
+        std_per_year: 0,
+        std_remaining: 0,
+        prem_per_year: 0,
+        prem_remaining: 0,
         nb_participations: 0,
         credits_reset_date: v.credits_reset_date,
         participation_ids: [],
@@ -405,6 +409,10 @@ const ParticipantDrawer = ({ userId, onOpenChange, validated, cars, locations }:
     acc[key].total_credits_per_year += Number(v.credits_per_year || 0);
     acc[key].total_credits_remaining += Number(v.credits_remaining || 0);
     acc[key].total_credits_used_this_year += Number(v.credits_used_this_year || 0);
+    acc[key].std_per_year += Number(v.standard_credits_per_year ?? 21);
+    acc[key].std_remaining += Number(v.standard_credits_remaining ?? 21);
+    acc[key].prem_per_year += Number(v.premium_credits_per_year ?? 7);
+    acc[key].prem_remaining += Number(v.premium_credits_remaining ?? 7);
     acc[key].nb_participations += 1;
     acc[key].participation_ids.push(v.id);
     if (v.participation_number != null) acc[key].participation_numbers.push(v.participation_number);
