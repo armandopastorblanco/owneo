@@ -582,7 +582,7 @@ const Dashboard = () => {
             )}
 
             {/* ============ HERO ============ */}
-            <section className="relative mx-4 mt-4 rounded-3xl overflow-hidden aspect-[16/9] sm:aspect-[21/9]">
+            <section id="mi-cuenta" className="relative mx-4 mt-4 rounded-3xl overflow-hidden aspect-[16/9] sm:aspect-[21/9] scroll-mt-24">
               <img src={carImage} alt={car.name} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
               <div className="absolute inset-0 p-5 sm:p-7 flex flex-col justify-end">
