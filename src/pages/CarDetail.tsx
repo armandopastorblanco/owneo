@@ -1069,6 +1069,8 @@ const CarDetail = () => {
                       availableParticipations={availableParticipations}
                       sharePrice={discountedPrice}
                       pageSource="car_detail"
+                      autoOpen={openParticipationForm}
+                      onOpenChange={setOpenParticipationForm}
                     />
                   </div>
                 </CardContent>
