@@ -162,6 +162,14 @@ const CarDetail = () => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
   const [specTab, setSpecTab] = useState("motor");
+  const [openParticipationForm, setOpenParticipationForm] = useState(false);
+
+  const handleSolicitarClick = () => {
+    setOpenParticipationForm(true);
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
 
   useEffect(() => {
     if (car) {
@@ -300,14 +308,14 @@ const CarDetail = () => {
 
       {/* ─── STICKY CTA BAR ─── */}
       <div
-        className={`fixed left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 transition-all duration-300 hidden sm:block ${
+        className={`fixed left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 transition-all duration-300 block ${
           stickyVisible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
-        style={{ top: 64 }}
+        style={{ top: typeof window !== "undefined" && window.innerWidth >= 640 ? 64 : 56 }}
       >
-        <div className="container mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
-          <div className="flex items-baseline gap-3 min-w-0">
-            <span className="font-bold text-foreground text-lg truncate">{car.name}</span>
+        <div className="container mx-auto max-w-6xl px-4 py-2 sm:py-3 flex items-center justify-between gap-3 sm:gap-4 min-h-[56px]">
+          <div className="flex items-baseline gap-3 min-w-0 flex-1">
+            <span className="font-bold text-foreground text-sm sm:text-lg truncate">{car.name}</span>
             <span className="text-muted-foreground text-sm hidden md:inline">{car.category}</span>
           </div>
           <div className="hidden lg:flex gap-6">
@@ -325,10 +333,12 @@ const CarDetail = () => {
             </div>
           </div>
           <Button
-            onClick={() => scrollTo(formRef)}
-            className="bg-champagne text-champagne-foreground hover:bg-champagne/90"
+            onClick={handleSolicitarClick}
+            size="sm"
+            className="bg-champagne text-champagne-foreground hover:bg-champagne/90 min-h-[44px] shrink-0"
           >
-            Solicitar participación
+            <span className="hidden sm:inline">Solicitar participación</span>
+            <span className="sm:hidden">Solicitar</span>
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
@@ -557,7 +567,7 @@ const CarDetail = () => {
 
                   {/* CTA principal */}
                   <Button
-                    onClick={() => scrollTo(formRef)}
+                    onClick={handleSolicitarClick}
                     size="lg"
                     className="w-full bg-champagne text-champagne-foreground hover:bg-champagne/90"
                   >
@@ -1059,6 +1069,8 @@ const CarDetail = () => {
                       availableParticipations={availableParticipations}
                       sharePrice={discountedPrice}
                       pageSource="car_detail"
+                      autoOpen={openParticipationForm}
+                      onOpenChange={setOpenParticipationForm}
                     />
                   </div>
                 </CardContent>
