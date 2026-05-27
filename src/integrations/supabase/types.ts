@@ -361,6 +361,7 @@ export type Database = {
           responded_at: string | null
           source: string | null
           status: string
+          subject: string | null
         }
         Insert: {
           admin_notes?: string | null
@@ -376,6 +377,7 @@ export type Database = {
           responded_at?: string | null
           source?: string | null
           status?: string
+          subject?: string | null
         }
         Update: {
           admin_notes?: string | null
@@ -391,6 +393,7 @@ export type Database = {
           responded_at?: string | null
           source?: string | null
           status?: string
+          subject?: string | null
         }
         Relationships: [
           {
