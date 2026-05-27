@@ -2,6 +2,16 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const STORAGE_KEY = "owneo_beta_access";
@@ -28,9 +38,13 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
   const [unlocked, setUnlocked] = useState<boolean>(() => hasValidAccess());
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [requestOpen, setRequestOpen] = useState(false);
+  const [reqName, setReqName] = useState("");
+  const [reqEmail, setReqEmail] = useState("");
+  const [reqMessage, setReqMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    // Re-check on mount in case of multiple tabs
     setUnlocked(hasValidAccess());
   }, []);
 
@@ -49,11 +63,68 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const handleRequestSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!reqName || !reqEmail || !reqMessage) {
+      toast.error("Completa todos los campos.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const { error: insertError } = await supabase
+        .from("consultation_requests")
+        .insert({
+          name: reqName,
+          email: reqEmail,
+          message: reqMessage,
+          subject: "Solicitud de acceso beta",
+          source: "beta_gate",
+          status: "pending",
+        } as any);
+      if (insertError) throw insertError;
+
+      supabase.functions
+        .invoke("send-contact-notification", {
+          body: {
+            name: reqName,
+            email: reqEmail,
+            subject: "Solicitud de acceso beta",
+            message: reqMessage,
+          },
+        })
+        .catch((err) => console.error("send-contact-notification:", err));
+
+      toast.success("Solicitud enviada. Te contactaremos pronto.");
+      setReqName("");
+      setReqEmail("");
+      setReqMessage("");
+      setRequestOpen(false);
+    } catch (err: any) {
+      toast.error(err.message || "No se pudo enviar la solicitud.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (unlocked) return <>{children}</>;
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-sm flex flex-col items-center">
+    <div className="relative min-h-screen bg-background flex items-center justify-center px-6 py-12 overflow-hidden">
+      {/* Background video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        src="/181536-866999858.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50 z-10" aria-hidden="true" />
+
+      <div className="relative z-20 w-full max-w-sm flex flex-col items-center">
         <img
           src={owneoLogo}
           alt="Owneo"
@@ -62,9 +133,16 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
         <h1 className="text-xs uppercase tracking-[0.35em] text-champagne mb-2">
           Beta privada
         </h1>
-        <p className="text-sm text-muted-foreground mb-10 text-center font-extralight">
+        <p className="text-sm text-muted-foreground mb-3 text-center font-extralight">
           Introduce la contraseña de acceso
         </p>
+        <button
+          type="button"
+          onClick={() => setRequestOpen(true)}
+          className="mb-8 text-[11px] uppercase tracking-[0.3em] text-champagne/80 hover:text-champagne font-extralight transition-colors underline-offset-4 hover:underline"
+        >
+          Solicitar acceso
+        </button>
 
         <form onSubmit={handleSubmit} className="w-full space-y-5">
           <div className="space-y-2">
@@ -103,6 +181,66 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
           Owneo · Acceso privado
         </p>
       </div>
+
+      <Dialog open={requestOpen} onOpenChange={setRequestOpen}>
+        <DialogContent className="bg-background/95 backdrop-blur-md border-champagne/20 max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xs uppercase tracking-[0.35em] text-champagne font-extralight">
+              Solicitar acceso
+            </DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground font-extralight">
+              Déjanos tus datos y te enviaremos un acceso a la beta privada.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleRequestSubmit} className="space-y-4 pt-2">
+            <div className="space-y-2">
+              <Label htmlFor="req-name" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+                Nombre completo
+              </Label>
+              <Input
+                id="req-name"
+                value={reqName}
+                onChange={(e) => setReqName(e.target.value)}
+                className="h-11 bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="req-email" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+                Email
+              </Label>
+              <Input
+                id="req-email"
+                type="email"
+                value={reqEmail}
+                onChange={(e) => setReqEmail(e.target.value)}
+                className="h-11 bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="req-message" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+                Mensaje
+              </Label>
+              <Textarea
+                id="req-message"
+                rows={3}
+                value={reqMessage}
+                onChange={(e) => setReqMessage(e.target.value)}
+                className="bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="w-full h-12 bg-champagne text-background hover:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
+            >
+              {submitting ? "Enviando..." : "Enviar"}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
