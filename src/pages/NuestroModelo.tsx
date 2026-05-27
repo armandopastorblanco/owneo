@@ -487,7 +487,7 @@ export default function NuestroModelo() {
                   </li>
                   <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">📅 Semanas al año</span>
-                    <span className="font-medium"><CountUp end={4} /> semanas</span>
+                    <span className="font-medium"><CountUp end={4} /> semanas (3+1)</span>
                   </li>
                   <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">🛣️ Km incluidos</span>
