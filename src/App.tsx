@@ -94,6 +94,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <BetaGate>
       <BrowserRouter>
         <ScrollToTop />
         <PostHogPageTracker />
