@@ -735,7 +735,7 @@ const Dashboard = () => {
             </section>
 
             {/* ============ CALENDAR ============ */}
-            <section className="mx-4 mt-6">
+            <section id="reservar" className="mx-4 mt-6 scroll-mt-24">
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-3">
                 <CalendarIcon className="w-5 h-5 text-champagne" />
                 Reservar días de uso
