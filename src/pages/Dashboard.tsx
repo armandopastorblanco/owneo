@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, Car, FileText, MapPin, Phone, Calendar as CalendarIcon,
   CreditCard, Info, Loader2, Clock, CheckCircle2, XCircle, Ban, Gauge,
-  User as UserIcon,
+  User as UserIcon, Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -86,7 +86,7 @@ const Dashboard = () => {
 
       const { data: validated } = await supabase
         .from("validated_participations")
-        .select("id, car_id, credits_remaining, credits_per_year, credits_used_this_year, credits_reset_date, cars:car_id(id, name, brand, model, year, image_url, min_reservation_days, max_reservation_days, reservation_advance_days, km_per_participation, location_id, locations:location_id(name))")
+        .select("id, car_id, credits_remaining, credits_per_year, credits_used_this_year, credits_reset_date, standard_credits_per_year, premium_credits_per_year, standard_credits_remaining, premium_credits_remaining, standard_credits_used_this_year, premium_credits_used_this_year, cars:car_id(id, name, brand, model, year, image_url, min_reservation_days, max_reservation_days, reservation_advance_days, km_per_participation, location_id, locations:location_id(name))")
         .eq("user_id", userId!);
 
       const grouped = new Map<string, any>();
@@ -102,6 +102,12 @@ const Dashboard = () => {
             credits_used_this_year: Number(v.credits_used_this_year ?? 0),
             credits_remaining: Number(v.credits_remaining ?? 0),
             credits_reset_date: v.credits_reset_date,
+            standard_credits_per_year: Number((v as any).standard_credits_per_year ?? 21),
+            premium_credits_per_year: Number((v as any).premium_credits_per_year ?? 7),
+            standard_credits_remaining: Number((v as any).standard_credits_remaining ?? 21),
+            premium_credits_remaining: Number((v as any).premium_credits_remaining ?? 7),
+            standard_credits_used_this_year: Number((v as any).standard_credits_used_this_year ?? 0),
+            premium_credits_used_this_year: Number((v as any).premium_credits_used_this_year ?? 0),
           });
         } else {
           ex.ids.push(v.id);
@@ -109,6 +115,12 @@ const Dashboard = () => {
           ex.credits_per_year += Number(v.credits_per_year ?? 28);
           ex.credits_used_this_year += Number(v.credits_used_this_year ?? 0);
           ex.credits_remaining += Number(v.credits_remaining ?? 0);
+          ex.standard_credits_per_year += Number((v as any).standard_credits_per_year ?? 21);
+          ex.premium_credits_per_year += Number((v as any).premium_credits_per_year ?? 7);
+          ex.standard_credits_remaining += Number((v as any).standard_credits_remaining ?? 21);
+          ex.premium_credits_remaining += Number((v as any).premium_credits_remaining ?? 7);
+          ex.standard_credits_used_this_year += Number((v as any).standard_credits_used_this_year ?? 0);
+          ex.premium_credits_used_this_year += Number((v as any).premium_credits_used_this_year ?? 0);
           if (v.credits_reset_date && (!ex.credits_reset_date || v.credits_reset_date < ex.credits_reset_date)) {
             ex.credits_reset_date = v.credits_reset_date;
           }
@@ -206,53 +218,35 @@ const Dashboard = () => {
   });
 
   // ================== RESERVATION LOGIC ==================
-  const minDays = primary?.car?.min_reservation_days ?? 1;
-  const maxDays = primary?.car?.max_reservation_days ?? 14;
+  const minDays = Math.max(7, primary?.car?.min_reservation_days ?? 7);
+  const maxDays = Math.min(14, primary?.car?.max_reservation_days ?? 14);
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
 
-  const creditsForDay = (date: Date): { credits: number; multiplier: number; isPeak: boolean } => {
+  const isPeakDay = (date: Date): boolean => {
     const d = startOfDay(date);
     const month = d.getMonth() + 1;
-    let perDay = 1;
-    let multiplier = 1;
-    let matched = false;
-    for (const r of creditRules as any[]) {
-      if (!r.is_active) continue;
-      if (!r.applies_to_all && Array.isArray(r.car_ids) && carId && !r.car_ids.includes(carId)) continue;
+    for (const rule of creditRules as any[]) {
+      if (!rule.is_active || !rule.is_premium_period) continue;
       let inRange = false;
-      if (r.months && Array.isArray(r.months) && r.months.length > 0) {
-        if (r.months.includes(month)) inRange = true;
-      } else if (r.start_date && r.end_date) {
-        const s = startOfDay(new Date(r.start_date));
-        const e = startOfDay(new Date(r.end_date));
+      if (rule.months && Array.isArray(rule.months) && rule.months.includes(month)) inRange = true;
+      if (rule.start_date && rule.end_date) {
+        const s = startOfDay(new Date(rule.start_date));
+        const e = startOfDay(new Date(rule.end_date));
         if (d >= s && d <= e) inRange = true;
       }
-      if (!inRange) continue;
-      const m = Number(r.multiplier ?? 1);
-      const cpd = Number(r.credits_per_day ?? 1);
-      if (m * cpd > multiplier * perDay) {
-        multiplier = m;
-        perDay = cpd;
-        matched = true;
-      }
+      if (inRange) return true;
     }
-    return { credits: perDay * multiplier, multiplier, isPeak: matched && multiplier > 1 };
+    return false;
   };
 
-  const computeRangeCredits = (from: Date, to: Date) => {
-    let total = 0;
-    let maxMult = 1;
-    let anyPeak = false;
+  const detectReservationType = (from: Date, to: Date): 'standard' | 'premium' | null => {
     let cur = startOfDay(from);
     const end = startOfDay(to);
     while (cur <= end) {
-      const info = creditsForDay(cur);
-      total += info.credits;
-      if (info.multiplier > maxMult) maxMult = info.multiplier;
-      if (info.isPeak) anyPeak = true;
+      if (isPeakDay(cur)) return 'premium';
       cur = addDays(cur, 1);
     }
-    return { total, maxMult, anyPeak };
+    return 'standard';
   };
 
   const isDateUnavailable = (date: Date) => {
@@ -277,12 +271,16 @@ const Dashboard = () => {
   };
 
   const totalDays = range?.from && range?.to ? differenceInDays(range.to, range.from) + 1 : 0;
-  const rangeCreditInfo = useMemo(() => {
-    if (!range?.from || !range?.to) return { total: 0, maxMult: 1, anyPeak: false };
-    return computeRangeCredits(range.from, range.to);
+  const reservationType = useMemo<'standard' | 'premium' | null>(() => {
+    if (!range?.from || !range?.to) return null;
+    return detectReservationType(range.from, range.to);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range?.from, range?.to, creditRules, carId]);
-  const totalCredits = rangeCreditInfo.total;
+  }, [range?.from, range?.to, creditRules]);
+
+  const availableForType = reservationType === 'premium'
+    ? Number(primary?.premium_credits_remaining ?? 0)
+    : Number(primary?.standard_credits_remaining ?? 0);
+  const hasEnoughCredits = !reservationType || totalDays <= availableForType;
 
   const createReservation = useMutation({
     mutationFn: async () => {
@@ -294,9 +292,18 @@ const Dashboard = () => {
       if (days < minDays) throw new Error(`Mínimo ${minDays} días`);
       if (days > maxDays) throw new Error(`Máximo ${maxDays} días`);
 
-      const { total: creditsToUse, maxMult, anyPeak } = computeRangeCredits(range.from, range.to);
-      if (creditsToUse > primary.credits_remaining) {
-        throw new Error(`Solo te quedan ${primary.credits_remaining} créditos (esta reserva requiere ${creditsToUse})`);
+      const rType = detectReservationType(range.from, range.to) ?? 'standard';
+      const isPremium = rType === 'premium';
+      const creditsToUse = days;
+      const poolRemaining = isPremium
+        ? Number(primary.premium_credits_remaining ?? 0)
+        : Number(primary.standard_credits_remaining ?? 0);
+      if (creditsToUse > poolRemaining) {
+        if (isPremium) {
+          throw new Error(`No tienes créditos premium suficientes (necesitas ${creditsToUse}, te quedan ${poolRemaining})`);
+        } else {
+          throw new Error(`No tienes créditos estándar suficientes (necesitas ${creditsToUse}, te quedan ${poolRemaining})`);
+        }
       }
 
       let cur = range.from;
@@ -312,8 +319,11 @@ const Dashboard = () => {
         start_date: format(range.from, "yyyy-MM-dd"),
         end_date: format(range.to, "yyyy-MM-dd"),
         credits_used: creditsToUse,
-        credit_multiplier: maxMult,
-        is_peak_period: anyPeak,
+        credit_multiplier: isPremium ? 1 : 1,
+        is_peak_period: isPremium,
+        reservation_type: rType,
+        standard_credits_used: isPremium ? 0 : creditsToUse,
+        premium_credits_used: isPremium ? creditsToUse : 0,
         status: "pending",
       }).select().single();
       if (error) throw error;
@@ -322,7 +332,7 @@ const Dashboard = () => {
         _action: "create_reservation",
         _target_table: "reservations",
         _target_id: res.id,
-        _details: { days, credits: creditsToUse, multiplier: maxMult, peak: anyPeak, start: range.from.toISOString(), end: range.to.toISOString() },
+        _details: { days, credits: creditsToUse, type: rType, start: range.from.toISOString(), end: range.to.toISOString() },
       });
     },
     onSuccess: () => {
@@ -596,15 +606,26 @@ const Dashboard = () => {
               </div>
             </section>
 
-            {/* ============ 4 METRICS ============ */}
-            <section className="grid grid-cols-2 sm:grid-cols-4 gap-3 px-4 mt-4">
+            {/* ============ METRICS (5) ============ */}
+            <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 mt-4">
               {[
                 {
-                  label: "Créditos disponibles",
-                  value: yearMetrics.remaining,
-                  icon: <CreditCard className="w-4 h-4 text-champagne" />,
+                  label: "Semanas estándar",
+                  value: `${Math.floor(Number(primary.standard_credits_remaining ?? 0) / 7)} sem. (${Number(primary.standard_credits_remaining ?? 0)} días)`,
+                  icon: <CalendarIcon className="w-4 h-4 text-champagne" />,
                   cls: "bg-champagne/10 border-champagne/30",
                   valueCls: "text-champagne",
+                },
+                {
+                  label: "Semana premium",
+                  value: `${Math.floor(Number(primary.premium_credits_remaining ?? 0) / 7)} sem. (${Number(primary.premium_credits_remaining ?? 0)} días)`,
+                  icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-amber-400"}`} />,
+                  cls: Number(primary.premium_credits_remaining ?? 0) === 0
+                    ? "bg-card border-border/50"
+                    : "bg-amber-500/10 border-amber-500/30",
+                  valueCls: Number(primary.premium_credits_remaining ?? 0) === 0
+                    ? "text-muted-foreground line-through"
+                    : "text-amber-400",
                 },
                 {
                   label: "Km restantes",
@@ -629,48 +650,89 @@ const Dashboard = () => {
                   cls: "bg-card border-border/50",
                   valueCls: "text-foreground",
                 },
-              ].map((m, i) => (
+              ].map((m, i, arr) => (
                 <motion.div
                   key={m.label}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className={`rounded-2xl border p-3 sm:p-4 ${m.cls}`}
+                  className={`rounded-2xl border p-3 sm:p-4 ${m.cls} ${
+                    i === arr.length - 1 && arr.length % 2 === 1 ? "col-span-2 sm:col-span-1" : ""
+                  }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[11px] uppercase tracking-wider text-muted-foreground">{m.label}</span>
                     {m.icon}
                   </div>
-                  <p className={`text-xl sm:text-2xl font-bold truncate ${m.valueCls}`}>{m.value}</p>
+                  <p className={`text-base sm:text-lg font-bold truncate ${m.valueCls}`}>{m.value}</p>
                 </motion.div>
               ))}
             </section>
 
-            {/* ============ CREDITS PROGRESS ============ */}
-            <section className="mx-4 mt-4 p-4 bg-card rounded-2xl border border-border/50">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-muted-foreground">Créditos utilizados este año</span>
-                <span className="text-sm font-semibold text-foreground">
-                  {yearMetrics.used} / {yearMetrics.perYear}
-                </span>
+            {/* ============ CREDITS PROGRESS (2 BARS) ============ */}
+            <section className="mx-4 mt-4 p-4 bg-card rounded-2xl border border-border/50 space-y-5">
+              {/* Standard */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Créditos estándar utilizados</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {Number(primary.standard_credits_used_this_year ?? 0)} / {Number(primary.standard_credits_per_year ?? 21)} días
+                  </span>
+                </div>
+                <div className="bg-muted rounded-full h-2 overflow-hidden">
+                  <motion.div
+                    className="h-2 bg-champagne rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: `${Number(primary.standard_credits_per_year ?? 0) > 0
+                        ? Math.min(100, (Number(primary.standard_credits_used_this_year ?? 0) / Number(primary.standard_credits_per_year)) * 100)
+                        : 0}%`,
+                    }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                </div>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xs text-muted-foreground">
+                    {primary.credits_reset_date
+                      ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
+                      : "Renovación anual"}
+                  </span>
+                  <span className="text-xs text-champagne font-medium">
+                    {Number(primary.standard_credits_remaining ?? 0)} restantes
+                  </span>
+                </div>
               </div>
-              <div className="bg-muted rounded-full h-2 overflow-hidden">
-                <motion.div
-                  className="h-2 bg-champagne rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${usedPct}%` }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                />
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <span className="text-xs text-muted-foreground">
-                  {primary.credits_reset_date
-                    ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
-                    : "Renovación anual"}
-                </span>
-                <span className="text-xs text-champagne font-medium">
-                  {yearMetrics.remaining} restantes
-                </span>
+
+              {/* Premium */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Crédito premium utilizado</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {Number(primary.premium_credits_used_this_year ?? 0)} / {Number(primary.premium_credits_per_year ?? 7)} días
+                  </span>
+                </div>
+                <div className="bg-muted rounded-full h-2 overflow-hidden">
+                  <motion.div
+                    className="h-2 bg-amber-400 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: `${Number(primary.premium_credits_per_year ?? 0) > 0
+                        ? Math.min(100, (Number(primary.premium_credits_used_this_year ?? 0) / Number(primary.premium_credits_per_year)) * 100)
+                        : 0}%`,
+                    }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                </div>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xs text-muted-foreground">
+                    {primary.credits_reset_date
+                      ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
+                      : "Renovación anual"}
+                  </span>
+                  <span className="text-xs text-amber-400 font-medium">
+                    {Number(primary.premium_credits_remaining ?? 0)} restantes
+                  </span>
+                </div>
               </div>
             </section>
 
@@ -686,6 +748,22 @@ const Dashboard = () => {
                   <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Máx. {maxDays}d</Badge>
                   <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Antelación {advanceDays}d</Badge>
                 </div>
+
+                {/* Info banner */}
+                <div className="rounded-xl bg-card border border-border/50 p-3 mb-4 text-xs text-muted-foreground space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full ring-1 ring-champagne/60 bg-champagne/20" />
+                    <span>Fechas en <span className="text-champagne">champagne</span> = período premium (consume créditos premium)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-muted" />
+                    <span>Resto del año = período estándar (consume créditos estándar)</span>
+                  </div>
+                  <p className="text-muted-foreground/70 pt-1">
+                    Una reserva que incluya al menos 1 día premium consume créditos premium completos.
+                  </p>
+                </div>
+
                 <div className="flex justify-center">
                   <Calendar
                     mode="range"
@@ -693,34 +771,65 @@ const Dashboard = () => {
                     onSelect={handleSelect}
                     locale={es}
                     disabled={(date) => date < addDays(startOfDay(new Date()), advanceDays) || isDateUnavailable(date)}
-                    modifiers={{ peak: (date) => creditsForDay(date).isPeak }}
+                    modifiers={{ peak: (date) => isPeakDay(date) }}
                     modifiersClassNames={{ peak: "ring-1 ring-champagne/60 text-champagne" }}
                     className="rounded-md border border-border pointer-events-auto"
                   />
                 </div>
                 {range?.from && range?.to && (
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    <div className="rounded-xl bg-muted/50 p-3 text-center">
-                      <p className="text-xs text-muted-foreground">Días</p>
-                      <p className="text-lg font-bold text-foreground">{totalDays}</p>
-                    </div>
-                    <div className="rounded-xl bg-champagne/10 border border-champagne/20 p-3 text-center">
-                      <p className="text-xs text-muted-foreground">
-                        Créditos{rangeCreditInfo.maxMult > 1 ? ` (×${rangeCreditInfo.maxMult})` : ""}
-                      </p>
-                      <p className="text-lg font-bold text-champagne">{totalCredits}</p>
-                    </div>
+                  <div className="mt-4 space-y-2">
+                    {reservationType === 'premium' ? (
+                      <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 p-3">
+                        <p className="text-sm font-semibold text-amber-400">
+                          Semana premium · {totalDays} días · {totalDays} créditos premium
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Créditos premium disponibles: {Number(primary.premium_credits_remaining ?? 0)}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="rounded-xl bg-muted/50 border border-border/50 p-3">
+                        <p className="text-sm font-semibold text-foreground">
+                          Semana estándar · {totalDays} días · {totalDays} créditos estándar
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Créditos estándar disponibles: {Number(primary.standard_credits_remaining ?? 0)}
+                        </p>
+                      </div>
+                    )}
+                    {!hasEnoughCredits && (
+                      <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3">
+                        <p className="text-sm font-semibold text-red-400">
+                          No tienes suficientes créditos {reservationType === 'premium' ? 'premium' : 'estándar'} disponibles
+                          (necesitas {totalDays}, tienes {availableForType})
+                        </p>
+                      </div>
+                    )}
+                    {totalDays < minDays && (
+                      <p className="text-xs text-red-400">Mínimo {minDays} días por reserva</p>
+                    )}
+                    {totalDays > maxDays && (
+                      <p className="text-xs text-red-400">Máximo {maxDays} días por reserva</p>
+                    )}
                   </div>
                 )}
                 <Button
                   className="w-full mt-4 bg-champagne hover:bg-champagne/90 text-champagne-foreground"
                   onClick={() => createReservation.mutate()}
-                  disabled={createReservation.isPending || !range?.from || !range?.to}
+                  disabled={
+                    createReservation.isPending ||
+                    !range?.from ||
+                    !range?.to ||
+                    !hasEnoughCredits ||
+                    totalDays < minDays ||
+                    totalDays > maxDays
+                  }
                 >
                   {createReservation.isPending ? "Enviando..." : "Solicitar Reserva"}
                 </Button>
               </div>
             </section>
+
 
             {/* ============ RESERVATIONS HISTORY ============ */}
             <section className="mx-4 mt-6">
@@ -759,8 +868,14 @@ const Dashboard = () => {
                             <p className="text-sm font-semibold text-foreground">
                               {format(new Date(r.start_date), "d MMM", { locale: es })} → {format(new Date(r.end_date), "d MMM yyyy", { locale: es })}
                             </p>
-                            <p className="text-xs text-muted-foreground mt-0.5">
-                              {days} día{days > 1 ? "s" : ""} · {r.credits_used ?? 0} créditos
+                            <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1.5 flex-wrap">
+                              <span>{days} día{days > 1 ? "s" : ""}</span>
+                              <span>·</span>
+                              {r.reservation_type === 'premium' ? (
+                                <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30">Premium</Badge>
+                              ) : (
+                                <Badge variant="outline">Estándar</Badge>
+                              )}
                             </p>
                             {r.rejection_reason && (
                               <p className="text-xs italic text-muted-foreground mt-1">Motivo: {r.rejection_reason}</p>
