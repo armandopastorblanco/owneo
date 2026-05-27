@@ -802,15 +802,15 @@ const AdminReservas = () => {
                 </div>
               </div>
             )}
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm text-muted-foreground">Multiplicador</label>
-                <Input type="number" step="0.1" value={ruleMultiplier} onChange={(e) => setRuleMultiplier(e.target.value)} />
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Créditos/día</label>
-                <Input type="number" step="0.1" value={ruleCreditsPerDay} onChange={(e) => setRuleCreditsPerDay(e.target.value)} />
-              </div>
+            <div>
+              <label className="text-sm text-muted-foreground">Tipo de período</label>
+              <Select value={ruleIsPremium ? "premium" : "standard"} onValueChange={(v) => setRuleIsPremium(v === "premium")}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="premium">Premium</SelectItem>
+                  <SelectItem value="standard">Estándar</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="flex items-center gap-3">
               <Switch checked={ruleAppliesToAll} onCheckedChange={setRuleAppliesToAll} />
