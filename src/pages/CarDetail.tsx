@@ -308,15 +308,14 @@ const CarDetail = () => {
 
       {/* ─── STICKY CTA BAR ─── */}
       <div
-        className={`fixed left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 transition-all duration-300 block ${
+        className={`fixed left-0 right-0 z-40 h-14 sm:h-16 bg-background/95 backdrop-blur-md border-b border-border/50 overflow-hidden top-14 sm:top-16 transition-all duration-300 block ${
           stickyVisible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
-        style={{ top: typeof window !== "undefined" && window.innerWidth >= 640 ? 64 : 56 }}
       >
-        <div className="container mx-auto max-w-6xl px-4 py-2 sm:py-3 flex items-center justify-between gap-3 sm:gap-4 min-h-[56px]">
-          <div className="flex items-baseline gap-3 min-w-0 flex-1">
-            <span className="font-bold text-foreground text-sm sm:text-lg truncate">{car.name}</span>
-            <span className="text-muted-foreground text-sm hidden md:inline">{car.category}</span>
+        <div className="container mx-auto max-w-6xl h-full px-4 flex items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <span className="font-semibold text-foreground text-sm sm:text-base truncate max-w-[55%]">{car.name}</span>
+            <span className="text-muted-foreground text-xs sm:text-sm hidden md:inline">{car.category}</span>
           </div>
           <div className="hidden lg:flex gap-6">
             <div className="text-center">
@@ -335,7 +334,7 @@ const CarDetail = () => {
           <Button
             onClick={handleSolicitarClick}
             size="sm"
-            className="bg-champagne text-champagne-foreground hover:bg-champagne/90 min-h-[44px] shrink-0"
+            className="bg-champagne text-champagne-foreground hover:bg-champagne/90 h-10 shrink-0"
           >
             <span className="hidden sm:inline">Solicitar participación</span>
             <span className="sm:hidden">Solicitar</span>
