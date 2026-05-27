@@ -121,7 +121,7 @@ export default function AdminConsultas() {
                 </Badge>
                 {headerLabel && (
                   <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
-                    {isContacto ? <Inbox className="w-3 h-3" /> : <Car className="w-3 h-3" />}
+                    {isLanding ? <Sparkles className="w-3 h-3" /> : isContacto ? <Inbox className="w-3 h-3" /> : <Car className="w-3 h-3" />}
                     {headerLabel}
                   </span>
                 )}
