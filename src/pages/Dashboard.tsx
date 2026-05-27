@@ -679,7 +679,7 @@ const Dashboard = () => {
                 </div>
                 <div className="bg-muted rounded-full h-2 overflow-hidden">
                   <motion.div
-                    className="h-2 bg-champagne rounded-full"
+                    className="h-2 bg-foreground/60 rounded-full"
                     initial={{ width: 0 }}
                     animate={{
                       width: `${Number(primary.standard_credits_per_year ?? 0) > 0
@@ -695,7 +695,7 @@ const Dashboard = () => {
                       ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
                       : "Renovación anual"}
                   </span>
-                  <span className="text-xs text-champagne font-medium">
+                  <span className="text-xs text-foreground font-medium">
                     {Number(primary.standard_credits_remaining ?? 0)} restantes
                   </span>
                 </div>
