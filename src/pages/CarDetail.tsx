@@ -374,7 +374,7 @@ const CarDetail = () => {
             <div className="grid grid-cols-3 gap-3 px-0 py-4 sm:absolute sm:bottom-4 sm:left-4 sm:right-4 sm:px-0 sm:py-0">
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
                 <CalendarDays className="w-4 h-4 mx-auto mb-1 text-champagne" />
-                <div className="text-sm font-bold text-foreground">{weeksPerParticipation} sem.</div>
+                <div className="text-sm font-bold text-foreground">{weeksPerParticipation} sem. (3+1)</div>
                 <div className="text-xs text-muted-foreground">por año</div>
               </div>
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
