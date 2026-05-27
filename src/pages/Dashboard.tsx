@@ -893,7 +893,7 @@ const Dashboard = () => {
             </section>
 
             {/* ============ DOCUMENTS ============ */}
-            <section className="mx-4 mt-6 space-y-4">
+            <section id="documentos" className="mx-4 mt-6 space-y-4 scroll-mt-24">
               <h2 className="flex items-center gap-2 text-lg font-semibold">
                 <FileText className="w-5 h-5 text-champagne" />
                 Documentos
