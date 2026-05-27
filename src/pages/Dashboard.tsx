@@ -292,9 +292,18 @@ const Dashboard = () => {
       if (days < minDays) throw new Error(`Mínimo ${minDays} días`);
       if (days > maxDays) throw new Error(`Máximo ${maxDays} días`);
 
-      const { total: creditsToUse, maxMult, anyPeak } = computeRangeCredits(range.from, range.to);
-      if (creditsToUse > primary.credits_remaining) {
-        throw new Error(`Solo te quedan ${primary.credits_remaining} créditos (esta reserva requiere ${creditsToUse})`);
+      const rType = detectReservationType(range.from, range.to) ?? 'standard';
+      const isPremium = rType === 'premium';
+      const creditsToUse = days;
+      const poolRemaining = isPremium
+        ? Number(primary.premium_credits_remaining ?? 0)
+        : Number(primary.standard_credits_remaining ?? 0);
+      if (creditsToUse > poolRemaining) {
+        if (isPremium) {
+          throw new Error(`No tienes créditos premium suficientes (necesitas ${creditsToUse}, te quedan ${poolRemaining})`);
+        } else {
+          throw new Error(`No tienes créditos estándar suficientes (necesitas ${creditsToUse}, te quedan ${poolRemaining})`);
+        }
       }
 
       let cur = range.from;
@@ -310,8 +319,11 @@ const Dashboard = () => {
         start_date: format(range.from, "yyyy-MM-dd"),
         end_date: format(range.to, "yyyy-MM-dd"),
         credits_used: creditsToUse,
-        credit_multiplier: maxMult,
-        is_peak_period: anyPeak,
+        credit_multiplier: isPremium ? 1 : 1,
+        is_peak_period: isPremium,
+        reservation_type: rType,
+        standard_credits_used: isPremium ? 0 : creditsToUse,
+        premium_credits_used: isPremium ? creditsToUse : 0,
         status: "pending",
       }).select().single();
       if (error) throw error;
@@ -320,7 +332,7 @@ const Dashboard = () => {
         _action: "create_reservation",
         _target_table: "reservations",
         _target_id: res.id,
-        _details: { days, credits: creditsToUse, multiplier: maxMult, peak: anyPeak, start: range.from.toISOString(), end: range.to.toISOString() },
+        _details: { days, credits: creditsToUse, type: rType, start: range.from.toISOString(), end: range.to.toISOString() },
       });
     },
     onSuccess: () => {
