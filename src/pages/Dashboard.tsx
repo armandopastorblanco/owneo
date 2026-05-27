@@ -218,7 +218,7 @@ const Dashboard = () => {
   });
 
   // ================== RESERVATION LOGIC ==================
-  const minDays = Math.max(7, primary?.car?.min_reservation_days ?? 7);
+  const minDays = primary?.car?.min_reservation_days ?? 7;
   const maxDays = primary?.car?.max_reservation_days ?? 14;
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
 
@@ -751,7 +751,7 @@ const Dashboard = () => {
                 <div className="rounded-xl bg-card border border-border/50 p-3 mb-4 text-xs text-muted-foreground space-y-1.5">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full ring-1 ring-champagne/60 bg-champagne/20" />
-                    <span>Fechas en <span className="text-champagne">champagne</span> = período premium (consume créditos premium)</span>
+                    <span>Fechas en <span className="text-[#bda095]">champagne</span> = período premium (consume créditos premium)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-muted" />
@@ -777,11 +777,11 @@ const Dashboard = () => {
                 {range?.from && range?.to && (
                   <div className="mt-4 space-y-2">
                     {reservationType === 'premium' ? (
-                      <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 p-3">
-                        <p className="text-sm font-semibold text-amber-400">
+                      <div className="rounded-xl bg-[#bda095]/10 border border-[#bda095]/30 p-3">
+                        <p className="text-sm font-semibold text-[#bda095]">
                           Semana premium · {totalDays} días · {totalDays} créditos premium
                         </p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className="text-xs text-[#bda095] mt-1">
                           Créditos premium disponibles: {Number(primary.premium_credits_remaining ?? 0)}
                         </p>
                       </div>
@@ -857,7 +857,7 @@ const Dashboard = () => {
                         <div className="flex items-start justify-between gap-3 flex-wrap">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap mb-2">
-                              {r.status === "pending" && <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30"><Clock className="w-3 h-3 mr-1" />En revisión</Badge>}
+                              {r.status === "pending" && <Badge className="bg-[#bda095]/20 text-[#bda095] border-[#bda095]/30"><Clock className="w-3 h-3 mr-1" />En revisión</Badge>}
                               {r.status === "confirmed" && <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30"><CheckCircle2 className="w-3 h-3 mr-1" />Confirmada</Badge>}
                               {r.status === "cancelled" && r.rejected_at && <Badge className="bg-red-500/20 text-red-300 border-red-500/30"><XCircle className="w-3 h-3 mr-1" />Rechazada</Badge>}
                               {r.status === "cancelled" && !r.rejected_at && <Badge className="bg-muted text-muted-foreground border-border"><Ban className="w-3 h-3 mr-1" />Cancelada</Badge>}
@@ -870,7 +870,7 @@ const Dashboard = () => {
                               <span>{days} día{days > 1 ? "s" : ""}</span>
                               <span>·</span>
                               {r.reservation_type === 'premium' ? (
-                                <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30">Premium</Badge>
+                                <Badge className="bg-[#bda095]/20 text-[#bda095] border-[#bda095]/30">Premium</Badge>
                               ) : (
                                 <Badge variant="outline">Estándar</Badge>
                               )}
