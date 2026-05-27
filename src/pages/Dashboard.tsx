@@ -86,7 +86,7 @@ const Dashboard = () => {
 
       const { data: validated } = await supabase
         .from("validated_participations")
-        .select("id, car_id, credits_remaining, credits_per_year, credits_used_this_year, credits_reset_date, standard_credits_per_year, premium_credits_per_year, standard_credits_remaining, premium_credits_remaining, standard_credits_used_this_year, premium_credits_used_this_year, cars:car_id(id, name, brand, model, year, image_url, min_reservation_days, max_reservation_days, reservation_advance_days, km_per_participation, location_id, locations:location_id(name))")
+        .select("id, car_id, credits_remaining, credits_per_year, credits_used_this_year, credits_reset_date, standard_credits_per_year, premium_credits_per_year, standard_credits_remaining, premium_credits_remaining, standard_credits_used_this_year, premium_credits_used_this_year, cars:car_id(id, name, brand, model, year, image_url, km_per_participation, location_id, locations:location_id(name))")
         .eq("user_id", userId!);
 
       const grouped = new Map<string, any>();
@@ -218,9 +218,9 @@ const Dashboard = () => {
   });
 
   // ================== RESERVATION LOGIC ==================
-  const minDays = primary?.car?.min_reservation_days ?? 7;
-  const maxDays = primary?.car?.max_reservation_days ?? 14;
-  const advanceDays = primary?.car?.reservation_advance_days ?? 7;
+  const minDays = 7;
+  const maxDays = 14;
+  const advanceDays = 7;
 
   const isPeakDay = (date: Date): boolean => {
     const d = startOfDay(date);
