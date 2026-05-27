@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import BottomNav from "@/components/BottomNav";
 import CookieBanner from "@/components/CookieBanner";
+import BetaGate from "@/components/BetaGate";
 import { usePostHogPageView } from "@/hooks/usePostHogPageView";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
@@ -93,6 +94,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <BetaGate>
       <BrowserRouter>
         <ScrollToTop />
         <PostHogPageTracker />
@@ -153,6 +155,7 @@ const App = () => (
           <CookieBanner />
         </AuthProvider>
       </BrowserRouter>
+      </BetaGate>
     </TooltipProvider>
   </QueryClientProvider>
 );
