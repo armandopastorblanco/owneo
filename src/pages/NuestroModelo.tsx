@@ -455,7 +455,7 @@ export default function NuestroModelo() {
                     ["Precio del vehículo", "€250.000"],
                     ["Participaciones disponibles", "10"],
                     ["Precio por participación", <span key="p" className="text-champagne font-bold">€25.000</span>],
-                    ["Semanas/año por participación", "4"],
+                    ["Semanas/año por participación", "4 (3+1)"],
                     ["Km/año por participación", "2.000"],
                     ["Duración", "según ficha del vehículo"],
                   ].map(([k, v], i) => (
