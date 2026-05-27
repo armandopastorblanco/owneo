@@ -507,7 +507,7 @@ export default function NuestroModelo() {
                 </ul>
 
                 <div className="mt-6 rounded-2xl bg-champagne/5 border border-champagne/20 p-4 text-sm text-muted-foreground">
-                  Con 1 participación, disfrutas 4 semanas al año de un Porsche 911 Turbo S por €25.000
+                  Con 1 participación, disfrutas 4 semanas (3 estándar + 1 premium) al año de un Porsche 911 Turbo S por €25.000
                   — y OWNEO gestiona absolutamente todo lo demás.
                 </div>
               </div>
