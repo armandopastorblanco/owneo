@@ -192,7 +192,7 @@ const Index = () => {
                     style={{borderColor:"rgba(189,160,149,0.12)"}}>
                     {[
                       "Seguro, garaje y mantenimiento ×10",
-                      "28 días garantizados al año",
+                      "21 días estándar + 7 días premium al año",
                       "Hasta un 70% de tu inversión recuperada"
                     ].map(item => (
                       <div key={item} className="flex items-center gap-2.5">
