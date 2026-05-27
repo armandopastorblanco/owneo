@@ -17,7 +17,7 @@ import {
 import {
   MessageCircle, Car, Eye, EyeOff, Archive,
   Trash2, Clock, CheckCircle2, User, Phone,
-  Mail, FileText, ChevronDown, ChevronUp, Inbox,
+  Mail, FileText, ChevronDown, ChevronUp, Inbox, Sparkles,
 } from "lucide-react";
 
 const STATUS_CONFIG: Record<string, { label: string; class: string }> = {
