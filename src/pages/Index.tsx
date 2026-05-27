@@ -245,7 +245,7 @@ const Index = () => {
                   </button>
                 </Link>
                 <p className="text-xs mt-5" style={{color:"rgba(255,255,255,0.2)"}}>
-                  Cálculo estimado · Ferrari Roma · 28 días al año · 5 años
+                  Cálculo estimado · Ferrari Roma · 21 días estándar + 7 días premium al año · 5 años
                 </p>
               </div>
 
