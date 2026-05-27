@@ -196,43 +196,46 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
       </div>
 
       <Dialog open={requestOpen} onOpenChange={setRequestOpen}>
-        <DialogContent className="bg-background/95 backdrop-blur-md border-champagne/20 max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xs uppercase tracking-[0.35em] text-champagne font-extralight">
+        <DialogContent className="bg-background/95 backdrop-blur-md border-champagne/20 max-w-md w-[calc(100vw-2rem)] sm:w-full rounded-xl p-5 sm:p-6 max-h-[90svh] overflow-y-auto">
+          <DialogHeader className="text-left">
+            <DialogTitle className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-champagne font-extralight">
               Solicitar acceso
             </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground font-extralight">
+            <DialogDescription className="text-[13px] sm:text-sm text-muted-foreground font-extralight">
               Déjanos tus datos y te enviaremos un acceso a la beta privada.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleRequestSubmit} className="space-y-4 pt-2">
             <div className="space-y-2">
-              <Label htmlFor="req-name" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+              <Label htmlFor="req-name" className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
                 Nombre completo
               </Label>
               <Input
                 id="req-name"
                 value={reqName}
                 onChange={(e) => setReqName(e.target.value)}
-                className="h-11 bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                autoComplete="name"
+                className="h-12 sm:h-11 text-base sm:text-sm bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="req-email" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+              <Label htmlFor="req-email" className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
                 Email
               </Label>
               <Input
                 id="req-email"
                 type="email"
+                inputMode="email"
+                autoComplete="email"
                 value={reqEmail}
                 onChange={(e) => setReqEmail(e.target.value)}
-                className="h-11 bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                className="h-12 sm:h-11 text-base sm:text-sm bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="req-message" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+              <Label htmlFor="req-message" className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
                 Mensaje
               </Label>
               <Textarea
@@ -240,14 +243,14 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
                 rows={3}
                 value={reqMessage}
                 onChange={(e) => setReqMessage(e.target.value)}
-                className="bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                className="text-base sm:text-sm bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
                 required
               />
             </div>
             <Button
               type="submit"
               disabled={submitting}
-              className="w-full h-12 bg-champagne text-background hover:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
+              className="w-full h-14 sm:h-12 bg-champagne text-background hover:bg-champagne/90 active:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
             >
               {submitting ? "Enviando..." : "Enviar"}
             </Button>
