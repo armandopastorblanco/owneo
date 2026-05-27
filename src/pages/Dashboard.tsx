@@ -86,7 +86,7 @@ const Dashboard = () => {
 
       const { data: validated } = await supabase
         .from("validated_participations")
-        .select("id, car_id, credits_remaining, credits_per_year, credits_used_this_year, credits_reset_date, cars:car_id(id, name, brand, model, year, image_url, min_reservation_days, max_reservation_days, reservation_advance_days, km_per_participation, location_id, locations:location_id(name))")
+        .select("id, car_id, credits_remaining, credits_per_year, credits_used_this_year, credits_reset_date, standard_credits_per_year, premium_credits_per_year, standard_credits_remaining, premium_credits_remaining, standard_credits_used_this_year, premium_credits_used_this_year, cars:car_id(id, name, brand, model, year, image_url, min_reservation_days, max_reservation_days, reservation_advance_days, km_per_participation, location_id, locations:location_id(name))")
         .eq("user_id", userId!);
 
       const grouped = new Map<string, any>();
@@ -102,6 +102,12 @@ const Dashboard = () => {
             credits_used_this_year: Number(v.credits_used_this_year ?? 0),
             credits_remaining: Number(v.credits_remaining ?? 0),
             credits_reset_date: v.credits_reset_date,
+            standard_credits_per_year: Number((v as any).standard_credits_per_year ?? 21),
+            premium_credits_per_year: Number((v as any).premium_credits_per_year ?? 7),
+            standard_credits_remaining: Number((v as any).standard_credits_remaining ?? 21),
+            premium_credits_remaining: Number((v as any).premium_credits_remaining ?? 7),
+            standard_credits_used_this_year: Number((v as any).standard_credits_used_this_year ?? 0),
+            premium_credits_used_this_year: Number((v as any).premium_credits_used_this_year ?? 0),
           });
         } else {
           ex.ids.push(v.id);
@@ -109,6 +115,12 @@ const Dashboard = () => {
           ex.credits_per_year += Number(v.credits_per_year ?? 28);
           ex.credits_used_this_year += Number(v.credits_used_this_year ?? 0);
           ex.credits_remaining += Number(v.credits_remaining ?? 0);
+          ex.standard_credits_per_year += Number((v as any).standard_credits_per_year ?? 21);
+          ex.premium_credits_per_year += Number((v as any).premium_credits_per_year ?? 7);
+          ex.standard_credits_remaining += Number((v as any).standard_credits_remaining ?? 21);
+          ex.premium_credits_remaining += Number((v as any).premium_credits_remaining ?? 7);
+          ex.standard_credits_used_this_year += Number((v as any).standard_credits_used_this_year ?? 0);
+          ex.premium_credits_used_this_year += Number((v as any).premium_credits_used_this_year ?? 0);
           if (v.credits_reset_date && (!ex.credits_reset_date || v.credits_reset_date < ex.credits_reset_date)) {
             ex.credits_reset_date = v.credits_reset_date;
           }
