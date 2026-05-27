@@ -102,7 +102,8 @@ export default function AdminConsultas() {
     const isPending = c.status === "pending";
     const statusCfg = STATUS_CONFIG[c.status] ?? STATUS_CONFIG.pending;
     const isContacto = c.source === "contacto";
-    const headerLabel = isContacto
+    const isLanding = c.source === "beta_gate";
+    const headerLabel = (isContacto || isLanding)
       ? (c.subject && c.car_name
           ? `${c.subject} · ${c.car_name}`
           : c.subject || c.car_name)
