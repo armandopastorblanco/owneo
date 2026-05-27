@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Share, Plus, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import owneoLogo from "@/assets/owneo-logo.png";
 
 interface PWAInstallPromptProps {
   show: boolean;
@@ -43,13 +42,11 @@ const PWAInstallPrompt = ({
             <div className="p-5">
               {/* App info */}
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl overflow-hidden bg-background border border-border/40 flex-shrink-0">
-                  <img
-                    src={owneoLogo}
-                    alt="OWNEO"
-                    className="w-full h-full object-cover mix-blend-screen filter brightness-110"
-                  />
-                </div>
+                <img
+                  src="/pwa-icon-192.png"
+                  alt="OWNEO"
+                  className="w-16 h-16 rounded-xl bg-black object-contain flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-foreground font-medium text-base tracking-wide">
                     OWNEO
