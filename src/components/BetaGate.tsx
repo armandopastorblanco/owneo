@@ -109,7 +109,10 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
   if (unlocked) return <>{children}</>;
 
   return (
-    <div className="relative min-h-screen bg-background flex items-center justify-center px-6 py-12 overflow-hidden">
+    <div
+      className="relative bg-background flex items-center justify-center px-5 sm:px-6 overflow-hidden"
+      style={{ minHeight: "100svh" }}
+    >
       {/* Background video */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
@@ -121,30 +124,40 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
         preload="auto"
         aria-hidden="true"
       />
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50 z-10" aria-hidden="true" />
+      {/* Dark overlay + subtle gradient for legibility on mobile */}
+      <div className="absolute inset-0 bg-black/55 z-10" aria-hidden="true" />
+      <div
+        className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-transparent to-black/70 sm:hidden"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-20 w-full max-w-sm flex flex-col items-center">
+      <div
+        className="relative z-20 w-full max-w-sm flex flex-col items-center py-10 sm:py-12"
+        style={{
+          paddingTop: "max(2.5rem, env(safe-area-inset-top))",
+          paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))",
+        }}
+      >
         <img
           src={owneoLogo}
           alt="Owneo"
-          className="h-16 w-auto mb-10 mix-blend-screen"
+          className="h-12 sm:h-16 w-auto mb-8 sm:mb-10 mix-blend-screen"
         />
-        <h1 className="text-xs uppercase tracking-[0.35em] text-champagne mb-2">
+        <h1 className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-champagne mb-2">
           Beta privada
         </h1>
-        <p className="text-sm text-muted-foreground mb-3 text-center font-extralight">
+        <p className="text-[13px] sm:text-sm text-muted-foreground mb-3 text-center font-extralight px-2">
           Introduce la contraseña de acceso
         </p>
         <button
           type="button"
           onClick={() => setRequestOpen(true)}
-          className="mb-8 text-[11px] uppercase tracking-[0.3em] text-champagne/80 hover:text-champagne font-extralight transition-colors underline-offset-4 hover:underline"
+          className="mb-8 min-h-[44px] px-2 text-[11px] uppercase tracking-[0.3em] text-champagne/80 active:text-champagne hover:text-champagne font-extralight transition-colors underline-offset-4 hover:underline"
         >
           Solicitar acceso
         </button>
 
-        <form onSubmit={handleSubmit} className="w-full space-y-5">
+        <form onSubmit={handleSubmit} className="w-full space-y-4 sm:space-y-5">
           <div className="space-y-2">
             <Label htmlFor="beta-password" className="sr-only">
               Contraseña
@@ -152,15 +165,15 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
             <Input
               id="beta-password"
               type="password"
-              autoFocus
               autoComplete="current-password"
+              inputMode="text"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
                 if (error) setError(false);
               }}
               placeholder="Contraseña"
-              className="h-12 text-center tracking-widest bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+              className="h-14 sm:h-12 text-base sm:text-sm text-center tracking-widest bg-black/30 sm:bg-transparent backdrop-blur-sm border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
             />
             {error && (
               <p className="text-xs text-center text-destructive font-extralight">
@@ -171,55 +184,58 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
 
           <Button
             type="submit"
-            className="w-full h-12 bg-champagne text-background hover:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
+            className="w-full h-14 sm:h-12 bg-champagne text-background hover:bg-champagne/90 active:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
           >
             Entrar
           </Button>
         </form>
 
-        <p className="mt-10 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        <p className="mt-8 sm:mt-10 text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-center">
           Owneo · Acceso privado
         </p>
       </div>
 
       <Dialog open={requestOpen} onOpenChange={setRequestOpen}>
-        <DialogContent className="bg-background/95 backdrop-blur-md border-champagne/20 max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xs uppercase tracking-[0.35em] text-champagne font-extralight">
+        <DialogContent className="bg-background/95 backdrop-blur-md border-champagne/20 max-w-md w-[calc(100vw-2rem)] sm:w-full rounded-xl p-5 sm:p-6 max-h-[90svh] overflow-y-auto">
+          <DialogHeader className="text-left">
+            <DialogTitle className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-champagne font-extralight">
               Solicitar acceso
             </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground font-extralight">
+            <DialogDescription className="text-[13px] sm:text-sm text-muted-foreground font-extralight">
               Déjanos tus datos y te enviaremos un acceso a la beta privada.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleRequestSubmit} className="space-y-4 pt-2">
             <div className="space-y-2">
-              <Label htmlFor="req-name" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+              <Label htmlFor="req-name" className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
                 Nombre completo
               </Label>
               <Input
                 id="req-name"
                 value={reqName}
                 onChange={(e) => setReqName(e.target.value)}
-                className="h-11 bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                autoComplete="name"
+                className="h-12 sm:h-11 text-base sm:text-sm bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="req-email" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+              <Label htmlFor="req-email" className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
                 Email
               </Label>
               <Input
                 id="req-email"
                 type="email"
+                inputMode="email"
+                autoComplete="email"
                 value={reqEmail}
                 onChange={(e) => setReqEmail(e.target.value)}
-                className="h-11 bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                className="h-12 sm:h-11 text-base sm:text-sm bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="req-message" className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
+              <Label htmlFor="req-message" className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground font-extralight">
                 Mensaje
               </Label>
               <Textarea
@@ -227,14 +243,14 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
                 rows={3}
                 value={reqMessage}
                 onChange={(e) => setReqMessage(e.target.value)}
-                className="bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
+                className="text-base sm:text-sm bg-transparent border-champagne/30 focus-visible:border-champagne focus-visible:ring-0"
                 required
               />
             </div>
             <Button
               type="submit"
               disabled={submitting}
-              className="w-full h-12 bg-champagne text-background hover:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
+              className="w-full h-14 sm:h-12 bg-champagne text-background hover:bg-champagne/90 active:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
             >
               {submitting ? "Enviando..." : "Enviar"}
             </Button>
