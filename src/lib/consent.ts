@@ -89,7 +89,7 @@ function loadGtag() {
 
   gtag("js", new Date());
   // SPA: we send page_view manually from GaPageTracker on every route change
-  gtag("config", GA_ID, { anonymize_ip: true, send_page_view: false });
+  gtag("config", GA_ID, { anonymize_ip: true, send_page_view: false, debug_mode: true });
 }
 
 function updateConsentSignals(consent: ConsentCategories) {
