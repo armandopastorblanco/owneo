@@ -1268,7 +1268,8 @@ const AdminReservas = () => {
                   profile: p.profiles, car: p.cars, car_id: p.car_id, user_id: p.user_id,
                   city: cityName,
                   numbers: [] as number[],
-                  total: 0, used: 0, remaining: 0,
+                  std_total: 0, std_remaining: 0,
+                  prem_total: 0, prem_remaining: 0,
                   reset_date: p.credits_reset_date,
                 });
               }
@@ -1276,9 +1277,10 @@ const AdminReservas = () => {
               a.ids.push(p.id);
               a.rows.push(p);
               a.numbers.push(p.participation_number);
-              a.total += Number(p.credits_per_year || 28);
-              a.used += Number(p.credits_used_this_year || 0);
-              a.remaining += Number(p.credits_remaining ?? ((p.credits_per_year || 28) - (p.credits_used_this_year || 0)));
+              a.std_total += Number(p.standard_credits_per_year ?? 21);
+              a.std_remaining += Number(p.standard_credits_remaining ?? 21);
+              a.prem_total += Number(p.premium_credits_per_year ?? 7);
+              a.prem_remaining += Number(p.premium_credits_remaining ?? 7);
               return acc;
             }, new Map()).values());
 
@@ -1290,9 +1292,9 @@ const AdminReservas = () => {
                   case "city": return (g.city || "").toLowerCase();
                   case "car": return (g.car?.name || "").toLowerCase();
                   case "count": return g.numbers.length;
-                  case "total": return g.total;
-                  case "used": return g.used;
-                  case "remaining": return g.remaining;
+                  case "total": return g.std_remaining;
+                  case "used": return g.prem_remaining;
+                  case "remaining": return g.std_remaining;
                   case "reset": return g.reset_date || "";
                 }
               };
@@ -1319,16 +1321,16 @@ const AdminReservas = () => {
                     <TableHead><SortBtn k="car" label="Vehículo" /></TableHead>
                     <TableHead><SortBtn k="city" label="Ciudad" /></TableHead>
                     <TableHead className="hidden md:table-cell"><SortBtn k="count" label="Participaciones" /></TableHead>
-                    <TableHead><SortBtn k="total" label="Créditos/año" /></TableHead>
-                    <TableHead><SortBtn k="used" label="Usados" /></TableHead>
-                    <TableHead><SortBtn k="remaining" label="Restantes" /></TableHead>
+                    <TableHead><SortBtn k="total" label="Std" /></TableHead>
+                    <TableHead><SortBtn k="used" label="Prem" /></TableHead>
                     <TableHead className="hidden lg:table-cell"><SortBtn k="reset" label="Reset" /></TableHead>
                     <TableHead></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {sorted.map((g: any) => {
-                    const pct = g.total > 0 ? (g.remaining / g.total) * 100 : 0;
+                    const stdPct = g.std_total > 0 ? (g.std_remaining / g.std_total) * 100 : 0;
+                    const premPct = g.prem_total > 0 ? (g.prem_remaining / g.prem_total) * 100 : 0;
                     return (
                       <TableRow key={g.key}>
                         <TableCell>
@@ -1340,19 +1342,23 @@ const AdminReservas = () => {
                         <TableCell className="hidden md:table-cell text-foreground">
                           {g.numbers.length}× (#{g.numbers.sort((a: number, b: number) => a - b).join(", #")})
                         </TableCell>
-                        <TableCell className="text-foreground">{g.total}</TableCell>
-                        <TableCell className="text-foreground">{g.used}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <Progress value={pct} className={`w-16 h-2 ${pct > 50 ? "[&>div]:bg-green-500" : pct > 20 ? "[&>div]:bg-orange-500" : "[&>div]:bg-red-500"}`} />
-                            <span className="text-sm text-foreground">{g.remaining}</span>
+                            <Progress value={stdPct} className="w-16 h-2 [&>div]:bg-foreground/60" />
+                            <span className="text-sm text-foreground whitespace-nowrap">{g.std_remaining} / {g.std_total}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Progress value={premPct} className="w-16 h-2 [&>div]:bg-[#bda095]" />
+                            <span className="text-sm text-[#bda095] whitespace-nowrap">{g.prem_remaining} / {g.prem_total}</span>
                           </div>
                         </TableCell>
                         <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
                           {g.reset_date ? format(new Date(g.reset_date), "dd/MM/yy") : "—"}
                         </TableCell>
                         <TableCell>
-                          <Button variant="ghost" size="sm" onClick={() => { setAdjustModal({ ...g.rows[0], _groupIds: g.ids, _groupRemaining: g.remaining }); setAdjustCredits(String(g.remaining)); setAdjustReason(""); }}>
+                          <Button variant="ghost" size="sm" onClick={() => { setAdjustModal({ ...g.rows[0], _groupIds: g.ids, _groupStdRemaining: g.std_remaining, _groupPremRemaining: g.prem_remaining }); setAdjustStdDelta("0"); setAdjustPremDelta("0"); setAdjustReason(""); }}>
                             <Edit className="h-4 w-4" />
                           </Button>
                         </TableCell>
@@ -1363,6 +1369,7 @@ const AdminReservas = () => {
               </Table>
             );
           })()}
+
         </CardContent>
       </Card>
 
