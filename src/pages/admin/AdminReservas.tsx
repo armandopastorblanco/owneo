@@ -99,7 +99,7 @@ const AdminReservas = () => {
     setRuleName(""); setRuleDesc("");
     setRuleType("months");
     setRuleMonths([]); setRuleStartDate(""); setRuleEndDate("");
-    setRuleMultiplier("1.0"); setRuleCreditsPerDay("1.0");
+    setRuleIsPremium(true);
     setRuleAppliesToAll(true); setRuleActive(true);
   };
 
