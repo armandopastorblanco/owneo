@@ -90,8 +90,7 @@ const AdminReservas = () => {
   const [ruleMonths, setRuleMonths] = useState<number[]>([]);
   const [ruleStartDate, setRuleStartDate] = useState("");
   const [ruleEndDate, setRuleEndDate] = useState("");
-  const [ruleMultiplier, setRuleMultiplier] = useState("1.0");
-  const [ruleCreditsPerDay, setRuleCreditsPerDay] = useState("1.0");
+  const [ruleIsPremium, setRuleIsPremium] = useState(true);
   const [ruleAppliesToAll, setRuleAppliesToAll] = useState(true);
   const [ruleActive, setRuleActive] = useState(true);
 
