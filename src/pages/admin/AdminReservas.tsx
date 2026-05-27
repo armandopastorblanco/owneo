@@ -711,8 +711,7 @@ const AdminReservas = () => {
                 <TableRow>
                   <TableHead>Regla</TableHead>
                   <TableHead>Período</TableHead>
-                  <TableHead>Multiplicador</TableHead>
-                  <TableHead>Créditos/día</TableHead>
+                  <TableHead>Tipo</TableHead>
                   <TableHead>Aplica a</TableHead>
                   <TableHead>Estado</TableHead>
                   <TableHead className="text-right">Acciones</TableHead>
