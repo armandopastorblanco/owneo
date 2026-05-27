@@ -99,7 +99,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
           </Button>
         </form>
 
-        <p className="mt-10 text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
+        <p className="mt-10 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
           Owneo · Acceso privado
         </p>
       </div>

@@ -111,15 +111,15 @@ const Index = () => {
                     </div>
                     <div className="space-y-3 border-t border-white/6 pt-6">
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground/70">Precio de compra</span>
+                        <span className="text-xs text-muted-foreground">Precio de compra</span>
                         <span className="text-xs text-muted-foreground">330.000€</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground/70">Gastos 5 años</span>
+                        <span className="text-xs text-muted-foreground">Gastos 5 años</span>
                         <span className="text-xs text-muted-foreground">+ 125.000€</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground/70">Reventa estimada (65%)</span>
+                        <span className="text-xs text-muted-foreground">Reventa estimada (65%)</span>
                         <span className="text-xs text-muted-foreground">− 214.500€</span>
                       </div>
                     </div>
@@ -132,7 +132,7 @@ const Index = () => {
                     ].map(item => (
                       <div key={item} className="flex items-center gap-2.5">
                         <X className="w-3 h-3 flex-shrink-0" style={{color:"rgba(239,68,68,0.5)"}} />
-                        <span className="text-xs text-muted-foreground/60">{item}</span>
+                        <span className="text-xs text-muted-foreground">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -174,15 +174,15 @@ const Index = () => {
                     <div className="space-y-3 border-t pt-6"
                       style={{borderColor:"rgba(189,160,149,0.12)"}}>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground/70">Participación única</span>
+                        <span className="text-xs text-muted-foreground">Participación única</span>
                         <span className="text-xs text-muted-foreground">33.000€</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground/70">Gestión 5 años</span>
+                        <span className="text-xs text-muted-foreground">Gestión 5 años</span>
                         <span className="text-xs text-muted-foreground">+ 16.500€</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground/70">Recuperas (reventa 70%)</span>
+                        <span className="text-xs text-muted-foreground">Recuperas (reventa 70%)</span>
                         <span className="text-xs" style={{color:"rgba(134,239,172,0.8)"}}>− 23.100€</span>
                       </div>
                     </div>
