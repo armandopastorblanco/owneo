@@ -567,7 +567,7 @@ const CarDetail = () => {
 
                   {/* CTA principal */}
                   <Button
-                    onClick={() => scrollTo(formRef)}
+                    onClick={handleSolicitarClick}
                     size="lg"
                     className="w-full bg-champagne text-champagne-foreground hover:bg-champagne/90"
                   >
