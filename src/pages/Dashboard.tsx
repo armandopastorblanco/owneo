@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, Car, FileText, MapPin, Phone, Calendar as CalendarIcon,
   CreditCard, Info, Loader2, Clock, CheckCircle2, XCircle, Ban, Gauge,
-  User as UserIcon,
+  User as UserIcon, Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
