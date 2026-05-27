@@ -609,23 +609,21 @@ const Dashboard = () => {
             {/* ============ METRICS (5) ============ */}
             <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 mt-4">
               {[
-                {
+              {
                   label: "Semanas estándar",
                   value: `${Math.floor(Number(primary.standard_credits_remaining ?? 0) / 7)} sem. (${Number(primary.standard_credits_remaining ?? 0)} días)`,
-                  icon: <CalendarIcon className="w-4 h-4 text-champagne" />,
-                  cls: "bg-champagne/10 border-champagne/30",
-                  valueCls: "text-champagne",
+                  icon: <CalendarIcon className="w-4 h-4 text-foreground" />,
+                  cls: "bg-card border-border/50",
+                  valueCls: "text-foreground",
                 },
                 {
                   label: "Semana premium",
                   value: `${Math.floor(Number(primary.premium_credits_remaining ?? 0) / 7)} sem. (${Number(primary.premium_credits_remaining ?? 0)} días)`,
-                  icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-amber-400"}`} />,
-                  cls: Number(primary.premium_credits_remaining ?? 0) === 0
-                    ? "bg-card border-border/50"
-                    : "bg-amber-500/10 border-amber-500/30",
+                  icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-champagne"}`} />,
+                  cls: "bg-champagne/10 border-champagne/30",
                   valueCls: Number(primary.premium_credits_remaining ?? 0) === 0
                     ? "text-muted-foreground line-through"
-                    : "text-amber-400",
+                    : "text-champagne",
                 },
                 {
                   label: "Km restantes",
