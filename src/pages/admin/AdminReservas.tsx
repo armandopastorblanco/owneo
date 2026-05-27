@@ -111,8 +111,7 @@ const AdminReservas = () => {
     setRuleMonths(rule.months || []);
     setRuleStartDate(rule.start_date || "");
     setRuleEndDate(rule.end_date || "");
-    setRuleMultiplier(String(rule.multiplier ?? "1.0"));
-    setRuleCreditsPerDay(String(rule.credits_per_day ?? "1.0"));
+    setRuleIsPremium(rule.is_premium_period ?? true);
     setRuleAppliesToAll(!!rule.applies_to_all);
     setRuleActive(!!rule.is_active);
     setShowRuleForm(true);
