@@ -66,12 +66,31 @@ const Dashboard = () => {
   const [conciergeOpen, setConciergeOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
+  const location = useLocation();
+
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUserId(user?.id ?? null);
       setAuthLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    const hash = location.hash?.replace("#", "");
+    if (!hash) {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+    const tryScroll = (attempt = 0) => {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (attempt < 20) {
+        setTimeout(() => tryScroll(attempt + 1), 100);
+      }
+    };
+    tryScroll();
+  }, [location.pathname, location.hash, location.key]);
 
   // ================== DATA ==================
   const { data: dashboard, isLoading } = useQuery({
