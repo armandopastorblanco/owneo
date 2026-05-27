@@ -727,8 +727,13 @@ const AdminReservas = () => {
                     <TableCell className="text-muted-foreground text-sm">
                       {rule.months ? rule.months.map((m: number) => MONTHS_ES[m - 1]).join(", ") : `${rule.start_date} → ${rule.end_date}`}
                     </TableCell>
-                    <TableCell>{multiplierBadge(rule.multiplier)}</TableCell>
-                    <TableCell className="text-foreground">{rule.credits_per_day}</TableCell>
+                    <TableCell>
+                      {rule.is_premium_period ? (
+                        <Badge variant="outline" className="text-[#bda095] border-[#bda095]/30 bg-[#bda095]/10">Premium</Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-foreground border-border bg-card">Estándar</Badge>
+                      )}
+                    </TableCell>
                     <TableCell className="text-muted-foreground">{rule.applies_to_all ? "Todos" : "Específicos"}</TableCell>
                     <TableCell><Badge variant={rule.is_active ? "default" : "secondary"}>{rule.is_active ? "Activa" : "Inactiva"}</Badge></TableCell>
                     <TableCell className="text-right">
