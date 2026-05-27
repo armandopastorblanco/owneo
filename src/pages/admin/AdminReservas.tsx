@@ -49,7 +49,8 @@ const AdminReservas = () => {
   const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
   const [deletingRuleId, setDeletingRuleId] = useState<string | null>(null);
   const [adjustModal, setAdjustModal] = useState<any>(null);
-  const [adjustCredits, setAdjustCredits] = useState("");
+  const [adjustStdDelta, setAdjustStdDelta] = useState("0");
+  const [adjustPremDelta, setAdjustPremDelta] = useState("0");
   const [adjustReason, setAdjustReason] = useState("");
   const [rejectModal, setRejectModal] = useState<any>(null);
   const [rejectReason, setRejectReason] = useState("");
