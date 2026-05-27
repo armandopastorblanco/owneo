@@ -115,7 +115,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
     >
       {/* Background video */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0 scale-150 sm:scale-100 object-center"
+        className="absolute inset-0 w-full h-full object-cover z-0 scale-[0.6] sm:scale-100 object-center"
         src="/181536-866999858.mp4"
         autoPlay
         loop
@@ -202,16 +202,16 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
             alt="Owneo"
             className="h-12 w-auto mb-8 mix-blend-screen"
           />
-          <h1 className="text-[10px] uppercase tracking-[0.35em] text-champagne mb-2">
+          <h1 className="text-[13px] uppercase tracking-[0.35em] text-champagne mb-2">
             Beta privada
           </h1>
-          <p className="text-[13px] text-muted-foreground mb-3 text-center font-extralight px-2">
+          <p className="text-[16px] text-muted-foreground mb-3 text-center font-extralight px-2">
             Introduce la contraseña de acceso
           </p>
           <button
             type="button"
             onClick={() => setRequestOpen(true)}
-            className="min-h-[44px] px-2 text-[11px] uppercase tracking-[0.3em] text-champagne/90 active:text-champagne font-extralight transition-colors underline-offset-4"
+            className="min-h-[44px] px-2 text-[14px] uppercase tracking-[0.3em] text-champagne/90 active:text-champagne font-extralight transition-colors underline-offset-4"
           >
             Solicitar acceso
           </button>
