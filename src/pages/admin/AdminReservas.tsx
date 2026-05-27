@@ -454,8 +454,7 @@ const AdminReservas = () => {
         months: ruleType === "months" ? ruleMonths : null,
         start_date: ruleType === "dates" ? ruleStartDate : null,
         end_date: ruleType === "dates" ? ruleEndDate : null,
-        multiplier: parseFloat(ruleMultiplier),
-        credits_per_day: parseFloat(ruleCreditsPerDay),
+        is_premium_period: ruleIsPremium,
         applies_to_all: ruleAppliesToAll,
         is_active: ruleActive,
       };
