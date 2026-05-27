@@ -90,8 +90,7 @@ const AdminReservas = () => {
   const [ruleMonths, setRuleMonths] = useState<number[]>([]);
   const [ruleStartDate, setRuleStartDate] = useState("");
   const [ruleEndDate, setRuleEndDate] = useState("");
-  const [ruleMultiplier, setRuleMultiplier] = useState("1.0");
-  const [ruleCreditsPerDay, setRuleCreditsPerDay] = useState("1.0");
+  const [ruleIsPremium, setRuleIsPremium] = useState(true);
   const [ruleAppliesToAll, setRuleAppliesToAll] = useState(true);
   const [ruleActive, setRuleActive] = useState(true);
 
@@ -100,7 +99,7 @@ const AdminReservas = () => {
     setRuleName(""); setRuleDesc("");
     setRuleType("months");
     setRuleMonths([]); setRuleStartDate(""); setRuleEndDate("");
-    setRuleMultiplier("1.0"); setRuleCreditsPerDay("1.0");
+    setRuleIsPremium(true);
     setRuleAppliesToAll(true); setRuleActive(true);
   };
 
@@ -112,8 +111,7 @@ const AdminReservas = () => {
     setRuleMonths(rule.months || []);
     setRuleStartDate(rule.start_date || "");
     setRuleEndDate(rule.end_date || "");
-    setRuleMultiplier(String(rule.multiplier ?? "1.0"));
-    setRuleCreditsPerDay(String(rule.credits_per_day ?? "1.0"));
+    setRuleIsPremium(rule.is_premium_period ?? true);
     setRuleAppliesToAll(!!rule.applies_to_all);
     setRuleActive(!!rule.is_active);
     setShowRuleForm(true);
@@ -456,8 +454,7 @@ const AdminReservas = () => {
         months: ruleType === "months" ? ruleMonths : null,
         start_date: ruleType === "dates" ? ruleStartDate : null,
         end_date: ruleType === "dates" ? ruleEndDate : null,
-        multiplier: parseFloat(ruleMultiplier),
-        credits_per_day: parseFloat(ruleCreditsPerDay),
+        is_premium_period: ruleIsPremium,
         applies_to_all: ruleAppliesToAll,
         is_active: ruleActive,
       };
@@ -714,8 +711,7 @@ const AdminReservas = () => {
                 <TableRow>
                   <TableHead>Regla</TableHead>
                   <TableHead>Período</TableHead>
-                  <TableHead>Multiplicador</TableHead>
-                  <TableHead>Créditos/día</TableHead>
+                  <TableHead>Tipo</TableHead>
                   <TableHead>Aplica a</TableHead>
                   <TableHead>Estado</TableHead>
                   <TableHead className="text-right">Acciones</TableHead>
@@ -731,8 +727,13 @@ const AdminReservas = () => {
                     <TableCell className="text-muted-foreground text-sm">
                       {rule.months ? rule.months.map((m: number) => MONTHS_ES[m - 1]).join(", ") : `${rule.start_date} → ${rule.end_date}`}
                     </TableCell>
-                    <TableCell>{multiplierBadge(rule.multiplier)}</TableCell>
-                    <TableCell className="text-foreground">{rule.credits_per_day}</TableCell>
+                    <TableCell>
+                      {rule.is_premium_period ? (
+                        <Badge variant="outline" className="text-[#bda095] border-[#bda095]/30 bg-[#bda095]/10">Premium</Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-foreground border-border bg-card">Estándar</Badge>
+                      )}
+                    </TableCell>
                     <TableCell className="text-muted-foreground">{rule.applies_to_all ? "Todos" : "Específicos"}</TableCell>
                     <TableCell><Badge variant={rule.is_active ? "default" : "secondary"}>{rule.is_active ? "Activa" : "Inactiva"}</Badge></TableCell>
                     <TableCell className="text-right">
@@ -805,15 +806,15 @@ const AdminReservas = () => {
                 </div>
               </div>
             )}
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm text-muted-foreground">Multiplicador</label>
-                <Input type="number" step="0.1" value={ruleMultiplier} onChange={(e) => setRuleMultiplier(e.target.value)} />
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Créditos/día</label>
-                <Input type="number" step="0.1" value={ruleCreditsPerDay} onChange={(e) => setRuleCreditsPerDay(e.target.value)} />
-              </div>
+            <div>
+              <label className="text-sm text-muted-foreground">Tipo de período</label>
+              <Select value={ruleIsPremium ? "premium" : "standard"} onValueChange={(v) => setRuleIsPremium(v === "premium")}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="premium">Premium</SelectItem>
+                  <SelectItem value="standard">Estándar</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="flex items-center gap-3">
               <Switch checked={ruleAppliesToAll} onCheckedChange={setRuleAppliesToAll} />
