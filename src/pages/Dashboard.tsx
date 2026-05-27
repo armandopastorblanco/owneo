@@ -219,7 +219,7 @@ const Dashboard = () => {
 
   // ================== RESERVATION LOGIC ==================
   const minDays = Math.max(7, primary?.car?.min_reservation_days ?? 7);
-  const maxDays = Math.min(14, primary?.car?.max_reservation_days ?? 14);
+  const maxDays = primary?.car?.max_reservation_days ?? 14;
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
 
   const isPeakDay = (date: Date): boolean => {
