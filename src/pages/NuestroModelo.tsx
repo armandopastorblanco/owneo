@@ -517,7 +517,7 @@ export default function NuestroModelo() {
           <Reveal delay={0.2}>
             <div className="mt-10 max-w-3xl mx-auto bg-card rounded-2xl border border-champagne/20 p-6 text-center">
               <p className="text-muted-foreground">
-                ¿Quieres más tiempo al volante? Adquiere 2 participaciones y disfruta de 8 semanas al año —
+                ¿Quieres más tiempo al volante? Adquiere 2 participaciones y disfruta de 8 semanas (6 estándar + 2 premium) al año —
                 o participa en varios vehículos de la flota OWNEO.
               </p>
               <Button asChild className="mt-4 bg-champagne text-champagne-foreground hover:bg-champagne/90">
