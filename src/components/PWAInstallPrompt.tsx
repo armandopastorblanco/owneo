@@ -105,7 +105,7 @@ const PWAInstallPrompt = ({
                 /* Android fallback: manual instructions */
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground font-light mb-3">
-                    Para instalar en tu Android:
+                    Para instalar en tu iPhone:
                   </p>
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
