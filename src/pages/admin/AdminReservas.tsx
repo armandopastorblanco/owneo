@@ -494,14 +494,26 @@ const AdminReservas = () => {
   // Adjust credits mutation
   const adjustMutation = useMutation({
     mutationFn: async () => {
-      const newTotal = parseFloat(adjustCredits);
+      const stdDelta = parseInt(adjustStdDelta || "0", 10) || 0;
+      const premDelta = parseInt(adjustPremDelta || "0", 10) || 0;
       const ids: string[] = adjustModal._groupIds || [adjustModal.id];
-      // Distribute: full amount on first row, 0 on the rest
+      // Apply full delta on first row, 0 on the rest
       for (let i = 0; i < ids.length; i++) {
-        const value = i === 0 ? newTotal : 0;
+        if (i !== 0) continue;
+        const { data: current, error: fetchErr } = await supabase
+          .from("validated_participations")
+          .select("standard_credits_remaining, premium_credits_remaining")
+          .eq("id", ids[i])
+          .single();
+        if (fetchErr) throw fetchErr;
+        const newStd = Number((current as any)?.standard_credits_remaining || 0) + stdDelta;
+        const newPrem = Number((current as any)?.premium_credits_remaining || 0) + premDelta;
         const { error } = await supabase
           .from("validated_participations")
-          .update({ credits_remaining: value })
+          .update({
+            standard_credits_remaining: newStd,
+            premium_credits_remaining: newPrem,
+          })
           .eq("id", ids[i]);
         if (error) throw error;
       }
@@ -509,7 +521,7 @@ const AdminReservas = () => {
         _action: "creditos_ajustados",
         _target_table: "validated_participations",
         _target_id: ids.join(","),
-        _details: { new_credits: newTotal, reason: adjustReason, group_size: ids.length },
+        _details: { std_delta: stdDelta, prem_delta: premDelta, reason: adjustReason, group_size: ids.length },
       });
     },
     onSuccess: () => {
@@ -518,6 +530,7 @@ const AdminReservas = () => {
       setAdjustModal(null);
     },
   });
+
 
   const acceptReservation = useMutation({
     mutationFn: async (reservationId: string) => {
