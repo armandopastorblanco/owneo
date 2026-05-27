@@ -57,17 +57,12 @@ import AdminCreditReminders from "./pages/admin/AdminCreditReminders";
 const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
-  const { pathname, search, hash, key } = useLocation();
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
-    requestAnimationFrame(() => {
-      document.documentElement.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      document.body.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    });
-  }, [pathname, search, hash, key]);
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return null;
 };
 
