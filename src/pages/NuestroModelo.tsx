@@ -181,10 +181,10 @@ export default function NuestroModelo() {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: CalendarDays, number: 4, suffix: "", unit: "semanas",
+                icon: CalendarDays, number: 4, suffix: "", unit: "semanas (3 estándar + 1 premium)",
                 title: "Por participación al año",
                 desc: "¿Quieres más tiempo? Adquiere más participaciones en el mismo vehículo o en otros modelos de la flota.",
-                badge: "= 28 días garantizados",
+                badge: "= 21 días estándar + 7 días premium",
               },
               {
                 icon: Gauge, number: 2000, suffix: "", unit: "km",
@@ -257,7 +257,7 @@ export default function NuestroModelo() {
             <div className="space-y-12">
               {[
                 { icon: ShoppingCart, title: "Compra del vehículo", desc: "OWNEO adquiere el vehículo de concesionarios oficiales certificados. Tú no te preocupas por la negociación ni los trámites." },
-                { icon: FileCheck, title: "Contrato y documentación", desc: "Contrato claro que garantiza tus 4 semanas anuales por participación y todos los derechos de uso." },
+                { icon: FileCheck, title: "Contrato y documentación", desc: "Contrato claro que garantiza tus 4 semanas (3 estándar + 1 premium) anuales por participación y todos los derechos de uso." },
                 { icon: Shield, title: "Seguro a todo riesgo", desc: "Cobertura completa con aseguradora premium. Cada participante está cubierto como conductor habitual." },
                 { icon: Wrench, title: "Mantenimiento y revisiones", desc: "Todas las revisiones programadas y reparaciones gestionadas por OWNEO. El vehículo siempre en perfectas condiciones." },
                 { icon: Key, title: "Entrega profesional", desc: "Un gestor OWNEO te entrega el vehículo en persona, impecablemente preparado, revisado y documentado." },
@@ -455,7 +455,7 @@ export default function NuestroModelo() {
                     ["Precio del vehículo", "€250.000"],
                     ["Participaciones disponibles", "10"],
                     ["Precio por participación", <span key="p" className="text-champagne font-bold">€25.000</span>],
-                    ["Semanas/año por participación", "4"],
+                    ["Semanas/año por participación", "4 (3+1)"],
                     ["Km/año por participación", "2.000"],
                     ["Duración", "según ficha del vehículo"],
                   ].map(([k, v], i) => (
@@ -487,7 +487,7 @@ export default function NuestroModelo() {
                   </li>
                   <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">📅 Semanas al año</span>
-                    <span className="font-medium"><CountUp end={4} /> semanas</span>
+                    <span className="font-medium"><CountUp end={4} /> semanas (3+1)</span>
                   </li>
                   <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">🛣️ Km incluidos</span>
@@ -507,7 +507,7 @@ export default function NuestroModelo() {
                 </ul>
 
                 <div className="mt-6 rounded-2xl bg-champagne/5 border border-champagne/20 p-4 text-sm text-muted-foreground">
-                  Con 1 participación, disfrutas 4 semanas al año de un Porsche 911 Turbo S por €25.000
+                  Con 1 participación, disfrutas 4 semanas (3 estándar + 1 premium) al año de un Porsche 911 Turbo S por €25.000
                   — y OWNEO gestiona absolutamente todo lo demás.
                 </div>
               </div>
@@ -517,7 +517,7 @@ export default function NuestroModelo() {
           <Reveal delay={0.2}>
             <div className="mt-10 max-w-3xl mx-auto bg-card rounded-2xl border border-champagne/20 p-6 text-center">
               <p className="text-muted-foreground">
-                ¿Quieres más tiempo al volante? Adquiere 2 participaciones y disfruta de 8 semanas al año —
+                ¿Quieres más tiempo al volante? Adquiere 2 participaciones y disfruta de 8 semanas (6 estándar + 2 premium) al año —
                 o participa en varios vehículos de la flota OWNEO.
               </p>
               <Button asChild className="mt-4 bg-champagne text-champagne-foreground hover:bg-champagne/90">

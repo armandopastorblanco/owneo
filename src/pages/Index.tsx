@@ -55,10 +55,10 @@ const Index = () => {
             </div>
             <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
               <CalendarDays className="w-8 h-8 text-foreground mb-4 mx-auto" />
-              <div className="text-5xl font-bold text-foreground mb-2 leading-none">4<div className="text-base font-semibold mt-1">Semanas</div></div>
+              <div className="text-5xl font-bold text-foreground mb-2 leading-none">3+1<div className="text-base font-semibold mt-1">Semanas</div></div>
               <div className="font-semibold text-foreground mb-2">Garantizadas al a&ntilde;o</div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Cuatro semanas al volante del coche de tus sue&ntilde;os. Cuando quieras, donde quieras.
+                3 semanas est&aacute;ndar &middot; 1 semana premium al volante del coche de tus sue&ntilde;os. Cuando quieras, donde quieras.
               </p>
             </div>
             <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
@@ -192,7 +192,7 @@ const Index = () => {
                     style={{borderColor:"rgba(189,160,149,0.12)"}}>
                     {[
                       "Seguro, garaje y mantenimiento ×10",
-                      "28 días garantizados al año",
+                      "21 días estándar + 7 días premium al año",
                       "Hasta un 70% de tu inversión recuperada"
                     ].map(item => (
                       <div key={item} className="flex items-center gap-2.5">
@@ -245,7 +245,7 @@ const Index = () => {
                   </button>
                 </Link>
                 <p className="text-xs mt-5" style={{color:"rgba(255,255,255,0.2)"}}>
-                  Cálculo estimado · Ferrari Roma · 28 días al año · 5 años
+                  Cálculo estimado · Ferrari Roma · 21 días estándar + 7 días premium al año · 5 años
                 </p>
               </div>
 

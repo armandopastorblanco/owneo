@@ -374,7 +374,7 @@ const CarDetail = () => {
             <div className="grid grid-cols-3 gap-3 px-0 py-4 sm:absolute sm:bottom-4 sm:left-4 sm:right-4 sm:px-0 sm:py-0">
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
                 <CalendarDays className="w-4 h-4 mx-auto mb-1 text-champagne" />
-                <div className="text-sm font-bold text-foreground">{weeksPerParticipation} sem.</div>
+                <div className="text-sm font-bold text-foreground">{weeksPerParticipation} sem. (3+1)</div>
                 <div className="text-xs text-muted-foreground">por año</div>
               </div>
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
@@ -602,7 +602,7 @@ const CarDetail = () => {
               Cuanto más participas, más disfrutas.
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl">
-              Cada participación te garantiza acceso exclusivo al vehículo. Acumula participaciones para ampliar tu tiempo al volante.
+              Cada participación te garantiza acceso exclusivo al vehículo: 3 semanas estándar + 1 semana premium. Acumula participaciones para ampliar tu tiempo al volante.
             </p>
 
             <div className="overflow-x-auto">
@@ -628,8 +628,8 @@ const CarDetail = () => {
                         <Users className={`w-4 h-4 ${highlighted ? "text-champagne" : "text-muted-foreground"}`} />
                         <span className={`font-bold ${highlighted ? "text-champagne" : "text-foreground"}`}>{r.n}</span>
                       </div>
-                      <div className="text-champagne font-bold">{r.weeks} sem.</div>
-                      <div className="text-foreground">{r.days} días</div>
+                      <div className="text-champagne font-bold">{Math.floor(r.weeks * 0.75)} est. + {Math.ceil(r.weeks * 0.25)} prem.</div>
+                      <div className="text-foreground">{Math.floor(r.days * 0.75)} + {Math.ceil(r.days * 0.25)} días</div>
                       <div className="text-foreground">{r.km.toLocaleString("es-ES")} km</div>
                       <div className="text-foreground font-semibold">{r.invest.toLocaleString("es-ES")}€</div>
                       <div className="text-muted-foreground text-sm">{r.fee.toLocaleString("es-ES")}€</div>
@@ -832,7 +832,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Tiempo de uso garantizado</td>
                     <td className="py-4 px-4 text-center text-foreground">Sin límite</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">{weeksPerParticipation} semanas/año</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{weeksPerParticipation} semanas/año (3+1)</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Kilómetros incluidos/año</td>
@@ -904,7 +904,7 @@ const CarDetail = () => {
               <h2 className="text-2xl font-bold mb-4 text-foreground">Condiciones de la participación</h2>
               <ul className="space-y-3">
                 {[
-                  { icon: Calendar, text: `${weeksPerParticipation} semanas garantizadas por participación/año` },
+                  { icon: Calendar, text: `${weeksPerParticipation} semanas (3 estándar + 1 premium) garantizadas por participación/año` },
                   { icon: Gauge, text: `${kmPerParticipation.toLocaleString("es-ES")} km incluidos por participación/año` },
                   { icon: Clock, text: `Duración: ${durationYears} años` },
                   { icon: TrendingUp, text: "Reventa estimada: hasta el 70% de tu participación" },
