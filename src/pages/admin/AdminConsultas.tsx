@@ -17,7 +17,7 @@ import {
 import {
   MessageCircle, Car, Eye, EyeOff, Archive,
   Trash2, Clock, CheckCircle2, User, Phone,
-  Mail, FileText, ChevronDown, ChevronUp,
+  Mail, FileText, ChevronDown, ChevronUp, Inbox,
 } from "lucide-react";
 
 const STATUS_CONFIG: Record<string, { label: string; class: string }> = {
@@ -84,12 +84,14 @@ export default function AdminConsultas() {
     toast.success("Notas guardadas.");
   };
 
+  const contactos = consultas.filter((c: any) => c.source === "contacto");
   const solicitudes = consultas.filter(
-    (c: any) => !c.source || c.source === "car_detail"
+    (c: any) => (!c.source || c.source === "car_detail")
   );
   const preguntas = consultas.filter(
     (c: any) => c.source === "dashboard_concierge"
   );
+  const unreadContactos = contactos.filter((c: any) => c.status === "pending").length;
   const unreadSolicitudes = solicitudes.filter((c: any) => c.status === "pending").length;
   const unreadPreguntas = preguntas.filter((c: any) => c.status === "pending").length;
 
@@ -97,6 +99,12 @@ export default function AdminConsultas() {
     const isExpanded = expandedId === c.id;
     const isPending = c.status === "pending";
     const statusCfg = STATUS_CONFIG[c.status] ?? STATUS_CONFIG.pending;
+    const isContacto = c.source === "contacto";
+    const headerLabel = isContacto
+      ? (c.subject && c.car_name
+          ? `${c.subject} · ${c.car_name}`
+          : c.subject || c.car_name)
+      : c.car_name;
 
     return (
       <Card className="border-border/40">
@@ -108,10 +116,10 @@ export default function AdminConsultas() {
                   {isPending ? <Clock className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
                   {statusCfg.label}
                 </Badge>
-                {c.car_name && (
+                {headerLabel && (
                   <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
-                    <Car className="w-3 h-3" />
-                    {c.car_name}
+                    {isContacto ? <Inbox className="w-3 h-3" /> : <Car className="w-3 h-3" />}
+                    {headerLabel}
                   </span>
                 )}
                 <span className="text-xs text-muted-foreground">
@@ -240,8 +248,17 @@ export default function AdminConsultas() {
         </p>
       </div>
 
-      <Tabs defaultValue="solicitudes">
+      <Tabs defaultValue="contacto">
         <TabsList className="mb-6">
+          <TabsTrigger value="contacto" className="flex items-center gap-2">
+            <Inbox className="w-4 h-4" />
+            Contacto
+            {unreadContactos > 0 && (
+              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                {unreadContactos}
+              </span>
+            )}
+          </TabsTrigger>
           <TabsTrigger value="solicitudes" className="flex items-center gap-2">
             <Car className="w-4 h-4" />
             Solicitudes
@@ -261,6 +278,20 @@ export default function AdminConsultas() {
             )}
           </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="contacto">
+          {isLoading ? (
+            <p className="text-muted-foreground text-sm">Cargando...</p>
+          ) : contactos.length === 0 ? (
+            <EmptyState label="No hay mensajes de contacto todavía." />
+          ) : (
+            <div className="space-y-3">
+              {contactos.map((c: any) => (
+                <ConsultaCard key={c.id} c={c} />
+              ))}
+            </div>
+          )}
+        </TabsContent>
 
         <TabsContent value="solicitudes">
           {isLoading ? (

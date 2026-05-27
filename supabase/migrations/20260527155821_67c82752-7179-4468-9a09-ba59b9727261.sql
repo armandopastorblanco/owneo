@@ -1,0 +1,1 @@
+ALTER TABLE public.consultation_requests ADD COLUMN IF NOT EXISTS subject text;

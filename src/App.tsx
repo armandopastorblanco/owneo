@@ -31,6 +31,7 @@ import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
 import NoticiaDetalle from "./pages/NoticiaDetalle";
 import Login from "./pages/Login";
 import Participar from "./pages/Participar";
+import Contacto from "./pages/Contacto";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import AvisoLegal from "./pages/AvisoLegal";
@@ -121,6 +122,7 @@ const App = () => (
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
               <Route path="/login" element={<Login />} />
               <Route path="/participar" element={<Participar />} />
+              <Route path="/contacto" element={<Contacto />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/aviso-legal" element={<AvisoLegal />} />
