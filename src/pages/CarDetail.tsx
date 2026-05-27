@@ -628,8 +628,8 @@ const CarDetail = () => {
                         <Users className={`w-4 h-4 ${highlighted ? "text-champagne" : "text-muted-foreground"}`} />
                         <span className={`font-bold ${highlighted ? "text-champagne" : "text-foreground"}`}>{r.n}</span>
                       </div>
-                      <div className="text-champagne font-bold">{r.weeks} sem.</div>
-                      <div className="text-foreground">{r.days} días</div>
+                      <div className="text-champagne font-bold">{Math.floor(r.weeks * 0.75)} est. + {Math.ceil(r.weeks * 0.25)} prem.</div>
+                      <div className="text-foreground">{Math.floor(r.days * 0.75)} + {Math.ceil(r.days * 0.25)} días</div>
                       <div className="text-foreground">{r.km.toLocaleString("es-ES")} km</div>
                       <div className="text-foreground font-semibold">{r.invest.toLocaleString("es-ES")}€</div>
                       <div className="text-muted-foreground text-sm">{r.fee.toLocaleString("es-ES")}€</div>
