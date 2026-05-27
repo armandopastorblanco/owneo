@@ -219,7 +219,7 @@ const Dashboard = () => {
 
   // ================== RESERVATION LOGIC ==================
   const minDays = Math.max(7, primary?.car?.min_reservation_days ?? 7);
-  const maxDays = Math.min(14, primary?.car?.max_reservation_days ?? 14);
+  const maxDays = primary?.car?.max_reservation_days ?? 14;
   const advanceDays = primary?.car?.reservation_advance_days ?? 7;
 
   const isPeakDay = (date: Date): boolean => {
@@ -609,23 +609,21 @@ const Dashboard = () => {
             {/* ============ METRICS (5) ============ */}
             <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 mt-4">
               {[
-                {
+              {
                   label: "Semanas estándar",
                   value: `${Math.floor(Number(primary.standard_credits_remaining ?? 0) / 7)} sem. (${Number(primary.standard_credits_remaining ?? 0)} días)`,
-                  icon: <CalendarIcon className="w-4 h-4 text-champagne" />,
-                  cls: "bg-champagne/10 border-champagne/30",
-                  valueCls: "text-champagne",
+                  icon: <CalendarIcon className="w-4 h-4 text-foreground" />,
+                  cls: "bg-card border-border/50",
+                  valueCls: "text-foreground",
                 },
                 {
                   label: "Semana premium",
                   value: `${Math.floor(Number(primary.premium_credits_remaining ?? 0) / 7)} sem. (${Number(primary.premium_credits_remaining ?? 0)} días)`,
-                  icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-amber-400"}`} />,
-                  cls: Number(primary.premium_credits_remaining ?? 0) === 0
-                    ? "bg-card border-border/50"
-                    : "bg-amber-500/10 border-amber-500/30",
+                  icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-champagne"}`} />,
+                  cls: "bg-champagne/10 border-champagne/30",
                   valueCls: Number(primary.premium_credits_remaining ?? 0) === 0
                     ? "text-muted-foreground line-through"
-                    : "text-amber-400",
+                    : "text-champagne",
                 },
                 {
                   label: "Km restantes",
@@ -681,7 +679,7 @@ const Dashboard = () => {
                 </div>
                 <div className="bg-muted rounded-full h-2 overflow-hidden">
                   <motion.div
-                    className="h-2 bg-champagne rounded-full"
+                    className="h-2 bg-foreground/60 rounded-full"
                     initial={{ width: 0 }}
                     animate={{
                       width: `${Number(primary.standard_credits_per_year ?? 0) > 0
@@ -697,7 +695,7 @@ const Dashboard = () => {
                       ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
                       : "Renovación anual"}
                   </span>
-                  <span className="text-xs text-champagne font-medium">
+                  <span className="text-xs text-foreground font-medium">
                     {Number(primary.standard_credits_remaining ?? 0)} restantes
                   </span>
                 </div>
@@ -713,7 +711,7 @@ const Dashboard = () => {
                 </div>
                 <div className="bg-muted rounded-full h-2 overflow-hidden">
                   <motion.div
-                    className="h-2 bg-amber-400 rounded-full"
+                    className="h-2 bg-champagne rounded-full"
                     initial={{ width: 0 }}
                     animate={{
                       width: `${Number(primary.premium_credits_per_year ?? 0) > 0
@@ -729,7 +727,7 @@ const Dashboard = () => {
                       ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
                       : "Renovación anual"}
                   </span>
-                  <span className="text-xs text-amber-400 font-medium">
+                  <span className="text-xs text-champagne font-medium">
                     {Number(primary.premium_credits_remaining ?? 0)} restantes
                   </span>
                 </div>
