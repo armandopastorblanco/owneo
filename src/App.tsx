@@ -155,6 +155,7 @@ const App = () => (
           <CookieBanner />
         </AuthProvider>
       </BrowserRouter>
+      </BetaGate>
     </TooltipProvider>
   </QueryClientProvider>
 );
