@@ -200,7 +200,7 @@ const CarDetail = () => {
     onSuccess: () => {
       setSubmitted(true);
       form.reset();
-      trackEvent("submit_consultation", { car_id: car?.id, car_name: car?.name });
+      trackEvent("submit_consultation", { car_id: car?.id, car_name: car?.name, page_source: "car_detail" });
     },
     onError: (err: Error) => toast.error(`Error: ${err.message}`),
   });
@@ -698,7 +698,7 @@ const CarDetail = () => {
                   }`}
                   onClick={() => {
                     setLightboxIndex(index);
-                    trackEvent("view_car_gallery", { car_name: car.name, image_index: index });
+                    trackEvent("view_car_gallery", { car_id: car.id, car_name: car.name, image_index: index, page_source: "car_detail" });
                   }}
                 >
                   <img
@@ -1052,12 +1052,13 @@ const CarDetail = () => {
                     ))}
                   </div>
 
-                  <div className="flex justify-center sm:justify-start" onClick={() => trackEvent("click_participate_cta", { car_name: car.name, car_id: car.id, participation_price: car.participationPrice, remaining_participations: car.remainingParticipations })}>
+                  <div className="flex justify-center sm:justify-start">
                     <ParticipationForm
                       carId={car.id}
                       carName={car.name}
                       availableParticipations={availableParticipations}
                       sharePrice={discountedPrice}
+                      pageSource="car_detail"
                     />
                   </div>
                 </CardContent>
