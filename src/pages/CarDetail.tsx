@@ -162,6 +162,14 @@ const CarDetail = () => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
   const [specTab, setSpecTab] = useState("motor");
+  const [openParticipationForm, setOpenParticipationForm] = useState(false);
+
+  const handleSolicitarClick = () => {
+    setOpenParticipationForm(true);
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
 
   useEffect(() => {
     if (car) {
