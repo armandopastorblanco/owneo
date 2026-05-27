@@ -602,7 +602,7 @@ const CarDetail = () => {
               Cuanto más participas, más disfrutas.
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl">
-              Cada participación te garantiza acceso exclusivo al vehículo. Acumula participaciones para ampliar tu tiempo al volante.
+              Cada participación te garantiza acceso exclusivo al vehículo: 3 semanas estándar + 1 semana premium. Acumula participaciones para ampliar tu tiempo al volante.
             </p>
 
             <div className="overflow-x-auto">
@@ -832,7 +832,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Tiempo de uso garantizado</td>
                     <td className="py-4 px-4 text-center text-foreground">Sin límite</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">{weeksPerParticipation} semanas/año</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{weeksPerParticipation} semanas/año (3+1)</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">Kilómetros incluidos/año</td>
@@ -904,7 +904,7 @@ const CarDetail = () => {
               <h2 className="text-2xl font-bold mb-4 text-foreground">Condiciones de la participación</h2>
               <ul className="space-y-3">
                 {[
-                  { icon: Calendar, text: `${weeksPerParticipation} semanas garantizadas por participación/año` },
+                  { icon: Calendar, text: `${weeksPerParticipation} semanas (3 estándar + 1 premium) garantizadas por participación/año` },
                   { icon: Gauge, text: `${kmPerParticipation.toLocaleString("es-ES")} km incluidos por participación/año` },
                   { icon: Clock, text: `Duración: ${durationYears} años` },
                   { icon: TrendingUp, text: "Reventa estimada: hasta el 70% de tu participación" },
