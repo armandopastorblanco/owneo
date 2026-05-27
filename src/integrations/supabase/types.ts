@@ -669,6 +669,7 @@ export type Database = {
           end_date: string | null
           id: string
           is_active: boolean | null
+          is_premium_period: boolean
           is_recurring: boolean | null
           months: number[] | null
           multiplier: number
@@ -685,6 +686,7 @@ export type Database = {
           end_date?: string | null
           id?: string
           is_active?: boolean | null
+          is_premium_period?: boolean
           is_recurring?: boolean | null
           months?: number[] | null
           multiplier?: number
@@ -701,6 +703,7 @@ export type Database = {
           end_date?: string | null
           id?: string
           is_active?: boolean | null
+          is_premium_period?: boolean
           is_recurring?: boolean | null
           months?: number[] | null
           multiplier?: number
@@ -1400,9 +1403,12 @@ export type Database = {
           is_peak_period: boolean | null
           notes: string | null
           participation_id: string
+          premium_credits_used: number
           rejected_at: string | null
           rejected_by: string | null
           rejection_reason: string | null
+          reservation_type: string
+          standard_credits_used: number
           start_date: string
           status: string | null
           updated_at: string | null
@@ -1420,9 +1426,12 @@ export type Database = {
           is_peak_period?: boolean | null
           notes?: string | null
           participation_id: string
+          premium_credits_used?: number
           rejected_at?: string | null
           rejected_by?: string | null
           rejection_reason?: string | null
+          reservation_type?: string
+          standard_credits_used?: number
           start_date: string
           status?: string | null
           updated_at?: string | null
@@ -1440,9 +1449,12 @@ export type Database = {
           is_peak_period?: boolean | null
           notes?: string | null
           participation_id?: string
+          premium_credits_used?: number
           rejected_at?: string | null
           rejected_by?: string | null
           rejection_reason?: string | null
+          reservation_type?: string
+          standard_credits_used?: number
           start_date?: string
           status?: string | null
           updated_at?: string | null
@@ -1598,7 +1610,13 @@ export type Database = {
           credits_used_this_year: number | null
           id: string
           participation_number: number
+          premium_credits_per_year: number
+          premium_credits_remaining: number
+          premium_credits_used_this_year: number
           request_id: string
+          standard_credits_per_year: number
+          standard_credits_remaining: number
+          standard_credits_used_this_year: number
           user_id: string
         }
         Insert: {
@@ -1610,7 +1628,13 @@ export type Database = {
           credits_used_this_year?: number | null
           id?: string
           participation_number: number
+          premium_credits_per_year?: number
+          premium_credits_remaining?: number
+          premium_credits_used_this_year?: number
           request_id: string
+          standard_credits_per_year?: number
+          standard_credits_remaining?: number
+          standard_credits_used_this_year?: number
           user_id: string
         }
         Update: {
@@ -1622,7 +1646,13 @@ export type Database = {
           credits_used_this_year?: number | null
           id?: string
           participation_number?: number
+          premium_credits_per_year?: number
+          premium_credits_remaining?: number
+          premium_credits_used_this_year?: number
           request_id?: string
+          standard_credits_per_year?: number
+          standard_credits_remaining?: number
+          standard_credits_used_this_year?: number
           user_id?: string
         }
         Relationships: [
@@ -1922,6 +1952,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      classify_reservation_type: {
+        Args: { p_car_id: string; p_end_date: string; p_start_date: string }
+        Returns: string
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
