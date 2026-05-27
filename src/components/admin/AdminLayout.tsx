@@ -145,7 +145,7 @@ const AdminLayout = () => {
 
       {/* Main content */}
       <div className="flex-1 md:ml-60 flex flex-col min-h-screen min-w-0">
-        <header className="sticky top-0 z-20 flex items-center justify-between h-14 px-3 md:px-4 border-b border-border/40 bg-card/80 backdrop-blur-sm gap-2">
+        <header className="fixed md:sticky top-0 left-0 right-0 md:left-auto md:right-auto z-40 md:z-20 flex items-center justify-between h-14 px-3 md:px-4 border-b border-border/40 bg-card/95 md:bg-card/80 backdrop-blur-sm gap-2">
           <div className="flex items-center gap-2 min-w-0">
             <Button variant="ghost" size="icon" className="md:hidden h-11 w-11 shrink-0" onClick={() => setSidebarOpen(true)} aria-label="Abrir menú">
               <Menu className="h-6 w-6" />
@@ -162,7 +162,7 @@ const AdminLayout = () => {
           </span>
         </header>
 
-        <main className="admin-shell flex-1 p-4 md:p-6 min-w-0 overflow-x-hidden">
+        <main className="admin-shell flex-1 p-4 md:p-6 pt-[72px] md:pt-6 min-w-0 overflow-x-hidden">
           <Outlet />
         </main>
       </div>
