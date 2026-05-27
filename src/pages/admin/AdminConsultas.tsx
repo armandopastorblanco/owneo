@@ -84,6 +84,7 @@ export default function AdminConsultas() {
     toast.success("Notas guardadas.");
   };
 
+  const landing = consultas.filter((c: any) => c.source === "beta_gate");
   const contactos = consultas.filter((c: any) => c.source === "contacto");
   const solicitudes = consultas.filter(
     (c: any) => (!c.source || c.source === "car_detail")
@@ -91,6 +92,7 @@ export default function AdminConsultas() {
   const preguntas = consultas.filter(
     (c: any) => c.source === "dashboard_concierge"
   );
+  const unreadLanding = landing.filter((c: any) => c.status === "pending").length;
   const unreadContactos = contactos.filter((c: any) => c.status === "pending").length;
   const unreadSolicitudes = solicitudes.filter((c: any) => c.status === "pending").length;
   const unreadPreguntas = preguntas.filter((c: any) => c.status === "pending").length;
