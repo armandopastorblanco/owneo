@@ -115,7 +115,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
     >
       {/* Background video */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0 scale-[0.6] sm:scale-100 object-center"
+        className="absolute inset-0 w-full h-full object-contain sm:object-cover z-0 scale-[0.6] sm:scale-100 object-center"
         src="/181536-866999858.mp4"
         autoPlay
         loop
