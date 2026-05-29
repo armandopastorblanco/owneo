@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -76,6 +77,19 @@ export default function Contacto() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Contacto | Owneo</title>
+        <meta name="description" content="¿Tienes alguna pregunta sobre Owneo? Contacta con nuestro equipo y te responderemos lo antes posible." />
+        <link rel="canonical" href="https://www.owneo.es/contacto" />
+        <meta property="og:title" content="Contacto | Owneo" />
+        <meta property="og:description" content="¿Tienes alguna pregunta sobre Owneo? Contacta con nuestro equipo y te responderemos lo antes posible." />
+        <meta property="og:url" content="https://www.owneo.es/contacto" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
       <main className="container mx-auto px-6 pt-32 pb-20 max-w-3xl">
         <header className="mb-10 text-center">

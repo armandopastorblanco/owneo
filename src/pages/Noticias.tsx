@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -113,6 +114,19 @@ const Noticias = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Noticias de Supercoches de Lujo | Owneo</title>
+        <meta name="description" content="Últimas noticias del mundo de los supercoches de lujo. Ferrari, Lamborghini, Porsche y el universo Owneo al día." />
+        <link rel="canonical" href="https://www.owneo.es/noticias" />
+        <meta property="og:title" content="Noticias de Supercoches de Lujo | Owneo" />
+        <meta property="og:description" content="Últimas noticias del mundo de los supercoches de lujo. Ferrari, Lamborghini, Porsche y el universo Owneo al día." />
+        <meta property="og:url" content="https://www.owneo.es/noticias" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
       
       {/* Hero */}

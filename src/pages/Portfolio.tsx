@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
@@ -28,6 +29,19 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Flota de Supercoches Compartidos | Owneo</title>
+        <meta name="description" content="Explora la flota Owneo: Ferrari, Lamborghini, Porsche y más superdeportivos compartidos en España. Conduce el coche de tus sueños, comparte los costes, vive la experiencia." />
+        <link rel="canonical" href="https://www.owneo.es/coches" />
+        <meta property="og:title" content="Flota de Supercoches Compartidos | Owneo" />
+        <meta property="og:description" content="Explora la flota Owneo: Ferrari, Lamborghini, Porsche y más superdeportivos compartidos en España." />
+        <meta property="og:url" content="https://www.owneo.es/coches" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
 
       <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">

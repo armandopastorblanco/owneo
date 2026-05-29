@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -84,6 +85,19 @@ function Reveal({
 export default function NuestroModelo() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Nuestro Modelo — Cómo funciona el car sharing | Owneo</title>
+        <meta name="description" content="Descubre cómo funciona Owneo: accede a un Ferrari, Lamborghini o Porsche pagando solo el 10% de su valor. Gastos compartidos entre 10 miembros, 4 semanas al año, experiencia total." />
+        <link rel="canonical" href="https://www.owneo.es/nuestro-modelo" />
+        <meta property="og:title" content="Nuestro Modelo | Owneo" />
+        <meta property="og:description" content="Descubre cómo funciona Owneo: accede a un Ferrari, Lamborghini o Porsche pagando solo el 10% de su valor. Gastos compartidos entre 10 miembros, 4 semanas al año, experiencia total." />
+        <meta property="og:url" content="https://www.owneo.es/nuestro-modelo" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
 
       {/* shared blob keyframes */}
