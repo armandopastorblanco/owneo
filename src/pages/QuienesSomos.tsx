@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -138,6 +139,19 @@ const missionVision = [
 const QuienesSomos = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Quiénes Somos | Owneo</title>
+        <meta name="description" content="Conoce el equipo detrás de Owneo, el club de supercoches compartidos más exclusivo de España. Ferrari, Lamborghini, Porsche — el lujo al alcance de los que saben compartirlo." />
+        <link rel="canonical" href="https://www.owneo.es/quienes-somos" />
+        <meta property="og:title" content="Quiénes Somos | Owneo" />
+        <meta property="og:description" content="Conoce el equipo detrás de Owneo, el club de supercoches compartidos más exclusivo de España." />
+        <meta property="og:url" content="https://www.owneo.es/quienes-somos" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
 
       <style>{`

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { ArrowRight, Star, MapPin, Percent, CalendarDays, Users, TrendingUp, Clock, Check, X, TrendingDown, Calculator } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -22,6 +23,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Owneo — Comparte un Supercoche de Lujo en España</title>
+        <meta name="description" content="Owneo — Accede a los supercoches más exclusivos de España. Comparte tu Ferrari, Lamborghini o Porsche, comparte los costes y vive la experiencia al 100%. Plazas limitadas." />
+        <link rel="canonical" href="https://www.owneo.es/" />
+        <meta property="og:title" content="Owneo — Comparte un Supercoche de Lujo en España" />
+        <meta property="og:description" content="Accede a los supercoches más exclusivos de España. Comparte tu Ferrari, Lamborghini o Porsche y vive la experiencia al 100%." />
+        <meta property="og:url" content="https://www.owneo.es/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
 
       {/* Hero Slider Section */}

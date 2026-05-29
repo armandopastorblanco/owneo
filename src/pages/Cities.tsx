@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCars } from "@/hooks/useCars";
@@ -17,6 +18,19 @@ const Cities = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Ubicaciones — Tu Supercoche cerca de ti | Owneo</title>
+        <meta name="description" content="Owneo opera en las principales ciudades de España. Encuentra tu Ferrari, Lamborghini o Porsche compartido cerca de ti." />
+        <link rel="canonical" href="https://www.owneo.es/ubicaciones" />
+        <meta property="og:title" content="Ubicaciones | Owneo" />
+        <meta property="og:description" content="Owneo opera en las principales ciudades de España. Encuentra tu Ferrari, Lamborghini o Porsche compartido cerca de ti." />
+        <meta property="og:url" content="https://www.owneo.es/ubicaciones" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+      </Helmet>
       <Navbar />
 
       <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
