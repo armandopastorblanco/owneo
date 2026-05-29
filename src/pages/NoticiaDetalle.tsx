@@ -44,7 +44,30 @@ const NoticiaDetalle = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{`${article.title} | Owneo`}</title>
+        <meta name="description" content={article.excerpt.slice(0, 155)} />
+        <link rel="canonical" href={`https://www.owneo.es/noticias/${article.slug}`} />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.excerpt.slice(0, 155)} />
+        <meta property="og:url" content={`https://www.owneo.es/noticias/${article.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          headline: article.title,
+          datePublished: toISODate(article.date),
+          publisher: {
+            "@type": "Organization",
+            name: "Owneo",
+            url: "https://www.owneo.es",
+          },
+          mainEntityOfPage: `https://www.owneo.es/noticias/${article.slug}`,
+        })}</script>
+      </Helmet>
       <Navbar />
+
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
         <img src={article.image} alt={article.title} loading="eager" className="w-full h-full object-cover" />
