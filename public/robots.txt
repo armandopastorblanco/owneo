@@ -12,3 +12,12 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /dashboard/documentos
+Disallow: /login
+Disallow: /reset-password
+Disallow: /unauthorized
+Disallow: /calendar-showcase
+
+Sitemap: https://www.owneo.es/sitemap.xml
