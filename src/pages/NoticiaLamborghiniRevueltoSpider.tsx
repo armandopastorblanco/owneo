@@ -26,6 +26,30 @@ const specs = [
 const NoticiaLamborghiniRevueltoSpider = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{`${TITLE} | Owneo`}</title>
+        <meta name="description" content={DESCRIPTION} />
+        <link rel="canonical" href={`https://www.owneo.es/noticias/${SLUG}`} />
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:url" content={`https://www.owneo.es/noticias/${SLUG}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": "${TITLE.replace(/"/g, '\\"')}",
+            "datePublished": "${DATE_ISO}",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Owneo",
+              "url": "https://www.owneo.es"
+            },
+            "mainEntityOfPage": "https://www.owneo.es/noticias/${SLUG}"
+          }
+        `}</script>
+      </Helmet>
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
