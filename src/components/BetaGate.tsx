@@ -35,6 +35,7 @@ const hasValidAccess = (): boolean => {
 
 const BetaGate = ({ children }: { children: ReactNode }) => {
   const [gateEnabled, setGateEnabled] = useState<boolean | null>(null);
+  const [betaPassword, setBetaPassword] = useState<string>("");
   const [unlocked, setUnlocked] = useState<boolean>(() => hasValidAccess());
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
