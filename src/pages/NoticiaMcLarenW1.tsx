@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Weight, Timer } from "lucide-react";
@@ -20,6 +21,28 @@ const specs = [
 const NoticiaMcLarenW1 = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>McLaren W1: el hypercar británico que redefine los límites | Owneo</title>
+        <meta name="description" content="Descubre el McLaren W1, el nuevo hypercar de Woking que sucede al P1. Motor V8 híbrido, aerodinámica activa y prestaciones extremas." />
+        <link rel="canonical" href="https://www.owneo.es/noticias/mclaren-w1" />
+        <meta property="og:title" content="McLaren W1: el hypercar británico que redefine los límites" />
+        <meta property="og:description" content="Descubre el McLaren W1, el nuevo hypercar de Woking que sucede al P1. Motor V8 híbrido, aerodinámica activa y prestaciones extremas." />
+        <meta property="og:url" content="https://www.owneo.es/noticias/mclaren-w1" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`{
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": "McLaren W1: el hypercar británico que redefine los límites",
+          "datePublished": "2026-02-15",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Owneo",
+            "url": "https://www.owneo.es"
+          },
+          "mainEntityOfPage": "https://www.owneo.es/noticias/mclaren-w1"
+        }`}</script>
+      </Helmet>
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">

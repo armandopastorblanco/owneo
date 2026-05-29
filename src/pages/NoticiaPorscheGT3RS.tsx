@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Gauge, Timer, Wind, Zap } from "lucide-react";
@@ -20,6 +21,28 @@ const specs = [
 const NoticiaPorscheGT3RS = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Porsche 911 GT3 RS 2026: récord en Nürburgring | Owneo</title>
+        <meta name="description" content="El Porsche 911 GT3 RS 2026 firma un nuevo récord en Nürburgring con neumáticos de serie. Tiempos, datos técnicos y análisis." />
+        <link rel="canonical" href="https://www.owneo.es/noticias/porsche-911-gt3-rs-2026" />
+        <meta property="og:title" content="Porsche 911 GT3 RS 2026: récord en Nürburgring" />
+        <meta property="og:description" content="El Porsche 911 GT3 RS 2026 firma un nuevo récord en Nürburgring con neumáticos de serie. Tiempos, datos técnicos y análisis." />
+        <meta property="og:url" content="https://www.owneo.es/noticias/porsche-911-gt3-rs-2026" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`{
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": "Porsche 911 GT3 RS 2026: récord en Nürburgring",
+          "datePublished": "2026-02-20",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Owneo",
+            "url": "https://www.owneo.es"
+          },
+          "mainEntityOfPage": "https://www.owneo.es/noticias/porsche-911-gt3-rs-2026"
+        }`}</script>
+      </Helmet>
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
