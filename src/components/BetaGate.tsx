@@ -120,7 +120,12 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  if (unlocked) return <>{children}</>;
+  // Loading state: avoid flashing protected content or the password screen
+  if (gateEnabled === null) {
+    return <div className="fixed inset-0 bg-black z-[9999]" aria-hidden="true" />;
+  }
+
+  if (!gateEnabled || unlocked) return <>{children}</>;
 
   return (
     <div
