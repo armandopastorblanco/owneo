@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Timer, Crown } from "lucide-react";
 import ArticleCTAs from "@/components/ArticleCTAs";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+
+const TITLE = "Lamborghini Revuelto Spider: el primer descapotable V12 híbrido de la historia de Lamborghini";
+const DESCRIPTION = "Sant'Agata presenta el Revuelto Spider, primer descapotable V12 híbrido de Lamborghini, con 1.015 CV y producción limitada a 249 unidades al año.";
+const SLUG = "lamborghini-revuelto-spider";
+const DATE_ISO = "2026-03-28";
 
 const heroImg = "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1600&q=80";
 const detailImg1 = "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80";
@@ -20,6 +26,30 @@ const specs = [
 const NoticiaLamborghiniRevueltoSpider = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{`${TITLE} | Owneo`}</title>
+        <meta name="description" content={DESCRIPTION} />
+        <link rel="canonical" href={`https://www.owneo.es/noticias/${SLUG}`} />
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:url" content={`https://www.owneo.es/noticias/${SLUG}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": "${TITLE.replace(/"/g, '\\"')}",
+            "datePublished": "${DATE_ISO}",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Owneo",
+              "url": "https://www.owneo.es"
+            },
+            "mainEntityOfPage": "https://www.owneo.es/noticias/${SLUG}"
+          }
+        `}</script>
+      </Helmet>
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
