@@ -26,7 +26,7 @@ import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
 import NoticiaPorscheGT3RS from "./pages/NoticiaPorscheGT3RS";
 import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
-import NoticiaBugattiTourbillon from "./pages/NoticiaBugattiTourbillon";
+
 import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
 import NoticiaDetalle from "./pages/NoticiaDetalle";
 import Login from "./pages/Login";
@@ -117,7 +117,7 @@ const App = () => (
               <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
               <Route path="/noticias/porsche-911-gt3-rs-2026" element={<NoticiaPorscheGT3RS />} />
               <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
-              <Route path="/noticias/bugatti-tourbillon" element={<NoticiaBugattiTourbillon />} />
+              
               <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
               <Route path="/login" element={<Login />} />
