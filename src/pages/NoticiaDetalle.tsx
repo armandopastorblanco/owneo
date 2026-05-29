@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -9,6 +10,19 @@ import { additionalNews, type NewsArticle } from "@/data/additionalNews";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 const iconMap = [Zap, Gauge, Timer, Crown];
+
+const MONTHS_ES: Record<string, string> = {
+  enero: "01", febrero: "02", marzo: "03", abril: "04", mayo: "05", junio: "06",
+  julio: "07", agosto: "08", septiembre: "09", octubre: "10", noviembre: "11", diciembre: "12",
+};
+
+const toISODate = (date: string): string => {
+  const m = date.trim().toLowerCase().match(/^(\d{1,2})\s+([a-záéíóú]+)\s+(\d{4})$/);
+  if (!m) return "";
+  const month = MONTHS_ES[m[2]] ?? "01";
+  return `${m[3]}-${month}-${m[1].padStart(2, "0")}`;
+};
+
 
 const NoticiaDetalle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -30,7 +44,30 @@ const NoticiaDetalle = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{`${article.title} | Owneo`}</title>
+        <meta name="description" content={article.excerpt.slice(0, 155)} />
+        <link rel="canonical" href={`https://www.owneo.es/noticias/${article.slug}`} />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.excerpt.slice(0, 155)} />
+        <meta property="og:url" content={`https://www.owneo.es/noticias/${article.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          headline: article.title,
+          datePublished: toISODate(article.date),
+          publisher: {
+            "@type": "Organization",
+            name: "Owneo",
+            url: "https://www.owneo.es",
+          },
+          mainEntityOfPage: `https://www.owneo.es/noticias/${article.slug}`,
+        })}</script>
+      </Helmet>
       <Navbar />
+
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
         <img src={article.image} alt={article.title} loading="eager" className="w-full h-full object-cover" />

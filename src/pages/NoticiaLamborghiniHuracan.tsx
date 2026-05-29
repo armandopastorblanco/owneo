@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Fuel, Weight } from "lucide-react";
@@ -20,6 +21,28 @@ const specs = [
 const NoticiaLamborghiniHuracan = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Sucesor del Lamborghini Huracán: V8 híbrido revelado | Owneo</title>
+        <meta name="description" content="Lamborghini presenta el sucesor del Huracán con un nuevo motor V8 biturbo híbrido. Diseño, potencia y todos los detalles." />
+        <link rel="canonical" href="https://www.owneo.es/noticias/lamborghini-huracan-hibrido" />
+        <meta property="og:title" content="Sucesor del Lamborghini Huracán: V8 híbrido revelado" />
+        <meta property="og:description" content="Lamborghini presenta el sucesor del Huracán con un nuevo motor V8 biturbo híbrido. Diseño, potencia y todos los detalles." />
+        <meta property="og:url" content="https://www.owneo.es/noticias/lamborghini-huracan-hibrido" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`{
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": "Sucesor del Lamborghini Huracán: V8 híbrido revelado",
+          "datePublished": "2026-02-28",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Owneo",
+            "url": "https://www.owneo.es"
+          },
+          "mainEntityOfPage": "https://www.owneo.es/noticias/lamborghini-huracan-hibrido"
+        }`}</script>
+      </Helmet>
       <Navbar />
 
       {/* Hero */}

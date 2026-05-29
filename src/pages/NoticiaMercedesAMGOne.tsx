@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Timer, Cpu } from "lucide-react";
@@ -20,6 +21,28 @@ const specs = [
 const NoticiaMercedesAMGOne = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Mercedes-AMG ONE: la actualización que acerca aún más la F1 | Owneo</title>
+        <meta name="description" content="Mercedes-AMG actualiza el ONE con tecnología directa de la Fórmula 1. Mejoras de potencia, fiabilidad y aerodinámica." />
+        <link rel="canonical" href="https://www.owneo.es/noticias/mercedes-amg-one-actualizacion" />
+        <meta property="og:title" content="Mercedes-AMG ONE: la actualización que acerca aún más la F1" />
+        <meta property="og:description" content="Mercedes-AMG actualiza el ONE con tecnología directa de la Fórmula 1. Mejoras de potencia, fiabilidad y aerodinámica." />
+        <meta property="og:url" content="https://www.owneo.es/noticias/mercedes-amg-one-actualizacion" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`{
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": "Mercedes-AMG ONE: la actualización que acerca aún más la F1",
+          "datePublished": "2026-02-01",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Owneo",
+            "url": "https://www.owneo.es"
+          },
+          "mainEntityOfPage": "https://www.owneo.es/noticias/mercedes-amg-one-actualizacion"
+        }`}</script>
+      </Helmet>
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">

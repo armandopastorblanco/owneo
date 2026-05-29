@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Zap, Gauge, Battery, Timer } from "lucide-react";
@@ -20,6 +21,28 @@ const specs = [
 const NoticiaFerrariLuce = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Ferrari Luce EV: detalles del primer 100% eléctrico de Ferrari | Owneo</title>
+        <meta name="description" content="Filtrados nuevos detalles del Ferrari Luce EV, el primer 100% eléctrico de Maranello: más de 1.200 CV y 500 km de autonomía." />
+        <link rel="canonical" href="https://www.owneo.es/noticias/ferrari-luce-ev" />
+        <meta property="og:title" content="Ferrari Luce EV: detalles del primer 100% eléctrico de Ferrari" />
+        <meta property="og:description" content="Filtrados nuevos detalles del Ferrari Luce EV, el primer 100% eléctrico de Maranello: más de 1.200 CV y 500 km de autonomía." />
+        <meta property="og:url" content="https://www.owneo.es/noticias/ferrari-luce-ev" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Owneo" />
+        <script type="application/ld+json">{`{
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": "Ferrari Luce EV: detalles del primer 100% eléctrico de Ferrari",
+          "datePublished": "2026-03-05",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Owneo",
+            "url": "https://www.owneo.es"
+          },
+          "mainEntityOfPage": "https://www.owneo.es/noticias/ferrari-luce-ev"
+        }`}</script>
+      </Helmet>
       <Navbar />
 
       {/* Hero */}
