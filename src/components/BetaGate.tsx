@@ -50,11 +50,12 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
     (async () => {
       const { data } = await supabase
         .from("app_settings" as any)
-        .select("value")
-        .eq("key", "beta_gate_enabled")
-        .maybeSingle();
+        .select("key, value")
+        .in("key", ["beta_gate_enabled", "beta_gate_password"]);
       if (cancelled) return;
-      setGateEnabled((data as any)?.value === "true");
+      const map = new Map<string, string>(((data as any[]) || []).map((r: any) => [r.key, r.value]));
+      setBetaPassword((map.get("beta_gate_password") || "").toUpperCase());
+      setGateEnabled(map.get("beta_gate_enabled") === "true");
     })();
     return () => {
       cancelled = true;
@@ -63,7 +64,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.trim().toUpperCase() === BETA_PASSWORD) {
+    if (betaPassword && password.trim().toUpperCase() === betaPassword) {
       try {
         localStorage.setItem(STORAGE_KEY, String(Date.now() + THIRTY_DAYS_MS));
       } catch {
