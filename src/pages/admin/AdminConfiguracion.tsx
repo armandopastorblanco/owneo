@@ -93,6 +93,9 @@ const AdminConfiguracion = () => {
         <p className="text-muted-foreground text-sm mt-1">Ajustes generales del sistema.</p>
       </div>
 
+      <BetaGateSettingCard />
+
+
       <Card>
         <Collapsible open={docsOpen} onOpenChange={setDocsOpen}>
           <CardHeader className="flex flex-row items-center justify-between">
