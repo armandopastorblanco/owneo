@@ -15,7 +15,6 @@ import { supabase } from "@/integrations/supabase/client";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const STORAGE_KEY = "owneo_beta_access";
-const BETA_PASSWORD = "TURBO";
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
 const hasValidAccess = (): boolean => {
@@ -35,6 +34,8 @@ const hasValidAccess = (): boolean => {
 };
 
 const BetaGate = ({ children }: { children: ReactNode }) => {
+  const [gateEnabled, setGateEnabled] = useState<boolean | null>(null);
+  const [betaPassword, setBetaPassword] = useState<string>("");
   const [unlocked, setUnlocked] = useState<boolean>(() => hasValidAccess());
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -45,12 +46,25 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    setUnlocked(hasValidAccess());
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase
+        .from("app_settings" as any)
+        .select("key, value")
+        .in("key", ["beta_gate_enabled", "beta_gate_password"]);
+      if (cancelled) return;
+      const map = new Map<string, string>(((data as any[]) || []).map((r: any) => [r.key, r.value]));
+      setBetaPassword((map.get("beta_gate_password") || "").toUpperCase());
+      setGateEnabled(map.get("beta_gate_enabled") === "true");
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.trim().toUpperCase() === BETA_PASSWORD) {
+    if (betaPassword && password.trim().toUpperCase() === betaPassword) {
       try {
         localStorage.setItem(STORAGE_KEY, String(Date.now() + THIRTY_DAYS_MS));
       } catch {
@@ -106,7 +120,12 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  if (unlocked) return <>{children}</>;
+  // Loading state: avoid flashing protected content or the password screen
+  if (gateEnabled === null) {
+    return <div className="fixed inset-0 bg-black z-[9999]" aria-hidden="true" />;
+  }
+
+  if (!gateEnabled || unlocked) return <>{children}</>;
 
   return (
     <div

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -92,6 +92,9 @@ const AdminConfiguracion = () => {
         <h1 className="text-2xl font-bold text-foreground">Configuración</h1>
         <p className="text-muted-foreground text-sm mt-1">Ajustes generales del sistema.</p>
       </div>
+
+      <BetaGateSettingCard />
+
 
       <Card>
         <Collapsible open={docsOpen} onOpenChange={setDocsOpen}>
@@ -199,6 +202,76 @@ const AdminConfiguracion = () => {
         </AlertDialogContent>
       </AlertDialog>
     </div>
+  );
+};
+
+const BetaGateSettingCard = () => {
+  const [enabled, setEnabled] = useState<boolean | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("app_settings" as any)
+        .select("value")
+        .eq("key", "beta_gate_enabled")
+        .maybeSingle();
+      setEnabled((data as any)?.value === "true");
+    })();
+  }, []);
+
+  const onToggle = async (v: boolean) => {
+    setSaving(true);
+    const prev = enabled;
+    setEnabled(v);
+    const { error } = await supabase
+      .from("app_settings" as any)
+      .upsert({ key: "beta_gate_enabled", value: v ? "true" : "false", updated_at: new Date().toISOString() } as any, { onConflict: "key" });
+    setSaving(false);
+    if (error) {
+      setEnabled(prev);
+      toast.error(error.message);
+      return;
+    }
+    await supabase.rpc("insert_audit_log", {
+      _action: "update_app_setting",
+      _target_table: "app_settings",
+      _target_id: "beta_gate_enabled",
+      _details: { value: v ? "true" : "false" },
+    });
+    toast.success(v ? "Beta Gate activada" : "Sitio público activado");
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg">Acceso al sitio</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={!!enabled}
+                disabled={enabled === null || saving}
+                onCheckedChange={onToggle}
+              />
+              <Label className="text-sm">
+                {enabled ? "Beta Gate activa — acceso restringido" : "Sitio público — Google puede indexar"}
+              </Label>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Controla si el sitio público está protegido por una pantalla de contraseña.
+            </p>
+          </div>
+          {enabled === null ? null : enabled ? (
+            <Badge className="bg-amber-500/15 text-amber-600 border-amber-500/30 hover:bg-amber-500/15">Restringido</Badge>
+          ) : (
+            <Badge className="bg-emerald-500/15 text-emerald-600 border-emerald-500/30 hover:bg-emerald-500/15">Público</Badge>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
