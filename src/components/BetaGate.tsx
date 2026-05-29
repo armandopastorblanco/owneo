@@ -15,7 +15,6 @@ import { supabase } from "@/integrations/supabase/client";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const STORAGE_KEY = "owneo_beta_access";
-const BETA_PASSWORD = "TURBO";
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
 const hasValidAccess = (): boolean => {
@@ -35,6 +34,7 @@ const hasValidAccess = (): boolean => {
 };
 
 const BetaGate = ({ children }: { children: ReactNode }) => {
+  const [gateEnabled, setGateEnabled] = useState<boolean | null>(null);
   const [unlocked, setUnlocked] = useState<boolean>(() => hasValidAccess());
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -45,7 +45,19 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    setUnlocked(hasValidAccess());
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase
+        .from("app_settings" as any)
+        .select("value")
+        .eq("key", "beta_gate_enabled")
+        .maybeSingle();
+      if (cancelled) return;
+      setGateEnabled((data as any)?.value === "true");
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
