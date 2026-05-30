@@ -13,9 +13,9 @@ import detailImg3 from "@/assets/news/ferrari-ev-detail-3.jpg";
 
 const specs = [
   { icon: Zap, label: "Potencia", value: "1.035 CV" },
-  { icon: Gauge, label: "0-100 km/h", value: "< 2,0 s" },
-  { icon: Battery, label: "Autonomía", value: "500+ km" },
-  { icon: Timer, label: "Carga rápida", value: "80% en 18 min" },
+  { icon: Gauge, label: "0-100 km/h", value: "2,5 s" },
+  { icon: Battery, label: "Autonomía", value: "530 km WLTP" },
+  { icon: Timer, label: "Arquitectura", value: "800V" },
 ];
 
 const NoticiaFerrariLuce = () => {
