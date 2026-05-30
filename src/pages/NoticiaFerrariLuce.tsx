@@ -209,12 +209,9 @@ const NoticiaFerrariLuce = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">¿Cuándo lo veremos?</h2>
-            <p className="text-base leading-relaxed mb-6">
-              Según las fuentes más fiables, Ferrari presentará oficialmente el Luce en septiembre de 2026, posiblemente en un evento privado en Maranello antes de su debut público en el Salón del Automóvil de París en octubre. Las primeras entregas están previstas para el primer trimestre de 2027, con un precio estimado que superará los 500.000 euros.
-            </p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6">Entregas y precio</h2>
             <p className="text-base leading-relaxed mb-8">
-              Lo que está claro es que el Ferrari Luce no será simplemente el primer coche eléctrico de Ferrari: será el modelo que defina si la electrificación puede coexistir con la emoción pura que ha hecho de Ferrari una leyenda. A juzgar por lo que sabemos hasta ahora, Maranello está decidido a demostrar que sí.
+              Las entregas del Ferrari Luce comenzarán a lo largo de 2027, con un precio de salida superior a los 500.000 euros.
             </p>
           </motion.div>
 
