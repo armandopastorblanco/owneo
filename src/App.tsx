@@ -24,6 +24,7 @@ import TwitterLanding from "./pages/TwitterLanding";
 import Noticias from "./pages/Noticias";
 import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
+import NoticiaLamborghiniTemerarioSpyder from "./pages/noticias/NoticiaLamborghiniTemerarioSpyder";
 
 import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
 
