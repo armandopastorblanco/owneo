@@ -101,9 +101,9 @@ const NoticiaLamborghiniTemerarioSpyder = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-12">
-            <img src={heroImg} alt="Detalle del Lamborghini Temerario, base del nuevo Spyder" loading="lazy" className="w-full rounded-2xl" />
+            <img src={interiorImg} alt="Interior y cockpit del Lamborghini Temerario — tecnología híbrida de nueva generación" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
-              El Temerario coupé, base mecánica del nuevo Spyder con V8 biturbo híbrido
+              Interior del Temerario — cockpit digital y materiales de competición
             </p>
           </motion.div>
 
