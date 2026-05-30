@@ -144,6 +144,13 @@ const NoticiaMcLarenW1 = () => {
           </motion.div>
 
           <ArticleCTAs vehicleName="McLaren W1" />
+
+          <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
+            <span className="text-champagne">Fuente oficial:</span>{" "}
+            <a href="https://cars.mclaren.com/uk_en/W1" rel="nofollow noopener" target="_blank" className="text-muted-foreground hover:text-champagne underline">
+              https://cars.mclaren.com/uk_en/W1
+            </a>
+          </p>
         </div>
       </article>
 

@@ -129,6 +129,13 @@ const NoticiaLamborghiniTemerarioSpyder = () => {
           </motion.div>
 
           <ArticleCTAs vehicleName="Lamborghini Temerario Spyder" />
+
+          <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
+            <span className="text-champagne">Fuente oficial:</span>{" "}
+            <a href="https://www.lamborghini.com/en-en/models/temerario" rel="nofollow noopener" target="_blank" className="text-muted-foreground hover:text-champagne underline">
+              https://www.lamborghini.com/en-en/models/temerario
+            </a>
+          </p>
         </div>
       </article>
 
