@@ -80,15 +80,15 @@ const NoticiaFerrariLuce = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              La primera berlina deportiva de cinco plazas totalmente eléctrica de Maranello promete 1.035 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari mientras abraza la electrificación total.
+              Ferrari presentó oficialmente el Luce el 25 de mayo de 2026 en Roma, marcando el inicio de una nueva era para Maranello. La primera berlina eléctrica de cinco plazas de Ferrari cuenta con 1.035 CV, autonomía de 530 km WLTP y arquitectura de 800V.
             </p>
 
             <p className="text-base leading-relaxed mb-6">
-              Tras años de especulación, las filtraciones más recientes pintan un cuadro cada vez más claro del Ferrari Luce EV. Fuentes cercanas a Maranello confirman que el proyecto, internamente conocido como "F260e", ha superado las fases de validación dinámica y se encuentra en las etapas finales de calibración antes de su presentación oficial prevista para el tercer trimestre de 2026.
+              El Ferrari Luce inaugura una nueva etapa para la marca del Cavallino Rampante. Tras la presentación oficial en Roma, Maranello ha confirmado todas las especificaciones técnicas y el plan industrial del modelo, que se producirá en la nueva planta dedicada a la electrificación.
             </p>
 
             <p className="text-base leading-relaxed mb-12">
-              Lo que hace único al Luce no es simplemente su propulsión eléctrica, sino la filosofía con la que Ferrari ha abordado el desafío: crear un automóvil que no solo iguale, sino que supere las sensaciones de conducción de sus modelos con motor de combustión interna. "No estamos construyendo un coche eléctrico que resulta ser un Ferrari. Estamos construyendo un Ferrari que resulta ser eléctrico", declaró una fuente interna.
+              Lo que hace único al Luce no es simplemente su propulsión eléctrica, sino la filosofía con la que Ferrari ha abordado el desafío: crear un automóvil que no solo iguale, sino que supere las sensaciones de conducción de sus modelos con motor de combustión interna. "No estamos construyendo un coche eléctrico que resulta ser un Ferrari. Estamos construyendo un Ferrari que resulta ser eléctrico", declararon desde Maranello durante la presentación.
             </p>
           </motion.div>
 
