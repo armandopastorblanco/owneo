@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import ArticleCTAs from "@/components/ArticleCTAs";
 
 import heroImg from "@/assets/news/lamborghini-temerario.jpg";
+import interiorImg from "@/assets/news/lamborghini-temerario-detail-1.jpg";
+import motionImg from "@/assets/news/lamborghini-temerario-detail-2.jpg";
 
 const specs = [
   { icon: Zap, label: "Potencia", value: "920 CV" },
