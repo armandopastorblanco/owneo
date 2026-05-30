@@ -12,7 +12,7 @@ import detailImg2 from "@/assets/news/ferrari-ev-detail-2.jpg";
 import detailImg3 from "@/assets/news/ferrari-ev-detail-3.jpg";
 
 const specs = [
-  { icon: Zap, label: "Potencia", value: "1.200+ CV" },
+  { icon: Zap, label: "Potencia", value: "1.035 CV" },
   { icon: Gauge, label: "0-100 km/h", value: "< 2,0 s" },
   { icon: Battery, label: "Autonomía", value: "500+ km" },
   { icon: Timer, label: "Carga rápida", value: "80% en 18 min" },
@@ -23,10 +23,10 @@ const NoticiaFerrariLuce = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
         <title>Ferrari Luce EV: detalles del primer 100% eléctrico de Ferrari | Owneo</title>
-        <meta name="description" content="Filtrados nuevos detalles del Ferrari Luce EV, el primer 100% eléctrico de Maranello: más de 1.200 CV y 500 km de autonomía." />
+        <meta name="description" content="Filtrados nuevos detalles del Ferrari Luce EV, la primera berlina deportiva de cinco plazas 100% eléctrica de Maranello: 1.035 CV y 500 km de autonomía." />
         <link rel="canonical" href="https://www.owneo.es/noticias/ferrari-luce-ev" />
         <meta property="og:title" content="Ferrari Luce EV: detalles del primer 100% eléctrico de Ferrari" />
-        <meta property="og:description" content="Filtrados nuevos detalles del Ferrari Luce EV, el primer 100% eléctrico de Maranello: más de 1.200 CV y 500 km de autonomía." />
+        <meta property="og:description" content="Filtrados nuevos detalles del Ferrari Luce EV, la primera berlina deportiva de cinco plazas 100% eléctrica de Maranello: 1.035 CV y 500 km de autonomía." />
         <meta property="og:url" content="https://www.owneo.es/noticias/ferrari-luce-ev" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Owneo" />
@@ -80,7 +80,7 @@ const NoticiaFerrariLuce = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              El primer superdeportivo totalmente eléctrico de Maranello promete más de 1.200 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari mientras abraza la electrificación total.
+              La primera berlina deportiva de cinco plazas totalmente eléctrica de Maranello promete 1.035 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari mientras abraza la electrificación total.
             </p>
 
             <p className="text-base leading-relaxed mb-6">
@@ -192,7 +192,7 @@ const NoticiaFerrariLuce = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Rendimiento eléctrico de nueva generación</h2>
             <p className="text-base leading-relaxed mb-6">
-              Bajo la piel del Luce se esconde una arquitectura eléctrica de 900V desarrollada íntegramente por Ferrari. Tres motores eléctricos — uno en el eje delantero y dos en el trasero — generan una potencia combinada superior a 1.200 CV con un par instantáneo de más de 1.500 Nm. La tracción integral inteligente distribuye la potencia entre los cuatro neumáticos con una frecuencia de ajuste de 1.000 veces por segundo.
+              Bajo la piel del Luce se esconde una arquitectura eléctrica de 900V desarrollada íntegramente por Ferrari. Tres motores eléctricos — uno en el eje delantero y dos en el trasero — generan una potencia combinada de 1.035 CV con un par instantáneo de más de 1.500 Nm. La tracción integral inteligente distribuye la potencia entre los cuatro neumáticos con una frecuencia de ajuste de 1.000 veces por segundo.
             </p>
             <p className="text-base leading-relaxed mb-6">
               La batería de estado semi-sólido de 120 kWh, producida en la nueva gigafactoría de Maranello, ofrece una autonomía superior a 500 km en ciclo WLTP. La carga ultrarrápida a 400 kW permite recuperar el 80% de la capacidad en apenas 18 minutos, convirtiendo las paradas en poco más que un café espresso.

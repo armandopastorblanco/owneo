@@ -408,42 +408,42 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 31, slug: "porsche-911-gt3-rs-2026-especificaciones", image: porscheGt3Rs2026, date: "11 Abril 2026", category: "Competición",
     title: "Porsche 911 GT3 RS 2026: nuevas especificaciones y aerodinámica activa evolucionada",
-    excerpt: "Porsche actualiza el 911 GT3 RS con un paquete aerodinámico revisado, suspensión recalibrada y una electrónica más permisiva en circuito. El bóxer atmosférico de 4.0 litros sube hasta 535 CV.",
+    excerpt: "Porsche actualiza el 911 GT3 RS con un paquete aerodinámico revisado, suspensión recalibrada y una electrónica más permisiva en circuito. El bóxer atmosférico de 4.0 litros entrega 518 CV.",
     readTime: "7 min",
     content: {
-      intro: "Porsche ha revelado las especificaciones definitivas del 911 GT3 RS 2026, una evolución que afina aún más uno de los GT más capaces del mercado. Las modificaciones se centran en tres ejes: aerodinámica activa, electrónica de chasis y un ligero incremento de potencia del seis cilindros bóxer atmosférico, que ahora ronda los 535 CV.",
+      intro: "Las especificaciones definitivas del modelo 2026 están pendientes de confirmación oficial por parte de Porsche. Sobre la base de las cifras oficiales actuales del 911 GT3 RS, el bóxer atmosférico de 4.0 litros entrega 518 CV. La evolución 2026 se centraría en tres ejes: aerodinámica activa, electrónica de chasis y un afinado del seis cilindros bóxer atmosférico.",
       sections: [
         { title: "Bóxer atmosférico afinado al milímetro", paragraphs: [
-          "El bóxer de 4.0 litros de aspiración natural mantiene su esencia pero estrena nueva gestión electrónica, un sistema de admisión revisado y un escape de titanio aligerado en 6 kg. Estas modificaciones permiten extraer 535 CV a 8.500 rpm, con la zona roja situada en 9.000 rpm, y un par máximo de 470 Nm.",
-          "Asociado a una caja PDK de 7 velocidades específicamente programada para uso en circuito, el GT3 RS 2026 firma un 0 a 100 km/h en 3,0 segundos y una velocidad máxima de 312 km/h. La relación potencia/peso baja hasta 2,68 kg/CV gracias a un peso en orden de marcha de 1.435 kg."
+          "El bóxer de 4.0 litros de aspiración natural mantiene su esencia con una gestión electrónica afinada, un sistema de admisión revisado y un escape de titanio aligerado. Las cifras oficiales actuales sitúan la potencia en 518 CV a 8.500 rpm, con la zona roja en 9.000 rpm, y un par máximo de 465 Nm. Las especificaciones definitivas del modelo 2026 están pendientes de confirmación oficial por parte de Porsche.",
+          "Asociado a una caja PDK de 7 velocidades específicamente programada para uso en circuito, el GT3 RS firma un 0 a 100 km/h en 3,2 segundos y una velocidad máxima en torno a 296 km/h, con un peso en orden de marcha de 1.450 kg."
         ]},
         { title: "Aerodinámica activa de inspiración LMDh", paragraphs: [
-          "El alerón trasero adopta ahora un sistema DRS de dos posiciones que se gestiona automáticamente en función del modo de conducción, mejorando tanto la velocidad punta como la carga aerodinámica en curva. La carga aerodinámica máxima alcanza los 920 kg a 285 km/h, superando con creces a la generación anterior.",
-          "El paquete Weissach opcional (estimado en 30.000 euros) sustituye numerosos elementos por fibra de carbono expuesta, incluyendo el techo, el capó delantero, la barra antivuelco y los retrovisores. Permite reducir 18 kg adicionales y desbloquea ajustes específicos de la suspensión KW para uso intensivo en pista."
+          "El alerón trasero adopta un sistema DRS de dos posiciones que se gestiona automáticamente en función del modo de conducción, mejorando tanto la velocidad punta como la carga aerodinámica en curva. La carga aerodinámica máxima supera los 860 kg a 285 km/h, una cifra de referencia en la categoría.",
+          "El paquete Weissach opcional (estimado en 30.000 euros) sustituye numerosos elementos por fibra de carbono expuesta, incluyendo el techo, el capó delantero, la barra antivuelco y los retrovisores. Permite reducir varios kilos adicionales y desbloquea ajustes específicos de la suspensión KW para uso intensivo en pista."
         ]}
       ]
     },
-    specs: [{ label: "Potencia", value: "535 CV" }, { label: "0-100 km/h", value: "3,0 s" }, { label: "Velocidad máx.", value: "312 km/h" }, { label: "Peso", value: "1.435 kg" }]
+    specs: [{ label: "Potencia", value: "518 CV" }, { label: "0-100 km/h", value: "3,2 s" }, { label: "Velocidad máx.", value: "296 km/h" }, { label: "Peso", value: "1.450 kg" }]
   },
   {
     id: 32, slug: "mclaren-w1-spider-confirmacion", image: mclarenW1Spider, date: "18 Abril 2026", category: "Hypercars",
-    title: "McLaren W1 Spider: confirmación oficial del hypercar a cielo abierto",
-    excerpt: "Woking confirma la versión Spider del W1. Mantiene los 1.275 CV del híbrido V8 y añade un techo de carbono desmontable manualmente. Solo 99 unidades a 2,5 millones de libras.",
+    title: "McLaren W1 Spider: primeros rumores del hypercar a cielo abierto",
+    excerpt: "Rumores apuntan a una versión Spider del W1, que mantendría los 1.275 CV del híbrido V8 y añadiría un techo de carbono desmontable manualmente. McLaren no ha confirmado cifras oficiales de producción ni precio.",
     readTime: "6 min",
     content: {
-      intro: "McLaren ha confirmado oficialmente la existencia del W1 Spider, una variante a cielo abierto del hypercar que sucede al P1 y al Speedtail. La marca británica producirá únicamente 99 unidades del Spider, todas ellas ya reservadas por clientes seleccionados del programa W1 original. Las entregas comenzarán a finales de 2027 una vez completada la producción del coupé.",
+      intro: "⚠️ La versión Spider del McLaren W1 no ha sido confirmada oficialmente por McLaren a fecha de publicación. Según los primeros rumores procedentes del entorno de Woking, la marca británica estaría trabajando en una variante a cielo abierto del hypercar que sucede al P1 y al Speedtail. Las informaciones disponibles apuntan a una posible reserva prioritaria para clientes seleccionados del programa W1 original, con entregas que comenzarían a finales de 2027 una vez completada la producción del coupé.",
       sections: [
         { title: "Híbrido V8 de 1.275 CV intacto", paragraphs: [
-          "El tren motriz del W1 Spider conserva íntegramente el del coupé: un V8 biturbo de 4.0 litros de diseño completamente nuevo, asistido por un motor eléctrico radial integrado en la transmisión, para una potencia combinada de 1.275 CV y un par de 1.340 Nm. La batería de 1,4 kWh permite 2 km de autonomía eléctrica en maniobras de baja velocidad.",
-          "A pesar del refuerzo estructural necesario para la ausencia de techo, el peso solo aumenta en 35 kg respecto al coupé, gracias al monocasco de carbono Aerocell desarrollado para soportar las cargas aerodinámicas extremas del W1 sin necesitar barras adicionales."
+          "Según los rumores, el tren motriz del W1 Spider conservaría íntegramente el del coupé: un V8 biturbo de 4.0 litros de diseño completamente nuevo, asistido por un motor eléctrico radial integrado en la transmisión, para una potencia combinada de 1.275 CV y un par de 1.340 Nm. La batería de 1,4 kWh permitiría 2 km de autonomía eléctrica en maniobras de baja velocidad.",
+          "A pesar del refuerzo estructural necesario para la ausencia de techo, el peso apenas aumentaría respecto al coupé, gracias al monocasco de carbono Aerocell desarrollado para soportar las cargas aerodinámicas extremas del W1 sin necesitar barras adicionales."
         ]},
         { title: "Techo de carbono extraíble", paragraphs: [
-          "A diferencia de otros hypercars, McLaren ha optado por un techo rígido de fibra de carbono extraíble manualmente, almacenable en el frontal. Esta solución preserva la pureza estética y reduce el peso respecto a un techo plegable motorizado.",
-          "Las puertas Dihedral con apertura hacia arriba se mantienen, y la aerodinámica activa Active Long Tail funciona exactamente como en el coupé, generando hasta 1.000 kg de carga aerodinámica a 280 km/h. El precio de entrada se sitúa en 2,5 millones de libras."
+          "A diferencia de otros hypercars, McLaren habría optado por un techo rígido de fibra de carbono extraíble manualmente, almacenable en el frontal. Esta solución preservaría la pureza estética y reduciría el peso respecto a un techo plegable motorizado.",
+          "Las puertas Dihedral con apertura hacia arriba se mantendrían, y la aerodinámica activa Active Long Tail funcionaría exactamente como en el coupé, generando hasta 1.000 kg de carga aerodinámica a 280 km/h. Se especula con una producción limitada, aunque McLaren no ha confirmado cifras oficiales."
         ]}
       ]
     },
-    specs: [{ label: "Potencia", value: "1.275 CV" }, { label: "0-100 km/h", value: "2,7 s" }, { label: "Motor", value: "V8 4.0 PHEV" }, { label: "Producción", value: "99 unidades" }]
+    specs: [{ label: "Potencia", value: "1.275 CV" }, { label: "0-100 km/h", value: "2,7 s" }, { label: "Motor", value: "V8 4.0 PHEV" }, { label: "Producción", value: "Sin confirmar" }]
   },
   {
     id: 33, slug: "aston-martin-vantage-gt3-2026", image: astonMartinVantageGt3, date: "25 Abril 2026", category: "Competición",
@@ -527,11 +527,11 @@ export const additionalNews: NewsArticle[] = [
   },
   {
     id: 37, slug: "porsche-718-cayman-gt4-rs-electrico", image: porsche718CaymanElectric, date: "23 Mayo 2026", category: "Eléctricos",
-    title: "Porsche 718 Cayman GT4 RS Eléctrico: debut oficial del primer GT eléctrico de la marca",
-    excerpt: "Porsche desvela en Weissach el primer Cayman GT4 RS 100% eléctrico. Dos motores síncronos, 700 CV, 0 a 100 km/h en 2,8 segundos y una arquitectura de 900 V diseñada para resistencia en circuito.",
+    title: "Porsche 718 Cayman GT4 RS Eléctrico: los rumores del primer GT eléctrico de la marca",
+    excerpt: "Rumores y especulaciones apuntan a un futuro Cayman GT4 RS 100% eléctrico con dos motores síncronos, 700 CV y arquitectura de 900 V. Porsche no ha confirmado oficialmente el proyecto.",
     readTime: "8 min",
     content: {
-      intro: "Porsche ha desvelado oficialmente en el centro de desarrollo de Weissach el nuevo 718 Cayman GT4 RS eléctrico, el primer GT 100% eléctrico de la marca. Esta versión inaugura una nueva familia de modelos puramente eléctricos del 718 Cayman y Boxster, diseñados desde el principio para entregar prestaciones dignas de un GT de Stuttgart sin recurrir al motor de combustión.",
+      intro: "⚠️ Este artículo está basado en filtraciones no confirmadas oficialmente por Porsche. Según rumores y especulaciones recientes procedentes del entorno de Weissach, la marca estaría trabajando en un 718 Cayman GT4 RS eléctrico, que sería el primer GT 100% eléctrico de Porsche. Esta hipotética versión inauguraría una nueva familia de modelos puramente eléctricos del 718 Cayman y Boxster, diseñados desde el principio para entregar prestaciones dignas de un GT de Stuttgart sin recurrir al motor de combustión.",
       sections: [
         { title: "Dos motores síncronos y arquitectura de 900 V", paragraphs: [
           "El nuevo GT4 RS eléctrico utiliza dos motores síncronos de imanes permanentes, uno en cada eje, para una potencia combinada de 700 CV y un par instantáneo de 850 Nm. Porsche ha desarrollado una arquitectura de 900 voltios, superior incluso a la del Taycan, que permite cargas ultra-rápidas y minimiza las pérdidas térmicas durante las sesiones de circuito.",
