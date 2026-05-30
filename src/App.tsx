@@ -24,6 +24,7 @@ import TwitterLanding from "./pages/TwitterLanding";
 import Noticias from "./pages/Noticias";
 import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
+import NoticiaLamborghiniTemerarioSpyder from "./pages/noticias/NoticiaLamborghiniTemerarioSpyder";
 
 import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
 
@@ -115,6 +116,7 @@ const App = () => (
               <Route path="/noticias" element={<Noticias />} />
               <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
               <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
+              <Route path="/noticias/lamborghini-temerario-spyder" element={<NoticiaLamborghiniTemerarioSpyder />} />
               
               <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
               

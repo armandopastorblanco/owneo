@@ -14,8 +14,18 @@ import porscheGt3 from "@/assets/news/porsche-gt3.jpg";
 import mclarenW1 from "@/assets/news/mclaren-w1.jpg";
 import bugattiTourbillon from "@/assets/news/bugatti-tourbillon.jpg";
 import mercedesAmgOne from "@/assets/news/mercedes-amg-one.jpg";
+import lamborghiniTemerario from "@/assets/news/lamborghini-temerario.jpg";
 
 const originalNews = [
+  {
+    id: 7,
+    image: lamborghiniTemerario,
+    date: "31 Mayo 2026",
+    category: "Lanzamientos",
+    title: "Lamborghini Temerario Spyder: primeras imágenes espía del descapotable V8 híbrido",
+    excerpt: "Las primeras fotografías espía del Lamborghini Temerario Spyder, captadas en el Nürburgring, confirman lo que muchos esperaban: Sant'Agata Bolognese trabaja a toda velocidad en la versión descapotable del sucesor del Huracán. Presentación prevista en Goodwood, 9-12 julio 2026.",
+    link: "/noticias/lamborghini-temerario-spyder"
+  },
   {
     id: 1,
     image: ferrariEv,
