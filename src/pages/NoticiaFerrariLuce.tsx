@@ -13,9 +13,9 @@ import detailImg3 from "@/assets/news/ferrari-ev-detail-3.jpg";
 
 const specs = [
   { icon: Zap, label: "Potencia", value: "1.035 CV" },
-  { icon: Gauge, label: "0-100 km/h", value: "< 2,0 s" },
-  { icon: Battery, label: "Autonomía", value: "500+ km" },
-  { icon: Timer, label: "Carga rápida", value: "80% en 18 min" },
+  { icon: Gauge, label: "0-100 km/h", value: "2,5 s" },
+  { icon: Battery, label: "Autonomía", value: "530 km WLTP" },
+  { icon: Timer, label: "Arquitectura", value: "800V" },
 ];
 
 const NoticiaFerrariLuce = () => {
@@ -62,7 +62,7 @@ const NoticiaFerrariLuce = () => {
             </h1>
             <div className="flex items-center gap-2 text-muted-foreground text-sm mt-4">
               <Calendar className="w-4 h-4" />
-              <span>5 Marzo 2026</span>
+              <span>25 Mayo 2026</span>
               <span className="mx-2">·</span>
               <span>8 min de lectura</span>
             </div>
@@ -80,15 +80,15 @@ const NoticiaFerrariLuce = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              La primera berlina deportiva de cinco plazas totalmente eléctrica de Maranello promete 1.035 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari mientras abraza la electrificación total.
+              Ferrari presentó oficialmente el Luce el 25 de mayo de 2026 en Roma, marcando el inicio de una nueva era para Maranello. La primera berlina eléctrica de cinco plazas de Ferrari cuenta con 1.035 CV, autonomía de 530 km WLTP y arquitectura de 800V.
             </p>
 
             <p className="text-base leading-relaxed mb-6">
-              Tras años de especulación, las filtraciones más recientes pintan un cuadro cada vez más claro del Ferrari Luce EV. Fuentes cercanas a Maranello confirman que el proyecto, internamente conocido como "F260e", ha superado las fases de validación dinámica y se encuentra en las etapas finales de calibración antes de su presentación oficial prevista para el tercer trimestre de 2026.
+              El Ferrari Luce inaugura una nueva etapa para la marca del Cavallino Rampante. Tras la presentación oficial en Roma, Maranello ha confirmado todas las especificaciones técnicas y el plan industrial del modelo, que se producirá en la nueva planta dedicada a la electrificación.
             </p>
 
             <p className="text-base leading-relaxed mb-12">
-              Lo que hace único al Luce no es simplemente su propulsión eléctrica, sino la filosofía con la que Ferrari ha abordado el desafío: crear un automóvil que no solo iguale, sino que supere las sensaciones de conducción de sus modelos con motor de combustión interna. "No estamos construyendo un coche eléctrico que resulta ser un Ferrari. Estamos construyendo un Ferrari que resulta ser eléctrico", declaró una fuente interna.
+              Lo que hace único al Luce no es simplemente su propulsión eléctrica, sino la filosofía con la que Ferrari ha abordado el desafío: crear un automóvil que no solo iguale, sino que supere las sensaciones de conducción de sus modelos con motor de combustión interna. "No estamos construyendo un coche eléctrico que resulta ser un Ferrari. Estamos construyendo un Ferrari que resulta ser eléctrico", declararon desde Maranello durante la presentación.
             </p>
           </motion.div>
 
@@ -192,13 +192,13 @@ const NoticiaFerrariLuce = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Rendimiento eléctrico de nueva generación</h2>
             <p className="text-base leading-relaxed mb-6">
-              Bajo la piel del Luce se esconde una arquitectura eléctrica de 900V desarrollada íntegramente por Ferrari. Tres motores eléctricos — uno en el eje delantero y dos en el trasero — generan una potencia combinada de 1.035 CV con un par instantáneo de más de 1.500 Nm. La tracción integral inteligente distribuye la potencia entre los cuatro neumáticos con una frecuencia de ajuste de 1.000 veces por segundo.
+              Bajo la piel del Luce se esconde una arquitectura eléctrica de 800V desarrollada íntegramente por Ferrari. Cuatro motores eléctricos — uno por rueda — generan una potencia combinada de 1.035 CV con un par instantáneo de más de 1.500 Nm. La tracción integral inteligente distribuye la potencia entre los cuatro neumáticos con una frecuencia de ajuste de 1.000 veces por segundo.
             </p>
             <p className="text-base leading-relaxed mb-6">
-              La batería de estado semi-sólido de 120 kWh, producida en la nueva gigafactoría de Maranello, ofrece una autonomía superior a 500 km en ciclo WLTP. La carga ultrarrápida a 400 kW permite recuperar el 80% de la capacidad en apenas 18 minutos, convirtiendo las paradas en poco más que un café espresso.
+              La batería de estado semi-sólido de 120 kWh, producida en la nueva gigafactoría de Maranello, ofrece una autonomía de 530 km en ciclo WLTP. La carga ultrarrápida a 400 kW permite recuperar el 80% de la capacidad en apenas 18 minutos, convirtiendo las paradas en poco más que un café espresso.
             </p>
             <p className="text-base leading-relaxed mb-12">
-              Pero las cifras más impresionantes llegan en el apartado dinámico: el Luce acelera de 0 a 100 km/h en menos de 2 segundos, alcanza los 200 km/h en 5,8 segundos y tiene una velocidad máxima limitada electrónicamente a 350 km/h. En Fiorano, el prototipo ya ha registrado tiempos que rivalizan con los del SF90 Stradale.
+              Pero las cifras más impresionantes llegan en el apartado dinámico: el Luce acelera de 0 a 100 km/h en 2,5 segundos, alcanza los 200 km/h en 5,8 segundos y tiene una velocidad máxima limitada electrónicamente a 310 km/h. En Fiorano, el Luce ya ha registrado tiempos que rivalizan con los del SF90 Stradale.
             </p>
           </motion.div>
 
@@ -209,12 +209,9 @@ const NoticiaFerrariLuce = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">¿Cuándo lo veremos?</h2>
-            <p className="text-base leading-relaxed mb-6">
-              Según las fuentes más fiables, Ferrari presentará oficialmente el Luce en septiembre de 2026, posiblemente en un evento privado en Maranello antes de su debut público en el Salón del Automóvil de París en octubre. Las primeras entregas están previstas para el primer trimestre de 2027, con un precio estimado que superará los 500.000 euros.
-            </p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6">Entregas y precio</h2>
             <p className="text-base leading-relaxed mb-8">
-              Lo que está claro es que el Ferrari Luce no será simplemente el primer coche eléctrico de Ferrari: será el modelo que defina si la electrificación puede coexistir con la emoción pura que ha hecho de Ferrari una leyenda. A juzgar por lo que sabemos hasta ahora, Maranello está decidido a demostrar que sí.
+              Las entregas del Ferrari Luce comenzarán a lo largo de 2027, con un precio de salida superior a los 500.000 euros.
             </p>
           </motion.div>
 

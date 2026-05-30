@@ -120,14 +120,14 @@ export const additionalNews: NewsArticle[] = [
   },
   {
     id: 11, slug: "lamborghini-fenomeno", image: lamborghiniFenomeno, date: "16 Agosto 2025", category: "Ediciones Limitadas",
-    title: "Lamborghini Fenomeno: 1.065 CV y solo 30 unidades del Revuelto más extremo",
-    excerpt: "Lamborghini presenta el Fenomeno, una versión ultra-limitada del Revuelto con 1.065 CV del V12 híbrido. Solo 30 unidades dentro del programa Few Off.",
+    title: "Lamborghini Fenomeno: 1.080 CV y solo 29 unidades del Revuelto más extremo",
+    excerpt: "Lamborghini presenta el Fenomeno, una versión ultra-limitada del Revuelto con 1.080 CV del V12 híbrido. Solo 29 unidades dentro del programa Few Off.",
     readTime: "6 min",
-    content: { intro: "Lamborghini ha presentado el Fenomeno, el modelo más potente y exclusivo de su historia actual. Basado en el Revuelto pero llevado al extremo, el Fenomeno forma parte del programa 'Few Off' de la marca, con una producción limitada a menos de 30 unidades. Su V12 híbrido de 6.5 litros genera 1.065 CV, superando incluso al Revuelto estándar.", sections: [
-      { title: "V12 híbrido al máximo", paragraphs: ["El motor V12 atmosférico de 6.5 litros del Fenomeno ha sido afinado para entregar 825 CV a 9.250 rpm, 15 CV más que el Revuelto estándar. Los tres motores eléctricos han sido repotenciados para aportar 240 CV adicionales, elevando la potencia total a 1.065 CV. El par combinado supera los 1.000 Nm.", "El paquete aerodinámico incluye un alerón fijo de competición, divisor frontal extendido y difusor trasero agresivo, todo en fibra de carbono expuesta."] },
-      { title: "Exclusividad máxima", paragraphs: ["Con menos de 30 unidades previstas y un precio estimado superior a 600.000 euros, el Fenomeno es una pieza de colección desde su nacimiento. Cada unidad es personalizada por Ad Personam con opciones únicas de color y acabado."] }
+    content: { intro: "Lamborghini ha presentado el Fenomeno, el modelo más potente y exclusivo de su historia actual. Basado en el Revuelto pero llevado al extremo, el Fenomeno forma parte del programa 'Few Off' de la marca, con una producción limitada a 29 unidades. Su V12 híbrido de 6.5 litros genera 1.080 CV, superando incluso al Revuelto estándar.", sections: [
+      { title: "V12 híbrido al máximo", paragraphs: ["El motor V12 atmosférico de 6.5 litros del Fenomeno ha sido afinado para entregar 835 CV, 15 CV más que el Revuelto estándar. Los tres motores eléctricos han sido repotenciados para aportar 245 CV adicionales, elevando la potencia total a 1.080 CV. El par combinado supera los 1.000 Nm.", "El paquete aerodinámico incluye un alerón fijo de competición, divisor frontal extendido y difusor trasero agresivo, todo en fibra de carbono expuesta."] },
+      { title: "Exclusividad máxima", paragraphs: ["Con 29 unidades previstas y un precio estimado superior a 600.000 euros, el Fenomeno es una pieza de colección desde su nacimiento. Cada unidad es personalizada por Ad Personam con opciones únicas de color y acabado."] }
     ] },
-    specs: [{ label: "Potencia", value: "1.065 CV" }, { label: "Motor", value: "V12 6.5L + 3 eléctricos" }, { label: "Producción", value: "~30 uds" }, { label: "Precio est.", value: "600.000+ €" }]
+    specs: [{ label: "Potencia", value: "1.080 CV" }, { label: "Motor", value: "V12 6.5L + 3 eléctricos" }, { label: "Producción", value: "29 uds" }, { label: "Precio est.", value: "600.000+ €" }]
   },
   {
     id: 12, slug: "ferrari-elettrica", image: ferrariElettrica, date: "9 Octubre 2025", category: "Eléctricos",
