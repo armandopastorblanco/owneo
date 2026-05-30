@@ -116,6 +116,7 @@ const App = () => (
               <Route path="/noticias" element={<Noticias />} />
               <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
               <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
+              <Route path="/noticias/lamborghini-temerario-spyder" element={<NoticiaLamborghiniTemerarioSpyder />} />
               
               <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
               
