@@ -62,7 +62,7 @@ const NoticiaFerrariLuce = () => {
             </h1>
             <div className="flex items-center gap-2 text-muted-foreground text-sm mt-4">
               <Calendar className="w-4 h-4" />
-              <span>5 Marzo 2026</span>
+              <span>25 Mayo 2026</span>
               <span className="mx-2">·</span>
               <span>8 min de lectura</span>
             </div>
