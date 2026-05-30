@@ -192,13 +192,13 @@ const NoticiaFerrariLuce = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Rendimiento eléctrico de nueva generación</h2>
             <p className="text-base leading-relaxed mb-6">
-              Bajo la piel del Luce se esconde una arquitectura eléctrica de 900V desarrollada íntegramente por Ferrari. Tres motores eléctricos — uno en el eje delantero y dos en el trasero — generan una potencia combinada de 1.035 CV con un par instantáneo de más de 1.500 Nm. La tracción integral inteligente distribuye la potencia entre los cuatro neumáticos con una frecuencia de ajuste de 1.000 veces por segundo.
+              Bajo la piel del Luce se esconde una arquitectura eléctrica de 800V desarrollada íntegramente por Ferrari. Cuatro motores eléctricos — uno por rueda — generan una potencia combinada de 1.035 CV con un par instantáneo de más de 1.500 Nm. La tracción integral inteligente distribuye la potencia entre los cuatro neumáticos con una frecuencia de ajuste de 1.000 veces por segundo.
             </p>
             <p className="text-base leading-relaxed mb-6">
-              La batería de estado semi-sólido de 120 kWh, producida en la nueva gigafactoría de Maranello, ofrece una autonomía superior a 500 km en ciclo WLTP. La carga ultrarrápida a 400 kW permite recuperar el 80% de la capacidad en apenas 18 minutos, convirtiendo las paradas en poco más que un café espresso.
+              La batería de estado semi-sólido de 120 kWh, producida en la nueva gigafactoría de Maranello, ofrece una autonomía de 530 km en ciclo WLTP. La carga ultrarrápida a 400 kW permite recuperar el 80% de la capacidad en apenas 18 minutos, convirtiendo las paradas en poco más que un café espresso.
             </p>
             <p className="text-base leading-relaxed mb-12">
-              Pero las cifras más impresionantes llegan en el apartado dinámico: el Luce acelera de 0 a 100 km/h en menos de 2 segundos, alcanza los 200 km/h en 5,8 segundos y tiene una velocidad máxima limitada electrónicamente a 350 km/h. En Fiorano, el prototipo ya ha registrado tiempos que rivalizan con los del SF90 Stradale.
+              Pero las cifras más impresionantes llegan en el apartado dinámico: el Luce acelera de 0 a 100 km/h en 2,5 segundos, alcanza los 200 km/h en 5,8 segundos y tiene una velocidad máxima limitada electrónicamente a 310 km/h. En Fiorano, el Luce ya ha registrado tiempos que rivalizan con los del SF90 Stradale.
             </p>
           </motion.div>
 
