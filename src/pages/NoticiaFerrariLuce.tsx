@@ -217,6 +217,13 @@ const NoticiaFerrariLuce = () => {
 
           {/* Back link */}
           <ArticleCTAs vehicleName="Ferrari Luce EV" />
+
+          <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
+            <span className="text-champagne">Fuente oficial:</span>{" "}
+            <a href="https://www.ferrari.com/en-EN/auto/ferrari-luce" rel="nofollow noopener" target="_blank" className="text-muted-foreground hover:text-champagne underline">
+              https://www.ferrari.com/en-EN/auto/ferrari-luce
+            </a>
+          </p>
         </div>
       </article>
 

@@ -144,6 +144,13 @@ const NoticiaLamborghiniRevueltoSpider = () => {
           </motion.div>
 
           <ArticleCTAs vehicleName="Lamborghini Revuelto Spider" />
+
+          <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
+            <span className="text-champagne">Fuente oficial:</span>{" "}
+            <a href="https://www.lamborghini.com/en-en/models/revuelto" rel="nofollow noopener" target="_blank" className="text-muted-foreground hover:text-champagne underline">
+              https://www.lamborghini.com/en-en/models/revuelto
+            </a>
+          </p>
         </div>
       </article>
 

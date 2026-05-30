@@ -29,6 +29,41 @@ const NoticiaDetalle = () => {
   const article = additionalNews.find((a) => a.slug === slug);
   const { trackEvent } = useAnalytics();
 
+const sourceUrls: Record<string, string> = {
+  "ferrari-f80-hypercar": "https://www.ferrari.com/en-EN/auto/ferrari-f80",
+  "lamborghini-temerario": "https://www.lamborghini.com/en-en/models/temerario",
+  "aston-martin-valhalla": "https://www.astonmartin.com/en/models/valhalla",
+  "porsche-911-gt2-rs-2026": "https://www.porsche.com/international/models/911/911-gt2-rs/",
+  "lamborghini-fenomeno": "https://www.lamborghini.com/en-en/models/few-off/fenomeno",
+  "ferrari-elettrica": "https://www.ferrari.com/en-EN/magazine/articles/ferrari-luce-unveiled",
+  "aston-martin-vanquish-volante": "https://www.astonmartin.com/en/models/vanquish",
+  "bentley-batur-convertible": "https://www.bentleymotors.com/en/models/batur.html",
+  "mclaren-w1-primeras-entregas": "https://cars.mclaren.com/uk_en/W1",
+  "rimac-nevera-r": "https://www.rimac-automobili.com/nevera/",
+  "porsche-taycan-turbo-gt": "https://www.porsche.com/international/models/taycan/taycan-turbo-gt/",
+  "rolls-royce-spectre-black-badge": "https://www.rolls-roycemotorcars.com/en_US/models/spectre/black-badge.html",
+  "pagani-utopia-roadster": "https://www.pagani.com/utopia-roadster/",
+  "koenigsegg-jesko-entregas": "https://www.koenigsegg.com/car/jesko/",
+  "ford-gt-mk-iv": "https://www.ford.com/cars/gt/",
+  "gordon-murray-t50": "https://gordonmurrayautomotive.com/cars/t50",
+  "maserati-mc20-icona": "https://www.maserati.com/en-en/models/mc20",
+  "lotus-emeya-r": "https://www.lotuscars.com/emeya",
+  "bmw-xm-label-red": "https://www.bmw.com/en/models/xm/label-red.html",
+  "mercedes-amg-gt-63-pro": "https://www.mercedes-amg.com/en/vehicles/amg-gt.html",
+  "porsche-911-turbo-s-2026": "https://www.porsche.com/international/models/911/911-turbo-models/911-turbo-s/",
+  "bugatti-tourbillon-lanzamiento": "https://www.bugatti.com/en/models/tourbillon",
+  "lamborghini-revuelto-spider": "https://www.lamborghini.com/en-en/models/revuelto",
+  "ferrari-12cilindri-spider-circuito": "https://www.ferrari.com/en-EN/auto/ferrari-12cilindri-spider",
+  "porsche-911-gt3-rs-2026-especificaciones": "https://www.porsche.com/international/models/911/911-gt3-rs/911-gt3-rs/",
+  "mclaren-w1-spider-confirmacion": "https://cars.mclaren.com/uk_en/W1",
+  "aston-martin-vantage-gt3-2026": "https://www.astonmartin.com/en/models/vantage",
+  "lamborghini-urus-se-actualizado": "https://www.lamborghini.com/en-en/models/urus-se",
+  "bugatti-bolide-primeras-entregas": "https://newsroom.bugatti.com/en/press-releases/the-final-bolide-a-vision-becomes-legacy",
+  "rolls-royce-droptail-edicion-final": "https://www.rolls-roycemotorcars.com/en_US/bespoke/coachbuild/la-rose-noire-droptail.html",
+  "porsche-718-cayman-gt4-rs-electrico": "https://www.porsche.com/international/models/718/718-cayman-gt4-rs/718-cayman-gt4-rs/",
+};
+
+
   useEffect(() => {
     if (article) {
       trackEvent("view_item", {
@@ -150,6 +185,20 @@ const NoticiaDetalle = () => {
           ))}
 
           <ArticleCTAs vehicleName={article.title.split(":")[0]} />
+
+          {sourceUrls[article.slug] && (
+            <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
+              <span className="text-champagne">Fuente oficial:</span>{" "}
+              <a
+                href={sourceUrls[article.slug]}
+                rel="nofollow noopener"
+                target="_blank"
+                className="text-muted-foreground hover:text-champagne underline"
+              >
+                {sourceUrls[article.slug]}
+              </a>
+            </p>
+          )}
         </div>
       </article>
 
