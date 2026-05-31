@@ -85,6 +85,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const isAdmin = role === "admin" || role === "superadmin";
 
+  // Auto-subscribe admins to push notifications once their role is known
+  useEffect(() => {
+    if (!isAdmin || !user) return;
+    const flagKey = `owneo_push_subscribed_${user.id}`;
+    if (sessionStorage.getItem(flagKey)) return;
+    sessionStorage.setItem(flagKey, "1");
+    import("@/lib/pushNotifications").then(({ subscribeAdminToPush }) => {
+      subscribeAdminToPush().catch((err) => console.error("admin push subscribe failed", err));
+    });
+  }, [isAdmin, user?.id]);
+
   return (
     <AuthContext.Provider value={{ user, session, loading, role, isAdmin, signOut }}>
       {children}
