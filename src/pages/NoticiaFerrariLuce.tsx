@@ -219,11 +219,12 @@ const NoticiaFerrariLuce = () => {
           <ArticleCTAs vehicleName="Ferrari Luce EV" />
 
           <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
-            <span className="text-champagne">Fuente oficial:</span>{" "}
-            <a href="https://www.ferrari.com/en-EN/auto/ferrari-luce" rel="nofollow noopener" target="_blank" className="text-muted-foreground hover:text-champagne underline">
-              https://www.ferrari.com/en-EN/auto/ferrari-luce
+            Fuente oficial:{" "}
+            <a href="https://www.ferrari.com/en-EN/auto/ferrari-luce" rel="nofollow noopener" target="_blank" className="text-[#bda095] hover:underline">
+              Ferrari — Luce
             </a>
           </p>
+
         </div>
       </article>
 
