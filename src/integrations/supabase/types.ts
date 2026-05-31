@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_push_subscriptions: {
+        Row: {
+          created_at: string | null
+          id: string
+          subscription: Json
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          subscription: Json
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          subscription?: Json
+        }
+        Relationships: []
+      }
       app_settings: {
         Row: {
           key: string
