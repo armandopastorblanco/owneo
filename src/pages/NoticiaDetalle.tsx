@@ -223,17 +223,18 @@ const sourceLabels: Record<string, string> = {
 
           {sourceUrls[article.slug] && (
             <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
-              <span className="text-champagne">Fuente oficial:</span>{" "}
+              Fuente oficial:{" "}
               <a
                 href={sourceUrls[article.slug]}
                 rel="nofollow noopener"
                 target="_blank"
-                className="text-muted-foreground hover:text-champagne underline"
+                className="text-[#bda095] hover:underline"
               >
-                {sourceUrls[article.slug]}
+                {sourceLabels[article.slug] ?? sourceUrls[article.slug]}
               </a>
             </p>
           )}
+
         </div>
       </article>
 
