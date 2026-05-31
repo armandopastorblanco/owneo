@@ -102,7 +102,7 @@ const NoticiaFerrariLuce = () => {
           >
             <img src={detailImg1} alt="Ferrari Luce EV vista lateral" loading="lazy" className="w-full rounded-2xl" />
             <p className="text-xs text-muted-foreground mt-3 text-center italic">
-              Render conceptual del Ferrari Luce EV basado en las filtraciones más recientes
+              Ferrari Luce — presentación oficial Roma, mayo 2026
             </p>
           </motion.div>
 
