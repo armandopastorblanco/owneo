@@ -79,6 +79,11 @@ if (isPreviewOrDev) {
       sessionStorage.removeItem(reloadKey);
     }
   });
+} else {
+  // Register the push notifications service worker in production only
+  import("./lib/pushNotifications").then(({ registerPushServiceWorker }) => {
+    registerPushServiceWorker();
+  });
 }
 
 createRoot(document.getElementById("root")!).render(
