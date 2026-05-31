@@ -79,7 +79,7 @@ const NoticiaLamborghiniTemerarioSpyder = () => {
         <div className="container mx-auto max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12">
-              Las primeras fotografías espía del Lamborghini Temerario Spyder, captadas en el Nürburgring, confirman lo que muchos esperaban: Sant'Agata Bolognese trabaja a toda velocidad en la versión descapotable del sucesor del Huracán. La sorpresa no es el modelo en sí, sino el momento: las entregas del coupé solo comenzaron en enero de 2026, y el Spyder ya rueda en pruebas. La presentación oficial se espera en el Festival of Speed de Goodwood, previsto para el 9-12 de julio de 2026.
+              Las primeras fotografías espía del Lamborghini Temerario Spyder, captadas en el Nürburgring, confirman lo que muchos esperaban: Sant'Agata Bolognese trabaja a toda velocidad en la versión descapotable del sucesor del <a href="/noticias/lamborghini-huracan-hibrido" className="text-[#bda095] hover:underline">Huracán</a>. La sorpresa no es el modelo en sí, sino el momento: las entregas del coupé solo comenzaron en enero de 2026, y el Spyder ya rueda en pruebas. La presentación oficial se espera en el Festival of Speed de Goodwood, previsto para el 9-12 de julio de 2026.
             </p>
           </motion.div>
 
@@ -124,7 +124,7 @@ const NoticiaLamborghiniTemerarioSpyder = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Goodwood 2026: la fecha a marcar en el calendario</h2>
             <p className="text-base leading-relaxed mb-8">
-              Según las fuentes más cercanas al proyecto, Lamborghini prevé presentar el Temerario Spyder en el Festival of Speed de Goodwood (9-12 julio 2026), junto con al menos otro nuevo modelo de la marca. Las primeras entregas podrían producirse a finales de 2026 o principios de 2027, con un precio de salida estimado en torno a los 300.000 euros — frente a los 270.000 del coupé. Con el Temerario coupé completamente vendido hasta finales de 2026 y el Revuelto con lista de espera que "se extiende hasta el Adriático" según sus propios directivos, Lamborghini demuestra que mientras otros fabricantes tropiezan con la electrificación, Sant'Agata Bolognese no puede hacer nada mal.
+              Según las fuentes más cercanas al proyecto, Lamborghini prevé presentar el Temerario Spyder en el Festival of Speed de Goodwood (9-12 julio 2026), junto con al menos otro nuevo modelo de la marca. Las primeras entregas podrían producirse a finales de 2026 o principios de 2027, con un precio de salida estimado en torno a los 300.000 euros — frente a los 270.000 del coupé. Con el <a href="/noticias/lamborghini-temerario" className="text-[#bda095] hover:underline">Temerario</a> coupé completamente vendido hasta finales de 2026 y el <a href="/noticias/lamborghini-revuelto-spider" className="text-[#bda095] hover:underline">Revuelto</a> con lista de espera que "se extiende hasta el Adriático" según sus propios directivos, Lamborghini demuestra que mientras otros fabricantes tropiezan con la electrificación, Sant'Agata Bolognese no puede hacer nada mal.
             </p>
           </motion.div>
 
