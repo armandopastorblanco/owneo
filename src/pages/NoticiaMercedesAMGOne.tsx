@@ -149,11 +149,12 @@ const NoticiaMercedesAMGOne = () => {
           <ArticleCTAs vehicleName="Mercedes-AMG ONE" />
 
           <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
-            <span className="text-champagne">Fuente oficial:</span>{" "}
-            <a href="https://www.mercedes-amg.com/en/vehicles/amg-one.html" rel="nofollow noopener" target="_blank" className="text-muted-foreground hover:text-champagne underline">
-              https://www.mercedes-amg.com/en/vehicles/amg-one.html
+            Fuente oficial:{" "}
+            <a href="https://www.mercedes-amg.com/en/vehicles/amg-one.html" rel="nofollow noopener" target="_blank" className="text-[#bda095] hover:underline">
+              Mercedes-AMG — ONE
             </a>
           </p>
+
         </div>
       </article>
 
