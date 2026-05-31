@@ -204,7 +204,11 @@ const sourceLabels: Record<string, string> = {
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{section.title}</h2>
               {section.paragraphs.map((p, pi) => (
-                <p key={pi} className="text-base leading-relaxed mb-6">{p}</p>
+                <p
+                  key={pi}
+                  className="text-base leading-relaxed mb-6"
+                  dangerouslySetInnerHTML={{ __html: p }}
+                />
               ))}
               {article.detailImages && article.detailImages[index] && (
                 <motion.img
