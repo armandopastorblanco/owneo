@@ -4,7 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { toast } from "sonner";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,6 +27,7 @@ const STATUS_CONFIG: Record<string, { label: string; class: string }> = {
 
 export default function AdminConsultas() {
   const qc = useQueryClient();
+  const [activeTab, setActiveTab] = useState<"landing" | "contacto" | "solicitudes" | "preguntas">("landing");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [editingNotes, setEditingNotes] = useState<Record<string, string>>({});
@@ -251,48 +251,42 @@ export default function AdminConsultas() {
         </p>
       </div>
 
-      <Tabs defaultValue="landing">
-        <TabsList className="grid grid-cols-2 gap-2 md:flex md:flex-row md:gap-2 md:flex-wrap w-full mb-6">
-          <TabsTrigger value="landing" className="flex items-center gap-2 w-full md:w-auto justify-center">
-            <Sparkles className="w-4 h-4" />
-            Landing
-            {unreadLanding > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadLanding}
-              </span>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="contacto" className="flex items-center gap-2 w-full md:w-auto justify-center">
-            <Inbox className="w-4 h-4" />
-            Contacto
-            {unreadContactos > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadContactos}
-              </span>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="solicitudes" className="flex items-center gap-2 w-full md:w-auto justify-center">
-            <Car className="w-4 h-4" />
-            Solicitudes
-            {unreadSolicitudes > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadSolicitudes}
-              </span>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="preguntas" className="flex items-center gap-2 w-full md:w-auto justify-center">
-            <MessageCircle className="w-4 h-4" />
-            Preguntas clientes
-            {unreadPreguntas > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadPreguntas}
-              </span>
-            )}
-          </TabsTrigger>
-        </TabsList>
+      {/* Bloc onglets */}
+      <div className="grid grid-cols-2 gap-2 md:flex md:flex-row md:gap-2 w-full mb-6">
+        {([
+          { value: "landing", label: "Landing", Icon: Sparkles, unread: unreadLanding },
+          { value: "contacto", label: "Contacto", Icon: Inbox, unread: unreadContactos },
+          { value: "solicitudes", label: "Solicitudes", Icon: Car, unread: unreadSolicitudes },
+          { value: "preguntas", label: "Preguntas clientes", Icon: MessageCircle, unread: unreadPreguntas },
+        ] as const).map(({ value, label, Icon, unread }) => {
+          const isActive = activeTab === value;
+          return (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setActiveTab(value as typeof activeTab)}
+              className={`w-full justify-center inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors border ${
+                isActive
+                  ? "bg-champagne text-champagne-foreground border-champagne"
+                  : "bg-background text-muted-foreground border-border hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              {label}
+              {unread > 0 && (
+                <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                  {unread}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
 
-        <TabsContent value="landing">
-          {isLoading ? (
+      {/* Contenu de l'onglet actif */}
+      <div>
+        {activeTab === "landing" && (
+          isLoading ? (
             <p className="text-muted-foreground text-sm">Cargando...</p>
           ) : landing.length === 0 ? (
             <EmptyState label="No hay solicitudes desde la landing beta todavía." />
@@ -302,11 +296,11 @@ export default function AdminConsultas() {
                 <ConsultaCard key={c.id} c={c} />
               ))}
             </div>
-          )}
-        </TabsContent>
+          )
+        )}
 
-        <TabsContent value="contacto">
-          {isLoading ? (
+        {activeTab === "contacto" && (
+          isLoading ? (
             <p className="text-muted-foreground text-sm">Cargando...</p>
           ) : contactos.length === 0 ? (
             <EmptyState label="No hay mensajes de contacto todavía." />
@@ -316,11 +310,11 @@ export default function AdminConsultas() {
                 <ConsultaCard key={c.id} c={c} />
               ))}
             </div>
-          )}
-        </TabsContent>
+          )
+        )}
 
-        <TabsContent value="solicitudes">
-          {isLoading ? (
+        {activeTab === "solicitudes" && (
+          isLoading ? (
             <p className="text-muted-foreground text-sm">Cargando...</p>
           ) : solicitudes.length === 0 ? (
             <EmptyState label="No hay solicitudes de información todavía." />
@@ -330,11 +324,11 @@ export default function AdminConsultas() {
                 <ConsultaCard key={c.id} c={c} />
               ))}
             </div>
-          )}
-        </TabsContent>
+          )
+        )}
 
-        <TabsContent value="preguntas">
-          {isLoading ? (
+        {activeTab === "preguntas" && (
+          isLoading ? (
             <p className="text-muted-foreground text-sm">Cargando...</p>
           ) : preguntas.length === 0 ? (
             <EmptyState label="No hay preguntas de clientes todavía." />
@@ -344,9 +338,10 @@ export default function AdminConsultas() {
                 <ConsultaCard key={c.id} c={c} />
               ))}
             </div>
-          )}
-        </TabsContent>
-      </Tabs>
+          )
+        )}
+      </div>
+
 
       <AlertDialog open={!!deletingId} onOpenChange={(o) => !o && setDeletingId(null)}>
         <AlertDialogContent>
