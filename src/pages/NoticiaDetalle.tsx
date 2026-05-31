@@ -166,9 +166,10 @@ const sourceLabels: Record<string, string> = {
       <article className="py-16 px-6">
         <div className="container mx-auto max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12">
-              {article.content.intro}
-            </p>
+            <p
+              className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12"
+              dangerouslySetInnerHTML={{ __html: article.content.intro }}
+            />
           </motion.div>
 
           {article.specs && (
@@ -203,7 +204,11 @@ const sourceLabels: Record<string, string> = {
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{section.title}</h2>
               {section.paragraphs.map((p, pi) => (
-                <p key={pi} className="text-base leading-relaxed mb-6">{p}</p>
+                <p
+                  key={pi}
+                  className="text-base leading-relaxed mb-6"
+                  dangerouslySetInnerHTML={{ __html: p }}
+                />
               ))}
               {article.detailImages && article.detailImages[index] && (
                 <motion.img
