@@ -25,13 +25,13 @@ const originalNews = [
     link: "/noticias/lamborghini-temerario-spyder"
   },
   {
-    id: 1,
-    image: ferrariEv,
-    date: "5 Marzo 2026",
-    category: "Eléctricos",
-    title: "Ferrari Luce EV: Nuevos detalles filtrados sobre el primer 100% eléctrico de Ferrari",
-    excerpt: "El primer superdeportivo totalmente eléctrico de Maranello promete más de 1.200 CV y una autonomía superior a 500 km. Las últimas filtraciones revelan un diseño revolucionario que mantiene la esencia Ferrari.",
-    link: "/noticias/ferrari-luce-ev"
+   id: 1,
+image: ferrariEv,
+date: "25 Mayo 2026",
+category: "Eléctricos",
+title: "Ferrari Luce: así es el primer coche 100% eléctrico de Maranello",
+excerpt: "Ferrari presentó oficialmente el Luce el 25 de mayo de 2026 en Roma. 1.035 CV, autonomía 530 km WLTP y arquitectura 800 V. El inicio de una nueva era para Maranello.",
+link: "/noticias/ferrari-luce-ev"
   },
   {
     id: 2,
