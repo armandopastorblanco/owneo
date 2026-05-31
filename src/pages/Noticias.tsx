@@ -10,9 +10,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 
 import ferrariEv from "@/assets/news/ferrari-ev.jpg";
 import lamborghiniReveal from "@/assets/news/lamborghini-reveal.jpg";
-import porscheGt3 from "@/assets/news/porsche-gt3.jpg";
 import mclarenW1 from "@/assets/news/mclaren-w1.jpg";
-import bugattiTourbillon from "@/assets/news/bugatti-tourbillon.jpg";
 import mercedesAmgOne from "@/assets/news/mercedes-amg-one.jpg";
 import lamborghiniTemerario from "@/assets/news/lamborghini-temerario.jpg";
 
@@ -45,15 +43,6 @@ const originalNews = [
     link: "/noticias/lamborghini-huracan-hibrido"
   },
   {
-    id: 3,
-    image: porscheGt3,
-    date: "20 Febrero 2026",
-    category: "Competición",
-    title: "Porsche 911 GT3 RS 2026: récord en Nürburgring con neumáticos de serie",
-    excerpt: "El nuevo GT3 RS pulveriza el crono del Nordschleife con un tiempo de 6:44.3, convirtiéndose en el Porsche de producción más rápido en el circuito alemán.",
-    link: "/noticias/porsche-911-gt3-rs-2026"
-  },
-  {
     id: 4,
     image: mclarenW1,
     date: "15 Febrero 2026",
@@ -61,15 +50,6 @@ const originalNews = [
     title: "McLaren W1: el hypercar británico que desafía a todos los límites",
     excerpt: "Con un motor V8 híbrido de 1.275 CV y un peso de solo 1.399 kg, el McLaren W1 establece nuevos estándares en el segmento de los hypercars con tecnología directa de F1.",
     link: "/noticias/mclaren-w1"
-  },
-  {
-    id: 5,
-    image: bugattiTourbillon,
-    date: "8 Febrero 2026",
-    category: "Lujo",
-    title: "Bugatti Tourbillon: el V16 aspirado más potente jamás creado",
-    excerpt: "Bugatti sorprende al mundo con un motor V16 atmosférico de 1.000 CV complementado por un sistema híbrido. El Tourbillon es la nueva obra maestra de Molsheim.",
-    link: "/noticias/bugatti-tourbillon"
   },
   {
     id: 6,
