@@ -25,9 +25,7 @@ import Noticias from "./pages/Noticias";
 import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
 import NoticiaLamborghiniTemerarioSpyder from "./pages/noticias/NoticiaLamborghiniTemerarioSpyder";
-
 import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
-
 import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
 import NoticiaDetalle from "./pages/NoticiaDetalle";
 import Login from "./pages/Login";
@@ -38,6 +36,7 @@ import NotFound from "./pages/NotFound";
 import AvisoLegal from "./pages/AvisoLegal";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import PoliticaCookies from "./pages/PoliticaCookies";
+import Creditos from "./pages/Creditos";
 import Unauthorized from "./pages/Unauthorized";
 import AdminGuard from "./components/admin/AdminGuard";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -117,9 +116,7 @@ const App = () => (
               <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
               <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
               <Route path="/noticias/lamborghini-temerario-spyder" element={<NoticiaLamborghiniTemerarioSpyder />} />
-              
               <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
-              
               <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
               <Route path="/login" element={<Login />} />
@@ -130,6 +127,7 @@ const App = () => (
               <Route path="/aviso-legal" element={<AvisoLegal />} />
               <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
               <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
+              <Route path="/creditos" element={<Creditos />} />
               {/* Admin routes */}
               <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
                 <Route index element={<AdminDashboard />} />
