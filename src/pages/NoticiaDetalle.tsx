@@ -63,6 +63,41 @@ const sourceUrls: Record<string, string> = {
   "porsche-718-cayman-gt4-rs-electrico": "https://www.porsche.com/international/models/718/718-cayman-gt4-rs/718-cayman-gt4-rs/",
 };
 
+const sourceLabels: Record<string, string> = {
+  "ferrari-f80-hypercar": "Ferrari — F80",
+  "lamborghini-temerario": "Lamborghini — Temerario",
+  "aston-martin-valhalla": "Aston Martin — Valhalla",
+  "porsche-911-gt2-rs-2026": "Porsche — 911 GT2 RS",
+  "lamborghini-fenomeno": "Lamborghini — Fenomeno",
+  "ferrari-elettrica": "Ferrari — Luce",
+  "aston-martin-vanquish-volante": "Aston Martin — Vanquish Volante",
+  "bentley-batur-convertible": "Bentley — Batur Convertible",
+  "mclaren-w1-primeras-entregas": "McLaren — W1",
+  "rimac-nevera-r": "Rimac — Nevera R",
+  "porsche-taycan-turbo-gt": "Porsche — Taycan Turbo GT",
+  "rolls-royce-spectre-black-badge": "Rolls-Royce — Spectre Black Badge",
+  "pagani-utopia-roadster": "Pagani — Utopia Roadster",
+  "koenigsegg-jesko-entregas": "Koenigsegg — Jesko",
+  "ford-gt-mk-iv": "Ford — GT Mk IV",
+  "gordon-murray-t50": "Gordon Murray — T.50",
+  "maserati-mc20-icona": "Maserati — MC20 Icona",
+  "lotus-emeya-r": "Lotus — Emeya R",
+  "bmw-xm-label-red": "BMW — XM Label Red",
+  "mercedes-amg-gt-63-pro": "Mercedes-AMG — GT 63 PRO",
+  "porsche-911-turbo-s-2026": "Porsche — 911 Turbo S",
+  "bugatti-tourbillon-lanzamiento": "Bugatti — Tourbillon",
+  "lamborghini-revuelto-spider": "Lamborghini — Revuelto Spider",
+  "ferrari-12cilindri-spider-circuito": "Ferrari — 12Cilindri Spider",
+  "porsche-911-gt3-rs-2026-especificaciones": "Porsche — 911 GT3 RS",
+  "mclaren-w1-spider-confirmacion": "McLaren — W1 Spider",
+  "aston-martin-vantage-gt3-2026": "Aston Martin — Vantage GT3",
+  "lamborghini-urus-se-actualizado": "Lamborghini — Urus SE",
+  "bugatti-bolide-primeras-entregas": "Bugatti — Bolide",
+  "rolls-royce-droptail-edicion-final": "Rolls-Royce — Droptail",
+  "porsche-718-cayman-gt4-rs-electrico": "Porsche — 718 Cayman GT4 RS",
+};
+
+
 
   useEffect(() => {
     if (article) {
