@@ -4,7 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { toast } from "sonner";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
