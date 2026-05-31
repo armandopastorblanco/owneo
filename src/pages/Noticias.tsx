@@ -10,9 +10,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 
 import ferrariEv from "@/assets/news/ferrari-ev.jpg";
 import lamborghiniReveal from "@/assets/news/lamborghini-reveal.jpg";
-import porscheGt3 from "@/assets/news/porsche-gt3.jpg";
 import mclarenW1 from "@/assets/news/mclaren-w1.jpg";
-import bugattiTourbillon from "@/assets/news/bugatti-tourbillon.jpg";
 import mercedesAmgOne from "@/assets/news/mercedes-amg-one.jpg";
 import lamborghiniTemerario from "@/assets/news/lamborghini-temerario.jpg";
 
