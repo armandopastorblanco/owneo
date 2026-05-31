@@ -252,44 +252,46 @@ export default function AdminConsultas() {
       </div>
 
       <Tabs defaultValue="landing">
-        <TabsList className="mb-6">
-          <TabsTrigger value="landing" className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4" />
-            Landing
-            {unreadLanding > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadLanding}
-              </span>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="contacto" className="flex items-center gap-2">
-            <Inbox className="w-4 h-4" />
-            Contacto
-            {unreadContactos > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadContactos}
-              </span>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="solicitudes" className="flex items-center gap-2">
-            <Car className="w-4 h-4" />
-            Solicitudes
-            {unreadSolicitudes > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadSolicitudes}
-              </span>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="preguntas" className="flex items-center gap-2">
-            <MessageCircle className="w-4 h-4" />
-            Preguntas clientes
-            {unreadPreguntas > 0 && (
-              <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
-                {unreadPreguntas}
-              </span>
-            )}
-          </TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
+          <TabsList className="mb-6 flex gap-2 min-w-max">
+            <TabsTrigger value="landing" className="flex items-center gap-2 whitespace-nowrap">
+              <Sparkles className="w-4 h-4" />
+              Landing
+              {unreadLanding > 0 && (
+                <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                  {unreadLanding}
+                </span>
+              )}
+            </TabsTrigger>
+            <TabsTrigger value="contacto" className="flex items-center gap-2 whitespace-nowrap">
+              <Inbox className="w-4 h-4" />
+              Contacto
+              {unreadContactos > 0 && (
+                <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                  {unreadContactos}
+                </span>
+              )}
+            </TabsTrigger>
+            <TabsTrigger value="solicitudes" className="flex items-center gap-2 whitespace-nowrap">
+              <Car className="w-4 h-4" />
+              Solicitudes
+              {unreadSolicitudes > 0 && (
+                <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                  {unreadSolicitudes}
+                </span>
+              )}
+            </TabsTrigger>
+            <TabsTrigger value="preguntas" className="flex items-center gap-2 whitespace-nowrap">
+              <MessageCircle className="w-4 h-4" />
+              Preguntas clientes
+              {unreadPreguntas > 0 && (
+                <span className="ml-1 w-5 h-5 rounded-full bg-champagne text-champagne-foreground text-[10px] font-bold flex items-center justify-center">
+                  {unreadPreguntas}
+                </span>
+              )}
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="landing">
           {isLoading ? (

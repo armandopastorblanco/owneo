@@ -171,7 +171,12 @@ All colors MUST be HSL.
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ===== Admin mobile responsive overrides (below 768px) ===== */
+/* Admin mobile responsive overrides (below 768px) */
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
 @media (max-width: 767px) {
   .admin-shell { font-size: 14px; }
   .admin-shell h1 { font-size: 1.25rem; line-height: 1.3; }
