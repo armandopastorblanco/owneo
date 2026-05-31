@@ -28,6 +28,7 @@ const STATUS_CONFIG: Record<string, { label: string; class: string }> = {
 
 export default function AdminConsultas() {
   const qc = useQueryClient();
+  const [activeTab, setActiveTab] = useState<"landing" | "contacto" | "solicitudes" | "preguntas">("landing");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [editingNotes, setEditingNotes] = useState<Record<string, string>>({});
