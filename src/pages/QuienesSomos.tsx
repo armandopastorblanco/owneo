@@ -17,7 +17,18 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PressSection from "@/components/PressSection";
 import { Button } from "@/components/ui/button";
-import quienesSomosHero from "@/assets/quienes-somos-hero.png";
+import quienesSomosHero from "@/assets/quienes-somos/qs-hero.jpg";
+import qsHistoria from "@/assets/quienes-somos/qs-historia.jpg";
+import qsMision from "@/assets/quienes-somos/qs-mision.jpg";
+import qsProfile1 from "@/assets/quienes-somos/qs-profile-1.jpg";
+import qsProfile2 from "@/assets/quienes-somos/qs-profile-2.jpg";
+import qsProfile3 from "@/assets/quienes-somos/qs-profile-3.jpg";
+import qsValue1 from "@/assets/quienes-somos/qs-value-1.jpg";
+import qsValue2 from "@/assets/quienes-somos/qs-value-2.jpg";
+import qsValue3 from "@/assets/quienes-somos/qs-value-3.jpg";
+import qsValue4 from "@/assets/quienes-somos/qs-value-4.jpg";
+import qsPress from "@/assets/quienes-somos/qs-press.jpg";
+import qsCta from "@/assets/quienes-somos/qs-cta.jpg";
 
 /* ---------------- motion helpers ---------------- */
 
