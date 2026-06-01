@@ -17,7 +17,18 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PressSection from "@/components/PressSection";
 import { Button } from "@/components/ui/button";
-import quienesSomosHero from "@/assets/quienes-somos-hero.png";
+import quienesSomosHero from "@/assets/quienes-somos/qs-hero.jpg";
+import qsHistoria from "@/assets/quienes-somos/qs-historia.jpg";
+import qsMision from "@/assets/quienes-somos/qs-mision.jpg";
+import qsProfile1 from "@/assets/quienes-somos/qs-profile-1.jpg";
+import qsProfile2 from "@/assets/quienes-somos/qs-profile-2.jpg";
+import qsProfile3 from "@/assets/quienes-somos/qs-profile-3.jpg";
+import qsValue1 from "@/assets/quienes-somos/qs-value-1.jpg";
+import qsValue2 from "@/assets/quienes-somos/qs-value-2.jpg";
+import qsValue3 from "@/assets/quienes-somos/qs-value-3.jpg";
+import qsValue4 from "@/assets/quienes-somos/qs-value-4.jpg";
+import qsPress from "@/assets/quienes-somos/qs-press.jpg";
+import qsCta from "@/assets/quienes-somos/qs-cta.jpg";
 
 /* ---------------- motion helpers ---------------- */
 
@@ -67,6 +78,7 @@ const profiles = [
     text:
       "No hace falta esperar a tener 300.000€ en el banco. Con una participación OWNEO, ese sueño tiene fecha, tiene matrícula y tiene 4 semanas al año garantizadas.",
     delay: 0,
+    bg: qsProfile1,
   },
   {
     number: "02",
@@ -75,6 +87,7 @@ const profiles = [
     text:
       "Una participación OWNEO no es un gasto — es una decisión financiera con retorno estimado, kilometraje controlado y reventa gestionada. El lujo que también tiene sentido en un Excel.",
     delay: 0.1,
+    bg: qsProfile2,
   },
   {
     number: "03",
@@ -83,6 +96,7 @@ const profiles = [
     text:
       "Sin garaje, sin seguro, sin revisiones, sin trámites. Solo reservar desde la app, recoger el coche impecable y disfrutar. El resto es problema de OWNEO.",
     delay: 0.2,
+    bg: qsProfile3,
   },
 ];
 
@@ -93,6 +107,7 @@ const values = [
     text:
       "El lujo no debería ser un privilegio de pocos. Lo que antes requería una fortuna, hoy requiere una decisión inteligente.",
     delay: 0,
+    bg: qsValue1,
   },
   {
     word: "CONFIANZA",
@@ -100,6 +115,7 @@ const values = [
     text:
       "Cada contrato, cada entrega, cada euro invertido está respaldado por un compromiso real. Sin letra pequeña.",
     delay: 0.1,
+    bg: qsValue2,
   },
   {
     word: "EXCELENCIA",
@@ -107,6 +123,7 @@ const values = [
     text:
       "No gestionamos coches. Gestionamos experiencias. Y en cada detalle, el estándar es el más alto posible.",
     delay: 0.2,
+    bg: qsValue3,
   },
   {
     word: "LIBERTAD",
@@ -114,6 +131,7 @@ const values = [
     text:
       "Conducir sin poseer. Disfrutar sin gestionar. Vivir la experiencia sin cargar con sus consecuencias.",
     delay: 0.3,
+    bg: qsValue4,
   },
 ];
 
@@ -247,7 +265,18 @@ const QuienesSomos = () => {
       </section>
 
       {/* ===================== MANIFESTO ===================== */}
-      <section className="py-24 sm:py-32">
+      <section className="relative py-24 sm:py-32 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsHistoria}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+        </div>
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
@@ -283,7 +312,18 @@ const QuienesSomos = () => {
       </section>
 
       {/* ===================== MISSION & VISION ===================== */}
-      <section className="py-20 sm:py-28 bg-card/30 border-y border-border">
+      <section className="relative py-20 sm:py-28 border-y border-border overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsMision}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background/60" />
+        </div>
         <div className="container mx-auto px-5 sm:px-6">
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {missionVision.map((item) => (
@@ -322,25 +362,36 @@ const QuienesSomos = () => {
             </div>
           </Reveal>
 
-          <div className="max-w-5xl mx-auto space-y-12 sm:space-y-16">
+          <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
             {profiles.map((p) => (
               <Reveal key={p.number} delay={p.delay}>
-                <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-start border-t border-border pt-10 sm:pt-12">
-                  <div className="md:col-span-3">
-                    <span className="block text-5xl sm:text-6xl font-black text-champagne/80 tabular-nums">
-                      {p.number}
-                    </span>
-                  </div>
-                  <div className="md:col-span-9 space-y-5">
-                    <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
-                      {p.profile}
-                    </h3>
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
-                      {p.hook}
-                    </p>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
-                      {p.text}
-                    </p>
+                <div className="relative overflow-hidden rounded-2xl border border-border">
+                  <img
+                    src={p.bg}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover max-h-[220px] md:max-h-none"
+                  />
+                  <div className="absolute inset-0 bg-background/80" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40" />
+                  <div className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-start p-8 sm:p-10 md:p-12">
+                    <div className="md:col-span-3">
+                      <span className="block text-5xl sm:text-6xl font-black text-champagne tabular-nums drop-shadow-lg">
+                        {p.number}
+                      </span>
+                    </div>
+                    <div className="md:col-span-9 space-y-5">
+                      <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
+                        {p.profile}
+                      </h3>
+                      <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
+                        {p.hook}
+                      </p>
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
+                        {p.text}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -366,18 +417,28 @@ const QuienesSomos = () => {
           <div className="max-w-5xl mx-auto grid sm:grid-cols-2 gap-px bg-border rounded-2xl overflow-hidden">
             {values.map((v) => (
               <Reveal key={v.word} delay={v.delay}>
-                <div className="h-full bg-background/80 p-8 sm:p-10 hover:bg-background transition-colors duration-500 group">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
-                      {v.word}
-                    </span>
-                    <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors">
-                      <v.icon className="w-4 h-4 text-champagne" />
+                <div className="relative h-full overflow-hidden group">
+                  <img
+                    src={v.bg}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 max-h-[220px] md:max-h-none"
+                  />
+                  <div className="absolute inset-0 bg-background/85 group-hover:bg-background/75 transition-colors duration-500" />
+                  <div className="relative p-8 sm:p-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
+                        {v.word}
+                      </span>
+                      <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors bg-background/40 backdrop-blur-sm">
+                        <v.icon className="w-4 h-4 text-champagne" />
+                      </div>
                     </div>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      {v.text}
+                    </p>
                   </div>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                    {v.text}
-                  </p>
                 </div>
               </Reveal>
             ))}
@@ -386,10 +447,33 @@ const QuienesSomos = () => {
       </section>
 
       {/* ===================== PRESS ===================== */}
-      <PressSection />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsPress}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+        </div>
+        <PressSection />
+      </section>
 
       {/* ===================== CTA FINAL ===================== */}
       <section className="py-24 sm:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsCta}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+        </div>
         <div
           className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-champagne/5 blur-3xl"
           style={{ animation: "owneo-float 12s ease-in-out infinite" }}
