@@ -272,10 +272,10 @@ const QuienesSomos = () => {
             alt=""
             aria-hidden="true"
             loading="lazy"
-            className="w-full h-full object-cover object-center max-h-[220px] md:max-h-[480px] mx-auto"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-background/80" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+          <div className="absolute inset-0 bg-background/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
         </div>
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
