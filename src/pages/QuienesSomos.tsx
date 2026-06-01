@@ -417,18 +417,28 @@ const QuienesSomos = () => {
           <div className="max-w-5xl mx-auto grid sm:grid-cols-2 gap-px bg-border rounded-2xl overflow-hidden">
             {values.map((v) => (
               <Reveal key={v.word} delay={v.delay}>
-                <div className="h-full bg-background/80 p-8 sm:p-10 hover:bg-background transition-colors duration-500 group">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
-                      {v.word}
-                    </span>
-                    <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors">
-                      <v.icon className="w-4 h-4 text-champagne" />
+                <div className="relative h-full overflow-hidden group">
+                  <img
+                    src={v.bg}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 max-h-[220px] md:max-h-none"
+                  />
+                  <div className="absolute inset-0 bg-background/85 group-hover:bg-background/75 transition-colors duration-500" />
+                  <div className="relative p-8 sm:p-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
+                        {v.word}
+                      </span>
+                      <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors bg-background/40 backdrop-blur-sm">
+                        <v.icon className="w-4 h-4 text-champagne" />
+                      </div>
                     </div>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      {v.text}
+                    </p>
                   </div>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                    {v.text}
-                  </p>
                 </div>
               </Reveal>
             ))}
@@ -437,7 +447,20 @@ const QuienesSomos = () => {
       </section>
 
       {/* ===================== PRESS ===================== */}
-      <PressSection />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsPress}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+        </div>
+        <PressSection />
+      </section>
 
       {/* ===================== CTA FINAL ===================== */}
       <section className="py-24 sm:py-32 relative overflow-hidden">
