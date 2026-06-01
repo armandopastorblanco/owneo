@@ -115,6 +115,7 @@ const values = [
     text:
       "Cada contrato, cada entrega, cada euro invertido está respaldado por un compromiso real. Sin letra pequeña.",
     delay: 0.1,
+    bg: qsValue2,
   },
   {
     word: "EXCELENCIA",
@@ -122,6 +123,7 @@ const values = [
     text:
       "No gestionamos coches. Gestionamos experiencias. Y en cada detalle, el estándar es el más alto posible.",
     delay: 0.2,
+    bg: qsValue3,
   },
   {
     word: "LIBERTAD",
@@ -129,6 +131,7 @@ const values = [
     text:
       "Conducir sin poseer. Disfrutar sin gestionar. Vivir la experiencia sin cargar con sus consecuencias.",
     delay: 0.3,
+    bg: qsValue4,
   },
 ];
 
