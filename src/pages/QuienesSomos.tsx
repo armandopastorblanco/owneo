@@ -78,6 +78,7 @@ const profiles = [
     text:
       "No hace falta esperar a tener 300.000€ en el banco. Con una participación OWNEO, ese sueño tiene fecha, tiene matrícula y tiene 4 semanas al año garantizadas.",
     delay: 0,
+    bg: qsProfile1,
   },
   {
     number: "02",
@@ -86,6 +87,7 @@ const profiles = [
     text:
       "Una participación OWNEO no es un gasto — es una decisión financiera con retorno estimado, kilometraje controlado y reventa gestionada. El lujo que también tiene sentido en un Excel.",
     delay: 0.1,
+    bg: qsProfile2,
   },
   {
     number: "03",
@@ -94,6 +96,7 @@ const profiles = [
     text:
       "Sin garaje, sin seguro, sin revisiones, sin trámites. Solo reservar desde la app, recoger el coche impecable y disfrutar. El resto es problema de OWNEO.",
     delay: 0.2,
+    bg: qsProfile3,
   },
 ];
 
@@ -104,6 +107,7 @@ const values = [
     text:
       "El lujo no debería ser un privilegio de pocos. Lo que antes requería una fortuna, hoy requiere una decisión inteligente.",
     delay: 0,
+    bg: qsValue1,
   },
   {
     word: "CONFIANZA",
