@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import ferrariRomaSpider from "@/assets/news/ferrari-roma-spider.jpg";
 import ferrariRomaCockpit from "@/assets/news/ferrari-roma-cockpit.jpg";
-import ferrariF430Hero from "@/assets/news/ferrari-f430-hero.webm";
 
 const Index = () => {
   const { data: cars = [], isLoading: carsLoading } = useCars();
@@ -57,7 +56,7 @@ const Index = () => {
           }}
         >
           <source
-            src={ferrariF430Hero}
+            src="/ferrari-f430-hero.webm"
             type="video/webm"
           />
         </video>
