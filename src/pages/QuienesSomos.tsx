@@ -197,8 +197,8 @@ const QuienesSomos = () => {
             className="w-full h-full object-cover will-change-transform"
             style={{ animation: "ken-burns 20s ease-in-out infinite alternate" }}
           />
-          <div className="absolute inset-0 bg-background/85" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
+          <div className="absolute inset-0 bg-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
         </div>
 
         {/* floating blobs */}
