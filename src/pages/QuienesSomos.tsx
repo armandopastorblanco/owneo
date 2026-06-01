@@ -362,25 +362,36 @@ const QuienesSomos = () => {
             </div>
           </Reveal>
 
-          <div className="max-w-5xl mx-auto space-y-12 sm:space-y-16">
+          <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
             {profiles.map((p) => (
               <Reveal key={p.number} delay={p.delay}>
-                <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-start border-t border-border pt-10 sm:pt-12">
-                  <div className="md:col-span-3">
-                    <span className="block text-5xl sm:text-6xl font-black text-champagne/80 tabular-nums">
-                      {p.number}
-                    </span>
-                  </div>
-                  <div className="md:col-span-9 space-y-5">
-                    <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
-                      {p.profile}
-                    </h3>
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
-                      {p.hook}
-                    </p>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
-                      {p.text}
-                    </p>
+                <div className="relative overflow-hidden rounded-2xl border border-border">
+                  <img
+                    src={p.bg}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover max-h-[220px] md:max-h-none"
+                  />
+                  <div className="absolute inset-0 bg-background/80" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40" />
+                  <div className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-start p-8 sm:p-10 md:p-12">
+                    <div className="md:col-span-3">
+                      <span className="block text-5xl sm:text-6xl font-black text-champagne tabular-nums drop-shadow-lg">
+                        {p.number}
+                      </span>
+                    </div>
+                    <div className="md:col-span-9 space-y-5">
+                      <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
+                        {p.profile}
+                      </h3>
+                      <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
+                        {p.hook}
+                      </p>
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
+                        {p.text}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Reveal>
