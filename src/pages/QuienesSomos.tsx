@@ -197,8 +197,8 @@ const QuienesSomos = () => {
             className="w-full h-full object-cover will-change-transform"
             style={{ animation: "ken-burns 20s ease-in-out infinite alternate" }}
           />
-          <div className="absolute inset-0 bg-background/85" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
+          <div className="absolute inset-0 bg-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
         </div>
 
         {/* floating blobs */}
@@ -274,8 +274,8 @@ const QuienesSomos = () => {
             loading="lazy"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-background/85" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+          <div className="absolute inset-0 bg-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
         </div>
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
@@ -321,8 +321,8 @@ const QuienesSomos = () => {
             loading="lazy"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-background/90" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background/60" />
+          <div className="absolute inset-0 bg-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/20" />
         </div>
         <div className="container mx-auto px-5 sm:px-6">
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
@@ -373,8 +373,8 @@ const QuienesSomos = () => {
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover max-h-[220px] md:max-h-none"
                   />
-                  <div className="absolute inset-0 bg-background/80" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40" />
+                  <div className="absolute inset-0 bg-background/30" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/20 via-background/10 to-background/20" />
                   <div className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-start p-8 sm:p-10 md:p-12">
                     <div className="md:col-span-3">
                       <span className="block text-5xl sm:text-6xl font-black text-champagne tabular-nums drop-shadow-lg">
@@ -425,7 +425,7 @@ const QuienesSomos = () => {
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 max-h-[220px] md:max-h-none"
                   />
-                  <div className="absolute inset-0 bg-background/85 group-hover:bg-background/75 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-background/30 group-hover:bg-background/20 transition-colors duration-500" />
                   <div className="relative p-8 sm:p-10">
                     <div className="flex items-center justify-between mb-6">
                       <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
@@ -456,8 +456,8 @@ const QuienesSomos = () => {
             loading="lazy"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-background/90" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+          <div className="absolute inset-0 bg-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
         </div>
         <PressSection />
       </section>
@@ -472,7 +472,7 @@ const QuienesSomos = () => {
             loading="lazy"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
         </div>
         <div
           className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-champagne/5 blur-3xl"
