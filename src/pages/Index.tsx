@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import ferrariRomaSpider from "@/assets/news/ferrari-roma-spider.jpg";
 import ferrariRomaCockpit from "@/assets/news/ferrari-roma-cockpit.jpg";
+import ferrariF430Hero from "@/assets/news/ferrari-f430-hero.webm";
 
 const Index = () => {
   const { data: cars = [], isLoading: carsLoading } = useCars();
@@ -56,7 +57,7 @@ const Index = () => {
           }}
         >
           <source
-            src="https://upload.wikimedia.org/wikipedia/commons/transcoded/0/07/Ferrari_F430_Spider_driving_as_viewed_from_FPV_drone.webm/Ferrari_F430_Spider_driving_as_viewed_from_FPV_drone.webm.720p.vp9.webm"
+            src={ferrariF430Hero}
             type="video/webm"
           />
         </video>
