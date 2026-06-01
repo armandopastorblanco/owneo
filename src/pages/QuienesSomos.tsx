@@ -464,6 +464,16 @@ const QuienesSomos = () => {
 
       {/* ===================== CTA FINAL ===================== */}
       <section className="py-24 sm:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsCta}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+        </div>
         <div
           className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-champagne/5 blur-3xl"
           style={{ animation: "owneo-float 12s ease-in-out infinite" }}
