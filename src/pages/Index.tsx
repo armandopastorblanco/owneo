@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
 import { ArrowRight, Star, MapPin, Percent, CalendarDays, Users, Check, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
-import HeroSlider from "@/components/HeroSlider";
 import PressSection from "@/components/PressSection";
 import { useCars } from "@/hooks/useCars";
 import { useLocations } from "@/hooks/useLocations";
@@ -55,14 +53,40 @@ const Index = () => {
             video.currentTime = 3;
           }}
         >
-          <source
-            src="/ferrari-f430-hero.webm"
-            type="video/webm"
-          />
+          <source src="/ferrari-f430-hero.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
-        <div className="relative z-10 h-full">
-          <HeroSlider />
+
+        {/* Contenu hero par dessus la vidéo */}
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6 text-center">
+          <div className="max-w-4xl mx-auto mt-20 sm:mt-16">
+            <div className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto mb-6 sm:mb-8" />
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extralight text-white/90 tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-2 sm:mb-4">
+              Vive lo
+            </h1>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.1em] sm:tracking-[0.15em] uppercase mb-6 sm:mb-8">
+              Extraordinario
+            </h1>
+            <p className="text-xs sm:text-sm md:text-base text-white/50 font-extralight tracking-[0.05em] sm:tracking-[0.1em] max-w-xs sm:max-w-xl mx-auto mb-8 sm:mb-12">
+              El lujo de los supercoches, ahora accesible
+            </p>
+            <Link to="/nuestro-modelo">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="border border-white/20 text-white/80 hover:text-white hover:bg-white/5 hover:border-white/40 text-xs md:text-sm font-light tracking-[0.2em] px-10 py-6 group transition-all duration-500"
+              >
+                DESCUBRIR
+                <ArrowRight className="ml-3 w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-12 right-8 z-20 hidden lg:flex flex-col items-center gap-3">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-light">Scroll</span>
+          <div className="w-[1px] h-10 bg-gradient-to-b from-white/30 to-transparent" />
         </div>
       </section>
 
@@ -124,7 +148,6 @@ const Index = () => {
       <section className="py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-5xl mx-auto">
 
-          {/* Header émotionnel avec Ferrari Roma Spider */}
           <div className="relative rounded-3xl overflow-hidden mb-20" style={{ minHeight: "420px" }}>
             <img
               src={ferrariRomaSpider}
@@ -133,10 +156,7 @@ const Index = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/85" />
             <div className="relative z-10 text-center py-20 px-6">
-              <span
-                className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6"
-                style={{ color: "rgba(189,160,149,0.7)" }}
-              >
+              <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6" style={{ color: "rgba(189,160,149,0.7)" }}>
                 Ejemplo real · Ferrari Roma
               </span>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
@@ -150,19 +170,15 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Comparación */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 items-stretch">
 
-            {/* Compra tradicional */}
             <div className="bg-[#0d0d0d] border border-white/8 rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
               <div>
                 <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground border border-white/10 rounded-full px-4 py-1.5 mb-10">
                   Comprándolo
                 </span>
                 <div className="mb-8">
-                  <p className="text-4xl sm:text-6xl font-black text-foreground/40 leading-none mb-3">
-                    ~240.500€
-                  </p>
+                  <p className="text-4xl sm:text-6xl font-black text-foreground/40 leading-none mb-3">~240.500€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años</p>
                 </div>
                 <div className="space-y-3 border-t border-white/6 pt-6">
@@ -181,11 +197,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t border-white/6 space-y-2.5">
-                {[
-                  "Seguro y mantenimiento a tu cargo",
-                  "Depreciación inmediata",
-                  "Inmovilización de capital",
-                ].map((item) => (
+                {["Seguro y mantenimiento a tu cargo", "Depreciación inmediata", "Inmovilización de capital"].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
                     <X className="w-3 h-3 flex-shrink-0" style={{ color: "rgba(239,68,68,0.5)" }} />
                     <span className="text-xs text-muted-foreground">{item}</span>
@@ -194,7 +206,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* OWNEO */}
             <div
               className="rounded-2xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
               style={{
@@ -204,24 +215,16 @@ const Index = () => {
               }}
             >
               <div className="absolute top-0 right-0">
-                <div
-                  className="text-[9px] font-black uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl"
-                  style={{ backgroundColor: "#bda095", color: "#000000" }}
-                >
+                <div className="text-[9px] font-black uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl" style={{ backgroundColor: "#bda095", color: "#000000" }}>
                   La decisión inteligente
                 </div>
               </div>
               <div>
-                <span
-                  className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10"
-                  style={{ color: "#bda095", borderColor: "rgba(189,160,149,0.3)" }}
-                >
+                <span className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10" style={{ color: "#bda095", borderColor: "rgba(189,160,149,0.3)" }}>
                   Con OWNEO
                 </span>
                 <div className="mb-8">
-                  <p className="text-4xl sm:text-6xl font-black leading-none mb-3" style={{ color: "#bda095" }}>
-                    ~26.400€
-                  </p>
+                  <p className="text-4xl sm:text-6xl font-black leading-none mb-3" style={{ color: "#bda095" }}>~26.400€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años · todo gestionado</p>
                 </div>
                 <div className="space-y-3 border-t pt-6" style={{ borderColor: "rgba(189,160,149,0.12)" }}>
@@ -243,11 +246,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t space-y-2.5" style={{ borderColor: "rgba(189,160,149,0.12)" }}>
-                {[
-                  "Seguro, garaje y mantenimiento ×10",
-                  "21 días estándar + 7 días premium al año",
-                  "Hasta un 70% de tu inversión recuperada",
-                ].map((item) => (
+                {["Seguro, garaje y mantenimiento ×10", "21 días estándar + 7 días premium al año", "Hasta un 70% de tu inversión recuperada"].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
                     <Check className="w-3 h-3 flex-shrink-0" style={{ color: "#bda095" }} />
                     <span className="text-xs text-muted-foreground">{item}</span>
@@ -257,7 +256,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Révélation finale avec Ferrari Roma Cockpit */}
           <div className="relative rounded-2xl overflow-hidden" style={{ minHeight: "380px" }}>
             <img
               src={ferrariRomaCockpit}
@@ -269,26 +267,17 @@ const Index = () => {
               <p className="text-[10px] uppercase tracking-[0.35em] mb-4" style={{ color: "rgba(189,160,149,0.5)" }}>
                 La diferencia
               </p>
-              <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
-                El mismo Ferrari Roma.
-              </p>
-              <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6" style={{ color: "#bda095" }}>
-                214.100€ de diferencia.
-              </p>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">El mismo Ferrari Roma.</p>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6" style={{ color: "#bda095" }}>214.100€ de diferencia.</p>
               <p className="text-sm text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
-                No es magia. Es una estructura de propiedad compartida diseñada para los que entienden
-                que el lujo inteligente no tiene nada que envidiarle al lujo tradicional.
+                No es magia. Es una estructura de propiedad compartida diseñada para los que entienden que el lujo inteligente no tiene nada que envidiarle al lujo tradicional.
               </p>
               <Link to="/nuestro-modelo">
                 <button
                   className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] px-8 py-4 rounded-full transition-all duration-300"
                   style={{ backgroundColor: "#bda095", color: "#000000" }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(189,160,149,0.85)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#bda095";
-                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(189,160,149,0.85)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#bda095"; }}
                 >
                   Quiero conducirlo
                   <ArrowRight className="w-4 h-4" />
@@ -310,18 +299,13 @@ const Index = () => {
               size="lg"
               variant="outline"
               className="border-foreground text-foreground hover:bg-foreground hover:text-background"
-              onClick={() => trackEvent("click_cta_modele", {
-                cta_text: "DESCUBRIR EL MODELO",
-                destination: "/nuestro-modelo",
-              })}
+              onClick={() => trackEvent("click_cta_modele", { cta_text: "DESCUBRIR EL MODELO", destination: "/nuestro-modelo" })}
             >
               DESCUBRIR EL MODELO
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <p className="text-xs text-muted-foreground mt-4">
-            Sin compromiso. Sin permanencia. Solo experiencia.
-          </p>
+          <p className="text-xs text-muted-foreground mt-4">Sin compromiso. Sin permanencia. Solo experiencia.</p>
         </div>
       </section>
 
@@ -329,9 +313,7 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              Colección Destacada
-            </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">Colección Destacada</h2>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo
             </p>
@@ -369,9 +351,7 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card/50">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              Nuestras Ubicaciones
-            </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">Nuestras Ubicaciones</h2>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Descubre nuestra flota en las ciudades más exclusivas de España
             </p>
@@ -384,11 +364,7 @@ const Index = () => {
                 className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
                 onClick={() => trackEvent("click_city_card", { city_name: city.name })}
               >
-                <img
-                  src={city.image}
-                  alt={city.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                <img src={city.image} alt={city.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                   <div className="flex items-center gap-2 mb-2">
