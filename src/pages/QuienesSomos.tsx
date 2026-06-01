@@ -312,7 +312,18 @@ const QuienesSomos = () => {
       </section>
 
       {/* ===================== MISSION & VISION ===================== */}
-      <section className="py-20 sm:py-28 bg-card/30 border-y border-border">
+      <section className="relative py-20 sm:py-28 border-y border-border overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={qsMision}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background/60" />
+        </div>
         <div className="container mx-auto px-5 sm:px-6">
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {missionVision.map((item) => (
