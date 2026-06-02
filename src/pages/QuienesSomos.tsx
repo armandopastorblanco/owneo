@@ -201,7 +201,6 @@ const QuienesSomos = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
         </div>
 
-        {/* floating blobs */}
         <div
           className="pointer-events-none absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full bg-champagne/10 blur-3xl"
           style={{ animation: "owneo-float 10s ease-in-out infinite" }}
@@ -250,7 +249,6 @@ const QuienesSomos = () => {
           </div>
         </div>
 
-        {/* scroll indicator */}
         <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-10">
           <motion.div
             initial={{ opacity: 0 }}
@@ -373,8 +371,8 @@ const QuienesSomos = () => {
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover max-h-[220px] md:max-h-none"
                   />
-                  <div className="absolute inset-0 bg-background/30" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background/20 via-background/10 to-background/20" />
+                  <div className="absolute inset-0 bg-background/75" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/65 via-background/55 to-background/65" />
                   <div className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-start p-8 sm:p-10 md:p-12">
                     <div className="md:col-span-3">
                       <span className="block text-5xl sm:text-6xl font-black text-champagne tabular-nums drop-shadow-lg">
