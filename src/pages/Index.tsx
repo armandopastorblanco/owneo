@@ -48,7 +48,7 @@ const Index = () => {
   playsInline
   preload="auto"
   className="absolute inset-0 w-full h-full object-cover"
-  style={{ filter: "grayscale(70%) brightness(0.55)" }}
+  style={{ filter: "grayscale(60%) brightness(0.60)" }}
 >
   <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
 </video>

@@ -39,7 +39,7 @@ const Creditos = () => {
 
               {/* ─── Hero vidéo ─── */}
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                <td className="py-4 px-4 text-white/70">ferrari-f430-hero.webm</td>
+                <td className="py-4 px-4 text-white/70">ferrari-f430-hero.mp4</td>
                 <td className="py-4 px-4 text-white/70">SE FPV</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:Ferrari_F430_Spider_driving_as_viewed_from_FPV_drone.webm"
