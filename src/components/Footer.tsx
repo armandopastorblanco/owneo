@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { openConsentManager } from "@/lib/consent";
@@ -154,6 +155,14 @@ const Footer = () => {
             >
               Gestionar preferencias de cookies
             </button>
+            <span aria-hidden="true" className="hidden md:inline text-border">|</span>
+            <Link
+              to="/creditos"
+              aria-label="Créditos fotográficos"
+              className="hover:text-foreground transition-colors"
+            >
+              Créditos fotográficos
+            </Link>
           </nav>
           <p className="text-center text-xs text-muted-foreground">
             © 2026 OWNEO SL — Todos los derechos reservados

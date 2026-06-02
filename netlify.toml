@@ -1,4 +1,2 @@
-[[headers]]
-  for = "/*.webm"
-  [headers.values]
-    Content-Type = "video/webm"
+[build]
+  publish = "dist"
