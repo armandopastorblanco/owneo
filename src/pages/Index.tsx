@@ -85,11 +85,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 right-8 z-20 hidden lg:flex flex-col items-center gap-3">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-light">Scroll</span>
-          <div className="w-[1px] h-10 bg-gradient-to-b from-white/30 to-transparent" />
-        </div>
       </section>
 
       {/* ─── NUESTRO MODELO ─── */}
