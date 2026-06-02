@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Creditos = () => {
@@ -12,8 +13,8 @@ const Creditos = () => {
           Créditos Fotográficos
         </h1>
         <p className="text-white/50 text-sm max-w-xl mx-auto leading-relaxed">
-          Algunas imágenes utilizadas en este sitio provienen de fuentes 
-          externas bajo licencias Creative Commons. A continuación detallamos 
+          Algunas imágenes y vídeos utilizados en este sitio provienen de fuentes
+          externas bajo licencias Creative Commons. A continuación detallamos
           su procedencia y condiciones de uso.
         </p>
       </div>
@@ -31,14 +32,14 @@ const Creditos = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Porsche 911 Turbo S */}
+
+              {/* ─── Porsche ─── */}
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">porsche-911-turbo-s-2026.jpg</td>
                 <td className="py-4 px-4 text-white/70">Alexander-93</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:2025_Porsche_992_Turbo_S_coupes_IAA_2025_DSC_1835.jpg"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
                     Wikimedia Commons
                   </a>
@@ -50,8 +51,7 @@ const Creditos = () => {
                 <td className="py-4 px-4 text-white/70">Matti Blume</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:Porsche_992_Turbo_S_Cabriolet,_Auto_2025,_Zurich_(20251029-P1074410).jpg"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
                     Wikimedia Commons
                   </a>
@@ -63,22 +63,63 @@ const Creditos = () => {
                 <td className="py-4 px-4 text-white/70">Alexander-93</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:2025_Porsche_992_Turbo_S_coupes_IAA_2025_DSC_1840.jpg"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
                     Wikimedia Commons
                   </a>
                 </td>
                 <td className="py-4 px-4 text-white/40 text-xs">CC BY-SA 4.0</td>
               </tr>
+
+              {/* ─── Ferrari Roma ─── */}
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">ferrari-roma-spider.jpg</td>
+                <td className="py-4 px-4 text-white/70">John Bauld (JiBs Media)</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Ferrari_Roma_Spider_(54328096181).jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">CC BY 2.0</td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">ferrari-roma-cockpit.jpg</td>
+                <td className="py-4 px-4 text-white/70">Epensock</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Ferrari_Roma_Dual_Cockpit_Design.jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">CC BY-SA 4.0</td>
+              </tr>
+
+              {/* ─── Ferrari F430 vidéo hero ─── */}
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">ferrari-f430-hero.webm</td>
+                <td className="py-4 px-4 text-white/70">SE FPV</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Ferrari_F430_Spider_driving_as_viewed_from_FPV_drone.webm"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  CC BY 3.0 · modificado (escala de grises 70%)
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>
 
-        {/* Footer note */}
         <p className="text-white/20 text-xs mt-12 text-center leading-relaxed">
-          Las imágenes de los kits de prensa oficiales de los constructores son propiedad de sus respectivas marcas 
-          y se utilizan en un contexto editorial informativo. · 
+          Las imágenes de los kits de prensa oficiales de los constructores son propiedad de sus respectivas marcas
+          y se utilizan en un contexto editorial informativo. ·
           <Link to="/" className="hover:text-white/40 transition-colors ml-1">
             Volver al inicio
           </Link>
