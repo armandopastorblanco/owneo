@@ -42,18 +42,19 @@ const Index = () => {
       {/* ─── HERO VIDEO ─── */}
       <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
         <video
-          autoPlay
+          ref={(el) => {
+            if (el) {
+              el.muted = true;
+              el.currentTime = 3;
+              el.play().catch(() => {});
+            }
+          }}
           loop
           muted
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: "grayscale(70%) brightness(0.55)" }}
-          onCanPlay={(e) => {
-            const video = e.currentTarget;
-            if (video.currentTime < 3) {
-              video.currentTime = 3;
-            }
-          }}
         >
           <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
         </video>
@@ -84,7 +85,6 @@ const Index = () => {
             </Link>
           </div>
         </div>
-
       </section>
 
       {/* ─── NUESTRO MODELO ─── */}
@@ -144,7 +144,6 @@ const Index = () => {
       {/* ─── COMPARATIVA FERRARI ROMA ─── */}
       <section className="py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-5xl mx-auto">
-
           <div className="relative rounded-3xl overflow-hidden mb-20" style={{ minHeight: "420px" }}>
             <img
               src={ferrariRomaSpider}
