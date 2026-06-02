@@ -194,7 +194,7 @@ const QuienesSomos = () => {
             src={quienesSomosHero}
             alt="OWNEO — el lujo que se comparte"
             loading="eager"
-            className="w-full h-full object-cover will-change-transform"
+            className="w-full h-full object-cover object-[65%_center] sm:object-center will-change-transform scale-110 sm:scale-100"
             style={{ animation: "ken-burns 20s ease-in-out infinite alternate" }}
           />
           <div className="absolute inset-0 bg-background/30" />
