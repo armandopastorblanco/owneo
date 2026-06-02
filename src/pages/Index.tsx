@@ -48,16 +48,18 @@ const Index = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: "grayscale(70%) brightness(0.55)" }}
-          onLoadedMetadata={(e) => {
+          onCanPlay={(e) => {
             const video = e.currentTarget;
-            video.currentTime = 3;
+            if (video.currentTime < 3) {
+              video.currentTime = 3;
+            }
           }}
         >
           <source src="/ferrari-f430-hero.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
 
-        {/* Contenu hero par dessus la vidéo */}
+        {/* Contenu hero */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6 text-center">
           <div className="max-w-4xl mx-auto mt-20 sm:mt-16">
             <div className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto mb-6 sm:mb-8" />
@@ -171,7 +173,6 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 items-stretch">
-
             <div className="bg-[#0d0d0d] border border-white/8 rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
               <div>
                 <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground border border-white/10 rounded-full px-4 py-1.5 mb-10">
@@ -264,9 +265,7 @@ const Index = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/75 to-black/90" />
             <div className="relative z-10 px-8 py-16 text-center">
-              <p className="text-[10px] uppercase tracking-[0.35em] mb-4" style={{ color: "rgba(189,160,149,0.5)" }}>
-                La diferencia
-              </p>
+              <p className="text-[10px] uppercase tracking-[0.35em] mb-4" style={{ color: "rgba(189,160,149,0.5)" }}>La diferencia</p>
               <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">El mismo Ferrari Roma.</p>
               <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6" style={{ color: "#bda095" }}>214.100€ de diferencia.</p>
               <p className="text-sm text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
