@@ -55,7 +55,7 @@ const Index = () => {
             }
           }}
         >
-          <source src="/ferrari-f430-hero.webm" type="video/webm" />
+          <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
 
