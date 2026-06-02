@@ -13,6 +13,10 @@ import {
 } from "lucide-react";
 import owneoLogo from "@/assets/owneo-logo.png";
 import porsche911 from "@/assets/cars/porsche-911-turbo-s.jpg";
+import cardKeyBg from "@/assets/concepto/card-key.jpg";
+import cardDashboardBg from "@/assets/concepto/card-dashboard.jpg";
+import cardWheelBg from "@/assets/concepto/card-wheel.jpg";
+import cardDetailingBg from "@/assets/concepto/card-detailing.jpg";
 
 /* ---------------- helpers ---------------- */
 
@@ -199,40 +203,55 @@ export default function NuestroModelo() {
                 title: "Por participación al año",
                 desc: "¿Quieres más tiempo? Adquiere más participaciones en el mismo vehículo o en otros modelos de la flota.",
                 badge: "= 21 días estándar + 7 días premium",
+                bg: cardKeyBg, alt: "Llave de supercar sobre superficie oscura",
               },
               {
                 icon: Gauge, number: 2000, suffix: "", unit: "km",
                 title: "Incluidos por participación",
                 desc: "Kilómetros garantizados por participación y por año, con el vehículo siempre impecable y a punto.",
+                bg: cardDashboardBg, alt: "Tablero de supercar con cuentarrevoluciones iluminado",
               },
               {
                 icon: Percent, number: 10, suffix: "%", unit: "",
                 title: "Del valor del vehículo",
                 desc: "Precio de entrada claro y único. Sin letra pequeña, sin sorpresas. El resto lo gestiona OWNEO.",
+                bg: cardWheelBg, alt: "Llanta forjada con pinza de freno carbono",
               },
               {
                 icon: Shield, number: null, fixed: "Cuota", unit: "anual fija",
                 title: "Todo incluido",
                 desc: "Una cuota anual cubre seguro, mantenimiento, parking y toda la gestión. Tú no gestionas absolutamente nada.",
                 badge: "Seguro · Parking · Mantenimiento",
+                bg: cardDetailingBg, alt: "Supercar en detallado premium",
               },
             ].map((c: any, i) => (
               <Reveal key={i} delay={i * 0.15}>
-                <div className="group h-full bg-background rounded-2xl p-8 border border-border/50 text-center transition-all duration-300 hover:scale-105 hover:border-champagne/50 hover:shadow-[0_0_40px_-10px_hsl(var(--champagne)/0.3)]">
-                  <c.icon className="w-10 h-10 text-champagne mx-auto mb-4" />
-                  <div className="text-4xl font-bold text-foreground">
-                    {c.number !== null ? (
-                      <CountUp end={c.number} suffix={c.suffix} />
-                    ) : (
-                      c.fixed
+                <div className="group relative h-full overflow-hidden rounded-2xl p-8 border border-border/50 text-center transition-all duration-300 hover:scale-105 hover:border-champagne/50 hover:shadow-[0_0_40px_-10px_hsl(var(--champagne)/0.3)]">
+                  <img
+                    src={c.bg}
+                    alt={c.alt}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/65" />
+                  <div className="relative">
+                    <c.icon className="w-10 h-10 text-champagne mx-auto mb-4" />
+                    <div className="text-4xl font-bold text-white">
+                      {c.number !== null ? (
+                        <CountUp end={c.number} suffix={c.suffix} />
+                      ) : (
+                        c.fixed
+                      )}
+                    </div>
+                    <div className="text-sm text-white/80 mt-1">{c.unit}</div>
+                    <h3 className="mt-4 text-lg font-semibold text-white">{c.title}</h3>
+                    <p className="mt-2 text-sm text-white/80">{c.desc}</p>
+                    {c.badge && (
+                      <div className="mt-4 text-xs text-champagne">{c.badge}</div>
                     )}
                   </div>
-                  <div className="text-sm text-muted-foreground mt-1">{c.unit}</div>
-                  <h3 className="mt-4 text-lg font-semibold">{c.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
-                  {c.badge && (
-                    <div className="mt-4 text-xs text-champagne">{c.badge}</div>
-                  )}
                 </div>
               </Reveal>
             ))}
