@@ -42,27 +42,7 @@ const Index = () => {
       {/* ─── HERO VIDEO ─── */}
       <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
 <video
-  ref={(el) => {
-    if (!el) return;
-    el.muted = true;
-    el.preload = "auto";
-
-    const forceStart = () => {
-      if (el.currentTime < 3) {
-        el.currentTime = 3;
-      }
-    };
-
-    el.addEventListener("loadedmetadata", forceStart, { once: true });
-    el.addEventListener("canplay", forceStart, { once: true });
-    el.addEventListener("timeupdate", () => {
-      if (el.currentTime > 0 && el.currentTime < 3) {
-        el.currentTime = 3;
-      }
-    }, { once: true });
-
-    el.play().catch(() => {});
-  }}
+  autoPlay
   loop
   muted
   playsInline
