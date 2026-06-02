@@ -120,7 +120,7 @@ const Index = () => {
             <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
               <CalendarDays className="w-8 h-8 text-foreground mb-4 mx-auto" />
               <div className="text-5xl font-bold text-foreground mb-2 leading-none">
-                3+1
+                4
                 <div className="text-base font-semibold mt-1">Semanas</div>
               </div>
               <div className="font-semibold text-foreground mb-2">Garantizadas al año</div>
