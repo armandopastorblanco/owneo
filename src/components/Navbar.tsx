@@ -64,11 +64,7 @@ const Navbar = () => {
     { path: "/noticias", label: language === "es" ? "NOTICIAS" : "NEWS" },
   ];
 
-  const navBgClass = isHomePage
-    ? scrolled || mobileMenuOpen
-      ? "bg-background/95 backdrop-blur-md border-b border-border/40"
-      : "bg-transparent border-b border-transparent"
-    : "bg-background/95 backdrop-blur-md border-b border-border/40";
+  const navBgClass = "bg-background/95 backdrop-blur-md border-b border-border/40";
 
   return (
     <>
