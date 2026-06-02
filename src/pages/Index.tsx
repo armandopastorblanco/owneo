@@ -42,22 +42,29 @@ const Index = () => {
       {/* ─── HERO VIDEO ─── */}
       <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
         <video
-          ref={(el) => {
-            if (el) {
-              el.muted = true;
-              el.currentTime = 3;
-              el.play().catch(() => {});
-            }
-          }}
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: "grayscale(70%) brightness(0.55)" }}
-        >
-          <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
-        </video>
+  ref={(el) => {
+    if (el) {
+      el.muted = true;
+      const startAndPlay = () => {
+        el.currentTime = 3;
+        el.play().catch(() => {});
+      };
+      if (el.readyState >= 1) {
+        startAndPlay();
+      } else {
+        el.addEventListener("loadedmetadata", startAndPlay, { once: true });
+      }
+    }
+  }}
+  loop
+  muted
+  playsInline
+  preload="auto"
+  className="absolute inset-0 w-full h-full object-cover"
+  style={{ filter: "grayscale(70%) brightness(0.55)" }}
+>
+  <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
+</video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
 
         {/* Contenu hero */}
