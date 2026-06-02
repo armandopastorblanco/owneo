@@ -1034,7 +1034,15 @@ export type Database = {
           id?: string
           request_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "internal_notes_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       kyc_documents: {
         Row: {
