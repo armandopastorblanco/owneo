@@ -275,9 +275,10 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
 
             <Button
               type="submit"
+              disabled={verifying}
               className="w-full h-14 bg-champagne text-background active:bg-champagne/90 tracking-[0.2em] uppercase text-xs font-light"
             >
-              Entrar
+              {verifying ? "Verificando..." : "Entrar"}
             </Button>
           </form>
 
