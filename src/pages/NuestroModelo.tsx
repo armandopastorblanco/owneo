@@ -17,6 +17,7 @@ import cardKeyBg from "@/assets/concepto/card-key.jpg";
 import cardDashboardBg from "@/assets/concepto/card-dashboard.jpg";
 import cardWheelBg from "@/assets/concepto/card-wheel.jpg";
 import cardDetailingBg from "@/assets/concepto/card-detailing.jpg";
+import heroConceptoBg from "@/assets/concepto/hero-concepto.jpg";
 
 /* ---------------- helpers ---------------- */
 
