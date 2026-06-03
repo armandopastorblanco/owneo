@@ -111,10 +111,22 @@ export default function NuestroModelo() {
         @keyframes owneo-shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
         @keyframes owneo-draw { from { transform: scaleY(0) } to { transform: scaleY(1) } }
         @keyframes owneo-bounce { 0%,100% { transform: translateY(0) } 50% { transform: translateY(8px) } }
+        @keyframes ken-burns { 0% { transform: scale(1) translate(0,0) } 100% { transform: scale(1.08) translate(-1%,-1%) } }
       `}</style>
 
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+        <div className="absolute inset-0">
+          <img
+            src={heroConceptoBg}
+            alt="OWNEO — el acceso inteligente al automovilismo de lujo"
+            loading="eager"
+            className="w-full h-full object-cover object-[65%_center] sm:object-center will-change-transform scale-110 sm:scale-100"
+            style={{ animation: "ken-burns 20s ease-in-out infinite alternate" }}
+          />
+          <div className="absolute inset-0 bg-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background" />
+        </div>
         <div
           className="pointer-events-none absolute top-10 -left-20 w-96 h-96 rounded-full bg-champagne/5 blur-3xl"
           style={{ animation: "owneo-float 8s ease-in-out infinite alternate" }}
