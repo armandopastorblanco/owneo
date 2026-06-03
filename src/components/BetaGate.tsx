@@ -35,10 +35,10 @@ const hasValidAccess = (): boolean => {
 
 const BetaGate = ({ children }: { children: ReactNode }) => {
   const [gateEnabled, setGateEnabled] = useState<boolean | null>(null);
-  const [betaPassword, setBetaPassword] = useState<string>("");
   const [unlocked, setUnlocked] = useState<boolean>(() => hasValidAccess());
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [verifying, setVerifying] = useState(false);
   const [requestOpen, setRequestOpen] = useState(false);
   const [reqName, setReqName] = useState("");
   const [reqEmail, setReqEmail] = useState("");
@@ -51,20 +51,28 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
       const { data } = await supabase
         .from("app_settings" as any)
         .select("key, value")
-        .in("key", ["beta_gate_enabled", "beta_gate_password"]);
+        .eq("key", "beta_gate_enabled");
       if (cancelled) return;
-      const map = new Map<string, string>(((data as any[]) || []).map((r: any) => [r.key, r.value]));
-      setBetaPassword((map.get("beta_gate_password") || "").toUpperCase());
-      setGateEnabled(map.get("beta_gate_enabled") === "true");
+      const row = ((data as any[]) || [])[0];
+      setGateEnabled(row?.value === "true");
     })();
     return () => {
       cancelled = true;
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (betaPassword && password.trim().toUpperCase() === betaPassword) {
+    if (verifying) return;
+    setVerifying(true);
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke("verify-beta-password", {
+        body: { password: password.trim() },
+      });
+      if (fnError || !data?.ok) {
+        setError(true);
+        return;
+      }
       try {
         localStorage.setItem(STORAGE_KEY, String(Date.now() + THIRTY_DAYS_MS));
       } catch {
@@ -72,8 +80,10 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
       }
       setError(false);
       setUnlocked(true);
-    } else {
+    } catch {
       setError(true);
+    } finally {
+      setVerifying(false);
     }
   };
 
