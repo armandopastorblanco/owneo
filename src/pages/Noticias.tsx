@@ -13,8 +13,18 @@ import lamborghiniReveal from "@/assets/news/lamborghini-reveal.jpg";
 import mclarenW1 from "@/assets/news/mclaren-w1.jpg";
 import mercedesAmgOne from "@/assets/news/mercedes-amg-one.jpg";
 import lamborghiniTemerario from "@/assets/news/lamborghini-temerario.jpg";
+import porscheCayenneTurboElectric from "@/assets/noticias/porsche-cayenne-turbo-electric-main.jpg";
 
 const originalNews = [
+  {
+    id: 8,
+    image: porscheCayenneTurboElectric,
+    date: "1 Junio 2026",
+    category: "Novedades · Porsche · Eléctricos",
+    title: "Porsche Cayenne Turbo Electric: 1.139 CV y el fin de los límites",
+    excerpt: "Stuttgart presenta el SUV eléctrico más potente de su historia. El nuevo Cayenne Turbo Electric no es una evolución. Es una declaración de intenciones.",
+    link: "/noticias/porsche-cayenne-turbo-electric-2026"
+  },
   {
     id: 7,
     image: lamborghiniTemerario,

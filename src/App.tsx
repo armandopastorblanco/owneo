@@ -25,6 +25,7 @@ import Noticias from "./pages/Noticias";
 import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
 import NoticiaLamborghiniTemerarioSpyder from "./pages/noticias/NoticiaLamborghiniTemerarioSpyder";
+import PorscheCayenneTurboElectric from "./pages/noticias/PorscheCayenneTurboElectric";
 import NoticiaMcLarenW1 from "./pages/NoticiaMcLarenW1";
 import NoticiaMercedesAMGOne from "./pages/NoticiaMercedesAMGOne";
 import NoticiaDetalle from "./pages/NoticiaDetalle";
@@ -116,6 +117,7 @@ const App = () => (
               <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
               <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
               <Route path="/noticias/lamborghini-temerario-spyder" element={<NoticiaLamborghiniTemerarioSpyder />} />
+              <Route path="/noticias/porsche-cayenne-turbo-electric-2026" element={<PorscheCayenneTurboElectric />} />
               <Route path="/noticias/mclaren-w1" element={<NoticiaMcLarenW1 />} />
               <Route path="/noticias/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
