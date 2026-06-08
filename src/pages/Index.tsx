@@ -99,38 +99,47 @@ const Index = () => {
 
           {/* 3 Métricas */}
           <div className="grid md:grid-cols-3 gap-6 mt-16">
-            <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
-              <Percent className="w-8 h-8 text-foreground mb-4 mx-auto" />
-              <div className="text-5xl font-bold text-foreground mb-2">10%</div>
-              <div className="font-semibold text-foreground mb-2">Del valor del vehículo</div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
-              </p>
-            </div>
-            <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
-              <CalendarDays className="w-8 h-8 text-foreground mb-4 mx-auto" />
-              <div className="text-5xl font-bold text-foreground mb-2 leading-none">
-                4
-                <div className="text-base font-semibold mt-1">Semanas</div>
+            <div className="group relative bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-champagne/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)] animate-fade-in overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-champagne/0 via-champagne/0 to-champagne/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative">
+                <Percent className="w-8 h-8 text-champagne mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+                <div className="text-5xl font-bold text-champagne mb-2 transition-transform duration-500 group-hover:scale-105">10%</div>
+                <div className="font-semibold text-foreground mb-2">Del valor del vehículo</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
+                </p>
               </div>
-              <div className="font-semibold text-foreground mb-2">Garantizadas al año</div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
-              </p>
-              <p className="text-xs text-muted-foreground mt-3 border-t border-border/40 pt-3">
-                ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
-              </p>
             </div>
-            <div className="bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-foreground/30 transition-all duration-300">
-              <Users className="w-8 h-8 text-foreground mb-4 mx-auto" />
-              <div className="text-5xl font-bold text-foreground mb-2">÷10</div>
-              <div className="font-semibold text-foreground mb-2">Los gastos compartidos</div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
-              </p>
-              <p className="text-xs text-muted-foreground mt-3 border-t border-border/40 pt-3">
-                ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
-              </p>
+            <div className="group relative bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-champagne/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)] animate-fade-in overflow-hidden" style={{ animationDelay: "100ms" }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-champagne/0 via-champagne/0 to-champagne/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative">
+                <CalendarDays className="w-8 h-8 text-champagne mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+                <div className="text-5xl font-bold text-champagne mb-2 leading-none transition-transform duration-500 group-hover:scale-105">
+                  4
+                  <div className="text-base font-semibold mt-1">Semanas</div>
+                </div>
+                <div className="font-semibold text-foreground mb-2">Garantizadas al año</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
+                </p>
+                <p className="text-xs text-muted-foreground mt-3 border-t border-border/40 pt-3">
+                  ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
+                </p>
+              </div>
+            </div>
+            <div className="group relative bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-champagne/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)] animate-fade-in overflow-hidden" style={{ animationDelay: "200ms" }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-champagne/0 via-champagne/0 to-champagne/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative">
+                <Users className="w-8 h-8 text-champagne mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+                <div className="text-5xl font-bold text-champagne mb-2 transition-transform duration-500 group-hover:scale-105">÷10</div>
+                <div className="font-semibold text-foreground mb-2">Los gastos compartidos</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
+                </p>
+                <p className="text-xs text-muted-foreground mt-3 border-t border-border/40 pt-3">
+                  ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
+                </p>
+              </div>
             </div>
           </div>
         </div>
