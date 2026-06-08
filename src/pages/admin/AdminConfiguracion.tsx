@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { useDocumentTypes } from "@/hooks/useDocuments";
 import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
 import VehicleDocumentTypesManager from "@/components/admin/VehicleDocumentTypesManager";
+import PressMentionsManager from "@/components/admin/PressMentionsManager";
 
 const AdminConfiguracion = () => {
   const qc = useQueryClient();
