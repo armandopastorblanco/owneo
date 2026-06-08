@@ -1315,6 +1315,39 @@ export type Database = {
           },
         ]
       }
+      press_mentions: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          logo_key: string | null
+          name: string
+          quote: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          logo_key?: string | null
+          name: string
+          quote: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          logo_key?: string | null
+          name?: string
+          quote?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           address: string | null
