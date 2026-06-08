@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { useDocumentTypes } from "@/hooks/useDocuments";
 import ExtraCostTypesManager from "@/components/admin/ExtraCostTypesManager";
 import VehicleDocumentTypesManager from "@/components/admin/VehicleDocumentTypesManager";
+import PressMentionsManager from "@/components/admin/PressMentionsManager";
 
 const AdminConfiguracion = () => {
   const qc = useQueryClient();
@@ -24,6 +25,7 @@ const AdminConfiguracion = () => {
   const [docsOpen, setDocsOpen] = useState(false);
   const [vehicleDocsOpen, setVehicleDocsOpen] = useState(false);
   const [extrasOpen, setExtrasOpen] = useState(false);
+  const [pressOpen, setPressOpen] = useState(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
@@ -170,6 +172,18 @@ const AdminConfiguracion = () => {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <ExtraCostTypesManager />
+        </CollapsibleContent>
+      </Collapsible>
+
+      <Collapsible open={pressOpen} onOpenChange={setPressOpen} className="rounded-lg border border-border bg-card">
+        <CollapsibleTrigger asChild>
+          <button className="flex items-center gap-2 text-left w-full hover:opacity-80 p-6">
+            {pressOpen ? <ChevronDown className="h-4 w-4 text-muted-foreground" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}
+            <span className="text-lg font-semibold leading-none tracking-tight">Hablan de Nosotros</span>
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <PressMentionsManager />
         </CollapsibleContent>
       </Collapsible>
 

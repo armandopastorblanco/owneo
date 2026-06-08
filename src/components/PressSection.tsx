@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const ForbesLogo = () => (
   <svg viewBox="0 0 200 50" className="h-8 w-auto fill-current">
@@ -30,34 +32,52 @@ const VanityFairLogo = () => (
   </svg>
 );
 
-const pressReferences = [
-  {
-    name: "Forbes",
-    Logo: ForbesLogo,
-    quote: "Revolucionando el acceso al lujo automovilístico en España"
-  },
-  {
-    name: "Motorpasión",
-    Logo: MotorpasionLogo,
-    quote: "La forma más inteligente de disfrutar un superdeportivo"
-  },
-  {
-    name: "GQ",
-    Logo: GQLogo,
-    quote: "El club de supercoches que está redefiniendo el lujo"
-  },
-  {
-    name: "Vanity Fair",
-    Logo: VanityFairLogo,
-    quote: "Donde la exclusividad se encuentra con la comunidad"
-  }
-];
+const LOGO_MAP: Record<string, React.FC> = {
+  forbes: ForbesLogo,
+  motorpasion: MotorpasionLogo,
+  gq: GQLogo,
+  vanityfair: VanityFairLogo,
+};
+
+const TextLogo = ({ name }: { name: string }) => (
+  <svg viewBox="0 0 220 40" className="h-7 w-auto fill-current">
+    <text x="0" y="28" fontSize="22" fontWeight="bold" fontFamily="Georgia, serif" letterSpacing="2">
+      {name.toUpperCase()}
+    </text>
+  </svg>
+);
+
+interface PressMention {
+  id: string;
+  name: string;
+  quote: string;
+  logo_key: string | null;
+  is_active: boolean;
+  sort_order: number;
+}
 
 interface PressSectionProps {
   standalone?: boolean;
 }
 
 const PressSection = ({ standalone = true }: PressSectionProps) => {
+  const [items, setItems] = useState<PressMention[] | null>(null);
+  const [enabled, setEnabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    (async () => {
+      const [{ data: settings }, { data: mentions }] = await Promise.all([
+        supabase.from("app_settings" as any).select("value").eq("key", "press_section_enabled").maybeSingle(),
+        supabase.from("press_mentions" as any).select("*").eq("is_active", true).order("sort_order", { ascending: true }),
+      ]);
+      setEnabled((settings as any)?.value !== "false");
+      setItems((mentions as any) || []);
+    })();
+  }, []);
+
+  if (items === null) return null;
+  if (!enabled || items.length === 0) return null;
+
   const content = (
     <>
       <motion.div
@@ -76,23 +96,26 @@ const PressSection = ({ standalone = true }: PressSectionProps) => {
       </motion.div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {pressReferences.map((press, index) => (
-          <motion.div
-            key={press.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="group bg-background/50 rounded-2xl p-6 border border-border/30 hover:border-champagne/30 transition-all duration-300 hover:bg-background/70 flex flex-col items-center text-center"
-          >
-            <div className="h-12 flex items-center justify-center mb-6 text-foreground/60 group-hover:text-foreground transition-colors duration-300">
-              <press.Logo />
-            </div>
-            <p className="text-sm text-muted-foreground italic leading-relaxed">
-              "{press.quote}"
-            </p>
-          </motion.div>
-        ))}
+        {items.map((press, index) => {
+          const Logo = press.logo_key ? LOGO_MAP[press.logo_key] : undefined;
+          return (
+            <motion.div
+              key={press.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group bg-background/50 rounded-2xl p-6 border border-border/30 hover:border-champagne/30 transition-all duration-300 hover:bg-background/70 flex flex-col items-center text-center"
+            >
+              <div className="h-12 flex items-center justify-center mb-6 text-foreground/60 group-hover:text-foreground transition-colors duration-300">
+                {Logo ? <Logo /> : <TextLogo name={press.name} />}
+              </div>
+              <p className="text-sm text-muted-foreground italic leading-relaxed">
+                "{press.quote}"
+              </p>
+            </motion.div>
+          );
+        })}
       </div>
     </>
   );
