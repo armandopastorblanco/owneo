@@ -25,6 +25,7 @@ const AdminConfiguracion = () => {
   const [docsOpen, setDocsOpen] = useState(false);
   const [vehicleDocsOpen, setVehicleDocsOpen] = useState(false);
   const [extrasOpen, setExtrasOpen] = useState(false);
+  const [pressOpen, setPressOpen] = useState(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
