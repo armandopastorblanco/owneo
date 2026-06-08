@@ -175,6 +175,18 @@ const AdminConfiguracion = () => {
         </CollapsibleContent>
       </Collapsible>
 
+      <Collapsible open={pressOpen} onOpenChange={setPressOpen} className="rounded-lg border border-border bg-card">
+        <CollapsibleTrigger asChild>
+          <button className="flex items-center gap-2 text-left w-full hover:opacity-80 p-6">
+            {pressOpen ? <ChevronDown className="h-4 w-4 text-muted-foreground" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}
+            <span className="text-lg font-semibold leading-none tracking-tight">Hablan de Nosotros</span>
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <PressMentionsManager />
+        </CollapsibleContent>
+      </Collapsible>
+
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader><DialogTitle>{editing ? "Editar tipo" : "Nuevo tipo de documento"}</DialogTitle></DialogHeader>
