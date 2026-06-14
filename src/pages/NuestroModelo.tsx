@@ -152,7 +152,7 @@ export default function NuestroModelo() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+            <h1 className="mt-6 ds-h1">
               El acceso más inteligente al
               <br />
               <span className="text-champagne">automovilismo de lujo</span>
@@ -192,12 +192,12 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
-              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+              <span className="ds-eyebrow-pill">
                 Participación OWNEO
               </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">
+              <h2 className="mt-4 ds-h2">
                 Todo lo que incluye tu participación
               </h2>
             </Reveal>
@@ -259,7 +259,7 @@ export default function NuestroModelo() {
                       )}
                     </div>
                     <div className="text-sm text-white/80 mt-1">{c.unit}</div>
-                    <h3 className="mt-4 text-lg font-semibold text-white">{c.title}</h3>
+                    <h3 className="mt-4 ds-card-title text-white">{c.title}</h3>
                     <p className="mt-2 text-sm text-white/80">{c.desc}</p>
                     {c.badge && (
                       <div className="mt-4 text-xs text-champagne">{c.badge}</div>
@@ -277,7 +277,7 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+              <h2 className="ds-h2">
                 Tú conduces.<br />
                 <span className="text-champagne">Nosotros nos encargamos de todo lo demás.</span>
               </h2>
@@ -319,7 +319,7 @@ export default function NuestroModelo() {
                       </div>
                       <div className={`pl-16 md:pl-0 md:w-1/2 ${right ? "md:pr-16" : "md:pl-16"}`}>
                         <div className="bg-card border border-border/50 rounded-2xl p-6 hover:border-champagne/30 transition-colors">
-                          <h3 className="text-lg font-semibold">{it.title}</h3>
+                          <h3 className="ds-card-title">{it.title}</h3>
                           <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
                         </div>
                       </div>
@@ -336,10 +336,10 @@ export default function NuestroModelo() {
       <section className="bg-card/30 border-y border-border py-20 sm:py-24">
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+            <span className="ds-eyebrow-pill">
               Cada entrega, una experiencia
             </span>
-            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">
+            <h2 className="mt-4 ds-h2">
               Cada vez que recoges tu coche, está impecable.
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -363,9 +363,9 @@ export default function NuestroModelo() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="bg-card rounded-3xl border border-champagne/20 p-8">
+            <div className="bg-card rounded-2xl border border-champagne/20 p-8">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-semibold">Protocolo de entrega OWNEO</h3>
+                <h3 className="ds-card-title">Protocolo de entrega OWNEO</h3>
                 <span className="text-xs bg-champagne/10 text-champagne rounded-full px-3 py-1 border border-champagne/20">
                   Verificado
                 </span>
@@ -408,12 +408,12 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
-              <span className="inline-flex items-center gap-2 bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+              <span className="ds-eyebrow-pill inline-flex items-center gap-2">
                 <Calculator className="w-4 h-4" /> Comparativa de costes
               </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">La decisión más inteligente</h2>
+              <h2 className="mt-4 ds-h2">La decisión más inteligente</h2>
               <p className="mt-2 text-champagne">Números reales, comparativa honesta.</p>
             </Reveal>
             <Reveal delay={0.2}>
@@ -477,23 +477,23 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <Reveal>
-              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+              <span className="ds-eyebrow-pill">
                 Caso práctico
               </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Así funciona en la realidad</h2>
+              <h2 className="mt-4 ds-h2">Así funciona en la realidad</h2>
             </Reveal>
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Reveal>
-              <div className="bg-card rounded-3xl border border-border/50 p-8">
+              <div className="bg-card rounded-2xl border border-border/50 p-8">
                 <div className="flex justify-center">
                   <div className="relative">
                     <div className="absolute inset-0 bg-champagne/20 blur-2xl rounded-full" />
                     <Car className="w-16 h-16 text-champagne relative" />
                   </div>
                 </div>
-                <h3 className="mt-4 text-2xl font-bold text-center">Porsche 911 Turbo S</h3>
+                <h3 className="mt-4 ds-h3 text-center">Porsche 911 Turbo S</h3>
                 <p className="text-center text-sm text-muted-foreground">Ejemplo de participación</p>
 
                 <ul className="mt-6 divide-y divide-border/50 text-sm">
@@ -515,11 +515,11 @@ export default function NuestroModelo() {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <div className="bg-gradient-to-br from-champagne/10 via-card to-champagne/10 rounded-3xl border border-champagne/20 p-8 h-full">
+              <div className="bg-gradient-to-br from-champagne/10 via-card to-champagne/10 rounded-2xl border border-champagne/20 p-8 h-full">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-champagne" />
-                    <h3 className="font-bold">Tu participación</h3>
+                    <h3 className="ds-card-title">Tu participación</h3>
                   </div>
                   <span className="text-xs bg-champagne/15 text-champagne rounded-full px-3 py-1 border border-champagne/20">
                     1 participación
@@ -579,10 +579,10 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
           <div className="md:col-span-3">
             <Reveal>
-              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+              <span className="ds-eyebrow-pill">
                 App OWNEO · Acceso exclusivo participantes
               </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Todo en la palma de tu mano.</h2>
+              <h2 className="mt-4 ds-h2">Todo en la palma de tu mano.</h2>
               <p className="mt-4 text-muted-foreground">
                 Una vez participante, accedes a la app OWNEO — disponible como aplicación web desde cualquier dispositivo.
                 Sin descargas adicionales, siempre disponible.
@@ -717,7 +717,7 @@ export default function NuestroModelo() {
       <section className="bg-card/30 border-y border-border py-20 sm:py-24">
         <div className="container mx-auto px-4">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">OWNEO en cifras</h2>
+            <h2 className="ds-h2 text-center">OWNEO en cifras</h2>
           </Reveal>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -727,10 +727,10 @@ export default function NuestroModelo() {
               { icon: Sparkles, big: "0", title: "Cargas de gestión", desc: "OWNEO gestiona compra, seguro, mantenimiento, parking, entrega y reventa. Tu única responsabilidad es disfrutar." },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 0.15}>
-                <div className="h-full bg-background rounded-3xl p-10 border border-border/50 text-center transition-all hover:border-champagne/30">
+                <div className="h-full bg-background rounded-2xl p-10 border border-border/50 text-center transition-all hover:border-champagne/30">
                   <c.icon className="w-8 h-8 text-champagne mx-auto" />
                   <div className="mt-4 text-5xl sm:text-6xl font-bold text-champagne">{c.big}</div>
-                  <h3 className="mt-4 text-lg font-semibold">{c.title}</h3>
+                  <h3 className="mt-4 ds-card-title">{c.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
                 </div>
               </Reveal>
@@ -744,10 +744,10 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
-              <span className="inline-block bg-champagne/10 text-champagne rounded-full px-4 py-2 text-sm border border-champagne/20">
+              <span className="ds-eyebrow-pill">
                 Protección del participante
               </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Tu inversión, protegida.</h2>
+              <h2 className="mt-4 ds-h2">Tu inversión, protegida.</h2>
               <p className="mt-4 text-muted-foreground">
                 Cada participación OWNEO está respaldada por un contrato, un seguro y un protocolo de verificación riguroso.
               </p>
@@ -766,7 +766,7 @@ export default function NuestroModelo() {
               <Reveal key={i} delay={i * 0.1}>
                 <div className="bg-card/50 rounded-2xl border border-border/50 p-6 text-center transition-all hover:border-champagne/30 h-full">
                   <it.icon className="w-8 h-8 text-champagne mx-auto" />
-                  <h3 className="mt-4 font-semibold text-sm">{it.title}</h3>
+                  <h3 className="mt-4 ds-card-title">{it.title}</h3>
                   <p className="mt-2 text-xs text-muted-foreground">{it.desc}</p>
                 </div>
               </Reveal>
@@ -783,7 +783,7 @@ export default function NuestroModelo() {
         />
         <div className="container relative mx-auto px-4 text-center">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">¿Listo para vivir la experiencia?</h2>
+            <h2 className="ds-h2">¿Listo para vivir la experiencia?</h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
