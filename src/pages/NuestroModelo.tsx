@@ -9,7 +9,7 @@ import {
   Shield, Car, Sparkles, CalendarDays, Gauge, Percent,
   ShoppingCart, FileCheck, Wrench, Key, TrendingUp, BadgeCheck,
   Calculator, Check, X, Calendar, FileText, MessageCircle, BarChart,
-  TrendingDown, RefreshCw, ArrowRight, ChevronDown,
+  TrendingDown, RefreshCw, ArrowRight, ChevronDown, Wallet, Smartphone,
 } from "lucide-react";
 import owneoLogo from "@/assets/owneo-logo.png";
 import porsche911 from "@/assets/cars/porsche-911-turbo-s.jpg";
@@ -85,6 +85,30 @@ function Reveal({
   );
 }
 
+/* ---------------- flip card (point 4) ---------------- */
+
+function FlipCard({
+  icon: Icon, title, desc, back,
+}: { icon: any; title: string; desc: string; back: string }) {
+  return (
+    <div className="owneo-flip group h-full min-h-[200px]">
+      <div className="owneo-flip-inner">
+        {/* recto */}
+        <div className="owneo-flip-face bg-card/50 rounded-2xl border border-border/50 p-6 text-center flex flex-col items-center justify-center">
+          <Icon className="w-8 h-8 text-champagne mx-auto" />
+          <h3 className="mt-4 ds-card-title">{title}</h3>
+          <p className="mt-2 text-xs text-muted-foreground">{desc}</p>
+        </div>
+        {/* verso */}
+        <div className="owneo-flip-face owneo-flip-back bg-card rounded-2xl border border-champagne/30 p-6 text-center flex flex-col items-center justify-center">
+          <Icon className="w-6 h-6 text-champagne mx-auto mb-3" />
+          <p className="text-xs text-muted-foreground leading-relaxed">{back}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- page ---------------- */
 
 export default function NuestroModelo() {
@@ -105,13 +129,21 @@ export default function NuestroModelo() {
       </Helmet>
       <Navbar />
 
-      {/* shared blob keyframes */}
+      {/* shared blob keyframes + flip 3D utilities */}
       <style>{`
         @keyframes owneo-float { 0%,100% { transform: translateY(-12px) } 50% { transform: translateY(12px) } }
         @keyframes owneo-shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
         @keyframes owneo-draw { from { transform: scaleY(0) } to { transform: scaleY(1) } }
         @keyframes owneo-bounce { 0%,100% { transform: translateY(0) } 50% { transform: translateY(8px) } }
         @keyframes ken-burns { 0% { transform: scale(1) translate(0,0) } 100% { transform: scale(1.08) translate(-1%,-1%) } }
+        .owneo-flip { perspective: 1200px; }
+        .owneo-flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); transform-style: preserve-3d; }
+        .owneo-flip:hover .owneo-flip-inner { transform: rotateY(180deg); }
+        .owneo-flip-face { position: absolute; inset: 0; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+        .owneo-flip-back { transform: rotateY(180deg); }
+        @media (hover: none) {
+          .owneo-flip:active .owneo-flip-inner { transform: rotateY(180deg); }
+        }
       `}</style>
 
       {/* ============ HERO ============ */}
@@ -408,8 +440,8 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
-              <span className="ds-eyebrow-pill inline-flex items-center gap-2">
-                <Calculator className="w-4 h-4" /> Comparativa de costes
+              <span className="ds-eyebrow-pill inline-flex items-center gap-2 whitespace-nowrap">
+                <Calculator className="w-4 h-4 shrink-0" /> Comparativa de costes
               </span>
             </Reveal>
             <Reveal delay={0.1}>
@@ -528,23 +560,23 @@ export default function NuestroModelo() {
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">💰 Tu inversión</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><Wallet className="w-4 h-4 text-champagne shrink-0" /> Tu inversión</span>
                     <span className="font-bold text-champagne text-lg"><CountUp end={25000} prefix="€" /></span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">📅 Semanas al año</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><CalendarDays className="w-4 h-4 text-champagne shrink-0" /> Semanas al año</span>
                     <span className="font-medium"><CountUp end={4} /> semanas (3+1)</span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">🛣️ Km incluidos</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><Gauge className="w-4 h-4 text-champagne shrink-0" /> Km incluidos</span>
                     <span className="font-medium"><CountUp end={2000} /> km</span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">📱 Reserva</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><Smartphone className="w-4 h-4 text-champagne shrink-0" /> Reserva</span>
                     <span className="font-medium">Digital · 24/7</span>
                   </li>
                   <li className="flex items-start justify-between gap-4">
-                    <span className="text-muted-foreground">🔄 Valor recuperado</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><RefreshCw className="w-4 h-4 text-champagne shrink-0" /> Valor recuperado</span>
                     <div className="text-right">
                       <div className="font-bold text-green-500"><CountUp end={17500} prefix="hasta €" /></div>
                       <div className="text-xs text-muted-foreground">al término del período · kilometraje controlado</div>
@@ -727,9 +759,9 @@ export default function NuestroModelo() {
               { icon: Sparkles, big: "0", title: "Cargas de gestión", desc: "OWNEO gestiona compra, seguro, mantenimiento, parking, entrega y reventa. Tu única responsabilidad es disfrutar." },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 0.15}>
-                <div className="h-full bg-background rounded-2xl p-10 border border-border/50 text-center transition-all hover:border-champagne/30">
-                  <c.icon className="w-8 h-8 text-champagne mx-auto" />
-                  <div className="mt-4 text-5xl sm:text-6xl font-bold text-champagne">{c.big}</div>
+                <div className="group h-full bg-background rounded-2xl p-10 border border-border/50 text-center transition-all duration-300 hover:scale-105 hover:border-champagne/50 hover:shadow-[0_0_40px_-10px_hsl(var(--champagne)/0.3)]">
+                  <c.icon className="w-8 h-8 text-champagne mx-auto transition-transform duration-500 group-hover:scale-110" />
+                  <div className="mt-4 text-5xl sm:text-6xl font-bold text-champagne transition-transform duration-500 group-hover:scale-105">{c.big}</div>
                   <h3 className="mt-4 ds-card-title">{c.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
                 </div>
@@ -751,24 +783,21 @@ export default function NuestroModelo() {
               <p className="mt-4 text-muted-foreground">
                 Cada participación OWNEO está respaldada por un contrato, un seguro y un protocolo de verificación riguroso.
               </p>
+              <p className="mt-2 text-xs text-muted-foreground">Pasa el cursor sobre cada tarjeta para saber más.</p>
             </Reveal>
           </div>
 
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {[
-              { icon: Car, title: "Vehículos verificados", desc: "Inspección técnica completa antes de cada uso" },
-              { icon: BadgeCheck, title: "Participantes verificados", desc: "Proceso de admisión riguroso" },
-              { icon: FileCheck, title: "Contrato garantizado", desc: "Tus derechos de uso por escrito" },
-              { icon: Shield, title: "Seguro premium", desc: "Cobertura completa con aseguradora reconocida" },
-              { icon: FileText, title: "Costes transparentes", desc: "Sin sorpresas ni cargos ocultos" },
-              { icon: RefreshCw, title: "Reventa gestionada", desc: "OWNEO gestiona la salida de tu inversión" },
+              { icon: Car, title: "Vehículos verificados", desc: "Inspección técnica completa antes de cada uso", back: "Cada vehículo pasa una revisión mecánica y estética antes de cada entrega. Documentamos su estado con fotos para que recibas siempre un coche impecable." },
+              { icon: BadgeCheck, title: "Participantes verificados", desc: "Proceso de admisión riguroso", back: "Validamos la identidad y el perfil de cada participante. Compartes tu vehículo solo con miembros igual de comprometidos que tú." },
+              { icon: FileCheck, title: "Contrato garantizado", desc: "Tus derechos de uso por escrito", back: "Tus semanas, tus kilómetros y tus condiciones quedan fijados por contrato. Sin ambigüedades, sin letra pequeña." },
+              { icon: Shield, title: "Seguro premium", desc: "Cobertura completa con aseguradora reconocida", back: "Póliza a todo riesgo con una aseguradora de primer nivel. Cada participante conduce cubierto como conductor habitual." },
+              { icon: FileText, title: "Costes transparentes", desc: "Sin sorpresas ni cargos ocultos", back: "Una única cuota anual lo cubre todo: seguro, mantenimiento, parking y gestión. Sabes exactamente lo que pagas, siempre." },
+              { icon: RefreshCw, title: "Reventa gestionada", desc: "OWNEO gestiona la salida de tu inversión", back: "Al término del período, vendemos el vehículo y te devolvemos tu parte. Recuperas hasta el 70% gracias al kilometraje controlado." },
             ].map((it, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="bg-card/50 rounded-2xl border border-border/50 p-6 text-center transition-all hover:border-champagne/30 h-full">
-                  <it.icon className="w-8 h-8 text-champagne mx-auto" />
-                  <h3 className="mt-4 ds-card-title">{it.title}</h3>
-                  <p className="mt-2 text-xs text-muted-foreground">{it.desc}</p>
-                </div>
+                <FlipCard icon={it.icon} title={it.title} desc={it.desc} back={it.back} />
               </Reveal>
             ))}
           </div>
