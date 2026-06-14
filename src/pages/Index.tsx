@@ -12,6 +12,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import ferrariRomaSpider from "@/assets/news/ferrari-roma-spider.jpg";
 import ferrariRomaCockpit from "@/assets/news/ferrari-roma-cockpit.jpg";
+import featureValueBg from "@/assets/model/feature-value.jpg";
+import featureWeeksBg from "@/assets/model/feature-weeks.jpg";
+import featureSharedBg from "@/assets/model/feature-shared.jpg";
 
 const Index = () => {
   const { data: cars = [], isLoading: carsLoading } = useCars();
@@ -95,49 +98,61 @@ const Index = () => {
             </p>
           </div>
 
-          {/* 3 Métricas — alignées via flex + zones réservées + zoom au survol */}
+          {/* 3 Métricas — cartes immersives (gabarit DS) */}
           <div className="grid md:grid-cols-3 gap-6 mt-16 items-stretch">
             {/* Carte 1 */}
-            <div className="ds-card-hover group h-full flex flex-col text-center animate-fade-in overflow-hidden">
-              <Percent className="ds-icon w-8 h-8 mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-              <div className="min-h-[6rem] flex flex-col items-center justify-start">
-                <div className="text-5xl font-extralight text-champagne leading-none transition-transform duration-500 group-hover:scale-105">10%</div>
+            <div className="group ds-card-feature animate-fade-in">
+              <img src={featureValueBg} alt="" aria-hidden="true" loading="lazy" width={1280} height={800} className="ds-card-feature-img" />
+              <div className="ds-card-feature-overlay" />
+              <div className="ds-feature-body">
+                <Percent className="ds-icon w-10 h-10 mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <div className="ds-feature-figure">
+                  <span className="text-5xl font-extralight text-white leading-none">10%</span>
+                </div>
+                <h3 className="ds-card-title text-white mt-2 mb-2">Del valor del vehículo</h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
+                </p>
               </div>
-              <div className="font-normal text-foreground mb-2">Del valor del vehículo</div>
-              <p className="ds-body">
-                Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
-              </p>
             </div>
 
             {/* Carte 2 */}
-            <div className="ds-card-hover group h-full flex flex-col text-center animate-fade-in overflow-hidden" style={{ animationDelay: "100ms" }}>
-              <CalendarDays className="ds-icon w-8 h-8 mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-              <div className="min-h-[6rem] flex flex-col items-center justify-start">
-                <div className="text-5xl font-extralight text-champagne leading-none transition-transform duration-500 group-hover:scale-105">4</div>
-                <div className="text-base font-normal text-champagne/90 mt-1">Semanas</div>
+            <div className="group ds-card-feature animate-fade-in" style={{ animationDelay: "100ms" }}>
+              <img src={featureWeeksBg} alt="" aria-hidden="true" loading="lazy" width={1280} height={800} className="ds-card-feature-img" />
+              <div className="ds-card-feature-overlay" />
+              <div className="ds-feature-body">
+                <CalendarDays className="ds-icon w-10 h-10 mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <div className="ds-feature-figure">
+                  <span className="text-5xl font-extralight text-white leading-none">4</span>
+                  <span className="text-base font-normal text-white/80 mt-1">Semanas</span>
+                </div>
+                <h3 className="ds-card-title text-white mt-2 mb-2">Garantizadas al año</h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
+                </p>
+                <div className="ds-feature-note text-xs text-champagne">
+                  ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
+                </div>
               </div>
-              <div className="font-normal text-foreground mb-2">Garantizadas al año</div>
-              <p className="ds-body">
-                3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
-              </p>
-              <p className="text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40">
-                ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
-              </p>
             </div>
 
             {/* Carte 3 */}
-            <div className="ds-card-hover group h-full flex flex-col text-center animate-fade-in overflow-hidden" style={{ animationDelay: "200ms" }}>
-              <Users className="ds-icon w-8 h-8 mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-              <div className="min-h-[6rem] flex flex-col items-center justify-start">
-                <div className="text-5xl font-extralight text-champagne leading-none transition-transform duration-500 group-hover:scale-105">÷10</div>
+            <div className="group ds-card-feature animate-fade-in" style={{ animationDelay: "200ms" }}>
+              <img src={featureSharedBg} alt="" aria-hidden="true" loading="lazy" width={1280} height={800} className="ds-card-feature-img" />
+              <div className="ds-card-feature-overlay" />
+              <div className="ds-feature-body">
+                <Users className="ds-icon w-10 h-10 mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <div className="ds-feature-figure">
+                  <span className="text-5xl font-extralight text-white leading-none">÷10</span>
+                </div>
+                <h3 className="ds-card-title text-white mt-2 mb-2">Los gastos compartidos</h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
+                </p>
+                <div className="ds-feature-note text-xs text-champagne">
+                  ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
+                </div>
               </div>
-              <div className="font-normal text-foreground mb-2">Los gastos compartidos</div>
-              <p className="ds-body">
-                Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
-              </p>
-              <p className="text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40">
-                ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
-              </p>
             </div>
           </div>
         </div>
