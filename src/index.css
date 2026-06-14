@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ════════════════════════════════════════════════════════════
+   OWNEO — DESIGN SYSTEM (source de vérité)
+   Toutes les couleurs sont en HSL. Ne jamais écrire de couleur
+   en dur dans les composants : utiliser les tokens ci-dessous.
+   ════════════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
+    /* ─── Fonds & textes ─── */
     --background: 0 0% 7%;
     --foreground: 0 0% 98%;
 
@@ -17,88 +20,123 @@ All colors MUST be HSL.
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 16 23% 66%;
+    /* ─── Accent unique de la marque : CHAMPAGNE ───
+       Ne change la valeur qu'ici pour rebrander tout le site. */
+    --champagne: 16 23% 66%;
+    --champagne-foreground: 0 0% 7%;
+
+    --primary: 16 23% 66%;            /* CTA principaux, accents forts */
     --primary-foreground: 0 0% 7%;
 
-    --secondary: 16 23% 66%;
-    --secondary-foreground: 0 0% 7%;
+    --secondary: 0 0% 15%;            /* boutons/blocs secondaires */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 89%;
-
-    --accent: 16 23% 66%;
+    --accent: 16 23% 66%;             /* pictos décoratifs, survols */
     --accent-foreground: 0 0% 7%;
 
-    --destructive: 0 84.2% 60.2%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --destructive: 0 72% 45%;         /* erreurs / "agotado" uniquement */
     --destructive-foreground: 0 0% 98%;
 
+    /* ─── Bordures & champs ─── */
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 16 23% 66%;
 
-    --radius: 0.5rem;
-    
-    --luxury-gold: 45 100% 70%;
-    --luxury-gold-light: 45 100% 80%;
-    --ferrari-red: 0 100% 28%;
-    --deep-black: 0 0% 7%;
-    --charcoal: 0 0% 15%;
+    /* ─── Rayon unifié (cartes arrondies "luxe") ─── */
+    --radius: 1rem;
+
+    /* ─── État métier : participations disponibles ─── */
     --participation-available: 16 23% 66%;
-    --champagne: 16 23% 66%;
-    --champagne-foreground: 0 0% 7%;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* ─── Sidebar (admin) ─── */
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 89%;
+    --sidebar-primary: 16 23% 66%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 16 23% 66%;
   }
 
+  /* Le site est nativement sombre : .dark = mêmes valeurs */
   .dark {
-    --background: 0 0% 5%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 98%;
   }
 }
 
 @layer utilities {
-  .text-luxury-gold {
-    color: hsl(var(--luxury-gold));
+  /* ─── Couleur d'accent (helpers) ─── */
+  .text-champagne { color: hsl(var(--champagne)); }
+  .bg-champagne   { background-color: hsl(var(--champagne)); }
+
+  /* ─── ÉCHELLE TYPOGRAPHIQUE — look luxe épuré ───
+     Une classe par niveau. À utiliser PARTOUT pour les titres. */
+
+  .ds-display {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+           font-extralight tracking-[0.15em] uppercase leading-tight;
   }
-  
-  .bg-luxury-gold {
-    background-color: hsl(var(--luxury-gold));
+
+  .ds-h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl
+           font-light tracking-[0.12em] uppercase leading-tight;
   }
-  
-  .text-ferrari-red {
-    color: hsl(var(--ferrari-red));
+
+  .ds-h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl
+           font-light tracking-[0.08em] leading-snug;
   }
-  
-  .text-champagne {
-    color: hsl(var(--champagne));
+
+  .ds-h3 {
+    @apply text-xl sm:text-2xl
+           font-light tracking-[0.04em] leading-snug;
   }
-  
-  .bg-champagne {
-    background-color: hsl(var(--champagne));
+
+  .ds-card-title {
+    @apply text-lg sm:text-xl
+           font-normal tracking-[0.02em] leading-snug;
   }
-  
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  .ds-eyebrow {
+    @apply inline-block text-xs uppercase tracking-[0.2em]
+           text-muted-foreground;
   }
-  
+
+  .ds-eyebrow-pill {
+    @apply inline-block text-xs uppercase tracking-[0.2em]
+           text-muted-foreground border border-border
+           rounded-full px-4 py-1;
+  }
+
+  .ds-lead { @apply text-base sm:text-lg text-muted-foreground leading-relaxed; }
+  .ds-body { @apply text-sm sm:text-base text-muted-foreground leading-relaxed; }
+
+  /* ─── BLOCS / CARTES — style unifié ─── */
+
+  .ds-card {
+    @apply bg-card border border-border rounded-2xl p-6 sm:p-8;
+  }
+
+  .ds-card-hover {
+    @apply bg-card border border-border rounded-2xl p-6 sm:p-8
+           transition-all duration-500
+           hover:border-champagne/60 hover:-translate-y-2
+           hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)];
+  }
+
+  .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .hover-lift:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 40px hsl(0 0% 0% / 0.5);
   }
+
+  /* Picto décoratif : toujours en couleur d'accent */
+  .ds-icon { @apply text-champagne; }
 }
 
 @layer base {
@@ -143,7 +181,7 @@ All colors MUST be HSL.
     transform: none;
     box-shadow: none;
   }
-  
+
   .group:hover .group-hover\:scale-110 {
     transform: none;
   }
@@ -171,8 +209,6 @@ All colors MUST be HSL.
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Admin mobile responsive overrides (below 768px) */
-
 /* Scrollbar hide utility */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -182,7 +218,6 @@ All colors MUST be HSL.
   .admin-shell h1 { font-size: 1.25rem; line-height: 1.3; }
   .admin-shell h2 { font-size: 1.1rem; line-height: 1.3; }
 
-  /* Stack all multi-column grids into single column on mobile */
   .admin-shell [class*="grid-cols-2"],
   .admin-shell [class*="grid-cols-3"],
   .admin-shell [class*="grid-cols-4"],
@@ -191,13 +226,11 @@ All colors MUST be HSL.
     grid-template-columns: minmax(0, 1fr) !important;
   }
 
-  /* Tables: horizontal scroll wrapper */
   .admin-shell table { min-width: 100%; font-size: 14px; }
   .admin-shell .overflow-x-auto,
   .admin-shell table {
     -webkit-overflow-scrolling: touch;
   }
-  /* Wrap any bare table in scroll */
   .admin-shell > table,
   .admin-shell div:not(.overflow-x-auto):not(.overflow-auto) > table {
     display: block;
@@ -205,28 +238,23 @@ All colors MUST be HSL.
     white-space: nowrap;
   }
 
-  /* Action buttons min height */
   .admin-shell button:not([class*="h-5"]):not([class*="h-6"]):not([class*="h-7"]):not([class*="h-8"]):not([class*="h-9"]):not([class*="size-"]) {
     min-height: 44px;
   }
-  /* Form fields full width + tall */
   .admin-shell input:not([type="checkbox"]):not([type="radio"]),
   .admin-shell select,
   .admin-shell textarea {
     width: 100%;
     min-height: 48px;
-    font-size: 16px; /* prevents iOS zoom */
+    font-size: 16px;
   }
   .admin-shell textarea { min-height: 96px; }
   .admin-shell label { display: block; font-size: 14px; margin-bottom: 4px; }
 
-  /* Charts container readable height */
   .admin-shell .recharts-responsive-container { min-height: 220px !important; width: 100% !important; }
 
-  /* Prevent horizontal overflow */
   .admin-shell { overflow-x: hidden; }
   .admin-shell * { max-width: 100%; }
 
-  /* Cards full width */
   .admin-shell [class*="max-w-"] { max-width: 100% !important; }
 }
