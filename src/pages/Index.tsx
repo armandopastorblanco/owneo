@@ -114,7 +114,7 @@ const Index = () => {
                   Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
-                  ✓ Un coche de lujo pasa más del 90% del tiempo aparcado. Paga por lo que vas a disfrutar, no por lo que duerme en el garaje.
+                  ✓&nbsp;El 90% del tiempo un superdeportivo está aparcado. Tú solo pagas lo que disfrutas.&nbsp;
                 </div>
               </div>
             </div>
