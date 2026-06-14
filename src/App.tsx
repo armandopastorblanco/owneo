@@ -39,6 +39,7 @@ import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import Creditos from "./pages/Creditos";
 import Unauthorized from "./pages/Unauthorized";
+import DesignSystem from "./pages/DesignSystem";
 import AdminGuard from "./components/admin/AdminGuard";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -130,6 +131,7 @@ const App = () => (
               <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
               <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
               <Route path="/creditos" element={<Creditos />} />
+              <Route path="/design-system" element={<DesignSystem />} />
               {/* Admin routes */}
               <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
                 <Route index element={<AdminDashboard />} />
