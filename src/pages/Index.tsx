@@ -39,7 +39,7 @@ const Index = () => {
       </Helmet>
       <Navbar />
 
-      {/* ─── HERO VIDEO ─── */}
+      {/* HERO VIDEO */}
       <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
         <video
           autoPlay
@@ -82,73 +82,72 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── NUESTRO MODELO ─── */}
+      {/* NUESTRO MODELO */}
       <section className="py-20 sm:py-24 px-4 sm:px-6 bg-card/30 border-y border-border">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center">
-            <span className="inline-block text-xs uppercase tracking-widest text-muted-foreground border border-border rounded-full px-4 py-1 mb-6">
-              Nuestro modelo
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-light text-foreground mb-6">
+            <span className="ds-eyebrow-pill mb-6">Nuestro modelo</span>
+            <h2 className="ds-h2 text-foreground mt-6 mb-6">
               El lujo que se comparte
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="ds-lead max-w-3xl mx-auto">
               Una marca que redefine el acceso a los coches de alta gama a través de la multipropiedad: un modelo eficiente, moderno y aspiracional, alineado con la nueva manera de entender la movilidad.
             </p>
           </div>
 
-          {/* 3 Métricas */}
-          <div className="grid md:grid-cols-3 gap-6 mt-16">
-            <div className="group relative bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-champagne/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)] animate-fade-in overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-champagne/0 via-champagne/0 to-champagne/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <Percent className="w-8 h-8 text-champagne mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-                <div className="text-5xl font-bold text-champagne mb-2 transition-transform duration-500 group-hover:scale-105">10%</div>
-                <div className="font-semibold text-foreground mb-2">Del valor del vehículo</div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
-                </p>
+          {/* 3 Métricas — alignées via flex + zones réservées + zoom au survol */}
+          <div className="grid md:grid-cols-3 gap-6 mt-16 items-stretch">
+            {/* Carte 1 */}
+            <div className="ds-card-hover group h-full flex flex-col text-center animate-fade-in overflow-hidden">
+              <Percent className="ds-icon w-8 h-8 mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+              <div className="min-h-[6rem] flex flex-col items-center justify-start">
+                <div className="text-5xl font-extralight text-champagne leading-none transition-transform duration-500 group-hover:scale-105">10%</div>
               </div>
+              <div className="font-normal text-foreground mb-2">Del valor del vehículo</div>
+              <p className="ds-body">
+                Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
+              </p>
             </div>
-            <div className="group relative bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-champagne/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)] animate-fade-in overflow-hidden" style={{ animationDelay: "100ms" }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-champagne/0 via-champagne/0 to-champagne/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <CalendarDays className="w-8 h-8 text-champagne mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-                <div className="text-5xl font-bold text-champagne mb-2 leading-none transition-transform duration-500 group-hover:scale-105">
-                  4
-                  <div className="text-base font-semibold mt-1">Semanas</div>
-                </div>
-                <div className="font-semibold text-foreground mb-2">Garantizadas al año</div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
-                </p>
-                <p className="text-xs text-muted-foreground mt-3 border-t border-border/40 pt-3">
-                  ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
-                </p>
+
+            {/* Carte 2 */}
+            <div className="ds-card-hover group h-full flex flex-col text-center animate-fade-in overflow-hidden" style={{ animationDelay: "100ms" }}>
+              <CalendarDays className="ds-icon w-8 h-8 mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+              <div className="min-h-[6rem] flex flex-col items-center justify-start">
+                <div className="text-5xl font-extralight text-champagne leading-none transition-transform duration-500 group-hover:scale-105">4</div>
+                <div className="text-base font-normal text-champagne/90 mt-1">Semanas</div>
               </div>
+              <div className="font-normal text-foreground mb-2">Garantizadas al año</div>
+              <p className="ds-body">
+                3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
+              </p>
+              <p className="text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40">
+                ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
+              </p>
             </div>
-            <div className="group relative bg-background rounded-2xl p-8 border border-border/50 text-center hover:border-champagne/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)] animate-fade-in overflow-hidden" style={{ animationDelay: "200ms" }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-champagne/0 via-champagne/0 to-champagne/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <Users className="w-8 h-8 text-champagne mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-                <div className="text-5xl font-bold text-champagne mb-2 transition-transform duration-500 group-hover:scale-105">÷10</div>
-                <div className="font-semibold text-foreground mb-2">Los gastos compartidos</div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
-                </p>
-                <p className="text-xs text-muted-foreground mt-3 border-t border-border/40 pt-3">
-                  ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
-                </p>
+
+            {/* Carte 3 */}
+            <div className="ds-card-hover group h-full flex flex-col text-center animate-fade-in overflow-hidden" style={{ animationDelay: "200ms" }}>
+              <Users className="ds-icon w-8 h-8 mb-4 mx-auto transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+              <div className="min-h-[6rem] flex flex-col items-center justify-start">
+                <div className="text-5xl font-extralight text-champagne leading-none transition-transform duration-500 group-hover:scale-105">÷10</div>
               </div>
+              <div className="font-normal text-foreground mb-2">Los gastos compartidos</div>
+              <p className="ds-body">
+                Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
+              </p>
+              <p className="text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40">
+                ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── COMPARATIVA FERRARI ROMA ─── */}
+      {/* COMPARATIVA FERRARI ROMA */}
       <section className="py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-3xl overflow-hidden mb-20" style={{ minHeight: "420px" }}>
+          {/* Bloc hero comparaison */}
+          <div className="relative rounded-3xl overflow-hidden mb-12" style={{ minHeight: "420px" }}>
             <img
               src={ferrariRomaSpider}
               alt="Ferrari Roma Spider"
@@ -170,14 +169,13 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 items-stretch">
+          {/* Les 2 cartes comparatives */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12 items-stretch">
             <div className="bg-card border border-border rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
               <div>
-                <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-10">
-                  Comprándolo
-                </span>
-                <div className="mb-8">
-                  <p className="text-4xl sm:text-6xl font-light text-foreground/40 leading-none mb-3">~240.500€</p>
+                <span className="ds-tag mb-10">Comprándolo</span>
+                <div className="mb-8 mt-10">
+                  <p className="text-4xl sm:text-6xl font-light text-muted-foreground leading-none mb-3">~240.500€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años</p>
                 </div>
                 <div className="space-y-3 border-t border-border pt-6">
@@ -212,10 +210,8 @@ const Index = () => {
                 </div>
               </div>
               <div>
-                <span className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10 text-champagne border-champagne/30">
-                  Con OWNEO
-                </span>
-                <div className="mb-8">
+                <span className="ds-tag mb-10 mt-10 text-champagne border-champagne/30">Con OWNEO</span>
+                <div className="mb-8 mt-10">
                   <p className="text-4xl sm:text-6xl font-light leading-none mb-3 text-champagne">~26.400€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años · todo gestionado</p>
                 </div>
@@ -248,6 +244,7 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Bloc final "El mismo Ferrari Roma" */}
           <div className="relative rounded-2xl overflow-hidden" style={{ minHeight: "380px" }}>
             <img
               src={ferrariRomaCockpit}
@@ -276,7 +273,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── CTA ─── */}
+      {/* CTA */}
       <section className="py-8 px-4 sm:px-6 bg-card/30 border-y border-border">
         <div className="container mx-auto max-w-6xl text-center">
           <Link to="/nuestro-modelo">
@@ -294,7 +291,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── FEATURED COLLECTION ─── */}
+      {/* FEATURED COLLECTION */}
       <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
@@ -332,7 +329,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── LOCATIONS ─── */}
+      {/* LOCATIONS */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card/50">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
@@ -353,7 +350,7 @@ const Index = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                   <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="w-4 h-4 text-foreground" />
+                    <MapPin className="w-4 h-4 text-champagne" />
                     <span className="text-sm text-muted-foreground uppercase tracking-wider">España</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-light text-foreground mb-2">{city.name}</h3>
@@ -378,7 +375,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── STATS ─── */}
+      {/* STATS */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card border-y border-border">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-10 sm:gap-12 text-center">
@@ -398,7 +395,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── SEO STORYTELLING ─── */}
+      {/* SEO STORYTELLING */}
       <section className="py-20 sm:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 sm:mb-16">
