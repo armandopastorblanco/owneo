@@ -41,17 +41,17 @@ const Index = () => {
 
       {/* ─── HERO VIDEO ─── */}
       <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  preload="auto"
-  className="absolute inset-0 w-full h-full object-cover"
-  style={{ filter: "grayscale(40%) brightness(0.70)" }}
->
-  <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
-</video>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "grayscale(40%) brightness(0.70)" }}
+        >
+          <source src="/ferrari-f430-hero.mp4" type="video/mp4" />
+        </video>
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
 
@@ -89,7 +89,7 @@ const Index = () => {
             <span className="inline-block text-xs uppercase tracking-widest text-muted-foreground border border-border rounded-full px-4 py-1 mb-6">
               Nuestro modelo
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-4xl sm:text-5xl font-light text-foreground mb-6">
               El lujo que se comparte
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
@@ -156,14 +156,14 @@ const Index = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/85" />
             <div className="relative z-10 text-center py-20 px-6">
-              <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6" style={{ color: "rgba(189,160,149,0.7)" }}>
+              <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6 text-champagne/70">
                 Ejemplo real · Ferrari Roma
               </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight mb-6">
                 Llevas años mirando<br />ese Ferrari.
-                <span className="block mt-2" style={{ color: "#bda095" }}>Ya es hora.</span>
+                <span className="block mt-2 text-champagne">Ya es hora.</span>
               </h2>
-              <div className="w-12 h-px mx-auto mb-8" style={{ backgroundColor: "#bda095" }} />
+              <div className="w-12 h-px mx-auto mb-8 bg-champagne" />
               <p className="text-base sm:text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
                 No se trata de gastar menos. Se trata de tomar la decisión más inteligente.
               </p>
@@ -171,16 +171,16 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 items-stretch">
-            <div className="bg-[#0d0d0d] border border-white/8 rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
+            <div className="bg-card border border-border rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
               <div>
-                <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground border border-white/10 rounded-full px-4 py-1.5 mb-10">
+                <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-10">
                   Comprándolo
                 </span>
                 <div className="mb-8">
-                  <p className="text-4xl sm:text-6xl font-black text-foreground/40 leading-none mb-3">~240.500€</p>
+                  <p className="text-4xl sm:text-6xl font-light text-foreground/40 leading-none mb-3">~240.500€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años</p>
                 </div>
-                <div className="space-y-3 border-t border-white/6 pt-6">
+                <div className="space-y-3 border-t border-border pt-6">
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-muted-foreground">Precio de compra</span>
                     <span className="text-xs text-muted-foreground">330.000€</span>
@@ -195,38 +195,31 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 pt-6 border-t border-white/6 space-y-2.5">
+              <div className="mt-8 pt-6 border-t border-border space-y-2.5">
                 {["Seguro y mantenimiento a tu cargo", "Depreciación inmediata", "Inmovilización de capital"].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
-                    <X className="w-3 h-3 flex-shrink-0" style={{ color: "rgba(239,68,68,0.5)" }} />
+                    <X className="w-3 h-3 flex-shrink-0 text-destructive/60" />
                     <span className="text-xs text-muted-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div
-              className="rounded-2xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
-              style={{
-                backgroundColor: "#0d0d0d",
-                border: "1px solid rgba(189,160,149,0.4)",
-                boxShadow: "0 0 60px rgba(189,160,149,0.07), 0 0 120px rgba(189,160,149,0.03)",
-              }}
-            >
+            <div className="rounded-2xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden bg-card border border-champagne/40 shadow-[0_0_60px_hsl(var(--champagne)/0.07),0_0_120px_hsl(var(--champagne)/0.03)]">
               <div className="absolute top-0 right-0">
-                <div className="text-[9px] font-black uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl" style={{ backgroundColor: "#bda095", color: "#000000" }}>
+                <div className="text-[9px] font-semibold uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl bg-champagne text-champagne-foreground">
                   La decisión inteligente
                 </div>
               </div>
               <div>
-                <span className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10" style={{ color: "#bda095", borderColor: "rgba(189,160,149,0.3)" }}>
+                <span className="inline-block text-[10px] uppercase tracking-[0.3em] border rounded-full px-4 py-1.5 mb-10 text-champagne border-champagne/30">
                   Con OWNEO
                 </span>
                 <div className="mb-8">
-                  <p className="text-4xl sm:text-6xl font-black leading-none mb-3" style={{ color: "#bda095" }}>~26.400€</p>
+                  <p className="text-4xl sm:text-6xl font-light leading-none mb-3 text-champagne">~26.400€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años · todo gestionado</p>
                 </div>
-                <div className="space-y-3 border-t pt-6" style={{ borderColor: "rgba(189,160,149,0.12)" }}>
+                <div className="space-y-3 border-t border-champagne/10 pt-6">
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-muted-foreground">Participación única</span>
                     <span className="text-xs text-muted-foreground">33.000€</span>
@@ -234,20 +227,20 @@ const Index = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-muted-foreground">
                       Gestión 5 años{" "}
-                      <span style={{ color: "rgba(189,160,149,0.7)" }}>(incluida en cuota anual)</span>
+                      <span className="text-champagne/70">(incluida en cuota anual)</span>
                     </span>
                     <span className="text-xs text-muted-foreground">+ 16.500€</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-muted-foreground">Recuperas (reventa 70%)</span>
-                    <span className="text-xs" style={{ color: "rgba(134,239,172,0.8)" }}>− 23.100€</span>
+                    <span className="text-xs text-green-400/80">− 23.100€</span>
                   </div>
                 </div>
               </div>
-              <div className="mt-8 pt-6 border-t space-y-2.5" style={{ borderColor: "rgba(189,160,149,0.12)" }}>
+              <div className="mt-8 pt-6 border-t border-champagne/10 space-y-2.5">
                 {["Seguro, garaje y mantenimiento ×10", "21 días estándar + 7 días premium al año", "Hasta un 70% de tu inversión recuperada"].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
-                    <Check className="w-3 h-3 flex-shrink-0" style={{ color: "#bda095" }} />
+                    <Check className="w-3 h-3 flex-shrink-0 text-champagne" />
                     <span className="text-xs text-muted-foreground">{item}</span>
                   </div>
                 ))}
@@ -263,24 +256,19 @@ const Index = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/75 to-black/90" />
             <div className="relative z-10 px-8 py-16 text-center">
-              <p className="text-[10px] uppercase tracking-[0.35em] mb-4" style={{ color: "rgba(189,160,149,0.5)" }}>La diferencia</p>
-              <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">El mismo Ferrari Roma.</p>
-              <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6" style={{ color: "#bda095" }}>214.100€ de diferencia.</p>
+              <p className="text-[10px] uppercase tracking-[0.35em] mb-4 text-champagne/50">La diferencia</p>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">El mismo Ferrari Roma.</p>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6 text-champagne">214.100€ de diferencia.</p>
               <p className="text-sm text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
                 No es magia. Es una estructura de propiedad compartida diseñada para los que entienden que el lujo inteligente no tiene nada que envidiarle al lujo tradicional.
               </p>
               <Link to="/nuestro-modelo">
-                <button
-                  className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] px-8 py-4 rounded-full transition-all duration-300"
-                  style={{ backgroundColor: "#bda095", color: "#000000" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(189,160,149,0.85)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#bda095"; }}
-                >
+                <button className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] px-8 py-4 rounded-full transition-all duration-300 bg-champagne text-champagne-foreground hover:bg-champagne/85">
                   Quiero conducirlo
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </Link>
-              <p className="text-xs mt-5" style={{ color: "rgba(255,255,255,0.2)" }}>
+              <p className="text-xs mt-5 text-white/20">
                 Cálculo estimado · Ferrari Roma · 21 días estándar + 7 días premium al año · 5 años
               </p>
             </div>
@@ -310,7 +298,7 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">Colección Destacada</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 text-foreground">Colección Destacada</h2>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo
             </p>
@@ -348,7 +336,7 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card/50">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">Nuestras Ubicaciones</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 text-foreground">Nuestras Ubicaciones</h2>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Descubre nuestra flota en las ciudades más exclusivas de España
             </p>
@@ -358,7 +346,7 @@ const Index = () => {
               <Link
                 key={city.id}
                 to="/ubicaciones"
-                className="group relative overflow-hidden rounded-lg aspect-[4/3] hover-lift"
+                className="group relative overflow-hidden rounded-2xl aspect-[4/3] hover-lift"
                 onClick={() => trackEvent("click_city_card", { city_name: city.name })}
               >
                 <img src={city.image} alt={city.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -368,7 +356,7 @@ const Index = () => {
                     <MapPin className="w-4 h-4 text-foreground" />
                     <span className="text-sm text-muted-foreground uppercase tracking-wider">España</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">{city.name}</h3>
+                  <h3 className="text-xl sm:text-2xl font-light text-foreground mb-2">{city.name}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
                 </div>
               </Link>
@@ -395,15 +383,15 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-10 sm:gap-12 text-center">
             <div>
-              <div className="text-4xl sm:text-5xl font-bold text-foreground mb-2">15+</div>
+              <div className="text-4xl sm:text-5xl font-light text-champagne mb-2">15+</div>
               <div className="text-muted-foreground">Supercoches de Lujo</div>
             </div>
             <div>
-              <div className="text-4xl sm:text-5xl font-bold text-foreground mb-2">5</div>
+              <div className="text-4xl sm:text-5xl font-light text-champagne mb-2">5</div>
               <div className="text-muted-foreground">Ubicaciones Premium</div>
             </div>
             <div>
-              <div className="text-4xl sm:text-5xl font-bold text-foreground mb-2">100%</div>
+              <div className="text-4xl sm:text-5xl font-light text-champagne mb-2">100%</div>
               <div className="text-muted-foreground">Excelencia Garantizada</div>
             </div>
           </div>
@@ -414,7 +402,7 @@ const Index = () => {
       <section className="py-20 sm:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-foreground">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 text-foreground">
               El Lujo de los Supercoches, Ahora Accesible
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
@@ -424,11 +412,11 @@ const Index = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-foreground/20 transition-all duration-300 hover:bg-card/50">
-              <div className="w-12 h-12 rounded-xl bg-foreground/10 flex items-center justify-center mb-6">
-                <Star className="w-6 h-6 text-foreground" />
+            <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-champagne/40 transition-all duration-300 hover:bg-card/50">
+              <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
+                <Star className="w-6 h-6 text-champagne" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-4">Las Marcas Más Prestigiosas del Mundo</h3>
+              <h3 className="text-xl font-light text-foreground mb-4">Las Marcas Más Prestigiosas del Mundo</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Nuestra flota exclusiva incluye los{" "}
                 <strong className="text-foreground">superdeportivos Ferrari</strong> más codiciados, desde el icónico Ferrari Portofino hasta el impresionante F8 Tributo. Experimenta la potencia de un{" "}
@@ -439,11 +427,11 @@ const Index = () => {
                 Ver más <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
-            <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-foreground/20 transition-all duration-300 hover:bg-card/50">
-              <div className="w-12 h-12 rounded-xl bg-foreground/10 flex items-center justify-center mb-6">
-                <Star className="w-6 h-6 text-foreground" />
+            <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-champagne/40 transition-all duration-300 hover:bg-card/50">
+              <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
+                <Star className="w-6 h-6 text-champagne" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-4">Elegancia Británica y Exclusividad</h3>
+              <h3 className="text-xl font-light text-foreground mb-4">Elegancia Británica y Exclusividad</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Descubre el refinamiento del{" "}
                 <strong className="text-foreground">Aston Martin DB11</strong>, la innovación aerodinámica del{" "}
@@ -458,9 +446,9 @@ const Index = () => {
             </article>
           </div>
           <div className="bg-gradient-to-br from-card/80 to-card/40 rounded-3xl p-6 sm:p-8 md:p-12 border border-border/50 mb-12 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-foreground/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-champagne/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-foreground mb-6 text-center">
                 Supercar Sharing: La Nueva Era del Lujo Compartido
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8 text-center max-w-3xl mx-auto">
@@ -470,15 +458,15 @@ const Index = () => {
               </p>
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
-                  <h4 className="font-bold text-foreground mb-2">Experiencia VIP</h4>
+                  <h4 className="font-light text-foreground mb-2">Experiencia VIP</h4>
                   <p className="text-sm text-muted-foreground">Servicio de concierge personalizado y entrega a domicilio en toda España</p>
                 </div>
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
-                  <h4 className="font-bold text-foreground mb-2">Flexibilidad Total</h4>
+                  <h4 className="font-light text-foreground mb-2">Flexibilidad Total</h4>
                   <p className="text-sm text-muted-foreground">Alquiler por días o semanas, adaptado a tus necesidades de lujo</p>
                 </div>
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
-                  <h4 className="font-bold text-foreground mb-2">Calidad Garantizada</h4>
+                  <h4 className="font-light text-foreground mb-2">Calidad Garantizada</h4>
                   <p className="text-sm text-muted-foreground">Vehículos impecables con mantenimiento premium y seguro completo</p>
                 </div>
               </div>
