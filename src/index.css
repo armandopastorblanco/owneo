@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 /* ════════════════════════════════════════════════════════════
-   OWNEO — DESIGN SYSTEM (source de vérité)
-   Toutes les couleurs sont en HSL. Ne jamais écrire de couleur
-   en dur dans les composants : utiliser les tokens ci-dessous.
+   OWNEO — DESIGN SYSTEM (source de vérité unique)
+   Principe : sobriété + champagne parcimonieux = luxe.
+   Toutes les couleurs en HSL. Jamais de couleur en dur dans
+   les composants : utiliser exclusivement les tokens/classes.
    ════════════════════════════════════════════════════════════ */
 
 @layer base {
@@ -20,38 +21,34 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    /* ─── Accent unique de la marque : CHAMPAGNE ───
-       Ne change la valeur qu'ici pour rebrander tout le site. */
+    /* ─── Accent unique : CHAMPAGNE (usage parcimonieux) ───
+       Rebrand : ne change la valeur QU'ICI. */
     --champagne: 16 23% 66%;
     --champagne-foreground: 0 0% 7%;
 
-    --primary: 16 23% 66%;            /* CTA principaux, accents forts */
+    --primary: 16 23% 66%;
     --primary-foreground: 0 0% 7%;
 
-    --secondary: 0 0% 15%;            /* boutons/blocs secondaires */
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 16 23% 66%;             /* pictos décoratifs, survols */
+    --accent: 16 23% 66%;
     --accent-foreground: 0 0% 7%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted-foreground: 0 0% 75%;
 
-    --destructive: 0 72% 45%;         /* erreurs / "agotado" uniquement */
+    --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    /* ─── Bordures & champs ─── */
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 16 23% 66%;
 
-    /* ─── Rayon unifié (cartes arrondies "luxe") ─── */
     --radius: 1rem;
 
-    /* ─── État métier : participations disponibles ─── */
     --participation-available: 16 23% 66%;
 
-    /* ─── Sidebar (admin) ─── */
     --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 89%;
     --sidebar-primary: 16 23% 66%;
@@ -62,7 +59,6 @@
     --sidebar-ring: 16 23% 66%;
   }
 
-  /* Le site est nativement sombre : .dark = mêmes valeurs */
   .dark {
     --background: 0 0% 7%;
     --foreground: 0 0% 98%;
@@ -74,54 +70,58 @@
   .text-champagne { color: hsl(var(--champagne)); }
   .bg-champagne   { background-color: hsl(var(--champagne)); }
 
-  /* ─── ÉCHELLE TYPOGRAPHIQUE — look luxe épuré ───
-     Une classe par niveau. À utiliser PARTOUT pour les titres. */
+  /* ════ TYPOGRAPHIE — échelle figée ════
+     Hero très fin & espacé · sections semi-gras sobre · sous-titres fins. */
 
   .ds-display {
     @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl
            font-extralight tracking-[0.15em] uppercase leading-tight;
   }
-
   .ds-h1 {
     @apply text-3xl sm:text-4xl md:text-5xl
            font-light tracking-[0.12em] uppercase leading-tight;
   }
-
   .ds-h2 {
     @apply text-2xl sm:text-3xl md:text-4xl
-           font-light tracking-[0.08em] leading-snug;
+           font-semibold tracking-[0.04em] leading-snug;
   }
-
   .ds-h3 {
     @apply text-xl sm:text-2xl
            font-light tracking-[0.04em] leading-snug;
   }
-
   .ds-card-title {
     @apply text-lg sm:text-xl
            font-normal tracking-[0.02em] leading-snug;
   }
-
-  .ds-eyebrow {
-    @apply inline-block text-xs uppercase tracking-[0.2em]
-           text-muted-foreground;
-  }
-
-  .ds-eyebrow-pill {
-    @apply inline-block text-xs uppercase tracking-[0.2em]
-           text-muted-foreground border border-border
-           rounded-full px-4 py-1;
-  }
-
   .ds-lead { @apply text-base sm:text-lg text-muted-foreground leading-relaxed; }
   .ds-body { @apply text-sm sm:text-base text-muted-foreground leading-relaxed; }
 
-  /* ─── BLOCS / CARTES — style unifié ─── */
+  /* ════ PASTILLES & TAGS ════
+     UN eyebrow champagne par section (au-dessus du titre).
+     Tags neutres pour les groupes de petits labels secondaires. */
 
+  /* Eyebrow de section — accent champagne (statique) */
+  .ds-eyebrow-pill {
+    @apply inline-block text-xs uppercase tracking-[0.2em] text-champagne
+           bg-champagne/10 border border-champagne/20 rounded-full px-4 py-2;
+  }
+
+  /* Tag secondaire — neutre & discret (ex. "Sin propiedad") */
+  .ds-tag {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em]
+           text-muted-foreground bg-card/50 border border-border
+           rounded-full px-4 py-2;
+  }
+
+  /* ════ PICTOS ════ Picto décoratif toujours en accent. */
+  .ds-icon { @apply text-champagne; }
+
+  /* ════ CARTES ════ */
+
+  /* Carte sobre (contenus fonctionnels/secondaires) */
   .ds-card {
     @apply bg-card border border-border rounded-2xl p-6 sm:p-8;
   }
-
   .ds-card-hover {
     @apply bg-card border border-border rounded-2xl p-6 sm:p-8
            transition-all duration-500
@@ -129,25 +129,52 @@
            hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.35)];
   }
 
+  /* Carte IMMERSIVE (moments forts) — image de fond + overlay.
+     À combiner avec le gabarit JSX (img + overlay + .ds-feature-body).
+     Effet : léger zoom de l'image + bordure & ombre dorée au survol. */
+  .ds-card-feature {
+    @apply group relative h-full overflow-hidden rounded-2xl
+           border border-border/50 transition-all duration-500
+           hover:border-champagne/60
+           hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.4)];
+  }
+  /* L'image de fond de la carte immersive */
+  .ds-card-feature-img {
+    @apply absolute inset-0 w-full h-full object-cover
+           transition-transform duration-700 group-hover:scale-105;
+  }
+  /* L'overlay sombre qui garantit la lisibilité du texte */
+  .ds-card-feature-overlay {
+    @apply absolute inset-0 bg-background/70;
+  }
+
+  /* ════ ALIGNEMENT NORMÉ du contenu des cartes immersives ════
+     Empilement en zones cohérentes d'une carte à l'autre. */
+  .ds-feature-body {
+    @apply relative z-10 flex flex-col items-center text-center
+           h-full p-8 sm:p-10;
+  }
+  /* Zone du chiffre-clé : hauteur réservée pour aligner les titres
+     même si l'unité est longue d'une carte à l'autre. */
+  .ds-feature-figure {
+    @apply min-h-[5.5rem] flex flex-col items-center justify-start;
+  }
+  /* Note / badge de bas de carte : toujours collé en bas. */
+  .ds-feature-note {
+    @apply mt-auto pt-4;
+  }
+
+  /* ════ EFFET utilitaire ════ */
   .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .hover-lift:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px hsl(0 0% 0% / 0.5);
   }
-
-  /* Picto décoratif : toujours en couleur d'accent */
-  .ds-icon { @apply text-champagne; }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground font-encode font-extralight;
-  }
-
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-encode font-extralight; }
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
@@ -155,11 +182,8 @@
 }
 
 /* Safe area for bottom nav */
-.safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
 
-/* Mobile-only: keep fixed header/footer anchored during pinch-zoom and scroll */
 @media (max-width: 767px) {
   nav.fixed,
   header.fixed {
@@ -170,28 +194,15 @@
   }
 }
 
-/* Bottom nav spacer for pages */
-.pb-bottom-nav {
-  padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
-}
+.pb-bottom-nav { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
 
-/* Remove hover effects on touch devices */
 @media (hover: none) and (pointer: coarse) {
-  .hover-lift:hover {
-    transform: none;
-    box-shadow: none;
-  }
-
-  .group:hover .group-hover\:scale-110 {
-    transform: none;
-  }
+  .hover-lift:hover { transform: none; box-shadow: none; }
+  .group:hover .group-hover\:scale-110 { transform: none; }
 }
 
-/* Ensure minimum touch targets */
 @media (pointer: coarse) {
-  button, a, [role="button"] {
-    min-height: 44px;
-  }
+  button, a, [role="button"] { min-height: 44px; }
 }
 
 /* react-big-calendar dark theme */
@@ -205,11 +216,9 @@
 .rbc-dark .rbc-off-range { color: hsl(var(--muted-foreground)); }
 .rbc-dark .rbc-event { padding: 2px 4px; }
 
-/* Hide scrollbar utility */
+/* Scrollbar utils */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Scrollbar hide utility */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -217,7 +226,6 @@
   .admin-shell { font-size: 14px; }
   .admin-shell h1 { font-size: 1.25rem; line-height: 1.3; }
   .admin-shell h2 { font-size: 1.1rem; line-height: 1.3; }
-
   .admin-shell [class*="grid-cols-2"],
   .admin-shell [class*="grid-cols-3"],
   .admin-shell [class*="grid-cols-4"],
@@ -225,19 +233,15 @@
   .admin-shell [class*="grid-cols-6"] {
     grid-template-columns: minmax(0, 1fr) !important;
   }
-
   .admin-shell table { min-width: 100%; font-size: 14px; }
   .admin-shell .overflow-x-auto,
-  .admin-shell table {
-    -webkit-overflow-scrolling: touch;
-  }
+  .admin-shell table { -webkit-overflow-scrolling: touch; }
   .admin-shell > table,
   .admin-shell div:not(.overflow-x-auto):not(.overflow-auto) > table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
-
   .admin-shell button:not([class*="h-5"]):not([class*="h-6"]):not([class*="h-7"]):not([class*="h-8"]):not([class*="h-9"]):not([class*="size-"]) {
     min-height: 44px;
   }
@@ -250,11 +254,8 @@
   }
   .admin-shell textarea { min-height: 96px; }
   .admin-shell label { display: block; font-size: 14px; margin-bottom: 4px; }
-
   .admin-shell .recharts-responsive-container { min-height: 220px !important; width: 100% !important; }
-
   .admin-shell { overflow-x: hidden; }
   .admin-shell * { max-width: 100%; }
-
   .admin-shell [class*="max-w-"] { max-width: 100% !important; }
 }
