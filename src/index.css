@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ════════════════════════════════════════════════════════════
-   OWNEO — DESIGN SYSTEM (source de vérité unique)
-   Principe : sobriété + champagne parcimonieux = luxe.
+/* ============================================================
+   OWNEO - DESIGN SYSTEM (source de verite unique)
+   Principe: sobriete + champagne parcimonieux = luxe.
    Toutes les couleurs en HSL. Jamais de couleur en dur dans
-   les composants : utiliser exclusivement les tokens/classes.
-   ════════════════════════════════════════════════════════════ */
+   les composants: utiliser exclusivement les tokens/classes.
+   ============================================================ */
 
 @layer base {
   :root {
