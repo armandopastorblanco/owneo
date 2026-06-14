@@ -113,6 +113,9 @@ const Index = () => {
                 <p className="text-sm text-white/80 leading-relaxed">
                   Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
                 </p>
+                <div className="ds-feature-note text-xs text-champagne">
+                  ✓ Un coche de lujo pasa más del 90% del tiempo aparcado. Paga por lo que vas a disfrutar, no por lo que duerme en el garaje.
+                </div>
               </div>
             </div>
 
@@ -120,6 +123,7 @@ const Index = () => {
             <div className="group ds-card-feature animate-fade-in" style={{ animationDelay: "100ms" }}>
               <img src={featureWeeksBg} alt="" aria-hidden="true" loading="lazy" width={1280} height={800} className="ds-card-feature-img" />
               <div className="ds-card-feature-overlay" />
+              <div className="absolute inset-0 bg-black/25" />
               <div className="ds-feature-body">
                 <CalendarDays className="ds-icon w-10 h-10 mb-4 transition-transform duration-500 group-hover:scale-110" />
                 <div className="ds-feature-figure">
@@ -186,7 +190,8 @@ const Index = () => {
 
           {/* Les 2 cartes comparatives */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12 items-stretch">
-            <div className="bg-card border border-border rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
+            {/* Carte gauche — Comprándolo */}
+            <div className="bg-card border border-border rounded-2xl p-8 sm:p-10 pt-12 flex flex-col justify-between">
               <div>
                 <span className="ds-tag mb-10">Comprándolo</span>
                 <div className="mb-8 mt-10">
@@ -218,14 +223,15 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden bg-card border border-champagne/40 shadow-[0_0_60px_hsl(var(--champagne)/0.07),0_0_120px_hsl(var(--champagne)/0.03)]">
+            {/* Carte droite — Con OWNEO */}
+            <div className="rounded-2xl p-8 sm:p-10 pt-12 flex flex-col justify-between relative overflow-hidden bg-card border border-champagne/40 shadow-[0_0_60px_hsl(var(--champagne)/0.07),0_0_120px_hsl(var(--champagne)/0.03)]">
               <div className="absolute top-0 right-0">
                 <div className="text-[9px] font-semibold uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl bg-champagne text-champagne-foreground">
                   La decisión inteligente
                 </div>
               </div>
               <div>
-                <span className="ds-tag mb-10 mt-10 text-champagne border-champagne/30">Con OWNEO</span>
+                <span className="ds-tag mb-10 text-champagne border-champagne/30">Con OWNEO</span>
                 <div className="mb-8 mt-10">
                   <p className="text-4xl sm:text-6xl font-light leading-none mb-3 text-champagne">~26.400€</p>
                   <p className="text-sm text-muted-foreground">coste real en 5 años · todo gestionado</p>
