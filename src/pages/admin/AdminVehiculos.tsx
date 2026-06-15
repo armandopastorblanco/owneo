@@ -40,7 +40,26 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import type { Tables } from "@/integrations/supabase/types";
 
-type DbCar = Tables<"cars"> & { promotion?: Record<string, unknown> | null };
+type DbCar = Tables<"cars"> & {
+  promotion?: Record<string, unknown> | null;
+  matricula?: string | null;
+};
+
+/* ═══════ SLUG HELPERS ═══════ */
+
+function slugify(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function buildUniqueSlug(model: string, cityName: string) {
+  const rand = Math.random().toString(36).slice(2, 6);
+  return [slugify(model), slugify(cityName), rand].filter(Boolean).join("-");
+}
 
 /* ═══════ DATA HOOKS ═══════ */
 
@@ -132,6 +151,13 @@ const AdminVehiculos = () => {
   // Form state
   const [form, setForm] = useState<Record<string, unknown>>({});
 
+  // Map location_id -> name (pour affichage ville unique)
+  const locationName = useMemo(() => {
+    const map: Record<string, string> = {};
+    (locations || []).forEach((l) => { map[l.id] = l.name; });
+    return map;
+  }, [locations]);
+
   const brands = useMemo(() => {
     if (!cars) return [];
     return [...new Set(cars.map((c) => c.brand))].sort();
@@ -148,11 +174,12 @@ const AdminVehiculos = () => {
         const s = getCarStatus(c).label.toLowerCase();
         if (s !== statusFilter) return false;
       }
-      if (cityFilter !== "todas" && !(c.available_in || []).includes(cityFilter)) return false;
+      // Filtre ville basé sur location_id (ville unique)
+      if (cityFilter !== "todas" && (locationName[c.location_id as string] || "") !== cityFilter) return false;
       if (brandFilter !== "todas" && c.brand !== brandFilter) return false;
       return true;
     });
-  }, [cars, search, statusFilter, cityFilter, brandFilter]);
+  }, [cars, search, statusFilter, cityFilter, brandFilter, locationName]);
 
   /* ── open drawer ── */
   const openDrawer = async (car?: DbCar) => {
@@ -180,7 +207,7 @@ const AdminVehiculos = () => {
         weeks_per_participation: (car as DbCar & { weeks_per_participation?: number }).weeks_per_participation ?? 4,
         km_per_participation: (car as DbCar & { km_per_participation?: number }).km_per_participation ?? 2000,
         location_id: (car as DbCar).location_id || "",
-        available_in: car.available_in || [],
+        matricula: (car as DbCar).matricula || "",
         is_active: car.is_active ?? false,
         price: car.price,
         max_participations: car.max_participations || 10,
@@ -214,7 +241,8 @@ const AdminVehiculos = () => {
         annual_fee_percent: 10, annual_fee_override: null,
         participation_duration_years: 5, weeks_per_participation: 4, km_per_participation: 2000,
         location_id: "",
-        available_in: [], is_active: false, price: 0,
+        matricula: "",
+        is_active: false, price: 0,
         max_participations: 10, participation_price: 0,
         remaining_participations: 10, specifications: {},
         features: [], image_url: "", gallery: [], status: "active",
@@ -282,7 +310,7 @@ const AdminVehiculos = () => {
         weeks_per_participation: Number(form.weeks_per_participation ?? 4),
         km_per_participation: Number(form.km_per_participation ?? 2000),
         location_id: form.location_id as string,
-        available_in: form.available_in as string[],
+        matricula: ((form.matricula as string) || "").trim() || null,
         is_active: form.is_active as boolean,
         price: Number(form.price),
         max_participations: Number(form.max_participations),
@@ -299,17 +327,13 @@ const AdminVehiculos = () => {
         manager_phone: (form.manager_phone as string) || null,
       };
 
-      // Promotion stays on cars; admin_notes now lives in car_admin_notes
-      const fullPayload = {
-        ...payload,
-        promotion: promo,
-      } as Record<string, unknown>;
-
       const adminNotesValue = (form.admin_notes as string) || null;
       let carId: string;
 
       if (editingCar) {
+        // Édition : on ne touche pas au slug existant
         carId = editingCar.id;
+        const fullPayload = { ...payload, promotion: promo } as Record<string, unknown>;
         const { error } = await supabase
           .from("cars")
           .update(fullPayload as never)
@@ -322,6 +346,13 @@ const AdminVehiculos = () => {
           _details: { changes: Object.keys(payload) } as never,
         });
       } else {
+        // Création : on génère un slug unique modele-ville-xxxx
+        const cityName = locationName[form.location_id as string] || "";
+        const fullPayload = {
+          ...payload,
+          promotion: promo,
+          slug: buildUniqueSlug(form.model as string, cityName),
+        } as Record<string, unknown>;
         const { data, error } = await supabase
           .from("cars")
           .insert(fullPayload as never)
@@ -353,10 +384,14 @@ const AdminVehiculos = () => {
   /* ── duplicate mutation ── */
   const duplicateMutation = useMutation({
     mutationFn: async (car: DbCar) => {
-      const { id, created_at, updated_at, ...rest } = car;
+      // On retire id, dates ET slug (régénéré) pour éviter la collision unique
+      const { id, created_at, updated_at, slug, ...rest } = car as DbCar & { slug?: string };
+      const cityName = locationName[car.location_id as string] || car.model;
       const payload = {
         ...rest,
         name: `${car.name} (Copia)`,
+        slug: buildUniqueSlug(car.model, cityName),
+        matricula: null,
         is_active: false,
         remaining_participations: car.max_participations || 10,
         status: "active",
@@ -495,7 +530,7 @@ const AdminVehiculos = () => {
                     <TableHead className="w-16"></TableHead>
                     <TableHead>Vehículo</TableHead>
                     <TableHead>Marca</TableHead>
-                    <TableHead>Ciudad(es)</TableHead>
+                    <TableHead>Ciudad</TableHead>
                     <TableHead className="text-right">Precio</TableHead>
                     <TableHead className="text-right">Participación</TableHead>
                     <TableHead>Participaciones</TableHead>
@@ -507,6 +542,7 @@ const AdminVehiculos = () => {
                   {filtered.map((car) => {
                     const status = getCarStatus(car);
                     const prog = participationProgress(car);
+                    const cityName = locationName[car.location_id as string] || "—";
                     return (
                       <TableRow key={car.id}>
                         <TableCell>
@@ -520,16 +556,19 @@ const AdminVehiculos = () => {
                             )}
                           </div>
                         </TableCell>
-                        <TableCell className="font-medium text-foreground">{car.name}</TableCell>
+                        <TableCell className="font-medium text-foreground">
+                          <div className="flex items-center gap-2">
+                            <span>{car.name}</span>
+                            {car.matricula && (
+                              <Badge variant="outline" className="text-[10px] font-mono shrink-0">
+                                {car.matricula}
+                              </Badge>
+                            )}
+                          </div>
+                        </TableCell>
                         <TableCell className="text-muted-foreground">{car.brand}</TableCell>
                         <TableCell>
-                          <div className="flex flex-wrap gap-1">
-                            {(car.available_in || []).map((city) => (
-                              <Badge key={city} variant="outline" className="text-xs">
-                                {city}
-                              </Badge>
-                            ))}
-                          </div>
+                          <Badge variant="outline" className="text-xs">{cityName}</Badge>
                         </TableCell>
                         <TableCell className="text-right text-foreground">
                           €{Number(car.price).toLocaleString("es-ES")}
@@ -659,15 +698,10 @@ const AdminVehiculos = () => {
                 />
               </div>
               <div>
-                <Label>Ciudad principal <span className="text-destructive">*</span></Label>
+                <Label>Ciudad <span className="text-destructive">*</span></Label>
                 <Select
                   value={(form.location_id as string) || ""}
-                  onValueChange={(v) => {
-                    const loc = locations?.find((l) => l.id === v);
-                    const current = (form.available_in as string[]) || [];
-                    const available_in = loc && !current.includes(loc.name) ? [...current, loc.name] : current;
-                    setForm({ ...form, location_id: v, available_in });
-                  }}
+                  onValueChange={(v) => setForm({ ...form, location_id: v })}
                 >
                   <SelectTrigger><SelectValue placeholder="Selecciona una ciudad" /></SelectTrigger>
                   <SelectContent>
@@ -676,208 +710,124 @@ const AdminVehiculos = () => {
                     ))}
                   </SelectContent>
                 </Select>
-                <p className="text-xs text-muted-foreground mt-1">Obligatoria. Cada vehículo debe estar asignado a una ciudad.</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Obligatoria. Un vehículo = una ciudad. Para ofrecer el mismo modelo en varias ciudades, usa el botón "Duplicar" desde la lista.
+                </p>
               </div>
               <div>
-                <Label className="mb-2 block">Ciudades disponibles (adicionales)</Label>
-                <div className="grid grid-cols-3 gap-2">
-                  {locations?.map((loc) => (
-                    <label key={loc.id} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
-                      <Checkbox
-                        checked={(form.available_in as string[])?.includes(loc.name)}
-                        onCheckedChange={(checked) => {
-                          const current = (form.available_in as string[]) || [];
-                          setForm({
-                            ...form,
-                            available_in: checked
-                              ? [...current, loc.name]
-                              : current.filter((c) => c !== loc.name),
-                          });
-                        }}
-                      />
-                      {loc.name}
-                    </label>
-                  ))}
-                </div>
+                <Label>Matrícula <span className="text-muted-foreground text-xs">(opcional)</span></Label>
+                <Input
+                  value={(form.matricula as string) || ""}
+                  onChange={(e) => setForm({ ...form, matricula: e.target.value })}
+                  placeholder="Ej. 1234-ABC"
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Identificación física del vehículo. Visible en Flota para diferenciar dos coches del mismo modelo y ciudad.
+                </p>
               </div>
-              <div className="flex items-center gap-3 pt-2">
+            </TabsContent>
+
+            {/* ─── TAB 2: Pricing ─── */}
+            <TabsContent value="pricing" className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <div>
+                  <Label>Publicado en el sitio</Label>
+                  <p className="text-xs text-muted-foreground">Activa para que sea visible públicamente</p>
+                </div>
                 <Switch
                   checked={form.is_active as boolean}
                   onCheckedChange={(v) => setForm({ ...form, is_active: v })}
                 />
-                <Label>Publicado (visible en el sitio)</Label>
               </div>
-            </TabsContent>
 
-            {/* ─── TAB 2: Precios ─── */}
-            <TabsContent value="pricing" className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Precio total del vehículo (€)</Label>
-                  <Input
-                    type="number"
-                    value={form.price as number}
-                    onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
-                  />
+                  <Input type="number" value={form.price as number} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} />
                 </div>
                 <div>
-                  <Label>Máx. participaciones</Label>
-                  <Input
-                    type="number" min={1} max={10}
-                    value={form.max_participations as number}
-                    onChange={(e) => setForm({ ...form, max_participations: Math.min(10, Math.max(1, Number(e.target.value))) })}
-                  />
+                  <Label>Nº de participaciones</Label>
+                  <Input type="number" value={form.max_participations as number} onChange={(e) => setForm({ ...form, max_participations: Number(e.target.value) })} />
+                </div>
+                <div>
+                  <Label>Precio por participación (€)</Label>
+                  <Input type="number" value={form.participation_price as number} onChange={(e) => setForm({ ...form, participation_price: Number(e.target.value) })} />
+                  {suggestedPrice > 0 && (
+                    <p className="text-xs text-muted-foreground mt-1">Sugerido: €{suggestedPrice.toLocaleString("es-ES")}</p>
+                  )}
+                </div>
+                <div>
+                  <Label>Participaciones restantes</Label>
+                  <Input type="number" value={form.remaining_participations as number} onChange={(e) => setForm({ ...form, remaining_participations: Number(e.target.value) })} />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Vendidas: {Number(form.max_participations) - Number(form.remaining_participations)}
+                  </p>
                 </div>
               </div>
-              <div>
-                <Label>Precio por participación (€)</Label>
-                <Input
-                  type="number"
-                  value={form.participation_price as number}
-                  onChange={(e) => setForm({ ...form, participation_price: Number(e.target.value) })}
-                />
-                {suggestedPrice > 0 && (
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Precio sugerido: {suggestedPrice.toLocaleString("es-ES")}€ (precio_total / max_participations)
-                  </p>
-                )}
-              </div>
-              <div>
-                <Label>Participaciones restantes</Label>
-                <Input
-                  type="number"
-                  min={0}
-                  max={form.max_participations as number}
-                  value={form.remaining_participations as number}
-                  onChange={(e) => {
-                    const v = Number(e.target.value);
-                    const max = form.max_participations as number;
-                    setForm({ ...form, remaining_participations: Math.min(max, Math.max(vpCount > 0 ? 0 : 0, v)) });
-                  }}
-                />
-                {vpCount > 0 && (
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {vpCount} participaciones vendidas (validadas)
-                  </p>
-                )}
-              </div>
-              <div>
-                <Label>Créditos por año</Label>
-                <Input type="number" defaultValue={28} disabled />
-                <p className="text-xs text-muted-foreground mt-1">
-                  Equivale a {Math.round(28 / 7)} semanas de uso al año
-                </p>
-              </div>
 
-              {/* ── Cuota anual de gestión ── */}
               <div className="border-t border-border pt-4 space-y-4">
-                <h4 className="font-semibold text-foreground">Cuota anual de gestión</h4>
+                <Label className="text-base font-semibold">Cuota de gestión anual</Label>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label>Cuota anual de gestión (%)</Label>
-                    <Input
-                      type="number" min={0} max={100} step="0.1"
-                      value={(form.annual_fee_percent as number) ?? 10}
-                      onChange={(e) => setForm({ ...form, annual_fee_percent: Number(e.target.value) })}
-                    />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Porcentaje del precio de participación cobrado anualmente por la gestión integral del vehículo.
-                    </p>
+                    <Label>Porcentaje anual (%)</Label>
+                    <Input type="number" value={form.annual_fee_percent as number} onChange={(e) => setForm({ ...form, annual_fee_percent: Number(e.target.value) })} />
                   </div>
                   <div>
-                    <Label>Cuota anual fija (€) — opcional</Label>
+                    <Label>Cuota fija (€, opcional)</Label>
                     <Input
-                      type="number" min={0}
-                      value={(form.annual_fee_override as number | null) ?? ""}
+                      type="number"
+                      value={(form.annual_fee_override as number) ?? ""}
                       onChange={(e) => setForm({ ...form, annual_fee_override: e.target.value === "" ? null : Number(e.target.value) })}
-                      placeholder="—"
-                    />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Si se rellena, sobreescribe el cálculo porcentual.
-                    </p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div>
-                    <Label>Duración de la participación</Label>
-                    <Select
-                      value={String((form.participation_duration_years as number) ?? 5)}
-                      onValueChange={(v) => setForm({ ...form, participation_duration_years: Number(v) })}
-                    >
-                      <SelectTrigger><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="3">3 años</SelectItem>
-                        <SelectItem value="5">5 años</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label>Semanas por participación / año</Label>
-                    <Input
-                      type="number" min={1}
-                      value={(form.weeks_per_participation as number) ?? 4}
-                      onChange={(e) => setForm({ ...form, weeks_per_participation: Number(e.target.value) })}
+                      placeholder="Auto"
                     />
                   </div>
                   <div>
-                    <Label>Km por participación / año</Label>
-                    <Input
-                      type="number" min={0}
-                      value={(form.km_per_participation as number) ?? 2000}
-                      onChange={(e) => setForm({ ...form, km_per_participation: Number(e.target.value) })}
-                    />
+                    <Label>Duración (años)</Label>
+                    <Input type="number" value={form.participation_duration_years as number} onChange={(e) => setForm({ ...form, participation_duration_years: Number(e.target.value) })} />
+                  </div>
+                  <div>
+                    <Label>Semanas / participación</Label>
+                    <Input type="number" value={form.weeks_per_participation as number} onChange={(e) => setForm({ ...form, weeks_per_participation: Number(e.target.value) })} />
+                  </div>
+                  <div>
+                    <Label>Km / año</Label>
+                    <Input type="number" value={form.km_per_participation as number} onChange={(e) => setForm({ ...form, km_per_participation: Number(e.target.value) })} />
                   </div>
                 </div>
               </div>
 
-              {/* Promotions */}
-              <div className="border-t border-border pt-4">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="border-t border-border pt-4 space-y-4">
+                <div className="flex items-center justify-between">
+                  <Label className="text-base font-semibold">Promoción</Label>
                   <Switch
                     checked={form.promotion_active as boolean}
                     onCheckedChange={(v) => setForm({ ...form, promotion_active: v })}
                   />
-                  <Label className="font-semibold">Activar promoción</Label>
                 </div>
-                {form.promotion_active && (
-                  <div className="space-y-4 pl-4 border-l-2 border-border">
-                    <div className="flex gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio" name="promo_type"
-                          checked={form.promotion_type === "direct"}
-                          onChange={() => setForm({ ...form, promotion_type: "direct" })}
-                          className="accent-primary"
-                        />
-                        <span className="text-sm text-foreground">Descuento directo</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio" name="promo_type"
-                          checked={form.promotion_type === "volume"}
-                          onChange={() => setForm({ ...form, promotion_type: "volume" })}
-                          className="accent-primary"
-                        />
-                        <span className="text-sm text-foreground">Descuento por volumen</span>
-                      </label>
+                {(form.promotion_active as boolean) && (
+                  <div className="space-y-4">
+                    <div>
+                      <Label>Tipo de promoción</Label>
+                      <Select
+                        value={form.promotion_type as string}
+                        onValueChange={(v) => setForm({ ...form, promotion_type: v })}
+                      >
+                        <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="direct">Descuento directo</SelectItem>
+                          <SelectItem value="volume">Descuento por volumen</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <Label>% de descuento</Label>
-                        <Input
-                          type="number" min={1} max={99}
-                          value={form.promotion_discount as number}
-                          onChange={(e) => setForm({ ...form, promotion_discount: Number(e.target.value) })}
-                        />
+                        <Label>Descuento (%)</Label>
+                        <Input type="number" value={form.promotion_discount as number} onChange={(e) => setForm({ ...form, promotion_discount: Number(e.target.value) })} />
                       </div>
                       {form.promotion_type === "volume" && (
                         <div>
-                          <Label>Mín. participaciones</Label>
-                          <Input
-                            type="number" min={2} max={10}
-                            value={form.promotion_min_parts as number}
-                            onChange={(e) => setForm({ ...form, promotion_min_parts: Number(e.target.value) })}
-                          />
+                          <Label>Participaciones mín.</Label>
+                          <Input type="number" value={form.promotion_min_parts as number} onChange={(e) => setForm({ ...form, promotion_min_parts: Number(e.target.value) })} />
                         </div>
                       )}
                     </div>
@@ -1120,13 +1070,13 @@ const AdminVehiculos = () => {
               {/* Manager section */}
               <details className="border border-border rounded-md group">
                 <summary className="cursor-pointer px-4 py-3 font-semibold text-foreground select-none flex items-center justify-between">
-                  <span>Gestionnaire du véhicule</span>
+                  <span>Gestor del vehículo</span>
                   <span className="text-xs text-muted-foreground group-open:hidden">Mostrar</span>
                   <span className="text-xs text-muted-foreground hidden group-open:inline">Ocultar</span>
                 </summary>
                 <div className="p-4 pt-2 space-y-3">
                   <div>
-                    <Label>Nom du gestionnaire</Label>
+                    <Label>Nombre del gestor</Label>
                     <Input
                       value={(form.manager_name as string) || ""}
                       onChange={(e) => setForm({ ...form, manager_name: e.target.value })}
@@ -1143,7 +1093,7 @@ const AdminVehiculos = () => {
                     />
                   </div>
                   <div>
-                    <Label>Téléphone</Label>
+                    <Label>Teléfono</Label>
                     <Input
                       value={(form.manager_phone as string) || ""}
                       onChange={(e) => setForm({ ...form, manager_phone: e.target.value })}
