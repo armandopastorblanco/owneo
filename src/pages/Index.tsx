@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
 import PressSection from "@/components/PressSection";
-import { useCars } from "@/hooks/useCars";
+import { useCars, useCarModels } from "@/hooks/useCars";
 import { useLocations } from "@/hooks/useLocations";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,13 @@ import featureWeeksBg from "@/assets/model/feature-weeks.jpg";
 import featureSharedBg from "@/assets/model/feature-shared.jpg";
 
 const Index = () => {
-  const { data: cars = [], isLoading: carsLoading } = useCars();
+  const { data: models = [], isLoading: carsLoading } = useCarModels();
   const { data: cities = [] } = useLocations();
   const { trackEvent } = useAnalytics();
-  const featuredCars = cars
-    .filter((c) => c.status !== "complete" && (c.remainingParticipations ?? 0) > 0)
+  // Déduplication par modèle (mêmes règles que la Gama) :
+  // on ne garde que les modèles avec des places restantes cumulées.
+  const featuredCars = models
+    .filter((m) => m.totalRemaining > 0)
     .slice(0, 4);
 
   return (
@@ -329,10 +331,23 @@ const Index = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {featuredCars.map((car) => (
-                <CarCard key={car.id} car={car} pageSource="home" />
-              ))}
-            </div>
+  {featuredCars.map((model) => {
+    const multiCity = model.cityCount > 1;
+    const link = multiCity
+      ? "/ubicaciones"
+      : (model.slug ? `/coches/${model.slug}` : `/car/${model.id}`);
+    return (
+      <CarCard
+        key={`${model.brand}-${model.model}`}
+        car={model}
+        pageSource="home"
+        linkOverride={link}
+        availabilityOverride={{ remaining: model.totalRemaining, max: model.totalMax }}
+        cityCountBadge={model.cityCount}
+      />
+    );
+  })}
+</div>
           )}
           <div className="text-center mt-12">
             <Link to="/coches">
