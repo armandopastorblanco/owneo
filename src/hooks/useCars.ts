@@ -33,6 +33,9 @@ export interface Car {
   specifications: Record<string, string>;
   features: string[];
   availableIn: string[];
+  locationId: string | null;
+  cityName: string | null;
+  citySlug: string | null;
   maxParticipations: number;
   remainingParticipations: number;
   participationPrice: number;
@@ -47,13 +50,19 @@ export interface Car {
   consultation_enabled: boolean;
 }
 
-function mapDbCarToCar(row: Tables<"cars">): Car {
+// Row + jointure locations (name, slug)
+type CarRowWithLocation = Tables<"cars"> & {
+  locations?: { name: string | null; slug: string | null } | null;
+};
+
+function mapDbCarToCar(row: CarRowWithLocation): Car {
   const numPrice = Number(row.price);
   const priceFormatted = `€${numPrice.toLocaleString("en-US")}`;
   const promoParsed = CarPromotionSchema.safeParse(row.promotion);
   const rawPromo = promoParsed.success ? promoParsed.data : null;
   return {
     id: row.id,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slug: (row as any).slug ?? "",
     name: row.name,
     brand: row.brand,
@@ -69,6 +78,10 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
     specifications: (row.specifications as Record<string, string>) || {},
     features: row.features || [],
     availableIn: row.available_in || [],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    locationId: (row as any).location_id ?? null,
+    cityName: row.locations?.name ?? null,
+    citySlug: row.locations?.slug ?? null,
     maxParticipations: row.max_participations || 10,
     remainingParticipations: row.remaining_participations ?? 10,
     participationPrice: Number(row.participation_price) || Math.round(numPrice * 0.1),
@@ -84,19 +97,79 @@ function mapDbCarToCar(row: Tables<"cars">): Car {
   };
 }
 
+/**
+ * Toutes les voitures actives (une ligne = un véhicule = une ville).
+ * Inclut le nom/slug de la ville via jointure sur locations.
+ */
 export function useCars() {
   return useQuery({
     queryKey: ["cars"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("cars")
-        .select("*")
+        .select("*, locations(name, slug)")
         .eq("is_active", true)
         .order("name");
       if (error) throw error;
-      return data.map(mapDbCarToCar);
+      return (data as unknown as CarRowWithLocation[]).map(mapDbCarToCar);
     },
   });
+}
+
+/**
+ * Représentation "modèle" pour la page Nuestra Gama :
+ * chaque modèle apparaît UNE seule fois, avec l'agrégation
+ * du nombre de villes et des places restantes cumulées.
+ */
+export interface CarModel extends Car {
+  cityCount: number;          // nombre de villes où le modèle existe
+  totalRemaining: number;     // places restantes cumulées (toutes villes)
+  totalMax: number;           // places max cumulées (toutes villes)
+  cities: { name: string | null; slug: string | null }[];
+}
+
+function buildModels(cars: Car[]): CarModel[] {
+  const groups = new Map<string, Car[]>();
+  for (const car of cars) {
+    // Clé de regroupement : marque + modèle (insensible à la casse)
+    const key = `${car.brand}__${car.model}`.toLowerCase().trim();
+    const arr = groups.get(key);
+    if (arr) arr.push(car);
+    else groups.set(key, [car]);
+  }
+
+  const models: CarModel[] = [];
+  for (const arr of groups.values()) {
+    // On choisit comme "vitrine" la fiche avec le plus de places dispo
+    // (à défaut la première), pour montrer une carte attractive.
+    const sorted = [...arr].sort(
+      (a, b) => (b.remainingParticipations ?? 0) - (a.remainingParticipations ?? 0)
+    );
+    const base = sorted[0];
+    const totalRemaining = arr.reduce((s, c) => s + (c.remainingParticipations ?? 0), 0);
+    const totalMax = arr.reduce((s, c) => s + (c.maxParticipations ?? 0), 0);
+    const cities = arr.map((c) => ({ name: c.cityName, slug: c.citySlug }));
+
+    models.push({
+      ...base,
+      cityCount: arr.length,
+      totalRemaining,
+      totalMax,
+      cities,
+    });
+  }
+  return models;
+}
+
+/**
+ * Hook dédié à la page Nuestra Gama : déduplique par modèle.
+ */
+export function useCarModels() {
+  const query = useCars();
+  return {
+    ...query,
+    data: query.data ? buildModels(query.data) : [],
+  };
 }
 
 export function useCar(idOrSlug: string | undefined, opts?: { bySlug?: boolean }) {
@@ -105,12 +178,12 @@ export function useCar(idOrSlug: string | undefined, opts?: { bySlug?: boolean }
     queryKey: ["car", bySlug ? "slug" : "id", idOrSlug],
     queryFn: async () => {
       if (!idOrSlug) return null;
-      const q = supabase.from("cars").select("*").eq("is_active", true);
+      const q = supabase.from("cars").select("*, locations(name, slug)").eq("is_active", true);
       const { data, error } = await (bySlug
         ? q.eq("slug", idOrSlug).maybeSingle()
         : q.eq("id", idOrSlug).maybeSingle());
       if (error) throw error;
-      return data ? mapDbCarToCar(data) : null;
+      return data ? mapDbCarToCar(data as unknown as CarRowWithLocation) : null;
     },
     enabled: !!idOrSlug,
   });
