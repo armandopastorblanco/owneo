@@ -45,7 +45,7 @@ const CarCard = ({
   return (
     <Link to={to} className="h-full" onClick={handleClick}>
       <Card
-        className={`overflow-hidden hover-lift group cursor-pointer bg-card border-border h-full flex flex-col transition-shadow duration-500 hover:shadow-[0_0_60px_hsl(var(--champagne)/0.07),0_0_120px_hsl(var(--champagne)/0.03)] ${isComplete ? "opacity-60" : ""}`}
+        className={`overflow-hidden group cursor-pointer bg-card border border-border h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover:border-champagne/60 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.4)] ${isComplete ? "opacity-60" : ""}`}
       >
         <div className="aspect-[16/10] overflow-hidden bg-muted relative">
           <img
