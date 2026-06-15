@@ -51,8 +51,10 @@ function Reveal({
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   as?: any;
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const MotionTag = (motion as any)[typeof As === "string" ? As : "div"];
   return (
     <MotionTag
@@ -213,13 +215,11 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10 pt-28 sm:pt-32 pb-20">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
-              <span className="inline-block text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90 px-3 py-1.5 rounded-full border border-champagne/30 bg-background/30 backdrop-blur-sm">
-                El lujo que se comparte
-              </span>
+              <span className="ds-eyebrow-pill">El lujo que se comparte</span>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <h1 className="mt-6 sm:mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight">
+              <h1 className="ds-h1 mt-6 sm:mt-8 text-foreground">
                 No es un coche.
                 <br />
                 <span className="text-champagne">Es una decisión.</span>
@@ -227,7 +227,7 @@ const QuienesSomos = () => {
             </Reveal>
 
             <Reveal delay={0.3}>
-              <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-foreground/80 leading-relaxed max-w-2xl mx-auto">
+              <p className="ds-lead mt-6 sm:mt-8 max-w-2xl mx-auto">
                 OWNEO nació para romper la ecuación que durante décadas ha hecho del lujo
                 automovilístico algo reservado a muy pocos.
               </p>
@@ -240,9 +240,7 @@ const QuienesSomos = () => {
                 { label: "Sin compromiso" },
               ].map((p, i) => (
                 <Reveal key={p.label} delay={0.5 + i * 0.1}>
-                  <span className="text-xs sm:text-sm uppercase tracking-[0.2em] font-medium text-foreground/80 px-4 py-2 rounded-full border border-border/60 bg-card/40 backdrop-blur-sm">
-                    {p.label}
-                  </span>
+                  <span className="ds-tag">{p.label}</span>
                 </Reveal>
               ))}
             </div>
@@ -278,13 +276,11 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
-                Nuestra historia
-              </span>
+              <span className="ds-eyebrow-pill">Nuestra historia</span>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mt-8 text-2xl sm:text-3xl md:text-4xl font-black leading-[1.3] tracking-tight">
+              <p className="ds-h2 mt-8 text-foreground leading-[1.3]">
                 Creemos que los coches más extraordinarios del mundo no deberían estar
                 reservados a unos pocos. No por falta de pasión —{" "}
                 <span className="text-champagne">
@@ -295,7 +291,7 @@ const QuienesSomos = () => {
             </Reveal>
 
             <Reveal delay={0.25}>
-              <p className="mt-10 text-base sm:text-lg text-muted-foreground leading-relaxed">
+              <p className="ds-body mt-10 text-muted-foreground">
                 OWNEO nació para romper esa ecuación. No democratizando el lujo hacia
                 abajo — sino elevando el acceso hacia arriba. El mismo coche, la misma
                 experiencia, la misma emoción. Sin el peso de la propiedad.
@@ -328,15 +324,13 @@ const QuienesSomos = () => {
               <Reveal key={item.label} delay={item.delay}>
                 <div className="h-full bg-background/60 backdrop-blur-sm rounded-2xl border border-border p-8 sm:p-10 hover:border-champagne/40 transition-colors duration-500">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
-                    <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-champagne" />
+                    <item.icon className="ds-icon w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
-                  <span className="text-[11px] uppercase tracking-[0.3em] font-medium text-champagne/90">
-                    {item.label}
-                  </span>
-                  <h3 className="mt-3 text-2xl sm:text-3xl font-semibold leading-tight tracking-tight">
+                  <span className="ds-eyebrow-pill">{item.label}</span>
+                  <h3 className="ds-h3 mt-4 text-foreground">
                     {item.title}
                   </h3>
-                  <p className="mt-5 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  <p className="ds-body mt-5 text-muted-foreground">
                     {item.text}
                   </p>
                 </div>
@@ -351,10 +345,8 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
-                Nuestros participantes
-              </span>
-              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
+              <span className="ds-eyebrow-pill">Nuestros participantes</span>
+              <h2 className="ds-h2 mt-6 text-foreground">
                 ¿Para quién es <span className="text-champagne">OWNEO</span>?
               </h2>
             </div>
@@ -375,18 +367,18 @@ const QuienesSomos = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-background/65 via-background/55 to-background/65" />
                   <div className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-start p-8 sm:p-10 md:p-12">
                     <div className="md:col-span-3">
-                      <span className="block text-5xl sm:text-6xl font-black text-champagne tabular-nums drop-shadow-lg">
+                      <span className="block text-5xl sm:text-6xl font-semibold text-champagne tabular-nums drop-shadow-lg">
                         {p.number}
                       </span>
                     </div>
                     <div className="md:col-span-9 space-y-5">
-                      <h3 className="text-xl sm:text-2xl uppercase tracking-[0.15em] text-foreground/90 font-semibold">
+                      <h3 className="ds-card-title uppercase tracking-[0.15em] text-foreground/90">
                         {p.profile}
                       </h3>
-                      <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-[1.25] tracking-tight">
+                      <p className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-[1.25] tracking-tight">
                         {p.hook}
                       </p>
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
+                      <p className="ds-body text-muted-foreground max-w-2xl">
                         {p.text}
                       </p>
                     </div>
@@ -403,10 +395,8 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
-                Lo que nos define
-              </span>
-              <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
+              <span className="ds-eyebrow-pill">Lo que nos define</span>
+              <h2 className="ds-h2 mt-6 text-foreground">
                 Nuestros <span className="text-champagne">valores</span>
               </h2>
             </div>
@@ -426,14 +416,14 @@ const QuienesSomos = () => {
                   <div className="absolute inset-0 bg-background/30 group-hover:bg-background/20 transition-colors duration-500" />
                   <div className="relative p-8 sm:p-10">
                     <div className="flex items-center justify-between mb-6">
-                      <span className="text-2xl sm:text-3xl font-black tracking-tight text-champagne">
+                      <span className="ds-h3 tracking-tight text-champagne">
                         {v.word}
                       </span>
                       <div className="w-10 h-10 rounded-full border border-champagne/30 flex items-center justify-center group-hover:border-champagne/70 transition-colors bg-background/40 backdrop-blur-sm">
-                        <v.icon className="w-4 h-4 text-champagne" />
+                        <v.icon className="ds-icon w-4 h-4" />
                       </div>
                     </div>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    <p className="ds-body text-muted-foreground">
                       {v.text}
                     </p>
                   </div>
@@ -479,13 +469,11 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.3em] font-medium text-champagne/90">
-                El siguiente paso
-              </span>
+              <span className="ds-eyebrow-pill">El siguiente paso</span>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <h2 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
+              <h2 className="ds-h2 mt-6 text-foreground">
                 ¿Listo para tomar
                 <br />
                 <span className="text-champagne">la decisión inteligente?</span>
@@ -493,7 +481,7 @@ const QuienesSomos = () => {
             </Reveal>
 
             <Reveal delay={0.25}>
-              <p className="mt-6 sm:mt-8 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
+              <p className="ds-lead mt-6 sm:mt-8 text-muted-foreground max-w-xl mx-auto">
                 Descubre cómo funciona exactamente el modelo OWNEO, o explora directamente
                 los vehículos disponibles y encuentra tu participación.
               </p>
