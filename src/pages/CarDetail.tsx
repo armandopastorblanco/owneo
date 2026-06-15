@@ -19,6 +19,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
+  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
+} from "@/components/ui/carousel";
+import {
   ArrowLeft, ArrowRight, MapPin, CheckCircle2, Users, Info, X,
   ChevronLeft, ChevronRight, Shield, Wrench, Sparkles, Zap, Gauge, Car as CarIcon,
   MessageCircle, Calendar, CalendarDays, Clock, TrendingUp, TrendingDown, RefreshCw, FileCheck, Loader2, Check,
@@ -27,7 +30,6 @@ import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ParticipationForm from "@/components/ParticipationForm";
-import Car360Viewer from "@/components/Car360Viewer";
 
 /* ─── spec labels & categorisation ─── */
 const specLabels: Record<string, string> = {
@@ -294,6 +296,9 @@ const CarDetail = () => {
 
   /* ─── image pour le bloc "La Experiencia" ─── */
   const experienceImage = car.gallery?.[1] ?? car.gallery?.[0] ?? car.image;
+
+  /* ─── images de la galerie (carrousel) ─── */
+  const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : [car.image];
 
   return (
     <div className="min-h-screen bg-background">
@@ -638,7 +643,7 @@ const CarDetail = () => {
             </p>
           </Reveal>
 
-                    {/* ─── BLOQUE E: LA EXPERIENCIA (carte immersive texte + image à gauche, stats à droite) ─── */}
+          {/* ─── BLOQUE E: LA EXPERIENCIA (carte immersive texte + image à gauche, stats à droite) ─── */}
           <section className="bg-card/20 border-y border-border/30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-20 mb-24">
             <div className="container mx-auto max-w-6xl grid lg:grid-cols-3 gap-6 items-stretch">
               {/* Carte immersive : image de fond + texte par-dessus (2 colonnes) */}
@@ -692,38 +697,43 @@ const CarDetail = () => {
             </div>
           </section>
 
-          {/* ─── BLOQUE F: 360 + GALERÍA ─── */}
+          {/* ─── BLOQUE F: GALERÍA (carrusel con flechas) ─── */}
           <Reveal className="mb-24">
             <div className="text-center max-w-3xl mx-auto mb-8">
               <span className="ds-eyebrow-pill">Galería exclusiva</span>
             </div>
 
-            {car.gallery && car.gallery.length >= 6 && (
-              <div className="mb-6">
-                <Car360Viewer carName={car.name} gallery={car.gallery} />
-              </div>
-            )}
+            <Carousel className="relative" opts={{ loop: galleryImages.length > 1 }}>
+              <CarouselContent>
+                {galleryImages.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div
+                      className="group relative aspect-[16/10] overflow-hidden rounded-2xl bg-gradient-to-b from-muted to-background cursor-pointer"
+                      onClick={() => {
+                        setLightboxIndex(index);
+                        trackEvent("view_car_gallery", { car_id: car.id, car_name: car.name, image_index: index, page_source: "car_detail" });
+                      }}
+                    >
+                      <img
+                        src={image}
+                        alt={`${car.name} vista ${index + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-background/70 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs text-muted-foreground pointer-events-none">
+                        {index + 1} / {galleryImages.length}
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              {(car.gallery || [car.image, car.image, car.image]).map((image, index) => (
-                <div
-                  key={index}
-                  className={`overflow-hidden rounded-2xl bg-gradient-to-b from-muted to-background cursor-pointer ${
-                    index === 0 ? "md:col-span-2 md:row-span-2 aspect-[16/10]" : "aspect-[4/3]"
-                  }`}
-                  onClick={() => {
-                    setLightboxIndex(index);
-                    trackEvent("view_car_gallery", { car_id: car.id, car_name: car.name, image_index: index, page_source: "car_detail" });
-                  }}
-                >
-                  <img
-                    src={image}
-                    alt={`${car.name} vista ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-              ))}
-            </div>
+              {galleryImages.length > 1 && (
+                <>
+                  <CarouselPrevious className="left-4 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background hover:text-champagne" />
+                  <CarouselNext className="right-4 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background hover:text-champagne" />
+                </>
+              )}
+            </Carousel>
           </Reveal>
 
           {/* lightbox */}
