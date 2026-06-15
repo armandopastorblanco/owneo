@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Car } from "@/hooks/useCars";
 import type { Tables } from "@/integrations/supabase/types";
 
