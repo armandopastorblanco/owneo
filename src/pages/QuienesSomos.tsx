@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import quienesSomosHero from "@/assets/quienes-somos/qs-hero.jpg";
 import qsHistoria from "@/assets/quienes-somos/qs-historia.jpg";
 import qsMision from "@/assets/quienes-somos/qs-mision.jpg";
+import qsMisionCard from "@/assets/quienes-somos/qs-mision-card.jpg";
+import qsVisionCard from "@/assets/quienes-somos/qs-vision-card.jpg";
 import qsProfile1 from "@/assets/quienes-somos/qs-profile-1.jpg";
 import qsProfile2 from "@/assets/quienes-somos/qs-profile-2.jpg";
 import qsProfile3 from "@/assets/quienes-somos/qs-profile-3.jpg";
@@ -145,6 +147,7 @@ const missionVision = [
     text:
       "Queremos que cualquier persona con la determinación y el criterio adecuado pueda sentarse al volante de un Ferrari, un Porsche o un Bentley — sin necesidad de comprarlo, sin gestionar nada, sin sorpresas.",
     delay: 0,
+    bg: qsMisionCard,
   },
   {
     icon: TrendingUp,
@@ -153,6 +156,7 @@ const missionVision = [
     text:
       "Aspiramos a construir la comunidad más exclusiva de apasionados del motor en Europa — donde el acceso a los mejores vehículos del mundo sea una decisión inteligente, no un privilegio heredado.",
     delay: 0.15,
+    bg: qsVisionCard,
   },
 ];
 
@@ -280,25 +284,30 @@ const QuienesSomos = () => {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="ds-h2 mt-8 text-foreground leading-[1.3]">
-                Creemos que los coches más extraordinarios del mundo no deberían estar
-                reservados a unos pocos. No por falta de pasión —{" "}
-                <span className="text-champagne">
-                  sino por una ecuación económica
-                </span>{" "}
-                que durante décadas ha hecho del lujo automovilístico algo inalcanzable.
-              </p>
+              <h2 className="ds-h2 mt-8 text-foreground">
+                El lujo no debería ser{" "}
+                <span className="text-champagne">cuestión de fortuna.</span>
+              </h2>
             </Reveal>
 
             <Reveal delay={0.25}>
-              <p className="ds-body mt-10 text-muted-foreground">
+              <p className="ds-lead mt-8 max-w-2xl mx-auto">
+                Creemos que los coches más extraordinarios del mundo no deberían estar
+                reservados a unos pocos. No por falta de pasión, sino por una ecuación
+                económica que durante décadas ha hecho del lujo automovilístico algo
+                inalcanzable.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.35}>
+              <p className="ds-body mt-6 text-muted-foreground max-w-2xl mx-auto">
                 OWNEO nació para romper esa ecuación. No democratizando el lujo hacia
                 abajo — sino elevando el acceso hacia arriba. El mismo coche, la misma
                 experiencia, la misma emoción. Sin el peso de la propiedad.
               </p>
             </Reveal>
 
-            <Reveal delay={0.4}>
+            <Reveal delay={0.5}>
               <div className="mt-12 mx-auto h-px w-24 bg-gradient-to-r from-transparent via-champagne/60 to-transparent" />
             </Reveal>
           </div>
@@ -306,33 +315,41 @@ const QuienesSomos = () => {
       </section>
 
       {/* ===================== MISSION & VISION ===================== */}
-      <section className="relative py-20 sm:py-28 border-y border-border overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={qsMision}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-background/30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/20" />
-        </div>
+      <section className="py-20 sm:py-28 border-y border-border bg-background">
         <div className="container mx-auto px-5 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+          <Reveal>
+            <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
+              <span className="ds-eyebrow-pill">Nuestro propósito</span>
+              <h2 className="ds-h2 mt-6 text-foreground">
+                Misión y <span className="text-champagne">visión</span>
+              </h2>
+            </div>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto items-stretch">
             {missionVision.map((item) => (
               <Reveal key={item.label} delay={item.delay}>
-                <div className="h-full bg-background/60 backdrop-blur-sm rounded-2xl border border-border p-8 sm:p-10 hover:border-champagne/40 transition-colors duration-500">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
-                    <item.icon className="ds-icon w-6 h-6 sm:w-7 sm:h-7" />
+                <div className="group ds-card-feature h-full">
+                  <img
+                    src={item.bg}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="ds-card-feature-img"
+                  />
+                  <div className="ds-card-feature-overlay" />
+                  <div className="ds-feature-body">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
+                      <item.icon className="ds-icon w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <span className="ds-eyebrow-pill">{item.label}</span>
+                    <h3 className="ds-card-title text-white mt-4 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-white/80 leading-relaxed">
+                      {item.text}
+                    </p>
                   </div>
-                  <span className="ds-eyebrow-pill">{item.label}</span>
-                  <h3 className="ds-h3 mt-4 text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="ds-body mt-5 text-muted-foreground">
-                    {item.text}
-                  </p>
                 </div>
               </Reveal>
             ))}
