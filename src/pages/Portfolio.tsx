@@ -3,20 +3,20 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
-import { useCars } from "@/hooks/useCars";
+import { useCarModels } from "@/hooks/useCars";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Portfolio = () => {
-  const { data: cars = [], isLoading } = useCars();
+  const { data: models = [], isLoading } = useCarModels();
   const { trackEvent } = useAnalytics();
 
   useEffect(() => {
-    if (!isLoading && cars.length) {
+    if (!isLoading && models.length) {
       trackEvent("view_item_list", {
         item_list_name: "Portfolio",
         item_list_id: "portfolio",
-        items: cars.slice(0, 20).map((c, i) => ({
+        items: models.slice(0, 20).map((c, i) => ({
           item_id: c.id,
           item_name: c.name,
           item_brand: c.brand,
@@ -25,7 +25,7 @@ const Portfolio = () => {
         })),
       });
     }
-  }, [isLoading, cars, trackEvent]);
+  }, [isLoading, models, trackEvent]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,15 +63,30 @@ const Portfolio = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-              {[...cars]
+              {[...models]
                 .sort((a, b) => {
-                  const aComplete = a.status === "complete" || a.remainingParticipations === 0 ? 1 : 0;
-                  const bComplete = b.status === "complete" || b.remainingParticipations === 0 ? 1 : 0;
+                  const aComplete = a.totalRemaining === 0 ? 1 : 0;
+                  const bComplete = b.totalRemaining === 0 ? 1 : 0;
                   return aComplete - bComplete;
                 })
-                .map((car) => (
-                  <CarCard key={car.id} car={car} pageSource="portfolio" />
-                ))}
+                .map((model) => {
+                  // Multi-villes -> on envoie vers Ubicaciones (choix de ville).
+                  // Mono-ville -> lien direct vers la fiche du véhicule.
+                  const multiCity = model.cityCount > 1;
+                  const link = multiCity
+                    ? "/ubicaciones"
+                    : (model.slug ? `/coches/${model.slug}` : `/car/${model.id}`);
+                  return (
+                    <CarCard
+                      key={`${model.brand}-${model.model}`}
+                      car={model}
+                      pageSource="portfolio"
+                      linkOverride={link}
+                      availabilityOverride={{ remaining: model.totalRemaining, max: model.totalMax }}
+                      cityCountBadge={model.cityCount}
+                    />
+                  );
+                })}
             </div>
           )}
         </div>
