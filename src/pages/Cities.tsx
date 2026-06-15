@@ -12,8 +12,10 @@ const Cities = () => {
   const { data: cities = [], isLoading: citiesLoading } = useLocations();
   const { data: cars = [] } = useCars();
 
+  // Compte basé sur la ville réelle du véhicule (location_id -> cityName),
+  // plus sur available_in qui n'est plus alimenté.
   const getCarsCountForCity = (cityName: string) => {
-    return cars.filter((car) => car.availableIn.includes(cityName)).length;
+    return cars.filter((car) => car.cityName === cityName).length;
   };
 
   return (
