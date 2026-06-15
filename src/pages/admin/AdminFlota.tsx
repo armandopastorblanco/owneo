@@ -23,6 +23,7 @@ type FleetCar = {
   image_url: string | null;
   total_km: number | null;
   max_participations: number | null;
+  matricula: string | null;
   location: { name: string } | null;
 };
 
@@ -32,7 +33,7 @@ const useFleet = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("cars")
-        .select("id,name,brand,model,year,image_url,total_km,max_participations,locations(name)")
+        .select("id,name,brand,model,year,image_url,total_km,max_participations,matricula,locations(name)")
         .eq("status", "complete")
         .order("name");
       if (error) throw error;
@@ -166,7 +167,14 @@ const AdminFlota = () => {
                 </div>
                 <CardContent className="p-4 space-y-3">
                   <div>
-                    <h3 className="font-semibold text-base">{c.name}</h3>
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-semibold text-base">{c.name}</h3>
+                      {c.matricula && (
+                        <Badge variant="outline" className="text-[10px] font-mono shrink-0">
+                          {c.matricula}
+                        </Badge>
+                      )}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       {c.brand} {c.model} · {c.year}
                     </p>
