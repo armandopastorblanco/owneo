@@ -12,10 +12,15 @@ import { ArrowLeft, MapPin } from "lucide-react";
 import type { Car } from "@/hooks/useCars";
 import type { Tables } from "@/integrations/supabase/types";
 
-function mapRowToCar(row: Tables<"cars">): Car {
+type CarRow = Tables<"cars"> & {
+  locations?: { name: string | null; slug: string | null } | null;
+};
+
+function mapRowToCar(row: CarRow): Car {
   const numPrice = Number(row.price);
   return {
     id: row.id,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slug: (row as any).slug ?? "",
     name: row.name,
     brand: row.brand,
@@ -31,6 +36,10 @@ function mapRowToCar(row: Tables<"cars">): Car {
     specifications: (row.specifications as Record<string, string>) || {},
     features: row.features || [],
     availableIn: row.available_in || [],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    locationId: (row as any).location_id ?? null,
+    cityName: row.locations?.name ?? null,
+    citySlug: row.locations?.slug ?? null,
     maxParticipations: row.max_participations || 10,
     remainingParticipations: row.remaining_participations ?? 10,
     participationPrice: Number(row.participation_price) || Math.round(numPrice * 0.1),
@@ -66,18 +75,18 @@ const CityDetail = () => {
   });
 
   const { data: cars = [], isLoading: carsLoading } = useQuery({
-    queryKey: ["city-cars", key, city?.name],
+    queryKey: ["city-cars", key, city?.id],
     enabled: !!key && !!city,
     queryFn: async () => {
-      // Filter by city name in available_in array (cars don't store location_id directly)
+      // Désormais : filtrage par location_id (un véhicule = une ville).
       const { data, error } = await supabase
         .from("cars")
-        .select("*")
+        .select("*, locations(name, slug)")
         .eq("is_active", true)
-        .contains("available_in", [city!.name])
+        .eq("location_id", city!.id)
         .order("name");
       if (error) throw error;
-      return (data || []).map(mapRowToCar);
+      return (data as unknown as CarRow[]).map(mapRowToCar);
     },
   });
 
