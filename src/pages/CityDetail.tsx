@@ -106,8 +106,8 @@ const CityDetail = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         <main className="pt-24 pb-12 px-6 container mx-auto text-center">
-          <h1 className="text-3xl font-bold text-foreground mb-4">Ciudad no encontrada</h1>
-          <p className="text-muted-foreground mb-6">La ciudad que buscas no existe o ya no está disponible.</p>
+          <h1 className="ds-h2 text-foreground mb-4">Ciudad no encontrada</h1>
+          <p className="ds-lead mb-6">La ciudad que buscas no existe o ya no está disponible.</p>
           <Link to="/ubicaciones">
             <Button variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" /> Volver a ciudades
@@ -135,13 +135,12 @@ const CityDetail = () => {
           <Link to="/ubicaciones" className="inline-flex items-center text-sm text-foreground/80 hover:text-foreground mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" /> Volver a ciudades
           </Link>
-          <div className="flex items-center gap-2 mb-3">
-            <MapPin className="w-6 h-6 text-foreground" />
-            <span className="text-sm uppercase tracking-widest text-muted-foreground">Ubicación premium</span>
+          <div className="mb-4">
+            <span className="ds-eyebrow-pill">Ubicación premium</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-3">{city.name}</h1>
+          <h1 className="ds-h1 text-foreground mb-4">{city.name}</h1>
           {city.description && (
-            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl">{city.description}</p>
+            <p className="ds-lead max-w-3xl">{city.description}</p>
           )}
         </div>
       </section>
@@ -149,7 +148,7 @@ const CityDetail = () => {
       {/* Cars list */}
       <main className="py-12 px-4 sm:px-6">
         <div className="container mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8">
+          <h2 className="ds-h2 text-foreground mb-8">
             Vehículos disponibles en {city.name}
           </h2>
           {carsLoading ? (
@@ -160,7 +159,7 @@ const CityDetail = () => {
             </div>
           ) : cars.length === 0 ? (
             <div className="text-center py-16 border border-border rounded-xl">
-              <p className="text-muted-foreground">
+              <p className="ds-body">
                 No hay vehículos disponibles en esta ciudad por el momento.
               </p>
             </div>
