@@ -292,6 +292,9 @@ const CarDetail = () => {
     { icon: CarIcon, label: "Motor", value: car.specifications?.engine || "—" },
   ];
 
+  /* ─── image pour le bloc "La Experiencia" ─── */
+  const experienceImage = car.gallery?.[1] ?? car.gallery?.[0] ?? car.image;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -381,12 +384,12 @@ const CarDetail = () => {
           </div>
 
           {/* ─── BLOQUE C: HEADER + PRECIO ─── */}
-          <div ref={pricingRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div ref={pricingRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
             <div className="space-y-10 lg:space-y-12">
-            <Reveal className="space-y-6">
-              <span className="ds-tag">{car.category}</span>
+            <Reveal className="space-y-6 text-center max-w-3xl mx-auto">
+              <span className="ds-eyebrow-pill">{car.category}</span>
               <h1 className="ds-h1 text-foreground">{car.name}</h1>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
+              <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
                 <MapPin className="w-4 h-4 text-champagne" />
                 <span>{car.availableIn.join(", ")}</span>
               </div>
@@ -582,14 +585,16 @@ const CarDetail = () => {
           </div>
 
           {/* ─── BLOQUE D: ALLOCATION ─── */}
-          <Reveal className="mb-16">
-            <span className="ds-eyebrow-pill mb-3">Tus derechos de uso</span>
-            <h2 className="ds-h2 text-foreground mb-3 mt-3">
-              Cuanto más participas, más disfrutas.
-            </h2>
-            <p className="ds-lead mb-8 max-w-2xl">
-              Cada participación te garantiza acceso exclusivo al vehículo: 3 semanas estándar + 1 semana premium. Acumula participaciones para ampliar tu tiempo al volante.
-            </p>
+          <Reveal className="mb-24">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <span className="ds-eyebrow-pill">Tus derechos de uso</span>
+              <h2 className="ds-h2 text-foreground mt-4 mb-3">
+                Cuanto más participas, más disfrutas.
+              </h2>
+              <p className="ds-lead">
+                Cada participación te garantiza acceso exclusivo al vehículo: 3 semanas estándar + 1 semana premium. Acumula participaciones para ampliar tu tiempo al volante.
+              </p>
+            </div>
 
             <div className="overflow-x-auto">
               <div className="min-w-[720px]">
@@ -625,7 +630,7 @@ const CarDetail = () => {
               </div>
             </div>
 
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className="text-sm text-muted-foreground mt-4 text-center">
               ¿Interesado en más de 5 participaciones?{" "}
               <button onClick={() => scrollTo(consultaRef)} className="text-champagne hover:underline">
                 Contáctanos para una propuesta personalizada.
@@ -633,29 +638,34 @@ const CarDetail = () => {
             </p>
           </Reveal>
 
-          {/* ─── BLOQUE E: LA EXPERIENCIA ─── */}
-          <section className="bg-card/20 border-y border-border/30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-16 mb-16">
-            <div className="container mx-auto max-w-6xl grid lg:grid-cols-5 gap-10">
-              <Reveal className="lg:col-span-3">
-                <span className="ds-eyebrow-pill mb-3">La Experiencia</span>
-                <h2 className="ds-h2 text-foreground mb-6 mt-3">
+          {/* ─── BLOQUE E: LA EXPERIENCIA (visuel à gauche + contenu à droite) ─── */}
+          <section className="bg-card/20 border-y border-border/30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-20 mb-24">
+            <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-10 items-center">
+              {/* Visuel immersif à gauche */}
+              <Reveal>
+                <div className="group relative aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[420px] rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.4)]">
+                  <div className="absolute inset-0 rounded-2xl overflow-hidden border border-border/50 transition-colors duration-500 group-hover:border-champagne/60">
+                    <img
+                      src={experienceImage}
+                      alt={car.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Contenu à droite */}
+              <Reveal delay={0.1}>
+                <span className="ds-eyebrow-pill">La Experiencia</span>
+                <h2 className="ds-h2 text-foreground mt-4 mb-6">
                   Una obra maestra sobre ruedas.
                 </h2>
                 <p className="ds-lead leading-relaxed whitespace-pre-line">{luxuryDesc}</p>
-                <Button
-                  variant="outline"
-                  className="mt-6"
-                  onClick={() => scrollTo(specsRef)}
-                >
-                  Ver especificaciones técnicas
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Reveal>
 
-              <div className="lg:col-span-2 space-y-4">
-                {statCards.map((s, i) => (
-                  <Reveal key={s.label} delay={0.1 * i}>
-                    <div className="bg-background rounded-xl border border-border/50 p-5 flex items-center gap-4">
+                <div className="space-y-4 mt-8">
+                  {statCards.map((s, i) => (
+                    <div key={s.label} className="bg-background rounded-xl border border-border/50 p-5 flex items-center gap-4">
                       <div className="p-3 rounded-lg bg-champagne/10 border border-champagne/20">
                         <s.icon className="w-6 h-6 text-champagne" />
                       </div>
@@ -664,23 +674,34 @@ const CarDetail = () => {
                         <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.label}</div>
                       </div>
                     </div>
-                  </Reveal>
-                ))}
-              </div>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  className="mt-8"
+                  onClick={() => scrollTo(specsRef)}
+                >
+                  Ver especificaciones técnicas
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Reveal>
             </div>
           </section>
 
           {/* ─── BLOQUE F: 360 + GALERÍA ─── */}
-          <Reveal className="mb-16">
-            <span className="ds-eyebrow-pill mb-4">Galería exclusiva</span>
+          <Reveal className="mb-24">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <span className="ds-eyebrow-pill">Galería exclusiva</span>
+            </div>
 
             {car.gallery && car.gallery.length >= 6 && (
-              <div className="mb-6 mt-4">
+              <div className="mb-6">
                 <Car360Viewer carName={car.name} gallery={car.gallery} />
               </div>
             )}
 
-            <div className="grid md:grid-cols-3 gap-4 mt-4">
+            <div className="grid md:grid-cols-3 gap-4">
               {(car.gallery || [car.image, car.image, car.image]).map((image, index) => (
                 <div
                   key={index}
@@ -725,9 +746,9 @@ const CarDetail = () => {
           )}
 
           {/* ─── BLOQUE G: SPECS ─── */}
-          <Reveal className="mb-16" >
+          <Reveal className="mb-24" >
             <div ref={specsRef}>
-              <h2 className="ds-h2 mb-6 text-foreground">Especificaciones técnicas</h2>
+              <h2 className="ds-h2 mb-6 text-foreground text-center">Especificaciones técnicas</h2>
               <Tabs value={specTab} onValueChange={setSpecTab}>
                 <div className="-mx-4 sm:mx-0 mb-4">
                   <TabsList className="flex w-max sm:w-auto mx-4 sm:mx-0 gap-1 overflow-x-auto no-scrollbar">
@@ -773,8 +794,8 @@ const CarDetail = () => {
 
           {/* ─── BLOQUE H: FEATURES ─── */}
           {car.features?.length > 0 && (
-            <Reveal className="mb-16">
-              <h2 className="ds-h2 mb-6 text-foreground">Características Premium</h2>
+            <Reveal className="mb-24">
+              <h2 className="ds-h2 mb-6 text-foreground text-center">Características Premium</h2>
               <div className="grid md:grid-cols-2 gap-3">
                 {car.features.map((feature, index) => (
                   <div
@@ -790,11 +811,13 @@ const CarDetail = () => {
           )}
 
           {/* ─── BLOQUE I: COMPARATIVA ─── */}
-          <Reveal className="mb-16">
-            <h2 className="ds-h2 mb-3 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
-            <p className="ds-lead mb-8">
-              Descubre cómo el modelo de co-sharing OWNEO reduce drásticamente los costes anuales de gestión.
-            </p>
+          <Reveal className="mb-24">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="ds-h2 mb-3 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
+              <p className="ds-lead">
+                Descubre cómo el modelo de co-sharing OWNEO reduce drásticamente los costes anuales de gestión.
+              </p>
+            </div>
 
             <div className="overflow-x-auto">
               <table className="w-full border-collapse min-w-[640px]">
@@ -863,7 +886,7 @@ const CarDetail = () => {
           </Reveal>
 
           {/* ─── BLOQUE J: DISPONIBILIDAD Y CONDICIONES ─── */}
-          <Reveal className="mb-16 grid md:grid-cols-2 gap-8">
+          <Reveal className="mb-24 grid md:grid-cols-2 gap-8">
             <div>
               <h2 className="ds-h3 mb-4 text-foreground">Disponible en</h2>
               <div className="flex flex-wrap gap-2">
@@ -903,11 +926,11 @@ const CarDetail = () => {
           </Reveal>
 
           {/* ─── BLOQUE K: CONSULTA PRIVADA ─── */}
-          <section ref={consultaRef} className="bg-gradient-to-br from-card via-background to-card border-y border-border/50 -mx-4 sm:-mx-6 px-4 sm:px-6 py-16 mb-16">
+          <section ref={consultaRef} className="bg-gradient-to-br from-card via-background to-card border-y border-border/50 -mx-4 sm:-mx-6 px-4 sm:px-6 py-20 mb-24">
             <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-10">
               <Reveal>
-                <span className="ds-eyebrow-pill mb-3">Consulta privada</span>
-                <h2 className="ds-h2 text-foreground mb-2 mt-3">¿Tienes preguntas?</h2>
+                <span className="ds-eyebrow-pill">Consulta privada</span>
+                <h2 className="ds-h2 text-foreground mt-4 mb-2">¿Tienes preguntas?</h2>
                 <h3 className="ds-h3 text-champagne mb-4">Habla con un especialista OWNEO.</h3>
                 <p className="ds-body leading-relaxed mb-6">
                   Nuestro equipo está disponible para resolver todas tus dudas sobre este vehículo, el proceso
