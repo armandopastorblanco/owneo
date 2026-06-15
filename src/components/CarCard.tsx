@@ -1,21 +1,36 @@
 import { Link } from "react-router-dom";
 import { Car } from "@/hooks/useCars";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight, Users, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 interface CarCardProps {
   car: Car;
   pageSource?: string;
+  /** Surcharge le lien de destination (ex: Gama -> Ubicaciones du modèle) */
+  linkOverride?: string;
+  /** Surcharge l'affichage des places (ex: agrégat multi-villes) */
+  availabilityOverride?: { remaining: number; max: number };
+  /** Affiche un badge "En X ciudades" (mode Gama agrégé) */
+  cityCountBadge?: number;
 }
 
-const CarCard = ({ car, pageSource = "unknown" }: CarCardProps) => {
+const CarCard = ({
+  car,
+  pageSource = "unknown",
+  linkOverride,
+  availabilityOverride,
+  cityCountBadge,
+}: CarCardProps) => {
   const { trackEvent } = useAnalytics();
   const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
   const sharePrice = car.participationPrice || Math.round(numericPrice * 0.1);
-  const isComplete = car.status === "complete" || car.remainingParticipations === 0;
-  const available = car.remainingParticipations ?? 0;
-  const max = car.maxParticipations ?? 10;
+
+  const available = availabilityOverride ? availabilityOverride.remaining : (car.remainingParticipations ?? 0);
+  const max = availabilityOverride ? availabilityOverride.max : (car.maxParticipations ?? 10);
+  const isComplete = available === 0 || (!availabilityOverride && car.status === "complete");
+
+  const to = linkOverride ?? (car.slug ? `/coches/${car.slug}` : `/car/${car.id}`);
 
   const handleClick = () => {
     trackEvent("select_item", {
@@ -28,7 +43,7 @@ const CarCard = ({ car, pageSource = "unknown" }: CarCardProps) => {
   };
 
   return (
-    <Link to={car.slug ? `/coches/${car.slug}` : `/car/${car.id}`} className="h-full" onClick={handleClick}>
+    <Link to={to} className="h-full" onClick={handleClick}>
       <Card className={`overflow-hidden hover-lift group cursor-pointer bg-card border-border h-full flex flex-col ${isComplete ? "opacity-60" : ""}`}>
         <div className="aspect-[16/10] overflow-hidden bg-muted relative">
           <img
@@ -46,6 +61,12 @@ const CarCard = ({ car, pageSource = "unknown" }: CarCardProps) => {
             <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-[hsl(var(--participation-available))] text-background">
               <Users className="w-3.5 h-3.5" />
               {available}/{max} disponibles
+            </div>
+          )}
+          {cityCountBadge && cityCountBadge > 1 && (
+            <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-background/80 text-foreground backdrop-blur">
+              <MapPin className="w-3.5 h-3.5" />
+              En {cityCountBadge} ciudades
             </div>
           )}
         </div>
