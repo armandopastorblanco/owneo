@@ -18,6 +18,7 @@ import cardDashboardBg from "@/assets/concepto/card-dashboard.jpg";
 import cardWheelBg from "@/assets/concepto/card-wheel.jpg";
 import cardDetailingBg from "@/assets/concepto/card-detailing.jpg";
 import heroConceptoBg from "@/assets/concepto/hero-concepto.jpg";
+import carOutline from "@/assets/concepto/car-outline.png";
 
 /* ---------------- helpers ---------------- */
 
@@ -440,8 +441,8 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
-              <span className="ds-eyebrow-pill inline-flex items-center gap-2 whitespace-nowrap">
-                <Calculator className="w-4 h-4 shrink-0" /> Comparativa de costes
+              <span className="ds-eyebrow-pill">
+                Comparativa de costes
               </span>
             </Reveal>
             <Reveal delay={0.1}>
@@ -522,7 +523,7 @@ export default function NuestroModelo() {
                 <div className="flex justify-center">
                   <div className="relative">
                     <div className="absolute inset-0 bg-champagne/20 blur-2xl rounded-full" />
-                    <Car className="w-16 h-16 text-champagne relative" />
+                    <img src={carOutline} alt="Porsche 911 Turbo S" className="relative w-28 h-auto" />
                   </div>
                 </div>
                 <h3 className="mt-4 ds-h3 text-center">Porsche 911 Turbo S</h3>
