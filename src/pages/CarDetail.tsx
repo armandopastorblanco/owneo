@@ -638,34 +638,46 @@ const CarDetail = () => {
             </p>
           </Reveal>
 
-          {/* ─── BLOQUE E: LA EXPERIENCIA (visuel à gauche + contenu à droite) ─── */}
+                    {/* ─── BLOQUE E: LA EXPERIENCIA (carte immersive texte + image à gauche, stats à droite) ─── */}
           <section className="bg-card/20 border-y border-border/30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-20 mb-24">
-            <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-10 items-center">
-              {/* Visuel immersif à gauche */}
-              <Reveal>
-                <div className="group relative aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[420px] rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.4)]">
+            <div className="container mx-auto max-w-6xl grid lg:grid-cols-3 gap-6 items-stretch">
+              {/* Carte immersive : image de fond + texte par-dessus (2 colonnes) */}
+              <Reveal className="lg:col-span-2">
+                <div className="group relative h-full min-h-[420px] rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.4)]">
+                  {/* Image de fond + overlay */}
                   <div className="absolute inset-0 rounded-2xl overflow-hidden border border-border/50 transition-colors duration-500 group-hover:border-champagne/60">
                     <img
                       src={experienceImage}
                       alt={car.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-background/75" />
+                  </div>
+
+                  {/* Contenu par-dessus */}
+                  <div className="relative z-10 flex flex-col h-full p-8 sm:p-10">
+                    <span className="ds-eyebrow-pill self-start">La Experiencia</span>
+                    <h2 className="ds-h2 text-foreground mt-4 mb-6">
+                      Una obra maestra sobre ruedas.
+                    </h2>
+                    <p className="ds-lead leading-relaxed whitespace-pre-line">{luxuryDesc}</p>
+                    <Button
+                      variant="outline"
+                      className="mt-8 self-start"
+                      onClick={() => scrollTo(specsRef)}
+                    >
+                      Ver especificaciones técnicas
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
                   </div>
                 </div>
               </Reveal>
 
-              {/* Contenu à droite */}
-              <Reveal delay={0.1}>
-                <span className="ds-eyebrow-pill">La Experiencia</span>
-                <h2 className="ds-h2 text-foreground mt-4 mb-6">
-                  Una obra maestra sobre ruedas.
-                </h2>
-                <p className="ds-lead leading-relaxed whitespace-pre-line">{luxuryDesc}</p>
-
-                <div className="space-y-4 mt-8">
-                  {statCards.map((s, i) => (
-                    <div key={s.label} className="bg-background rounded-xl border border-border/50 p-5 flex items-center gap-4">
+              {/* 3 stat cards alignées à droite */}
+              <div className="flex flex-col gap-4 lg:gap-6">
+                {statCards.map((s, i) => (
+                  <Reveal key={s.label} delay={0.1 * i} className="flex-1">
+                    <div className="h-full bg-background rounded-xl border border-border/50 p-5 flex items-center gap-4">
                       <div className="p-3 rounded-lg bg-champagne/10 border border-champagne/20">
                         <s.icon className="w-6 h-6 text-champagne" />
                       </div>
@@ -674,18 +686,9 @@ const CarDetail = () => {
                         <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.label}</div>
                       </div>
                     </div>
-                  ))}
-                </div>
-
-                <Button
-                  variant="outline"
-                  className="mt-8"
-                  onClick={() => scrollTo(specsRef)}
-                >
-                  Ver especificaciones técnicas
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Reveal>
+                  </Reveal>
+                ))}
+              </div>
             </div>
           </section>
 
