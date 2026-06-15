@@ -47,10 +47,11 @@ const Portfolio = () => {
       <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-foreground">
-              Nuestra <span className="text-foreground">Gama</span>
+            <span className="ds-eyebrow-pill">Nuestra flota</span>
+            <h1 className="ds-h1 mt-6 mb-4 text-foreground">
+              Nuestra <span className="text-champagne">Gama</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="ds-lead max-w-3xl mx-auto">
               Explora nuestra colección exclusiva de los supercoches más prestigiosos del mundo
             </p>
           </div>
