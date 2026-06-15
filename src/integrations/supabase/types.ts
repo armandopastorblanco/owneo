@@ -268,6 +268,7 @@ export type Database = {
           manager_email: string | null
           manager_name: string | null
           manager_phone: string | null
+          matricula: string | null
           max_participations: number | null
           max_reservation_days: number | null
           min_reservation_days: number | null
@@ -310,6 +311,7 @@ export type Database = {
           manager_email?: string | null
           manager_name?: string | null
           manager_phone?: string | null
+          matricula?: string | null
           max_participations?: number | null
           max_reservation_days?: number | null
           min_reservation_days?: number | null
@@ -352,6 +354,7 @@ export type Database = {
           manager_email?: string | null
           manager_name?: string | null
           manager_phone?: string | null
+          matricula?: string | null
           max_participations?: number | null
           max_reservation_days?: number | null
           min_reservation_days?: number | null
