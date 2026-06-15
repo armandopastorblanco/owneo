@@ -233,7 +233,7 @@ const CarDetail = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4 text-foreground">Vehículo no encontrado</h1>
+          <h1 className="ds-h2 mb-4 text-foreground">Vehículo no encontrado</h1>
           <Link to="/coches">
             <Button variant="outline">
               <ArrowLeft className="mr-2 w-4 h-4" />
@@ -295,16 +295,6 @@ const CarDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-
-      {/* shared keyframes */}
-      <style>{`
-        @keyframes owneo-shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
-        .shimmer-badge {
-          background: linear-gradient(90deg, hsl(var(--card)) 0%, hsl(var(--champagne) / 0.15) 50%, hsl(var(--card)) 100%);
-          background-size: 200% 100%;
-          animation: owneo-shimmer 3s linear infinite;
-        }
-      `}</style>
 
       {/* ─── STICKY CTA BAR ─── */}
       <div
@@ -394,16 +384,14 @@ const CarDetail = () => {
           <div ref={pricingRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
             <div className="space-y-10 lg:space-y-12">
             <Reveal className="space-y-6">
-              <span className="inline-block text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-3 py-1">
-                {car.category}
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">{car.name}</h1>
+              <span className="ds-tag">{car.category}</span>
+              <h1 className="ds-h1 text-foreground">{car.name}</h1>
               <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <MapPin className="w-4 h-4" />
+                <MapPin className="w-4 h-4 text-champagne" />
                 <span>{car.availableIn.join(", ")}</span>
               </div>
               <div>
-                <p className={`text-muted-foreground leading-relaxed ${descExpanded ? "" : "line-clamp-2"}`}>
+                <p className={`ds-body ${descExpanded ? "" : "line-clamp-2"}`}>
                   {luxuryDesc}
                 </p>
                 {luxuryDesc.length > 160 && (
@@ -595,13 +583,11 @@ const CarDetail = () => {
 
           {/* ─── BLOQUE D: ALLOCATION ─── */}
           <Reveal className="mb-16">
-            <span className="inline-block text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-3 py-1 mb-3">
-              Tus derechos de uso
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+            <span className="ds-eyebrow-pill mb-3">Tus derechos de uso</span>
+            <h2 className="ds-h2 text-foreground mb-3 mt-3">
               Cuanto más participas, más disfrutas.
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl">
+            <p className="ds-lead mb-8 max-w-2xl">
               Cada participación te garantiza acceso exclusivo al vehículo: 3 semanas estándar + 1 semana premium. Acumula participaciones para ampliar tu tiempo al volante.
             </p>
 
@@ -651,13 +637,11 @@ const CarDetail = () => {
           <section className="bg-card/20 border-y border-border/30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-16 mb-16">
             <div className="container mx-auto max-w-6xl grid lg:grid-cols-5 gap-10">
               <Reveal className="lg:col-span-3">
-                <span className="inline-block text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-3 py-1 mb-3">
-                  La Experiencia
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                <span className="ds-eyebrow-pill mb-3">La Experiencia</span>
+                <h2 className="ds-h2 text-foreground mb-6 mt-3">
                   Una obra maestra sobre ruedas.
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-line">{luxuryDesc}</p>
+                <p className="ds-lead leading-relaxed whitespace-pre-line">{luxuryDesc}</p>
                 <Button
                   variant="outline"
                   className="mt-6"
@@ -688,17 +672,15 @@ const CarDetail = () => {
 
           {/* ─── BLOQUE F: 360 + GALERÍA ─── */}
           <Reveal className="mb-16">
-            <span className="inline-block text-xs uppercase tracking-wider text-champagne shimmer-badge border border-champagne/20 rounded-full px-3 py-1 mb-4">
-              Galería exclusiva
-            </span>
+            <span className="ds-eyebrow-pill mb-4">Galería exclusiva</span>
 
             {car.gallery && car.gallery.length >= 6 && (
-              <div className="mb-6">
+              <div className="mb-6 mt-4">
                 <Car360Viewer carName={car.name} gallery={car.gallery} />
               </div>
             )}
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-4 mt-4">
               {(car.gallery || [car.image, car.image, car.image]).map((image, index) => (
                 <div
                   key={index}
@@ -745,7 +727,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE G: SPECS ─── */}
           <Reveal className="mb-16" >
             <div ref={specsRef}>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">Especificaciones técnicas</h2>
+              <h2 className="ds-h2 mb-6 text-foreground">Especificaciones técnicas</h2>
               <Tabs value={specTab} onValueChange={setSpecTab}>
                 <div className="-mx-4 sm:mx-0 mb-4">
                   <TabsList className="flex w-max sm:w-auto mx-4 sm:mx-0 gap-1 overflow-x-auto no-scrollbar">
@@ -792,7 +774,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE H: FEATURES ─── */}
           {car.features?.length > 0 && (
             <Reveal className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 text-foreground">Características Premium</h2>
+              <h2 className="ds-h2 mb-6 text-foreground">Características Premium</h2>
               <div className="grid md:grid-cols-2 gap-3">
                 {car.features.map((feature, index) => (
                   <div
@@ -809,8 +791,8 @@ const CarDetail = () => {
 
           {/* ─── BLOQUE I: COMPARATIVA ─── */}
           <Reveal className="mb-16">
-            <h2 className="text-3xl font-bold mb-3 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
-            <p className="text-muted-foreground mb-8">
+            <h2 className="ds-h2 mb-3 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
+            <p className="ds-lead mb-8">
               Descubre cómo el modelo de co-sharing OWNEO reduce drásticamente los costes anuales de gestión.
             </p>
 
@@ -883,7 +865,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE J: DISPONIBILIDAD Y CONDICIONES ─── */}
           <Reveal className="mb-16 grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">Disponible en</h2>
+              <h2 className="ds-h3 mb-4 text-foreground">Disponible en</h2>
               <div className="flex flex-wrap gap-2">
                 {car.availableIn.map((city) => (
                   <div key={city} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full">
@@ -901,7 +883,7 @@ const CarDetail = () => {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold mb-4 text-foreground">Condiciones de la participación</h2>
+              <h2 className="ds-h3 mb-4 text-foreground">Condiciones de la participación</h2>
               <ul className="space-y-3">
                 {[
                   { icon: Calendar, text: `${weeksPerParticipation} semanas (3 estándar + 1 premium) garantizadas por participación/año` },
@@ -924,12 +906,10 @@ const CarDetail = () => {
           <section ref={consultaRef} className="bg-gradient-to-br from-card via-background to-card border-y border-border/50 -mx-4 sm:-mx-6 px-4 sm:px-6 py-16 mb-16">
             <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-10">
               <Reveal>
-                <span className="inline-block text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-3 py-1 mb-3">
-                  Consulta privada
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">¿Tienes preguntas?</h2>
-                <h3 className="text-xl text-champagne font-semibold mb-4">Habla con un especialista OWNEO.</h3>
-                <p className="text-muted-foreground leading-relaxed mb-6">
+                <span className="ds-eyebrow-pill mb-3">Consulta privada</span>
+                <h2 className="ds-h2 text-foreground mb-2 mt-3">¿Tienes preguntas?</h2>
+                <h3 className="ds-h3 text-champagne mb-4">Habla con un especialista OWNEO.</h3>
+                <p className="ds-body leading-relaxed mb-6">
                   Nuestro equipo está disponible para resolver todas tus dudas sobre este vehículo, el proceso
                   de participación y las condiciones contractuales. Sin compromiso.
                 </p>
@@ -950,11 +930,11 @@ const CarDetail = () => {
               <Reveal delay={0.1}>
                 <Card className="bg-card border border-border/50 rounded-2xl">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-foreground mb-4">Solicitar consulta privada</h3>
                     {submitted ? (
-                      <div className="flex items-start gap-3 p-4 rounded-xl border border-champagne/30 bg-champagne/5">
-                        <Check className="w-5 h-5 text-champagne flex-shrink-0 mt-0.5" />
-                        <p className="text-champagne text-sm">
+                      <div className="text-center py-8">
+                        <CheckCircle2 className="w-12 h-12 mx-auto mb-4 text-champagne" />
+                        <p className="text-foreground font-semibold mb-1">¡Gracias!</p>
+                        <p className="text-muted-foreground text-sm">
                           Solicitud recibida. Nos pondremos en contacto contigo en menos de 24 horas.
                         </p>
                       </div>
@@ -1020,13 +1000,11 @@ const CarDetail = () => {
               <Card className="bg-gradient-to-r from-muted/20 to-card border border-border/50 rounded-2xl">
                 <CardContent className="p-8 text-center">
                   <Users className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                  <span className="inline-block text-xs uppercase tracking-wider text-muted-foreground border border-border rounded-full px-3 py-1 mb-3">
-                    Participaciones agotadas
-                  </span>
-                  <h3 className="text-2xl font-bold mb-3 text-foreground">
+                  <span className="ds-tag mb-3">Participaciones agotadas</span>
+                  <h3 className="ds-h3 mb-3 mt-3 text-foreground">
                     Este vehículo ya tiene todos sus participantes
                   </h3>
-                  <p className="text-muted-foreground mb-6">
+                  <p className="ds-body mb-6">
                     Descubre otros vehículos disponibles en nuestra vitrina
                   </p>
                   <Link to="/coches">
@@ -1037,13 +1015,13 @@ const CarDetail = () => {
             ) : (
               <Card className="bg-gradient-to-br from-champagne/5 via-card to-champagne/5 border border-champagne/20 rounded-3xl">
                 <CardContent className="p-8 md:p-12 text-center">
-                  <span className="inline-block text-xs uppercase tracking-wider text-champagne shimmer-badge border border-champagne/20 rounded-full px-3 py-1 mb-4">
+                  <span className="ds-eyebrow-pill mb-4">
                     Participaciones disponibles · {availableParticipations}/{maxParticipations}
                   </span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+                  <h2 className="ds-h2 text-foreground mb-3 mt-4">
                     Asegura tu participación en el {car.name}
                   </h2>
-                  <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                  <p className="ds-body max-w-2xl mx-auto mb-8">
                     Completa el formulario para iniciar el proceso. Nuestro equipo revisará tu solicitud y te
                     contactará en menos de 24 horas.
                   </p>
