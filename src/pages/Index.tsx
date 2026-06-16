@@ -112,7 +112,7 @@ const Index = () => {
                   <span className="text-5xl font-extralight text-white leading-none">10%</span>
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">Del valor del vehículo</h3>
-                <p className="text-sm text-white/80 leading-relaxed">
+                <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
                   Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
@@ -133,7 +133,7 @@ const Index = () => {
                   <span className="text-base font-normal text-white/80 mt-1">Semanas</span>
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">Garantizadas al año</h3>
-                <p className="text-sm text-white/80 leading-relaxed">
+                <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
                   3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
@@ -152,7 +152,7 @@ const Index = () => {
                   <span className="text-5xl font-extralight text-white leading-none">÷10</span>
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">Los gastos compartidos</h3>
-                <p className="text-sm text-white/80 leading-relaxed">
+                <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
                   Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
@@ -179,7 +179,7 @@ const Index = () => {
               <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6 text-champagne/70">
                 Ejemplo real · Ferrari Roma
               </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight mb-6">
                 Llevas años mirando<br />ese Ferrari.
                 <span className="block mt-2 text-champagne">Ya es hora.</span>
               </h2>
@@ -277,7 +277,7 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/75 to-black/90" />
             <div className="relative z-10 px-8 py-16 text-center">
               <p className="text-[10px] uppercase tracking-[0.35em] mb-4 text-champagne/50">La diferencia</p>
-              <p className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">El mismo Ferrari Roma.</p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">El mismo Ferrari Roma.</h2>
               <p className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6 text-champagne">214.100€ de diferencia.</p>
               <p className="text-sm text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
                 No es magia. Es una estructura de propiedad compartida diseñada para los que entienden que el lujo inteligente no tiene nada que envidiarle al lujo tradicional.
@@ -318,8 +318,8 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 text-foreground">Colección Destacada</h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="ds-h2 text-foreground mb-4">Colección Destacada</h2>
+            <p className="ds-lead max-w-2xl mx-auto">
               Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo
             </p>
           </div>
@@ -331,23 +331,23 @@ const Index = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-  {featuredCars.map((model) => {
-    const multiCity = model.cityCount > 1;
-    const link = multiCity
-      ? "/ubicaciones"
-      : (model.slug ? `/coches/${model.slug}` : `/car/${model.id}`);
-    return (
-      <CarCard
-        key={`${model.brand}-${model.model}`}
-        car={model}
-        pageSource="home"
-        linkOverride={link}
-        availabilityOverride={{ remaining: model.totalRemaining, max: model.totalMax }}
-        cityCountBadge={model.cityCount}
-      />
-    );
-  })}
-</div>
+              {featuredCars.map((model) => {
+                const multiCity = model.cityCount > 1;
+                const link = multiCity
+                  ? "/ubicaciones"
+                  : (model.slug ? `/coches/${model.slug}` : `/car/${model.id}`);
+                return (
+                  <CarCard
+                    key={`${model.brand}-${model.model}`}
+                    car={model}
+                    pageSource="home"
+                    linkOverride={link}
+                    availabilityOverride={{ remaining: model.totalRemaining, max: model.totalMax }}
+                    cityCountBadge={model.cityCount}
+                  />
+                );
+              })}
+            </div>
           )}
           <div className="text-center mt-12">
             <Link to="/coches">
@@ -369,8 +369,8 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card/50">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 text-foreground">Nuestras Ubicaciones</h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="ds-h2 text-foreground mb-4">Nuestras Ubicaciones</h2>
+            <p className="ds-lead max-w-2xl mx-auto">
               Descubre nuestra flota en las ciudades más exclusivas de España
             </p>
           </div>
@@ -389,7 +389,7 @@ const Index = () => {
                     <MapPin className="w-4 h-4 text-champagne" />
                     <span className="text-sm text-muted-foreground uppercase tracking-wider">España</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-light text-foreground mb-2">{city.name}</h3>
+                  <h3 className="ds-card-title text-foreground mb-2">{city.name}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
                 </div>
               </Link>
@@ -435,10 +435,10 @@ const Index = () => {
       <section className="py-20 sm:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 text-foreground">
+            <h2 className="ds-h2 text-foreground mb-6">
               El Lujo de los Supercoches, Ahora Accesible
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="ds-lead leading-relaxed max-w-3xl mx-auto">
               En OWNEO revolucionamos el concepto de{" "}
               <strong className="text-foreground">alquiler de supercoches de lujo</strong>{" "}
               en España, haciendo realidad el sueño de conducir los vehículos más exclusivos del mundo.
@@ -449,7 +449,7 @@ const Index = () => {
               <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
                 <Star className="w-6 h-6 text-champagne" />
               </div>
-              <h3 className="text-xl font-light text-foreground mb-4">Las Marcas Más Prestigiosas del Mundo</h3>
+              <h3 className="ds-h3 text-foreground mb-4">Las Marcas Más Prestigiosas del Mundo</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Nuestra flota exclusiva incluye los{" "}
                 <strong className="text-foreground">superdeportivos Ferrari</strong> más codiciados, desde el icónico Ferrari Portofino hasta el impresionante F8 Tributo. Experimenta la potencia de un{" "}
@@ -464,7 +464,7 @@ const Index = () => {
               <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
                 <Star className="w-6 h-6 text-champagne" />
               </div>
-              <h3 className="text-xl font-light text-foreground mb-4">Elegancia Británica y Exclusividad</h3>
+              <h3 className="ds-h3 text-foreground mb-4">Elegancia Británica y Exclusividad</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Descubre el refinamiento del{" "}
                 <strong className="text-foreground">Aston Martin DB11</strong>, la innovación aerodinámica del{" "}
@@ -481,7 +481,7 @@ const Index = () => {
           <div className="bg-gradient-to-br from-card/80 to-card/40 rounded-3xl p-6 sm:p-8 md:p-12 border border-border/50 mb-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-champagne/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-foreground mb-6 text-center">
+              <h3 className="ds-h3 text-foreground mb-6 text-center">
                 Supercar Sharing: La Nueva Era del Lujo Compartido
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8 text-center max-w-3xl mx-auto">
@@ -510,7 +510,6 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <PressSection standalone={false} />
           <div className="bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 text-center mt-12">
             <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
               Desde el{" "}
