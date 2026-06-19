@@ -30,6 +30,7 @@ import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ParticipationForm from "@/components/ParticipationForm";
+import { Helmet } from "react-helmet-async";
 
 /* ─── spec labels & categorisation ─── */
 const specLabels: Record<string, string> = {
