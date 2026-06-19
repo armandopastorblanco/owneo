@@ -1,0 +1,19 @@
+# Owneo
+
+> Owneo es una plataforma española de car sharing de supercoches y SUV de lujo. Compra una participación del 10% en un Ferrari, Lamborghini, Porsche o Mercedes y disfruta de hasta 28 días al año sin asumir el coste total de propiedad.
+
+## Pages
+
+- [Inicio](/): Resumen del modelo Owneo, gama destacada y ciudades disponibles.
+- [Nuestro Modelo](/nuestro-modelo): Cómo funciona el car sharing de supercoches en 5 pasos y comparativa de costes.
+- [Quiénes Somos](/quienes-somos): Misión, visión y equipo detrás de Owneo.
+- [Nuestra Gama](/coches): Catálogo de supercoches disponibles para participación compartida.
+- [Ciudades](/ubicaciones): Ciudades españolas donde Owneo opera (Madrid, Barcelona, Valencia, Sevilla, Málaga, Bilbao).
+- [Noticias](/noticias): Actualidad de supercoches de lujo y novedades Owneo.
+- [Contacto](/contacto): Formulario para hablar con el equipo Owneo.
+
+## Optional
+
+- [Aviso Legal](/aviso-legal)
+- [Política de Privacidad](/politica-de-privacidad)
+- [Política de Cookies](/politica-de-cookies)
