@@ -30,6 +30,7 @@ import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ParticipationForm from "@/components/ParticipationForm";
+import { Helmet } from "react-helmet-async";
 
 /* ─── spec labels & categorisation ─── */
 const specLabels: Record<string, string> = {
@@ -300,8 +301,44 @@ const CarDetail = () => {
   /* ─── images de la galerie (carrousel) ─── */
   const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : [car.image];
 
+  const carUrl = `https://www.owneo.es/coches/${car.slug}`;
+  const carImageAbs = car.image?.startsWith("http") ? car.image : `https://www.owneo.es${car.image?.startsWith("/") ? "" : "/"}${car.image ?? ""}`;
+  const metaDescription = (luxuryDesc || `${car.name}: comparte un supercoche de lujo en España con Owneo. Participaciones desde ${sharePrice.toLocaleString("es-ES")} €.`).slice(0, 158);
+
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>{`${car.name} — Comparte un supercoche | Owneo`}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={carUrl} />
+        <meta property="og:title" content={`${car.name} — Owneo`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={carUrl} />
+        <meta property="og:type" content="product" />
+        <meta property="og:image" content={carImageAbs} />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={carImageAbs} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": car.name,
+          "brand": { "@type": "Brand", "name": car.brand },
+          "image": carImageAbs,
+          "description": metaDescription,
+          "url": carUrl,
+          "offers": {
+            "@type": "Offer",
+            "price": sharePrice,
+            "priceCurrency": "EUR",
+            "availability": isComplete
+              ? "https://schema.org/SoldOut"
+              : "https://schema.org/InStock",
+            "url": carUrl
+          }
+        })}</script>
+      </Helmet>
       <Navbar />
 
       {/* ─── STICKY CTA BAR ─── */}

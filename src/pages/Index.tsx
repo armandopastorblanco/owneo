@@ -38,9 +38,26 @@ const Index = () => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Owneo" />
         <meta property="og:locale" content="es_ES" />
-        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:image" content="https://www.owneo.es/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@owneo" />
+        <meta name="twitter:image" content="https://www.owneo.es/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Owneo",
+          "url": "https://www.owneo.es",
+          "logo": "https://www.owneo.es/pwa-icon-512.png",
+          "email": "info@owneo.es",
+          "sameAs": []
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Owneo",
+          "url": "https://www.owneo.es",
+          "inLanguage": "es-ES"
+        })}</script>
       </Helmet>
       <Navbar />
 
