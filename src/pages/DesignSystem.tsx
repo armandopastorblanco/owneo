@@ -1,4 +1,4 @@
-import { Percent, CalendarDays, Users, ArrowRight, MapPin, Star, Shield, Check } from "lucide-react";
+import { Percent, CalendarDays, Users, ArrowRight, MapPin, Star, Shield, Check, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import featureBg from "@/assets/cars/ferrari-roma.jpg";
@@ -73,6 +73,76 @@ const DesignSystem = () => {
             Nunca colores fijos (#hex / rgba) salvo overlays sobre imágenes.
           </p>
         </Block>
+
+        {/* LOGOS */}
+        <Block title="Logos y símbolo">
+          <p className="ds-body mb-8">
+            Descarga los archivos oficiales de la marca. Usa la versión negativa sobre fondos oscuros
+            y la positiva sobre fondos claros. El símbolo se reserva para usos compactos (favicon, app icon, avatar).
+          </p>
+
+          <h3 className="ds-card-title text-foreground mb-4">Logo — versión negativa (fondo negro)</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+            {[
+              { src: "/brand/OWNEO_Logo_Neg_RGB.jpg", label: "Logo negativo — JPG" },
+              { src: "/brand/OWNEO_Logo_Neg_RGB.png", label: "Logo negativo — PNG" },
+            ].map((f) => (
+              <div key={f.src} className="ds-card">
+                <div className="rounded-xl overflow-hidden bg-black flex items-center justify-center h-40 mb-4">
+                  <img src={f.src} alt={f.label} className="max-h-24 w-auto object-contain" />
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="ds-body">{f.label}</span>
+                  <a href={f.src} download>
+                    <Button variant="outline" size="sm"><Download className="w-4 h-4 mr-2" />Descargar</Button>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="ds-card-title text-foreground mb-4">Logo — versión positiva (fondo blanco)</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+            {[
+              { src: "/brand/OWNEO_Logo_Pos_RGB.jpg", label: "Logo positivo — JPG" },
+              { src: "/brand/OWNEO_Logo_Pos_RGB.png", label: "Logo positivo — PNG" },
+            ].map((f) => (
+              <div key={f.src} className="ds-card">
+                <div className="rounded-xl overflow-hidden bg-white flex items-center justify-center h-40 mb-4">
+                  <img src={f.src} alt={f.label} className="max-h-24 w-auto object-contain" />
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="ds-body">{f.label}</span>
+                  <a href={f.src} download>
+                    <Button variant="outline" size="sm"><Download className="w-4 h-4 mr-2" />Descargar</Button>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="ds-card-title text-foreground mb-4">Símbolo</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {[
+              { src: "/brand/OWNEO_Simbolo_RGB.jpg", label: "Símbolo — JPG", bg: "bg-black" },
+              { src: "/brand/OWNEO_Simbolo_RGB.png", label: "Símbolo — PNG", bg: "bg-white" },
+            ].map((f) => (
+              <div key={f.src} className="ds-card">
+                <div className={`rounded-xl overflow-hidden ${f.bg} flex items-center justify-center h-40 mb-4`}>
+                  <img src={f.src} alt={f.label} className="max-h-32 w-auto object-contain" />
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="ds-body">{f.label}</span>
+                  <a href={f.src} download>
+                    <Button variant="outline" size="sm"><Download className="w-4 h-4 mr-2" />Descargar</Button>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Block>
+
+
 
         {/* TIPOGRAFÍA */}
         <Block title="Tipografía — Encode Sans Expanded">
