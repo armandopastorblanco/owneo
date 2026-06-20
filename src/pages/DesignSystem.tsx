@@ -1,4 +1,4 @@
-import { Percent, CalendarDays, Users, ArrowRight, MapPin, Star, Shield, Check } from "lucide-react";
+import { Percent, CalendarDays, Users, ArrowRight, MapPin, Star, Shield, Check, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import featureBg from "@/assets/cars/ferrari-roma.jpg";
