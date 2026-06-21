@@ -115,6 +115,7 @@ const App = () => (
               <Route path="/nuestro-modelo" element={<NuestroModelo />} />
               <Route path="/tiktok" element={<TikTokLanding />} />
               <Route path="/twitter" element={<TwitterLanding />} />
+              <Route path="/lista-espera" element={<WaitlistLanding />} />
               <Route path="/noticias" element={<Noticias />} />
               <Route path="/noticias/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
               <Route path="/noticias/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
