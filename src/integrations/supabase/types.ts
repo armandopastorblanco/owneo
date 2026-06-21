@@ -2027,6 +2027,33 @@ export type Database = {
           },
         ]
       }
+      waitlist: {
+        Row: {
+          ciudad: string | null
+          created_at: string | null
+          email: string
+          id: string
+          nombre: string | null
+          source: string | null
+        }
+        Insert: {
+          ciudad?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          nombre?: string | null
+          source?: string | null
+        }
+        Update: {
+          ciudad?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          nombre?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
