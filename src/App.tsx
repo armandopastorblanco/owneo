@@ -21,6 +21,7 @@ import QuienesSomos from "./pages/QuienesSomos";
 import NuestroModelo from "./pages/NuestroModelo";
 import TikTokLanding from "./pages/TikTokLanding";
 import TwitterLanding from "./pages/TwitterLanding";
+import WaitlistLanding from "./pages/WaitlistLanding";
 import Noticias from "./pages/Noticias";
 import NoticiaFerrariLuce from "./pages/NoticiaFerrariLuce";
 import NoticiaLamborghiniHuracan from "./pages/NoticiaLamborghiniHuracan";
