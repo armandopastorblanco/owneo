@@ -2059,6 +2059,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_update_document_status: {
+        Args: { _id: string; _notes?: string; _status: string }
+        Returns: undefined
+      }
       classify_reservation_type: {
         Args: { p_car_id: string; p_end_date: string; p_start_date: string }
         Returns: string
