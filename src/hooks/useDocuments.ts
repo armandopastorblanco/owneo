@@ -101,14 +101,11 @@ export function useUpdateDocumentStatus() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (params: { id: string; status: string; notes?: string | null }) => {
-      const { error } = await supabase
-        .from("participant_documents" as any)
-        .update({
-          status: params.status,
-          notes: params.notes ?? null,
-          reviewed_at: new Date().toISOString(),
-        })
-        .eq("id", params.id);
+      const { error } = await supabase.rpc("admin_update_document_status" as any, {
+        _id: params.id,
+        _status: params.status,
+        _notes: params.notes ?? null,
+      });
       if (error) throw error;
     },
     onSuccess: () => {
