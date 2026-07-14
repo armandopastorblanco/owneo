@@ -1,5 +1,5 @@
 import ferrariF80 from "@/assets/news/ferrari-f80.jpg";
-import lamborghiniTemerario from "@/assets/news/lamborghini-temerario.jpg";
+
 import astonMartinValhalla from "@/assets/news/aston-martin-valhalla.jpg";
 import porscheGt2Rs from "@/assets/news/porsche-gt2-rs.jpg";
 import lamborghiniFenomeno from "@/assets/news/lamborghini-fenomeno.jpg";
@@ -83,18 +83,6 @@ export const additionalNews: NewsArticle[] = [
       { label: "Peso seco", value: "1.525 kg" },
       { label: "Producción", value: "799 uds" },
     ]
-  },
-  {
-    id: 8, slug: "lamborghini-temerario", image: lamborghiniTemerario, date: "16 Agosto 2024", category: "Lanzamientos",
-    title: "Lamborghini Temerario: el sucesor del Huracán ya es oficial con 920 CV híbridos",
-    excerpt: "Lamborghini presenta oficialmente el Temerario, sucesor del Huracán con un nuevo V8 biturbo de 4.0L y tres motores eléctricos que generan 920 CV combinados.",
-    readTime: "7 min",
-    content: { intro: "El Lamborghini Temerario ha sido presentado oficialmente como el sucesor del icónico Huracán. Equipado con un motor V8 biturbo de 4.0 litros completamente nuevo y tres motores eléctricos, el Temerario es el segundo modelo HPEV (High Performance Electrified Vehicle) de Lamborghini tras el Revuelto, y marca una nueva era para los superdeportivos de Sant'Agata Bolognese.", sections: [
-      { title: "Un V8 revolucionario", paragraphs: ["El nuevo V8 biturbo de 4.0 litros con cigüeñal de plano plano es una creación 100% Lamborghini, no una derivación del motor Audi. Desarrolla 800 CV a 9.000 rpm, con un sonido agudo y distintivo que recuerda más a un motor de competición que a un turbo convencional. Combinado con tres motores eléctricos (dos delanteros y uno trasero integrado en la transmisión DCT de 8 velocidades), la potencia total alcanza los 920 CV.", "La batería de 3,8 kWh permite una autonomía eléctrica de 13 km y asiste activamente en la conducción deportiva, eliminando el lag del turbo y proporcionando impulsos de par instantáneo."] },
-      { title: "Diseño y chasis", paragraphs: ["El Temerario presenta un diseño más afilado y compacto que el Huracán, con proporciones de motor central que enfatizan su carácter deportivo. El chasis combina aluminio y fibra de carbono con una rigidez torsional un 20% superior a su predecesor. El peso en seco de 1.340 kg (estimado) otorga una relación peso/potencia excepcional.", "La tracción integral inteligente distribuye el par entre los cuatro neumáticos con una frecuencia de ajuste de 500 veces por segundo, mientras que la dirección en las cuatro ruedas mejora la agilidad a baja velocidad y la estabilidad a alta velocidad."] },
-      { title: "Precio y disponibilidad", paragraphs: ["El Lamborghini Temerario tiene un precio base de 290.000 dólares en EE.UU. Las primeras entregas están previstas para mediados de 2025, con versiones Performante y Sterrato previstas para los años siguientes."] }
-    ] },
-    specs: [{ label: "Potencia", value: "920 CV" }, { label: "0-100 km/h", value: "2,7 s" }, { label: "V. máxima", value: "343 km/h" }, { label: "Precio", value: "~290.000 $" }]
   },
   {
     id: 9, slug: "aston-martin-valhalla", image: astonMartinValhalla, date: "23 Mayo 2025", category: "Lanzamientos",

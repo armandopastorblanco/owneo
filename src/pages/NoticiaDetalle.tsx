@@ -31,7 +31,7 @@ const NoticiaDetalle = () => {
 
 const sourceUrls: Record<string, string> = {
   "ferrari-f80-hypercar": "https://www.ferrari.com/en-EN/auto/ferrari-f80",
-  "lamborghini-temerario": "https://www.lamborghini.com/en-en/models/temerario",
+  
   "aston-martin-valhalla": "https://www.astonmartin.com/en/models/valhalla",
   "porsche-911-gt2-rs-2026": "https://www.porsche.com/international/models/911/911-gt2-rs/",
   "lamborghini-fenomeno": "https://www.lamborghini.com/en-en/models/few-off/fenomeno",
@@ -65,7 +65,7 @@ const sourceUrls: Record<string, string> = {
 
 const sourceLabels: Record<string, string> = {
   "ferrari-f80-hypercar": "Ferrari — F80",
-  "lamborghini-temerario": "Lamborghini — Temerario",
+  
   "aston-martin-valhalla": "Aston Martin — Valhalla",
   "porsche-911-gt2-rs-2026": "Porsche — 911 GT2 RS",
   "lamborghini-fenomeno": "Lamborghini — Fenomeno",
