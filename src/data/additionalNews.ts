@@ -32,6 +32,12 @@ import lamborghiniUrusSe from "@/assets/news/lamborghini-urus-se.jpg";
 import bugattiBolide from "@/assets/news/bugatti-bolide.jpg";
 import rollsRoyceDroptail from "@/assets/news/rolls-royce-droptail.jpg";
 import porsche718CaymanElectric from "@/assets/news/porsche-718-cayman-electric.jpg";
+import ferrariPurosangueImg from "@/assets/news/ferrari-purosangue.jpg.asset.json";
+import porsche911TurboSHibridoImg from "@/assets/news/porsche-911-turbo-s-hibrido.jpg.asset.json";
+import lamborghiniUrusSePerformanteImg from "@/assets/news/lamborghini-urus-se-performante.jpg.asset.json";
+import maseratiGt2StradaleImg from "@/assets/news/maserati-gt2-stradale.jpg.asset.json";
+import astonMartinVanquishImg from "@/assets/news/aston-martin-vanquish.jpg.asset.json";
+import ferrari296SpecialeImg from "@/assets/news/ferrari-296-speciale.jpg.asset.json";
 
 export interface NewsArticle {
   id: number;
@@ -54,7 +60,7 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 101,
     slug: "ferrari-296-speciale",
-    image: "/placeholder.svg",
+    image: ferrari296SpecialeImg.url,
     date: "11 Julio 2026",
     category: "Competición",
     title: "Ferrari 296 Speciale: el V6 híbrido de Maranello alcanza los 880 CV",
@@ -86,7 +92,7 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 102,
     slug: "aston-martin-vanquish",
-    image: "/placeholder.svg",
+    image: astonMartinVanquishImg.url,
     date: "4 Julio 2026",
     category: "Gran Turismo",
     title: "Aston Martin Vanquish: el V12 biturbo de 835 CV que corona la gama de Gaydon",
@@ -118,7 +124,7 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 103,
     slug: "maserati-gt2-stradale",
-    image: "/placeholder.svg",
+    image: maseratiGt2StradaleImg.url,
     date: "27 Junio 2026",
     category: "Gran Turismo",
     title: "Maserati GT2 Stradale: el V6 Nettuno de 640 CV lleva el MC20 al circuito",
@@ -150,7 +156,7 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 104,
     slug: "lamborghini-urus-se-performante",
-    image: "/placeholder.svg",
+    image: lamborghiniUrusSePerformanteImg.url,
     date: "20 Junio 2026",
     category: "SUV Deportivo",
     title: "Lamborghini Urus SE Performante: el Super SUV híbrido más rápido con 812 CV",
@@ -182,7 +188,7 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 105,
     slug: "porsche-911-turbo-s-hibrido-992-2",
-    image: "/placeholder.svg",
+    image: porsche911TurboSHibridoImg.url,
     date: "13 Junio 2026",
     category: "Lanzamientos",
     title: "Porsche 911 Turbo S (992.2): el icono se hace híbrido y supera los 700 CV",
@@ -214,7 +220,7 @@ export const additionalNews: NewsArticle[] = [
   {
     id: 106,
     slug: "ferrari-purosangue",
-    image: "/placeholder.svg",
+    image: ferrariPurosangueImg.url,
     date: "6 Junio 2026",
     category: "SUV Deportivo",
     title: "Ferrari Purosangue: el primer «SUV» de Maranello y su V12 atmosférico de 725 CV",
