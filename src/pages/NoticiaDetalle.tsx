@@ -30,6 +30,12 @@ const NoticiaDetalle = () => {
   const { trackEvent } = useAnalytics();
 
 const sourceUrls: Record<string, string> = {
+  "ferrari-purosangue": "https://www.ferrari.com/es-ES/auto/ferrari-purosangue",
+  "porsche-911-turbo-s-hibrido-992-2": "https://www.porsche.com/usa/models/911/911-turbo-models/911-turbo-s/",
+  "lamborghini-urus-se-performante": "https://www.lamborghini.com/en-en/models/urus/urus-se-performante",
+  "maserati-gt2-stradale": "https://www.maserati.com/global/en/models/gt2-stradale",
+  "aston-martin-vanquish": "https://www.astonmartin.com/en/models/vanquish",
+  "ferrari-296-speciale": "https://www.ferrari.com/es-ES/auto/ferrari-296-gtb",
   "ferrari-f80-hypercar": "https://www.ferrari.com/en-EN/auto/ferrari-f80",
   
   "aston-martin-valhalla": "https://www.astonmartin.com/en/models/valhalla",
@@ -64,6 +70,12 @@ const sourceUrls: Record<string, string> = {
 };
 
 const sourceLabels: Record<string, string> = {
+  "ferrari-purosangue": "Ferrari — Purosangue",
+  "porsche-911-turbo-s-hibrido-992-2": "Porsche — 911 Turbo S (992.2)",
+  "lamborghini-urus-se-performante": "Lamborghini — Urus SE Performante",
+  "maserati-gt2-stradale": "Maserati — GT2 Stradale",
+  "aston-martin-vanquish": "Aston Martin — Vanquish",
+  "ferrari-296-speciale": "Ferrari — 296 Speciale",
   "ferrari-f80-hypercar": "Ferrari — F80",
   
   "aston-martin-valhalla": "Aston Martin — Valhalla",
