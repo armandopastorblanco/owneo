@@ -26,20 +26,21 @@
           "openWorldHint": false
         },
         "inputSchema": {
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "city_slug": {
-              "description": "Optional city slug filter (e.g. madrid, barcelona).",
-              "type": "string"
+              "type": "string",
+              "description": "Optional city slug filter (e.g. madrid, barcelona)."
             },
             "limit": {
-              "description": "Max rows (default 20).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 50
+              "maximum": 50,
+              "description": "Max rows (default 20)."
             }
-          }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
         },
         "outputSchema": null
       },
@@ -53,7 +54,6 @@
           "openWorldHint": false
         },
         "inputSchema": {
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "slug": {
@@ -64,7 +64,9 @@
           },
           "required": [
             "slug"
-          ]
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
         },
         "outputSchema": null
       },
@@ -110,20 +112,21 @@
           "openWorldHint": false
         },
         "inputSchema": {
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "status": {
-              "description": "Optional reservation status filter.",
               "type": "string",
               "enum": [
                 "pending",
                 "confirmed",
                 "cancelled",
                 "completed"
-              ]
+              ],
+              "description": "Optional reservation status filter."
             }
-          }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
         },
         "outputSchema": null
       }
