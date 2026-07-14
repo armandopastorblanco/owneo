@@ -52,6 +52,201 @@ export interface NewsArticle {
 
 export const additionalNews: NewsArticle[] = [
   {
+    id: 101,
+    slug: "ferrari-296-speciale",
+    image: "/placeholder.svg",
+    date: "11 Julio 2026",
+    category: "Competición",
+    title: "Ferrari 296 Speciale: el V6 híbrido de Maranello alcanza los 880 CV",
+    excerpt: "Ferrari lleva su berlinetta V6 híbrida a su máxima expresión con la 296 Speciale. La combinación del V6 biturbo con el sistema eléctrico alcanza los 880 CV, acompañada de un profundo trabajo de aligeramiento y aerodinámica. Es la versión más afilada y prestacional de la familia 296.",
+    readTime: "7 min",
+    content: {
+      intro: "Con la 296 GTB, Ferrari demostró que un V6 híbrido podía ofrecer emociones dignas del Cavallino Rampante. La versión Speciale toma ese concepto y lo radicaliza siguiendo la estela de nombres míticos como el 458 Speciale, con un enfoque claramente orientado al rendimiento puro y a la conducción en circuito. Cada aspecto de la 296 Speciale ha sido revisado para extraer el máximo: más potencia, menos peso y una aerodinámica más agresiva componen una berlinetta pensada para quienes buscan la experiencia Ferrari más intensa.",
+      sections: [
+        { title: "V6 híbrido llevado al límite", paragraphs: [
+          "El propulsor parte del V6 biturbo de 3.0 litros a 120 grados combinado con un motor eléctrico, pero en la Speciale la potencia combinada se eleva hasta los 880 CV. La respuesta, ya excepcional en la 296 GTB, gana en inmediatez gracias a las mejoras en la gestión electrónica y el empuje eléctrico. La caja de doble embrague de ocho velocidades y la tracción trasera completan el esquema.",
+          "El trabajo de aligeramiento, con fibra de carbono y componentes específicos, mejora la relación peso-potencia y agudiza la respuesta dinámica, mientras que la aerodinámica revisada incrementa la carga sin penalizar la eficiencia."
+        ]},
+        { title: "Aerodinámica y dinámica de circuito", paragraphs: [
+          "La 296 Speciale incorpora un paquete aerodinámico específico, con elementos activos y pasivos que aumentan la carga aerodinámica en curva y bajo frenada. Los reglajes de suspensión, la electrónica de control y los neumáticos han sido calibrados para el uso en pista, ofreciendo un nivel de precisión y agarre superior al de la 296 GTB de partida.",
+          "El interior adopta un enfoque minimalista y deportivo, con asientos baquet, materiales ligeros y detalles que refuerzan la vocación racing del modelo, sin perder la sofisticación característica de Maranello."
+        ]},
+        { title: "Precio y exclusividad", paragraphs: [
+          "Como versión Speciale de la gama 296, este modelo se sitúa por encima de la 296 GTB en precio y exclusividad, con una producción orientada a los clientes más exigentes. Con él, Ferrari confirma que la era híbrida puede convivir con la emoción más pura del Cavallino Rampante."
+        ]}
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "880 CV" },
+      { label: "Motor", value: "V6 3.0 biturbo híbrido" },
+      { label: "Transmisión", value: "Doble embrague 8 vel." },
+      { label: "Tracción", value: "Trasera" },
+    ]
+  },
+  {
+    id: 102,
+    slug: "aston-martin-vanquish",
+    image: "/placeholder.svg",
+    date: "4 Julio 2026",
+    category: "Gran Turismo",
+    title: "Aston Martin Vanquish: el V12 biturbo de 835 CV que corona la gama de Gaydon",
+    excerpt: "Aston Martin recupera uno de sus nombres más legendarios para su nuevo buque insignia. El Vanquish estrena un V12 biturbo de 5.2 litros que entrega 835 CV y 1.000 Nm, convirtiéndose en el Aston Martin de producción más potente de la historia. Un super GT de motor delantero sin rival directo.",
+    readTime: "7 min",
+    content: {
+      intro: "El nombre Vanquish evoca lo mejor de la tradición Aston Martin, y la marca británica lo reserva para su modelo más ambicioso. Tras años de gama poblada por V8 de origen AMG, Gaydon reivindica el V12 como seña de identidad de su flagship, un gesto tan emocional como estratégico en una era de electrificación. El nuevo Vanquish no es una evolución más: es la declaración de que Aston Martin sigue creyendo en el gran turismo de doce cilindros, motor delantero y tracción trasera, en su forma más pura y extrema.",
+      sections: [
+        { title: "Un V12 biturbo desarrollado en casa", paragraphs: [
+          "En el corazón del Vanquish late un V12 biturbo de 5.2 litros en posición delantera-central, desarrollado internamente por Aston Martin. Con 835 CV a 6.500 rpm y 1.000 Nm de par entre 2.500 y 5.000 rpm, es el motor más potente jamás montado en un Aston Martin de serie. La potencia llega al eje trasero a través de una transmisión automática de ocho velocidades con diferencial electrónico de deslizamiento limitado.",
+          "Las prestaciones están a la altura del propulsor: 0 a 100 km/h en 3,3 segundos y una velocidad máxima de 345 km/h, cifras que sitúan al Vanquish entre los GT más rápidos del mundo."
+        ]},
+        { title: "Diseño: presencia y proporciones de gran turismo", paragraphs: [
+          "El Vanquish exhibe unas proporciones clásicas de GT delantero, con un capó largo, una cabina retrasada y una zaga musculosa. La parrilla frontal, la más grande jamás vista en un Aston Martin de serie, domina el frontal y refuerza el carácter imponente del modelo. Cada línea transmite la mezcla de elegancia y agresividad que define a la marca.",
+          "El interior combina artesanía británica con tecnología moderna: cuero cosido a mano, aluminio y una nueva interfaz digital que moderniza el habitáculo sin perder el aire exclusivo propio de un Aston Martin de primer nivel."
+        ]},
+        { title: "Precio y posicionamiento", paragraphs: [
+          "Como nuevo buque insignia de la gama, el Vanquish se sitúa en lo más alto de la oferta de Aston Martin, con un precio acorde a su condición de super GT V12 de producción limitada. Con él, Gaydon reafirma su lugar entre los grandes fabricantes de gran turismo de lujo."
+        ]}
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "835 CV" },
+      { label: "0-100 km/h", value: "3,3 s" },
+      { label: "Motor", value: "V12 5.2 biturbo" },
+      { label: "Velocidad máxima", value: "345 km/h" },
+    ]
+  },
+  {
+    id: 103,
+    slug: "maserati-gt2-stradale",
+    image: "/placeholder.svg",
+    date: "27 Junio 2026",
+    category: "Gran Turismo",
+    title: "Maserati GT2 Stradale: el V6 Nettuno de 640 CV lleva el MC20 al circuito",
+    excerpt: "Maserati traslada su coche de competición GT2 a la carretera con el nuevo GT2 Stradale. Basado en el MC20, adopta el V6 Nettuno biturbo de 640 CV, una notable reducción de peso y una aerodinámica capaz de generar hasta 500 kg de carga. Es el Maserati de calle más radical jamás producido.",
+    readTime: "7 min",
+    content: {
+      intro: "El MC20 devolvió a Maserati al segmento de los superdeportivos con un producto brillante. El GT2 Stradale va un paso más allá: toma como base el coche de carreras GT2 y lo homologa para uso en carretera, ofreciendo a los clientes una experiencia lo más cercana posible a la competición sin renunciar a la matrícula. Cada decisión de ingeniería en el GT2 Stradale persigue el mismo objetivo: rendimiento en circuito. Menos peso, más carga aerodinámica y una respuesta más afilada definen a esta versión que corona la gama deportiva del Tridente.",
+      sections: [
+        { title: "Nettuno: el V6 más avanzado de Módena", paragraphs: [
+          "El corazón del GT2 Stradale es el V6 Nettuno biturbo de 3.0 litros, el mismo propulsor de tecnología derivada de la Fórmula 1 con precámara de combustión que debutó en el MC20. Aquí entrega 640 CV, diez más que en el MC20 de partida, canalizados exclusivamente al eje trasero a través de una caja de doble embrague de ocho velocidades.",
+          "La reducción de peso —del orden de 60 kg respecto al MC20— y la mejora aerodinámica se traducen en un 0 a 100 km/h en apenas 2,8 segundos. La aerodinámica activa y los apéndices específicos generan hasta 500 kg de carga aerodinámica a alta velocidad, cifra impensable en un GT convencional."
+        ]},
+        { title: "Ligereza y aerodinámica de competición", paragraphs: [
+          "El GT2 Stradale recurre de forma extensiva a la fibra de carbono para reducir peso, tanto en la carrocería como en elementos interiores. El gran alerón trasero, el splitter delantero y el difúsor optimizado forman un paquete aerodinámico que remite directamente al coche de carreras del que deriva.",
+          "El habitáculo, despojado y orientado a la conducción, mantiene los elementos esenciales del lujo Maserati pero con un claro enfoque deportivo: asientos baquet, materiales ligeros y una ergonomía pensada para el circuito."
+        ]},
+        { title: "Precio y exclusividad", paragraphs: [
+          "El Maserati GT2 Stradale se posiciona como el modelo más prestacional y exclusivo de la gama, con un precio que refleja su naturaleza de superdeportivo homologado derivado de la competición. Con él, Maserati reafirma su regreso al más alto nivel del segmento."
+        ]}
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "640 CV" },
+      { label: "0-100 km/h", value: "2,8 s" },
+      { label: "Motor", value: "V6 Nettuno 3.0 biturbo" },
+      { label: "Carga aerodinámica", value: "Hasta 500 kg" },
+    ]
+  },
+  {
+    id: 104,
+    slug: "lamborghini-urus-se-performante",
+    image: "/placeholder.svg",
+    date: "20 Junio 2026",
+    category: "SUV Deportivo",
+    title: "Lamborghini Urus SE Performante: el Super SUV híbrido más rápido con 812 CV",
+    excerpt: "Lamborghini lleva su Super SUV a un nuevo nivel con el Urus SE Performante. La combinación del V8 biturbo con un sistema híbrido enchufable eleva la potencia hasta los 812 CV, convirtiéndolo en la versión más radical y prestacional del Urus. Sant'Agata Bolognese redefine lo que un SUV puede llegar a ser.",
+    readTime: "7 min",
+    content: {
+      intro: "El Urus ha sido un éxito rotundo para Lamborghini desde su lanzamiento, y la marca no ha dejado de exprimir su potencial. Con la variante SE Performante, Sant'Agata Bolognese fusiona por primera vez la electrificación enchufable con el enfoque más deportivo y afilado de la gama, dando como resultado el Super SUV más potente y capaz de su historia. A diferencia del Urus SE convencional, la versión Performante prioriza la dinámica sobre el confort. Suspensión rebajada, reglajes específicos y una puesta a punto orientada al circuito convierten a este SUV en una herramienta capaz de humillar a muchos deportivos puros.",
+      sections: [
+        { title: "V8 híbrido: 812 CV de furia electrificada", paragraphs: [
+          "El propulsor combina el conocido V8 biturbo de 4.0 litros con un motor eléctrico alimentado por una batería de 25,9 kWh. El resultado es una potencia combinada de 812 CV y 1.000 Nm de par, cifras que representan un salto notable respecto a las versiones anteriores. El sistema PHEV no solo añade potencia, sino también una respuesta instantánea gracias al empuje eléctrico.",
+          "Las prestaciones son propias de un superdeportivo: 0 a 100 km/h en 3,3 segundos, 0 a 200 km/h en 10,8 segundos y una velocidad máxima de 312 km/h. Todo ello con la posibilidad de circular en modo 100% eléctrico en entornos urbanos."
+        ]},
+        { title: "Chasis y dinámica de referencia", paragraphs: [
+          "El Urus SE Performante estrena una electrónica de chasis recalibrada, con control de balanceo, dirección a las cuatro ruedas y un reparto de par vectorial que mejora la agilidad en curva. La altura de conducción reducida y los neumáticos específicos completan un conjunto diseñado para ofrecer sensaciones que ningún Super SUV rival puede igualar.",
+          "En el interior, los materiales deportivos, la fibra de carbono y los asientos envolventes refuerzan el carácter racing del modelo, sin renunciar al lujo y la habitabilidad que se esperan de un Lamborghini de cuatro plazas."
+        ]},
+        { title: "Precio y posicionamiento", paragraphs: [
+          "El Urus SE Performante se sitúa en la cúspide de la gama Urus, con un precio acorde a su exclusividad y prestaciones. Con él, Lamborghini reafirma su liderazgo en el segmento de los Super SUV, un mercado que la propia marca contribuyó a crear."
+        ]}
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "812 CV" },
+      { label: "0-100 km/h", value: "3,3 s" },
+      { label: "Motor", value: "V8 4.0 biturbo PHEV" },
+      { label: "Velocidad máxima", value: "312 km/h" },
+    ]
+  },
+  {
+    id: 105,
+    slug: "porsche-911-turbo-s-hibrido-992-2",
+    image: "/placeholder.svg",
+    date: "13 Junio 2026",
+    category: "Lanzamientos",
+    title: "Porsche 911 Turbo S (992.2): el icono se hace híbrido y supera los 700 CV",
+    excerpt: "Porsche da el paso más importante en la historia del 911 Turbo: la electrificación. La actualización 992.2 del Turbo S estrena el sistema T-Hybrid derivado de la competición, con el que el bóxer biturbo alcanza los 711 CV. Nunca antes el Turbo S había sido tan rápido ni tan sofisticado.",
+    readTime: "7 min",
+    content: {
+      intro: "El 911 Turbo S siempre ha representado la cima de la gama de producción de Stuttgart, el punto en el que el uso diario y las prestaciones de superdeportivo se encuentran. Con la llegada de la generación 992.2, Porsche introduce por primera vez la tecnología híbrida en esta variante, un cambio que muchos esperaban con recelo y que finalmente confirma la dirección de la marca. Lejos de suavizar el carácter del Turbo S, la electrificación lo intensifica. El sistema T-Hybrid no busca autonomía eléctrica ni eficiencia máxima, sino eliminar por completo el retardo del turbo y multiplicar la respuesta. Es la misma filosofía que Porsche aplicó en el GTS, ahora llevada al extremo.",
+      sections: [
+        { title: "T-Hybrid: electrificación al servicio del rendimiento", paragraphs: [
+          "El corazón del nuevo Turbo S sigue siendo un motor bóxer de seis cilindros biturbo, pero ahora asistido por un sistema híbrido ligero de alto voltaje directamente heredado de la competición. Un turbocompresor eléctrico elimina prácticamente todo el lag, mientras que un motor eléctrico integrado aporta un empuje instantáneo. La potencia combinada alcanza los 711 CV, situando al Turbo S en territorio hasta ahora reservado a los superdeportivos puros.",
+          "La transmisión PDK de ocho velocidades y la tracción total permanente completan un conjunto que hace del 911 Turbo S una de las máquinas más efectivas del mercado en cualquier condición. Las cifras de aceleración descienden por debajo de los 2,5 segundos en el 0 a 100 km/h."
+        ]},
+        { title: "Diseño evolutivo, esencia intacta", paragraphs: [
+          "Fiel a la tradición del 911, la evolución estética es contenida. Nuevas entradas de aire, faros rediseñados y detalles aerodinámicos específicos distinguen al Turbo S de sus hermanos menores. El alerón trasero adaptativo y la aerodinámica activa gestionan la carga según la velocidad y el modo de conducción seleccionado.",
+          "En el interior, Porsche mantiene el equilibrio entre deportividad y refinamiento que caracteriza a la variante Turbo S, con acabados exclusivos, cuadro digital y la instrumentación de última generación de la familia 992.2."
+        ]},
+        { title: "Precio y disponibilidad", paragraphs: [
+          "El nuevo 911 Turbo S parte de un precio cercano a los 270.000 euros, cifra que puede escalar notablemente con el amplio catálogo de personalización de Porsche. Las primeras entregas están en marcha en los principales mercados europeos."
+        ]}
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "711 CV" },
+      { label: "0-100 km/h", value: "2,5 s" },
+      { label: "Motor", value: "Bóxer 6 cil. biturbo T-Hybrid" },
+      { label: "Precio", value: "Desde ~270.000 €" },
+    ]
+  },
+  {
+    id: 106,
+    slug: "ferrari-purosangue",
+    image: "/placeholder.svg",
+    date: "6 Junio 2026",
+    category: "SUV Deportivo",
+    title: "Ferrari Purosangue: el primer «SUV» de Maranello y su V12 atmosférico de 725 CV",
+    excerpt: "Ferrari reescribe sus propias reglas con el Purosangue, el primer coche de cuatro puertas y cuatro plazas de su historia. Bajo su carrocería elevada late un V12 atmosférico de 6.5 litros y 725 CV, colocado en posición central-delantera. Maranello se niega a llamarlo SUV: lo define como el Ferrari más versátil jamás creado.",
+    readTime: "7 min",
+    content: {
+      intro: "Durante décadas, la sola idea de un Ferrari de cuatro puertas resultaba impensable en Maranello. El Purosangue rompe ese tabú, pero lo hace sin traicionar la esencia de la marca. En lugar de seguir el manual del SUV de lujo, Ferrari ha diseñado un automóvil que combina la practicidad de cuatro plazas reales con la dinámica y las sensaciones de un auténtico deportivo del Cavallino Rampante. «Purosangue significa pura sangre. No es un SUV, es un Ferrari con cuatro puertas», ha repetido Maranello desde su presentación, marcando distancia con rivales como el Lamborghini Urus o el Aston Martin DBX. La diferencia filosófica es evidente en cuanto se levanta el capó.",
+      sections: [
+        { title: "El corazón: un V12 atmosférico contra corriente", paragraphs: [
+          "Mientras el resto del segmento apuesta por motores V8 turboalimentados o sistemas híbridos, Ferrari ha tomado la decisión más radical posible: dotar al Purosangue de un V12 atmosférico de 6.5 litros. Este propulsor, ubicado en posición central-delantera para lograr un reparto de pesos óptimo, entrega 725 CV a 7.750 rpm y 716 Nm de par, con el 80% disponible ya a 2.100 rpm.",
+          "El resultado es una entrega de potencia lineal y una sonoridad que ningún SUV del mercado puede igualar. La caja de cambios de doble embrague y ocho velocidades se sitúa en el eje trasero, configurando un esquema transaxle que refuerza el equilibrio dinámico. La tracción total, con un sistema de transmisión delantera específico de Ferrari, se activa únicamente cuando resulta necesaria."
+        ]},
+        { title: "Diseño: altura sí, silueta de SUV no", paragraphs: [
+          "Ferrari ha trabajado obsesivamente para que el Purosangue no parezca un todocamino convencional. La silueta, más baja y estilizada que la de sus rivales, esconde unas proporciones cuidadas al milímetro. El elemento más distintivo son las puertas traseras con apertura antagónica —las llamadas puertas «suicidas»— que facilitan el acceso a las dos plazas traseras individuales sin renunciar a una línea de techo fluida.",
+          "Con cerca de 2.033 kg en orden de marcha, el Purosangue no es un peso pluma, pero Ferrari ha recurrido a la fibra de carbono en el techo y a una carrocería mixta de aluminio para contener las cifras. La suspensión activa Ferrari controla el balanceo y las transferencias de masa con una precisión que redefine lo que un vehículo de esta altura puede ofrecer en curva."
+        ]},
+        { title: "Un interior de cuatro plazas reales", paragraphs: [
+          "El habitáculo abandona la configuración 2+2 simbólica para ofrecer cuatro asientos independientes y verdaderamente utilizables. La arquitectura de doble cockpit sitúa una pantalla dedicada frente al pasajero, mientras el conductor dispone de la instrumentación digital de la última generación Ferrari. Los materiales combinan cuero, aluminio y fibra de carbono, con un maletero que hace del Purosangue un Ferrari realmente utilizable a diario."
+        ]},
+        { title: "Precio y posicionamiento", paragraphs: [
+          "El Ferrari Purosangue parte de un precio cercano a los 390.000 euros. Maranello ha limitado su producción para que no supere el 20% del volumen total de la marca, preservando así la exclusividad. La lista de espera se extiende durante años en la mayoría de mercados."
+        ]}
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "725 CV" },
+      { label: "0-100 km/h", value: "3,3 s" },
+      { label: "Motor", value: "V12 6.5 atmosférico" },
+      { label: "Velocidad máxima", value: "310 km/h" },
+    ]
+  },
+  {
     id: 7,
     slug: "ferrari-f80-hypercar",
     image: ferrariF80,
