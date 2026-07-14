@@ -32,6 +32,12 @@ import lamborghiniUrusSe from "@/assets/news/lamborghini-urus-se.jpg";
 import bugattiBolide from "@/assets/news/bugatti-bolide.jpg";
 import rollsRoyceDroptail from "@/assets/news/rolls-royce-droptail.jpg";
 import porsche718CaymanElectric from "@/assets/news/porsche-718-cayman-electric.jpg";
+import ferrariPurosangueImg from "@/assets/news/ferrari-purosangue.jpg.asset.json";
+import porsche911TurboSHibridoImg from "@/assets/news/porsche-911-turbo-s-hibrido.jpg.asset.json";
+import lamborghiniUrusSePerformanteImg from "@/assets/news/lamborghini-urus-se-performante.jpg.asset.json";
+import maseratiGt2StradaleImg from "@/assets/news/maserati-gt2-stradale.jpg.asset.json";
+import astonMartinVanquishImg from "@/assets/news/aston-martin-vanquish.jpg.asset.json";
+import ferrari296SpecialeImg from "@/assets/news/ferrari-296-speciale.jpg.asset.json";
 
 export interface NewsArticle {
   id: number;
