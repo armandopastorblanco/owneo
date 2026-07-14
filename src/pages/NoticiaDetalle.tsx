@@ -70,6 +70,12 @@ const sourceUrls: Record<string, string> = {
 };
 
 const sourceLabels: Record<string, string> = {
+  "ferrari-purosangue": "Ferrari — Purosangue",
+  "porsche-911-turbo-s-hibrido-992-2": "Porsche — 911 Turbo S (992.2)",
+  "lamborghini-urus-se-performante": "Lamborghini — Urus SE Performante",
+  "maserati-gt2-stradale": "Maserati — GT2 Stradale",
+  "aston-martin-vanquish": "Aston Martin — Vanquish",
+  "ferrari-296-speciale": "Ferrari — 296 Speciale",
   "ferrari-f80-hypercar": "Ferrari — F80",
   
   "aston-martin-valhalla": "Aston Martin — Valhalla",
