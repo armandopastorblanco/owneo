@@ -57,6 +57,7 @@ import AdminFlota from "./pages/admin/AdminFlota";
 import AdminFlotaDetalle from "./pages/admin/AdminFlotaDetalle";
 import AdminConsultas from "./pages/admin/AdminConsultas";
 import AdminCreditReminders from "./pages/admin/AdminCreditReminders";
+import OAuthConsent from "./pages/OAuthConsent";
 
 const queryClient = new QueryClient();
 
@@ -134,6 +135,7 @@ const App = () => (
               <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
               <Route path="/creditos" element={<Creditos />} />
               <Route path="/design-system" element={<DesignSystem />} />
+              <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
               {/* Admin routes */}
               <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
                 <Route index element={<AdminDashboard />} />
