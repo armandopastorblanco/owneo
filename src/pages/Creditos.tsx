@@ -587,6 +587,110 @@ const Creditos = () => {
                 <td className="py-4 px-4 text-white/40 text-xs">CC BY-SA 4.0</td>
               </tr>
 
+              {/* ─── Créditos de imágenes / Noticias (julio 2026) ─── */}
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">ferrari-purosangue.jpg</td>
+                <td className="py-4 px-4 text-white/70">John Bauld (Toronto)</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Ferrari_Purosangue_(54328319903).jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer"
+                    className="hover:text-white underline underline-offset-4 transition-colors">
+                    CC BY 2.0
+                  </a>
+                </td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">porsche-911-turbo-s-hibrido.jpg</td>
+                <td className="py-4 px-4 text-white/70">Wikimedia Commons (IAA 2025)</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:2025_Porsche_992_Turbo_S_coupes_IAA_2025_DSC_1835.jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer"
+                    className="hover:text-white underline underline-offset-4 transition-colors">
+                    CC BY-SA 4.0
+                  </a>
+                </td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">lamborghini-urus-se-performante.jpg</td>
+                <td className="py-4 px-4 text-white/70">Wikimedia Commons</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Lamborghini_Urus_SE_-_54661371834.jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer"
+                    className="hover:text-white underline underline-offset-4 transition-colors">
+                    CC BY-SA 4.0
+                  </a>
+                </td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">maserati-gt2-stradale.jpg</td>
+                <td className="py-4 px-4 text-white/70">Wikimedia Commons</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Maserati_GT2Stradale_(2026)_(55081233612).jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
+                    className="hover:text-white underline underline-offset-4 transition-colors">
+                    CC0 1.0 — Dominio público
+                  </a>
+                </td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">aston-martin-vanquish.jpg</td>
+                <td className="py-4 px-4 text-white/70">Calreyn88</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:2025_Aston_Martin_Vanquish_V12_Auto_10.jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer"
+                    className="hover:text-white underline underline-offset-4 transition-colors">
+                    CC BY-SA 4.0
+                  </a>
+                </td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">ferrari-296-speciale.jpg</td>
+                <td className="py-4 px-4 text-white/70">Mustang Joe (Joe deSousa)</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:Ferrari_296_Speciale_(55112786260).jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">
+                  <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
+                    className="hover:text-white underline underline-offset-4 transition-colors">
+                    CC0 1.0 — Dominio público
+                  </a>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>
