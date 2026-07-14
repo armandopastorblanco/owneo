@@ -219,9 +219,9 @@ const NoticiaFerrariLuce = () => {
           <ArticleCTAs vehicleName="Ferrari Luce EV" />
 
           <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
-            Fuente oficial:{" "}
-            <a href="https://www.ferrari.com/en-EN/auto/ferrari-luce" rel="nofollow noopener" target="_blank" className="text-[#bda095] hover:underline">
-              Ferrari — Luce
+            Fuente:{" "}
+            <a href="https://www.frandroid.com/marques/ferrari/3110797_voici-la-ferrari-luce-la-premiere-voiture-electrique-de-la-marque-brise-tous-les-codes" rel="nofollow noopener" target="_blank" className="text-[#bda095] hover:underline">
+              Frandroid — Voici la Ferrari Luce, la première voiture électrique de la marque
             </a>
           </p>
 
