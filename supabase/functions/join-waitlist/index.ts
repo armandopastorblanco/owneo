@@ -55,6 +55,21 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Mirror into consultation_requests so it surfaces in admin/consultas "Landing"
+    // and triggers the notify_admin_new_consulta push notification.
+    try {
+      const { error: consultErr } = await supabase.from('consultation_requests').insert({
+        name: nombre || email,
+        email,
+        message: `Solicitud desde lista de espera${ciudad ? ` — Ciudad de interés: ${ciudad}` : ''}`,
+        source: 'beta_gate',
+        status: 'pending',
+      });
+      if (consultErr) console.error('consultation_requests insert error', consultErr);
+    } catch (err) {
+      console.error('consultation_requests insert failed', err);
+    }
+
     // Best-effort Brevo sync — never block the user
     const brevoKey = Deno.env.get('BREVO_API_KEY');
     let brevoOk = false;
