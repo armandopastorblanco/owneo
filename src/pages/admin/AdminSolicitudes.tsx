@@ -496,6 +496,9 @@ const AdminSolicitudes = () => {
         </CardContent>
       </Card>
 
+      {/* Solicitudes sin vehículo (Lista de espera) */}
+      <WaitlistSection />
+
       {/* SECTION 2 — Filters */}
       <Card>
         <CardContent className="pt-5 space-y-4">
@@ -1349,4 +1352,84 @@ const RequestRows = ({
   );
 };
 
+const WaitlistSection = () => {
+  const qc = useQueryClient();
+  const { data: entries = [], isLoading } = useQuery({
+    queryKey: ["admin-waitlist-entries"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("waitlist")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
+  const deleteEntry = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("waitlist").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-waitlist-entries"] });
+      toast.success("Entrada eliminada");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-base flex items-center gap-2">
+          <ClipboardList className="h-4 w-4" />
+          Solicitudes sin vehículo (Lista de espera)
+          <Badge variant="outline">{entries.length}</Badge>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        {isLoading ? (
+          <Skeleton className="h-16 w-full" />
+        ) : entries.length === 0 ? (
+          <p className="text-sm text-muted-foreground py-4 text-center">
+            No hay solicitudes sin vehículo.
+          </p>
+        ) : (
+          <div className="space-y-1">
+            {entries.map((e: any) => (
+              <div
+                key={e.id}
+                className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 rounded-lg border border-border/20 hover:bg-muted/30"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground truncate">
+                    {e.nombre || "—"}
+                  </p>
+                  <p className="text-xs text-muted-foreground truncate">{e.email}</p>
+                </div>
+                <Badge variant="outline" className="w-fit">
+                  {e.ciudad || "Sin ciudad"}
+                </Badge>
+                <span className="text-xs text-muted-foreground">
+                  {formatDistanceToNow(new Date(e.created_at), { locale: es, addSuffix: true })}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    if (confirm("¿Eliminar esta entrada?")) deleteEntry.mutate(e.id);
+                  }}
+                >
+                  <XCircle className="h-4 w-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
+
 export default AdminSolicitudes;
+

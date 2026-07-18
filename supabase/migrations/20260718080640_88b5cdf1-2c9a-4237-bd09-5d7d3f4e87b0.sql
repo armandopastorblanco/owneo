@@ -1,0 +1,1 @@
+GRANT SELECT, DELETE ON public.waitlist TO authenticated; GRANT ALL ON public.waitlist TO service_role;
