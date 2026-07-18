@@ -496,6 +496,9 @@ const AdminSolicitudes = () => {
         </CardContent>
       </Card>
 
+      {/* Solicitudes sin vehículo (Lista de espera) */}
+      <WaitlistSection />
+
       {/* SECTION 2 — Filters */}
       <Card>
         <CardContent className="pt-5 space-y-4">
