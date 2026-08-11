@@ -200,12 +200,12 @@ const Index = () => {
                 {t("home.comparison_title")}
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight mb-6">
-                Llevas años mirando<br />ese Ferrari.
-                <span className="block mt-2 text-champagne">Ya es hora.</span>
+                {t("home.comparison_hero_line1")}
+                <span className="block mt-2 text-champagne">{t("home.comparison_hero_line2")}</span>
               </h2>
               <div className="w-12 h-px mx-auto mb-8 bg-champagne" />
               <p className="text-base sm:text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
-                No se trata de gastar menos. Se trata de tomar la decisión más inteligente.
+                {t("home.comparison_hero_body")}
               </p>
             </div>
           </div>
@@ -249,35 +249,34 @@ const Index = () => {
             <div className="rounded-2xl p-8 sm:p-10 pt-12 flex flex-col justify-between relative overflow-hidden bg-card border border-champagne/40 shadow-[0_0_60px_hsl(var(--champagne)/0.07),0_0_120px_hsl(var(--champagne)/0.03)]">
               <div className="absolute top-0 right-0">
                 <div className="text-[9px] font-semibold uppercase tracking-[0.25em] px-5 py-2 rounded-bl-2xl rounded-tr-2xl bg-champagne text-champagne-foreground">
-                  La decisión inteligente
+                  {t("home.comparison_owneo_badge")}
                 </div>
               </div>
               <div>
                 <span className="ds-tag mb-10 text-champagne border-champagne/30">Con OWNEO</span>
                 <div className="mb-8 mt-10">
                   <p className="text-4xl sm:text-6xl font-light leading-none mb-3 text-champagne">~26.400€</p>
-                  <p className="text-sm text-muted-foreground">coste real en 5 años · todo gestionado</p>
+                  <p className="text-sm text-muted-foreground">{t("home.comparison_owneo_cost")}</p>
                 </div>
                 <div className="space-y-3 border-t border-champagne/10 pt-6">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground">Participación única</span>
+                    <span className="text-xs text-muted-foreground">{t("home.comparison_owneo_line1")}</span>
                     <span className="text-xs text-muted-foreground">33.000€</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-muted-foreground">
-                      Gestión 5 años{" "}
-                      <span className="text-champagne/70">(incluida en cuota anual)</span>
+                      {t("home.comparison_owneo_line2")}
                     </span>
                     <span className="text-xs text-muted-foreground">+ 16.500€</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground">Recuperas (reventa 70%)</span>
+                    <span className="text-xs text-muted-foreground">{t("home.comparison_owneo_line3")}</span>
                     <span className="text-xs text-green-400/80">− 23.100€</span>
                   </div>
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t border-champagne/10 space-y-2.5">
-                {["Seguro, garaje y mantenimiento ×10", "21 días estándar + 7 días premium al año", "Hasta un 70% de tu inversión recuperada"].map((item) => (
+                {[t("home.comparison_owneo_check1"), t("home.comparison_owneo_check2"), t("home.comparison_owneo_check3")].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
                     <Check className="w-3 h-3 flex-shrink-0 text-champagne" />
                     <span className="text-xs text-muted-foreground">{item}</span>
@@ -297,19 +296,19 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/75 to-black/90" />
             <div className="relative z-10 px-8 py-16 text-center">
               <p className="text-[10px] uppercase tracking-[0.35em] mb-4 text-champagne/50">La diferencia</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">El mismo Ferrari Roma.</h2>
-              <p className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6 text-champagne">214.100€ de diferencia.</p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">{t("home.comparison_final_line1")}</h2>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6 text-champagne">{t("home.comparison_final_line2")}</p>
               <p className="text-sm text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
-                No es magia. Es una estructura de propiedad compartida diseñada para los que entienden que el lujo inteligente no tiene nada que envidiarle al lujo tradicional.
+                {t("home.comparison_final_body")}
               </p>
               <Link to="/nuestro-modelo">
                 <button className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] px-8 py-4 rounded-full transition-all duration-300 bg-champagne text-champagne-foreground hover:bg-champagne/85">
-                  Quiero conducirlo
+                  {t("home.comparison_final_cta")}
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </Link>
               <p className="text-xs mt-5 text-white/20">
-                Cálculo estimado · Ferrari Roma · 21 días estándar + 7 días premium al año · 5 años
+                {t("home.comparison_final_note")}
               </p>
             </div>
           </div>
@@ -501,8 +500,8 @@ const Index = () => {
               </p>
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
-                  <h4 className="font-light text-foreground mb-2">Experiencia VIP</h4>
-                  <p className="text-sm text-muted-foreground">Servicio de concierge personalizado y entrega a domicilio en toda España</p>
+                  <h4 className="font-light text-foreground mb-2">{t("home.sharing_vip")}</h4>
+                  <p className="text-sm text-muted-foreground">{t("home.sharing_vip_desc")}</p>
                 </div>
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
                   <h4 className="font-light text-foreground mb-2">{t("home.sharing_flexibility")}</h4>
@@ -515,7 +514,7 @@ const Index = () => {
               </div>
               <div className="text-center">
                 <Link to="/ubicaciones" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline">
-                  Ver ubicaciones <ArrowRight className="w-4 h-4" />
+                  {t("home.see_locations")} <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
