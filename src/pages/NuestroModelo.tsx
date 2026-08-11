@@ -752,9 +752,9 @@ export default function NuestroModelo() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: TrendingDown, big: <>~<CountUp end={90} suffix="%" /></>, title: "Menos costes de gestión", desc: "Frente a la propiedad tradicional, tu cuota anual divide todos los gastos de gestión entre los participantes." },
-              { icon: RefreshCw, big: <>hasta <CountUp end={70} suffix="%" /></>, title: "Del valor recuperado", desc: "Al revender el vehículo al término del período acordado, recuperas hasta el 70% de tu participación inicial gracias al kilometraje controlado." },
-              { icon: Sparkles, big: "0", title: "Cargas de gestión", desc: "OWNEO gestiona compra, seguro, mantenimiento, parking, entrega y reventa. Tu única responsabilidad es disfrutar." },
+              { icon: TrendingDown, big: <>~<CountUp end={90} suffix="%" /></>, title: t("model.stats1_title"), desc: t("model.stats1_desc") },
+              { icon: RefreshCw, big: <>hasta <CountUp end={70} suffix="%" /></>, title: t("model.stats2_title"), desc: t("model.stats2_desc") },
+              { icon: Sparkles, big: "0", title: t("model.stats3_title"), desc: t("model.stats3_desc") },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 0.15}>
                 <div className="group h-full bg-background rounded-2xl p-10 border border-border/50 text-center transition-all duration-300 hover:scale-105 hover:border-champagne/50 hover:shadow-[0_0_40px_-10px_hsl(var(--champagne)/0.3)]">
@@ -779,20 +779,20 @@ export default function NuestroModelo() {
               </span>
               <h2 className="mt-4 ds-h2">Tu inversión, protegida.</h2>
               <p className="mt-4 text-muted-foreground">
-                Cada participación OWNEO está respaldada por un contrato, un seguro y un protocolo de verificación riguroso.
+                {t("model.trust_title")}
               </p>
-              <p className="mt-2 text-xs text-muted-foreground">Pasa el cursor sobre cada tarjeta para saber más.</p>
+              <p className="mt-2 text-xs text-muted-foreground">{t("model.trust_subtitle")}</p>
             </Reveal>
           </div>
 
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {[
-              { icon: Car, title: "Vehículos verificados", desc: "Inspección técnica completa antes de cada uso", back: "Cada vehículo pasa una revisión mecánica y estética antes de cada entrega. Documentamos su estado con fotos para que recibas siempre un coche impecable." },
-              { icon: BadgeCheck, title: "Participantes verificados", desc: "Proceso de admisión riguroso", back: "Validamos la identidad y el perfil de cada participante. Compartes tu vehículo solo con miembros igual de comprometidos que tú." },
-              { icon: FileCheck, title: "Contrato garantizado", desc: "Tus derechos de uso por escrito", back: "Tus semanas, tus kilómetros y tus condiciones quedan fijados por contrato. Sin ambigüedades, sin letra pequeña." },
-              { icon: Shield, title: "Seguro premium", desc: "Cobertura completa con aseguradora reconocida", back: "Póliza a todo riesgo con una aseguradora de primer nivel. Cada participante conduce cubierto como conductor habitual." },
-              { icon: FileText, title: "Costes transparentes", desc: "Sin sorpresas ni cargos ocultos", back: "Una única cuota anual lo cubre todo: seguro, mantenimiento, parking y gestión. Sabes exactamente lo que pagas, siempre." },
-              { icon: RefreshCw, title: "Reventa gestionada", desc: "OWNEO gestiona la salida de tu inversión", back: "Al término del período, vendemos el vehículo y te devolvemos tu parte. Recuperas hasta el 70% gracias al kilometraje controlado." },
+              { icon: Car, title: t("model.trust1_title"), desc: t("model.trust1_desc"), back: t("model.trust1_back") },
+              { icon: BadgeCheck, title: t("model.trust2_title"), desc: t("model.trust2_desc"), back: t("model.trust2_back") },
+              { icon: FileCheck, title: t("model.trust3_title"), desc: t("model.trust3_desc"), back: t("model.trust3_back") },
+              { icon: Shield, title: t("model.trust4_title"), desc: t("model.trust4_desc"), back: t("model.trust4_back") },
+              { icon: FileText, title: t("model.trust5_title"), desc: t("model.trust5_desc"), back: t("model.trust5_back") },
+              { icon: RefreshCw, title: t("model.trust6_title"), desc: t("model.trust6_desc"), back: t("model.trust6_back") },
             ].map((it, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <FlipCard icon={it.icon} title={it.title} desc={it.desc} back={it.back} />
