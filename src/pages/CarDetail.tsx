@@ -311,9 +311,9 @@ const CarDetail = () => {
 
   /* ─── stat cards ─── */
   const statCards = [
-    { icon: Zap, label: car.specifications?.acceleration ? "0-100 km/h" : t("car.spec_power"), value: car.specifications?.acceleration || car.specifications?.power || "—" },
-    { icon: Gauge, label: t("car.spec_topSpeed"), value: car.specifications?.topSpeed || "—" },
-    { icon: CarIcon, label: t("car.spec_engine"), value: car.specifications?.engine || "—" },
+    { icon: Zap, label: displaySpecs?.acceleration ? "0-100 km/h" : t("car.spec_power"), value: displaySpecs?.acceleration || displaySpecs?.power || "—" },
+    { icon: Gauge, label: t("car.spec_topSpeed"), value: displaySpecs?.topSpeed || "—" },
+    { icon: CarIcon, label: t("car.spec_engine"), value: displaySpecs?.engine || "—" },
   ];
 
   /* ─── image pour le bloc "La Experiencia" ─── */
