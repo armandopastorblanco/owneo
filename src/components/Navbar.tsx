@@ -235,16 +235,23 @@ const Navbar = () => {
               </Link>
             )}
             <div className="flex items-center gap-3">
-              <Select value={language} onValueChange={handleLanguageChange}>
+              <Select
+                value={language}
+                onValueChange={(lang) => {
+                  handleLanguageChange(lang);
+                  setMobileMenuOpen(false);
+                }}
+              >
                 <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs min-h-[48px]">
                   <Globe className="w-4 h-4 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-background border-border" position="popper">
-                  <SelectItem value="es" className="text-foreground/80">ES</SelectItem>
-                  <SelectItem value="en" className="text-foreground/80">EN</SelectItem>
+                <SelectContent className="z-[80] bg-background border-border" position="popper">
+                  <SelectItem value="es" className="text-foreground/80 min-h-[48px]">ES</SelectItem>
+                  <SelectItem value="en" className="text-foreground/80 min-h-[48px]">EN</SelectItem>
                 </SelectContent>
               </Select>
+
 
               {user ? (
                 <div className="flex items-center gap-2 flex-1">
