@@ -659,5 +659,26 @@
     "field_confirm_password": "Confirm password",
     "save_changes": "Save changes",
     "saving": "Saving..."
+  },
+  "pwa": {
+    "close": "Close",
+    "subtitle": "Install our app for a better experience",
+    "ios_intro": "To install on your iPhone:",
+    "ios_step1_pre": "1. Tap the",
+    "ios_step1_btn": "Share",
+    "ios_step1_hint": "(square with arrow)",
+    "ios_step2_pre": "2. Select",
+    "ios_step2_btn": "Add to Home Screen",
+    "ios_step3_pre": "3. Tap",
+    "ios_step3_btn": "Add",
+    "understood": "Got it",
+    "android_step1_pre": "1. Open the",
+    "android_step1_post": "menu of your browser",
+    "android_step2_pre": "2. Select",
+    "android_step2_opt1": "Install app",
+    "android_step2_or": "or",
+    "android_step2_opt2": "Add to Home Screen",
+    "install_btn": "Install app",
+    "not_now": "Not now"
   }
 }
