@@ -946,12 +946,13 @@ const CarDetail = () => {
 
             <div className="mt-6 p-6 bg-champagne/10 rounded-2xl border border-champagne/20">
               <p className="text-center text-foreground">
-                <span className="font-bold text-champagne">~90% de ahorro</span> en costes anuales de gestión con OWNEO Co-Sharing.
+                <span className="font-bold text-champagne">~90%</span> {t("car.savings_banner")}
               </p>
             </div>
             <p className="text-xs text-muted-foreground italic mt-3">
-              Estimación basada en costes anuales de gestión (seguro, mantenimiento, parking). No incluye precio de adquisición ni depreciación.
+              {t("car.savings_note")}
             </p>
+
           </Reveal>
 
           {/* ─── BLOQUE J: DISPONIBILIDAD Y CONDICIONES ─── */}
