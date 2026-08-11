@@ -352,6 +352,7 @@
     "not_found": "Vehicle not found",
     "complete_waitlist": "Full — Waiting list",
     "participations_available": "{{available}}/{{max}} participations available",
+    "weeks_short": "wks.",
     "sticky_participation": "Participation",
     "sticky_annual": "Annual mgmt.",
     "sticky_duration": "Duration",
