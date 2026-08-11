@@ -110,7 +110,7 @@ const Navbar = () => {
 
             {/* Right actions */}
             <div className="hidden md:flex items-center gap-3 justify-end">
-              <Select value={language} onValueChange={setLanguage}>
+              <Select value={language} onValueChange={handleLanguageChange}>
                 <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
                   <Globe className="w-3 h-3 mr-2" />
                   <SelectValue />
@@ -142,7 +142,7 @@ const Navbar = () => {
                       className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
                     >
                       <User className="w-3.5 h-3.5" />
-                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      <span>{t("nav.account")}</span>
                     </Button>
                   </Link>
                   <Button
@@ -162,7 +162,7 @@ const Navbar = () => {
                     className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
                   >
                     <User className="w-3.5 h-3.5" />
-                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                    <span>{t("nav.login")}</span>
                   </Button>
                 </Link>
               )}
@@ -244,7 +244,7 @@ const Navbar = () => {
               </Link>
             )}
             <div className="flex items-center gap-3">
-              <Select value={language} onValueChange={setLanguage}>
+              <Select value={language} onValueChange={handleLanguageChange}>
                 <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs min-h-[48px]">
                   <Globe className="w-4 h-4 mr-2" />
                   <SelectValue />
@@ -260,7 +260,7 @@ const Navbar = () => {
                   <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex-1">
                     <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
                       <User className="w-4 h-4" />
-                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      <span>{t("nav.account")}</span>
                     </Button>
                   </Link>
                   <Button
@@ -275,7 +275,7 @@ const Navbar = () => {
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1">
                   <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
                     <User className="w-4 h-4" />
-                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                    <span>{t("nav.login")}</span>
                   </Button>
                 </Link>
               )}
