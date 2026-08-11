@@ -48,7 +48,7 @@ export const useLanguageRouter = () => {
       navigate(esPath || '/', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
+  }, [lang]);
 
   useEffect(() => {
     if (location.pathname.startsWith('/en') && i18n.language !== 'en') {
