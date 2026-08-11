@@ -549,6 +549,10 @@
     "privacy_accept": "Acepto la",
     "privacy_link": "política de privacidad",
     "err_privacy": "Debes aceptar la política de privacidad",
-    "logged_as": "Has iniciado sesión como"
+    "logged_as": "Has iniciado sesión como",
+    "participation": "Participación",
+    "answers_recorded": "{{count}} respuestas registradas",
+    "go_dashboard": "Ir al dashboard",
+    "back_portfolio": "Volver al portfolio"
   }
 }

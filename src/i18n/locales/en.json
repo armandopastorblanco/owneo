@@ -549,6 +549,10 @@
     "privacy_accept": "I accept the",
     "privacy_link": "privacy policy",
     "err_privacy": "You must accept the privacy policy",
-    "logged_as": "You are logged in as"
+    "logged_as": "You are logged in as",
+    "participation": "Participation",
+    "answers_recorded": "{{count}} answers recorded",
+    "go_dashboard": "Go to dashboard",
+    "back_portfolio": "Back to portfolio"
   }
 }

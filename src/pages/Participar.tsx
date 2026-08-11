@@ -718,17 +718,17 @@ const Step3Summary = ({
 
       <Card className="bg-card border-border">
         <CardContent className="p-5 space-y-2 text-sm">
-          <h3 className="font-semibold text-foreground mb-2">Información personal</h3>
-          <div className="flex justify-between"><span className="text-muted-foreground">Nombre</span><span className="text-foreground">{personal.name} {personal.surname}</span></div>
+          <h3 className="font-semibold text-foreground mb-2">{t("join.personal_title")}</h3>
+          <div className="flex justify-between"><span className="text-muted-foreground">{t("join.field_name")}</span><span className="text-foreground">{personal.name} {personal.surname}</span></div>
           <div className="flex justify-between"><span className="text-muted-foreground">Email</span><span className="text-foreground">{personal.email}</span></div>
-          <div className="flex justify-between"><span className="text-muted-foreground">Teléfono</span><span className="text-foreground">{personal.phone}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">{t("join.field_phone")}</span><span className="text-foreground">{personal.phone}</span></div>
         </CardContent>
       </Card>
 
       <Card className="bg-card border-border">
         <CardContent className="p-5 space-y-2 text-sm">
-          <h3 className="font-semibold text-foreground mb-2">Participación</h3>
-          <div className="flex justify-between"><span className="text-muted-foreground">Participaciones</span><span className="text-foreground">{personal.numParticipations}</span></div>
+          <h3 className="font-semibold text-foreground mb-2">{t("join.participation")}</h3>
+          <div className="flex justify-between"><span className="text-muted-foreground">{t("join.parts_available")}</span><span className="text-foreground">{personal.numParticipations}</span></div>
           <div className="flex justify-between pt-2 border-t border-border">
             <span className="text-muted-foreground">Total</span>
             <span className="text-xl font-bold text-foreground">{total.toLocaleString("es-ES")}€</span>
@@ -738,8 +738,8 @@ const Step3Summary = ({
 
       <Card className="bg-card border-border">
         <CardContent className="p-5 space-y-2 text-sm">
-          <h3 className="font-semibold text-foreground mb-2">Cuestionario</h3>
-          <p className="text-muted-foreground">{Object.keys(answers).length} respuestas registradas</p>
+          <h3 className="font-semibold text-foreground mb-2">{t("join.step_questionnaire")}</h3>
+          <p className="text-muted-foreground">{t("join.answers_recorded", { count: Object.keys(answers).length })}</p>
         </CardContent>
       </Card>
 
@@ -934,10 +934,10 @@ const Participar = () => {
             </p>
             <div className="flex gap-3 justify-center pt-4">
               <Button onClick={() => navigate("/dashboard")} className="bg-foreground text-background hover:bg-foreground/90">
-                Ir al dashboard
+                {t("join.go_dashboard")}
               </Button>
               <Button variant="outline" onClick={() => navigate("/coches")}>
-                Volver al portfolio
+                {t("join.back_portfolio")}
               </Button>
             </div>
           </div>
