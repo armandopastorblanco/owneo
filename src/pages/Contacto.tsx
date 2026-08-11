@@ -71,7 +71,7 @@ export default function Contacto() {
       setForm(initialForm);
       setAccepted(false);
     } catch (err: any) {
-      toast.error(err.message || "No se pudo enviar el mensaje.");
+      toast.error(err.message || t("contact.error_send"));
     } finally {
       setSubmitting(false);
     }
@@ -99,7 +99,7 @@ export default function Contacto() {
             {t("contact.title")}
           </h1>
           <p className="text-muted-foreground">
-            ¿Tienes alguna pregunta? Escríbenos y nuestro equipo te responderá lo antes posible.
+            {t("contact.subtitle")}
           </p>
         </header>
 
@@ -120,7 +120,7 @@ export default function Contacto() {
 
           <div className="grid md:grid-cols-2 gap-5">
             <div className="space-y-2">
-              <Label htmlFor="phone">Teléfono</Label>
+              <Label htmlFor="phone">{t("contact.phone")}</Label>
               <Input id="phone" type="tel" value={form.phone} onChange={update("phone")} />
             </div>
             <div className="space-y-2">
@@ -130,12 +130,12 @@ export default function Contacto() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="car_name">Vehículo de interés</Label>
+            <Label htmlFor="car_name">{t("contact.car_interest")}</Label>
             <Input
               id="car_name"
               value={form.car_name}
               onChange={update("car_name")}
-              placeholder="¿Tienes algún vehículo en mente? (opcional)"
+              placeholder={t("contact.car_placeholder")}
             />
           </div>
 
@@ -151,16 +151,16 @@ export default function Contacto() {
               onCheckedChange={(v) => setAccepted(v === true)}
             />
             <Label htmlFor="privacy" className="text-sm text-muted-foreground leading-snug">
-              Acepto la{" "}
+              {t("contact.privacy")}{" "}
               <a href="/politica-de-privacidad" className="text-champagne hover:underline">
-                política de privacidad
+                {t("contact.privacy_link")}
               </a>
               .
             </Label>
           </div>
 
           <Button type="submit" disabled={submitting} className="w-full md:w-auto">
-            {submitting ? "Enviando..." : t("contact.send")}
+            {submitting ? t("contact.sending") : t("contact.send")}
           </Button>
         </form>
       </main>
