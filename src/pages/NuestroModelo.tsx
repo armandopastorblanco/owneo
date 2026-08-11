@@ -742,7 +742,7 @@ export default function NuestroModelo() {
       <section className="bg-card/30 border-y border-border py-20 sm:py-24">
         <div className="container mx-auto px-4">
           <Reveal>
-            <h2 className="ds-h2 text-center">OWNEO en cifras</h2>
+            <h2 className="ds-h2 text-center">{t("model.stats_title")}</h2>
           </Reveal>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -770,9 +770,9 @@ export default function NuestroModelo() {
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
               <span className="ds-eyebrow-pill">
-                Protección del participante
+                {t("model.security_eyebrow")}
               </span>
-              <h2 className="mt-4 ds-h2">Tu inversión, protegida.</h2>
+              <h2 className="mt-4 ds-h2">{t("model.security_title")}</h2>
               <p className="mt-4 text-muted-foreground">
                 {t("model.trust_title")}
               </p>
