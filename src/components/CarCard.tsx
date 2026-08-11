@@ -64,7 +64,7 @@ const CarCard = ({
           ) : (
             <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-[hsl(var(--participation-available))] text-background">
               <Users className="w-3.5 h-3.5" />
-              {available}/{max} disponibles
+              {t("car.available_badge", { available, max })}
             </div>
           )}
           {cityCountBadge && cityCountBadge > 1 && (
