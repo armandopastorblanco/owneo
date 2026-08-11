@@ -111,12 +111,12 @@ const Index = () => {
       <section className="py-20 sm:py-24 px-4 sm:px-6 bg-card/30 border-y border-border">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center">
-            <span className="ds-eyebrow-pill mb-6">Nuestro modelo</span>
+            <span className="ds-eyebrow-pill mb-6">{t("home.eyebrow")}</span>
             <h2 className="ds-h2 text-foreground mt-6 mb-6">
               {t("home.model_title")}
             </h2>
             <p className="ds-lead max-w-3xl mx-auto">
-              Una marca que redefine el acceso a los coches de alta gama a través de la multipropiedad: un modelo eficiente, moderno y aspiracional, alineado con la nueva manera de entender la movilidad.
+              {t("home.intro_para")}
             </p>
           </div>
 
@@ -197,7 +197,7 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/85" />
             <div className="relative z-10 text-center py-20 px-6">
               <span className="inline-block text-[10px] uppercase tracking-[0.35em] mb-6 text-champagne/70">
-                Ejemplo real · Ferrari Roma
+                {t("home.comparison_title")}
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight mb-6">
                 Llevas años mirando<br />ese Ferrari.
@@ -215,28 +215,28 @@ const Index = () => {
             {/* Carte gauche — Comprándolo */}
             <div className="bg-card border border-border rounded-2xl p-8 sm:p-10 pt-12 flex flex-col justify-between">
               <div>
-                <span className="ds-tag mb-10">Comprándolo</span>
+                <span className="ds-tag mb-10">{t("home.comparison_buying")}</span>
                 <div className="mb-8 mt-10">
                   <p className="text-4xl sm:text-6xl font-light text-muted-foreground leading-none mb-3">~240.500€</p>
-                  <p className="text-sm text-muted-foreground">coste real en 5 años</p>
+                  <p className="text-sm text-muted-foreground">{t("home.comparison_cost")}</p>
                 </div>
                 <div className="space-y-3 border-t border-border pt-6">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground">Precio de compra</span>
+                    <span className="text-xs text-muted-foreground">{t("home.comparison_purchase")}</span>
                     <span className="text-xs text-muted-foreground">330.000€</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground">Gastos 5 años</span>
+                    <span className="text-xs text-muted-foreground">{t("home.comparison_expenses")}</span>
                     <span className="text-xs text-muted-foreground">+ 125.000€</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground">Reventa estimada (65%)</span>
+                    <span className="text-xs text-muted-foreground">{t("home.comparison_resale")}</span>
                     <span className="text-xs text-muted-foreground">− 214.500€</span>
                   </div>
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t border-border space-y-2.5">
-                {["Seguro y mantenimiento a tu cargo", "Depreciación inmediata", "Inmovilización de capital"].map((item) => (
+                {[t("home.comparison_insurance"), t("home.comparison_depreciation"), t("home.comparison_capital")].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
                     <X className="w-3 h-3 flex-shrink-0 text-destructive/60" />
                     <span className="text-xs text-muted-foreground">{item}</span>
@@ -326,11 +326,11 @@ const Index = () => {
               className="border-foreground text-foreground hover:bg-foreground hover:text-background"
               onClick={() => trackEvent("click_cta_modele", { cta_text: "DESCUBRIR EL MODELO", destination: "/nuestro-modelo" })}
             >
-              DESCUBRIR EL MODELO
+              {t("home.cta_model")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <p className="text-xs text-muted-foreground mt-4">Sin compromiso. Sin permanencia. Solo experiencia.</p>
+          <p className="text-xs text-muted-foreground mt-4">{t("home.comparison_tagline")}</p>
         </div>
       </section>
 
@@ -423,7 +423,7 @@ const Index = () => {
                 className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
                 onClick={() => trackEvent("click_ver_ubicaciones", {})}
               >
-                VER TODAS LAS UBICACIONES
+                {t("home.cta_locations")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -492,7 +492,7 @@ const Index = () => {
             <div className="absolute top-0 right-0 w-64 h-64 bg-champagne/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10">
               <h3 className="ds-h3 text-foreground mb-6 text-center">
-                Supercar Sharing: La Nueva Era del Lujo Compartido
+                {t("home.sharing_title")}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8 text-center max-w-3xl mx-auto">
                 El <strong className="text-foreground">supercar sharing</strong> representa la evolución del acceso al lujo automovilístico. Ya no es necesario invertir cientos de miles de euros para disfrutar de un{" "}
@@ -505,12 +505,12 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground">Servicio de concierge personalizado y entrega a domicilio en toda España</p>
                 </div>
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
-                  <h4 className="font-light text-foreground mb-2">Flexibilidad Total</h4>
-                  <p className="text-sm text-muted-foreground">Alquiler por días o semanas, adaptado a tus necesidades de lujo</p>
+                  <h4 className="font-light text-foreground mb-2">{t("home.sharing_flexibility")}</h4>
+                  <p className="text-sm text-muted-foreground">{t("home.sharing_flexibility_desc")}</p>
                 </div>
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
-                  <h4 className="font-light text-foreground mb-2">Calidad Garantizada</h4>
-                  <p className="text-sm text-muted-foreground">Vehículos impecables con mantenimiento premium y seguro completo</p>
+                  <h4 className="font-light text-foreground mb-2">{t("home.sharing_quality")}</h4>
+                  <p className="text-sm text-muted-foreground">{t("home.sharing_quality_desc")}</p>
                 </div>
               </div>
               <div className="text-center">
