@@ -73,6 +73,7 @@ function useReducedMotion() {
 }
 
 function CountUp({ end, suffix = "", prefix = "", duration = 1200 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
+  const { i18n } = useTranslation();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const [val, setVal] = useState(0);
@@ -90,7 +91,8 @@ function CountUp({ end, suffix = "", prefix = "", duration = 1200 }: { end: numb
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, end, duration, reduced]);
-  return <span ref={ref}>{prefix}{Math.round(val).toLocaleString("es-ES")}{suffix}</span>;
+  return <span ref={ref}>{prefix}{Math.round(val).toLocaleString(i18n.language === "en" ? "en-GB" : "es-ES")}{suffix}</span>;
+
 }
 
 const fadeUp = {
