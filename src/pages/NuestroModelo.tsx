@@ -245,29 +245,29 @@ export default function NuestroModelo() {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: CalendarDays, number: 4, suffix: "", unit: "semanas (3 estándar + 1 premium)",
-                title: "Por participación al año",
-                desc: "¿Quieres más tiempo? Adquiere más participaciones en el mismo vehículo o en otros modelos de la flota.",
-                badge: "= 21 días estándar + 7 días premium",
+                icon: CalendarDays, number: 4, suffix: "", unit: t("model.card1_label"),
+                title: t("model.card1_title"),
+                desc: t("model.card1_note"),
+                badge: t("model.card1_detail"),
                 bg: cardKeyBg, alt: "Llave de supercar sobre superficie oscura",
               },
               {
-                icon: Gauge, number: 2000, suffix: "", unit: "km",
-                title: "Incluidos por participación",
-                desc: "Kilómetros garantizados por participación y por año, con el vehículo siempre impecable y a punto.",
+                icon: Gauge, number: 2000, suffix: "", unit: t("model.card2_label"),
+                title: t("model.card2_title"),
+                desc: t("model.card2_note"),
                 bg: cardDashboardBg, alt: "Tablero de supercar con cuentarrevoluciones iluminado",
               },
               {
                 icon: Percent, number: 10, suffix: "%", unit: "",
-                title: "Del valor del vehículo",
-                desc: "Precio de entrada claro y único. Sin letra pequeña, sin sorpresas. El resto lo gestiona OWNEO.",
+                title: t("model.card3_label"),
+                desc: t("model.card3_title"),
                 bg: cardWheelBg, alt: "Llanta forjada con pinza de freno carbono",
               },
               {
-                icon: Shield, number: null, fixed: "Cuota", unit: "anual fija",
-                title: "Todo incluido",
-                desc: "Una cuota anual cubre seguro, mantenimiento, parking y toda la gestión. Tú no gestionas absolutamente nada.",
-                badge: "Seguro · Parking · Mantenimiento",
+                icon: Shield, number: null, fixed: t("model.card4_label"), unit: "",
+                title: t("model.card4_title"),
+                desc: t("model.card4_note"),
+                badge: t("model.card4_detail"),
                 bg: cardDetailingBg, alt: "Supercar en detallado premium",
               },
             ].map((c: any, i) => (
