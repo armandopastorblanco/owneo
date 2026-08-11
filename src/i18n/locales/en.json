@@ -332,6 +332,11 @@
     "power": "Power",
     "seats": "Seats",
     "transmission": "Transmission",
-    "year": "Year"
+    "year": "Year",
+    "available_badge": "{{available}}/{{max}} available",
+    "sold_out_badge": "Sold out — Waiting list",
+    "cities_badge": "In {{count}} cities",
+    "participation_label": "Participation share",
+    "complete_label": "Full"
   }
 }

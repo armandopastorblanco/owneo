@@ -332,6 +332,11 @@
     "power": "Potencia",
     "seats": "Plazas",
     "transmission": "Transmisión",
-    "year": "Año"
+    "year": "Año",
+    "available_badge": "{{available}}/{{max}} disponibles",
+    "sold_out_badge": "Completo — Lista de espera",
+    "cities_badge": "En {{count}} ciudades",
+    "participation_label": "Cuota de participación",
+    "complete_label": "Completo"
   }
 }

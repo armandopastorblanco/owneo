@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Car } from "@/hooks/useCars";
 import { ArrowRight, Users, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,6 +23,7 @@ const CarCard = ({
   availabilityOverride,
   cityCountBadge,
 }: CarCardProps) => {
+  const { t } = useTranslation();
   const { trackEvent } = useAnalytics();
   const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
   const sharePrice = car.participationPrice || Math.round(numericPrice * 0.1);
@@ -57,18 +59,18 @@ const CarCard = ({
           {isComplete ? (
             <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-destructive text-destructive-foreground">
               <Users className="w-3.5 h-3.5" />
-              Participaciones agotadas
+              {t("car.sold_out_badge")}
             </div>
           ) : (
             <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-[hsl(var(--participation-available))] text-background">
               <Users className="w-3.5 h-3.5" />
-              {available}/{max} disponibles
+              {t("car.available_badge", { available, max })}
             </div>
           )}
           {cityCountBadge && cityCountBadge > 1 && (
             <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-background/80 text-foreground backdrop-blur">
               <MapPin className="w-3.5 h-3.5" />
-              En {cityCountBadge} ciudades
+              {t("car.cities_badge", { count: cityCountBadge })}
             </div>
           )}
         </div>
@@ -86,7 +88,7 @@ const CarCard = ({
           </p>
           <div className="flex items-center justify-between mt-auto">
             <div className="flex flex-col">
-              <span className="text-xs text-muted-foreground uppercase tracking-wider">Cuota de participación</span>
+              <span className="text-xs text-muted-foreground uppercase tracking-wider">{t("car.participation_label")}</span>
               <span className="text-2xl font-bold text-foreground">
                 {sharePrice.toLocaleString('es-ES')}€
               </span>
@@ -95,7 +97,7 @@ const CarCard = ({
               </span>
             </div>
             {isComplete ? (
-              <span className="text-xs font-semibold text-destructive uppercase tracking-wider">Completo</span>
+              <span className="text-xs font-semibold text-destructive uppercase tracking-wider">{t("car.complete_label")}</span>
             ) : (
               <ArrowRight className="w-5 h-5 text-foreground group-hover:translate-x-1 transition-transform" />
             )}
