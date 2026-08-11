@@ -369,15 +369,13 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <Reveal>
             <span className="ds-eyebrow-pill">
-              Cada entrega, una experiencia
+              {t("model.delivery_subtitle")}
             </span>
             <h2 className="mt-4 ds-h2">
-              Cada vez que recoges tu coche, está impecable.
+              {t("model.delivery_title")}
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Antes de cada entrega, nuestro equipo prepara el vehículo de forma profesional: limpieza integral,
-              revisión técnica, documentación fotográfica del estado. Un gestor OWNEO te hace entrega en persona.
-              Tú solo tienes que sentarte al volante.
+              {t("model.delivery_desc")}
             </p>
             <ul className="mt-6 space-y-3">
               {[
