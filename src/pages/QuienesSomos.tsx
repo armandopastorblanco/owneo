@@ -518,7 +518,7 @@ const QuienesSomos = () => {
 
             <Reveal delay={0.55}>
               <p className="mt-8 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium text-muted-foreground">
-                Sin compromiso · Proceso 100% digital · Respuesta en 24h
+                {t("about.cta_tagline")}
               </p>
             </Reveal>
           </div>
