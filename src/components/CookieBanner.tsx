@@ -254,6 +254,7 @@ function CategoryRow({
   disabled?: boolean;
   required?: boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="flex items-start justify-between gap-4 rounded-xl border border-border/60 bg-card/40 p-4">
       <div className="flex-1 min-w-0">
