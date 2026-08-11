@@ -450,7 +450,6 @@ export default function NuestroModelo() {
               <p className="mt-4 text-muted-foreground">
                 {t("model.comparison_body")}
               </p>
-              </p>
             </Reveal>
           </div>
 
