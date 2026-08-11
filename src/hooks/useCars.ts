@@ -34,7 +34,9 @@ export interface Car {
   category_en: string;
   luxury_description_en: string;
   specifications: Record<string, string>;
+  specifications_en: Record<string, string>;
   features: string[];
+  features_en: string[];
   availableIn: string[];
   locationId: string | null;
   cityName: string | null;
