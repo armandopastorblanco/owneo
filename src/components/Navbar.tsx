@@ -10,13 +10,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut, isAdmin } = useAuth();
-  const [language, setLanguage] = useState("es");
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
+  const handleLanguageChange = (lang: string) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("owneo-lang", lang);
+    document.documentElement.lang = lang;
+  };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
