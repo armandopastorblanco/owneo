@@ -606,22 +606,21 @@ export default function NuestroModelo() {
           <div className="md:col-span-3">
             <Reveal>
               <span className="ds-eyebrow-pill">
-                App OWNEO · Acceso exclusivo participantes
+                {t("model.app_eyebrow")}
               </span>
-              <h2 className="mt-4 ds-h2">Todo en la palma de tu mano.</h2>
+              <h2 className="mt-4 ds-h2">{t("model.app_title")}</h2>
               <p className="mt-4 text-muted-foreground">
-                Una vez participante, accedes a la app OWNEO — disponible como aplicación web desde cualquier dispositivo.
-                Sin descargas adicionales, siempre disponible.
+                {t("model.app_body")}
               </p>
             </Reveal>
 
             <ul className="mt-8 space-y-4">
               {[
-                { icon: Calendar, t: "Reserva tus semanas directamente desde la app" },
-                { icon: Car, t: "Consulta el estado de tu vehículo en tiempo real" },
-                { icon: FileText, t: "Accede a todos los documentos del coche" },
-                { icon: MessageCircle, t: "Contacta con tu gestor OWNEO en cualquier momento" },
-                { icon: BarChart, t: "Consulta tu historial de usos y semanas disponibles" },
+                { icon: Calendar, t: t("model.app_feat1") },
+                { icon: Car, t: t("model.app_feat2") },
+                { icon: FileText, t: t("model.app_feat3") },
+                { icon: MessageCircle, t: t("model.app_feat4") },
+                { icon: BarChart, t: t("model.app_feat5") },
               ].map((f, i) => (
                 <Reveal key={i} delay={i * 0.1}>
                   <div className="flex items-center gap-3">
@@ -636,7 +635,7 @@ export default function NuestroModelo() {
 
             <Reveal delay={0.3}>
               <div className="mt-6 inline-block text-xs bg-card border border-border/50 rounded-full px-3 py-1 text-muted-foreground">
-                PWA · Compatible iOS & Android · Sin instalación
+                {t("model.app_badge")}
               </div>
             </Reveal>
           </div>
