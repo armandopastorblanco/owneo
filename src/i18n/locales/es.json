@@ -77,7 +77,12 @@
     "comparison_final_note": "Cálculo estimado · Ferrari Roma · 21 días estándar + 7 días premium al año · 5 años",
     "sharing_vip": "Experiencia VIP",
     "sharing_vip_desc": "Servicio de concierge personalizado y entrega a domicilio en toda España",
-    "see_locations": "Ver ubicaciones"
+    "see_locations": "Ver ubicaciones",
+    "stat2_weeks_label": "Semanas",
+    "city_country": "España",
+    "comparison_with_owneo": "Con OWNEO",
+    "comparison_difference": "La diferencia",
+    "sharing_body": "El supercar sharing representa la evolución del acceso al lujo automovilístico. Ya no es necesario invertir cientos de miles de euros para disfrutar de un coche de alta gama. Con OWNEO, accede a una flota de supercoches premium en las mejores ubicaciones de España: Barcelona, Madrid, Marbella, Valencia, Ibiza y Alicante."
   },
   "fleet": {
     "title": "Nuestra",

@@ -150,7 +150,7 @@ const Index = () => {
                 <CalendarDays className="ds-icon w-10 h-10 mb-4 transition-transform duration-500 group-hover:scale-110" />
                 <div className="ds-feature-figure">
                   <span className="text-5xl font-extralight text-white leading-none">4</span>
-                  <span className="text-base font-normal text-white/80 mt-1">Semanas</span>
+                  <span className="text-base font-normal text-white/80 mt-1">{t("home.stat2_weeks_label")}</span>
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat2_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
@@ -253,7 +253,7 @@ const Index = () => {
                 </div>
               </div>
               <div>
-                <span className="ds-tag mb-10 text-champagne border-champagne/30">Con OWNEO</span>
+                <span className="ds-tag mb-10 text-champagne border-champagne/30">{t("home.comparison_with_owneo")}</span>
                 <div className="mb-8 mt-10">
                   <p className="text-4xl sm:text-6xl font-light leading-none mb-3 text-champagne">~26.400€</p>
                   <p className="text-sm text-muted-foreground">{t("home.comparison_owneo_cost")}</p>
@@ -295,7 +295,7 @@ const Index = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/75 to-black/90" />
             <div className="relative z-10 px-8 py-16 text-center">
-              <p className="text-[10px] uppercase tracking-[0.35em] mb-4 text-champagne/50">La diferencia</p>
+              <p className="text-[10px] uppercase tracking-[0.35em] mb-4 text-champagne/50">{t("home.comparison_difference")}</p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">{t("home.comparison_final_line1")}</h2>
               <p className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6 text-champagne">{t("home.comparison_final_line2")}</p>
               <p className="text-sm text-white/60 max-w-md mx-auto mb-8 leading-relaxed">
@@ -406,7 +406,7 @@ const Index = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="w-4 h-4 text-champagne" />
-                    <span className="text-sm text-muted-foreground uppercase tracking-wider">España</span>
+                    <span className="text-sm text-muted-foreground uppercase tracking-wider">{t("home.city_country")}</span>
                   </div>
                   <h3 className="ds-card-title text-foreground mb-2">{city.name}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
@@ -494,9 +494,7 @@ const Index = () => {
                 {t("home.sharing_title")}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8 text-center max-w-3xl mx-auto">
-                El <strong className="text-foreground">supercar sharing</strong> representa la evolución del acceso al lujo automovilístico. Ya no es necesario invertir cientos de miles de euros para disfrutar de un{" "}
-                <strong className="text-foreground">coche de alta gama</strong>. Con OWNEO, accede a una{" "}
-                <strong className="text-foreground">flota de supercoches premium</strong> en las mejores ubicaciones de España: Barcelona, Madrid, Marbella, Valencia, Ibiza y Alicante.
+                {t("home.sharing_body")}
               </p>
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-background/50 rounded-xl p-6 text-center border border-border/30">
