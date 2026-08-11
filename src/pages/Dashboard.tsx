@@ -20,43 +20,47 @@ import {
 } from "@/components/ui/dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { format, addDays, differenceInDays, startOfDay, subYears } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveCarImage } from "@/lib/resolveCarImage";
 import DocumentsBlock, { type DocItem } from "@/components/dashboard/DocumentsBlock";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 // ============ Schemas ============
-const conciergeSchema = z.object({
-  name: z.string().trim().min(1, "Nombre requerido").max(100),
-  email: z.string().trim().email("Email inválido").max(255),
+const makeConciergeSchema = (t: (k: string) => string) => z.object({
+  name: z.string().trim().min(1, t("dash.err_name_required")).max(100),
+  email: z.string().trim().email(t("dash.err_email_invalid")).max(255),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   message: z.string().trim().max(1000).optional().or(z.literal("")),
 });
-type ConciergeForm = z.infer<typeof conciergeSchema>;
+type ConciergeForm = z.infer<ReturnType<typeof makeConciergeSchema>>;
 
-const profileSchema = z
+const makeProfileSchema = (t: (k: string) => string) => z
   .object({
-    email: z.string().trim().email("Email inválido").max(255),
+    email: z.string().trim().email(t("dash.err_email_invalid")).max(255),
     phone: z.string().trim().max(40).optional().or(z.literal("")),
     address: z.string().trim().max(255).optional().or(z.literal("")),
     linkedin: z.string().trim().max(255).optional().or(z.literal("")),
-    password: z.string().min(8, "Mínimo 8 caracteres").max(72).optional().or(z.literal("")),
+    password: z.string().min(8, t("dash.err_password_min")).max(72).optional().or(z.literal("")),
     confirmPassword: z.string().optional().or(z.literal("")),
   })
   .refine((d) => !d.password || d.password === d.confirmPassword, {
-    message: "Las contraseñas no coinciden",
+    message: t("dash.err_passwords_match"),
     path: ["confirmPassword"],
   });
-type ProfileForm = z.infer<typeof profileSchema>;
+type ProfileForm = z.infer<ReturnType<typeof makeProfileSchema>>;
 
 const Dashboard = () => {
+  const { t, i18n } = useTranslation();
+  const conciergeSchema = useMemo(() => makeConciergeSchema(t), [t, i18n.language]);
+  const profileSchema = useMemo(() => makeProfileSchema(t), [t, i18n.language]);
   const qc = useQueryClient();
   const [range, setRange] = useState<DateRange | undefined>();
   const [userId, setUserId] = useState<string | null>(null);
@@ -661,8 +665,8 @@ const Dashboard = () => {
                 {
                   label: "Próxima reserva",
                   value: yearMetrics.nextReservation
-                    ? format(new Date(yearMetrics.nextReservation), "d MMM", { locale: es })
-                    : "Sin reservas",
+                    ? format(new Date(yearMetrics.nextReservation), "d MMM", { locale: i18n.language === "en" ? enUS : es })
+                    : t("dash.no_bookings"),
                   icon: <Clock className="w-4 h-4 text-muted-foreground" />,
                   cls: "bg-card border-border/50",
                   valueCls: "text-foreground",
@@ -691,9 +695,9 @@ const Dashboard = () => {
               {/* Standard */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Créditos estándar utilizados</span>
+                  <span className="text-sm text-muted-foreground">{t("dash.std_credits_used")}</span>
                   <span className="text-sm font-semibold text-foreground">
-                    {Number(primary.standard_credits_used_this_year ?? 0)} / {Number(primary.standard_credits_per_year ?? 21)} días
+                    {Number(primary.standard_credits_used_this_year ?? 0)} / {Number(primary.standard_credits_per_year ?? 21)} {t("dash.days")}
                   </span>
                 </div>
                 <div className="bg-muted rounded-full h-2 overflow-hidden">
@@ -711,11 +715,11 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-xs text-muted-foreground">
                     {primary.credits_reset_date
-                      ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
-                      : "Renovación anual"}
+                      ? `${t("dash.renewal")}: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: i18n.language === "en" ? enUS : es })}`
+                      : t("dash.renewal_annual")}
                   </span>
                   <span className="text-xs text-foreground font-medium">
-                    {Number(primary.standard_credits_remaining ?? 0)} restantes
+                    {Number(primary.standard_credits_remaining ?? 0)} {t("dash.remaining")}
                   </span>
                 </div>
               </div>
@@ -723,9 +727,9 @@ const Dashboard = () => {
               {/* Premium */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Crédito premium utilizado</span>
+                  <span className="text-sm text-muted-foreground">{t("dash.prem_credits_used")}</span>
                   <span className="text-sm font-semibold text-foreground">
-                    {Number(primary.premium_credits_used_this_year ?? 0)} / {Number(primary.premium_credits_per_year ?? 7)} días
+                    {Number(primary.premium_credits_used_this_year ?? 0)} / {Number(primary.premium_credits_per_year ?? 7)} {t("dash.days")}
                   </span>
                 </div>
                 <div className="bg-muted rounded-full h-2 overflow-hidden">
@@ -743,11 +747,11 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-xs text-muted-foreground">
                     {primary.credits_reset_date
-                      ? `Renovación: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: es })}`
-                      : "Renovación anual"}
+                      ? `${t("dash.renewal")}: ${format(new Date(primary.credits_reset_date), "d MMM yyyy", { locale: i18n.language === "en" ? enUS : es })}`
+                      : t("dash.renewal_annual")}
                   </span>
                   <span className="text-xs text-champagne font-medium">
-                    {Number(primary.premium_credits_remaining ?? 0)} restantes
+                    {Number(primary.premium_credits_remaining ?? 0)} {t("dash.remaining")}
                   </span>
                 </div>
               </div>
@@ -757,27 +761,27 @@ const Dashboard = () => {
             <section id="reservar" className="mx-4 mt-6 scroll-mt-24">
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-3">
                 <CalendarIcon className="w-5 h-5 text-champagne" />
-                Reservar días de uso
+                {t("dash.book_days_title")}
               </h2>
               <div className="bg-card rounded-2xl border border-border/50 p-4">
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Mín. {minDays}d</Badge>
                   <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Máx. {maxDays}d</Badge>
-                  <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />Antelación {advanceDays}d</Badge>
+                  <Badge variant="outline" className="text-xs"><Info className="w-3 h-3 mr-1" />{t("dash.advance")} {advanceDays}d</Badge>
                 </div>
 
                 {/* Info banner */}
                 <div className="rounded-xl bg-card border border-border/50 p-3 mb-4 text-xs text-muted-foreground space-y-1.5">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full ring-1 ring-champagne/60 bg-champagne/20" />
-                    <span>Fechas en <span className="text-[#bda095]">champagne</span> = período premium (consume créditos premium)</span>
+                    <span>{t("dash.legend_premium")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-muted" />
-                    <span>Resto del año = período estándar (consume créditos estándar)</span>
+                    <span>{t("dash.legend_standard")}</span>
                   </div>
                   <p className="text-muted-foreground/70 pt-1">
-                    Una reserva que incluya al menos 1 día premium consume créditos premium completos.
+                    {t("dash.legend_note")}
                   </p>
                 </div>
 
@@ -786,7 +790,7 @@ const Dashboard = () => {
                     mode="range"
                     selected={range}
                     onSelect={handleSelect}
-                    locale={es}
+                    locale={i18n.language === "en" ? enUS : es}
                     disabled={(date) => date < addDays(startOfDay(new Date()), advanceDays) || isDateUnavailable(date)}
                     modifiers={{ peak: (date) => isPeakDay(date) }}
                     modifiersClassNames={{ peak: "ring-1 ring-champagne/60 text-champagne" }}
@@ -883,7 +887,7 @@ const Dashboard = () => {
                               {r.status === "completed" && <Badge variant="outline">Completada</Badge>}
                             </div>
                             <p className="text-sm font-semibold text-foreground">
-                              {format(new Date(r.start_date), "d MMM", { locale: es })} → {format(new Date(r.end_date), "d MMM yyyy", { locale: es })}
+                              {format(new Date(r.start_date), "d MMM", { locale: i18n.language === "en" ? enUS : es })} → {format(new Date(r.end_date), "d MMM yyyy", { locale: i18n.language === "en" ? enUS : es })}
                             </p>
                             <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1.5 flex-wrap">
                               <span>{days} día{days > 1 ? "s" : ""}</span>
@@ -919,23 +923,23 @@ const Dashboard = () => {
               </h2>
               <DocumentsBlock
                 variant="vehicle"
-                title="Documentos del vehículo"
+                title={t("dash.vehicle_docs_title")}
                 carId={carId}
-                emptyText="No hay documentos disponibles por el momento."
+                emptyText={t("dash.vehicle_docs_empty")}
                 items={(vehicleDocs as any[])
                   .filter((d) => !!d.file_url)
                   .map<DocItem>((d) => ({
                     id: d.id,
-                    typeName: d.vehicle_document_types?.name || d.file_name || "Documento",
+                    typeName: d.vehicle_document_types?.name || d.file_name || t("dash.document"),
                     fileUrl: d.file_url,
                     fileName: d.file_name,
                   }))}
               />
               <DocumentsBlock
                 variant="user"
-                title="Mis documentos"
+                title={t("dash.my_docs_title")}
                 manageHref="/dashboard/documentos"
-                emptyText="Aún no hay documentos configurados."
+                emptyText={t("dash.my_docs_empty")}
                 items={(docTypes as any[]).map<DocItem>((t) => {
                   const d = (userDocs as any[]).find((x) => x.document_type_id === t.id);
                   return {
@@ -954,7 +958,7 @@ const Dashboard = () => {
             <section className="mx-4 mt-6">
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-3">
                 <MapPin className="w-5 h-5 text-champagne" />
-                Localización
+                {t("dash.location_title")}
               </h2>
               <div className="bg-card rounded-2xl border border-border/50 p-5 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3 min-w-0">
@@ -963,7 +967,7 @@ const Dashboard = () => {
                   </div>
                   <div className="min-w-0">
                     <p className="font-semibold text-foreground truncate">{car.locations?.name ?? "—"}</p>
-                    <p className="text-xs text-muted-foreground">España</p>
+                    <p className="text-xs text-muted-foreground">{t("dash.country")}</p>
                   </div>
                 </div>
                 <Button
@@ -977,7 +981,7 @@ const Dashboard = () => {
                     )
                   }
                 >
-                  Abrir en Maps
+                  {t("dash.open_maps")}
                 </Button>
               </div>
             </section>
@@ -992,8 +996,8 @@ const Dashboard = () => {
                   <Phone className="w-5 h-5 text-foreground group-hover:text-champagne transition-colors" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground">Servicio de Conserjería</p>
-                  <p className="text-xs text-muted-foreground">Asistencia premium · Respuesta en 24h</p>
+                  <p className="font-semibold text-foreground">{t("dash.concierge_title")}</p>
+                  <p className="text-xs text-muted-foreground">{t("dash.concierge_subtitle")}</p>
                 </div>
                 <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-champagne transition-colors" />
               </button>
@@ -1009,8 +1013,8 @@ const Dashboard = () => {
                   <UserIcon className="w-5 h-5 text-foreground group-hover:text-champagne transition-colors" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground">Mis datos personales</p>
-                  <p className="text-xs text-muted-foreground">Email · Teléfono · Dirección · Contraseña</p>
+                  <p className="font-semibold text-foreground">{t("dash.profile_title")}</p>
+                  <p className="text-xs text-muted-foreground">{t("dash.profile_subtitle")}</p>
                 </div>
                 <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-champagne transition-colors" />
               </button>
@@ -1023,15 +1027,15 @@ const Dashboard = () => {
       <AlertDialog open={!!cancellingId} onOpenChange={(o) => !o && setCancellingId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Cancelar la reserva?</AlertDialogTitle>
+            <AlertDialogTitle>{t("dash.cancel_dialog_title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción no se puede deshacer. Tus créditos serán restituidos automáticamente.
+              {t("dash.cancel_dialog_desc")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Volver</AlertDialogCancel>
+            <AlertDialogCancel>{t("dash.cancel_dialog_back")}</AlertDialogCancel>
             <AlertDialogAction onClick={() => cancellingId && cancelReservation.mutate(cancellingId)}>
-              Confirmar cancelación
+              {t("dash.cancel_dialog_confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -1041,29 +1045,29 @@ const Dashboard = () => {
       <Dialog open={conciergeOpen} onOpenChange={setConciergeOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Contactar con el equipo OWNEO</DialogTitle>
-            <DialogDescription>Te responderemos en menos de 24 horas.</DialogDescription>
+            <DialogTitle>{t("dash.concierge_dialog_title")}</DialogTitle>
+            <DialogDescription>{t("dash.concierge_dialog_desc")}</DialogDescription>
           </DialogHeader>
           <form
             onSubmit={conciergeForm.handleSubmit((v) => conciergeMutation.mutate(v))}
             className="space-y-3"
           >
             <div>
-              <Label htmlFor="cc-name">Nombre</Label>
+              <Label htmlFor="cc-name">{t("dash.form_name")}</Label>
               <Input id="cc-name" {...conciergeForm.register("name")} />
               {conciergeForm.formState.errors.name && (
                 <p className="text-xs text-red-400 mt-1">{conciergeForm.formState.errors.name.message}</p>
               )}
             </div>
             <div>
-              <Label htmlFor="cc-email">Email</Label>
+              <Label htmlFor="cc-email">{t("dash.field_email")}</Label>
               <Input id="cc-email" type="email" {...conciergeForm.register("email")} />
               {conciergeForm.formState.errors.email && (
                 <p className="text-xs text-red-400 mt-1">{conciergeForm.formState.errors.email.message}</p>
               )}
             </div>
             <div>
-              <Label htmlFor="cc-phone">Teléfono</Label>
+              <Label htmlFor="cc-phone">{t("dash.field_phone")}</Label>
               <Input id="cc-phone" type="tel" {...conciergeForm.register("phone")} />
             </div>
             <div>
@@ -1093,36 +1097,36 @@ const Dashboard = () => {
             className="space-y-3"
           >
             <div>
-              <Label htmlFor="p-email">Email</Label>
+              <Label htmlFor="p-email">{t("dash.field_email")}</Label>
               <Input id="p-email" type="email" {...profileForm.register("email")} />
               {profileForm.formState.errors.email && (
                 <p className="text-xs text-red-400 mt-1">{profileForm.formState.errors.email.message}</p>
               )}
             </div>
             <div>
-              <Label htmlFor="p-phone">Teléfono</Label>
+              <Label htmlFor="p-phone">{t("dash.field_phone")}</Label>
               <Input id="p-phone" type="tel" {...profileForm.register("phone")} />
             </div>
             <div>
-              <Label htmlFor="p-address">Dirección</Label>
+              <Label htmlFor="p-address">{t("dash.field_address")}</Label>
               <Input id="p-address" type="text" {...profileForm.register("address")} />
             </div>
             <div>
-              <Label htmlFor="p-linkedin">LinkedIn</Label>
+              <Label htmlFor="p-linkedin">{t("dash.field_linkedin")}</Label>
               <Input id="p-linkedin" type="text" {...profileForm.register("linkedin")} />
             </div>
             <div className="border-t border-border/50 pt-3">
               <p className="text-xs text-muted-foreground mb-2">Cambiar contraseña (opcional)</p>
               <div className="space-y-3">
                 <div>
-                  <Label htmlFor="p-pw">Nueva contraseña</Label>
+                  <Label htmlFor="p-pw">{t("dash.field_new_password")}</Label>
                   <Input id="p-pw" type="password" autoComplete="new-password" {...profileForm.register("password")} />
                   {profileForm.formState.errors.password && (
                     <p className="text-xs text-red-400 mt-1">{profileForm.formState.errors.password.message}</p>
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="p-pw2">Confirmar contraseña</Label>
+                  <Label htmlFor="p-pw2">{t("dash.field_confirm_password")}</Label>
                   <Input id="p-pw2" type="password" autoComplete="new-password" {...profileForm.register("confirmPassword")} />
                   {profileForm.formState.errors.confirmPassword && (
                     <p className="text-xs text-red-400 mt-1">{profileForm.formState.errors.confirmPassword.message}</p>
@@ -1135,7 +1139,7 @@ const Dashboard = () => {
               className="w-full bg-champagne hover:bg-champagne/90 text-champagne-foreground"
               disabled={updateProfile.isPending}
             >
-              {updateProfile.isPending ? "Guardando..." : "Guardar cambios"}
+              {updateProfile.isPending ? t("dash.saving") : t("dash.save_changes")}
             </Button>
           </form>
         </DialogContent>
