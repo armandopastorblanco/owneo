@@ -483,16 +483,13 @@ const QuienesSomos = () => {
 
             <Reveal delay={0.1}>
               <h2 className="ds-h2 mt-6 text-foreground">
-                ¿Listo para tomar
-                <br />
-                <span className="text-champagne">la decisión inteligente?</span>
+                <span className="text-champagne">{t("about.cta_title")}</span>
               </h2>
             </Reveal>
 
             <Reveal delay={0.25}>
               <p className="ds-lead mt-6 sm:mt-8 text-muted-foreground max-w-xl mx-auto">
-                Descubre cómo funciona exactamente el modelo OWNEO, o explora directamente
-                los vehículos disponibles y encuentra tu participación.
+                {t("about.cta_subtitle")}
               </p>
             </Reveal>
 
