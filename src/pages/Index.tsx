@@ -133,10 +133,10 @@ const Index = () => {
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat1_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
-                  Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
+                  {t("home.stat1_desc")}
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
-                  ✓&nbsp;El 90% del tiempo un superdeportivo está aparcado. Tú solo pagas lo que disfrutas.&nbsp;
+                  ✓&nbsp;{t("home.stat1_note")}&nbsp;
                 </div>
               </div>
             </div>
@@ -154,10 +154,10 @@ const Index = () => {
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat2_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
-                  3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
+                  {t("home.stat2_desc")}
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
-                  ✓ La semana premium está incluida en el precio de tu participación — sin coste adicional.
+                  ✓ {t("home.stat2_note")}
                 </div>
               </div>
             </div>
@@ -173,10 +173,10 @@ const Index = () => {
                 </div>
                 <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat3_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
-                  Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
+                  {t("home.stat3_desc")}
                 </p>
                 <div className="ds-feature-note text-xs text-champagne">
-                  ✓ Los costes de gestión están incluidos en tu cuota anual — sin sorpresas al final del año.
+                  ✓ {t("home.stat3_note")}
                 </div>
               </div>
             </div>
@@ -437,15 +437,15 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-10 sm:gap-12 text-center">
             <div>
               <div className="text-4xl sm:text-5xl font-light text-champagne mb-2">15+</div>
-              <div className="text-muted-foreground">Supercoches de Lujo</div>
+              <div className="text-muted-foreground">{t("home.counter1_label")}</div>
             </div>
             <div>
               <div className="text-4xl sm:text-5xl font-light text-champagne mb-2">5</div>
-              <div className="text-muted-foreground">Ubicaciones Premium</div>
+              <div className="text-muted-foreground">{t("home.counter2_label")}</div>
             </div>
             <div>
               <div className="text-4xl sm:text-5xl font-light text-champagne mb-2">100%</div>
-              <div className="text-muted-foreground">Excelencia Garantizada</div>
+              <div className="text-muted-foreground">{t("home.counter3_label")}</div>
             </div>
           </div>
         </div>
@@ -456,12 +456,10 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="ds-h2 text-foreground mb-6">
-              El Lujo de los Supercoches, Ahora Accesible
+              {t("home.seo_title")}
             </h2>
             <p className="ds-lead leading-relaxed max-w-3xl mx-auto">
-              En OWNEO revolucionamos el concepto de{" "}
-              <strong className="text-foreground">alquiler de supercoches de lujo</strong>{" "}
-              en España, haciendo realidad el sueño de conducir los vehículos más exclusivos del mundo.
+              {t("home.seo_p1")}
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -469,32 +467,24 @@ const Index = () => {
               <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
                 <Star className="w-6 h-6 text-champagne" />
               </div>
-              <h3 className="ds-h3 text-foreground mb-4">Las Marcas Más Prestigiosas del Mundo</h3>
+              <h3 className="ds-h3 text-foreground mb-4">{t("home.seo_p1_title")}</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Nuestra flota exclusiva incluye los{" "}
-                <strong className="text-foreground">superdeportivos Ferrari</strong> más codiciados, desde el icónico Ferrari Portofino hasta el impresionante F8 Tributo. Experimenta la potencia de un{" "}
-                <strong className="text-foreground"> Lamborghini Huracán</strong> o el rugido del legendario Aventador. Para los amantes de la ingeniería alemana, ofrecemos la gama completa de{" "}
-                <strong className="text-foreground">Porsche</strong>: el 911 Turbo S, el Taycan eléctrico y los SUV deportivos Cayenne y Macan.
+                {t("home.seo_p1_body")}
               </p>
               <Link to="/coches" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline">
-                Ver más <ArrowRight className="w-4 h-4" />
+                {t("home.seo_see_more")} <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
             <article className="group bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-champagne/40 transition-all duration-300 hover:bg-card/50">
               <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center mb-6">
                 <Star className="w-6 h-6 text-champagne" />
               </div>
-              <h3 className="ds-h3 text-foreground mb-4">Elegancia Británica y Exclusividad</h3>
+              <h3 className="ds-h3 text-foreground mb-4">{t("home.seo_p2_title")}</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Descubre el refinamiento del{" "}
-                <strong className="text-foreground">Aston Martin DB11</strong>, la innovación aerodinámica del{" "}
-                <strong className="text-foreground">McLaren 720S</strong>, o el lujo supremo del{" "}
-                <strong className="text-foreground">Rolls-Royce Wraith</strong>. Completa tu experiencia con la artesanía del{" "}
-                <strong className="text-foreground">Bentley Continental GT</strong> o la potencia del{" "}
-                <strong className="text-foreground">Mercedes-AMG GT R</strong>, conocido como "La Bestia del Infierno Verde".
+                {t("home.seo_p2_body")}
               </p>
               <Link to="/coches" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 group-hover:underline">
-                Ver más <ArrowRight className="w-4 h-4" />
+                {t("home.seo_see_more")} <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
           </div>
@@ -532,15 +522,10 @@ const Index = () => {
           </div>
           <div className="bg-card/30 rounded-2xl p-6 sm:p-8 border border-border/50 text-center mt-12">
             <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
-              Desde el{" "}
-              <strong className="text-foreground">alquiler de Ferrari en Barcelona</strong> hasta un{" "}
-              <strong className="text-foreground">Lamborghini en Marbella</strong>, OWNEO te ofrece la oportunidad de vivir experiencias únicas al volante de los{" "}
-              <strong className="text-foreground">mejores supercoches del mundo</strong>. Descubre por qué somos líderes en{" "}
-              <strong className="text-foreground">luxury car rental</strong> y{" "}
-              <strong className="text-foreground">supercar experiences</strong> en España.
+              {t("home.seo_footer")}
             </p>
             <Link to="/coches" className="inline-flex items-center text-foreground font-medium hover:gap-3 gap-2 transition-all duration-300 hover:underline">
-              Explorar colección completa <ArrowRight className="w-4 h-4" />
+              {t("home.seo_cta")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
