@@ -295,9 +295,7 @@ const QuienesSomos = () => {
 
             <Reveal delay={0.35}>
               <p className="ds-body mt-6 text-muted-foreground max-w-2xl mx-auto">
-                OWNEO nació para romper esa ecuación. No democratizando el lujo hacia
-                abajo — sino elevando el acceso hacia arriba. El mismo coche, la misma
-                experiencia, la misma emoción. Sin el peso de la propiedad.
+                {t("about.manifesto_p2")}
               </p>
             </Reveal>
 
