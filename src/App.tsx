@@ -58,6 +58,7 @@ import AdminFlotaDetalle from "./pages/admin/AdminFlotaDetalle";
 import AdminConsultas from "./pages/admin/AdminConsultas";
 import AdminCreditReminders from "./pages/admin/AdminCreditReminders";
 import OAuthConsent from "./pages/OAuthConsent";
+import i18n from "./i18n/index";
 
 const queryClient = new QueryClient();
 

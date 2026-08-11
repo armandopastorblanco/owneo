@@ -55,20 +55,11 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    {
-      path: "/nuestro-modelo",
-      label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT",
-    },
-    { path: "/coches", label: "NUESTRA GAMA" },
-    {
-      path: "/ubicaciones",
-      label: language === "es" ? "UBICACIONES" : "LOCATIONS",
-    },
-    {
-      path: "/quienes-somos",
-      label: language === "es" ? "QUIÉNES SOMOS" : "ABOUT US",
-    },
-    { path: "/noticias", label: language === "es" ? "NOTICIAS" : "NEWS" },
+    { path: "/nuestro-modelo", label: t("nav.concept") },
+    { path: "/coches", label: t("nav.fleet") },
+    { path: "/ubicaciones", label: t("nav.locations") },
+    { path: "/quienes-somos", label: t("nav.about") },
+    { path: "/noticias", label: t("nav.news") },
   ];
 
   const navBgClass = "bg-background/95 backdrop-blur-md border-b border-border/40";
