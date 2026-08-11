@@ -182,7 +182,7 @@ export default function NuestroModelo() {
                 animation: "owneo-shimmer 3s linear infinite",
               }}
             >
-              Derecho de uso · Todo incluido · Sin cargas
+              {t("model.eyebrow")}
             </span>
           </Reveal>
 
@@ -196,15 +196,15 @@ export default function NuestroModelo() {
 
           <Reveal delay={0.4}>
             <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-              {t("model.subtitle")}
+              {t("model.hero_subtitle")}
             </p>
           </Reveal>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {[
-              { icon: Shield, label: "Contrato garantizado" },
-              { icon: Car, label: "Vehículos premium" },
-              { icon: Sparkles, label: "Cero gestión" },
+              { icon: Shield, label: t("model.tag1") },
+              { icon: Car, label: t("model.tag2") },
+              { icon: Sparkles, label: t("model.tag3") },
             ].map((p, i) => (
               <Reveal key={p.label} delay={0.6 + i * 0.1}>
                 <div className="bg-card border border-border/50 rounded-full px-4 py-2 text-sm flex items-center gap-2 text-muted-foreground">
@@ -227,18 +227,17 @@ export default function NuestroModelo() {
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
               <span className="ds-eyebrow-pill">
-                Participación OWNEO
+                {t("model.tag4")}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="mt-4 ds-h2">
-                Todo lo que incluye tu participación
+                {t("model.includes_title")}
               </h2>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mt-4 text-muted-foreground">
-                Una participación OWNEO es un contrato de derecho de uso sobre un vehículo específico.
-                Tú eliges el coche, adquieres tu participación, y OWNEO se encarga de absolutamente todo lo demás.
+                {t("model.includes_subtitle")}
               </p>
             </Reveal>
           </div>
@@ -246,29 +245,29 @@ export default function NuestroModelo() {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: CalendarDays, number: 4, suffix: "", unit: "semanas (3 estándar + 1 premium)",
-                title: "Por participación al año",
-                desc: "¿Quieres más tiempo? Adquiere más participaciones en el mismo vehículo o en otros modelos de la flota.",
-                badge: "= 21 días estándar + 7 días premium",
+                icon: CalendarDays, number: 4, suffix: "", unit: t("model.card1_label"),
+                title: t("model.card1_title"),
+                desc: t("model.card1_note"),
+                badge: t("model.card1_detail"),
                 bg: cardKeyBg, alt: "Llave de supercar sobre superficie oscura",
               },
               {
-                icon: Gauge, number: 2000, suffix: "", unit: "km",
-                title: "Incluidos por participación",
-                desc: "Kilómetros garantizados por participación y por año, con el vehículo siempre impecable y a punto.",
+                icon: Gauge, number: 2000, suffix: "", unit: t("model.card2_label"),
+                title: t("model.card2_title"),
+                desc: t("model.card2_note"),
                 bg: cardDashboardBg, alt: "Tablero de supercar con cuentarrevoluciones iluminado",
               },
               {
                 icon: Percent, number: 10, suffix: "%", unit: "",
-                title: "Del valor del vehículo",
-                desc: "Precio de entrada claro y único. Sin letra pequeña, sin sorpresas. El resto lo gestiona OWNEO.",
+                title: t("model.card3_label"),
+                desc: t("model.card3_title"),
                 bg: cardWheelBg, alt: "Llanta forjada con pinza de freno carbono",
               },
               {
-                icon: Shield, number: null, fixed: "Cuota", unit: "anual fija",
-                title: "Todo incluido",
-                desc: "Una cuota anual cubre seguro, mantenimiento, parking y toda la gestión. Tú no gestionas absolutamente nada.",
-                badge: "Seguro · Parking · Mantenimiento",
+                icon: Shield, number: null, fixed: t("model.card4_label"), unit: "",
+                title: t("model.card4_title"),
+                desc: t("model.card4_note"),
+                badge: t("model.card4_detail"),
                 bg: cardDetailingBg, alt: "Supercar en detallado premium",
               },
             ].map((c: any, i) => (
@@ -312,14 +311,13 @@ export default function NuestroModelo() {
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
               <h2 className="ds-h2">
-                Tú conduces.<br />
-                <span className="text-champagne">Nosotros nos encargamos de todo lo demás.</span>
+                {t("model.we_handle_title").split(". ")[0]}.<br />
+                <span className="text-champagne">{t("model.we_handle_title").split(". ").slice(1).join(". ")}</span>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-4 text-muted-foreground">
-                Desde la compra del vehículo hasta su reventa, pasando por cada revisión, cada seguro y cada entrega
-                — OWNEO gestiona cada detalle para que tú solo tengas que disfrutar.
+                {t("model.we_handle_subtitle")}
               </p>
             </Reveal>
           </div>
@@ -336,12 +334,12 @@ export default function NuestroModelo() {
 
             <div className="space-y-12">
               {[
-                { icon: ShoppingCart, title: "Compra del vehículo", desc: "OWNEO adquiere el vehículo de concesionarios oficiales certificados. Tú no te preocupas por la negociación ni los trámites." },
-                { icon: FileCheck, title: "Contrato y documentación", desc: "Contrato claro que garantiza tus 4 semanas (3 estándar + 1 premium) anuales por participación y todos los derechos de uso." },
-                { icon: Shield, title: "Seguro a todo riesgo", desc: "Cobertura completa con aseguradora premium. Cada participante está cubierto como conductor habitual." },
-                { icon: Wrench, title: "Mantenimiento y revisiones", desc: "Todas las revisiones programadas y reparaciones gestionadas por OWNEO. El vehículo siempre en perfectas condiciones." },
-                { icon: Key, title: "Entrega profesional", desc: "Un gestor OWNEO te entrega el vehículo en persona, impecablemente preparado, revisado y documentado." },
-                { icon: TrendingUp, title: "Reventa gestionada", desc: "Al término del período acordado (indicado en la ficha de cada vehículo), OWNEO gestiona la venta y redistribuye el valor entre los participantes." },
+                { icon: ShoppingCart, title: t("model.step1_title"), desc: t("model.step1_desc") },
+                { icon: FileCheck, title: t("model.step2_title"), desc: t("model.step2_desc") },
+                { icon: Shield, title: t("model.step3_title"), desc: t("model.step3_desc") },
+                { icon: Wrench, title: t("model.step4_title"), desc: t("model.step4_desc") },
+                { icon: Key, title: t("model.step5_title"), desc: t("model.step5_desc") },
+                { icon: TrendingUp, title: t("model.step6_title"), desc: t("model.step6_desc") },
               ].map((it, i) => {
                 const right = i % 2 === 1;
                 return (
@@ -371,15 +369,13 @@ export default function NuestroModelo() {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <Reveal>
             <span className="ds-eyebrow-pill">
-              Cada entrega, una experiencia
+              {t("model.delivery_subtitle")}
             </span>
             <h2 className="mt-4 ds-h2">
-              Cada vez que recoges tu coche, está impecable.
+              {t("model.delivery_title")}
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Antes de cada entrega, nuestro equipo prepara el vehículo de forma profesional: limpieza integral,
-              revisión técnica, documentación fotográfica del estado. Un gestor OWNEO te hace entrega en persona.
-              Tú solo tienes que sentarte al volante.
+              {t("model.delivery_desc")}
             </p>
             <ul className="mt-6 space-y-3">
               {[
@@ -756,9 +752,9 @@ export default function NuestroModelo() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: TrendingDown, big: <>~<CountUp end={90} suffix="%" /></>, title: "Menos costes de gestión", desc: "Frente a la propiedad tradicional, tu cuota anual divide todos los gastos de gestión entre los participantes." },
-              { icon: RefreshCw, big: <>hasta <CountUp end={70} suffix="%" /></>, title: "Del valor recuperado", desc: "Al revender el vehículo al término del período acordado, recuperas hasta el 70% de tu participación inicial gracias al kilometraje controlado." },
-              { icon: Sparkles, big: "0", title: "Cargas de gestión", desc: "OWNEO gestiona compra, seguro, mantenimiento, parking, entrega y reventa. Tu única responsabilidad es disfrutar." },
+              { icon: TrendingDown, big: <>~<CountUp end={90} suffix="%" /></>, title: t("model.stats1_title"), desc: t("model.stats1_desc") },
+              { icon: RefreshCw, big: <>hasta <CountUp end={70} suffix="%" /></>, title: t("model.stats2_title"), desc: t("model.stats2_desc") },
+              { icon: Sparkles, big: "0", title: t("model.stats3_title"), desc: t("model.stats3_desc") },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 0.15}>
                 <div className="group h-full bg-background rounded-2xl p-10 border border-border/50 text-center transition-all duration-300 hover:scale-105 hover:border-champagne/50 hover:shadow-[0_0_40px_-10px_hsl(var(--champagne)/0.3)]">
@@ -783,20 +779,20 @@ export default function NuestroModelo() {
               </span>
               <h2 className="mt-4 ds-h2">Tu inversión, protegida.</h2>
               <p className="mt-4 text-muted-foreground">
-                Cada participación OWNEO está respaldada por un contrato, un seguro y un protocolo de verificación riguroso.
+                {t("model.trust_title")}
               </p>
-              <p className="mt-2 text-xs text-muted-foreground">Pasa el cursor sobre cada tarjeta para saber más.</p>
+              <p className="mt-2 text-xs text-muted-foreground">{t("model.trust_subtitle")}</p>
             </Reveal>
           </div>
 
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {[
-              { icon: Car, title: "Vehículos verificados", desc: "Inspección técnica completa antes de cada uso", back: "Cada vehículo pasa una revisión mecánica y estética antes de cada entrega. Documentamos su estado con fotos para que recibas siempre un coche impecable." },
-              { icon: BadgeCheck, title: "Participantes verificados", desc: "Proceso de admisión riguroso", back: "Validamos la identidad y el perfil de cada participante. Compartes tu vehículo solo con miembros igual de comprometidos que tú." },
-              { icon: FileCheck, title: "Contrato garantizado", desc: "Tus derechos de uso por escrito", back: "Tus semanas, tus kilómetros y tus condiciones quedan fijados por contrato. Sin ambigüedades, sin letra pequeña." },
-              { icon: Shield, title: "Seguro premium", desc: "Cobertura completa con aseguradora reconocida", back: "Póliza a todo riesgo con una aseguradora de primer nivel. Cada participante conduce cubierto como conductor habitual." },
-              { icon: FileText, title: "Costes transparentes", desc: "Sin sorpresas ni cargos ocultos", back: "Una única cuota anual lo cubre todo: seguro, mantenimiento, parking y gestión. Sabes exactamente lo que pagas, siempre." },
-              { icon: RefreshCw, title: "Reventa gestionada", desc: "OWNEO gestiona la salida de tu inversión", back: "Al término del período, vendemos el vehículo y te devolvemos tu parte. Recuperas hasta el 70% gracias al kilometraje controlado." },
+              { icon: Car, title: t("model.trust1_title"), desc: t("model.trust1_desc"), back: t("model.trust1_back") },
+              { icon: BadgeCheck, title: t("model.trust2_title"), desc: t("model.trust2_desc"), back: t("model.trust2_back") },
+              { icon: FileCheck, title: t("model.trust3_title"), desc: t("model.trust3_desc"), back: t("model.trust3_back") },
+              { icon: Shield, title: t("model.trust4_title"), desc: t("model.trust4_desc"), back: t("model.trust4_back") },
+              { icon: FileText, title: t("model.trust5_title"), desc: t("model.trust5_desc"), back: t("model.trust5_back") },
+              { icon: RefreshCw, title: t("model.trust6_title"), desc: t("model.trust6_desc"), back: t("model.trust6_back") },
             ].map((it, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <FlipCard icon={it.icon} title={it.title} desc={it.desc} back={it.back} />
@@ -814,26 +810,26 @@ export default function NuestroModelo() {
         />
         <div className="container relative mx-auto px-4 text-center">
           <Reveal>
-            <h2 className="ds-h2">¿Listo para vivir la experiencia?</h2>
+            <h2 className="ds-h2">{t("model.cta_title")}</h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-              Explora nuestra flota, elige tu vehículo y solicita tu participación. OWNEO se encarga del resto.
+              {t("model.cta_subtitle")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" className="bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                <Link to="/coches">Ver la flota <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                <Link to="/coches">{t("about.cta_fleet")} <ArrowRight className="ml-2 w-5 h-5" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/coches">Solicitar participación</Link>
+                <Link to="/coches">{t("car.request")}</Link>
               </Button>
             </div>
           </Reveal>
           <Reveal delay={0.3}>
             <p className="mt-6 text-xs text-muted-foreground">
-              Sin compromiso · Proceso 100% digital · Respuesta en 24h
+              {t("model.cta_tagline")}
             </p>
           </Reveal>
         </div>
