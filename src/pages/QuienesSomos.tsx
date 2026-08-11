@@ -75,91 +75,85 @@ function Reveal({
 
 /* ---------------- page ---------------- */
 
-const profiles = [
+type TFn = (key: string) => string;
+
+const buildProfiles = (t: TFn) => [
   {
     number: "01",
-    profile: "El apasionado del motor",
-    hook: "Sueña con un Ferrari desde los 16 años. OWNEO lo hace posible.",
-    text:
-      "No hace falta esperar a tener 300.000€ en el banco. Con una participación OWNEO, ese sueño tiene fecha, tiene matrícula y tiene 4 semanas al año garantizadas.",
+    profile: t("about.profile1_title"),
+    hook: t("about.profile1_hook"),
+    text: t("about.profile1_text"),
     delay: 0,
     bg: qsProfile1,
   },
   {
     number: "02",
-    profile: "El inversor inteligente",
-    hook: "No compra caprichos. Compra experiencias con valor real.",
-    text:
-      "Una participación OWNEO no es un gasto — es una decisión financiera con retorno estimado, kilometraje controlado y reventa gestionada. El lujo que también tiene sentido en un Excel.",
+    profile: t("about.profile2_title"),
+    hook: t("about.profile2_hook"),
+    text: t("about.profile2_text"),
     delay: 0.1,
     bg: qsProfile2,
   },
   {
     number: "03",
-    profile: "El que vive el presente",
-    hook: "Prefiere 4 semanas al volante de un Porsche que 365 días preocupándose por él.",
-    text:
-      "Sin garaje, sin seguro, sin revisiones, sin trámites. Solo reservar desde la app, recoger el coche impecable y disfrutar. El resto es problema de OWNEO.",
+    profile: t("about.profile3_title"),
+    hook: t("about.profile3_hook"),
+    text: t("about.profile3_text"),
     delay: 0.2,
     bg: qsProfile3,
   },
 ];
 
-const values = [
+const buildValues = (t: TFn) => [
   {
-    word: "ACCESO",
+    word: t("about.value1_word"),
     icon: Gem,
-    text:
-      "El lujo no debería ser un privilegio de pocos. Lo que antes requería una fortuna, hoy requiere una decisión inteligente.",
+    text: t("about.value1_text"),
     delay: 0,
     bg: qsValue1,
   },
   {
-    word: "CONFIANZA",
+    word: t("about.value2_word"),
     icon: Shield,
-    text:
-      "Cada contrato, cada entrega, cada euro invertido está respaldado por un compromiso real. Sin letra pequeña.",
+    text: t("about.value2_text"),
     delay: 0.1,
     bg: qsValue2,
   },
   {
-    word: "EXCELENCIA",
+    word: t("about.value3_word"),
     icon: Award,
-    text:
-      "No gestionamos coches. Gestionamos experiencias. Y en cada detalle, el estándar es el más alto posible.",
+    text: t("about.value3_text"),
     delay: 0.2,
     bg: qsValue3,
   },
   {
-    word: "LIBERTAD",
+    word: t("about.value4_word"),
     icon: Heart,
-    text:
-      "Conducir sin poseer. Disfrutar sin gestionar. Vivir la experiencia sin cargar con sus consecuencias.",
+    text: t("about.value4_text"),
     delay: 0.3,
     bg: qsValue4,
   },
 ];
 
-const missionVision = [
+const buildMissionVision = (t: TFn) => [
   {
     icon: Sparkles,
-    label: "Misión",
-    title: "Hacer accesible lo extraordinario.",
-    text:
-      "Queremos que cualquier persona con la determinación y el criterio adecuado pueda sentarse al volante de un Ferrari, un Porsche o un Bentley — sin necesidad de comprarlo, sin gestionar nada, sin sorpresas.",
+    label: t("about.mission_label"),
+    title: t("about.mission_title"),
+    text: t("about.mission_desc"),
     delay: 0,
     bg: qsMisionCard,
   },
   {
     icon: TrendingUp,
-    label: "Visión",
-    title: "El referente europeo del lujo compartido.",
-    text:
-      "Aspiramos a construir la comunidad más exclusiva de apasionados del motor en Europa — donde el acceso a los mejores vehículos del mundo sea una decisión inteligente, no un privilegio heredado.",
+    label: t("about.vision_label"),
+    title: t("about.vision_title"),
+    text: t("about.vision_desc"),
     delay: 0.15,
     bg: qsVisionCard,
   },
 ];
+
 
 const QuienesSomos = () => {
   const { t } = useTranslation();
