@@ -336,7 +336,23 @@
   "cookie": {
     "text": "Utilizamos cookies propias y de terceros para garantizar el correcto funcionamiento del sitio, analizar el tráfico y personalizar tu experiencia. Puedes aceptar todas, rechazarlas o configurar tus preferencias en cualquier momento.",
     "accept": "Aceptar todo",
-    "reject": "Rechazar todo"
+    "reject": "Rechazar todo",
+    "title": "Tu privacidad es importante",
+    "configure": "Configurar",
+    "prefs_title": "Preferencias de cookies",
+    "prefs_desc": "Selecciona qué tipo de cookies quieres permitir. Tu elección se guarda y puedes modificarla cuando quieras desde el pie de página.",
+    "always_active": "Siempre activas",
+    "reject_all": "Rechazar todo",
+    "accept_all": "Aceptar todo",
+    "save_prefs": "Guardar preferencias",
+    "tech_title": "Cookies técnicas",
+    "tech_desc": "Imprescindibles para el funcionamiento del sitio (sesión, seguridad, navegación). No se pueden desactivar.",
+    "analytics_title": "Cookies analíticas",
+    "analytics_desc": "Nos ayudan a entender cómo se usa el sitio mediante Google Analytics y PostHog. Datos anonimizados y agregados.",
+    "marketing_title": "Cookies de marketing",
+    "marketing_desc": "Permiten mostrar anuncios y contenidos más relevantes en función de tus intereses.",
+    "personal_title": "Cookies de personalización",
+    "personal_desc": "Recuerdan tus preferencias (idioma, ciudad, vehículos vistos) para una experiencia adaptada."
   },
   "car": {
     "per_year_short": "año",
@@ -554,5 +570,23 @@
     "answers_recorded": "{{count}} respuestas registradas",
     "go_dashboard": "Ir al dashboard",
     "back_portfolio": "Volver al portfolio"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Accede a tu cuenta para gestionar tus participaciones",
+    "field_password": "Contraseña",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "loading": "Cargando...",
+    "submit": "Iniciar Sesión",
+    "no_account": "¿Aún no eres cliente?",
+    "request_part": "Solicita una participación",
+    "err_title": "Error al iniciar sesión",
+    "err_credentials": "Email o contraseña incorrectos",
+    "success_title": "Bienvenido",
+    "success_desc": "Has iniciado sesión correctamente",
+    "forgot_err_title": "Introduce tu email",
+    "forgot_err_desc": "Necesitamos tu email para enviar el enlace de recuperación",
+    "forgot_ok_title": "Email enviado",
+    "forgot_ok_desc": "Revisa tu bandeja de entrada para restablecer tu contraseña"
   }
 }
