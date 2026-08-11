@@ -406,7 +406,7 @@ const QuienesSomos = () => {
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
               <span className="ds-eyebrow-pill">Lo que nos define</span>
               <h2 className="ds-h2 mt-6 text-foreground">
-                Nuestros <span className="text-champagne">valores</span>
+                <span className="text-champagne">{t("about.values_title")}</span>
               </h2>
             </div>
           </Reveal>
