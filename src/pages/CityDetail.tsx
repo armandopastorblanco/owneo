@@ -41,7 +41,11 @@ function mapRowToCar(row: CarRow): Car {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     luxury_description_en: (row as any).luxury_description_en || "",
     specifications: (row.specifications as Record<string, string>) || {},
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    specifications_en: ((row as any).specifications_en as Record<string, string>) || {},
     features: row.features || [],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    features_en: (row as any).features_en || [],
     availableIn: row.available_in || [],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     locationId: (row as any).location_id ?? null,
