@@ -356,6 +356,8 @@
   },
   "car": {
     "per_year_short": "año",
+    "savings_banner": "de ahorro en costes anuales de gestión con OWNEO Co-Sharing.",
+    "savings_note": "Estimación basada en costes anuales de gestión (seguro, mantenimiento, parking). No incluye precio de adquisición ni depreciación.",
     "request": "Solicitar participación",
     "specs": "Especificaciones técnicas",
     "power": "Potencia",

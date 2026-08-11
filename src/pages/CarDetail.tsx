@@ -380,7 +380,7 @@ const CarDetail = () => {
             </div>
             <div className="text-center">
               <div className="text-xs text-muted-foreground">{t("car.sticky_annual")}</div>
-              <div className="font-bold text-foreground">{annualFee.toLocaleString("es-ES")}€/{t("car.per_year_short")}</div>
+              <div className="font-bold text-foreground">{annualFee.toLocaleString(i18n.language === "en" ? "en-GB" : "es-ES")}€/{t("car.per_year_short")}</div>
             </div>
             <div className="text-center">
               <div className="text-xs text-muted-foreground">{t("car.sticky_duration")}</div>
