@@ -119,7 +119,7 @@ const makeConsultaSchema = (t: TFunction) => z.object({
 type ConsultaForm = z.infer<ReturnType<typeof makeConsultaSchema>>;
 
 const CarDetail = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const params = useParams<{ slug?: string; id?: string }>();
   const slug = params.slug;
   const id = params.id;
@@ -270,7 +270,12 @@ const CarDetail = () => {
   const weeksPerParticipation = car.weeks_per_participation ?? 4;
   const kmPerParticipation = car.km_per_participation ?? 2000;
   const durationYears = car.participation_duration_years ?? 5;
-  const luxuryDesc = car.luxury_description_override || car.luxuryDescription || "";
+  const luxuryDesc =
+    car.luxury_description_override ||
+    (i18n.language === "en" && car.luxury_description_en
+      ? car.luxury_description_en
+      : car.luxuryDescription) ||
+    "";
 
   const totalCostOverLife = sharePrice + annualFee * durationYears;
   const estimatedResale = Math.round(sharePrice * 0.7);
@@ -355,7 +360,7 @@ const CarDetail = () => {
         <div className="container mx-auto max-w-6xl h-full px-4 flex items-center justify-between gap-3 sm:gap-4">
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <span className="font-semibold text-foreground text-sm sm:text-base truncate max-w-[55%]">{car.name}</span>
-            <span className="text-muted-foreground text-xs sm:text-sm hidden md:inline">{car.category}</span>
+            <span className="text-muted-foreground text-xs sm:text-sm hidden md:inline">{i18n.language === "en" && car.category_en ? car.category_en : car.category}</span>
           </div>
           <div className="hidden lg:flex gap-6">
             <div className="text-center">
@@ -434,7 +439,7 @@ const CarDetail = () => {
           <div ref={pricingRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
             <div className="space-y-10 lg:space-y-12">
             <Reveal className="space-y-6 text-center max-w-3xl mx-auto">
-              <span className="ds-eyebrow-pill">{car.category}</span>
+              <span className="ds-eyebrow-pill">{i18n.language === "en" && car.category_en ? car.category_en : car.category}</span>
               <h1 className="ds-h1 text-foreground">{car.name}</h1>
               <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
                 <MapPin className="w-4 h-4 text-champagne" />

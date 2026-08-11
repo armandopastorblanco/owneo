@@ -23,7 +23,7 @@ const CarCard = ({
   availabilityOverride,
   cityCountBadge,
 }: CarCardProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { trackEvent } = useAnalytics();
   const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
   const sharePrice = car.participationPrice || Math.round(numericPrice * 0.1);
@@ -77,14 +77,14 @@ const CarCard = ({
         <CardContent className="p-6 flex-1 flex flex-col">
           <div className="mb-2">
             <span className="text-xs text-muted-foreground uppercase tracking-wider">
-              {car.category}
+              {i18n.language === "en" && car.category_en ? car.category_en : car.category}
             </span>
           </div>
           <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-foreground/80 transition-colors">
             {car.name}
           </h3>
           <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
-            {car.description}
+            {i18n.language === "en" && car.description_en ? car.description_en : car.description}
           </p>
           <div className="flex items-center justify-between mt-auto">
             <div className="flex flex-col">
