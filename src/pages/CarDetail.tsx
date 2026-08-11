@@ -954,21 +954,21 @@ const CarDetail = () => {
               <div className="flex items-center gap-2 mt-4 p-3 bg-card rounded-xl border border-border/50">
                 <Shield className="w-4 h-4 text-champagne flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">
-                  Uso exclusivo en territorio español · Entrega por gestor OWNEO en tu ciudad.
+                  {t("car.exclusive_use_note")}
                 </span>
               </div>
             </div>
 
             <div>
-              <h2 className="ds-h3 mb-4 text-foreground">Condiciones de la participación</h2>
+              <h2 className="ds-h3 mb-4 text-foreground">{t("car.conditions_title")}</h2>
               <ul className="space-y-3">
                 {[
-                  { icon: Calendar, text: `${weeksPerParticipation} semanas (3 estándar + 1 premium) garantizadas por participación/año` },
-                  { icon: Gauge, text: `${kmPerParticipation.toLocaleString("es-ES")} km incluidos por participación/año` },
-                  { icon: Clock, text: `Duración: ${durationYears} años` },
-                  { icon: TrendingUp, text: "Reventa estimada: hasta el 70% de tu participación" },
-                  { icon: RefreshCw, text: "Reventa gestionada íntegramente por OWNEO" },
-                  { icon: Shield, text: "Seguro, mantenimiento y parking incluidos en cuota anual" },
+                  { icon: Calendar, text: t("car.cond_weeks", { n: weeksPerParticipation }) },
+                  { icon: Gauge, text: t("car.cond_km", { km: kmPerParticipation.toLocaleString("es-ES") }) },
+                  { icon: Clock, text: t("car.cond_duration", { n: durationYears }) },
+                  { icon: TrendingUp, text: t("car.cond_resale") },
+                  { icon: RefreshCw, text: t("car.cond_resale_managed") },
+                  { icon: Shield, text: t("car.cond_included") },
                 ].map((it, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
                     <it.icon className="w-4 h-4 text-champagne mt-0.5 flex-shrink-0" />
