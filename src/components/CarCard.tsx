@@ -97,7 +97,7 @@ const CarCard = ({
               </span>
             </div>
             {isComplete ? (
-              <span className="text-xs font-semibold text-destructive uppercase tracking-wider">Completo</span>
+              <span className="text-xs font-semibold text-destructive uppercase tracking-wider">{t("car.complete_label")}</span>
             ) : (
               <ArrowRight className="w-5 h-5 text-foreground group-hover:translate-x-1 transition-transform" />
             )}
