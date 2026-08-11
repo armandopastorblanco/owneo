@@ -18,7 +18,7 @@ import featureWeeksBg from "@/assets/model/feature-weeks.jpg";
 import featureSharedBg from "@/assets/model/feature-shared.jpg";
 
 const Index = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { data: models = [], isLoading: carsLoading } = useCarModels();
   const { data: cities = [] } = useLocations();
@@ -409,7 +409,9 @@ const Index = () => {
                     <span className="text-sm text-muted-foreground uppercase tracking-wider">{t("home.city_country")}</span>
                   </div>
                   <h3 className="ds-card-title text-foreground mb-2">{city.name}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{city.description}</p>
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {i18n.language === "en" && city.description_en ? city.description_en : city.description}
+                  </p>
                 </div>
               </Link>
             ))}

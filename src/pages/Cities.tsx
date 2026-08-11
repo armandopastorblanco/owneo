@@ -10,7 +10,7 @@ import { MapPin, ArrowRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Cities = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { data: cities = [], isLoading: citiesLoading } = useLocations();
   const { data: cars = [] } = useCars();
@@ -80,7 +80,7 @@ const Cities = () => {
                         <h2 className="ds-card-title text-foreground">{city.name}</h2>
                       </div>
                       <p className="ds-body mb-4 line-clamp-2">
-                        {city.description}
+                        {i18n.language === "en" && city.description_en ? city.description_en : city.description}
                       </p>
                       <Link to={city.slug ? `/ubicaciones/${city.slug}` : `/cities/${city.id}`}>
                         <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
