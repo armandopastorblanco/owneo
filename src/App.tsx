@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useLanguageRouter } from "@/hooks/useLanguageRouter";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import BottomNav from "@/components/BottomNav";
@@ -90,6 +91,11 @@ const GaPageTracker = () => {
   return null;
 };
 
+const LanguageRouter = () => {
+  useLanguageRouter();
+  return null;
+};
+
 const App = () => {
   useEffect(() => {
     document.documentElement.lang = i18n.language;
@@ -103,6 +109,7 @@ const App = () => {
       <BetaGate>
       <BrowserRouter>
         <ScrollToTop />
+        <LanguageRouter />
         <PostHogPageTracker />
         <GaPageTracker />
         <AuthProvider>
@@ -142,6 +149,16 @@ const App = () => {
               <Route path="/creditos" element={<Creditos />} />
               <Route path="/design-system" element={<DesignSystem />} />
               <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
+              {/* EN mirror routes */}
+              <Route path="/en" element={<Index />} />
+              <Route path="/en/cars" element={<Portfolio />} />
+              <Route path="/en/our-model" element={<NuestroModelo />} />
+              <Route path="/en/locations" element={<Cities />} />
+              <Route path="/en/about-us" element={<QuienesSomos />} />
+              <Route path="/en/news" element={<Noticias />} />
+              <Route path="/en/news/:slug" element={<NoticiaDetalle />} />
+              <Route path="/en/contact" element={<Contacto />} />
+              <Route path="/en/cars/:slug" element={<CarDetail />} />
               {/* Admin routes */}
               <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
                 <Route index element={<AdminDashboard />} />
