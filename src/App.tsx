@@ -169,6 +169,7 @@ const App = () => {
       </BetaGate>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
