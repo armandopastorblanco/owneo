@@ -261,7 +261,7 @@ function CategoryRow({
           {title}
           {required && (
             <span className="ml-2 text-[10px] uppercase tracking-wide text-primary">
-              Siempre activas
+              {t("cookie.always_active")}
             </span>
           )}
         </Label>
