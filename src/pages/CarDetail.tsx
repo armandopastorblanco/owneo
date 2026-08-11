@@ -827,7 +827,7 @@ const CarDetail = () => {
                   </TabsList>
                 </div>
                 {Object.entries(SPEC_CATEGORIES).map(([cat, keys]) => {
-                  const items = keys.filter((k) => car.specifications?.[k]);
+                  const items = keys.filter((k) => displaySpecs?.[k]);
                   return (
                     <TabsContent key={cat} value={cat}>
                       <Card className="bg-card border-border rounded-2xl">
