@@ -810,26 +810,26 @@ export default function NuestroModelo() {
         />
         <div className="container relative mx-auto px-4 text-center">
           <Reveal>
-            <h2 className="ds-h2">¿Listo para vivir la experiencia?</h2>
+            <h2 className="ds-h2">{t("model.cta_title")}</h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-              Explora nuestra flota, elige tu vehículo y solicita tu participación. OWNEO se encarga del resto.
+              {t("model.cta_subtitle")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" className="bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                <Link to="/coches">Ver la flota <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                <Link to="/coches">{t("about.cta_fleet")} <ArrowRight className="ml-2 w-5 h-5" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/coches">Solicitar participación</Link>
+                <Link to="/coches">{t("car.request")}</Link>
               </Button>
             </div>
           </Reveal>
           <Reveal delay={0.3}>
             <p className="mt-6 text-xs text-muted-foreground">
-              Sin compromiso · Proceso 100% digital · Respuesta en 24h
+              {t("model.cta_tagline")}
             </p>
           </Reveal>
         </div>
