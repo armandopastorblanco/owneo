@@ -311,9 +311,9 @@ const CarDetail = () => {
 
   /* ─── stat cards ─── */
   const statCards = [
-    { icon: Zap, label: car.specifications?.acceleration ? "0-100 km/h" : t("car.spec_power"), value: car.specifications?.acceleration || car.specifications?.power || "—" },
-    { icon: Gauge, label: t("car.spec_topSpeed"), value: car.specifications?.topSpeed || "—" },
-    { icon: CarIcon, label: t("car.spec_engine"), value: car.specifications?.engine || "—" },
+    { icon: Zap, label: displaySpecs?.acceleration ? "0-100 km/h" : t("car.spec_power"), value: displaySpecs?.acceleration || displaySpecs?.power || "—" },
+    { icon: Gauge, label: t("car.spec_topSpeed"), value: displaySpecs?.topSpeed || "—" },
+    { icon: CarIcon, label: t("car.spec_engine"), value: displaySpecs?.engine || "—" },
   ];
 
   /* ─── image pour le bloc "La Experiencia" ─── */
@@ -1110,21 +1110,20 @@ const CarDetail = () => {
               <Card className="bg-gradient-to-br from-champagne/5 via-card to-champagne/5 border border-champagne/20 rounded-3xl">
                 <CardContent className="p-8 md:p-12 text-center">
                   <span className="ds-eyebrow-pill mb-4">
-                    Participaciones disponibles · {availableParticipations}/{maxParticipations}
+                    {t("car.cta_badge")} · {availableParticipations}/{maxParticipations}
                   </span>
                   <h2 className="ds-h2 text-foreground mb-3 mt-4">
-                    Asegura tu participación en el {car.name}
+                    {t("car.cta_title")} {car.name}
                   </h2>
                   <p className="ds-body max-w-2xl mx-auto mb-8">
-                    Completa el formulario para iniciar el proceso. Nuestro equipo revisará tu solicitud y te
-                    contactará en menos de 24 horas.
+                    {t("car.cta_subtitle")}
                   </p>
 
                   <div className="flex flex-wrap justify-center gap-3 mb-8">
                     {[
-                      { icon: Shield, text: "Proceso seguro" },
-                      { icon: FileCheck, text: "Sin compromiso" },
-                      { icon: Clock, text: "Respuesta en 24h" },
+                      { icon: Shield, text: t("car.cta_secure") },
+                      { icon: FileCheck, text: t("car.cta_nocommit") },
+                      { icon: Clock, text: t("car.cta_response") },
                     ].map((p) => (
                       <span key={p.text} className="inline-flex items-center gap-2 text-sm text-muted-foreground bg-card border border-border/50 rounded-full px-4 py-2">
                         <p.icon className="w-4 h-4 text-champagne" />

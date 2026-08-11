@@ -514,7 +514,14 @@
     "comp_indefinite": "Indefinida",
     "comp_included": "Incluido",
     "available_in": "Disponible en",
-    "features_title": "Características Premium"
+    "features_title": "Características Premium",
+    "cta_badge": "PARTICIPACIONES DISPONIBLES",
+    "cta_title": "Asegura tu participación en el",
+    "cta_subtitle": "Completa el formulario para iniciar el proceso. Nuestro equipo revisará tu solicitud y te contactará en menos de 24 horas.",
+    "cta_secure": "Proceso seguro",
+    "cta_nocommit": "Sin compromiso",
+    "cta_response": "Respuesta en 24h",
+    "cta_button": "SOLICITAR PARTICIPACIÓN"
   },
   "join": {
     "selected_vehicle": "Vehículo seleccionado",

@@ -514,7 +514,14 @@
     "comp_indefinite": "Indefinite",
     "comp_included": "Included",
     "available_in": "Available in",
-    "features_title": "Premium Features"
+    "features_title": "Premium Features",
+    "cta_badge": "PARTICIPATIONS AVAILABLE",
+    "cta_title": "Secure your participation in the",
+    "cta_subtitle": "Fill in the form to start the process. Our team will review your request and contact you within 24 hours.",
+    "cta_secure": "Secure process",
+    "cta_nocommit": "No commitment",
+    "cta_response": "Response within 24h",
+    "cta_button": "REQUEST PARTICIPATION"
   },
   "join": {
     "selected_vehicle": "Selected vehicle",
