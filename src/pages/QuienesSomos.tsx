@@ -278,7 +278,7 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="ds-eyebrow-pill">Nuestra historia</span>
+              <span className="ds-eyebrow-pill">{t("about.our_story")}</span>
             </Reveal>
 
             <Reveal delay={0.1}>
