@@ -468,7 +468,7 @@ const CarDetail = () => {
                           <TooltipTrigger
                             type="button"
                             onClick={() => setTooltipOpen((v) => !v)}
-                            aria-label="Información sobre co-sharing"
+                            aria-label={t("car.how_cosharing")}
                           >
                             <Info className="w-4 h-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
