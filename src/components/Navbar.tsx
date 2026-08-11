@@ -230,7 +230,7 @@ const Navbar = () => {
                   className="w-full min-h-[48px] flex items-center gap-2 text-champagne border-champagne/30 hover:bg-champagne/10 text-sm"
                 >
                   <Shield className="w-4 h-4" />
-                  <span>PANEL ADMIN</span>
+                  <span>{t("nav.admin_panel")}</span>
                 </Button>
               </Link>
             )}
@@ -240,7 +240,7 @@ const Navbar = () => {
                   <Globe className="w-4 h-4 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-background border-border">
+                <SelectContent className="bg-background border-border" position="popper">
                   <SelectItem value="es" className="text-foreground/80">ES</SelectItem>
                   <SelectItem value="en" className="text-foreground/80">EN</SelectItem>
                 </SelectContent>

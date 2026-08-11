@@ -1,5 +1,17 @@
 {
+  "bottomnav": {
+    "panel": "Panel",
+    "book": "Reservar",
+    "documents": "Documentos",
+    "my_account": "Mi Cuenta",
+    "enquiries": "Consultas",
+    "reservations": "Reservas",
+    "payments": "Pagos",
+    "admin": "Admin"
+  },
   "nav": {
+    "home": "Inicio",
+    "admin_panel": "PANEL ADMIN",
     "concept": "NUESTRO CONCEPTO",
     "fleet": "NUESTRA GAMA",
     "locations": "UBICACIONES",
