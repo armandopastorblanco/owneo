@@ -277,6 +277,15 @@ const CarDetail = () => {
       : car.luxuryDescription) ||
     "";
 
+  const displayFeatures =
+    i18n.language === "en" && car.features_en?.length ? car.features_en : car.features;
+  const displaySpecs =
+    i18n.language === "en" && Object.keys(car.specifications_en || {}).length
+      ? car.specifications_en
+      : car.specifications;
+
+
+
   const totalCostOverLife = sharePrice + annualFee * durationYears;
   const estimatedResale = Math.round(sharePrice * 0.7);
   const netCost = totalCostOverLife - estimatedResale;
