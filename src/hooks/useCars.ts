@@ -30,6 +30,9 @@ export interface Car {
   category: string;
   description: string;
   luxuryDescription: string;
+  description_en: string;
+  category_en: string;
+  luxury_description_en: string;
   specifications: Record<string, string>;
   features: string[];
   availableIn: string[];
@@ -75,6 +78,12 @@ function mapDbCarToCar(row: CarRowWithLocation): Car {
     category: row.category || "",
     description: row.description || "",
     luxuryDescription: row.luxury_description || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    description_en: (row as any).description_en || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    category_en: (row as any).category_en || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    luxury_description_en: (row as any).luxury_description_en || "",
     specifications: (row.specifications as Record<string, string>) || {},
     features: row.features || [],
     availableIn: row.available_in || [],
