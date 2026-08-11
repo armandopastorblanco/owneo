@@ -230,6 +230,9 @@
     "explore_plural": "Explorar {{count}} vehículos"
   },
   "about": {
+    "our_participants": "Nuestros participantes",
+    "what_defines_us": "Lo que nos define",
+    "next_step": "El siguiente paso",
     "title": "No es un coche.",
     "title_accent": "Es una decisión.",
     "subtitle": "OWNEO nació para romper la ecuación que durante décadas ha hecho del lujo automovilístico algo reservado a muy pocos.",
