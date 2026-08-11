@@ -17,6 +17,27 @@ const routeMapReverse: Record<string, string> = Object.fromEntries(
   Object.entries(routeMap).map(([k, v]) => [v, k])
 );
 
+const prefixMap: Record<string, string> = {
+  '/noticias/': '/en/news/',
+  '/coches/': '/en/cars/',
+};
+
+const toEnPath = (path: string): string => {
+  if (routeMap[path]) return routeMap[path];
+  for (const [es, en] of Object.entries(prefixMap)) {
+    if (path.startsWith(es)) return path.replace(es, en);
+  }
+  return `/en${path}`;
+};
+
+const toEsPath = (path: string): string => {
+  if (routeMapReverse[path]) return routeMapReverse[path];
+  for (const [es, en] of Object.entries(prefixMap)) {
+    if (path.startsWith(en)) return path.replace(en, es);
+  }
+  return path.replace('/en', '');
+};
+
 export const useLanguageRouter = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,12 +61,10 @@ export const useLanguageRouter = () => {
     }
     prevLang.current = i18n.language;
     if (i18n.language === 'en' && !isEnPath) {
-      const enPath = routeMap[location.pathname] || `/en${location.pathname}`;
-      navigate(enPath, { replace: true });
+      navigate(toEnPath(location.pathname), { replace: true });
     }
     if (i18n.language === 'es' && isEnPath) {
-      const esPath = routeMapReverse[location.pathname] || location.pathname.replace('/en', '');
-      navigate(esPath || '/', { replace: true });
+      navigate(toEsPath(location.pathname) || '/', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);

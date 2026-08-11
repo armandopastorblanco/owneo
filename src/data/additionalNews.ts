@@ -1,3 +1,4 @@
+import { newsEn } from "./additionalNewsEn";
 import ferrariF80 from "@/assets/news/ferrari-f80.jpg";
 
 import astonMartinValhalla from "@/assets/news/aston-martin-valhalla.jpg";
@@ -47,16 +48,27 @@ export interface NewsArticle {
   category: string;
   title: string;
   excerpt: string;
+  /** English translation of excerpt */
+  excerpt_en?: string;
   readTime: string;
   content: {
     intro: string;
-    sections: { title: string; paragraphs: string[] }[];
+    /** English translation of intro */
+    intro_en?: string;
+    sections: {
+      title: string;
+      paragraphs: string[];
+      /** English translation of title */
+      title_en?: string;
+      /** English translation of paragraphs */
+      paragraphs_en?: string[];
+    }[];
   };
   specs?: { label: string; value: string }[];
   detailImages?: { src: string; alt: string }[];
 }
 
-export const additionalNews: NewsArticle[] = [
+const articlesEs: NewsArticle[] = [
   {
     id: 101,
     slug: "ferrari-296-speciale",
@@ -739,3 +751,23 @@ export const additionalNews: NewsArticle[] = [
     specs: [{ label: "Potencia", value: "700 CV" }, { label: "0-100 km/h", value: "2,8 s" }, { label: "Batería", value: "85 kWh / 900 V" }, { label: "Autonomía", value: "380 km WLTP" }]
   }
 ];
+
+// Merge the English translations (see additionalNewsEn.ts) onto each article,
+// so every article object also exposes excerpt_en / intro_en / title_en / paragraphs_en.
+export const additionalNews: NewsArticle[] = articlesEs.map((a) => {
+  const en = newsEn[a.slug];
+  if (!en) return a;
+  return {
+    ...a,
+    excerpt_en: en.excerpt,
+    content: {
+      ...a.content,
+      intro_en: en.intro,
+      sections: a.content.sections.map((s, i) => ({
+        ...s,
+        title_en: en.sections[i]?.title,
+        paragraphs_en: en.sections[i]?.paragraphs,
+      })),
+    },
+  };
+});
