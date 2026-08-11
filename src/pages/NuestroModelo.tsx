@@ -506,9 +506,9 @@ export default function NuestroModelo() {
           <div className="text-center">
             <Reveal>
               <span className="ds-eyebrow-pill">
-                Caso práctico
+                {t("model.practical_eyebrow")}
               </span>
-              <h2 className="mt-4 ds-h2">Así funciona en la realidad</h2>
+              <h2 className="mt-4 ds-h2">{t("model.practical_title")}</h2>
             </Reveal>
           </div>
 
@@ -522,16 +522,16 @@ export default function NuestroModelo() {
                   </div>
                 </div>
                 <h3 className="mt-4 ds-h3 text-center">Porsche 911 Turbo S</h3>
-                <p className="text-center text-sm text-muted-foreground">Ejemplo de participación</p>
+                <p className="text-center text-sm text-muted-foreground">{t("model.practical_car_subtitle")}</p>
 
                 <ul className="mt-6 divide-y divide-border/50 text-sm">
                   {[
-                    ["Precio del vehículo", "€250.000"],
-                    ["Participaciones disponibles", "10"],
-                    ["Precio por participación", <span key="p" className="text-champagne font-bold">€25.000</span>],
-                    ["Semanas/año por participación", "4 (3+1)"],
-                    ["Km/año por participación", "2.000"],
-                    ["Duración", "según ficha del vehículo"],
+                    [t("model.practical_row1"), "€250.000"],
+                    [t("model.practical_row2"), "10"],
+                    [t("model.practical_row3"), <span key="p" className="text-champagne font-bold">€25.000</span>],
+                    [t("model.practical_row4"), "4 (3+1)"],
+                    [t("model.practical_row5"), "2.000"],
+                    [t("model.practical_row6"), t("model.practical_row6_value")],
                   ].map(([k, v], i) => (
                     <li key={i} className="flex justify-between py-3">
                       <span className="text-muted-foreground">{k}</span>
@@ -550,39 +550,38 @@ export default function NuestroModelo() {
                     <h3 className="ds-card-title">Tu participación</h3>
                   </div>
                   <span className="text-xs bg-champagne/15 text-champagne rounded-full px-3 py-1 border border-champagne/20">
-                    1 participación
+                    {t("model.practical_participation_badge")}
                   </span>
                 </div>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground flex items-center gap-2"><Wallet className="w-4 h-4 text-champagne shrink-0" /> Tu inversión</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><Wallet className="w-4 h-4 text-champagne shrink-0" /> {t("model.practical_investment")}</span>
                     <span className="font-bold text-champagne text-lg"><CountUp end={25000} prefix="€" /></span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground flex items-center gap-2"><CalendarDays className="w-4 h-4 text-champagne shrink-0" /> Semanas al año</span>
-                    <span className="font-medium"><CountUp end={4} /> semanas (3+1)</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><CalendarDays className="w-4 h-4 text-champagne shrink-0" /> {t("model.practical_weeks")}</span>
+                    <span className="font-medium">{t("model.practical_weeks_value")}</span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground flex items-center gap-2"><Gauge className="w-4 h-4 text-champagne shrink-0" /> Km incluidos</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><Gauge className="w-4 h-4 text-champagne shrink-0" /> {t("model.practical_km")}</span>
                     <span className="font-medium"><CountUp end={2000} /> km</span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground flex items-center gap-2"><Smartphone className="w-4 h-4 text-champagne shrink-0" /> Reserva</span>
-                    <span className="font-medium">Digital · 24/7</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><Smartphone className="w-4 h-4 text-champagne shrink-0" /> {t("model.practical_booking")}</span>
+                    <span className="font-medium">{t("model.practical_booking_value")}</span>
                   </li>
                   <li className="flex items-start justify-between gap-4">
-                    <span className="text-muted-foreground flex items-center gap-2"><RefreshCw className="w-4 h-4 text-champagne shrink-0" /> Valor recuperado</span>
+                    <span className="text-muted-foreground flex items-center gap-2"><RefreshCw className="w-4 h-4 text-champagne shrink-0" /> {t("model.practical_recovery")}</span>
                     <div className="text-right">
                       <div className="font-bold text-green-500"><CountUp end={17500} prefix="hasta €" /></div>
-                      <div className="text-xs text-muted-foreground">al término del período · kilometraje controlado</div>
+                      <div className="text-xs text-muted-foreground">{t("model.practical_recovery_note")}</div>
                     </div>
                   </li>
                 </ul>
 
                 <div className="mt-6 rounded-2xl bg-champagne/5 border border-champagne/20 p-4 text-sm text-muted-foreground">
-                  Con 1 participación, disfrutas 4 semanas (3 estándar + 1 premium) al año de un Porsche 911 Turbo S por €25.000
-                  — y OWNEO gestiona absolutamente todo lo demás.
+                  {t("model.practical_summary")}
                 </div>
               </div>
             </Reveal>
@@ -591,11 +590,10 @@ export default function NuestroModelo() {
           <Reveal delay={0.2}>
             <div className="mt-10 max-w-3xl mx-auto bg-card rounded-2xl border border-champagne/20 p-6 text-center">
               <p className="text-muted-foreground">
-                ¿Quieres más tiempo al volante? Adquiere 2 participaciones y disfruta de 8 semanas (6 estándar + 2 premium) al año —
-                o participa en varios vehículos de la flota OWNEO.
+                {t("model.practical_more")}
               </p>
               <Button asChild className="mt-4 bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                <Link to="/coches">Ver la flota <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                <Link to="/coches">{t("model.practical_fleet_cta")} <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
             </div>
           </Reveal>
