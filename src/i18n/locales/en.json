@@ -377,6 +377,7 @@
     "sticky_participation": "Participation",
     "sticky_annual": "Annual mgmt.",
     "sticky_duration": "Duration",
+    "no_specs_available": "No data available for this category.",
     "sticky_years": "{{n}} years",
     "sticky_request_short": "Request",
     "per_year": "per year",
