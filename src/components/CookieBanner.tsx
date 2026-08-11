@@ -104,7 +104,7 @@ const CookieBanner = () => {
               </span>
               <div className="flex-1 min-w-0">
                 <h2 className="text-base sm:text-lg font-semibold text-foreground">
-                  Tu privacidad es importante
+                  {t("cookie.title")}
                 </h2>
                 <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
                   {t("cookie.text")}{" "}
@@ -134,7 +134,7 @@ const CookieBanner = () => {
                 aria-label="Configurar preferencias de cookies"
                 className="order-2 w-full min-h-11"
               >
-                Configurar
+                {t("cookie.configure")}
               </Button>
               <Button
                 variant="outline"
@@ -162,40 +162,39 @@ const CookieBanner = () => {
           "
         >
           <DialogHeader className="px-6 pt-6 pb-4 border-b border-border">
-            <DialogTitle className="text-xl">Preferencias de cookies</DialogTitle>
+            <DialogTitle className="text-xl">{t("cookie.prefs_title")}</DialogTitle>
             <DialogDescription className="text-sm text-muted-foreground">
-              Selecciona qué tipo de cookies quieres permitir. Tu elección se guarda y
-              puedes modificarla cuando quieras desde el pie de página.
+              {t("cookie.prefs_desc")}
             </DialogDescription>
           </DialogHeader>
 
           <div className="px-6 py-5 space-y-4 overflow-y-auto max-h-[55vh]">
             <CategoryRow
               id="cookies-tecnicas"
-              title="Cookies técnicas"
-              description="Imprescindibles para el funcionamiento del sitio (sesión, seguridad, navegación). No se pueden desactivar."
+              title={t("cookie.tech_title")}
+              description={t("cookie.tech_desc")}
               checked
               disabled
               required
             />
             <CategoryRow
               id="cookies-analiticas"
-              title="Cookies analíticas"
-              description="Nos ayudan a entender cómo se usa el sitio mediante Google Analytics y PostHog. Datos anonimizados y agregados."
+              title={t("cookie.analytics_title")}
+              description={t("cookie.analytics_desc")}
               checked={prefs.analytics}
               onChange={(v) => setPrefs((p) => ({ ...p, analytics: v }))}
             />
             <CategoryRow
               id="cookies-marketing"
-              title="Cookies de marketing"
-              description="Permiten mostrar anuncios y contenidos más relevantes en función de tus intereses."
+              title={t("cookie.marketing_title")}
+              description={t("cookie.marketing_desc")}
               checked={prefs.marketing}
               onChange={(v) => setPrefs((p) => ({ ...p, marketing: v }))}
             />
             <CategoryRow
               id="cookies-personalizacion"
-              title="Cookies de personalización"
-              description="Recuerdan tus preferencias (idioma, ciudad, vehículos vistos) para una experiencia adaptada."
+              title={t("cookie.personal_title")}
+              description={t("cookie.personal_desc")}
               checked={prefs.personalization}
               onChange={(v) => setPrefs((p) => ({ ...p, personalization: v }))}
             />
@@ -214,7 +213,7 @@ const CookieBanner = () => {
               className="w-full sm:w-auto min-h-11"
               aria-label="Rechazar todas las cookies opcionales"
             >
-              Rechazar todo
+              {t("cookie.reject_all")}
             </Button>
             <Button
               variant="ghost"
@@ -222,14 +221,14 @@ const CookieBanner = () => {
               className="w-full sm:w-auto min-h-11"
               aria-label="Aceptar todas las cookies"
             >
-              Aceptar todo
+              {t("cookie.accept_all")}
             </Button>
             <Button
               onClick={handleSave}
               className="w-full sm:w-auto min-h-11"
               aria-label="Guardar mis preferencias de cookies"
             >
-              Guardar preferencias
+              {t("cookie.save_prefs")}
             </Button>
           </DialogFooter>
         </DialogContent>

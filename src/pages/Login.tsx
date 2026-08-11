@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -14,6 +15,7 @@ import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 const Login = () => {
+  const { t } = useTranslation();
   const pwaRaw = usePWAInstall();
   const pwa = useMemo(
     () => pwaRaw,
@@ -61,9 +63,9 @@ const Login = () => {
         error_type: error.message,
       });
       toast({
-        title: "Error al iniciar sesión",
+        title: t("login.err_title"),
         description: error.message === "Invalid login credentials"
-          ? "Email o contraseña incorrectos"
+          ? t("login.err_credentials")
           : error.message,
         variant: "destructive",
       });
@@ -71,7 +73,7 @@ const Login = () => {
       trackEvent("login", {
         method: "email",
       });
-      toast({ title: "Bienvenido", description: "Has iniciado sesión correctamente" });
+      toast({ title: t("login.success_title"), description: t("login.success_desc") });
       navigate(from, { replace: true });
     }
     setLoading(false);
@@ -79,7 +81,7 @@ const Login = () => {
 
   const handleForgotPassword = async () => {
     if (!email.trim()) {
-      toast({ title: "Introduce tu email", description: "Necesitamos tu email para enviar el enlace de recuperación", variant: "destructive" });
+      toast({ title: t("login.forgot_err_title"), description: t("login.forgot_err_desc"), variant: "destructive" });
       return;
     }
     setLoading(true);
@@ -90,7 +92,7 @@ const Login = () => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
       trackEvent("password_reset_request", {});
-      toast({ title: "Email enviado", description: "Revisa tu bandeja de entrada para restablecer tu contraseña" });
+      toast({ title: t("login.forgot_ok_title"), description: t("login.forgot_ok_desc") });
     }
     setLoading(false);
   };
@@ -101,8 +103,8 @@ const Login = () => {
       <div className="flex items-center justify-center px-6 py-24 md:py-32">
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Iniciar Sesión</h1>
-            <p className="text-muted-foreground">Accede a tu cuenta para gestionar tus participaciones</p>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">{t("login.title")}</h1>
+            <p className="text-muted-foreground">{t("login.subtitle")}</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5">
@@ -123,7 +125,7 @@ const Login = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Contraseña</Label>
+              <Label htmlFor="password">{t("login.field_password")}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
@@ -152,22 +154,22 @@ const Login = () => {
                 onClick={handleForgotPassword}
                 className="text-sm text-champagne hover:underline"
               >
-                ¿Olvidaste tu contraseña?
+                {t("login.forgot_password")}
               </button>
             </div>
 
             <Button type="submit" className="w-full bg-champagne text-champagne-foreground hover:bg-champagne/90" disabled={loading}>
-              {loading ? "Cargando..." : "Iniciar Sesión"}
+              {loading ? t("login.loading") : t("login.submit")}
             </Button>
           </form>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
-            ¿Aún no eres cliente?{" "}
+            {t("login.no_account")}{" "}
             <Link
               to="/coches"
               className="text-champagne hover:underline font-medium"
             >
-              Solicita una participación
+              {t("login.request_part")}
             </Link>
           </p>
         </div>
