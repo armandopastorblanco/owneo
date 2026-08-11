@@ -311,14 +311,13 @@ export default function NuestroModelo() {
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
               <h2 className="ds-h2">
-                Tú conduces.<br />
-                <span className="text-champagne">Nosotros nos encargamos de todo lo demás.</span>
+                {t("model.we_handle_title").split(". ")[0]}.<br />
+                <span className="text-champagne">{t("model.we_handle_title").split(". ").slice(1).join(". ")}</span>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-4 text-muted-foreground">
-                Desde la compra del vehículo hasta su reventa, pasando por cada revisión, cada seguro y cada entrega
-                — OWNEO gestiona cada detalle para que tú solo tengas que disfrutar.
+                {t("model.we_handle_subtitle")}
               </p>
             </Reveal>
           </div>
@@ -335,12 +334,12 @@ export default function NuestroModelo() {
 
             <div className="space-y-12">
               {[
-                { icon: ShoppingCart, title: "Compra del vehículo", desc: "OWNEO adquiere el vehículo de concesionarios oficiales certificados. Tú no te preocupas por la negociación ni los trámites." },
-                { icon: FileCheck, title: "Contrato y documentación", desc: "Contrato claro que garantiza tus 4 semanas (3 estándar + 1 premium) anuales por participación y todos los derechos de uso." },
-                { icon: Shield, title: "Seguro a todo riesgo", desc: "Cobertura completa con aseguradora premium. Cada participante está cubierto como conductor habitual." },
-                { icon: Wrench, title: "Mantenimiento y revisiones", desc: "Todas las revisiones programadas y reparaciones gestionadas por OWNEO. El vehículo siempre en perfectas condiciones." },
-                { icon: Key, title: "Entrega profesional", desc: "Un gestor OWNEO te entrega el vehículo en persona, impecablemente preparado, revisado y documentado." },
-                { icon: TrendingUp, title: "Reventa gestionada", desc: "Al término del período acordado (indicado en la ficha de cada vehículo), OWNEO gestiona la venta y redistribuye el valor entre los participantes." },
+                { icon: ShoppingCart, title: t("model.step1_title"), desc: t("model.step1_desc") },
+                { icon: FileCheck, title: t("model.step2_title"), desc: t("model.step2_desc") },
+                { icon: Shield, title: t("model.step3_title"), desc: t("model.step3_desc") },
+                { icon: Wrench, title: t("model.step4_title"), desc: t("model.step4_desc") },
+                { icon: Key, title: t("model.step5_title"), desc: t("model.step5_desc") },
+                { icon: TrendingUp, title: t("model.step6_title"), desc: t("model.step6_desc") },
               ].map((it, i) => {
                 const right = i % 2 === 1;
                 return (
