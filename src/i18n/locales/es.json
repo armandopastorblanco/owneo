@@ -225,7 +225,19 @@
     "rights": "© 2026 OWNEO SL — Todos los derechos reservados",
     "legal": "Aviso Legal",
     "privacy": "Política de Privacidad",
-    "cookies": "Política de Cookies"
+    "cookies": "Política de Cookies",
+    "tagline": "Tu destino exclusivo para supercoches de lujo en España",
+    "section_contact": "CONTACTO",
+    "section_links": "ENLACES",
+    "section_app": "APP",
+    "section_social": "REDES SOCIALES",
+    "app_subtitle": "Instala nuestra app",
+    "link_fleet": "Nuestra Gama",
+    "link_locations": "Ubicaciones",
+    "link_about": "Quiénes Somos",
+    "link_contact": "Contacto",
+    "cookie_manage": "Gestionar preferencias de cookies",
+    "photo_credits": "Créditos fotográficos"
   },
   "cookie": {
     "text": "Utilizamos cookies propias y de terceros para garantizar el correcto funcionamiento del sitio, analizar el tráfico y personalizar tu experiencia. Puedes aceptar todas, rechazarlas o configurar tus preferencias en cualquier momento.",
