@@ -157,6 +157,9 @@ const buildMissionVision = (t: TFn) => [
 
 const QuienesSomos = () => {
   const { t } = useTranslation();
+  const profiles = buildProfiles(t);
+  const values = buildValues(t);
+  const missionVision = buildMissionVision(t);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
