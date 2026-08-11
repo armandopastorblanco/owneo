@@ -379,14 +379,14 @@ export default function NuestroModelo() {
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Vehículo verificado y documentado fotográficamente",
-                "Limpieza y preparación profesional antes de cada uso",
-                "Entrega y recogida en mano por gestor OWNEO",
-                "Check-out documentado tras cada uso",
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
+                t("model.delivery_check1"),
+                t("model.delivery_check2"),
+                t("model.delivery_check3"),
+                t("model.delivery_check4"),
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Check className="w-5 h-5 text-champagne shrink-0 mt-0.5" />
-                  <span>{t}</span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -395,22 +395,22 @@ export default function NuestroModelo() {
           <Reveal delay={0.2}>
             <div className="bg-card rounded-2xl border border-champagne/20 p-8">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="ds-card-title">Protocolo de entrega OWNEO</h3>
+                <h3 className="ds-card-title">{t("model.delivery_protocol_title")}</h3>
                 <span className="text-xs bg-champagne/10 text-champagne rounded-full px-3 py-1 border border-champagne/20">
-                  Verificado
+                  {t("model.delivery_protocol_badge")}
                 </span>
               </div>
               <ul className="space-y-3">
                 {[
-                  "Estado exterior documentado",
-                  "Interior revisado",
-                  "Nivel de combustible verificado",
-                  "Kilometraje registrado",
-                  "Documentación en regla",
-                  "Vehículo listo para entrega",
-                ].map((t, i) => (
+                  t("model.delivery_proto1"),
+                  t("model.delivery_proto2"),
+                  t("model.delivery_proto3"),
+                  t("model.delivery_proto4"),
+                  t("model.delivery_proto5"),
+                  t("model.delivery_proto6"),
+                ].map((item, i) => (
                   <motion.li
-                    key={t}
+                    key={item}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -420,13 +420,13 @@ export default function NuestroModelo() {
                     <span className="w-6 h-6 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
                       <Check className="w-3.5 h-3.5 text-green-500" />
                     </span>
-                    <span className="text-foreground">{t}</span>
+                    <span className="text-foreground">{item}</span>
                   </motion.li>
                 ))}
               </ul>
               <div className="mt-6 pt-6 border-t border-border/50 flex items-center gap-2 text-xs text-muted-foreground">
                 <BadgeCheck className="w-4 h-4 text-champagne" />
-                Firmado por gestor OWNEO
+                {t("model.delivery_signed")}
               </div>
             </div>
           </Reveal>
@@ -439,17 +439,17 @@ export default function NuestroModelo() {
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
               <span className="ds-eyebrow-pill">
-                Comparativa de costes
+                {t("model.comparison_eyebrow")}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="mt-4 ds-h2">La decisión más inteligente</h2>
-              <p className="mt-2 text-champagne">Números reales, comparativa honesta.</p>
+              <h2 className="mt-4 ds-h2">{t("model.comparison_title2")}</h2>
+              <p className="mt-2 text-champagne">{t("model.comparison_subtitle2")}</p>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mt-4 text-muted-foreground">
-                Análisis transparente de los costes anuales de gestión (sin incluir precio de adquisición ni depreciación)
-                comparado con la propiedad tradicional.
+                {t("model.comparison_body")}
+              </p>
               </p>
             </Reveal>
           </div>
