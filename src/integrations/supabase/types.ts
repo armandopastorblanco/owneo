@@ -252,10 +252,12 @@ export type Database = {
           available_in: string[] | null
           brand: string
           category: string | null
+          category_en: string | null
           consultation_enabled: boolean | null
           created_at: string
           deadline: string | null
           description: string | null
+          description_en: string | null
           features: string[] | null
           gallery: string[] | null
           id: string
@@ -264,6 +266,7 @@ export type Database = {
           km_per_participation: number | null
           location_id: string
           luxury_description: string | null
+          luxury_description_en: string | null
           luxury_description_override: string | null
           manager_email: string | null
           manager_name: string | null
@@ -295,10 +298,12 @@ export type Database = {
           available_in?: string[] | null
           brand: string
           category?: string | null
+          category_en?: string | null
           consultation_enabled?: boolean | null
           created_at?: string
           deadline?: string | null
           description?: string | null
+          description_en?: string | null
           features?: string[] | null
           gallery?: string[] | null
           id?: string
@@ -307,6 +312,7 @@ export type Database = {
           km_per_participation?: number | null
           location_id: string
           luxury_description?: string | null
+          luxury_description_en?: string | null
           luxury_description_override?: string | null
           manager_email?: string | null
           manager_name?: string | null
@@ -338,10 +344,12 @@ export type Database = {
           available_in?: string[] | null
           brand?: string
           category?: string | null
+          category_en?: string | null
           consultation_enabled?: boolean | null
           created_at?: string
           deadline?: string | null
           description?: string | null
+          description_en?: string | null
           features?: string[] | null
           gallery?: string[] | null
           id?: string
@@ -350,6 +358,7 @@ export type Database = {
           km_per_participation?: number | null
           location_id?: string
           luxury_description?: string | null
+          luxury_description_en?: string | null
           luxury_description_override?: string | null
           manager_email?: string | null
           manager_name?: string | null
@@ -1102,6 +1111,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
+          description_en: string | null
           id: string
           image_url: string | null
           is_active: boolean
@@ -1113,6 +1123,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
+          description_en?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean
@@ -1124,6 +1135,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
+          description_en?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean
