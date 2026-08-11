@@ -84,7 +84,7 @@ const Cities = () => {
                       </p>
                       <Link to={city.slug ? `/ubicaciones/${city.slug}` : `/cities/${city.id}`}>
                         <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                          <span>Explorar {carsCount} {carsCount === 1 ? "vehículo" : "vehículos"}</span>
+                          <span>{carsCount === 1 ? t("locations.explore_singular", { count: carsCount }) : t("locations.explore_plural", { count: carsCount })}</span>
                           <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                         </Button>
                       </Link>
