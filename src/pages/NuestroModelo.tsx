@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, useInView } from "framer-motion";
@@ -113,6 +114,7 @@ function FlipCard({
 /* ---------------- page ---------------- */
 
 export default function NuestroModelo() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
@@ -186,16 +188,15 @@ export default function NuestroModelo() {
 
           <Reveal delay={0.2}>
             <h1 className="mt-6 ds-h1">
-              El acceso más inteligente al
+              {t("model.title")}
               <br />
-              <span className="text-champagne">automovilismo de lujo</span>
+              <span className="text-champagne">{t("model.title_accent")}</span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.4}>
             <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-              OWNEO reinventa la relación con los coches de alta gama. No compras un coche. No lo alquilas.
-              Adquieres el derecho a disfrutarlo como si fuera tuyo — con todo el servicio, sin ninguna de las cargas.
+              {t("model.subtitle")}
             </p>
           </Reveal>
 

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
@@ -17,6 +18,7 @@ const AppleIcon = ({ className }: { className?: string }) => (
 );
 
 const Footer = () => {
+  const { t } = useTranslation();
   const pwa = usePWAInstall();
 
   const handleAndroidInstall = () => {
@@ -128,7 +130,7 @@ const Footer = () => {
               aria-label="Leer el Aviso Legal"
               className="hover:text-foreground transition-colors"
             >
-              Aviso Legal
+              {t("footer.legal")}
             </a>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <a
@@ -136,7 +138,7 @@ const Footer = () => {
               aria-label="Leer la Política de Privacidad"
               className="hover:text-foreground transition-colors"
             >
-              Política de Privacidad
+              {t("footer.privacy")}
             </a>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <a
@@ -144,7 +146,7 @@ const Footer = () => {
               aria-label="Leer la Política de Cookies"
               className="hover:text-foreground transition-colors"
             >
-              Política de Cookies
+              {t("footer.cookies")}
             </a>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <button
@@ -165,7 +167,7 @@ const Footer = () => {
             </Link>
           </nav>
           <p className="text-center text-xs text-muted-foreground">
-            © 2026 OWNEO SL — Todos los derechos reservados
+            {t("footer.rights")}
           </p>
         </div>
       </div>

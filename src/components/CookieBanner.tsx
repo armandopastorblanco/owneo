@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { Cookie } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -26,6 +27,7 @@ const DEFAULT: ConsentCategories = {
 };
 
 const CookieBanner = () => {
+  const { t } = useTranslation();
   const [showBanner, setShowBanner] = useState(false);
   const [showConfig, setShowConfig] = useState(false);
   const [prefs, setPrefs] = useState<ConsentCategories>(DEFAULT);
@@ -105,15 +107,12 @@ const CookieBanner = () => {
                   Tu privacidad es importante
                 </h2>
                 <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
-                  Utilizamos cookies propias y de terceros para garantizar el correcto
-                  funcionamiento del sitio, analizar el tráfico y personalizar tu experiencia.
-                  Puedes aceptar todas, rechazarlas o configurar tus preferencias en cualquier
-                  momento.{" "}
+                  {t("cookie.text")}{" "}
                   <Link
                     to="/politica-de-cookies"
                     className="underline underline-offset-2 hover:text-foreground transition-colors"
                   >
-                    Política de Cookies
+                    {t("footer.cookies")}
                   </Link>
                   .
                 </p>
@@ -127,7 +126,7 @@ const CookieBanner = () => {
                 aria-label="Aceptar todas las cookies"
                 className="order-1 sm:order-3 w-full min-h-11"
               >
-                Aceptar todo
+                {t("cookie.accept")}
               </Button>
               <Button
                 variant="ghost"
@@ -143,7 +142,7 @@ const CookieBanner = () => {
                 aria-label="Rechazar todas las cookies opcionales"
                 className="order-3 sm:order-1 w-full min-h-11"
               >
-                Rechazar todo
+                {t("cookie.reject")}
               </Button>
             </div>
           </div>

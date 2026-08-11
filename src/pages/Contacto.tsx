@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { toast } from "sonner";
@@ -20,6 +21,7 @@ const initialForm = {
 };
 
 export default function Contacto() {
+  const { t } = useTranslation();
   const [form, setForm] = useState(initialForm);
   const [accepted, setAccepted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -65,7 +67,7 @@ export default function Contacto() {
         })
         .catch((err) => console.error("send-contact-notification:", err));
 
-      toast.success("Mensaje enviado. Nos pondremos en contacto contigo pronto.");
+      toast.success(t("contact.success"));
       setForm(initialForm);
       setAccepted(false);
     } catch (err: any) {
@@ -94,7 +96,7 @@ export default function Contacto() {
       <main className="container mx-auto px-6 pt-32 pb-20 max-w-3xl">
         <header className="mb-10 text-center">
           <h1 className="text-4xl md:text-5xl font-extralight tracking-tight text-foreground mb-4">
-            Contacto
+            {t("contact.title")}
           </h1>
           <p className="text-muted-foreground">
             ¿Tienes alguna pregunta? Escríbenos y nuestro equipo te responderá lo antes posible.
@@ -107,11 +109,11 @@ export default function Contacto() {
         >
           <div className="grid md:grid-cols-2 gap-5">
             <div className="space-y-2">
-              <Label htmlFor="name">Nombre *</Label>
+              <Label htmlFor="name">{t("contact.name")} *</Label>
               <Input id="name" value={form.name} onChange={update("name")} required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">{t("contact.email")} *</Label>
               <Input id="email" type="email" value={form.email} onChange={update("email")} required />
             </div>
           </div>
@@ -122,7 +124,7 @@ export default function Contacto() {
               <Input id="phone" type="tel" value={form.phone} onChange={update("phone")} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="subject">Asunto *</Label>
+              <Label htmlFor="subject">{t("contact.subject")} *</Label>
               <Input id="subject" value={form.subject} onChange={update("subject")} required />
             </div>
           </div>
@@ -138,7 +140,7 @@ export default function Contacto() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Mensaje *</Label>
+            <Label htmlFor="message">{t("contact.message")} *</Label>
             <Textarea id="message" rows={4} value={form.message} onChange={update("message")} required />
           </div>
 
@@ -158,7 +160,7 @@ export default function Contacto() {
           </div>
 
           <Button type="submit" disabled={submitting} className="w-full md:w-auto">
-            {submitting ? "Enviando..." : "Enviar mensaje"}
+            {submitting ? "Enviando..." : t("contact.send")}
           </Button>
         </form>
       </main>
