@@ -336,7 +336,23 @@
   "cookie": {
     "text": "We use our own and third-party cookies to ensure the site works properly, analyse traffic and personalise your experience. You can accept all, reject them or configure your preferences at any time.",
     "accept": "Accept all",
-    "reject": "Reject all"
+    "reject": "Reject all",
+    "title": "Your privacy matters",
+    "configure": "Configure",
+    "prefs_title": "Cookie Preferences",
+    "prefs_desc": "Choose which cookies you want to allow. Your choice is saved and you can change it at any time from the footer.",
+    "always_active": "Always active",
+    "reject_all": "Reject all",
+    "accept_all": "Accept all",
+    "save_prefs": "Save preferences",
+    "tech_title": "Technical cookies",
+    "tech_desc": "Essential for the site to work (session, security, navigation). They cannot be deactivated.",
+    "analytics_title": "Analytics cookies",
+    "analytics_desc": "Help us understand how the site is used via Google Analytics and PostHog. Anonymised and aggregated data.",
+    "marketing_title": "Marketing cookies",
+    "marketing_desc": "Allow us to show more relevant ads and content based on your interests.",
+    "personal_title": "Personalisation cookies",
+    "personal_desc": "Remember your preferences (language, city, vehicles viewed) for a tailored experience."
   },
   "car": {
     "per_year_short": "yr",
@@ -554,5 +570,23 @@
     "answers_recorded": "{{count}} answers recorded",
     "go_dashboard": "Go to dashboard",
     "back_portfolio": "Back to portfolio"
+  },
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Access your account to manage your participations",
+    "field_password": "Password",
+    "forgot_password": "Forgot your password?",
+    "loading": "Loading...",
+    "submit": "Sign In",
+    "no_account": "Not a client yet?",
+    "request_part": "Request a participation",
+    "err_title": "Login error",
+    "err_credentials": "Incorrect email or password",
+    "success_title": "Welcome",
+    "success_desc": "You have successfully signed in",
+    "forgot_err_title": "Enter your email",
+    "forgot_err_desc": "We need your email to send the recovery link",
+    "forgot_ok_title": "Email sent",
+    "forgot_ok_desc": "Check your inbox to reset your password"
   }
 }
