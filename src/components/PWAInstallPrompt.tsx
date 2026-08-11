@@ -19,7 +19,9 @@ const PWAInstallPrompt = ({
   onInstall,
   onDismiss,
 }: PWAInstallPromptProps) => {
+  const { t } = useTranslation();
   if (!show) return null;
+
 
   return (
     <AnimatePresence>
