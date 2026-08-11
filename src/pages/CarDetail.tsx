@@ -845,7 +845,7 @@ const CarDetail = () => {
                                     {labels[k] || k}
                                   </span>
                                   <span className={`font-semibold text-sm sm:text-base text-left sm:text-right break-words leading-snug ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
-                                    {car.specifications[k]}
+                                    {displaySpecs[k]}
                                   </span>
                                 </div>
                               ))}
