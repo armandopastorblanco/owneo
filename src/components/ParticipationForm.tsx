@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useTranslation } from "react-i18next";
 
 interface ParticipationFormProps {
   carId: string;
@@ -28,6 +29,7 @@ const ParticipationForm = ({
   onOpenChange,
 }: ParticipationFormProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { trackEvent } = useAnalytics();
   const disabled = availableParticipations === 0;
   const triggeredRef = useRef(false);
@@ -62,7 +64,7 @@ const ParticipationForm = ({
       disabled={disabled}
       onClick={handleClick}
     >
-      {disabled ? "SIN DISPONIBILIDAD" : "SOLICITAR PARTICIPACIÓN"}
+      {disabled ? t("car.cta_sold_out") : t("car.cta_button")}
     </Button>
   );
 };

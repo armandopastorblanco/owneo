@@ -1094,15 +1094,15 @@ const CarDetail = () => {
               <Card className="bg-gradient-to-r from-muted/20 to-card border border-border/50 rounded-2xl">
                 <CardContent className="p-8 text-center">
                   <Users className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                  <span className="ds-tag mb-3">Participaciones agotadas</span>
+                  <span className="ds-tag mb-3">{t("car.sold_out_badge")}</span>
                   <h3 className="ds-h3 mb-3 mt-3 text-foreground">
-                    Este vehículo ya tiene todos sus participantes
+                    {t("car.sold_out_title")}
                   </h3>
                   <p className="ds-body mb-6">
-                    Descubre otros vehículos disponibles en nuestra vitrina
+                    {t("car.sold_out_desc")}
                   </p>
                   <Link to="/coches">
-                    <Button variant="outline">Ver otros vehículos</Button>
+                    <Button variant="outline">{t("car.sold_out_cta")}</Button>
                   </Link>
                 </CardContent>
               </Card>
