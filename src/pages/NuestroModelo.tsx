@@ -182,7 +182,7 @@ export default function NuestroModelo() {
                 animation: "owneo-shimmer 3s linear infinite",
               }}
             >
-              Derecho de uso · Todo incluido · Sin cargas
+              {t("model.eyebrow")}
             </span>
           </Reveal>
 
@@ -196,15 +196,15 @@ export default function NuestroModelo() {
 
           <Reveal delay={0.4}>
             <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-              {t("model.subtitle")}
+              {t("model.hero_subtitle")}
             </p>
           </Reveal>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {[
-              { icon: Shield, label: "Contrato garantizado" },
-              { icon: Car, label: "Vehículos premium" },
-              { icon: Sparkles, label: "Cero gestión" },
+              { icon: Shield, label: t("model.tag1") },
+              { icon: Car, label: t("model.tag2") },
+              { icon: Sparkles, label: t("model.tag3") },
             ].map((p, i) => (
               <Reveal key={p.label} delay={0.6 + i * 0.1}>
                 <div className="bg-card border border-border/50 rounded-full px-4 py-2 text-sm flex items-center gap-2 text-muted-foreground">
@@ -227,18 +227,17 @@ export default function NuestroModelo() {
           <div className="text-center max-w-3xl mx-auto">
             <Reveal>
               <span className="ds-eyebrow-pill">
-                Participación OWNEO
+                {t("model.tag4")}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="mt-4 ds-h2">
-                Todo lo que incluye tu participación
+                {t("model.includes_title")}
               </h2>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mt-4 text-muted-foreground">
-                Una participación OWNEO es un contrato de derecho de uso sobre un vehículo específico.
-                Tú eliges el coche, adquieres tu participación, y OWNEO se encarga de absolutamente todo lo demás.
+                {t("model.includes_subtitle")}
               </p>
             </Reveal>
           </div>
