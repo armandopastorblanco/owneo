@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
+
 
 const routeMap: Record<string, string> = {
   '/': '/en',
@@ -17,11 +18,18 @@ const routeMapReverse: Record<string, string> = Object.fromEntries(
 );
 
 export const useLanguageRouter = () => {
-  const { i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const [lang, setLang] = useState(i18n.language);
+
+  useEffect(() => {
+    const handler = (lng: string) => setLang(lng);
+    i18n.on('languageChanged', handler);
+    return () => i18n.off('languageChanged', handler);
+  }, []);
 
   const prevLang = useRef<string | null>(null);
+
 
   useEffect(() => {
     const isEnPath = location.pathname.startsWith('/en');
@@ -40,7 +48,7 @@ export const useLanguageRouter = () => {
       navigate(esPath || '/', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
+  }, [lang]);
 
   useEffect(() => {
     if (location.pathname.startsWith('/en') && i18n.language !== 'en') {
