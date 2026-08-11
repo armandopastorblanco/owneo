@@ -476,10 +476,10 @@ export default function NuestroModelo() {
 
                 <div className="bg-muted/30 p-2.5 sm:p-4 font-bold border-t border-border">{t("model.comparison_total")}</div>
                 <div className="bg-red-500/10 p-2.5 sm:p-4 font-bold border-t border-border whitespace-nowrap">
-                  <CountUp end={17800} prefix="€" /><span className="text-muted-foreground font-normal">/año</span>
+                  <CountUp end={17800} prefix="€" /><span className="text-muted-foreground font-normal">/{t("car.per_year_short")}</span>
                 </div>
                 <div className="bg-champagne/10 p-2.5 sm:p-4 font-bold border-t border-border ring-1 ring-champagne/30 text-champagne whitespace-nowrap">
-                  <CountUp end={1780} prefix="€" /><span className="text-champagne/70 font-normal">/año</span>
+                  <CountUp end={1780} prefix="€" /><span className="text-champagne/70 font-normal">/{t("car.per_year_short")}</span>
                 </div>
               </div>
             </div>
@@ -547,7 +547,7 @@ export default function NuestroModelo() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-champagne" />
-                    <h3 className="ds-card-title">Tu participación</h3>
+                    <h3 className="ds-card-title">{t("model.participation_card_title")}</h3>
                   </div>
                   <span className="text-xs bg-champagne/15 text-champagne rounded-full px-3 py-1 border border-champagne/20">
                     {t("model.practical_participation_badge")}

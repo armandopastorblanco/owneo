@@ -93,6 +93,7 @@
     "filter_available": "Disponibles"
   },
   "model": {
+    "participation_card_title": "Tu participación",
     "title": "El acceso más inteligente al",
     "title_accent": "automovilismo de lujo",
     "subtitle": "OWNEO reinventa la relación con los coches de alta gama. No compras un coche. No lo alquilas. Adquieres el derecho a disfrutarlo como si fuera tuyo — con todo el servicio, sin ninguna de las cargas.",
@@ -335,6 +336,7 @@
     "reject": "Rechazar todo"
   },
   "car": {
+    "per_year_short": "año",
     "request": "Solicitar participación",
     "specs": "Especificaciones técnicas",
     "power": "Potencia",

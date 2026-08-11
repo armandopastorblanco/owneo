@@ -369,7 +369,7 @@ const CarDetail = () => {
             </div>
             <div className="text-center">
               <div className="text-xs text-muted-foreground">{t("car.sticky_annual")}</div>
-              <div className="font-bold text-foreground">{annualFee.toLocaleString("es-ES")}€/año</div>
+              <div className="font-bold text-foreground">{annualFee.toLocaleString("es-ES")}€/{t("car.per_year_short")}</div>
             </div>
             <div className="text-center">
               <div className="text-xs text-muted-foreground">{t("car.sticky_duration")}</div>
@@ -513,7 +513,7 @@ const CarDetail = () => {
                       <Shield className="w-4 h-4 text-champagne" />
                       <span className="text-xs text-muted-foreground uppercase tracking-wider">{t("car.annual_mgmt_included")}</span>
                     </div>
-                    <p className="text-2xl font-bold text-foreground mb-3">{annualFee.toLocaleString("es-ES")}€<span className="text-sm text-muted-foreground font-normal">/año</span></p>
+                    <p className="text-2xl font-bold text-foreground mb-3">{annualFee.toLocaleString("es-ES")}€<span className="text-sm text-muted-foreground font-normal">/{t("car.per_year_short")}</span></p>
                     <div className="grid grid-cols-2 gap-2">
                       {[
                         { icon: Shield, label: t("car.insurance") },

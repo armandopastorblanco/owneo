@@ -93,6 +93,7 @@
     "filter_available": "Available"
   },
   "model": {
+    "participation_card_title": "Your participation",
     "title": "The smartest way into",
     "title_accent": "luxury motoring",
     "subtitle": "OWNEO reinvents your relationship with high-end cars. You don't buy a car. You don't rent one. You acquire the right to enjoy it as if it were yours — with the full service, without any of the burdens.",
@@ -335,6 +336,7 @@
     "reject": "Reject all"
   },
   "car": {
+    "per_year_short": "yr",
     "request": "Request a share",
     "specs": "Technical specifications",
     "power": "Power",
