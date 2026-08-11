@@ -835,7 +835,7 @@ const CarDetail = () => {
                       <Card className="bg-card border-border rounded-2xl">
                         <CardContent className="p-5 sm:p-6">
                           {items.length === 0 ? (
-                            <p className="text-muted-foreground text-sm text-center py-6">Sin datos disponibles para esta categoría.</p>
+                            <p className="text-muted-foreground text-sm text-center py-6">{t("car.no_specs_available")}</p>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
                               {items.map((k) => (
@@ -907,7 +907,7 @@ const CarDetail = () => {
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_guaranteed_time")}</td>
                     <td className="py-4 px-4 text-center text-foreground">{t("car.comp_no_limit")}</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">{weeksPerParticipation} semanas/año (3+1)</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{t("car.cond_weeks", { n: weeksPerParticipation })}</td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_km_year")}</td>
@@ -939,7 +939,7 @@ const CarDetail = () => {
                   <tr>
                     <td className="py-4 px-4 text-foreground font-bold">{t("car.comp_duration")}</td>
                     <td className="py-4 px-4 text-center text-foreground font-bold">{t("car.comp_indefinite")}</td>
-                    <td className="py-4 px-4 text-center text-champagne font-bold">{durationYears} años</td>
+                    <td className="py-4 px-4 text-center text-champagne font-bold">{t("car.sticky_years", { n: durationYears })}</td>
                   </tr>
                 </tbody>
               </table>
