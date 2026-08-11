@@ -24,6 +24,7 @@ const originalNews = [
     category: "Novedades · Porsche · Eléctricos",
     title: "Porsche Cayenne Turbo Electric: 1.139 CV y el fin de los límites",
     excerpt: "Stuttgart presenta el SUV eléctrico más potente de su historia. El nuevo Cayenne Turbo Electric no es una evolución. Es una declaración de intenciones.",
+    excerpt_en: "Stuttgart unveils the most powerful electric SUV in its history. The new Cayenne Turbo Electric is not an evolution. It is a statement of intent.",
     link: "/noticias/porsche-cayenne-turbo-electric-2026"
   },
   {
@@ -33,6 +34,7 @@ const originalNews = [
     category: "Lanzamientos",
     title: "Lamborghini Temerario Spyder: primeras imágenes espía del descapotable V8 híbrido",
     excerpt: "Las primeras fotografías espía del Lamborghini Temerario Spyder, captadas en el Nürburgring, confirman lo que muchos esperaban: Sant'Agata Bolognese trabaja a toda velocidad en la versión descapotable del sucesor del Huracán. Presentación prevista en Goodwood, 9-12 julio 2026.",
+    excerpt_en: "The first spy photographs of the Lamborghini Temerario Spyder, captured at the Nürburgring, confirm what many expected: Sant'Agata Bolognese is working flat out on the convertible version of the Huracán successor. Unveiling expected at Goodwood, 9-12 July 2026.",
     link: "/noticias/lamborghini-temerario-spyder"
   },
   {
@@ -42,6 +44,7 @@ date: "25 Mayo 2026",
 category: "Eléctricos",
 title: "Ferrari Luce: así es el primer coche 100% eléctrico de Maranello",
 excerpt: "Ferrari presentó oficialmente el Luce el 25 de mayo de 2026 en Roma. 1.035 CV, autonomía 530 km WLTP y arquitectura 800 V. El inicio de una nueva era para Maranello.",
+    excerpt_en: "Ferrari officially unveiled the Luce on 25 May 2026 in Rome. 1,035 hp, 530 km WLTP range and an 800 V architecture. The start of a new era for Maranello.",
 link: "/noticias/ferrari-luce-ev"
   },
   {
@@ -51,6 +54,7 @@ link: "/noticias/ferrari-luce-ev"
     category: "Lanzamientos",
     title: "Lamborghini presenta el sucesor del Huracán con motor V8 híbrido",
     excerpt: "Sant'Agata Bolognese desvela su nueva bestia: un V8 biturbo combinado con tres motores eléctricos que supera los 900 CV. La era híbrida de Lamborghini acaba de comenzar.",
+    excerpt_en: "Sant'Agata Bolognese unveils its new beast: a twin-turbo V8 combined with three electric motors producing over 900 hp. Lamborghini's hybrid era has just begun.",
     link: "/noticias/lamborghini-huracan-hibrido"
   },
   {
@@ -60,6 +64,7 @@ link: "/noticias/ferrari-luce-ev"
     category: "Hypercars",
     title: "McLaren W1: el hypercar británico que desafía a todos los límites",
     excerpt: "Con un motor V8 híbrido de 1.275 CV y un peso de solo 1.399 kg, el McLaren W1 establece nuevos estándares en el segmento de los hypercars con tecnología directa de F1.",
+    excerpt_en: "With a 1,275 hp hybrid V8 and a weight of just 1,399 kg, the McLaren W1 sets new standards in the hypercar segment with technology taken straight from F1.",
     link: "/noticias/mclaren-w1"
   },
   {
@@ -69,6 +74,7 @@ link: "/noticias/ferrari-luce-ev"
     category: "Tecnología",
     title: "Mercedes-AMG ONE: actualización que lleva la tecnología F1 al siguiente nivel",
     excerpt: "Mercedes actualiza su hypercar con nuevo software que mejora la respuesta del motor de F1 y añade 15 CV extra. Los propietarios existentes recibirán la actualización gratuitamente.",
+    excerpt_en: "Mercedes updates its hypercar with new software that sharpens the F1 engine's response and adds 15 hp. Existing owners will receive the update free of charge.",
     link: "/noticias/mercedes-amg-one-actualizacion"
   }
 ];
@@ -201,7 +207,7 @@ const Noticias = () => {
                       {item.title}
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {(isEn && "excerpt_en" in item && item.excerpt_en) || item.excerpt}
+                      {(isEn ? item.excerpt_en ?? item.excerpt : item.excerpt)}
                     </p>
                     <span className="inline-flex items-center gap-1.5 text-xs text-champagne font-medium tracking-wider uppercase group-hover:gap-3 transition-all duration-300">
                       {t("news.read_more")} <ArrowRight className="w-3.5 h-3.5" />
