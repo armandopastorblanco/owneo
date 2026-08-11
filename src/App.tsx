@@ -90,7 +90,12 @@ const GaPageTracker = () => {
   return null;
 };
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, []);
+
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
