@@ -75,94 +75,91 @@ function Reveal({
 
 /* ---------------- page ---------------- */
 
-const profiles = [
+type TFn = (key: string) => string;
+
+const buildProfiles = (t: TFn) => [
   {
     number: "01",
-    profile: "El apasionado del motor",
-    hook: "Sueña con un Ferrari desde los 16 años. OWNEO lo hace posible.",
-    text:
-      "No hace falta esperar a tener 300.000€ en el banco. Con una participación OWNEO, ese sueño tiene fecha, tiene matrícula y tiene 4 semanas al año garantizadas.",
+    profile: t("about.profile1_title"),
+    hook: t("about.profile1_hook"),
+    text: t("about.profile1_text"),
     delay: 0,
     bg: qsProfile1,
   },
   {
     number: "02",
-    profile: "El inversor inteligente",
-    hook: "No compra caprichos. Compra experiencias con valor real.",
-    text:
-      "Una participación OWNEO no es un gasto — es una decisión financiera con retorno estimado, kilometraje controlado y reventa gestionada. El lujo que también tiene sentido en un Excel.",
+    profile: t("about.profile2_title"),
+    hook: t("about.profile2_hook"),
+    text: t("about.profile2_text"),
     delay: 0.1,
     bg: qsProfile2,
   },
   {
     number: "03",
-    profile: "El que vive el presente",
-    hook: "Prefiere 4 semanas al volante de un Porsche que 365 días preocupándose por él.",
-    text:
-      "Sin garaje, sin seguro, sin revisiones, sin trámites. Solo reservar desde la app, recoger el coche impecable y disfrutar. El resto es problema de OWNEO.",
+    profile: t("about.profile3_title"),
+    hook: t("about.profile3_hook"),
+    text: t("about.profile3_text"),
     delay: 0.2,
     bg: qsProfile3,
   },
 ];
 
-const values = [
+const buildValues = (t: TFn) => [
   {
-    word: "ACCESO",
+    word: t("about.value1_word"),
     icon: Gem,
-    text:
-      "El lujo no debería ser un privilegio de pocos. Lo que antes requería una fortuna, hoy requiere una decisión inteligente.",
+    text: t("about.value1_text"),
     delay: 0,
     bg: qsValue1,
   },
   {
-    word: "CONFIANZA",
+    word: t("about.value2_word"),
     icon: Shield,
-    text:
-      "Cada contrato, cada entrega, cada euro invertido está respaldado por un compromiso real. Sin letra pequeña.",
+    text: t("about.value2_text"),
     delay: 0.1,
     bg: qsValue2,
   },
   {
-    word: "EXCELENCIA",
+    word: t("about.value3_word"),
     icon: Award,
-    text:
-      "No gestionamos coches. Gestionamos experiencias. Y en cada detalle, el estándar es el más alto posible.",
+    text: t("about.value3_text"),
     delay: 0.2,
     bg: qsValue3,
   },
   {
-    word: "LIBERTAD",
+    word: t("about.value4_word"),
     icon: Heart,
-    text:
-      "Conducir sin poseer. Disfrutar sin gestionar. Vivir la experiencia sin cargar con sus consecuencias.",
+    text: t("about.value4_text"),
     delay: 0.3,
     bg: qsValue4,
   },
 ];
 
-const missionVision = [
+const buildMissionVision = (t: TFn) => [
   {
     icon: Sparkles,
-    label: "Misión",
-    title: "Hacer accesible lo extraordinario.",
-    text:
-      "Queremos que cualquier persona con la determinación y el criterio adecuado pueda sentarse al volante de un Ferrari, un Porsche o un Bentley — sin necesidad de comprarlo, sin gestionar nada, sin sorpresas.",
+    label: t("about.mission_label"),
+    title: t("about.mission_title"),
+    text: t("about.mission_desc"),
     delay: 0,
     bg: qsMisionCard,
   },
   {
     icon: TrendingUp,
-    label: "Visión",
-    title: "El referente europeo del lujo compartido.",
-    text:
-      "Aspiramos a construir la comunidad más exclusiva de apasionados del motor en Europa — donde el acceso a los mejores vehículos del mundo sea una decisión inteligente, no un privilegio heredado.",
+    label: t("about.vision_label"),
+    title: t("about.vision_title"),
+    text: t("about.vision_desc"),
     delay: 0.15,
     bg: qsVisionCard,
   },
 ];
 
+
 const QuienesSomos = () => {
   const { t } = useTranslation();
+  const profiles = buildProfiles(t);
+  const values = buildValues(t);
+  const missionVision = buildMissionVision(t);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
@@ -221,7 +218,7 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6 relative z-10 pt-28 sm:pt-32 pb-20">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
-              <span className="ds-eyebrow-pill">El lujo que se comparte</span>
+              <span className="ds-eyebrow-pill">{t("about.eyebrow")}</span>
             </Reveal>
 
             <Reveal delay={0.15}>
@@ -240,9 +237,9 @@ const QuienesSomos = () => {
 
             <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               {[
-                { label: "Sin propiedad" },
-                { label: "Sin gestión" },
-                { label: "Sin compromiso" },
+                { label: t("about.tag1") },
+                { label: t("about.tag2") },
+                { label: t("about.tag3") },
               ].map((p, i) => (
                 <Reveal key={p.label} delay={0.5 + i * 0.1}>
                   <span className="ds-tag">{p.label}</span>
@@ -259,7 +256,7 @@ const QuienesSomos = () => {
             transition={{ delay: 1, duration: 2, repeat: Infinity }}
             className="flex flex-col items-center gap-2 text-champagne/70"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Descubrir</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] font-medium">{t("about.discover")}</span>
             <ChevronDown className="w-4 h-4" />
           </motion.div>
         </div>
@@ -281,30 +278,24 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
-              <span className="ds-eyebrow-pill">Nuestra historia</span>
+              <span className="ds-eyebrow-pill">{t("about.our_story")}</span>
             </Reveal>
 
             <Reveal delay={0.1}>
               <h2 className="ds-h2 mt-8 text-foreground">
-                El lujo no debería ser{" "}
-                <span className="text-champagne">cuestión de fortuna.</span>
+                <span className="text-champagne">{t("about.manifesto_title")}</span>
               </h2>
             </Reveal>
 
             <Reveal delay={0.25}>
               <p className="ds-lead mt-8 max-w-2xl mx-auto">
-                Creemos que los coches más extraordinarios del mundo no deberían estar
-                reservados a unos pocos. No por falta de pasión, sino por una ecuación
-                económica que durante décadas ha hecho del lujo automovilístico algo
-                inalcanzable.
+                {t("about.manifesto_p1")}
               </p>
             </Reveal>
 
             <Reveal delay={0.35}>
               <p className="ds-body mt-6 text-muted-foreground max-w-2xl mx-auto">
-                OWNEO nació para romper esa ecuación. No democratizando el lujo hacia
-                abajo — sino elevando el acceso hacia arriba. El mismo coche, la misma
-                experiencia, la misma emoción. Sin el peso de la propiedad.
+                {t("about.manifesto_p2")}
               </p>
             </Reveal>
 
@@ -320,9 +311,9 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <span className="ds-eyebrow-pill">Nuestro propósito</span>
+              <span className="ds-eyebrow-pill">{t("about.purpose")}</span>
               <h2 className="ds-h2 mt-6 text-foreground">
-                Misión y <span className="text-champagne">visión</span>
+                <span className="text-champagne">{t("about.mission_vision")}</span>
               </h2>
             </div>
           </Reveal>
@@ -365,7 +356,7 @@ const QuienesSomos = () => {
             <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
               <span className="ds-eyebrow-pill">Nuestros participantes</span>
               <h2 className="ds-h2 mt-6 text-foreground">
-                ¿Para quién es <span className="text-champagne">OWNEO</span>?
+                <span className="text-champagne">{t("about.for_whom")}</span>
               </h2>
             </div>
           </Reveal>
@@ -415,7 +406,7 @@ const QuienesSomos = () => {
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
               <span className="ds-eyebrow-pill">Lo que nos define</span>
               <h2 className="ds-h2 mt-6 text-foreground">
-                Nuestros <span className="text-champagne">valores</span>
+                <span className="text-champagne">{t("about.values_title")}</span>
               </h2>
             </div>
           </Reveal>
@@ -492,16 +483,13 @@ const QuienesSomos = () => {
 
             <Reveal delay={0.1}>
               <h2 className="ds-h2 mt-6 text-foreground">
-                ¿Listo para tomar
-                <br />
-                <span className="text-champagne">la decisión inteligente?</span>
+                <span className="text-champagne">{t("about.cta_title")}</span>
               </h2>
             </Reveal>
 
             <Reveal delay={0.25}>
               <p className="ds-lead mt-6 sm:mt-8 text-muted-foreground max-w-xl mx-auto">
-                Descubre cómo funciona exactamente el modelo OWNEO, o explora directamente
-                los vehículos disponibles y encuentra tu participación.
+                {t("about.cta_subtitle")}
               </p>
             </Reveal>
 
@@ -513,7 +501,7 @@ const QuienesSomos = () => {
                   className="text-base px-8 h-12 bg-champagne text-champagne-foreground hover:bg-champagne/90"
                 >
                   <Link to="/coches">
-                    Ver la flota
+                    {t("about.cta_fleet")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </Button>
@@ -523,14 +511,14 @@ const QuienesSomos = () => {
                   size="lg"
                   className="text-base px-8 h-12 border-champagne/40 hover:bg-champagne/10"
                 >
-                  <Link to="/nuestro-modelo">Descubrir el modelo</Link>
+                  <Link to="/nuestro-modelo">{t("about.cta_model")}</Link>
                 </Button>
               </div>
             </Reveal>
 
             <Reveal delay={0.55}>
               <p className="mt-8 text-xs sm:text-sm uppercase tracking-[0.25em] font-medium text-muted-foreground">
-                Sin compromiso · Proceso 100% digital · Respuesta en 24h
+                {t("about.cta_tagline")}
               </p>
             </Reveal>
           </div>
