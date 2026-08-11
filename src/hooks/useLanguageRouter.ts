@@ -18,11 +18,18 @@ const routeMapReverse: Record<string, string> = Object.fromEntries(
 );
 
 export const useLanguageRouter = () => {
-  const { i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const [lang, setLang] = useState(i18n.language);
+
+  useEffect(() => {
+    const handler = (lng: string) => setLang(lng);
+    i18n.on('languageChanged', handler);
+    return () => i18n.off('languageChanged', handler);
+  }, []);
 
   const prevLang = useRef<string | null>(null);
+
 
   useEffect(() => {
     const isEnPath = location.pathname.startsWith('/en');
