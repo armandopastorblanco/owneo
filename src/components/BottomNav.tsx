@@ -8,6 +8,7 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 type NavItem = {
   key: string;
@@ -19,31 +20,32 @@ type NavItem = {
   onClick?: (e: React.MouseEvent) => void;
 };
 
-const defaultItems = (user: any): NavItem[] => [
-  { key: "home", label: "Inicio", icon: Home, path: "/", isActive: (p) => p === "/" },
-  { key: "gama", label: "Gama", icon: Car, path: "/coches", isActive: (p) => p === "/coches" },
-  { key: "ciudades", label: "Ciudades", icon: MapPin, path: "/ubicaciones", isActive: (p) => p.startsWith("/ubicaciones") || p.startsWith("/cities") },
-  { key: "noticias", label: "Noticias", icon: Newspaper, path: "/noticias", isActive: (p) => p.startsWith("/noticias") },
+const defaultItems = (user: any, t: (k: string) => string): NavItem[] => [
+  { key: "home", label: t("nav.home"), icon: Home, path: "/", isActive: (p) => p === "/" },
+  { key: "gama", label: t("nav.fleet"), icon: Car, path: "/coches", isActive: (p) => p === "/coches" },
+  { key: "ciudades", label: t("nav.locations"), icon: MapPin, path: "/ubicaciones", isActive: (p) => p.startsWith("/ubicaciones") || p.startsWith("/cities") },
+  { key: "noticias", label: t("nav.news"), icon: Newspaper, path: "/noticias", isActive: (p) => p.startsWith("/noticias") },
   {
     key: "cuenta",
-    label: user ? "Cuenta" : "Acceder",
+    label: user ? t("nav.account") : t("nav.login"),
     icon: User,
     path: user ? "/dashboard" : "/login",
     isActive: (p) => p === (user ? "/dashboard" : "/login"),
   },
 ];
 
-const adminItems: NavItem[] = [
-  { key: "consultas", label: "Consultas", icon: MessageSquare, path: "/admin/consultas", isActive: (p) => p.startsWith("/admin/consultas") },
-  { key: "reservas", label: "Reservas", icon: Calendar, path: "/admin/reservas", isActive: (p) => p.startsWith("/admin/reservas") },
-  { key: "pagos", label: "Pagos", icon: CreditCard, path: "/admin/pagos", isActive: (p) => p.startsWith("/admin/pagos") },
-  { key: "admin", label: "Admin", icon: Settings, path: "/admin", isActive: (p) => p === "/admin" },
+const adminItems = (t: (k: string) => string): NavItem[] => [
+  { key: "consultas", label: t("bottomnav.enquiries"), icon: MessageSquare, path: "/admin/consultas", isActive: (p) => p.startsWith("/admin/consultas") },
+  { key: "reservas", label: t("bottomnav.reservations"), icon: Calendar, path: "/admin/reservas", isActive: (p) => p.startsWith("/admin/reservas") },
+  { key: "pagos", label: t("bottomnav.payments"), icon: CreditCard, path: "/admin/pagos", isActive: (p) => p.startsWith("/admin/pagos") },
+  { key: "admin", label: t("bottomnav.admin"), icon: Settings, path: "/admin", isActive: (p) => p === "/admin" },
 ];
 
 const BottomNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, role } = useAuth();
+  const { t } = useTranslation();
 
   const isAdmin = role === "admin" || role === "superadmin";
 
@@ -79,31 +81,31 @@ const BottomNav = () => {
 
   const participantItems: NavItem[] = [
     {
-      key: "panel", label: "Panel", icon: LayoutDashboard, path: "/dashboard",
+      key: "panel", label: t("bottomnav.panel"), icon: LayoutDashboard, path: "/dashboard",
       isActive: (p, h) => p === "/dashboard" && !h,
       onClick: goToDashboardHash(""),
     },
     {
-      key: "reservar", label: "Reservar", icon: Calendar, path: "/dashboard#reservar",
+      key: "reservar", label: t("bottomnav.book"), icon: Calendar, path: "/dashboard#reservar",
       isActive: (p, h) => p === "/dashboard" && h === "#reservar",
       onClick: goToDashboardHash("reservar"),
     },
     {
-      key: "documentos", label: "Documentos", icon: FileText, path: "/dashboard#documentos",
+      key: "documentos", label: t("bottomnav.documents"), icon: FileText, path: "/dashboard#documentos",
       isActive: (p, h) => p === "/dashboard" && h === "#documentos",
       onClick: goToDashboardHash("documentos"),
     },
     {
-      key: "mi-cuenta", label: "Mi Cuenta", icon: User, path: "/dashboard#mi-cuenta",
+      key: "mi-cuenta", label: t("bottomnav.my_account"), icon: User, path: "/dashboard#mi-cuenta",
       isActive: (p, h) => p === "/dashboard" && h === "#mi-cuenta",
       onClick: goToDashboardHash("mi-cuenta"),
     },
   ];
 
   let items: NavItem[];
-  if (isAdmin) items = adminItems;
+  if (isAdmin) items = adminItems(t);
   else if (hasActiveParticipation) items = participantItems;
-  else items = defaultItems(user);
+  else items = defaultItems(user, t);
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-md border-t border-border/40 safe-area-bottom">

@@ -1,5 +1,17 @@
 {
+  "bottomnav": {
+    "panel": "Dashboard",
+    "book": "Book",
+    "documents": "Documents",
+    "my_account": "My Account",
+    "enquiries": "Enquiries",
+    "reservations": "Bookings",
+    "payments": "Payments",
+    "admin": "Admin"
+  },
   "nav": {
+    "home": "HOME",
+    "admin_panel": "ADMIN PANEL",
     "concept": "OUR CONCEPT",
     "fleet": "OUR FLEET",
     "locations": "LOCATIONS",
