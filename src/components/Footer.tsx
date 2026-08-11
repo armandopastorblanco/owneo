@@ -40,12 +40,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold text-foreground mb-4">OWNEO</h3>
             <p className="text-sm text-muted-foreground">
-              Tu destino exclusivo para supercoches de lujo en España
+              {t("footer.tagline")}
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">CONTACTO</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t("footer.section_contact")}</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
@@ -63,18 +63,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">ENLACES</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t("footer.section_links")}</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <div><a href="/coches" className="hover:text-foreground transition-colors">Nuestra Gama</a></div>
-              <div><a href="/ubicaciones" className="hover:text-foreground transition-colors">Ubicaciones</a></div>
-              <div><a href="/quienes-somos" className="hover:text-foreground transition-colors">Quiénes Somos</a></div>
-              <div><a href="/contacto" className="hover:text-foreground transition-colors">Contacto</a></div>
+              <div><a href="/coches" className="hover:text-foreground transition-colors">{t("footer.link_fleet")}</a></div>
+              <div><a href="/ubicaciones" className="hover:text-foreground transition-colors">{t("footer.link_locations")}</a></div>
+              <div><a href="/quienes-somos" className="hover:text-foreground transition-colors">{t("footer.link_about")}</a></div>
+              <div><a href="/contacto" className="hover:text-foreground transition-colors">{t("footer.link_contact")}</a></div>
             </div>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">APP</h4>
-            <p className="text-xs text-muted-foreground mb-3">Instala nuestra app</p>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t("footer.section_app")}</h4>
+            <p className="text-xs text-muted-foreground mb-3">{t("footer.app_subtitle")}</p>
             <div className="flex gap-4">
               <button
                 onClick={handleAndroidInstall}
@@ -100,7 +100,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">REDES SOCIALES</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t("footer.section_social")}</h4>
             <div className="flex gap-4">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Instagram className="w-5 h-5" />
@@ -155,7 +155,7 @@ const Footer = () => {
               aria-label="Abrir gestor de preferencias de cookies"
               className="hover:text-foreground transition-colors underline-offset-2 hover:underline"
             >
-              Gestionar preferencias de cookies
+              {t("footer.cookie_manage")}
             </button>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <Link
@@ -163,7 +163,7 @@ const Footer = () => {
               aria-label="Créditos fotográficos"
               className="hover:text-foreground transition-colors"
             >
-              Créditos fotográficos
+              {t("footer.photo_credits")}
             </Link>
           </nav>
           <p className="text-center text-xs text-muted-foreground">
