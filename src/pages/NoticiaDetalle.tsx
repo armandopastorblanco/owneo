@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,6 +27,8 @@ const toISODate = (date: string): string => {
 
 const NoticiaDetalle = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { i18n } = useTranslation();
+  const isEn = i18n.language === "en";
   const article = additionalNews.find((a) => a.slug === slug);
   const { trackEvent } = useAnalytics();
 
@@ -128,10 +131,10 @@ const sourceLabels: Record<string, string> = {
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
         <title>{`${article.title} | Owneo`}</title>
-        <meta name="description" content={article.excerpt.slice(0, 155)} />
+        <meta name="description" content={((isEn && article.excerpt_en) || article.excerpt).slice(0, 155)} />
         <link rel="canonical" href={`https://www.owneo.es/noticias/${article.slug}`} />
         <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.excerpt.slice(0, 155)} />
+        <meta property="og:description" content={((isEn && article.excerpt_en) || article.excerpt).slice(0, 155)} />
         <meta property="og:url" content={`https://www.owneo.es/noticias/${article.slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Owneo" />
@@ -157,7 +160,7 @@ const sourceLabels: Record<string, string> = {
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
             <Link to="/noticias" className="inline-flex items-center gap-2 text-champagne text-sm mb-4 hover:gap-3 transition-all">
-              <ArrowLeft className="w-4 h-4" /> Volver a Noticias
+              <ArrowLeft className="w-4 h-4" /> {isEn ? "Back to News" : "Volver a Noticias"}
             </Link>
             <span className="block bg-champagne/90 text-background text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">
               {article.category}
@@ -169,7 +172,7 @@ const sourceLabels: Record<string, string> = {
               <Calendar className="w-4 h-4" />
               <span>{article.date}</span>
               <span className="mx-2">·</span>
-              <span>{article.readTime} de lectura</span>
+              <span>{isEn ? `${article.readTime} read` : `${article.readTime} de lectura`}</span>
             </div>
           </div>
         </div>
@@ -180,7 +183,7 @@ const sourceLabels: Record<string, string> = {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <p
               className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12"
-              dangerouslySetInnerHTML={{ __html: article.content.intro }}
+              dangerouslySetInnerHTML={{ __html: (isEn && article.content.intro_en) || article.content.intro }}
             />
           </motion.div>
 
@@ -214,8 +217,8 @@ const sourceLabels: Record<string, string> = {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">{section.title}</h2>
-              {section.paragraphs.map((p, pi) => (
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">{(isEn && section.title_en) || section.title}</h2>
+              {((isEn && section.paragraphs_en) || section.paragraphs).map((p, pi) => (
                 <p
                   key={pi}
                   className="text-base leading-relaxed mb-6"
@@ -240,7 +243,7 @@ const sourceLabels: Record<string, string> = {
 
           {sourceUrls[article.slug] && (
             <p className="text-sm text-muted-foreground border-t border-border/30 pt-4 mt-8">
-              Fuente oficial:{" "}
+              {isEn ? "Official source: " : "Fuente oficial: "}
               <a
                 href={sourceUrls[article.slug]}
                 rel="nofollow noopener"

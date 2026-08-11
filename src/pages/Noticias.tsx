@@ -80,8 +80,29 @@ const additionalNewsItems = additionalNews.map((a) => ({
   category: a.category,
   title: a.title,
   excerpt: a.excerpt,
+  excerpt_en: a.excerpt_en,
   link: `/noticias/${a.slug}`
 }));
+
+const CATEGORIES_EN: Record<string, string> = {
+  "Lanzamientos": "Launches",
+  "Eléctricos": "Electric",
+  "Hypercars": "Hypercars",
+  "Lujo": "Luxury",
+  "Competición": "Racing",
+  "SUV Deportivo": "Sport SUV",
+  "Gran Turismo": "Grand Tourer",
+  "Ediciones Limitadas": "Limited Editions",
+  "Tecnología": "Technology",
+  "Novedades · Porsche · Eléctricos": "News · Porsche · Electric",
+};
+
+const translateCategory = (category: string) =>
+  CATEGORIES_EN[category] ??
+  category
+    .split(" · ")
+    .map((part) => CATEGORIES_EN[part] ?? part)
+    .join(" · ");
 
 const allNews = [...originalNews, ...additionalNewsItems];
 
@@ -103,7 +124,8 @@ const newsItems = [...allNews].sort(
 );
 
 const Noticias = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language === "en";
 
   const { trackEvent } = useAnalytics();
 
@@ -166,7 +188,7 @@ const Noticias = () => {
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-champagne/90 text-background text-xs font-semibold px-3 py-1 rounded-full">
-                        {item.category}
+                        {isEn ? translateCategory(item.category) : item.category}
                       </span>
                     </div>
                   </div>
@@ -179,7 +201,7 @@ const Noticias = () => {
                       {item.title}
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {item.excerpt}
+                      {(isEn && "excerpt_en" in item && item.excerpt_en) || item.excerpt}
                     </p>
                     <span className="inline-flex items-center gap-1.5 text-xs text-champagne font-medium tracking-wider uppercase group-hover:gap-3 transition-all duration-300">
                       {t("news.read_more")} <ArrowRight className="w-3.5 h-3.5" />
