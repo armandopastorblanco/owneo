@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
@@ -9,6 +10,8 @@ import { MapPin, ArrowRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Cities = () => {
+  const { t } = useTranslation();
+
   const { data: cities = [], isLoading: citiesLoading } = useLocations();
   const { data: cars = [] } = useCars();
 
@@ -39,10 +42,10 @@ const Cities = () => {
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12 max-w-3xl mx-auto">
             <h1 className="ds-h1 mb-6">
-              Ubicaciones <span className="text-champagne">Premium</span>
+              {t("locations.title")} <span className="text-champagne">{t("locations.title_accent")}</span>
             </h1>
             <p className="ds-lead">
-              Descubre nuestros showrooms exclusivos en las ciudades más prestigiosas de España
+              {t("locations.subtitle")}
             </p>
           </div>
 

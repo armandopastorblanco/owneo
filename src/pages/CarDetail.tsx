@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
@@ -117,6 +118,7 @@ const consultaSchema = z.object({
 type ConsultaForm = z.infer<typeof consultaSchema>;
 
 const CarDetail = () => {
+  const { t } = useTranslation();
   const params = useParams<{ slug?: string; id?: string }>();
   const slug = params.slug;
   const id = params.id;
@@ -371,7 +373,7 @@ const CarDetail = () => {
             size="sm"
             className="bg-champagne text-champagne-foreground hover:bg-champagne/90 h-10 shrink-0"
           >
-            <span className="hidden sm:inline">Solicitar participación</span>
+            <span className="hidden sm:inline">{t("car.request")}</span>
             <span className="sm:hidden">Solicitar</span>
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
@@ -603,7 +605,7 @@ const CarDetail = () => {
                     size="lg"
                     className="w-full bg-champagne text-champagne-foreground hover:bg-champagne/90"
                   >
-                    Solicitar participación
+                    {t("car.request")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">
@@ -798,7 +800,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE G: SPECS ─── */}
           <Reveal className="mb-24" >
             <div ref={specsRef}>
-              <h2 className="ds-h2 mb-6 text-foreground text-center">Especificaciones técnicas</h2>
+              <h2 className="ds-h2 mb-6 text-foreground text-center">{t("car.specs")}</h2>
               <Tabs value={specTab} onValueChange={setSpecTab}>
                 <div className="-mx-4 sm:mx-0 mb-4">
                   <TabsList className="flex w-max sm:w-auto mx-4 sm:mx-0 gap-1 overflow-x-auto no-scrollbar">
@@ -824,7 +826,7 @@ const CarDetail = () => {
                                   className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4 py-3 sm:py-3.5 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
                                 >
                                   <span className="text-muted-foreground text-[11px] sm:text-sm uppercase tracking-wide leading-snug sm:flex-1 sm:min-w-0">
-                                    {specLabels[k] || k}
+                                    {({ power: t("car.power"), seats: t("car.seats"), transmission: t("car.transmission"), year: t("car.year") } as Record<string, string>)[k] || specLabels[k] || k}
                                   </span>
                                   <span className={`font-semibold text-sm sm:text-base text-left sm:text-right break-words leading-snug ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
                                     {car.specifications[k]}

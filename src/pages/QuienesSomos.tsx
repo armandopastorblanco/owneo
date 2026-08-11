@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -161,6 +162,7 @@ const missionVision = [
 ];
 
 const QuienesSomos = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
@@ -224,16 +226,15 @@ const QuienesSomos = () => {
 
             <Reveal delay={0.15}>
               <h1 className="ds-h1 mt-6 sm:mt-8 text-foreground">
-                No es un coche.
+                {t("about.title")}
                 <br />
-                <span className="text-champagne">Es una decisión.</span>
+                <span className="text-champagne">{t("about.title_accent")}</span>
               </h1>
             </Reveal>
 
             <Reveal delay={0.3}>
               <p className="ds-lead mt-6 sm:mt-8 max-w-2xl mx-auto">
-                OWNEO nació para romper la ecuación que durante décadas ha hecho del lujo
-                automovilístico algo reservado a muy pocos.
+                {t("about.subtitle")}
               </p>
             </Reveal>
 

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
@@ -8,6 +9,8 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Portfolio = () => {
+  const { t } = useTranslation();
+
   const { data: models = [], isLoading } = useCarModels();
   const { trackEvent } = useAnalytics();
 
@@ -44,10 +47,10 @@ const Portfolio = () => {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h1 className="ds-h1 mb-6">
-              Nuestra <span className="text-champagne">Gama</span>
+              {t("fleet.title")} <span className="text-champagne">{t("fleet.title_accent")}</span>
             </h1>
             <p className="ds-lead">
-              Explora nuestra colección exclusiva de los supercoches más prestigiosos del mundo
+              {t("fleet.subtitle")}
             </p>
           </div>
 

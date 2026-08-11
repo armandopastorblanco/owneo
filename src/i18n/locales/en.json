@@ -9,13 +9,14 @@
     "login": "LOGIN"
   },
   "home": {
-    "hero_title": "Access Spain's most exclusive supercars",
-    "hero_subtitle": "Share your Ferrari, Lamborghini or Porsche, share the costs and live the experience 100%.",
-    "hero_cta": "Explore the fleet",
-    "hero_cta2": "Our model",
+    "hero_title": "Live the",
+    "hero_title_accent": "Extraordinary",
+    "hero_subtitle": "Supercar luxury, now within reach",
+    "hero_cta": "DISCOVER",
+    "hero_cta2": "VIEW ALL VEHICLES",
     "model_title": "Luxury worth sharing",
     "stat1_label": "Of the vehicle's value",
-    "stat2_label": "Guaranteed weeks per year",
+    "stat2_label": "Guaranteed every year",
     "stat3_label": "Shared running costs",
     "collection_title": "Featured Collection",
     "collection_subtitle": "Masterpieces selected from the world's most prestigious manufacturers",
@@ -23,27 +24,32 @@
     "locations_subtitle": "Discover our fleet in Spain's most exclusive cities"
   },
   "fleet": {
-    "title": "Our Fleet",
-    "subtitle": "Shared luxury supercars in Spain",
+    "title": "Our",
+    "title_accent": "Fleet",
+    "subtitle": "Explore our exclusive collection of the world's most prestigious supercars",
     "cta": "Request a spot",
     "filter_all": "All",
     "filter_available": "Available"
   },
   "model": {
-    "title": "Our Model",
-    "subtitle": "How luxury car sharing works"
+    "title": "The smartest way into",
+    "title_accent": "luxury motoring",
+    "subtitle": "OWNEO reinvents your relationship with high-end cars. You don't buy a car. You don't rent one. You acquire the right to enjoy it as if it were yours — with the full service, without any of the burdens.",
+    "body_intro": "OWNEO reinvents your relationship with high-end cars. You don't buy a car. You don't rent one. You acquire the right to enjoy it as if it were yours — with the full service, without any of the burdens."
   },
   "locations": {
-    "title": "Locations",
-    "subtitle": "Your supercar near you"
+    "title": "Premium",
+    "title_accent": "Locations",
+    "subtitle": "Discover our exclusive showrooms in Spain's most prestigious cities"
   },
   "about": {
-    "title": "About Us",
-    "subtitle": "The team behind Owneo"
+    "title": "It's not a car.",
+    "title_accent": "It's a decision.",
+    "subtitle": "OWNEO was born to break the equation that for decades has kept automotive luxury reserved for a very few."
   },
   "news": {
     "title": "News",
-    "subtitle": "Latest from the supercar world",
+    "subtitle": "The latest from the world of supercars and automotive luxury",
     "read_more": "Read more"
   },
   "contact": {
@@ -52,7 +58,7 @@
     "email": "Email",
     "message": "Message",
     "send": "Send message",
-    "success": "Message sent successfully",
+    "success": "Message sent. We'll get back to you shortly.",
     "subject": "Subject"
   },
   "participate": {
@@ -60,19 +66,19 @@
     "cta": "Submit request"
   },
   "footer": {
-    "rights": "All rights reserved",
+    "rights": "© 2026 OWNEO SL — All rights reserved",
     "legal": "Legal Notice",
     "privacy": "Privacy Policy",
     "cookies": "Cookie Policy"
   },
   "cookie": {
-    "text": "We use cookies to improve your experience on Owneo.",
-    "accept": "Accept",
-    "reject": "Decline"
+    "text": "We use our own and third-party cookies to ensure the site works properly, analyse traffic and personalise your experience. You can accept all, reject them or configure your preferences at any time.",
+    "accept": "Accept all",
+    "reject": "Reject all"
   },
   "car": {
-    "request": "Request a spot",
-    "specs": "Specifications",
+    "request": "Request a share",
+    "specs": "Technical specifications",
     "power": "Power",
     "seats": "Seats",
     "transmission": "Transmission",
