@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, Star, MapPin, Percent, CalendarDays, Users, Check, X } from "lucide-react";
@@ -17,6 +18,8 @@ import featureWeeksBg from "@/assets/model/feature-weeks.jpg";
 import featureSharedBg from "@/assets/model/feature-shared.jpg";
 
 const Index = () => {
+  const { t } = useTranslation();
+
   const { data: models = [], isLoading: carsLoading } = useCarModels();
   const { data: cities = [] } = useLocations();
   const { trackEvent } = useAnalytics();
@@ -82,13 +85,13 @@ const Index = () => {
           <div className="max-w-4xl mx-auto mt-20 sm:mt-16">
             <div className="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto mb-6 sm:mb-8" />
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extralight text-white/90 tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-2 sm:mb-4">
-              Vive lo
+              {t("home.hero_title")}
             </h1>
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.1em] sm:tracking-[0.15em] uppercase mb-6 sm:mb-8">
-              Extraordinario
+              {t("home.hero_title_accent")}
             </h1>
             <p className="text-xs sm:text-sm md:text-base text-white/50 font-extralight tracking-[0.05em] sm:tracking-[0.1em] max-w-xs sm:max-w-xl mx-auto mb-8 sm:mb-12">
-              El lujo de los supercoches, ahora accesible
+              {t("home.hero_subtitle")}
             </p>
             <Link to="/nuestro-modelo">
               <Button
@@ -96,7 +99,7 @@ const Index = () => {
                 size="lg"
                 className="border border-white/20 text-white/80 hover:text-white hover:bg-white/5 hover:border-white/40 text-xs md:text-sm font-light tracking-[0.2em] px-10 py-6 group transition-all duration-500"
               >
-                DESCUBRIR
+                {t("home.hero_cta")}
                 <ArrowRight className="ml-3 w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
               </Button>
             </Link>
@@ -110,7 +113,7 @@ const Index = () => {
           <div className="text-center">
             <span className="ds-eyebrow-pill mb-6">Nuestro modelo</span>
             <h2 className="ds-h2 text-foreground mt-6 mb-6">
-              El lujo que se comparte
+              {t("home.model_title")}
             </h2>
             <p className="ds-lead max-w-3xl mx-auto">
               Una marca que redefine el acceso a los coches de alta gama a través de la multipropiedad: un modelo eficiente, moderno y aspiracional, alineado con la nueva manera de entender la movilidad.
@@ -128,7 +131,7 @@ const Index = () => {
                 <div className="ds-feature-figure">
                   <span className="text-5xl font-extralight text-white leading-none">10%</span>
                 </div>
-                <h3 className="ds-card-title text-white mt-2 mb-2">Del valor del vehículo</h3>
+                <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat1_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
                   Tu participación, calculada sobre el precio de mercado. Sin letra pequeña, sin sorpresas.
                 </p>
@@ -149,7 +152,7 @@ const Index = () => {
                   <span className="text-5xl font-extralight text-white leading-none">4</span>
                   <span className="text-base font-normal text-white/80 mt-1">Semanas</span>
                 </div>
-                <h3 className="ds-card-title text-white mt-2 mb-2">Garantizadas al año</h3>
+                <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat2_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
                   3 semanas estándar · 1 semana premium al volante del coche de tus sueños. Cuando quieras, donde quieras.
                 </p>
@@ -168,7 +171,7 @@ const Index = () => {
                 <div className="ds-feature-figure">
                   <span className="text-5xl font-extralight text-white leading-none">÷10</span>
                 </div>
-                <h3 className="ds-card-title text-white mt-2 mb-2">Los gastos compartidos</h3>
+                <h3 className="ds-card-title text-white mt-2 mb-2">{t("home.stat3_label")}</h3>
                 <p className="text-sm text-white/80 leading-relaxed min-h-[6rem]">
                   Seguro, mantenimiento y garaje se dividen entre los 10 socios. El lujo real está en compartir los costes, no en eliminarlos.
                 </p>
@@ -335,9 +338,9 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="ds-h2 text-foreground mb-4">Colección Destacada</h2>
+            <h2 className="ds-h2 text-foreground mb-4">{t("home.collection_title")}</h2>
             <p className="ds-lead max-w-2xl mx-auto">
-              Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo
+              {t("home.collection_subtitle")}
             </p>
           </div>
           {carsLoading ? (
@@ -374,7 +377,7 @@ const Index = () => {
                 className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
                 onClick={() => trackEvent("click_ver_todos_vehiculos", { section: "featured_collection" })}
               >
-                VER TODOS LOS VEHÍCULOS
+                {t("home.hero_cta2")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -386,9 +389,9 @@ const Index = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-card/50">
         <div className="container mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="ds-h2 text-foreground mb-4">Nuestras Ubicaciones</h2>
+            <h2 className="ds-h2 text-foreground mb-4">{t("home.locations_title")}</h2>
             <p className="ds-lead max-w-2xl mx-auto">
-              Descubre nuestra flota en las ciudades más exclusivas de España
+              {t("home.locations_subtitle")}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

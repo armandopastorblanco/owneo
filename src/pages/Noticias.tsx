@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
@@ -102,6 +103,8 @@ const newsItems = [...allNews].sort(
 );
 
 const Noticias = () => {
+  const { t } = useTranslation();
+
   const { trackEvent } = useAnalytics();
 
   useEffect(() => {
@@ -139,10 +142,10 @@ const Noticias = () => {
             className="text-center"
           >
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-4">
-              Noticias
+              {t("news.title")}
             </h1>
             <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Las últimas novedades del mundo de los supercars y el lujo automovilístico
+              {t("news.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -179,7 +182,7 @@ const Noticias = () => {
                       {item.excerpt}
                     </p>
                     <span className="inline-flex items-center gap-1.5 text-xs text-champagne font-medium tracking-wider uppercase group-hover:gap-3 transition-all duration-300">
-                      Leer más <ArrowRight className="w-3.5 h-3.5" />
+                      {t("news.read_more")} <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </div>
                 </>
