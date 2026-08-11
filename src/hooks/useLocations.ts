@@ -7,6 +7,7 @@ export interface City {
   slug: string;
   name: string;
   description: string;
+  description_en: string;
   image: string;
 }
 
@@ -25,6 +26,7 @@ export function useLocations() {
         slug: (row as any).slug ?? "",
         name: row.name,
         description: row.description || "",
+        description_en: (row as any).description_en || "",
         image: resolveAssetPath(row.image_url),
       }));
     },
