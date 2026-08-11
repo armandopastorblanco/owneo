@@ -156,6 +156,12 @@ const App = () => {
               <Route path="/en/locations" element={<Cities />} />
               <Route path="/en/about-us" element={<QuienesSomos />} />
               <Route path="/en/news" element={<Noticias />} />
+              <Route path="/en/news/ferrari-luce-ev" element={<NoticiaFerrariLuce />} />
+              <Route path="/en/news/lamborghini-huracan-hibrido" element={<NoticiaLamborghiniHuracan />} />
+              <Route path="/en/news/lamborghini-temerario-spyder" element={<NoticiaLamborghiniTemerarioSpyder />} />
+              <Route path="/en/news/porsche-cayenne-turbo-electric-2026" element={<PorscheCayenneTurboElectric />} />
+              <Route path="/en/news/mclaren-w1" element={<NoticiaMcLarenW1 />} />
+              <Route path="/en/news/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
               <Route path="/en/news/:slug" element={<NoticiaDetalle />} />
               <Route path="/en/contact" element={<Contacto />} />
               <Route path="/en/cars/:slug" element={<CarDetail />} />
