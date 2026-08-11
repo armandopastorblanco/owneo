@@ -9,13 +9,14 @@
     "login": "ACCEDER"
   },
   "home": {
-    "hero_title": "Accede a los supercoches más exclusivos de España",
-    "hero_subtitle": "Comparte tu Ferrari, Lamborghini o Porsche, comparte los costes y vive la experiencia al 100%.",
-    "hero_cta": "Descubrir la flota",
-    "hero_cta2": "Nuestro modelo",
+    "hero_title": "Vive lo",
+    "hero_title_accent": "Extraordinario",
+    "hero_subtitle": "El lujo de los supercoches, ahora accesible",
+    "hero_cta": "DESCUBRIR",
+    "hero_cta2": "VER TODOS LOS VEHÍCULOS",
     "model_title": "El lujo que se comparte",
     "stat1_label": "Del valor del vehículo",
-    "stat2_label": "Semanas garantizadas al año",
+    "stat2_label": "Garantizadas al año",
     "stat3_label": "Los gastos compartidos",
     "collection_title": "Colección Destacada",
     "collection_subtitle": "Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo",
@@ -23,27 +24,32 @@
     "locations_subtitle": "Descubre nuestra flota en las ciudades más exclusivas de España"
   },
   "fleet": {
-    "title": "Nuestra Flota",
-    "subtitle": "Supercoches de lujo compartidos en España",
+    "title": "Nuestra",
+    "title_accent": "Gama",
+    "subtitle": "Explora nuestra colección exclusiva de los supercoches más prestigiosos del mundo",
     "cta": "Solicitar plaza",
     "filter_all": "Todos",
     "filter_available": "Disponibles"
   },
   "model": {
-    "title": "Nuestro Modelo",
-    "subtitle": "Cómo funciona el car sharing de lujo"
+    "title": "El acceso más inteligente al",
+    "title_accent": "automovilismo de lujo",
+    "subtitle": "OWNEO reinventa la relación con los coches de alta gama. No compras un coche. No lo alquilas. Adquieres el derecho a disfrutarlo como si fuera tuyo — con todo el servicio, sin ninguna de las cargas.",
+    "body_intro": "OWNEO reinventa la relación con los coches de alta gama. No compras un coche. No lo alquilas. Adquieres el derecho a disfrutarlo como si fuera tuyo — con todo el servicio, sin ninguna de las cargas."
   },
   "locations": {
     "title": "Ubicaciones",
-    "subtitle": "Tu supercoche cerca de ti"
+    "title_accent": "Premium",
+    "subtitle": "Descubre nuestros showrooms exclusivos en las ciudades más prestigiosas de España"
   },
   "about": {
-    "title": "Quiénes Somos",
-    "subtitle": "El equipo detrás de Owneo"
+    "title": "No es un coche.",
+    "title_accent": "Es una decisión.",
+    "subtitle": "OWNEO nació para romper la ecuación que durante décadas ha hecho del lujo automovilístico algo reservado a muy pocos."
   },
   "news": {
     "title": "Noticias",
-    "subtitle": "Últimas novedades del mundo de los supercoches",
+    "subtitle": "Las últimas novedades del mundo de los supercars y el lujo automovilístico",
     "read_more": "Leer más"
   },
   "contact": {
@@ -52,7 +58,7 @@
     "email": "Email",
     "message": "Mensaje",
     "send": "Enviar mensaje",
-    "success": "Mensaje enviado correctamente",
+    "success": "Mensaje enviado. Nos pondremos en contacto contigo pronto.",
     "subject": "Asunto"
   },
   "participate": {
@@ -60,19 +66,19 @@
     "cta": "Enviar solicitud"
   },
   "footer": {
-    "rights": "Todos los derechos reservados",
+    "rights": "© 2026 OWNEO SL — Todos los derechos reservados",
     "legal": "Aviso Legal",
     "privacy": "Política de Privacidad",
     "cookies": "Política de Cookies"
   },
   "cookie": {
-    "text": "Utilizamos cookies para mejorar tu experiencia en Owneo.",
-    "accept": "Aceptar",
-    "reject": "Rechazar"
+    "text": "Utilizamos cookies propias y de terceros para garantizar el correcto funcionamiento del sitio, analizar el tráfico y personalizar tu experiencia. Puedes aceptar todas, rechazarlas o configurar tus preferencias en cualquier momento.",
+    "accept": "Aceptar todo",
+    "reject": "Rechazar todo"
   },
   "car": {
-    "request": "Solicitar plaza",
-    "specs": "Especificaciones",
+    "request": "Solicitar participación",
+    "specs": "Especificaciones técnicas",
     "power": "Potencia",
     "seats": "Plazas",
     "transmission": "Transmisión",
