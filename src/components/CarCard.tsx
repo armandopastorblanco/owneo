@@ -23,6 +23,7 @@ const CarCard = ({
   availabilityOverride,
   cityCountBadge,
 }: CarCardProps) => {
+  const { t } = useTranslation();
   const { trackEvent } = useAnalytics();
   const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ''));
   const sharePrice = car.participationPrice || Math.round(numericPrice * 0.1);
