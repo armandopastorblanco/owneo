@@ -33,11 +33,11 @@ export default function Contacto() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.subject || !form.message) {
-      toast.error("Completa todos los campos obligatorios.");
+      toast.error(t("contact.error_required"));
       return;
     }
     if (!accepted) {
-      toast.error("Debes aceptar la política de privacidad.");
+      toast.error(t("contact.error_privacy"));
       return;
     }
     setSubmitting(true);
