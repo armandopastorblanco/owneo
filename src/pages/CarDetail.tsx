@@ -954,7 +954,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE J: DISPONIBILIDAD Y CONDICIONES ─── */}
           <Reveal className="mb-24 grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="ds-h3 mb-4 text-foreground">Disponible en</h2>
+              <h2 className="ds-h3 mb-4 text-foreground">{t("car.available_in")}</h2>
               <div className="flex flex-wrap gap-2">
                 {car.availableIn.map((city) => (
                   <div key={city} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full">
