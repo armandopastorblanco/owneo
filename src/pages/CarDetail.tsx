@@ -861,28 +861,22 @@ const CarDetail = () => {
           </Reveal>
 
           {/* ─── BLOQUE H: FEATURES ─── */}
-          {(() => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const featuresEn = (car as any).features_en as string[] | undefined;
-            const featuresList =
-              i18n.language === "en" && featuresEn?.length ? featuresEn : car.features;
-            return featuresList?.length > 0 ? (
-              <Reveal className="mb-24">
-                <h2 className="ds-h2 mb-6 text-foreground text-center">{t("car.features_title")}</h2>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {featuresList.map((feature, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-3 p-4 bg-card/50 border border-border/30 rounded-xl hover:border-champagne/30 transition-all"
-                    >
-                      <CheckCircle2 className="w-5 h-5 text-champagne flex-shrink-0" />
-                      <span className="text-foreground">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-            ) : null;
-          })()}
+          {displayFeatures?.length > 0 ? (
+            <Reveal className="mb-24">
+              <h2 className="ds-h2 mb-6 text-foreground text-center">{t("car.features_title")}</h2>
+              <div className="grid md:grid-cols-2 gap-3">
+                {displayFeatures.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-4 bg-card/50 border border-border/30 rounded-xl hover:border-champagne/30 transition-all"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-champagne flex-shrink-0" />
+                    <span className="text-foreground">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          ) : null}
 
           {/* ─── BLOQUE I: COMPARATIVA ─── */}
           <Reveal className="mb-24">
