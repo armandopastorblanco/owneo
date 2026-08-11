@@ -10,13 +10,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut, isAdmin } = useAuth();
-  const [language, setLanguage] = useState("es");
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
+  const handleLanguageChange = (lang: string) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("owneo-lang", lang);
+    document.documentElement.lang = lang;
+  };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -48,20 +55,11 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    {
-      path: "/nuestro-modelo",
-      label: language === "es" ? "NUESTRO CONCEPTO" : "OUR CONCEPT",
-    },
-    { path: "/coches", label: "NUESTRA GAMA" },
-    {
-      path: "/ubicaciones",
-      label: language === "es" ? "UBICACIONES" : "LOCATIONS",
-    },
-    {
-      path: "/quienes-somos",
-      label: language === "es" ? "QUIÉNES SOMOS" : "ABOUT US",
-    },
-    { path: "/noticias", label: language === "es" ? "NOTICIAS" : "NEWS" },
+    { path: "/nuestro-modelo", label: t("nav.concept") },
+    { path: "/coches", label: t("nav.fleet") },
+    { path: "/ubicaciones", label: t("nav.locations") },
+    { path: "/quienes-somos", label: t("nav.about") },
+    { path: "/noticias", label: t("nav.news") },
   ];
 
   const navBgClass = "bg-background/95 backdrop-blur-md border-b border-border/40";
@@ -103,7 +101,7 @@ const Navbar = () => {
 
             {/* Right actions */}
             <div className="hidden md:flex items-center gap-3 justify-end">
-              <Select value={language} onValueChange={setLanguage}>
+              <Select value={language} onValueChange={handleLanguageChange}>
                 <SelectTrigger className="w-[80px] border-border/40 bg-transparent text-foreground/60 hover:text-foreground text-xs">
                   <Globe className="w-3 h-3 mr-2" />
                   <SelectValue />
@@ -135,7 +133,7 @@ const Navbar = () => {
                       className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
                     >
                       <User className="w-3.5 h-3.5" />
-                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      <span>{t("nav.account")}</span>
                     </Button>
                   </Link>
                   <Button
@@ -155,7 +153,7 @@ const Navbar = () => {
                     className="flex items-center gap-2 text-foreground/50 hover:text-foreground hover:bg-foreground/5 text-xs font-light tracking-wider"
                   >
                     <User className="w-3.5 h-3.5" />
-                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                    <span>{t("nav.login")}</span>
                   </Button>
                 </Link>
               )}
@@ -237,7 +235,7 @@ const Navbar = () => {
               </Link>
             )}
             <div className="flex items-center gap-3">
-              <Select value={language} onValueChange={setLanguage}>
+              <Select value={language} onValueChange={handleLanguageChange}>
                 <SelectTrigger className="w-[88px] border-border/40 bg-transparent text-foreground/70 text-xs min-h-[48px]">
                   <Globe className="w-4 h-4 mr-2" />
                   <SelectValue />
@@ -253,7 +251,7 @@ const Navbar = () => {
                   <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="flex-1">
                     <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
                       <User className="w-4 h-4" />
-                      <span>{language === "es" ? "MI CUENTA" : "MY ACCOUNT"}</span>
+                      <span>{t("nav.account")}</span>
                     </Button>
                   </Link>
                   <Button
@@ -268,7 +266,7 @@ const Navbar = () => {
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1">
                   <Button variant="outline" className="w-full min-h-[48px] flex items-center gap-2 text-foreground/80 text-sm">
                     <User className="w-4 h-4" />
-                    <span>{language === "es" ? "ACCEDER" : "LOGIN"}</span>
+                    <span>{t("nav.login")}</span>
                   </Button>
                 </Link>
               )}
