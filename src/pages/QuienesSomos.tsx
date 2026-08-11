@@ -501,7 +501,7 @@ const QuienesSomos = () => {
                   className="text-base px-8 h-12 bg-champagne text-champagne-foreground hover:bg-champagne/90"
                 >
                   <Link to="/coches">
-                    Ver la flota
+                    {t("about.cta_fleet")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </Button>
