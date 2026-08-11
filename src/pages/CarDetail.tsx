@@ -852,29 +852,35 @@ const CarDetail = () => {
           </Reveal>
 
           {/* ─── BLOQUE H: FEATURES ─── */}
-          {car.features?.length > 0 && (
-            <Reveal className="mb-24">
-              <h2 className="ds-h2 mb-6 text-foreground text-center">Características Premium</h2>
-              <div className="grid md:grid-cols-2 gap-3">
-                {car.features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 p-4 bg-card/50 border border-border/30 rounded-xl hover:border-champagne/30 transition-all"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-champagne flex-shrink-0" />
-                    <span className="text-foreground">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          )}
+          {(() => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const featuresEn = (car as any).features_en as string[] | undefined;
+            const featuresList =
+              i18n.language === "en" && featuresEn?.length ? featuresEn : car.features;
+            return featuresList?.length > 0 ? (
+              <Reveal className="mb-24">
+                <h2 className="ds-h2 mb-6 text-foreground text-center">{t("car.features_title")}</h2>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {featuresList.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-3 p-4 bg-card/50 border border-border/30 rounded-xl hover:border-champagne/30 transition-all"
+                    >
+                      <CheckCircle2 className="w-5 h-5 text-champagne flex-shrink-0" />
+                      <span className="text-foreground">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            ) : null;
+          })()}
 
           {/* ─── BLOQUE I: COMPARATIVA ─── */}
           <Reveal className="mb-24">
             <div className="text-center max-w-3xl mx-auto mb-8">
-              <h2 className="ds-h2 mb-3 text-foreground">Compra Individual VS OWNEO Co-Sharing</h2>
+              <h2 className="ds-h2 mb-3 text-foreground">{t("car.vs_title")}</h2>
               <p className="ds-lead">
-                Descubre cómo el modelo de co-sharing OWNEO reduce drásticamente los costes anuales de gestión.
+                {t("car.vs_subtitle")}
               </p>
             </div>
 
@@ -882,57 +888,58 @@ const CarDetail = () => {
               <table className="w-full border-collapse min-w-[640px]">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-4 px-4 text-muted-foreground font-medium">Concepto</th>
-                    <th className="text-center py-4 px-4 text-muted-foreground font-medium">Compra Individual</th>
+                    <th className="text-left py-4 px-4 text-muted-foreground font-medium">{t("car.comparison_concept")}</th>
+                    <th className="text-center py-4 px-4 text-muted-foreground font-medium">{t("car.individual_purchase")}</th>
                     <th className="text-center py-4 px-4 font-medium text-champagne">OWNEO Co-Sharing</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Inversión inicial</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_initial_investment")}</td>
                     <td className="py-4 px-4 text-center text-foreground">{car.price}</td>
                     <td className="py-4 px-4 text-center text-champagne font-semibold">{sharePrice.toLocaleString("es-ES")}€</td>
                   </tr>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Tiempo de uso garantizado</td>
-                    <td className="py-4 px-4 text-center text-foreground">Sin límite</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_guaranteed_time")}</td>
+                    <td className="py-4 px-4 text-center text-foreground">{t("car.comp_no_limit")}</td>
                     <td className="py-4 px-4 text-center text-champagne font-semibold">{weeksPerParticipation} semanas/año (3+1)</td>
                   </tr>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Kilómetros incluidos/año</td>
-                    <td className="py-4 px-4 text-center text-foreground">Sin límite</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_km_year")}</td>
+                    <td className="py-4 px-4 text-center text-foreground">{t("car.comp_no_limit")}</td>
                     <td className="py-4 px-4 text-center text-champagne font-semibold">{kmPerParticipation.toLocaleString("es-ES")} km</td>
                   </tr>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Seguro anual</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_annual_insurance")}</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(car.numericPrice * 0.03).toLocaleString("es-ES")}€</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">Incluido</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{t("car.comp_included")}</td>
                   </tr>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Mantenimiento anual</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_annual_maintenance")}</td>
                     <td className="py-4 px-4 text-center text-foreground">~{Math.round(car.numericPrice * 0.02).toLocaleString("es-ES")}€</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">Incluido</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{t("car.comp_included")}</td>
                   </tr>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Almacenamiento anual</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_annual_storage")}</td>
                     <td className="py-4 px-4 text-center text-foreground">~3.000€</td>
-                    <td className="py-4 px-4 text-center text-champagne font-semibold">Incluido</td>
+                    <td className="py-4 px-4 text-center text-champagne font-semibold">{t("car.comp_included")}</td>
                   </tr>
                   <tr className="border-b border-border/50">
-                    <td className="py-4 px-4 text-foreground font-medium">Coste anual de gestión</td>
+                    <td className="py-4 px-4 text-foreground font-medium">{t("car.comp_annual_mgmt_cost")}</td>
                     <td className="py-4 px-4 text-center text-foreground">
                       ~{(Math.round(car.numericPrice * 0.05) + 3000).toLocaleString("es-ES")}€
                     </td>
                     <td className="py-4 px-4 text-center text-champagne font-semibold">{annualFee.toLocaleString("es-ES")}€</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-4 text-foreground font-bold">Duración del compromiso</td>
-                    <td className="py-4 px-4 text-center text-foreground font-bold">Indefinida</td>
+                    <td className="py-4 px-4 text-foreground font-bold">{t("car.comp_duration")}</td>
+                    <td className="py-4 px-4 text-center text-foreground font-bold">{t("car.comp_indefinite")}</td>
                     <td className="py-4 px-4 text-center text-champagne font-bold">{durationYears} años</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+
 
             <div className="mt-6 p-6 bg-champagne/10 rounded-2xl border border-champagne/20">
               <p className="text-center text-foreground">
@@ -947,7 +954,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE J: DISPONIBILIDAD Y CONDICIONES ─── */}
           <Reveal className="mb-24 grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="ds-h3 mb-4 text-foreground">Disponible en</h2>
+              <h2 className="ds-h3 mb-4 text-foreground">{t("car.available_in")}</h2>
               <div className="flex flex-wrap gap-2">
                 {car.availableIn.map((city) => (
                   <div key={city} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full">

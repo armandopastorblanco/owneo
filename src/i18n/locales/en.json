@@ -233,7 +233,10 @@
     "title_accent": "Locations",
     "subtitle": "Discover our exclusive showrooms in Spain's most prestigious cities",
     "explore_singular": "Explore {{count}} vehicle",
-    "explore_plural": "Explore {{count}} vehicles"
+    "explore_plural": "Explore {{count}} vehicles",
+    "back": "Go back",
+    "premium_location": "Premium Location",
+    "vehicles_available_in": "Vehicles available in"
   },
   "about": {
     "our_participants": "Our participants",
@@ -477,6 +480,22 @@
     "cond_duration": "Duration: {{n}} years",
     "cond_resale": "Estimated resale: up to 70% of your participation",
     "cond_resale_managed": "Resale fully managed by OWNEO",
-    "cond_included": "Insurance, maintenance and parking included in the annual fee"
+    "cond_included": "Insurance, maintenance and parking included in the annual fee",
+    "vs_title": "Individual Purchase VS OWNEO Co-Sharing",
+    "vs_subtitle": "See how the OWNEO co-sharing model drastically reduces annual management costs.",
+    "comparison_concept": "Concept",
+    "comp_initial_investment": "Initial investment",
+    "comp_guaranteed_time": "Guaranteed usage time",
+    "comp_km_year": "Km included/year",
+    "comp_annual_insurance": "Annual insurance",
+    "comp_annual_maintenance": "Annual maintenance",
+    "comp_annual_storage": "Annual storage",
+    "comp_annual_mgmt_cost": "Annual management cost",
+    "comp_duration": "Commitment duration",
+    "comp_no_limit": "No limit",
+    "comp_indefinite": "Indefinite",
+    "comp_included": "Included",
+    "available_in": "Available in",
+    "features_title": "Premium Features"
   }
 }
