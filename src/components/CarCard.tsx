@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Car } from "@/hooks/useCars";
 import { ArrowRight, Users, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
