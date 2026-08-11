@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
@@ -34,21 +35,21 @@ import ParticipationForm from "@/components/ParticipationForm";
 import { Helmet } from "react-helmet-async";
 
 /* ─── spec labels & categorisation ─── */
-const specLabels: Record<string, string> = {
-  engine: "Motor", power: "Potencia", torque: "Par Motor",
-  acceleration: "Aceleración", topSpeed: "Velocidad Máxima",
-  transmission: "Transmisión", drivetrain: "Tracción",
-  weight: "Peso en Vacío", fuelType: "Combustible",
-  displacement: "Cilindrada", cylinders: "Cilindros", valves: "Válvulas",
-  compression: "Relación de Compresión", fuelSystem: "Sistema de Alimentación",
-  emissionClass: "Normativa de Emisiones", co2Emissions: "Emisiones de CO₂",
-  fuelConsumption: "Consumo Combinado", tankCapacity: "Capacidad del Depósito",
-  brakes: "Frenos", tiresFront: "Neumáticos Delanteros", tiresRear: "Neumáticos Traseros",
-  suspension: "Suspensión", length: "Longitud", width: "Anchura", height: "Altura",
-  wheelbase: "Distancia entre Ejes", trunkCapacity: "Capacidad del Maletero",
-  doors: "Puertas", seats: "Plazas", batteryCapacity: "Capacidad de Batería",
-  range: "Autonomía", chargingTime: "Tiempo de Carga Rápida",
-};
+const specLabels = (t: TFunction): Record<string, string> => ({
+  engine: t("car.spec_engine"), power: t("car.spec_power"), torque: t("car.spec_torque"),
+  acceleration: t("car.spec_acceleration"), topSpeed: t("car.spec_topSpeed"),
+  transmission: t("car.spec_transmission"), drivetrain: t("car.spec_drivetrain"),
+  weight: t("car.spec_weight"), fuelType: t("car.spec_fuelType"),
+  displacement: t("car.spec_displacement"), cylinders: t("car.spec_cylinders"), valves: t("car.spec_valves"),
+  compression: t("car.spec_compression"), fuelSystem: t("car.spec_fuelSystem"),
+  emissionClass: t("car.spec_emissionClass"), co2Emissions: t("car.spec_co2Emissions"),
+  fuelConsumption: t("car.spec_fuelConsumption"), tankCapacity: t("car.spec_tankCapacity"),
+  brakes: t("car.spec_brakes"), tiresFront: t("car.spec_tiresFront"), tiresRear: t("car.spec_tiresRear"),
+  suspension: t("car.spec_suspension"), length: t("car.spec_length"), width: t("car.spec_width"), height: t("car.spec_height"),
+  wheelbase: t("car.spec_wheelbase"), trunkCapacity: t("car.spec_trunkCapacity"),
+  doors: t("car.spec_doors"), seats: t("car.spec_seats"), batteryCapacity: t("car.spec_batteryCapacity"),
+  range: t("car.spec_range"), chargingTime: t("car.spec_chargingTime"),
+});
 
 const SPEC_CATEGORIES: Record<string, string[]> = {
   motor: ["engine", "displacement", "cylinders", "valves", "compression", "fuelSystem", "fuelType", "batteryCapacity"],
@@ -108,14 +109,14 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 }
 
 /* ─── consultation form ─── */
-const consultaSchema = z.object({
-  name: z.string().trim().min(2, "Nombre demasiado corto").max(100),
-  email: z.string().trim().email("Email inválido").max(255),
+const makeConsultaSchema = (t: TFunction) => z.object({
+  name: z.string().trim().min(2, t("car.name_too_short")).max(100),
+  email: z.string().trim().email(t("car.email_invalid")).max(255),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
   message: z.string().trim().max(1000).optional().or(z.literal("")),
-  consent: z.literal(true, { errorMap: () => ({ message: "Debes aceptar la política de privacidad" }) }),
+  consent: z.literal(true, { errorMap: () => ({ message: t("car.must_accept_privacy") }) }),
 });
-type ConsultaForm = z.infer<typeof consultaSchema>;
+type ConsultaForm = z.infer<ReturnType<typeof makeConsultaSchema>>;
 
 const CarDetail = () => {
   const { t } = useTranslation();
@@ -191,6 +192,8 @@ const CarDetail = () => {
   }, [car?.id]);
 
   /* ─── consultation mutation ─── */
+  const consultaSchema = useMemo(() => makeConsultaSchema(t), [t]);
+  const labels = useMemo(() => specLabels(t), [t]);
   const form = useForm<ConsultaForm>({
     resolver: zodResolver(consultaSchema),
     defaultValues: { name: "", email: "", phone: "", message: "", consent: false as unknown as true },
@@ -215,7 +218,7 @@ const CarDetail = () => {
       form.reset();
       trackEvent("submit_consultation", { car_id: car?.id, car_name: car?.name, page_source: "car_detail" });
     },
-    onError: (err: Error) => toast.error(`Error: ${err.message}`),
+    onError: (err: Error) => toast.error(`${t("car.consult_error")}: ${err.message}`),
   });
 
   if (isLoading) {
@@ -238,11 +241,11 @@ const CarDetail = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="ds-h2 mb-4 text-foreground">Vehículo no encontrado</h1>
+          <h1 className="ds-h2 mb-4 text-foreground">{t("car.not_found")}</h1>
           <Link to="/coches">
             <Button variant="outline">
               <ArrowLeft className="mr-2 w-4 h-4" />
-              Volver a Nuestra Gama
+              {t("car.back_to_fleet")}
             </Button>
           </Link>
         </div>
@@ -292,9 +295,9 @@ const CarDetail = () => {
 
   /* ─── stat cards ─── */
   const statCards = [
-    { icon: Zap, label: car.specifications?.acceleration ? "0-100 km/h" : "Potencia", value: car.specifications?.acceleration || car.specifications?.power || "—" },
-    { icon: Gauge, label: "Velocidad máxima", value: car.specifications?.topSpeed || "—" },
-    { icon: CarIcon, label: "Motor", value: car.specifications?.engine || "—" },
+    { icon: Zap, label: car.specifications?.acceleration ? "0-100 km/h" : t("car.spec_power"), value: car.specifications?.acceleration || car.specifications?.power || "—" },
+    { icon: Gauge, label: t("car.spec_topSpeed"), value: car.specifications?.topSpeed || "—" },
+    { icon: CarIcon, label: t("car.spec_engine"), value: car.specifications?.engine || "—" },
   ];
 
   /* ─── image pour le bloc "La Experiencia" ─── */
@@ -356,16 +359,16 @@ const CarDetail = () => {
           </div>
           <div className="hidden lg:flex gap-6">
             <div className="text-center">
-              <div className="text-xs text-muted-foreground">Participación</div>
+              <div className="text-xs text-muted-foreground">{t("car.sticky_participation")}</div>
               <div className="font-bold text-champagne">{discountedPrice.toLocaleString("es-ES")}€</div>
             </div>
             <div className="text-center">
-              <div className="text-xs text-muted-foreground">Gestión anual</div>
+              <div className="text-xs text-muted-foreground">{t("car.sticky_annual")}</div>
               <div className="font-bold text-foreground">{annualFee.toLocaleString("es-ES")}€/año</div>
             </div>
             <div className="text-center">
-              <div className="text-xs text-muted-foreground">Duración</div>
-              <div className="font-bold text-foreground">{durationYears} años</div>
+              <div className="text-xs text-muted-foreground">{t("car.sticky_duration")}</div>
+              <div className="font-bold text-foreground">{t("car.sticky_years", { n: durationYears })}</div>
             </div>
           </div>
           <Button
@@ -374,7 +377,7 @@ const CarDetail = () => {
             className="bg-champagne text-champagne-foreground hover:bg-champagne/90 h-10 shrink-0"
           >
             <span className="hidden sm:inline">{t("car.request")}</span>
-            <span className="sm:hidden">Solicitar</span>
+            <span className="sm:hidden">{t("car.sticky_request_short")}</span>
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
@@ -383,7 +386,7 @@ const CarDetail = () => {
       <main className="pt-20 sm:pt-24 pb-12 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
           <Link to="/coches" className="inline-flex items-center text-foreground hover:text-champagne mb-6 transition-colors">
-            <ArrowLeft className="mr-2 w-4 h-4" /> Volver a Nuestra Gama
+            <ArrowLeft className="mr-2 w-4 h-4" /> {t("car.back_to_fleet")}
           </Link>
 
           {/* ─── BLOQUE A: HERO ─── */}
@@ -398,7 +401,7 @@ const CarDetail = () => {
 
               <div className={`absolute top-4 right-4 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${isComplete ? "bg-blue-500/80" : "bg-[hsl(var(--participation-available))]"} text-background`}>
                 <Users className="w-4 h-4" />
-                {isComplete ? "Completo — Lista de espera" : `${availableParticipations}/${maxParticipations} participaciones disponibles`}
+                {isComplete ? t("car.complete_waitlist") : t("car.participations_available", { available: availableParticipations, max: maxParticipations })}
               </div>
               {isPromoActive && (
                 <div className="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-semibold bg-emerald-500 text-background">
@@ -412,17 +415,17 @@ const CarDetail = () => {
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
                 <CalendarDays className="w-4 h-4 mx-auto mb-1 text-champagne" />
                 <div className="text-sm font-bold text-foreground">{weeksPerParticipation} sem. (3+1)</div>
-                <div className="text-xs text-muted-foreground">por año</div>
+                <div className="text-xs text-muted-foreground">{t("car.per_year")}</div>
               </div>
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
                 <Gauge className="w-4 h-4 mx-auto mb-1 text-champagne" />
                 <div className="text-sm font-bold text-foreground">{kmPerParticipation.toLocaleString("es-ES")} km</div>
-                <div className="text-xs text-muted-foreground">incluidos</div>
+                <div className="text-xs text-muted-foreground">{t("car.km_included")}</div>
               </div>
               <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl p-3 text-center">
                 <Clock className="w-4 h-4 mx-auto mb-1 text-champagne" />
-                <div className="text-sm font-bold text-foreground">{durationYears} años</div>
-                <div className="text-xs text-muted-foreground">duración</div>
+                <div className="text-sm font-bold text-foreground">{t("car.sticky_years", { n: durationYears })}</div>
+                <div className="text-xs text-muted-foreground">{t("car.duration_label")}</div>
               </div>
             </div>
           </div>
@@ -446,7 +449,7 @@ const CarDetail = () => {
                     onClick={() => setDescExpanded(!descExpanded)}
                     className="text-champagne text-sm mt-2 hover:underline"
                   >
-                    {descExpanded ? "Ver menos" : "Ver más"}
+                    {descExpanded ? t("car.see_less") : t("car.see_more")}
                   </button>
                 )}
               </div>
@@ -459,7 +462,7 @@ const CarDetail = () => {
                   {/* Sección 1 — Precio participación */}
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Cuota de participación</span>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">{t("car.participation_label")}</span>
                       <TooltipProvider delayDuration={150}>
                         <Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
                           <TooltipTrigger
@@ -470,10 +473,9 @@ const CarDetail = () => {
                             <Info className="w-4 h-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="max-w-xs p-4">
-                            <p className="font-semibold mb-2">¿Cómo funciona el co-sharing?</p>
+                            <p className="font-semibold mb-2">{t("car.how_cosharing")}</p>
                             <p className="text-sm text-muted-foreground">
-                              La cuota de participación representa el 10% del valor total del vehículo.
-                              Como co-sharer, disfrutas de acceso exclusivo según tu participación.
+                              {t("car.cosharing_desc")}
                             </p>
                           </TooltipContent>
                         </Tooltip>
@@ -484,7 +486,7 @@ const CarDetail = () => {
                         {car.price}
                       </span>
                       <span className="text-xs text-muted-foreground bg-card border border-border/50 rounded-full px-2 py-0.5">
-                        Valor del vehículo
+                        {t("car.vehicle_value")}
                       </span>
                     </div>
                     {isPromoActive && promotion?.type === "direct" ? (
@@ -495,7 +497,7 @@ const CarDetail = () => {
                     ) : (
                       <p className="text-4xl font-bold text-champagne">{sharePrice.toLocaleString("es-ES")}€</p>
                     )}
-                    <p className="text-xs text-muted-foreground mt-1">= 10% del valor del vehículo</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("car.participation_pct")}</p>
                   </div>
 
                   <div className="border-t border-border/30" />
@@ -504,15 +506,15 @@ const CarDetail = () => {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <Shield className="w-4 h-4 text-champagne" />
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Gestión anual incluida</span>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">{t("car.annual_mgmt_included")}</span>
                     </div>
                     <p className="text-2xl font-bold text-foreground mb-3">{annualFee.toLocaleString("es-ES")}€<span className="text-sm text-muted-foreground font-normal">/año</span></p>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { icon: Shield, label: "Seguro a todo riesgo" },
-                        { icon: Wrench, label: "Mantenimiento y revisiones" },
-                        { icon: MapPin, label: "Parking premium" },
-                        { icon: Sparkles, label: "Gestión integral OWNEO" },
+                        { icon: Shield, label: t("car.insurance") },
+                        { icon: Wrench, label: t("car.maintenance") },
+                        { icon: MapPin, label: t("car.parking") },
+                        { icon: Sparkles, label: t("car.mgmt_integral") },
                       ].map((it) => (
                         <div key={it.label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                           <it.icon className="w-3.5 h-3.5 text-champagne flex-shrink-0" />
@@ -528,7 +530,7 @@ const CarDetail = () => {
                   <div className="mt-4 rounded-xl overflow-hidden border border-border/50">
                     <div className="bg-muted/30 px-4 py-2 border-b border-border/50">
                       <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                        Coste neto estimado a {durationYears} años
+                        {t("car.net_cost_label", { n: durationYears })}
                       </span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border/50">
@@ -536,24 +538,24 @@ const CarDetail = () => {
                       <div className="p-4 bg-muted/10">
                         <div className="flex items-center gap-1.5 mb-4 h-6">
                           <div className="w-2 h-2 rounded-full bg-red-400/70 flex-shrink-0" />
-                          <span className="text-xs text-muted-foreground font-medium leading-none">Compra individual</span>
+                          <span className="text-xs text-muted-foreground font-medium leading-none">{t("car.individual_purchase")}</span>
                         </div>
                         <div className="space-y-0">
                           <div className="flex justify-between items-center h-9 border-b border-border/20">
-                            <span className="text-xs text-muted-foreground">Precio compra</span>
+                            <span className="text-xs text-muted-foreground">{t("car.purchase_price")}</span>
                             <span className="text-xs text-foreground font-medium">{car.numericPrice.toLocaleString('es-ES')}€</span>
                           </div>
                           <div className="flex justify-between items-center h-9 border-b border-border/20">
-                            <span className="text-xs text-muted-foreground">Gastos {durationYears} años</span>
+                            <span className="text-xs text-muted-foreground">{t("car.expenses_years", { n: durationYears })}</span>
                             <span className="text-xs text-foreground font-medium">+{(ownerAnnualTotal * durationYears).toLocaleString('es-ES')}€</span>
                           </div>
                           <div className="flex justify-between items-center h-9">
-                            <span className="text-xs text-muted-foreground">Reventa estimada</span>
+                            <span className="text-xs text-muted-foreground">{t("car.est_resale")}</span>
                             <span className="text-xs text-green-500/70 font-medium">-{ownerResaleValue.toLocaleString('es-ES')}€</span>
                           </div>
                         </div>
                         <div className="pt-3 mt-3 border-t border-border/40">
-                          <div className="text-xs text-muted-foreground mb-1">Coste neto</div>
+                          <div className="text-xs text-muted-foreground mb-1">{t("car.net_cost")}</div>
                           <div className="text-xl font-bold text-foreground">{ownerNetCost.toLocaleString('es-ES')}€</div>
                         </div>
                       </div>
@@ -565,20 +567,20 @@ const CarDetail = () => {
                         </div>
                         <div className="space-y-0">
                           <div className="flex justify-between items-center h-9 border-b border-border/20">
-                            <span className="text-xs text-muted-foreground">Participación</span>
+                            <span className="text-xs text-muted-foreground">{t("car.sticky_participation")}</span>
                             <span className="text-xs text-foreground font-medium">{sharePrice.toLocaleString('es-ES')}€</span>
                           </div>
                           <div className="flex justify-between items-center h-9 border-b border-border/20">
-                            <span className="text-xs text-muted-foreground">Gestión {durationYears} años</span>
+                            <span className="text-xs text-muted-foreground">{t("car.expenses_years", { n: durationYears })}</span>
                             <span className="text-xs text-foreground font-medium">+{(annualFee * durationYears).toLocaleString('es-ES')}€</span>
                           </div>
                           <div className="flex justify-between items-center h-9">
-                            <span className="text-xs text-muted-foreground">Reventa estimada</span>
+                            <span className="text-xs text-muted-foreground">{t("car.est_resale")}</span>
                             <span className="text-xs text-green-500 font-medium">-{estimatedResale.toLocaleString('es-ES')}€</span>
                           </div>
                         </div>
                         <div className="pt-3 mt-3 border-t border-champagne/20">
-                          <div className="text-xs text-muted-foreground mb-1">Coste neto</div>
+                          <div className="text-xs text-muted-foreground mb-1">{t("car.net_cost")}</div>
                           <div className="text-xl font-bold text-champagne">{netCost.toLocaleString('es-ES')}€</div>
                         </div>
                       </div>
@@ -586,7 +588,7 @@ const CarDetail = () => {
                     <div className="px-4 py-3 bg-champagne/10 border-t border-champagne/20 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <TrendingDown className="w-4 h-4 text-champagne flex-shrink-0" />
-                        <span className="text-xs text-foreground font-medium">Ahorras con OWNEO</span>
+                        <span className="text-xs text-foreground font-medium">{t("car.save_with_owneo")}</span>
                       </div>
                       <span className="text-base font-bold text-champagne">
                         ~{saving.toLocaleString('es-ES')}€
@@ -594,7 +596,7 @@ const CarDetail = () => {
                     </div>
                     <div className="px-4 py-2 bg-muted/10 border-t border-border/30">
                       <p className="text-xs text-muted-foreground italic">
-                        Estimación orientativa basada en costes medios de mercado. Sujeta a condiciones reales del vehículo.
+                        {t("car.est_note")}
                       </p>
                     </div>
                   </div>
@@ -609,7 +611,7 @@ const CarDetail = () => {
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">
-                    Sin compromiso · Proceso 100% digital · Respuesta en 24h
+                    {t("car.no_commitment")}
                   </p>
 
                   <Button
@@ -619,7 +621,7 @@ const CarDetail = () => {
                     className="w-full text-muted-foreground hover:text-champagne"
                   >
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    Reservar consulta privada
+                    {t("car.private_consult")}
                   </Button>
                 </CardContent>
               </Card>
@@ -631,24 +633,24 @@ const CarDetail = () => {
           {/* ─── BLOQUE D: ALLOCATION ─── */}
           <Reveal className="mb-24">
             <div className="text-center max-w-3xl mx-auto mb-8">
-              <span className="ds-eyebrow-pill">Tus derechos de uso</span>
+              <span className="ds-eyebrow-pill">{t("car.allocation_eyebrow")}</span>
               <h2 className="ds-h2 text-foreground mt-4 mb-3">
-                Cuanto más participas, más disfrutas.
+                {t("car.more_you_participate")}
               </h2>
               <p className="ds-lead">
-                Cada participación te garantiza acceso exclusivo al vehículo: 3 semanas estándar + 1 semana premium. Acumula participaciones para ampliar tu tiempo al volante.
+                {t("car.usage_desc")}
               </p>
             </div>
 
             <div className="overflow-x-auto">
               <div className="min-w-[720px]">
                 <div className="grid grid-cols-6 gap-2 px-4 py-3 text-xs uppercase tracking-wider text-muted-foreground border-b border-border/50">
-                  <div>N° Parts</div>
-                  <div>Semanas/año</div>
-                  <div>Días/año</div>
-                  <div>Km incluidos</div>
-                  <div>Inversión</div>
-                  <div>Gestión anual</div>
+                  <div>{t("car.n_parts")}</div>
+                  <div>{t("car.weeks_year")}</div>
+                  <div>{t("car.days_year")}</div>
+                  <div>{t("car.km_included")}</div>
+                  <div>{t("car.investment")}</div>
+                  <div>{t("car.annual_mgmt")}</div>
                 </div>
                 {allocationRows.map((r) => {
                   const highlighted = r.n === 1;
@@ -663,8 +665,8 @@ const CarDetail = () => {
                         <Users className={`w-4 h-4 ${highlighted ? "text-champagne" : "text-muted-foreground"}`} />
                         <span className={`font-bold ${highlighted ? "text-champagne" : "text-foreground"}`}>{r.n}</span>
                       </div>
-                      <div className="text-champagne font-bold">{Math.floor(r.weeks * 0.75)} est. + {Math.ceil(r.weeks * 0.25)} prem.</div>
-                      <div className="text-foreground">{Math.floor(r.days * 0.75)} + {Math.ceil(r.days * 0.25)} días</div>
+                      <div className="text-champagne font-bold">{Math.floor(r.weeks * 0.75)} {t("car.standard_short")} + {Math.ceil(r.weeks * 0.25)} {t("car.premium_short")}</div>
+                      <div className="text-foreground">{Math.floor(r.days * 0.75)} + {Math.ceil(r.days * 0.25)} {t("car.days")}</div>
                       <div className="text-foreground">{r.km.toLocaleString("es-ES")} km</div>
                       <div className="text-foreground font-semibold">{r.invest.toLocaleString("es-ES")}€</div>
                       <div className="text-muted-foreground text-sm">{r.fee.toLocaleString("es-ES")}€</div>
@@ -675,9 +677,9 @@ const CarDetail = () => {
             </div>
 
             <p className="text-sm text-muted-foreground mt-4 text-center">
-              ¿Interesado en más de 5 participaciones?{" "}
+              {t("car.more_than_5")}{" "}
               <button onClick={() => scrollTo(consultaRef)} className="text-champagne hover:underline">
-                Contáctanos para una propuesta personalizada.
+                {t("car.contact_custom")}
               </button>
             </p>
           </Reveal>
@@ -700,9 +702,9 @@ const CarDetail = () => {
 
                   {/* Contenu par-dessus */}
                   <div className="relative z-10 flex flex-col h-full p-8 sm:p-10">
-                    <span className="ds-eyebrow-pill self-start">La Experiencia</span>
+                    <span className="ds-eyebrow-pill self-start">{t("car.experience_eyebrow")}</span>
                     <h2 className="ds-h2 text-foreground mt-4 mb-6">
-                      Una obra maestra sobre ruedas.
+                      {t("car.experience_title")}
                     </h2>
                     <p className="ds-lead leading-relaxed whitespace-pre-line">{luxuryDesc}</p>
                     <Button
@@ -710,7 +712,7 @@ const CarDetail = () => {
                       className="mt-8 self-start"
                       onClick={() => scrollTo(specsRef)}
                     >
-                      Ver especificaciones técnicas
+                      {t("car.see_specs")}
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
@@ -739,7 +741,7 @@ const CarDetail = () => {
           {/* ─── BLOQUE F: GALERÍA (carrusel con flechas) ─── */}
           <Reveal className="mb-24">
             <div className="text-center max-w-3xl mx-auto mb-8">
-              <span className="ds-eyebrow-pill">Galería exclusiva</span>
+              <span className="ds-eyebrow-pill">{t("car.gallery_eyebrow")}</span>
             </div>
 
             <Carousel className="relative" opts={{ loop: galleryImages.length > 1 }}>
@@ -804,10 +806,10 @@ const CarDetail = () => {
               <Tabs value={specTab} onValueChange={setSpecTab}>
                 <div className="-mx-4 sm:mx-0 mb-4">
                   <TabsList className="flex w-max sm:w-auto mx-4 sm:mx-0 gap-1 overflow-x-auto no-scrollbar">
-                    <TabsTrigger value="motor" className="text-xs sm:text-sm whitespace-nowrap">Motor</TabsTrigger>
-                    <TabsTrigger value="prestaciones" className="text-xs sm:text-sm whitespace-nowrap">Prestaciones</TabsTrigger>
-                    <TabsTrigger value="dimensiones" className="text-xs sm:text-sm whitespace-nowrap">Dimensiones</TabsTrigger>
-                    <TabsTrigger value="equipamiento" className="text-xs sm:text-sm whitespace-nowrap">Equipamiento</TabsTrigger>
+                    <TabsTrigger value="motor" className="text-xs sm:text-sm whitespace-nowrap">{t("car.spec_tab_motor")}</TabsTrigger>
+                    <TabsTrigger value="prestaciones" className="text-xs sm:text-sm whitespace-nowrap">{t("car.spec_tab_prestaciones")}</TabsTrigger>
+                    <TabsTrigger value="dimensiones" className="text-xs sm:text-sm whitespace-nowrap">{t("car.spec_tab_dimensiones")}</TabsTrigger>
+                    <TabsTrigger value="equipamiento" className="text-xs sm:text-sm whitespace-nowrap">{t("car.spec_tab_equipamiento")}</TabsTrigger>
                   </TabsList>
                 </div>
                 {Object.entries(SPEC_CATEGORIES).map(([cat, keys]) => {
@@ -826,7 +828,7 @@ const CarDetail = () => {
                                   className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4 py-3 sm:py-3.5 border-b border-border/40 last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
                                 >
                                   <span className="text-muted-foreground text-[11px] sm:text-sm uppercase tracking-wide leading-snug sm:flex-1 sm:min-w-0">
-                                    {({ power: t("car.power"), seats: t("car.seats"), transmission: t("car.transmission"), year: t("car.year") } as Record<string, string>)[k] || specLabels[k] || k}
+                                    {labels[k] || k}
                                   </span>
                                   <span className={`font-semibold text-sm sm:text-base text-left sm:text-right break-words leading-snug ${HIGHLIGHTED_SPECS.has(k) ? "text-champagne" : "text-foreground"}`}>
                                     {car.specifications[k]}
@@ -981,22 +983,21 @@ const CarDetail = () => {
           <section ref={consultaRef} className="bg-gradient-to-br from-card via-background to-card border-y border-border/50 -mx-4 sm:-mx-6 px-4 sm:px-6 py-20 mb-24">
             <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-10">
               <Reveal>
-                <span className="ds-eyebrow-pill">Consulta privada</span>
-                <h2 className="ds-h2 text-foreground mt-4 mb-2">¿Tienes preguntas?</h2>
-                <h3 className="ds-h3 text-champagne mb-4">Habla con un especialista OWNEO.</h3>
+                <span className="ds-eyebrow-pill">{t("car.consult_eyebrow")}</span>
+                <h2 className="ds-h2 text-foreground mt-4 mb-2">{t("car.consult_title")}</h2>
+                <h3 className="ds-h3 text-champagne mb-4">{t("car.consult_subtitle")}</h3>
                 <p className="ds-body leading-relaxed mb-6">
-                  Nuestro equipo está disponible para resolver todas tus dudas sobre este vehículo, el proceso
-                  de participación y las condiciones contractuales. Sin compromiso.
+                  {t("car.consult_desc")}
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Respuesta en menos de 24 horas",
-                    "Consulta completamente confidencial",
-                    "Sin ningún tipo de compromiso",
-                  ].map((t) => (
-                    <li key={t} className="flex items-center gap-3 text-sm text-muted-foreground">
+                    t("car.consult_perk_1"),
+                    t("car.consult_perk_2"),
+                    t("car.consult_perk_3"),
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
                       <CheckCircle2 className="w-4 h-4 text-champagne" />
-                      <span>{t}</span>
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -1008,33 +1009,33 @@ const CarDetail = () => {
                     {submitted ? (
                       <div className="text-center py-8">
                         <CheckCircle2 className="w-12 h-12 mx-auto mb-4 text-champagne" />
-                        <p className="text-foreground font-semibold mb-1">¡Gracias!</p>
+                        <p className="text-foreground font-semibold mb-1">{t("car.thanks")}</p>
                         <p className="text-muted-foreground text-sm">
-                          Solicitud recibida. Nos pondremos en contacto contigo en menos de 24 horas.
+                          {t("car.request_received")}
                         </p>
                       </div>
                     ) : (
                       <form onSubmit={form.handleSubmit((v) => consultaMutation.mutate(v))} className="space-y-4">
                         <div>
-                          <label className="text-sm text-foreground mb-1 block">Nombre *</label>
-                          <Input {...form.register("name")} placeholder="Tu nombre" />
+                          <label className="text-sm text-foreground mb-1 block">{t("car.form_name")} *</label>
+                          <Input {...form.register("name")} placeholder={t("car.form_name_ph")} />
                           {form.formState.errors.name && <p className="text-xs text-destructive mt-1">{form.formState.errors.name.message}</p>}
                         </div>
                         <div>
-                          <label className="text-sm text-foreground mb-1 block">Email *</label>
+                          <label className="text-sm text-foreground mb-1 block">{t("car.form_email")} *</label>
                           <Input type="email" {...form.register("email")} placeholder="tu@email.com" />
                           {form.formState.errors.email && <p className="text-xs text-destructive mt-1">{form.formState.errors.email.message}</p>}
                         </div>
                         <div>
-                          <label className="text-sm text-foreground mb-1 block">Teléfono</label>
+                          <label className="text-sm text-foreground mb-1 block">{t("car.form_phone")}</label>
                           <Input type="tel" {...form.register("phone")} placeholder="+34 ..." />
                         </div>
                         <div>
-                          <label className="text-sm text-foreground mb-1 block">Mensaje</label>
+                          <label className="text-sm text-foreground mb-1 block">{t("car.form_message")}</label>
                           <Textarea
                             {...form.register("message")}
                             rows={4}
-                            placeholder={`¿Qué te gustaría saber sobre el ${car.name}?`}
+                            placeholder={t("car.form_message_ph", { car: car.name })}
                           />
                         </div>
                         <div className="flex items-start gap-2">
@@ -1044,7 +1045,7 @@ const CarDetail = () => {
                             onCheckedChange={(v) => form.setValue("consent", v as true, { shouldValidate: true })}
                           />
                           <label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed">
-                            Acepto la política de privacidad
+                            {t("car.form_consent")}
                           </label>
                         </div>
                         {form.formState.errors.consent && (
@@ -1056,9 +1057,9 @@ const CarDetail = () => {
                           className="w-full bg-champagne text-champagne-foreground hover:bg-champagne/90"
                         >
                           {consultaMutation.isPending ? (
-                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Enviando...</>
+                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> {t("car.sending")}</>
                           ) : (
-                            "Enviar consulta"
+                            t("car.form_submit")
                           )}
                         </Button>
                       </form>
