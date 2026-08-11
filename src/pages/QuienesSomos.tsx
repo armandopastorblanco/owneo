@@ -511,7 +511,7 @@ const QuienesSomos = () => {
                   size="lg"
                   className="text-base px-8 h-12 border-champagne/40 hover:bg-champagne/10"
                 >
-                  <Link to="/nuestro-modelo">Descubrir el modelo</Link>
+                  <Link to="/nuestro-modelo">{t("about.cta_model")}</Link>
                 </Button>
               </div>
             </Reveal>
