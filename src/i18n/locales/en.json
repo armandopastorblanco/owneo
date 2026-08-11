@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "concept": "OUR CONCEPT",
+    "fleet": "OUR FLEET",
+    "locations": "LOCATIONS",
+    "about": "ABOUT US",
+    "news": "NEWS",
+    "account": "MY ACCOUNT",
+    "login": "LOGIN"
+  },
+  "home": {
+    "hero_title": "Access Spain's most exclusive supercars",
+    "hero_subtitle": "Share your Ferrari, Lamborghini or Porsche, share the costs and live the experience 100%.",
+    "hero_cta": "Explore the fleet",
+    "hero_cta2": "Our model",
+    "model_title": "Luxury worth sharing",
+    "stat1_label": "Of the vehicle's value",
+    "stat2_label": "Guaranteed weeks per year",
+    "stat3_label": "Shared running costs",
+    "collection_title": "Featured Collection",
+    "collection_subtitle": "Masterpieces selected from the world's most prestigious manufacturers",
+    "locations_title": "Our Locations",
+    "locations_subtitle": "Discover our fleet in Spain's most exclusive cities"
+  },
+  "fleet": {
+    "title": "Our Fleet",
+    "subtitle": "Shared luxury supercars in Spain",
+    "cta": "Request a spot",
+    "filter_all": "All",
+    "filter_available": "Available"
+  },
+  "model": {
+    "title": "Our Model",
+    "subtitle": "How luxury car sharing works"
+  },
+  "locations": {
+    "title": "Locations",
+    "subtitle": "Your supercar near you"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "The team behind Owneo"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest from the supercar world",
+    "read_more": "Read more"
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Message sent successfully",
+    "subject": "Subject"
+  },
+  "participate": {
+    "title": "Request a spot",
+    "cta": "Submit request"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "legal": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy"
+  },
+  "cookie": {
+    "text": "We use cookies to improve your experience on Owneo.",
+    "accept": "Accept",
+    "reject": "Decline"
+  },
+  "car": {
+    "request": "Request a spot",
+    "specs": "Specifications",
+    "power": "Power",
+    "seats": "Seats",
+    "transmission": "Transmission",
+    "year": "Year"
+  }
+}

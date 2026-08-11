@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "concept": "NUESTRO CONCEPTO",
+    "fleet": "NUESTRA GAMA",
+    "locations": "UBICACIONES",
+    "about": "QUIÉNES SOMOS",
+    "news": "NOTICIAS",
+    "account": "MI CUENTA",
+    "login": "ACCEDER"
+  },
+  "home": {
+    "hero_title": "Accede a los supercoches más exclusivos de España",
+    "hero_subtitle": "Comparte tu Ferrari, Lamborghini o Porsche, comparte los costes y vive la experiencia al 100%.",
+    "hero_cta": "Descubrir la flota",
+    "hero_cta2": "Nuestro modelo",
+    "model_title": "El lujo que se comparte",
+    "stat1_label": "Del valor del vehículo",
+    "stat2_label": "Semanas garantizadas al año",
+    "stat3_label": "Los gastos compartidos",
+    "collection_title": "Colección Destacada",
+    "collection_subtitle": "Obras maestras seleccionadas de los fabricantes más prestigiosos del mundo",
+    "locations_title": "Nuestras Ubicaciones",
+    "locations_subtitle": "Descubre nuestra flota en las ciudades más exclusivas de España"
+  },
+  "fleet": {
+    "title": "Nuestra Flota",
+    "subtitle": "Supercoches de lujo compartidos en España",
+    "cta": "Solicitar plaza",
+    "filter_all": "Todos",
+    "filter_available": "Disponibles"
+  },
+  "model": {
+    "title": "Nuestro Modelo",
+    "subtitle": "Cómo funciona el car sharing de lujo"
+  },
+  "locations": {
+    "title": "Ubicaciones",
+    "subtitle": "Tu supercoche cerca de ti"
+  },
+  "about": {
+    "title": "Quiénes Somos",
+    "subtitle": "El equipo detrás de Owneo"
+  },
+  "news": {
+    "title": "Noticias",
+    "subtitle": "Últimas novedades del mundo de los supercoches",
+    "read_more": "Leer más"
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nombre",
+    "email": "Email",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "success": "Mensaje enviado correctamente",
+    "subject": "Asunto"
+  },
+  "participate": {
+    "title": "Solicitar plaza",
+    "cta": "Enviar solicitud"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "legal": "Aviso Legal",
+    "privacy": "Política de Privacidad",
+    "cookies": "Política de Cookies"
+  },
+  "cookie": {
+    "text": "Utilizamos cookies para mejorar tu experiencia en Owneo.",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
+  },
+  "car": {
+    "request": "Solicitar plaza",
+    "specs": "Especificaciones",
+    "power": "Potencia",
+    "seats": "Plazas",
+    "transmission": "Transmisión",
+    "year": "Año"
+  }
+}
