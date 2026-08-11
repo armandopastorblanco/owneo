@@ -283,17 +283,13 @@ const QuienesSomos = () => {
 
             <Reveal delay={0.1}>
               <h2 className="ds-h2 mt-8 text-foreground">
-                El lujo no debería ser{" "}
-                <span className="text-champagne">cuestión de fortuna.</span>
+                <span className="text-champagne">{t("about.manifesto_title")}</span>
               </h2>
             </Reveal>
 
             <Reveal delay={0.25}>
               <p className="ds-lead mt-8 max-w-2xl mx-auto">
-                Creemos que los coches más extraordinarios del mundo no deberían estar
-                reservados a unos pocos. No por falta de pasión, sino por una ecuación
-                económica que durante décadas ha hecho del lujo automovilístico algo
-                inalcanzable.
+                {t("about.manifesto_p1")}
               </p>
             </Reveal>
 
