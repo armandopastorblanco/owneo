@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCars, useCar, type Car } from "@/hooks/useCars";
@@ -88,6 +90,7 @@ const Step0VehicleSelection = ({
   initialCarId?: string;
   onConfirm: (car: Car) => void;
 }) => {
+  const { t } = useTranslation();
   const { data: cars = [], isLoading: carsLoading } = useCars();
   const { data: locations = [], isLoading: locsLoading } = useLocations();
   const { data: initialCar } = useCar(initialCarId);
@@ -127,7 +130,7 @@ const Step0VehicleSelection = ({
 
     return (
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-foreground">Vehículo seleccionado</h2>
+        <h2 className="text-2xl font-bold text-foreground">{t("join.selected_vehicle")}</h2>
 
         <Card className="bg-card border-border overflow-hidden">
           <div className="aspect-video relative bg-muted">
@@ -141,16 +144,16 @@ const Step0VehicleSelection = ({
             <h3 className="text-xl font-semibold text-foreground">{currentCar.name}</h3>
             <div className="flex items-center gap-2 text-muted-foreground text-sm">
               <MapPin className="w-4 h-4" />
-              <span>{currentCar.availableIn?.join(", ") || "Ubicación no especificada"}</span>
+              <span>{currentCar.availableIn?.join(", ") || t("join.err_location_unspecified")}</span>
             </div>
             <div className="flex justify-between items-center pt-3 border-t border-border">
-              <span className="text-muted-foreground text-sm">Precio por participación</span>
+              <span className="text-muted-foreground text-sm">{t("join.price_per_part")}</span>
               <span className="text-lg font-bold text-foreground">
                 {currentCar.participationPrice.toLocaleString("es-ES")}€
               </span>
             </div>
             <div className="flex justify-between items-center text-sm">
-              <span className="text-muted-foreground">Participaciones disponibles</span>
+              <span className="text-muted-foreground">{t("join.parts_available")}</span>
               <span className="text-foreground">{currentCar.remainingParticipations}</span>
             </div>
           </CardContent>
@@ -158,7 +161,7 @@ const Step0VehicleSelection = ({
 
         {otherCities.length > 0 && (
           <div className="space-y-2">
-            <Label className="text-foreground">¿Prefieres otra ciudad?</Label>
+            <Label className="text-foreground">{t("join.prefer_other_city")}</Label>
             <Select
               value={selectedCarId || initialCar.id}
               onValueChange={(v) => setSelectedCarId(v)}
@@ -168,7 +171,7 @@ const Step0VehicleSelection = ({
               </SelectTrigger>
               <SelectContent className="bg-card border-border">
                 <SelectItem value={initialCar.id}>
-                  {initialCar.availableIn?.[0] || "Ciudad principal"}
+                  {initialCar.availableIn?.[0] || t("join.main_city")}
                 </SelectItem>
                 {otherCities.map((c) => (
                   <SelectItem key={c.id} value={c.id}>
@@ -185,7 +188,7 @@ const Step0VehicleSelection = ({
           className="w-full bg-foreground text-background hover:bg-foreground/90"
           size="lg"
         >
-          Continuar <ArrowRight className="w-4 h-4 ml-2" />
+          {t("join.continue")} <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>
     );
@@ -207,10 +210,10 @@ const Step0VehicleSelection = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-foreground">Selecciona un vehículo</h2>
+      <h2 className="text-2xl font-bold text-foreground">{t("join.select_vehicle")}</h2>
 
       <div className="space-y-2">
-        <Label className="text-foreground">Ciudad</Label>
+        <Label className="text-foreground">{t("join.city")}</Label>
         <Select
           value={selectedCityId}
           onValueChange={(v) => {
@@ -219,7 +222,7 @@ const Step0VehicleSelection = ({
           }}
         >
           <SelectTrigger className="bg-background border-border">
-            <SelectValue placeholder="Selecciona una ciudad" />
+            <SelectValue placeholder={t("join.select_city_ph")} />
           </SelectTrigger>
           <SelectContent className="bg-card border-border">
             {locations.map((l) => (
@@ -233,10 +236,10 @@ const Step0VehicleSelection = ({
 
       {selectedCityId && (
         <div className="space-y-3">
-          <Label className="text-foreground">Vehículos disponibles</Label>
+          <Label className="text-foreground">{t("join.available_vehicles")}</Label>
           {carsInCity.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              No hay vehículos disponibles en esta ciudad.
+              {t("join.no_vehicles_in_city")}
             </p>
           ) : (
             <div className="grid sm:grid-cols-2 gap-4">
@@ -258,7 +261,7 @@ const Step0VehicleSelection = ({
                     <h4 className="font-semibold text-foreground text-sm">{c.name}</h4>
                     <div className="flex justify-between text-xs">
                       <span className="text-muted-foreground">
-                        {c.remainingParticipations} disp.
+                        {c.remainingParticipations} {t("join.disp_short")}
                       </span>
                       <span className="text-foreground font-semibold">
                         {c.participationPrice.toLocaleString("es-ES")}€
@@ -278,7 +281,7 @@ const Step0VehicleSelection = ({
         className="w-full bg-foreground text-background hover:bg-foreground/90"
         size="lg"
       >
-        Confirmar selección <ArrowRight className="w-4 h-4 ml-2" />
+        {t("join.confirm_selection")} <ArrowRight className="w-4 h-4 ml-2" />
       </Button>
     </div>
   );
@@ -288,38 +291,39 @@ const Step0VehicleSelection = ({
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-const fieldLabels: Record<string, string> = {
-  name: "Nombre",
-  surname: "Apellidos",
-  email: "Email",
-  password: "Contraseña",
-  confirmPassword: "Confirmar contraseña",
-  phone: "Teléfono",
-  address: "Dirección",
-  linkedin: "LinkedIn",
-  cityId: "Ciudad",
-  numParticipations: "Número de participaciones",
-};
+const makeFieldLabels = (t: TFunction): Record<string, string> => ({
+  name: t("join.field_name"),
+  surname: t("join.field_surname"),
+  email: t("join.field_email"),
+  password: t("join.field_password"),
+  confirmPassword: t("join.field_confirm_password"),
+  phone: t("join.field_phone"),
+  address: t("join.field_address"),
+  linkedin: t("join.field_linkedin"),
+  cityId: t("join.field_city"),
+  numParticipations: t("join.field_num_parts"),
+});
 
-const personalSchemaGuest = z
-  .object({
-    name: z.string().trim().min(2, { message: "El nombre debe tener al menos 2 caracteres" }),
-    surname: z.string().trim().min(2, { message: "Los apellidos deben tener al menos 2 caracteres" }),
-    email: z.string().trim().email({ message: "Introduce un email válido" }),
-    password: z.string().regex(passwordRegex, {
-      message: "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número",
-    }),
-    confirmPassword: z.string(),
-    phone: z.string().trim().min(6, { message: "Introduce un teléfono válido" }),
-    address: z.string().trim().optional().or(z.literal("")),
-    linkedin: z.string().trim().optional().or(z.literal("")),
-    cityId: z.string().min(1, { message: "Selecciona una ciudad" }),
-    numParticipations: z.number().int().min(1),
-  })
-  .refine((d) => d.password === d.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Las contraseñas no coinciden",
-  });
+const makePersonalSchemaGuest = (t: TFunction) =>
+  z
+    .object({
+      name: z.string().trim().min(2, { message: t("join.err_name_short") }),
+      surname: z.string().trim().min(2, { message: t("join.err_surname_short") }),
+      email: z.string().trim().email({ message: t("join.err_email_invalid") }),
+      password: z.string().regex(passwordRegex, {
+        message: t("join.err_password_weak"),
+      }),
+      confirmPassword: z.string(),
+      phone: z.string().trim().min(6, { message: t("join.err_phone_short") }),
+      address: z.string().trim().optional().or(z.literal("")),
+      linkedin: z.string().trim().optional().or(z.literal("")),
+      cityId: z.string().min(1, { message: t("join.err_city_required") }),
+      numParticipations: z.number().int().min(1, { message: t("join.err_parts_min") }),
+    })
+    .refine((d) => d.password === d.confirmPassword, {
+      path: ["confirmPassword"],
+      message: t("join.err_password_mismatch"),
+    });
 
 const Step1PersonalInfo = ({
   car,
@@ -330,6 +334,8 @@ const Step1PersonalInfo = ({
   onBack: () => void;
   onComplete: (data: Draft["personal"]) => void;
 }) => {
+  const { t } = useTranslation();
+  const fieldLabels = makeFieldLabels(t);
   const { user } = useAuth();
   const { data: locations = [] } = useLocations();
   const { trackEvent } = useAnalytics();
@@ -418,7 +424,7 @@ const Step1PersonalInfo = ({
 
       if (!user) {
         // Guest flow — sign up
-        const parsed = personalSchemaGuest.safeParse(form);
+        const parsed = makePersonalSchemaGuest(t).safeParse(form);
         if (!parsed.success) {
           const first = parsed.error.errors[0];
           const fieldKey = String(first.path[0] ?? "");
@@ -525,30 +531,30 @@ const Step1PersonalInfo = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <h2 className="text-2xl font-bold text-foreground">Información personal</h2>
+      <h2 className="text-2xl font-bold text-foreground">{t("join.personal_title")}</h2>
 
       {!user && (
         <p className="text-sm text-muted-foreground">
-          ¿Ya tienes cuenta?{" "}
+          {t("join.already_account")}{" "}
           <Link to={`/login?redirect=/participar?carId=${car.id}`} className="text-champagne hover:underline">
-            Inicia sesión
+            {t("join.login_link")}
           </Link>
         </p>
       )}
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-foreground">Nombre *</Label>
+          <Label htmlFor="name" className="text-foreground">{t("join.field_name")} *</Label>
           <Input id="name" value={form.name} onChange={(e) => update("name", e.target.value)} required />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="surname" className="text-foreground">Apellidos *</Label>
+          <Label htmlFor="surname" className="text-foreground">{t("join.field_surname")} *</Label>
           <Input id="surname" value={form.surname} onChange={(e) => update("surname", e.target.value)} required />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-foreground">Email *</Label>
+        <Label htmlFor="email" className="text-foreground">{t("join.field_email")} *</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
@@ -566,7 +572,7 @@ const Step1PersonalInfo = ({
       {!user && (
         <>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-foreground">Contraseña *</Label>
+            <Label htmlFor="password" className="text-foreground">{t("join.field_password")} *</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
@@ -589,7 +595,7 @@ const Step1PersonalInfo = ({
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword" className="text-foreground">Confirmar contraseña *</Label>
+            <Label htmlFor="confirmPassword" className="text-foreground">{t("join.field_confirm_password")} *</Label>
             <Input
               id="confirmPassword"
               type={showPwd ? "text" : "password"}
@@ -603,17 +609,17 @@ const Step1PersonalInfo = ({
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="phone" className="text-foreground">Teléfono *</Label>
+        <Label htmlFor="phone" className="text-foreground">{t("join.field_phone")} *</Label>
         <Input id="phone" type="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)} required />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="address" className="text-foreground">Dirección</Label>
+        <Label htmlFor="address" className="text-foreground">{t("join.field_address")}</Label>
         <Input id="address" value={form.address} onChange={(e) => update("address", e.target.value)} />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="linkedin" className="text-foreground">LinkedIn</Label>
+        <Label htmlFor="linkedin" className="text-foreground">{t("join.field_linkedin")}</Label>
         <Input
           id="linkedin"
           value={form.linkedin}
@@ -623,10 +629,10 @@ const Step1PersonalInfo = ({
       </div>
 
       <div className="space-y-2">
-        <Label className="text-foreground">Ciudad de preferencia *</Label>
+        <Label className="text-foreground">{t("join.field_city")} *</Label>
         <Select value={form.cityId} onValueChange={(v) => update("cityId", v)}>
           <SelectTrigger>
-            <SelectValue placeholder="Selecciona una ciudad" />
+            <SelectValue placeholder={t("join.select_city_ph")} />
           </SelectTrigger>
           <SelectContent className="bg-card">
             {locations.map((l) => (
@@ -638,7 +644,7 @@ const Step1PersonalInfo = ({
 
       <div className="space-y-2">
         <Label htmlFor="numParticipations" className="text-foreground">
-          Número de participaciones * (máx. {maxParts})
+          {t("join.field_num_parts")} * (máx. {maxParts})
         </Label>
         <Input
           id="numParticipations"
@@ -661,7 +667,7 @@ const Step1PersonalInfo = ({
 
       <div className="flex gap-3 pt-2">
         <Button type="button" variant="outline" onClick={onBack} className="flex-1">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Atrás
+          <ArrowLeft className="w-4 h-4 mr-2" /> {t("join.back")}
         </Button>
         <Button
           type="submit"
@@ -669,7 +675,7 @@ const Step1PersonalInfo = ({
           className="flex-1 bg-foreground text-background hover:bg-foreground/90"
         >
           {loading ? "Procesando..." : (
-            <>Continuar <ArrowRight className="w-4 h-4 ml-2" /></>
+            <>{t("join.continue")} <ArrowRight className="w-4 h-4 ml-2" /></>
           )}
         </Button>
       </div>
@@ -694,10 +700,11 @@ const Step3Summary = ({
   onConfirm: () => void;
   loading: boolean;
 }) => {
+  const { t } = useTranslation();
   const total = car.participationPrice * personal.numParticipations;
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-foreground">Resumen y confirmación</h2>
+      <h2 className="text-2xl font-bold text-foreground">{t("join.summary_title")}</h2>
 
       <Card className="bg-card border-border overflow-hidden">
         <div className="aspect-video bg-muted">
@@ -711,17 +718,17 @@ const Step3Summary = ({
 
       <Card className="bg-card border-border">
         <CardContent className="p-5 space-y-2 text-sm">
-          <h3 className="font-semibold text-foreground mb-2">Información personal</h3>
-          <div className="flex justify-between"><span className="text-muted-foreground">Nombre</span><span className="text-foreground">{personal.name} {personal.surname}</span></div>
+          <h3 className="font-semibold text-foreground mb-2">{t("join.personal_title")}</h3>
+          <div className="flex justify-between"><span className="text-muted-foreground">{t("join.field_name")}</span><span className="text-foreground">{personal.name} {personal.surname}</span></div>
           <div className="flex justify-between"><span className="text-muted-foreground">Email</span><span className="text-foreground">{personal.email}</span></div>
-          <div className="flex justify-between"><span className="text-muted-foreground">Teléfono</span><span className="text-foreground">{personal.phone}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">{t("join.field_phone")}</span><span className="text-foreground">{personal.phone}</span></div>
         </CardContent>
       </Card>
 
       <Card className="bg-card border-border">
         <CardContent className="p-5 space-y-2 text-sm">
-          <h3 className="font-semibold text-foreground mb-2">Participación</h3>
-          <div className="flex justify-between"><span className="text-muted-foreground">Participaciones</span><span className="text-foreground">{personal.numParticipations}</span></div>
+          <h3 className="font-semibold text-foreground mb-2">{t("join.participation")}</h3>
+          <div className="flex justify-between"><span className="text-muted-foreground">{t("join.parts_available")}</span><span className="text-foreground">{personal.numParticipations}</span></div>
           <div className="flex justify-between pt-2 border-t border-border">
             <span className="text-muted-foreground">Total</span>
             <span className="text-xl font-bold text-foreground">{total.toLocaleString("es-ES")}€</span>
@@ -731,21 +738,21 @@ const Step3Summary = ({
 
       <Card className="bg-card border-border">
         <CardContent className="p-5 space-y-2 text-sm">
-          <h3 className="font-semibold text-foreground mb-2">Cuestionario</h3>
-          <p className="text-muted-foreground">{Object.keys(answers).length} respuestas registradas</p>
+          <h3 className="font-semibold text-foreground mb-2">{t("join.step_questionnaire")}</h3>
+          <p className="text-muted-foreground">{t("join.answers_recorded", { count: Object.keys(answers).length })}</p>
         </CardContent>
       </Card>
 
       <div className="flex gap-3">
         <Button type="button" variant="outline" onClick={onBack} className="flex-1">
-          <ArrowLeft className="w-4 h-4 mr-2" /> Atrás
+          <ArrowLeft className="w-4 h-4 mr-2" /> {t("join.back")}
         </Button>
         <Button
           onClick={onConfirm}
           disabled={loading}
           className="flex-1 bg-foreground text-background hover:bg-foreground/90"
         >
-          {loading ? "Enviando..." : "Confirmar solicitud"}
+          {loading ? t("join.submitting") : t("join.submit")}
         </Button>
       </div>
     </div>
@@ -755,6 +762,7 @@ const Step3Summary = ({
 // ============== Main page ==============
 
 const Participar = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const carIdFromUrl = params.get("carId") || undefined;
@@ -920,16 +928,16 @@ const Participar = () => {
             <div className="mx-auto w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center">
               <CheckCircle2 className="w-12 h-12 text-emerald-500" />
             </div>
-            <h1 className="text-3xl font-bold text-foreground">¡Solicitud enviada!</h1>
+            <h1 className="text-3xl font-bold text-foreground">{t("join.success_title")}</h1>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Tu solicitud está siendo procesada. Nos pondremos en contacto contigo en breve.
+              {t("join.success_body")}
             </p>
             <div className="flex gap-3 justify-center pt-4">
               <Button onClick={() => navigate("/dashboard")} className="bg-foreground text-background hover:bg-foreground/90">
-                Ir al dashboard
+                {t("join.go_dashboard")}
               </Button>
               <Button variant="outline" onClick={() => navigate("/coches")}>
-                Volver al portfolio
+                {t("join.back_portfolio")}
               </Button>
             </div>
           </div>
@@ -938,7 +946,7 @@ const Participar = () => {
             {/* Step indicator */}
             <div className="mb-8">
               <div className="flex items-center justify-between text-xs text-muted-foreground">
-                {["Vehículo", "Datos", "Cuestionario", "Confirmar"].map((label, i) => (
+                {[t("join.step_vehicle"), t("join.step_personal"), t("join.step_questionnaire"), t("join.step_summary")].map((label, i) => (
                   <div key={label} className="flex-1 flex flex-col items-center gap-2">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                       draft.step >= i ? "bg-foreground text-background" : "bg-muted text-muted-foreground"
@@ -968,7 +976,7 @@ const Participar = () => {
 
             {draft.step === 2 && selectedCar && draft.personal && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-foreground">Cuestionario</h2>
+                <h2 className="text-2xl font-bold text-foreground">{t("join.step_questionnaire")}</h2>
                 <EvaluationQuestionnaire
                   carId={selectedCar.id}
                   carName={selectedCar.name}
@@ -986,7 +994,7 @@ const Participar = () => {
                   submitMode="next"
                 />
                 <Button variant="outline" onClick={() => setStep(1)} className="w-full">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Atrás
+                  <ArrowLeft className="w-4 h-4 mr-2" /> {t("join.back")}
                 </Button>
               </div>
             )}

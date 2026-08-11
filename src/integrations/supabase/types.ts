@@ -259,6 +259,7 @@ export type Database = {
           description: string | null
           description_en: string | null
           features: string[] | null
+          features_en: string[] | null
           gallery: string[] | null
           id: string
           image_url: string | null
@@ -285,6 +286,7 @@ export type Database = {
           reservation_advance_days: number | null
           slug: string | null
           specifications: Json | null
+          specifications_en: Json | null
           status: string | null
           technical_sheet: Json | null
           total_km: number | null
@@ -305,6 +307,7 @@ export type Database = {
           description?: string | null
           description_en?: string | null
           features?: string[] | null
+          features_en?: string[] | null
           gallery?: string[] | null
           id?: string
           image_url?: string | null
@@ -331,6 +334,7 @@ export type Database = {
           reservation_advance_days?: number | null
           slug?: string | null
           specifications?: Json | null
+          specifications_en?: Json | null
           status?: string | null
           technical_sheet?: Json | null
           total_km?: number | null
@@ -351,6 +355,7 @@ export type Database = {
           description?: string | null
           description_en?: string | null
           features?: string[] | null
+          features_en?: string[] | null
           gallery?: string[] | null
           id?: string
           image_url?: string | null
@@ -377,6 +382,7 @@ export type Database = {
           reservation_advance_days?: number | null
           slug?: string | null
           specifications?: Json | null
+          specifications_en?: Json | null
           status?: string | null
           technical_sheet?: Json | null
           total_km?: number | null
