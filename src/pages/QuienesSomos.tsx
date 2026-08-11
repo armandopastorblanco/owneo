@@ -237,9 +237,9 @@ const QuienesSomos = () => {
 
             <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               {[
-                { label: "Sin propiedad" },
-                { label: "Sin gestión" },
-                { label: "Sin compromiso" },
+                { label: t("about.tag1") },
+                { label: t("about.tag2") },
+                { label: t("about.tag3") },
               ].map((p, i) => (
                 <Reveal key={p.label} delay={0.5 + i * 0.1}>
                   <span className="ds-tag">{p.label}</span>
