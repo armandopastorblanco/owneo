@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveAssetPath } from "@/lib/assetMap";
@@ -62,6 +63,7 @@ function mapRowToCar(row: CarRow): Car {
 }
 
 const CityDetail = () => {
+  const { t } = useTranslation();
   const params = useParams<{ slug?: string; cityId?: string }>();
   const slug = params.slug;
   const cityId = params.cityId;
@@ -116,7 +118,7 @@ const CityDetail = () => {
           <p className="ds-lead mb-6">La ciudad que buscas no existe o ya no está disponible.</p>
           <Link to="/ubicaciones">
             <Button variant="outline">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Volver a ciudades
+              <ArrowLeft className="w-4 h-4 mr-2" /> {t("locations.back")}
             </Button>
           </Link>
         </main>
@@ -139,10 +141,10 @@ const CityDetail = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-28 pb-10">
           <Link to="/ubicaciones" className="inline-flex items-center text-sm text-foreground/80 hover:text-foreground mb-4">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Volver a ciudades
+            <ArrowLeft className="w-4 h-4 mr-2" /> {t("locations.back")}
           </Link>
           <div className="mb-4">
-            <span className="ds-eyebrow-pill">Ubicación premium</span>
+            <span className="ds-eyebrow-pill">{t("locations.premium_location")}</span>
           </div>
           <h1 className="ds-h1 text-foreground mb-4">{city.name}</h1>
           {city.description && (
@@ -155,7 +157,7 @@ const CityDetail = () => {
       <main className="py-12 px-4 sm:px-6">
         <div className="container mx-auto">
           <h2 className="ds-h2 text-foreground mb-8">
-            Vehículos disponibles en {city.name}
+            {t("locations.vehicles_available_in")} {city.name}
           </h2>
           {carsLoading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
