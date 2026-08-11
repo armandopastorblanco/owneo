@@ -33,6 +33,12 @@ function mapRowToCar(row: CarRow): Car {
     category: row.category || "",
     description: row.description || "",
     luxuryDescription: row.luxury_description || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    description_en: (row as any).description_en || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    category_en: (row as any).category_en || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    luxury_description_en: (row as any).luxury_description_en || "",
     specifications: (row.specifications as Record<string, string>) || {},
     features: row.features || [],
     availableIn: row.available_in || [],
