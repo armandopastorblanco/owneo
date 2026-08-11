@@ -88,7 +88,7 @@ const CarCard = ({
           </p>
           <div className="flex items-center justify-between mt-auto">
             <div className="flex flex-col">
-              <span className="text-xs text-muted-foreground uppercase tracking-wider">Cuota de participación</span>
+              <span className="text-xs text-muted-foreground uppercase tracking-wider">{t("car.participation_label")}</span>
               <span className="text-2xl font-bold text-foreground">
                 {sharePrice.toLocaleString('es-ES')}€
               </span>
