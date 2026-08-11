@@ -356,6 +356,8 @@
   },
   "car": {
     "per_year_short": "yr",
+    "savings_banner": "savings on annual management costs with OWNEO Co-Sharing.",
+    "savings_note": "Estimate based on annual management costs (insurance, maintenance, parking). Does not include acquisition price or depreciation.",
     "request": "Request a share",
     "specs": "Technical specifications",
     "power": "Power",

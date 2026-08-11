@@ -73,6 +73,7 @@ function useReducedMotion() {
 }
 
 function CountUp({ end, suffix = "", prefix = "", duration = 1200 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
+  const { i18n } = useTranslation();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const [val, setVal] = useState(0);
@@ -90,7 +91,8 @@ function CountUp({ end, suffix = "", prefix = "", duration = 1200 }: { end: numb
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, end, duration, reduced]);
-  return <span ref={ref}>{prefix}{Math.round(val).toLocaleString("es-ES")}{suffix}</span>;
+  return <span ref={ref}>{prefix}{Math.round(val).toLocaleString(i18n.language === "en" ? "en-GB" : "es-ES")}{suffix}</span>;
+
 }
 
 const fadeUp = {
@@ -378,7 +380,7 @@ const CarDetail = () => {
             </div>
             <div className="text-center">
               <div className="text-xs text-muted-foreground">{t("car.sticky_annual")}</div>
-              <div className="font-bold text-foreground">{annualFee.toLocaleString("es-ES")}€/{t("car.per_year_short")}</div>
+              <div className="font-bold text-foreground">{annualFee.toLocaleString(i18n.language === "en" ? "en-GB" : "es-ES")}€/{t("car.per_year_short")}</div>
             </div>
             <div className="text-center">
               <div className="text-xs text-muted-foreground">{t("car.sticky_duration")}</div>
@@ -946,12 +948,13 @@ const CarDetail = () => {
 
             <div className="mt-6 p-6 bg-champagne/10 rounded-2xl border border-champagne/20">
               <p className="text-center text-foreground">
-                <span className="font-bold text-champagne">~90% de ahorro</span> en costes anuales de gestión con OWNEO Co-Sharing.
+                <span className="font-bold text-champagne">~90%</span> {t("car.savings_banner")}
               </p>
             </div>
             <p className="text-xs text-muted-foreground italic mt-3">
-              Estimación basada en costes anuales de gestión (seguro, mantenimiento, parking). No incluye precio de adquisición ni depreciación.
+              {t("car.savings_note")}
             </p>
+
           </Reveal>
 
           {/* ─── BLOQUE J: DISPONIBILIDAD Y CONDICIONES ─── */}
