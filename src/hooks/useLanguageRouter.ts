@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -21,8 +21,16 @@ export const useLanguageRouter = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const prevLang = useRef<string | null>(null);
+
   useEffect(() => {
     const isEnPath = location.pathname.startsWith('/en');
+    // On first mount, let the URL win (an /en URL sets the language below).
+    if (prevLang.current === null) {
+      prevLang.current = i18n.language;
+      if (isEnPath) return;
+    }
+    prevLang.current = i18n.language;
     if (i18n.language === 'en' && !isEnPath) {
       const enPath = routeMap[location.pathname] || `/en${location.pathname}`;
       navigate(enPath, { replace: true });
