@@ -659,5 +659,26 @@
     "field_confirm_password": "Confirmar contraseña",
     "save_changes": "Guardar cambios",
     "saving": "Guardando..."
+  },
+  "pwa": {
+    "close": "Cerrar",
+    "subtitle": "Instala nuestra app para una mejor experiencia",
+    "ios_intro": "Para instalar en tu iPhone:",
+    "ios_step1_pre": "1. Pulsa el botón",
+    "ios_step1_btn": "Compartir",
+    "ios_step1_hint": "(cuadrado con flecha)",
+    "ios_step2_pre": "2. Selecciona",
+    "ios_step2_btn": "Añadir a pantalla de inicio",
+    "ios_step3_pre": "3. Pulsa",
+    "ios_step3_btn": "Añadir",
+    "understood": "Entendido",
+    "android_step1_pre": "1. Abre el menú",
+    "android_step1_post": "de tu navegador",
+    "android_step2_pre": "2. Selecciona",
+    "android_step2_opt1": "Instalar app",
+    "android_step2_or": "o",
+    "android_step2_opt2": "Añadir a pantalla de inicio",
+    "install_btn": "Instalar app",
+    "not_now": "Ahora no"
   }
 }

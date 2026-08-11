@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Share, Plus, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+
 
 interface PWAInstallPromptProps {
   show: boolean;
@@ -17,7 +19,9 @@ const PWAInstallPrompt = ({
   onInstall,
   onDismiss,
 }: PWAInstallPromptProps) => {
+  const { t } = useTranslation();
   if (!show) return null;
+
 
   return (
     <AnimatePresence>
@@ -34,7 +38,7 @@ const PWAInstallPrompt = ({
             <button
               onClick={onDismiss}
               className="absolute top-3 right-3 p-2 text-muted-foreground hover:text-foreground transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Cerrar"
+              aria-label={t("pwa.close")}
             >
               <X className="w-5 h-5" />
             </button>
@@ -52,7 +56,7 @@ const PWAInstallPrompt = ({
                     OWNEO
                   </h3>
                   <p className="text-muted-foreground text-sm font-light">
-                    Instala nuestra app para una mejor experiencia
+                    {t("pwa.subtitle")}
                   </p>
                 </div>
               </div>
@@ -61,7 +65,7 @@ const PWAInstallPrompt = ({
                 /* iOS instructions */
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground font-light mb-3">
-                    Para instalar en tu iPhone:
+                    {t("pwa.ios_intro")}
                   </p>
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
@@ -69,9 +73,9 @@ const PWAInstallPrompt = ({
                         <Share className="w-4 h-4 text-primary" />
                       </div>
                       <p className="text-sm text-foreground/80">
-                        <span className="font-medium">1.</span> Pulsa el botón{" "}
-                        <span className="font-medium">Compartir</span>{" "}
-                        <span className="text-muted-foreground">(cuadrado con flecha)</span>
+                        {t("pwa.ios_step1_pre")}{" "}
+                        <span className="font-medium">{t("pwa.ios_step1_btn")}</span>{" "}
+                        <span className="text-muted-foreground">{t("pwa.ios_step1_hint")}</span>
                       </p>
                     </div>
                     <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
@@ -79,8 +83,8 @@ const PWAInstallPrompt = ({
                         <Plus className="w-4 h-4 text-primary" />
                       </div>
                       <p className="text-sm text-foreground/80">
-                        <span className="font-medium">2.</span> Selecciona{" "}
-                        <span className="font-medium">"Añadir a pantalla de inicio"</span>
+                        {t("pwa.ios_step2_pre")}{" "}
+                        <span className="font-medium">"{t("pwa.ios_step2_btn")}"</span>
                       </p>
                     </div>
                     <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
@@ -88,8 +92,8 @@ const PWAInstallPrompt = ({
                         <Download className="w-4 h-4 text-primary" />
                       </div>
                       <p className="text-sm text-foreground/80">
-                        <span className="font-medium">3.</span> Pulsa{" "}
-                        <span className="font-medium">"Añadir"</span>
+                        {t("pwa.ios_step3_pre")}{" "}
+                        <span className="font-medium">"{t("pwa.ios_step3_btn")}"</span>
                       </p>
                     </div>
                   </div>
@@ -98,14 +102,14 @@ const PWAInstallPrompt = ({
                     onClick={onDismiss}
                     className="w-full mt-3 min-h-[48px] text-sm font-light tracking-wider border-border/40"
                   >
-                    Entendido
+                    {t("pwa.understood")}
                   </Button>
                 </div>
               ) : !canInstallNatively ? (
                 /* Android fallback: manual instructions */
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground font-light mb-3">
-                    Para instalar en tu iPhone:
+                    {t("pwa.ios_intro")}
                   </p>
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
@@ -113,8 +117,8 @@ const PWAInstallPrompt = ({
                         <Plus className="w-4 h-4 text-primary" />
                       </div>
                       <p className="text-sm text-foreground/80">
-                        <span className="font-medium">1.</span> Abre el menú{" "}
-                        <span className="font-medium">⋮</span> de tu navegador
+                        {t("pwa.android_step1_pre")}{" "}
+                        <span className="font-medium">⋮</span> {t("pwa.android_step1_post")}
                       </p>
                     </div>
                     <div className="flex items-center gap-3 bg-background/60 rounded-xl px-4 py-3">
@@ -122,9 +126,9 @@ const PWAInstallPrompt = ({
                         <Download className="w-4 h-4 text-primary" />
                       </div>
                       <p className="text-sm text-foreground/80">
-                        <span className="font-medium">2.</span> Selecciona{" "}
-                        <span className="font-medium">"Instalar app"</span> o{" "}
-                        <span className="font-medium">"Añadir a pantalla de inicio"</span>
+                        {t("pwa.android_step2_pre")}{" "}
+                        <span className="font-medium">"{t("pwa.android_step2_opt1")}"</span> {t("pwa.android_step2_or")}{" "}
+                        <span className="font-medium">"{t("pwa.android_step2_opt2")}"</span>
                       </p>
                     </div>
                   </div>
@@ -133,7 +137,7 @@ const PWAInstallPrompt = ({
                     onClick={onDismiss}
                     className="w-full mt-3 min-h-[48px] text-sm font-light tracking-wider border-border/40"
                   >
-                    Entendido
+                    {t("pwa.understood")}
                   </Button>
                 </div>
               ) : (
@@ -144,14 +148,14 @@ const PWAInstallPrompt = ({
                     className="flex-1 min-h-[48px] text-sm font-medium tracking-wider"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    Instalar app
+                    {t("pwa.install_btn")}
                   </Button>
                   <Button
                     variant="outline"
                     onClick={onDismiss}
                     className="min-h-[48px] text-sm font-light tracking-wider border-border/40 px-5"
                   >
-                    Ahora no
+                    {t("pwa.not_now")}
                   </Button>
                 </div>
               )}
