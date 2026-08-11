@@ -404,7 +404,7 @@ const QuienesSomos = () => {
         <div className="container mx-auto px-5 sm:px-6">
           <Reveal>
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
-              <span className="ds-eyebrow-pill">Lo que nos define</span>
+              <span className="ds-eyebrow-pill">{t("about.what_defines_us")}</span>
               <h2 className="ds-h2 mt-6 text-foreground">
                 <span className="text-champagne">{t("about.values_title")}</span>
               </h2>
