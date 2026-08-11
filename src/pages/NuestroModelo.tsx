@@ -456,25 +456,25 @@ export default function NuestroModelo() {
           <Reveal delay={0.1}>
             <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border">
               <div className="grid grid-cols-[1.2fr_1fr_1fr] sm:grid-cols-[1.4fr_1fr_1fr] text-xs sm:text-sm">
-                <div className="bg-muted/20 p-2.5 sm:p-4 font-semibold">Concepto</div>
+                <div className="bg-muted/20 p-2.5 sm:p-4 font-semibold">{t("model.comparison_concept")}</div>
                 <div className="bg-red-500/5 p-2.5 sm:p-4 font-semibold flex items-center gap-1.5 sm:gap-2">
                   <X className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-500 shrink-0" />
-                  <span className="leading-tight">Propietario<span className="hidden sm:inline"> único</span></span>
+                  <span className="leading-tight">{t("model.comparison_owner")}</span>
                 </div>
                 <div className="bg-champagne/5 p-2.5 sm:p-4 font-semibold flex items-center gap-1.5 sm:gap-2 ring-1 ring-champagne/30">
                   <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-champagne shrink-0" /> OWNEO
                 </div>
 
                 {[
-                  { label: "Seguro anual", owner: 5000, owneo: 500, maxBar: 5000 },
-                  { label: "Mantenimiento", owner: 8000, owneo: 800, maxBar: 8000 },
-                  { label: "Parking/Garaje", owner: 3600, owneo: 360, maxBar: 8000 },
-                  { label: "Limpieza", owner: 1200, owneo: 120, maxBar: 8000 },
+                  { label: t("model.comparison_insurance"), owner: 5000, owneo: 500, maxBar: 5000 },
+                  { label: t("model.comparison_maintenance"), owner: 8000, owneo: 800, maxBar: 8000 },
+                  { label: t("model.comparison_parking"), owner: 3600, owneo: 360, maxBar: 8000 },
+                  { label: t("model.comparison_cleaning"), owner: 1200, owneo: 120, maxBar: 8000 },
                 ].map((row) => (
                   <RowCompare key={row.label} row={row} />
                 ))}
 
-                <div className="bg-muted/30 p-2.5 sm:p-4 font-bold border-t border-border">TOTAL</div>
+                <div className="bg-muted/30 p-2.5 sm:p-4 font-bold border-t border-border">{t("model.comparison_total")}</div>
                 <div className="bg-red-500/10 p-2.5 sm:p-4 font-bold border-t border-border whitespace-nowrap">
                   <CountUp end={17800} prefix="€" /><span className="text-muted-foreground font-normal">/año</span>
                 </div>
@@ -490,11 +490,10 @@ export default function NuestroModelo() {
               <div className="text-6xl sm:text-7xl font-bold text-champagne">
                 <CountUp end={90} suffix="%" />
               </div>
-              <p className="mt-2 text-lg text-muted-foreground">de ahorro en costes anuales de gestión</p>
-              <p className="mt-1 text-sm text-muted-foreground">10x menos caro a lo largo de 5 años</p>
+              <p className="mt-2 text-lg text-muted-foreground">{t("model.comparison_saving")}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t("model.comparison_cheaper")}</p>
               <p className="mt-6 italic text-xs text-muted-foreground max-w-2xl mx-auto">
-                Estimación basada en un vehículo de €250.000 con kilometraje controlado. Los valores reales varían
-                según el modelo. Depreciación y costes de adquisición no incluidos en este cálculo anual.
+                {t("model.comparison_note")}
               </p>
             </div>
           </Reveal>
