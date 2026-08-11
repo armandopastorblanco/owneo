@@ -225,7 +225,19 @@
     "rights": "© 2026 OWNEO SL — All rights reserved",
     "legal": "Legal Notice",
     "privacy": "Privacy Policy",
-    "cookies": "Cookie Policy"
+    "cookies": "Cookie Policy",
+    "tagline": "Your exclusive destination for luxury supercars in Spain",
+    "section_contact": "CONTACT",
+    "section_links": "LINKS",
+    "section_app": "APP",
+    "section_social": "SOCIAL MEDIA",
+    "app_subtitle": "Install our app",
+    "link_fleet": "Our Fleet",
+    "link_locations": "Locations",
+    "link_about": "About Us",
+    "link_contact": "Contact",
+    "cookie_manage": "Manage cookie preferences",
+    "photo_credits": "Photo credits"
   },
   "cookie": {
     "text": "We use our own and third-party cookies to ensure the site works properly, analyse traffic and personalise your experience. You can accept all, reject them or configure your preferences at any time.",
