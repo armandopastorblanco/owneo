@@ -530,7 +530,10 @@ const Index = () => {
         </div>
       </section>
 
+      <PressSection />
+
       <Footer />
+
     </div>
   );
 };
