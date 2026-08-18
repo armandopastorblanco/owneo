@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ChevronDown, ChevronUp, Eye, Download, Loader2,
   Car, User, BadgeCheck, FileSignature, FileText, Landmark, CreditCard,
@@ -13,6 +14,7 @@ import {
 import { getSignedUrl } from "@/lib/getSignedUrl";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+
 
 type Variant = "vehicle" | "user";
 
@@ -53,15 +55,16 @@ const iconForType = (name: string) => {
 };
 
 const StatusBadge = ({ status, notes }: { status?: string | null; notes?: string | null }) => {
+  const { t } = useTranslation();
   if (!status) return null;
   if (status === "pending")
-    return <Badge className="bg-amber-500/15 text-amber-300 border-amber-500/30 text-[10px]">En revisión</Badge>;
+    return <Badge className="bg-amber-500/15 text-amber-300 border-amber-500/30 text-[10px]">{t("dash.doc_status_pending")}</Badge>;
   if (status === "validated")
-    return <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30 text-[10px]">Validado</Badge>;
+    return <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30 text-[10px]">{t("dash.doc_status_validated")}</Badge>;
   if (status === "rejected") {
     const badge = (
       <Badge className="bg-destructive/20 text-destructive border-destructive/30 text-[10px] cursor-help">
-        Rechazado
+        {t("dash.doc_status_rejected")}
       </Badge>
     );
     if (!notes) return badge;
@@ -82,6 +85,7 @@ const StatusBadge = ({ status, notes }: { status?: string | null; notes?: string
 const DocRow = ({
   item, variant, carId,
 }: { item: DocItem; variant: Variant; carId?: string | null }) => {
+  const { t } = useTranslation();
   const [viewing, setViewing] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const TypeIcon = iconForType(item.typeName);
@@ -144,13 +148,14 @@ const DocRow = ({
           </Button>
         </div>
       ) : (
-        <Badge variant="secondary" className="text-[10px] shrink-0">Pendiente de subir</Badge>
+        <Badge variant="secondary" className="text-[10px] shrink-0">{t("dash.doc_pending")}</Badge>
       )}
     </div>
   );
 };
 
 const DocumentsBlock = ({ variant, title, items, carId, emptyText, manageHref }: Props) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const HeaderIcon = variant === "vehicle" ? Car : User;
 
@@ -179,7 +184,7 @@ const DocumentsBlock = ({ variant, title, items, carId, emptyText, manageHref }:
           <div className="px-4 pb-4">
             {items.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
-                {emptyText || "No hay documentos disponibles."}
+                {emptyText || t("dash.doc_empty")}
               </p>
             ) : (
               <div className="divide-y divide-border/20">
@@ -190,7 +195,7 @@ const DocumentsBlock = ({ variant, title, items, carId, emptyText, manageHref }:
             )}
             {variant === "user" && manageHref && (
               <Link to={manageHref} className="block mt-3">
-                <Button variant="outline" size="sm" className="w-full">Gestionar mis documentos</Button>
+                <Button variant="outline" size="sm" className="w-full">{t("dash.doc_manage")}</Button>
               </Link>
             )}
           </div>
