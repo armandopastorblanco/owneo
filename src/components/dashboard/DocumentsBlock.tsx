@@ -55,15 +55,16 @@ const iconForType = (name: string) => {
 };
 
 const StatusBadge = ({ status, notes }: { status?: string | null; notes?: string | null }) => {
+  const { t } = useTranslation();
   if (!status) return null;
   if (status === "pending")
-    return <Badge className="bg-amber-500/15 text-amber-300 border-amber-500/30 text-[10px]">En revisión</Badge>;
+    return <Badge className="bg-amber-500/15 text-amber-300 border-amber-500/30 text-[10px]">{t("dash.doc_status_pending")}</Badge>;
   if (status === "validated")
-    return <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30 text-[10px]">Validado</Badge>;
+    return <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30 text-[10px]">{t("dash.doc_status_validated")}</Badge>;
   if (status === "rejected") {
     const badge = (
       <Badge className="bg-destructive/20 text-destructive border-destructive/30 text-[10px] cursor-help">
-        Rechazado
+        {t("dash.doc_status_rejected")}
       </Badge>
     );
     if (!notes) return badge;
