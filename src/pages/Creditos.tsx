@@ -255,7 +255,7 @@ const Creditos = () => {
                     Wikimedia Commons
                   </a>
                 </td>
-                <td className="py-4 px-4 text-white/40 text-xs">CC0 1.0 — Domaine public</td>
+                <td className="py-4 px-4 text-white/40 text-xs">{t("credits.cc0")}</td>
               </tr>
 
               {/* ─── Lamborghini Revuelto ─── */}
