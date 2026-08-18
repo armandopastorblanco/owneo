@@ -366,6 +366,19 @@
     "personal_title": "Personalisation cookies",
     "personal_desc": "Remember your preferences (language, city, vehicles viewed) for a tailored experience."
   },
+  "credits": {
+    "eyebrow": "Transparency",
+    "title": "Photo Credits",
+    "intro": "Some images and videos used on this site come from external sources under Creative Commons licences. Below we detail their origin and terms of use.",
+    "col_file": "File",
+    "col_author": "Author",
+    "col_source": "Source",
+    "col_license": "Licence",
+    "cc0": "CC0 1.0 — Public domain",
+    "modified_greyscale": "modified (70% greyscale)",
+    "press_note": "Images from official manufacturer press kits are the property of their respective brands and are used in an informational editorial context.",
+    "back_home": "Back to home"
+  },
   "car": {
     "per_year_short": "yr",
     "savings_banner": "savings on annual management costs with OWNEO Co-Sharing.",
