@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ChevronDown, ChevronUp, Eye, Download, Loader2,
   Car, User, BadgeCheck, FileSignature, FileText, Landmark, CreditCard,
@@ -13,6 +14,7 @@ import {
 import { getSignedUrl } from "@/lib/getSignedUrl";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+
 
 type Variant = "vehicle" | "user";
 
