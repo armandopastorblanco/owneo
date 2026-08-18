@@ -49,7 +49,7 @@ const Creditos = () => {
                     Wikimedia Commons
                   </a>
                 </td>
-                <td className="py-4 px-4 text-white/40 text-xs">CC BY 3.0 · modificado (escala de grises 70%)</td>
+                <td className="py-4 px-4 text-white/40 text-xs">CC BY 3.0 · {t("credits.modified_greyscale")}</td>
               </tr>
 
               {/* ─── Porsche 911 Turbo S ─── */}
@@ -203,7 +203,7 @@ const Creditos = () => {
                     Wikimedia Commons
                   </a>
                 </td>
-                <td className="py-4 px-4 text-white/40 text-xs">CC0 1.0 — Domaine public</td>
+                <td className="py-4 px-4 text-white/40 text-xs">{t("credits.cc0")}</td>
               </tr>
 
               {/* ─── Lamborghini Temerario ─── */}
@@ -243,7 +243,7 @@ const Creditos = () => {
                     Wikimedia Commons
                   </a>
                 </td>
-                <td className="py-4 px-4 text-white/40 text-xs">CC0 1.0 — Domaine public</td>
+                <td className="py-4 px-4 text-white/40 text-xs">{t("credits.cc0")}</td>
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">lamborghini-urus-se-detail-1.jpg</td>
@@ -651,9 +651,9 @@ const Creditos = () => {
                   </a>
                 </td>
                 <td className="py-4 px-4 text-white/40 text-xs">
-                  <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
+                    <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
                     className="hover:text-white underline underline-offset-4 transition-colors">
-                    CC0 1.0 — Dominio público
+                    {t("credits.cc0")}
                   </a>
                 </td>
               </tr>
@@ -685,9 +685,9 @@ const Creditos = () => {
                   </a>
                 </td>
                 <td className="py-4 px-4 text-white/40 text-xs">
-                  <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
+                    <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer"
                     className="hover:text-white underline underline-offset-4 transition-colors">
-                    CC0 1.0 — Dominio público
+                    {t("credits.cc0")}
                   </a>
                 </td>
               </tr>
