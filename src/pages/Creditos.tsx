@@ -14,15 +14,13 @@ const Creditos = () => {
       {/* Header */}
       <div className="border-b border-white/10 py-16 px-6 text-center">
         <p className="text-xs tracking-[0.3em] text-white/40 uppercase mb-4">
-          Transparencia
+          {t("credits.eyebrow")}
         </p>
         <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase mb-6">
-          Créditos Fotográficos
+          {t("credits.title")}
         </h1>
         <p className="text-white/50 text-sm max-w-xl mx-auto leading-relaxed">
-          Algunas imágenes y vídeos utilizados en este sitio provienen de fuentes
-          externas bajo licencias Creative Commons. A continuación detallamos
-          su procedencia y condiciones de uso.
+          {t("credits.intro")}
         </p>
       </div>
 
@@ -32,10 +30,10 @@ const Creditos = () => {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">Archivo</th>
-                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">Autor</th>
-                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">Fuente</th>
-                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">Licencia</th>
+                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">{t("credits.col_file")}</th>
+                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">{t("credits.col_author")}</th>
+                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">{t("credits.col_source")}</th>
+                <th className="text-left py-4 px-4 text-xs tracking-[0.2em] uppercase text-white/40 font-light">{t("credits.col_license")}</th>
               </tr>
             </thead>
             <tbody>
@@ -699,10 +697,9 @@ const Creditos = () => {
         </div>
 
         <p className="text-white/20 text-xs mt-12 text-center leading-relaxed">
-          Las imágenes de los kits de prensa oficiales de los constructores son propiedad de sus respectivas marcas
-          y se utilizan en un contexto editorial informativo. ·
+          {t("credits.press_note")} ·
           <Link to="/" className="hover:text-white/40 transition-colors ml-1">
-            Volver al inicio
+            {t("credits.back_home")}
           </Link>
         </p>
       </div>
