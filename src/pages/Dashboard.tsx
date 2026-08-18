@@ -589,14 +589,14 @@ const Dashboard = () => {
       <main className="mx-auto max-w-3xl">
         {!car ? (
           <div className="mx-4 mt-10 rounded-2xl border border-border bg-card p-10 text-center text-muted-foreground">
-            No tienes participaciones validadas todavía.
+            {t("dash.no_participations")}
           </div>
         ) : (
           <>
             {/* ============ VEHICLE SELECTOR ============ */}
             {participations.length > 1 && (
               <section className="px-4 pt-5">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Mis vehículos</p>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">{t("dash.my_vehicles")}</p>
                 <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-3 -mx-4 px-4 pb-2">
                   {participations.map((p: any, i: number) => {
                     const active = i === selectedIdx;
@@ -617,7 +617,7 @@ const Dashboard = () => {
                         <div className="bg-card p-2">
                           <p className="text-xs font-semibold truncate text-foreground">{p.car?.name}</p>
                           <p className={`text-[11px] ${active ? "text-champagne" : "text-muted-foreground"}`}>
-                            {p.credits_remaining} créditos
+                            {t("dash.credits", { n: p.credits_remaining })}
                           </p>
                         </div>
                       </button>
@@ -645,7 +645,7 @@ const Dashboard = () => {
                   </div>
                   {primary.num > 1 && (
                     <span className="shrink-0 rounded-full px-3 py-1 text-xs bg-champagne/20 border border-champagne/30 text-champagne">
-                      {primary.num} participaciones
+                      {t("dash.participations_badge", { n: primary.num })}
                     </span>
                   )}
                 </div>
@@ -656,15 +656,15 @@ const Dashboard = () => {
             <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 mt-4">
               {[
               {
-                  label: "Semanas estándar",
-                  value: `${Math.floor(Number(primary.standard_credits_remaining ?? 0) / 7)} sem. (${Number(primary.standard_credits_remaining ?? 0)} días)`,
+                  label: t("dash.weeks_standard_label"),
+                  value: `${Math.floor(Number(primary.standard_credits_remaining ?? 0) / 7)} ${t("dash.sem")} (${Number(primary.standard_credits_remaining ?? 0)} ${t("dash.days_short")})`,
                   icon: <CalendarIcon className="w-4 h-4 text-foreground" />,
                   cls: "bg-card border-border/50",
                   valueCls: "text-foreground",
                 },
                 {
-                  label: "Semana premium",
-                  value: `${Math.floor(Number(primary.premium_credits_remaining ?? 0) / 7)} sem. (${Number(primary.premium_credits_remaining ?? 0)} días)`,
+                  label: t("dash.week_premium_label"),
+                  value: `${Math.floor(Number(primary.premium_credits_remaining ?? 0) / 7)} ${t("dash.sem")} (${Number(primary.premium_credits_remaining ?? 0)} ${t("dash.days_short")})`,
                   icon: <Star className={`w-4 h-4 ${Number(primary.premium_credits_remaining ?? 0) === 0 ? "text-muted-foreground" : "text-champagne"}`} />,
                   cls: "bg-champagne/10 border-champagne/30",
                   valueCls: Number(primary.premium_credits_remaining ?? 0) === 0
@@ -672,14 +672,14 @@ const Dashboard = () => {
                     : "text-champagne",
                 },
                 {
-                  label: "Km restantes",
+                  label: t("dash.km_remaining_label"),
                   value: `${kmRemaining.toLocaleString("es-ES")} km`,
                   icon: <Gauge className="w-4 h-4 text-muted-foreground" />,
                   cls: "bg-card border-border/50",
                   valueCls: "text-foreground",
                 },
                 {
-                  label: "Días usados este año",
+                  label: t("dash.days_used_label"),
                   value: yearMetrics.used,
                   icon: <CalendarIcon className="w-4 h-4 text-muted-foreground" />,
                   cls: "bg-card border-border/50",
@@ -912,16 +912,16 @@ const Dashboard = () => {
                               {format(new Date(r.start_date), "d MMM", { locale: i18n.language === "en" ? enUS : es })} → {format(new Date(r.end_date), "d MMM yyyy", { locale: i18n.language === "en" ? enUS : es })}
                             </p>
                             <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1.5 flex-wrap">
-                              <span>{days} día{days > 1 ? "s" : ""}</span>
+                              <span>{t("dash.booking_days", { n: days })}</span>
                               <span>·</span>
                               {r.reservation_type === 'premium' ? (
-                                <Badge className="bg-[#bda095]/20 text-[#bda095] border-[#bda095]/30">Premium</Badge>
+                                <Badge className="bg-[#bda095]/20 text-[#bda095] border-[#bda095]/30">{t("dash.booking_type_premium")}</Badge>
                               ) : (
-                                <Badge variant="outline">Estándar</Badge>
+                                <Badge variant="outline">{t("dash.booking_type_standard")}</Badge>
                               )}
                             </p>
                             {r.rejection_reason && (
-                              <p className="text-xs italic text-muted-foreground mt-1">Motivo: {r.rejection_reason}</p>
+                              <p className="text-xs italic text-muted-foreground mt-1">{t("dash.rejection_reason")} {r.rejection_reason}</p>
                             )}
                           </div>
                           {(canCancelConfirmed || canCancelPending) && (
