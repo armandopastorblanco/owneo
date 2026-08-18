@@ -85,6 +85,7 @@ const StatusBadge = ({ status, notes }: { status?: string | null; notes?: string
 const DocRow = ({
   item, variant, carId,
 }: { item: DocItem; variant: Variant; carId?: string | null }) => {
+  const { t } = useTranslation();
   const [viewing, setViewing] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const TypeIcon = iconForType(item.typeName);
@@ -147,7 +148,7 @@ const DocRow = ({
           </Button>
         </div>
       ) : (
-        <Badge variant="secondary" className="text-[10px] shrink-0">Pendiente de subir</Badge>
+        <Badge variant="secondary" className="text-[10px] shrink-0">{t("dash.doc_pending")}</Badge>
       )}
     </div>
   );
