@@ -155,6 +155,7 @@ const DocRow = ({
 };
 
 const DocumentsBlock = ({ variant, title, items, carId, emptyText, manageHref }: Props) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const HeaderIcon = variant === "vehicle" ? Car : User;
 
@@ -183,7 +184,7 @@ const DocumentsBlock = ({ variant, title, items, carId, emptyText, manageHref }:
           <div className="px-4 pb-4">
             {items.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
-                {emptyText || "No hay documentos disponibles."}
+                {emptyText || t("dash.doc_empty")}
               </p>
             ) : (
               <div className="divide-y divide-border/20">
@@ -194,7 +195,7 @@ const DocumentsBlock = ({ variant, title, items, carId, emptyText, manageHref }:
             )}
             {variant === "user" && manageHref && (
               <Link to={manageHref} className="block mt-3">
-                <Button variant="outline" size="sm" className="w-full">Gestionar mis documentos</Button>
+                <Button variant="outline" size="sm" className="w-full">{t("dash.doc_manage")}</Button>
               </Link>
             )}
           </div>
