@@ -366,6 +366,19 @@
     "personal_title": "Cookies de personalización",
     "personal_desc": "Recuerdan tus preferencias (idioma, ciudad, vehículos vistos) para una experiencia adaptada."
   },
+  "credits": {
+    "eyebrow": "Transparencia",
+    "title": "Créditos Fotográficos",
+    "intro": "Algunas imágenes y vídeos utilizados en este sitio provienen de fuentes externas bajo licencias Creative Commons. A continuación detallamos su procedencia y condiciones de uso.",
+    "col_file": "Archivo",
+    "col_author": "Autor",
+    "col_source": "Fuente",
+    "col_license": "Licencia",
+    "cc0": "CC0 1.0 — Dominio público",
+    "modified_greyscale": "modificado (escala de grises 70%)",
+    "press_note": "Las imágenes de los kits de prensa oficiales de los constructores son propiedad de sus respectivas marcas y se utilizan en un contexto editorial informativo.",
+    "back_home": "Volver al inicio"
+  },
   "car": {
     "per_year_short": "año",
     "savings_banner": "de ahorro en costes anuales de gestión con OWNEO Co-Sharing.",
