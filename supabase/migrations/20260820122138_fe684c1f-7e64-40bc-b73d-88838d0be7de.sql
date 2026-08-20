@@ -1,0 +1,62 @@
+INSERT INTO public.cars (
+  slug, name, brand, model, year, price, max_participations, remaining_participations,
+  image_url, gallery, category, category_en, description, description_en,
+  luxury_description, luxury_description_en, specifications, specifications_en,
+  features, features_en, available_in, location_id, status, is_active,
+  annual_fee_percent, participation_duration_years, weeks_per_participation, km_per_participation,
+  min_reservation_days, max_reservation_days, reservation_advance_days, consultation_enabled
+) VALUES (
+  'mercedes-amg-g63',
+  'Mercedes-AMG G 63',
+  'Mercedes-AMG',
+  'G 63',
+  2025,
+  225000.00,
+  10,
+  10,
+  '/assets/cars/mercedes-amg-g63.jpg',
+  ARRAY[
+    '/assets/cars/gallery/mercedes-amg-g63-1.jpg',
+    '/assets/cars/gallery/mercedes-amg-g63-2.jpg',
+    '/assets/cars/gallery/mercedes-amg-g63-3.jpg',
+    '/assets/cars/gallery/mercedes-amg-g63-4.jpg',
+    '/assets/cars/gallery/mercedes-amg-g63-5.jpg',
+    '/assets/cars/gallery/mercedes-amg-g63-6.jpg'
+  ],
+  'SUV de Lujo',
+  'Luxury SUV',
+  'El icono todoterreno convertido en leyenda urbana',
+  'The off-road icon turned urban legend',
+  'El Mercedes-AMG G 63 en gris selenita es la presencia absoluta: una silueta cúbica inconfundible desde 1979, ahora animada por un V8 biturbo de 4.0 litros y 585 CV construido a mano en Affalterbach. Sus tres diferenciales bloqueables y su chasis de escalera conviven con una cabina de nappa, doble pantalla panorámica y detalles en fibra de carbono. Pocos vehículos consiguen unir de forma tan natural el lujo más exigente, la capacidad real fuera del asfalto y una estética que no ha necesitado cambiar en cuatro décadas.',
+  'The Mercedes-AMG G 63 in selenite grey is presence in its purest form: an unmistakable cubic silhouette born in 1979, now driven by a hand-built 4.0-litre biturbo V8 producing 585 HP in Affalterbach. Three lockable differentials and a ladder-frame chassis sit alongside a nappa leather cabin, twin widescreen displays and carbon fibre trim. Very few vehicles combine uncompromising luxury, genuine off-road capability and a design that has needed no reinvention in four decades.',
+  '{"engine":"4.0L V8 Biturbo","power":"585 CV a 6.000 rpm","torque":"850 Nm a 2.500 rpm","acceleration":"0-100 km/h en 4,5 s","topSpeed":"220 km/h (240 km/h con AMG Driver''s Package)","transmission":"AMG SPEEDSHIFT TCT 9 velocidades","drivetrain":"Tracción integral permanente AMG 4MATIC","displacement":"3.982 cc","cylinders":"8 cilindros en V","valves":"32 válvulas","compression":"8.6:1","fuelSystem":"Inyección directa por conductos","fuelType":"Gasolina sin plomo 98","fuelConsumption":"14,7 L/100 km","co2Emissions":"335 g/km","emissionClass":"Euro 6e","brakes":"Discos ventilados perforados 400/370 mm","suspension":"Doble trapecio delantero independiente / Eje rígido trasero con AMG Ride Control","tiresFront":"275/50 R20","tiresRear":"275/50 R20","length":"4.873 mm","width":"1.984 mm","height":"1.969 mm","wheelbase":"2.890 mm","weight":"2.560 kg","seats":"5","doors":"5","tankCapacity":"100 litros","trunkCapacity":"667 litros"}'::jsonb,
+  '{"engine":"4.0L V8 Biturbo","power":"585 HP at 6,000 rpm","torque":"850 Nm at 2,500 rpm","acceleration":"0-100 km/h in 4.5 s","topSpeed":"220 km/h (240 km/h with AMG Driver''s Package)","transmission":"9-speed AMG SPEEDSHIFT TCT","drivetrain":"AMG Performance 4MATIC all-wheel drive","displacement":"3,982 cc","cylinders":"V8","valves":"32","compression":"8.6:1","fuelSystem":"Direct injection","fuelType":"Petrol (98 RON)","fuelConsumption":"14.7 L/100 km","co2Emissions":"335 g/km","emissionClass":"Euro 6e","brakes":"Perforated ventilated discs 400/370 mm","suspension":"Independent double-wishbone (front) / Rigid axle (rear) with AMG Ride Control","tiresFront":"275/50 R20","tiresRear":"275/50 R20","length":"4,873 mm","width":"1,984 mm","height":"1,969 mm","wheelbase":"2,890 mm","weight":"2,560 kg","seats":"5","doors":"5","tankCapacity":"100 L","trunkCapacity":"667 L"}'::jsonb,
+  ARRAY[
+    'V8 biturbo 4.0 de 585 CV montado a mano',
+    'Tres diferenciales bloqueables al 100%',
+    'Suspensión adaptativa AMG Ride Control',
+    'Interior en cuero nappa con pespunte rojo',
+    'Doble pantalla panorámica de 12,3"',
+    'Escape deportivo AMG Performance conmutable'
+  ],
+  ARRAY[
+    'Hand-assembled 4.0 biturbo V8 with 585 HP',
+    'Three 100% lockable differentials',
+    'AMG Ride Control adaptive suspension',
+    'Nappa leather interior with red stitching',
+    'Twin 12.3" widescreen displays',
+    'Switchable AMG Performance exhaust system'
+  ],
+  ARRAY['Madrid','Barcelona','Valencia'],
+  '7c1b562b-1281-4b4b-8e9e-f6da148a4dfe',
+  'active',
+  true,
+  10,
+  5,
+  4,
+  2000,
+  7,
+  14,
+  7,
+  true
+);
