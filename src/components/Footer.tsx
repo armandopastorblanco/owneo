@@ -18,7 +18,18 @@ const AppleIcon = ({ className }: { className?: string }) => (
 );
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language === "en";
+  const L = {
+    legal: isEn ? "/en/legal-notice" : "/aviso-legal",
+    privacy: isEn ? "/en/privacy-policy" : "/politica-de-privacidad",
+    cookies: isEn ? "/en/cookies-policy" : "/politica-de-cookies",
+    credits: isEn ? "/en/credits" : "/creditos",
+    fleet: isEn ? "/en/cars" : "/coches",
+    locations: isEn ? "/en/locations" : "/ubicaciones",
+    about: isEn ? "/en/about-us" : "/quienes-somos",
+    contact: isEn ? "/en/contact" : "/contacto",
+  };
   const pwa = usePWAInstall();
 
   const handleAndroidInstall = () => {
@@ -65,10 +76,10 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground">{t("footer.section_links")}</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <div><a href="/coches" className="hover:text-foreground transition-colors">{t("footer.link_fleet")}</a></div>
-              <div><a href="/ubicaciones" className="hover:text-foreground transition-colors">{t("footer.link_locations")}</a></div>
-              <div><a href="/quienes-somos" className="hover:text-foreground transition-colors">{t("footer.link_about")}</a></div>
-              <div><a href="/contacto" className="hover:text-foreground transition-colors">{t("footer.link_contact")}</a></div>
+              <div><a href={L.fleet} className="hover:text-foreground transition-colors">{t("footer.link_fleet")}</a></div>
+              <div><a href={L.locations} className="hover:text-foreground transition-colors">{t("footer.link_locations")}</a></div>
+              <div><a href={L.about} className="hover:text-foreground transition-colors">{t("footer.link_about")}</a></div>
+              <div><a href={L.contact} className="hover:text-foreground transition-colors">{t("footer.link_contact")}</a></div>
             </div>
           </div>
 
@@ -126,7 +137,7 @@ const Footer = () => {
             className="flex flex-col items-center gap-3 md:flex-row md:flex-wrap md:justify-center md:gap-x-3 md:gap-y-2"
           >
             <a
-              href="/aviso-legal"
+              href={L.legal}
               aria-label="Leer el Aviso Legal"
               className="hover:text-foreground transition-colors"
             >
@@ -134,7 +145,7 @@ const Footer = () => {
             </a>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <a
-              href="/politica-de-privacidad"
+              href={L.privacy}
               aria-label="Leer la Política de Privacidad"
               className="hover:text-foreground transition-colors"
             >
@@ -142,7 +153,7 @@ const Footer = () => {
             </a>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <a
-              href="/politica-de-cookies"
+              href={L.cookies}
               aria-label="Leer la Política de Cookies"
               className="hover:text-foreground transition-colors"
             >
@@ -159,7 +170,7 @@ const Footer = () => {
             </button>
             <span aria-hidden="true" className="hidden md:inline text-border">|</span>
             <Link
-              to="/creditos"
+              to={L.credits}
               aria-label="Créditos fotográficos"
               className="hover:text-foreground transition-colors"
             >
