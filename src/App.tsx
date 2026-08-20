@@ -165,6 +165,10 @@ const App = () => {
               <Route path="/en/news/:slug" element={<NoticiaDetalle />} />
               <Route path="/en/contact" element={<Contacto />} />
               <Route path="/en/cars/:slug" element={<CarDetail />} />
+              <Route path="/en/legal-notice" element={<AvisoLegal />} />
+              <Route path="/en/privacy-policy" element={<PoliticaPrivacidad />} />
+              <Route path="/en/cookies-policy" element={<PoliticaCookies />} />
+              <Route path="/en/credits" element={<Creditos />} />
               {/* Admin routes */}
               <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
                 <Route index element={<AdminDashboard />} />

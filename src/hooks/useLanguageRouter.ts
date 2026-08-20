@@ -11,6 +11,10 @@ const routeMap: Record<string, string> = {
   '/quienes-somos': '/en/about-us',
   '/noticias': '/en/news',
   '/contacto': '/en/contact',
+  '/aviso-legal': '/en/legal-notice',
+  '/politica-de-privacidad': '/en/privacy-policy',
+  '/politica-de-cookies': '/en/cookies-policy',
+  '/creditos': '/en/credits',
 };
 
 const routeMapReverse: Record<string, string> = Object.fromEntries(

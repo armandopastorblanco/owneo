@@ -122,7 +122,7 @@ const PoliticaPrivacidad = () => {
           <h2>VIII. Cookies</h2>
           <p>
             The Website uses its own and third-party cookies. Please consult our{" "}
-            <a href="/politica-de-cookies">Cookie Policy</a> available in the footer of the Website.
+            <a href="/en/cookies-policy">Cookie Policy</a> available in the footer of the Website.
           </p>
 
           <h2>IX. Amendments</h2>
