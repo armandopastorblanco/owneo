@@ -1029,7 +1029,7 @@ const AdminVehiculos = () => {
                 <Label className="text-base font-semibold">Estado del vehículo</Label>
                 <Select
                   value={form.status as string}
-                  onValueChange={(v) => setForm({ ...form, status: v, is_active: v === "active" ? (form.is_active as boolean) : v !== "archived" && (form.is_active as boolean) })}
+                  onValueChange={(v) => setForm({ ...form, status: v, is_active: v === "archived" ? false : true })}
                 >
                   <SelectTrigger className="mt-2">
                     <SelectValue />
@@ -1040,6 +1040,9 @@ const AdminVehiculos = () => {
                     <SelectItem value="archived">Archivado</SelectItem>
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Al elegir «Activo» o «Completo» el vehículo se publica automáticamente. Puedes desactivarlo con el interruptor «Publicado en el sitio» (pestaña Precios), que lo dejará en Borrador.
+                </p>
               </div>
 
               <div>
