@@ -27,7 +27,7 @@ const DEFAULT: ConsentCategories = {
 };
 
 const CookieBanner = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showBanner, setShowBanner] = useState(false);
   const [showConfig, setShowConfig] = useState(false);
   const [prefs, setPrefs] = useState<ConsentCategories>(DEFAULT);
@@ -109,7 +109,7 @@ const CookieBanner = () => {
                 <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
                   {t("cookie.text")}{" "}
                   <Link
-                    to="/politica-de-cookies"
+                    to={i18n.language === "en" ? "/en/cookies-policy" : "/politica-de-cookies"}
                     className="underline underline-offset-2 hover:text-foreground transition-colors"
                   >
                     {t("footer.cookies")}

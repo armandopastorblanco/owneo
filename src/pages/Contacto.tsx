@@ -21,7 +21,7 @@ const initialForm = {
 };
 
 export default function Contacto() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [form, setForm] = useState(initialForm);
   const [accepted, setAccepted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -152,7 +152,7 @@ export default function Contacto() {
             />
             <Label htmlFor="privacy" className="text-sm text-muted-foreground leading-snug">
               {t("contact.privacy")}{" "}
-              <a href="/politica-de-privacidad" className="text-champagne hover:underline">
+              <a href={i18n.language === "en" ? "/en/privacy-policy" : "/politica-de-privacidad"} className="text-champagne hover:underline">
                 {t("contact.privacy_link")}
               </a>
               .
