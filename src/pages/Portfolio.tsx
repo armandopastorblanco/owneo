@@ -1,15 +1,19 @@
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CarCard from "@/components/CarCard";
 import { useCarModels } from "@/hooks/useCars";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MapPin } from "lucide-react";
 
 const Portfolio = () => {
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const ciudadFilter = searchParams.get("ciudad");
 
   const { data: models = [], isLoading } = useCarModels();
   const { trackEvent } = useAnalytics();
@@ -29,6 +33,14 @@ const Portfolio = () => {
     const bComplete = b.totalRemaining === 0 ? 1 : 0;
     return aComplete - bComplete;
   });
+
+  const filteredModels = ciudadFilter
+    ? sortedModels.filter(
+        (model) =>
+          model.cityName?.toLowerCase() === ciudadFilter.toLowerCase() ||
+          model.availableIn?.map((c) => c.toLowerCase()).includes(ciudadFilter.toLowerCase())
+      )
+    : sortedModels;
 
   return (
     <div className="min-h-screen bg-background">
@@ -67,29 +79,51 @@ const Portfolio = () => {
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sortedModels.map((model) => {
-                const multiCity = model.cityCount > 1;
-                const link = multiCity
-                  ? "/ubicaciones"
-                  : model.slug
-                  ? `/coches/${model.slug}`
-                  : `/car/${model.id}`;
-                return (
-                  <CarCard
-                    key={`${model.brand}-${model.model}`}
-                    car={model}
-                    pageSource="portfolio"
-                    linkOverride={link}
-                    availabilityOverride={{
-                      remaining: model.totalRemaining,
-                      max: model.totalMax,
-                    }}
-                    cityCountBadge={model.cityCount}
-                  />
-                );
-              })}
-            </div>
+            <>
+              {ciudadFilter && (
+                <div className="flex items-center gap-3 mb-6 px-4 py-3 rounded-lg border border-champagne/40 bg-champagne/5">
+                  <MapPin className="w-4 h-4 text-champagne" />
+                  <span className="text-sm text-foreground">
+                    Mostrando vehículos disponibles en <strong className="text-champagne capitalize">{ciudadFilter}</strong>
+                  </span>
+                  <button
+                    onClick={() => setSearchParams({})}
+                    className="ml-auto text-xs text-muted-foreground hover:text-foreground underline"
+                  >
+                    Ver toda la flota
+                  </button>
+                </div>
+              )}
+              {filteredModels.length === 0 ? (
+                <p className="text-muted-foreground text-center py-12">
+                  No hay vehículos disponibles en <strong className="capitalize">{ciudadFilter}</strong> por el momento.
+                </p>
+              ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredModels.map((model) => {
+                    const multiCity = model.cityCount > 1;
+                    const link = multiCity
+                      ? "/ubicaciones"
+                      : model.slug
+                      ? `/coches/${model.slug}`
+                      : `/car/${model.id}`;
+                    return (
+                      <CarCard
+                        key={`${model.brand}-${model.model}`}
+                        car={model}
+                        pageSource="portfolio"
+                        linkOverride={link}
+                        availabilityOverride={{
+                          remaining: model.totalRemaining,
+                          max: model.totalMax,
+                        }}
+                        cityCountBadge={model.cityCount}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </>
           )}
         </div>
       </main>
