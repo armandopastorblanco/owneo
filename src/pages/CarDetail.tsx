@@ -476,10 +476,6 @@ const CarDetail = () => {
             <Reveal className="space-y-6 text-center max-w-3xl mx-auto">
               <span className="ds-eyebrow-pill">{i18n.language === "en" && car.category_en ? car.category_en : car.category}</span>
               <h1 className="ds-h1 text-foreground">{car.name}</h1>
-              <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-                <MapPin className="w-4 h-4 text-champagne" />
-                <span>{car.availableIn.join(", ")}</span>
-              </div>
               <div>
                 <p className={`ds-body ${descExpanded ? "" : "line-clamp-2"}`}>
                   {luxuryDesc}
