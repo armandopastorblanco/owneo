@@ -100,13 +100,6 @@ const Step0VehicleSelection = ({
   const [selectedCityId, setSelectedCityId] = useState<string | undefined>();
   const [selectedCarId, setSelectedCarId] = useState<string | undefined>(initialCarId);
 
-  // Map db location_id -> city name (cars use availableIn = string[] of city names)
-  const cityById = useMemo(() => {
-    const m = new Map<string, string>();
-    locations.forEach((l) => m.set(l.id, l.name));
-    return m;
-  }, [locations]);
-
   const availableCars = useMemo(() => {
     return cars.filter(
       (c) => c.status === "active" && c.remainingParticipations > 0
@@ -115,10 +108,8 @@ const Step0VehicleSelection = ({
 
   const carsInCity = useMemo(() => {
     if (!selectedCityId) return [];
-    const cityName = cityById.get(selectedCityId);
-    if (!cityName) return [];
-    return availableCars.filter((c) => c.availableIn?.includes(cityName));
-  }, [selectedCityId, cityById, availableCars]);
+    return availableCars.filter((c) => c.locationId === selectedCityId);
+  }, [selectedCityId, availableCars]);
 
 
 
@@ -146,7 +137,7 @@ const Step0VehicleSelection = ({
             <h3 className="text-xl font-semibold text-foreground">{currentCar.name}</h3>
             <div className="flex items-center gap-2 text-muted-foreground text-sm">
               <MapPin className="w-4 h-4" />
-              <span>{currentCar.availableIn?.join(", ") || t("join.err_location_unspecified")}</span>
+              <span>{currentCar.cityName || t("join.err_location_unspecified")}</span>
             </div>
             <div className="flex justify-between items-center pt-3 border-t border-border">
               <span className="text-muted-foreground text-sm">{t("join.price_per_part")}</span>
@@ -183,11 +174,11 @@ const Step0VehicleSelection = ({
               </SelectTrigger>
               <SelectContent className="bg-card border-border">
                 <SelectItem value={initialCar.id}>
-                  {initialCar.availableIn?.[0] || t("join.main_city")}
+                  {initialCar.cityName || t("join.main_city")}
                 </SelectItem>
                 {otherCities.map((c) => (
                   <SelectItem key={c.id} value={c.id}>
-                    {c.availableIn?.[0] || c.name}
+                    {c.cityName || c.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -380,13 +371,12 @@ const Step1PersonalInfo = ({
     numParticipations: 1,
   });
 
-  // Pre-select city based on car.availableIn[0] matching a location name
+  // Pre-select city based on car.locationId
   useEffect(() => {
-    if (!form.cityId && locations.length && car.availableIn?.[0]) {
-      const match = locations.find((l) => l.name === car.availableIn[0]);
-      if (match) setForm((f) => ({ ...f, cityId: match.id }));
+    if (!form.cityId && car.locationId) {
+      setForm((f) => ({ ...f, cityId: car.locationId! }));
     }
-  }, [locations, car, form.cityId]);
+  }, [car.locationId, form.cityId]);
 
   // Pre-fill from profile if logged in
   useEffect(() => {
@@ -736,7 +726,12 @@ const Step3Summary = ({
         </div>
         <CardContent className="p-5 space-y-2">
           <h3 className="font-semibold text-foreground">{car.name}</h3>
-          <p className="text-sm text-muted-foreground">{car.availableIn?.join(", ")}</p>
+          {car.cityName && (
+            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-champagne flex-shrink-0" />
+              {car.cityName}
+            </p>
+          )}
         </CardContent>
       </Card>
 
@@ -832,7 +827,7 @@ const Participar = () => {
       car_name: car.name,
       car_brand: car.brand,
       car_id: car.id,
-      city_name: car.availableIn?.[0],
+      city_name: car.cityName,
       participation_price: car.participationPrice,
     });
   };
