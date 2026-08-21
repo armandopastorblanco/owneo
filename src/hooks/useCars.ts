@@ -141,6 +141,13 @@ export interface CarModel extends Car {
   totalRemaining: number;     // places restantes cumulées (toutes villes)
   totalMax: number;           // places max cumulées (toutes villes)
   cities: { name: string | null; slug: string | null }[];
+  cityDetails: {
+    name: string | null;
+    slug: string | null;
+    remaining: number;
+    max: number;
+    status: string;
+  }[];
 }
 
 function buildModels(cars: Car[]): CarModel[] {
