@@ -12,6 +12,8 @@ import { MapPin } from "lucide-react";
 
 const Portfolio = () => {
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const ciudadFilter = searchParams.get("ciudad");
 
   const { data: models = [], isLoading } = useCarModels();
   const { trackEvent } = useAnalytics();
@@ -31,6 +33,14 @@ const Portfolio = () => {
     const bComplete = b.totalRemaining === 0 ? 1 : 0;
     return aComplete - bComplete;
   });
+
+  const filteredModels = ciudadFilter
+    ? sortedModels.filter(
+        (model) =>
+          model.cityName?.toLowerCase() === ciudadFilter.toLowerCase() ||
+          model.availableIn?.map((c) => c.toLowerCase()).includes(ciudadFilter.toLowerCase())
+      )
+    : sortedModels;
 
   return (
     <div className="min-h-screen bg-background">
