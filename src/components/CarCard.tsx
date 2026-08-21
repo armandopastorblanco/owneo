@@ -8,7 +8,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 import CityPickerModal from "@/components/CityPickerModal";
 
 interface CarCardProps {
-  car: CarModel;
+  car: Car;
   pageSource?: string;
   /** Surcharge le lien de destination (ex: Gama -> Ubicaciones du modèle) */
   linkOverride?: string;
@@ -137,7 +137,7 @@ const CarCard = ({
         </Link>
       )}
       {isMultiCity && showPicker && (
-        <CityPickerModal car={car} onClose={() => setShowPicker(false)} />
+        <CityPickerModal car={car as CarModel} onClose={() => setShowPicker(false)} />
       )}
     </>
   );
