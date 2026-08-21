@@ -172,6 +172,7 @@ const CarDetail = () => {
   const [descExpanded, setDescExpanded] = useState(false);
   const [specTab, setSpecTab] = useState("motor");
   const [openParticipationForm, setOpenParticipationForm] = useState(false);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
   const handleSolicitarClick = () => {
     setOpenParticipationForm(true);
