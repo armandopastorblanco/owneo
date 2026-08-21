@@ -12,6 +12,7 @@ interface ParticipationFormProps {
   pageSource?: string;
   autoOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  forcedCity?: string;
 }
 
 /**
