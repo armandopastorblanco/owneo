@@ -195,6 +195,12 @@ const CarDetail = () => {
     }
   }, [car?.id]);
 
+  useEffect(() => {
+    if (car?.availableIn?.length) {
+      setSelectedCity(car.availableIn[0]);
+    }
+  }, [car]);
+
   /* ─── consultation mutation ─── */
   const consultaSchema = useMemo(() => makeConsultaSchema(t), [t]);
   const labels = useMemo(() => specLabels(t), [t]);
