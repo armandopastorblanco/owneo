@@ -92,7 +92,7 @@ function mapDbCarToCar(row: CarRowWithLocation): Car {
     features: row.features || [],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     features_en: (row as any).features_en || [],
-    availableIn: row.available_in || [],
+    availableIn: [],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     locationId: (row as any).location_id ?? null,
     cityName: row.locations?.name ?? null,
