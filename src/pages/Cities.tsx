@@ -62,6 +62,7 @@ const Cities = () => {
 
                 return (
                   <div
+                    id={city.slug}
                     key={city.id}
                     className="group relative h-[360px] sm:h-[450px] rounded-xl overflow-hidden border border-border transition-all duration-500 hover:border-champagne/60 hover:shadow-[0_20px_60px_-15px_hsl(var(--champagne)/0.4)]"
                   >
@@ -82,9 +83,9 @@ const Cities = () => {
                       <p className="ds-body mb-4 line-clamp-2">
                         {i18n.language === "en" && city.description_en ? city.description_en : city.description}
                       </p>
-                      <Link to={city.slug ? `/ubicaciones/${city.slug}` : `/cities/${city.id}`}>
+                      <Link to={`/flota?ciudad=${city.slug}`}>
                         <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
-                          <span>{carsCount === 1 ? t("locations.explore_singular", { count: carsCount }) : t("locations.explore_plural", { count: carsCount })}</span>
+                          <span>Ver flota en {city.name}</span>
                           <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                         </Button>
                       </Link>
