@@ -990,19 +990,23 @@ const CarDetail = () => {
           <Reveal className="mb-24 grid md:grid-cols-2 gap-8">
             <div>
               <h2 className="ds-h3 mb-4 text-foreground">{t("car.available_in")}</h2>
-              {car.availableIn && car.availableIn.length > 0 && (
+              {(() => {
+                const details = (car as CarModel).cityDetails;
+                return Array.isArray(details) && details.length > 1;
+              })() && (
                 <div className="mt-4">
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5" /> Disponible en
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {car.availableIn.map((city) => {
-                      const slug = city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
+                    {(car as CarModel).cityDetails?.map((cityDetail) => {
+                      const city = cityDetail.name;
+                      const slug = cityDetail.slug;
                       const isSelected = selectedCity === city;
                       return (
                         <button
-                          key={city}
-                          onClick={() => setSelectedCity(city)}
+                          key={slug || city}
+                          onClick={() => setSelectedCity(city || null)}
                           className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
                             isSelected
                               ? "bg-champagne text-champagne-foreground border-champagne"
