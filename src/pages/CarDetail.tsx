@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useCar } from "@/hooks/useCars";
+import { useCar, CarModel } from "@/hooks/useCars";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -124,6 +124,8 @@ type ConsultaForm = z.infer<ReturnType<typeof makeConsultaSchema>>;
 const CarDetail = () => {
   const { t, i18n } = useTranslation();
   const params = useParams<{ slug?: string; id?: string }>();
+  const location = useLocation();
+  const incomingCitySlug = (location.state?.selectedCity as string | null) ?? null;
   const slug = params.slug;
   const id = params.id;
   const { data: car, isLoading } = useCar(slug ?? id, { bySlug: !!slug });
@@ -196,10 +198,18 @@ const CarDetail = () => {
   }, [car?.id]);
 
   useEffect(() => {
-    if (car?.availableIn?.length) {
-      setSelectedCity(car.availableIn[0]);
+    if (!car) return;
+    if (incomingCitySlug) {
+      const matchingCity = (car as CarModel).cityDetails?.find(d => d.slug === incomingCitySlug);
+      if (matchingCity?.name) {
+        setSelectedCity(matchingCity.name);
+      } else if (car.cityName) {
+        setSelectedCity(car.cityName);
+      }
+    } else if (car.cityName) {
+      setSelectedCity(car.cityName);
     }
-  }, [car]);
+  }, [car, incomingCitySlug]);
 
   /* ─── consultation mutation ─── */
   const consultaSchema = useMemo(() => makeConsultaSchema(t), [t]);
