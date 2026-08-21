@@ -161,7 +161,17 @@ const Step0VehicleSelection = ({
           </CardContent>
         </Card>
 
-        {otherCities.length > 0 && (
+        {forcedCity ? (
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-champagne/30 bg-champagne/5">
+            <MapPin className="w-4 h-4 text-champagne flex-shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">
+                {i18n.language === "en" ? "Your vehicle location" : "Ubicación de tu vehículo"}
+              </p>
+              <p className="text-sm font-semibold text-foreground">{forcedCity}</p>
+            </div>
+          </div>
+        ) : otherCities.length > 0 && (
           <div className="space-y-2">
             <Label className="text-foreground">{t("join.prefer_other_city")}</Label>
             <Select
