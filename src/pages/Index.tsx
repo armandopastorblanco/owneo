@@ -351,16 +351,11 @@ const Index = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {featuredCars.map((model) => {
-                const multiCity = model.cityCount > 1;
-                const link = multiCity
-                  ? "/ubicaciones"
-                  : (model.slug ? `/coches/${model.slug}` : `/car/${model.id}`);
                 return (
                   <CarCard
                     key={`${model.brand}-${model.model}`}
                     car={model}
                     pageSource="home"
-                    linkOverride={link}
                     availabilityOverride={{ remaining: model.totalRemaining, max: model.totalMax }}
                     cityCountBadge={model.cityCount}
                   />
