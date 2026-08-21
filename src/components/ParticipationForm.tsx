@@ -44,7 +44,8 @@ const ParticipationForm = ({
       participation_price: sharePrice,
       remaining_participations: availableParticipations,
     });
-    navigate(`/participar?carId=${carId}`);
+    const cityParam = forcedCity ? `&forcedCity=${encodeURIComponent(forcedCity)}` : "";
+    navigate(`/participar?carId=${carId}${cityParam}`);
   };
 
   useEffect(() => {
