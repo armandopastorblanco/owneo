@@ -12,9 +12,8 @@ const CityPickerModal = ({ car, onClose }: CityPickerModalProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const handleCitySelect = (citySlug: string | null) => {
-    const dest = car.slug ? `/coches/${car.slug}` : `/car/${car.id}`;
-    navigate(dest, { state: { selectedCity: citySlug } });
+  const handleCitySelect = (city: { carId: string; slug: string | null }) => {
+    navigate(`/car/${city.carId}`, { state: { selectedCity: city.slug } });
     onClose();
   };
 
@@ -69,7 +68,7 @@ const CityPickerModal = ({ car, onClose }: CityPickerModalProps) => {
               <button
                 key={city.slug || city.name}
                 disabled={isFull}
-                onClick={() => handleCitySelect(city.slug)}
+                onClick={() => handleCitySelect(city)}
                 className={`flex items-center justify-between w-full px-4 py-3 rounded-xl border transition-all duration-200 text-left
                   ${isFull
                     ? "border-border bg-muted/30 opacity-50 cursor-not-allowed"
