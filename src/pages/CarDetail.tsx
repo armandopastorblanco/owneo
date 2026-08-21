@@ -116,6 +116,7 @@ const makeConsultaSchema = (t: TFunction) => z.object({
   email: z.string().trim().email(t("car.email_invalid")).max(255),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
   message: z.string().trim().max(1000).optional().or(z.literal("")),
+  city: z.string().optional().or(z.literal("")),
   consent: z.literal(true, { errorMap: () => ({ message: t("car.must_accept_privacy") }) }),
 });
 type ConsultaForm = z.infer<ReturnType<typeof makeConsultaSchema>>;
