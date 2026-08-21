@@ -116,6 +116,7 @@ const makeConsultaSchema = (t: TFunction) => z.object({
   email: z.string().trim().email(t("car.email_invalid")).max(255),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
   message: z.string().trim().max(1000).optional().or(z.literal("")),
+  city: z.string().optional().or(z.literal("")),
   consent: z.literal(true, { errorMap: () => ({ message: t("car.must_accept_privacy") }) }),
 });
 type ConsultaForm = z.infer<ReturnType<typeof makeConsultaSchema>>;
@@ -171,6 +172,7 @@ const CarDetail = () => {
   const [descExpanded, setDescExpanded] = useState(false);
   const [specTab, setSpecTab] = useState("motor");
   const [openParticipationForm, setOpenParticipationForm] = useState(false);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
   const handleSolicitarClick = () => {
     setOpenParticipationForm(true);
@@ -193,13 +195,24 @@ const CarDetail = () => {
     }
   }, [car?.id]);
 
+  useEffect(() => {
+    if (car?.availableIn?.length) {
+      setSelectedCity(car.availableIn[0]);
+    }
+  }, [car]);
+
   /* ─── consultation mutation ─── */
   const consultaSchema = useMemo(() => makeConsultaSchema(t), [t]);
   const labels = useMemo(() => specLabels(t), [t]);
   const form = useForm<ConsultaForm>({
     resolver: zodResolver(consultaSchema),
-    defaultValues: { name: "", email: "", phone: "", message: "", consent: false as unknown as true },
+    defaultValues: { name: "", email: "", phone: "", message: "", city: selectedCity ?? "", consent: false as unknown as true },
   });
+
+  useEffect(() => {
+    form.setValue("city", selectedCity ?? "", { shouldValidate: false });
+  }, [selectedCity, form]);
+
   const [submitted, setSubmitted] = useState(false);
 
   const consultaMutation = useMutation({
@@ -211,6 +224,7 @@ const CarDetail = () => {
         email: values.email,
         phone: values.phone || null,
         message: values.message || null,
+        city: values.city || selectedCity || null,
         status: "pending",
       } as never);
       if (error) throw error;
@@ -961,14 +975,42 @@ const CarDetail = () => {
           <Reveal className="mb-24 grid md:grid-cols-2 gap-8">
             <div>
               <h2 className="ds-h3 mb-4 text-foreground">{t("car.available_in")}</h2>
-              <div className="flex flex-wrap gap-2">
-                {car.availableIn.map((city) => (
-                  <div key={city} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full">
-                    <MapPin className="w-4 h-4 text-champagne" />
-                    <span className="text-foreground text-sm">{city}</span>
+              {car.availableIn && car.availableIn.length > 0 && (
+                <div className="mt-4">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5" /> Disponible en
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {car.availableIn.map((city) => {
+                      const slug = city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
+                      const isSelected = selectedCity === city;
+                      return (
+                        <button
+                          key={city}
+                          onClick={() => setSelectedCity(city)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                            isSelected
+                              ? "bg-champagne text-champagne-foreground border-champagne"
+                              : "bg-transparent text-muted-foreground border-border hover:border-champagne/60 hover:text-foreground"
+                          }`}
+                        >
+                          {city}
+                        </button>
+                      );
+                    })}
                   </div>
-                ))}
-              </div>
+                  {selectedCity && (
+                    <div className="mt-3 flex items-center gap-3">
+                      <Link
+                        to={`/ubicaciones#${selectedCity.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-")}`}
+                        className="text-xs text-champagne underline hover:text-champagne/80 flex items-center gap-1"
+                      >
+                        <MapPin className="w-3 h-3" /> Ver showroom en {selectedCity}
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="flex items-center gap-2 mt-4 p-3 bg-card rounded-xl border border-border/50">
                 <Shield className="w-4 h-4 text-champagne flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">
@@ -1034,6 +1076,7 @@ const CarDetail = () => {
                       </div>
                     ) : (
                       <form onSubmit={form.handleSubmit((v) => consultaMutation.mutate(v))} className="space-y-4">
+                        <input type="hidden" {...form.register("city")} />
                         <div>
                           <label className="text-sm text-foreground mb-1 block">{t("car.form_name")} *</label>
                           <Input {...form.register("name")} placeholder={t("car.form_name_ph")} />
@@ -1068,6 +1111,11 @@ const CarDetail = () => {
                         </div>
                         {form.formState.errors.consent && (
                           <p className="text-xs text-destructive">{form.formState.errors.consent.message as string}</p>
+                        )}
+                        {selectedCity && (
+                          <p className="text-xs text-muted-foreground">
+                            Consulta para el showroom de <strong className="text-foreground">{selectedCity}</strong>
+                          </p>
                         )}
                         <Button
                           type="submit"
