@@ -35,11 +35,15 @@ const Portfolio = () => {
   });
 
   const filteredModels = ciudadFilter
-    ? sortedModels.filter(
-        (model) =>
-          model.cityName?.toLowerCase() === ciudadFilter.toLowerCase() ||
-          model.availableIn?.map((c) => c.toLowerCase()).includes(ciudadFilter.toLowerCase())
-      )
+    ? sortedModels.filter((model) => {
+        const cityNameMatch = model.cityName?.toLowerCase() === ciudadFilter.toLowerCase();
+        const citySlugMatch = model.citySlug?.toLowerCase() === ciudadFilter.toLowerCase();
+        const availableInMatch = Array.isArray(model.availableIn) &&
+          model.availableIn.some(
+            (c) => c.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-") === ciudadFilter.toLowerCase()
+          );
+        return cityNameMatch || citySlugMatch || availableInMatch;
+      })
     : sortedModels;
 
   return (
@@ -100,27 +104,18 @@ const Portfolio = () => {
                 </p>
               ) : (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredModels.map((model) => {
-                    const multiCity = model.cityCount > 1;
-                    const link = multiCity
-                      ? "/ubicaciones"
-                      : model.slug
-                      ? `/coches/${model.slug}`
-                      : `/car/${model.id}`;
-                    return (
-                      <CarCard
-                        key={`${model.brand}-${model.model}`}
-                        car={model}
-                        pageSource="portfolio"
-                        linkOverride={link}
-                        availabilityOverride={{
-                          remaining: model.totalRemaining,
-                          max: model.totalMax,
-                        }}
-                        cityCountBadge={model.cityCount}
-                      />
-                    );
-                  })}
+                  {filteredModels.map((model) => (
+                    <CarCard
+                      key={`${model.brand}-${model.model}`}
+                      car={model}
+                      pageSource="portfolio"
+                      availabilityOverride={{
+                        remaining: model.totalRemaining,
+                        max: model.totalMax,
+                      }}
+                      cityCountBadge={model.cityCount}
+                    />
+                  ))}
                 </div>
               )}
             </>
