@@ -1112,6 +1112,11 @@ const CarDetail = () => {
                         {form.formState.errors.consent && (
                           <p className="text-xs text-destructive">{form.formState.errors.consent.message as string}</p>
                         )}
+                        {selectedCity && (
+                          <p className="text-xs text-muted-foreground">
+                            Consulta para el showroom de <strong className="text-foreground">{selectedCity}</strong>
+                          </p>
+                        )}
                         <Button
                           type="submit"
                           disabled={consultaMutation.isPending}
