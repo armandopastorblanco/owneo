@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useCar } from "@/hooks/useCars";
+import { useCar, CarModel } from "@/hooks/useCars";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -199,8 +199,13 @@ const CarDetail = () => {
 
   useEffect(() => {
     if (!car) return;
-    if (incomingCitySlug && car.cityDetails?.some(d => d.slug === incomingCitySlug)) {
-      setSelectedCity(incomingCitySlug);
+    if (incomingCitySlug) {
+      const matchingCity = (car as CarModel).cityDetails?.find(d => d.slug === incomingCitySlug);
+      if (matchingCity?.name) {
+        setSelectedCity(matchingCity.name);
+      } else if (car.cityName) {
+        setSelectedCity(car.cityName);
+      }
     } else if (car.cityName) {
       setSelectedCity(car.cityName);
     }
