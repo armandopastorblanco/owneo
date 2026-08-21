@@ -206,8 +206,13 @@ const CarDetail = () => {
   const labels = useMemo(() => specLabels(t), [t]);
   const form = useForm<ConsultaForm>({
     resolver: zodResolver(consultaSchema),
-    defaultValues: { name: "", email: "", phone: "", message: "", consent: false as unknown as true },
+    defaultValues: { name: "", email: "", phone: "", message: "", city: selectedCity ?? "", consent: false as unknown as true },
   });
+
+  useEffect(() => {
+    form.setValue("city", selectedCity ?? "", { shouldValidate: false });
+  }, [selectedCity, form]);
+
   const [submitted, setSubmitted] = useState(false);
 
   const consultaMutation = useMutation({
