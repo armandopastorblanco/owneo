@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -124,6 +124,8 @@ type ConsultaForm = z.infer<ReturnType<typeof makeConsultaSchema>>;
 const CarDetail = () => {
   const { t, i18n } = useTranslation();
   const params = useParams<{ slug?: string; id?: string }>();
+  const location = useLocation();
+  const incomingCitySlug = (location.state?.selectedCity as string | null) ?? null;
   const slug = params.slug;
   const id = params.id;
   const { data: car, isLoading } = useCar(slug ?? id, { bySlug: !!slug });
@@ -196,10 +198,13 @@ const CarDetail = () => {
   }, [car?.id]);
 
   useEffect(() => {
-    if (car?.availableIn?.length) {
-      setSelectedCity(car.availableIn[0]);
+    if (!car) return;
+    if (incomingCitySlug && car.cityDetails?.some(d => d.slug === incomingCitySlug)) {
+      setSelectedCity(incomingCitySlug);
+    } else if (car.cityName) {
+      setSelectedCity(car.cityName);
     }
-  }, [car]);
+  }, [car, incomingCitySlug]);
 
   /* ─── consultation mutation ─── */
   const consultaSchema = useMemo(() => makeConsultaSchema(t), [t]);
