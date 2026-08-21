@@ -183,7 +183,7 @@ const CityDetail = () => {
                   car={car}
                   pageSource="city_detail"
                   cityCountBadge={1}
-                  linkOverride={car.slug ? `/coches/${car.slug}` : `/car/${car.id}`}
+                  linkOverride={`/car/${car.id}`}
                 />
               ))}
             </div>
