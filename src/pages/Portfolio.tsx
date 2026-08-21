@@ -104,27 +104,18 @@ const Portfolio = () => {
                 </p>
               ) : (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredModels.map((model) => {
-                    const multiCity = model.cityCount > 1;
-                    const link = multiCity
-                      ? "/ubicaciones"
-                      : model.slug
-                      ? `/coches/${model.slug}`
-                      : `/car/${model.id}`;
-                    return (
-                      <CarCard
-                        key={`${model.brand}-${model.model}`}
-                        car={model}
-                        pageSource="portfolio"
-                        linkOverride={link}
-                        availabilityOverride={{
-                          remaining: model.totalRemaining,
-                          max: model.totalMax,
-                        }}
-                        cityCountBadge={model.cityCount}
-                      />
-                    );
-                  })}
+                  {filteredModels.map((model) => (
+                    <CarCard
+                      key={`${model.brand}-${model.model}`}
+                      car={model}
+                      pageSource="portfolio"
+                      availabilityOverride={{
+                        remaining: model.totalRemaining,
+                        max: model.totalMax,
+                      }}
+                      cityCountBadge={model.cityCount}
+                    />
+                  ))}
                 </div>
               )}
             </>
