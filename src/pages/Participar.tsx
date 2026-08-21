@@ -92,7 +92,7 @@ const Step0VehicleSelection = ({
   onConfirm: (car: Car) => void;
   forcedCity?: string;
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: cars = [], isLoading: carsLoading } = useCars();
   const { data: locations = [], isLoading: locsLoading } = useLocations();
   const { data: initialCar } = useCar(initialCarId);
