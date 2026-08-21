@@ -35,11 +35,15 @@ const Portfolio = () => {
   });
 
   const filteredModels = ciudadFilter
-    ? sortedModels.filter(
-        (model) =>
-          model.cityName?.toLowerCase() === ciudadFilter.toLowerCase() ||
-          model.availableIn?.map((c) => c.toLowerCase()).includes(ciudadFilter.toLowerCase())
-      )
+    ? sortedModels.filter((model) => {
+        const cityNameMatch = model.cityName?.toLowerCase() === ciudadFilter.toLowerCase();
+        const citySlugMatch = model.citySlug?.toLowerCase() === ciudadFilter.toLowerCase();
+        const availableInMatch = Array.isArray(model.availableIn) &&
+          model.availableIn.some(
+            (c) => c.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-") === ciudadFilter.toLowerCase()
+          );
+        return cityNameMatch || citySlugMatch || availableInMatch;
+      })
     : sortedModels;
 
   return (
