@@ -86,9 +86,11 @@ const clearDraft = () => {
 const Step0VehicleSelection = ({
   initialCarId,
   onConfirm,
+  forcedCity,
 }: {
   initialCarId?: string;
   onConfirm: (car: Car) => void;
+  forcedCity?: string;
 }) => {
   const { t } = useTranslation();
   const { data: cars = [], isLoading: carsLoading } = useCars();
