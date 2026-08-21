@@ -28,6 +28,7 @@ const ParticipationForm = ({
   pageSource = "car_detail",
   autoOpen = false,
   onOpenChange,
+  forcedCity,
 }: ParticipationFormProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
