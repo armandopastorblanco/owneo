@@ -12,6 +12,7 @@ interface ParticipationFormProps {
   pageSource?: string;
   autoOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  forcedCity?: string;
 }
 
 /**
@@ -27,6 +28,7 @@ const ParticipationForm = ({
   pageSource = "car_detail",
   autoOpen = false,
   onOpenChange,
+  forcedCity,
 }: ParticipationFormProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -42,7 +44,8 @@ const ParticipationForm = ({
       participation_price: sharePrice,
       remaining_participations: availableParticipations,
     });
-    navigate(`/participar?carId=${carId}`);
+    const cityParam = forcedCity ? `&forcedCity=${encodeURIComponent(forcedCity)}` : "";
+    navigate(`/participar?carId=${carId}${cityParam}`);
   };
 
   useEffect(() => {

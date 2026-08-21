@@ -86,11 +86,13 @@ const clearDraft = () => {
 const Step0VehicleSelection = ({
   initialCarId,
   onConfirm,
+  forcedCity,
 }: {
   initialCarId?: string;
   onConfirm: (car: Car) => void;
+  forcedCity?: string;
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: cars = [], isLoading: carsLoading } = useCars();
   const { data: locations = [], isLoading: locsLoading } = useLocations();
   const { data: initialCar } = useCar(initialCarId);
@@ -159,7 +161,17 @@ const Step0VehicleSelection = ({
           </CardContent>
         </Card>
 
-        {otherCities.length > 0 && (
+        {forcedCity ? (
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-champagne/30 bg-champagne/5">
+            <MapPin className="w-4 h-4 text-champagne flex-shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">
+                {i18n.language === "en" ? "Your vehicle location" : "Ubicación de tu vehículo"}
+              </p>
+              <p className="text-sm font-semibold text-foreground">{forcedCity}</p>
+            </div>
+          </div>
+        ) : otherCities.length > 0 && (
           <div className="space-y-2">
             <Label className="text-foreground">{t("join.prefer_other_city")}</Label>
             <Select
@@ -214,24 +226,36 @@ const Step0VehicleSelection = ({
 
       <div className="space-y-2">
         <Label className="text-foreground">{t("join.city")}</Label>
-        <Select
-          value={selectedCityId}
-          onValueChange={(v) => {
-            setSelectedCityId(v);
-            setSelectedCarId(undefined);
-          }}
-        >
-          <SelectTrigger className="bg-background border-border">
-            <SelectValue placeholder={t("join.select_city_ph")} />
-          </SelectTrigger>
-          <SelectContent className="bg-card border-border">
-            {locations.map((l) => (
-              <SelectItem key={l.id} value={l.id}>
-                {l.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {forcedCity ? (
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-champagne/30 bg-champagne/5">
+            <MapPin className="w-4 h-4 text-champagne flex-shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">
+                {i18n.language === "en" ? "Your vehicle location" : "Ubicación de tu vehículo"}
+              </p>
+              <p className="text-sm font-semibold text-foreground">{forcedCity}</p>
+            </div>
+          </div>
+        ) : (
+          <Select
+            value={selectedCityId}
+            onValueChange={(v) => {
+              setSelectedCityId(v);
+              setSelectedCarId(undefined);
+            }}
+          >
+            <SelectTrigger className="bg-background border-border">
+              <SelectValue placeholder={t("join.select_city_ph")} />
+            </SelectTrigger>
+            <SelectContent className="bg-card border-border">
+              {locations.map((l) => (
+                <SelectItem key={l.id} value={l.id}>
+                  {l.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </div>
 
       {selectedCityId && (
@@ -766,6 +790,7 @@ const Participar = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const carIdFromUrl = params.get("carId") || undefined;
+  const forcedCity = params.get("forcedCity") || undefined;
   const { user, loading: authLoading } = useAuth();
   const { trackEvent } = useAnalytics();
 
@@ -963,6 +988,7 @@ const Participar = () => {
               <Step0VehicleSelection
                 initialCarId={draft.carId}
                 onConfirm={handleStep0}
+                forcedCity={forcedCity}
               />
             )}
 
