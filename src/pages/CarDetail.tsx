@@ -1076,6 +1076,7 @@ const CarDetail = () => {
                       </div>
                     ) : (
                       <form onSubmit={form.handleSubmit((v) => consultaMutation.mutate(v))} className="space-y-4">
+                        <input type="hidden" {...form.register("city")} />
                         <div>
                           <label className="text-sm text-foreground mb-1 block">{t("car.form_name")} *</label>
                           <Input {...form.register("name")} placeholder={t("car.form_name_ph")} />
