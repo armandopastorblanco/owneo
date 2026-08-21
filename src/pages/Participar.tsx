@@ -790,6 +790,7 @@ const Participar = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const carIdFromUrl = params.get("carId") || undefined;
+  const forcedCity = params.get("forcedCity") || undefined;
   const { user, loading: authLoading } = useAuth();
   const { trackEvent } = useAnalytics();
 
