@@ -79,12 +79,6 @@ const CarCard = ({
             {t("car.available_badge", { available, max })}
           </div>
         )}
-        {isMultiCity && (
-          <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-background/80 text-foreground backdrop-blur">
-            <MapPin className="w-3.5 h-3.5" />
-            {t("car.cities_avail", { count: cityCountBadge })}
-          </div>
-        )}
       </div>
       <CardContent className="p-6 flex-1 flex flex-col">
         <div className="mb-2">
