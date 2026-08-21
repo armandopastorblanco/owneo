@@ -164,6 +164,10 @@ function buildModels(cars: Car[]): CarModel[] {
   for (const arr of groups.values()) {
     // On choisit comme "vitrine" la fiche avec le plus de places dispo
     // (à défaut la première), pour montrer une carte attractive.
+    const sorted = [...arr].sort(
+      (a, b) => (b.remainingParticipations ?? 0) - (a.remainingParticipations ?? 0)
+    );
+    const base = sorted[0];
     const totalRemaining = arr.reduce((s, c) => s + (c.remainingParticipations ?? 0), 0);
     const totalMax = arr.reduce((s, c) => s + (c.maxParticipations ?? 0), 0);
     const cityDetails = arr.map((c) => ({
