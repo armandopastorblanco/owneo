@@ -224,6 +224,7 @@ const CarDetail = () => {
         email: values.email,
         phone: values.phone || null,
         message: values.message || null,
+        city: values.city || selectedCity || null,
         status: "pending",
       } as never);
       if (error) throw error;
