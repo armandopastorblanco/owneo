@@ -226,24 +226,36 @@ const Step0VehicleSelection = ({
 
       <div className="space-y-2">
         <Label className="text-foreground">{t("join.city")}</Label>
-        <Select
-          value={selectedCityId}
-          onValueChange={(v) => {
-            setSelectedCityId(v);
-            setSelectedCarId(undefined);
-          }}
-        >
-          <SelectTrigger className="bg-background border-border">
-            <SelectValue placeholder={t("join.select_city_ph")} />
-          </SelectTrigger>
-          <SelectContent className="bg-card border-border">
-            {locations.map((l) => (
-              <SelectItem key={l.id} value={l.id}>
-                {l.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {forcedCity ? (
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-champagne/30 bg-champagne/5">
+            <MapPin className="w-4 h-4 text-champagne flex-shrink-0" />
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">
+                {i18n.language === "en" ? "Your vehicle location" : "Ubicación de tu vehículo"}
+              </p>
+              <p className="text-sm font-semibold text-foreground">{forcedCity}</p>
+            </div>
+          </div>
+        ) : (
+          <Select
+            value={selectedCityId}
+            onValueChange={(v) => {
+              setSelectedCityId(v);
+              setSelectedCarId(undefined);
+            }}
+          >
+            <SelectTrigger className="bg-background border-border">
+              <SelectValue placeholder={t("join.select_city_ph")} />
+            </SelectTrigger>
+            <SelectContent className="bg-card border-border">
+              {locations.map((l) => (
+                <SelectItem key={l.id} value={l.id}>
+                  {l.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </div>
 
       {selectedCityId && (
