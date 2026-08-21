@@ -142,6 +142,7 @@ export interface CarModel extends Car {
   totalMax: number;           // places max cumulées (toutes villes)
   cities: { name: string | null; slug: string | null }[];
   cityDetails: {
+    carId: string;
     name: string | null;
     slug: string | null;
     remaining: number;
@@ -171,6 +172,7 @@ function buildModels(cars: Car[]): CarModel[] {
     const totalRemaining = arr.reduce((s, c) => s + (c.remainingParticipations ?? 0), 0);
     const totalMax = arr.reduce((s, c) => s + (c.maxParticipations ?? 0), 0);
     const cityDetails = arr.map((c) => ({
+      carId: c.id,
       name: c.cityName,
       slug: c.citySlug,
       remaining: c.remainingParticipations ?? 0,
