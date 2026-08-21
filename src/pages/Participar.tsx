@@ -988,6 +988,7 @@ const Participar = () => {
               <Step0VehicleSelection
                 initialCarId={draft.carId}
                 onConfirm={handleStep0}
+                forcedCity={forcedCity}
               />
             )}
 
