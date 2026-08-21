@@ -112,6 +112,9 @@ const CarCard = ({
     </Card>
   );
 
+  const carModel = car as CarModel;
+  const hasCityDetails = Array.isArray(carModel.cityDetails) && carModel.cityDetails.length > 0;
+
   return (
     <>
       {isMultiCity ? (
@@ -130,8 +133,8 @@ const CarCard = ({
           {cardContent}
         </Link>
       )}
-      {isMultiCity && showPicker && (
-        <CityPickerModal car={car as CarModel} onClose={() => setShowPicker(false)} />
+      {isMultiCity && showPicker && hasCityDetails && (
+        <CityPickerModal car={carModel} onClose={() => setShowPicker(false)} />
       )}
     </>
   );
