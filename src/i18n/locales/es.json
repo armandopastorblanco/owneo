@@ -380,6 +380,10 @@
     "back_home": "Volver al inicio"
   },
   "car": {
+    "city_picker_title": "Elige tu ciudad",
+    "city_picker_subtitle": "Las plazas disponibles varían según la ubicación.",
+    "city_last_spot": "Última plaza",
+    "cities_avail": "{{count}} ciudades",
     "per_year_short": "año",
     "savings_banner": "de ahorro en costes anuales de gestión con OWNEO Co-Sharing.",
     "savings_note": "Estimación basada en costes anuales de gestión (seguro, mantenimiento, parking). No incluye precio de adquisición ni depreciación.",
