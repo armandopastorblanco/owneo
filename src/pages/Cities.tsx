@@ -83,7 +83,7 @@ const Cities = () => {
                       <p className="ds-body mb-4 line-clamp-2">
                         {i18n.language === "en" && city.description_en ? city.description_en : city.description}
                       </p>
-                      <Link to={`/flota?ciudad=${city.slug}`}>
+                      <Link to={`/coches?ciudad=${city.slug}`}>
                         <Button className="w-full group/btn bg-champagne text-champagne-foreground hover:bg-champagne/90">
                           <span>Ver flota en {city.name}</span>
                           <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
