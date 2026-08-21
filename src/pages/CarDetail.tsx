@@ -1208,6 +1208,13 @@ const CarDetail = () => {
                       pageSource="car_detail"
                       autoOpen={openParticipationForm}
                       onOpenChange={setOpenParticipationForm}
+                      forcedCity={
+                        (() => {
+                          const details = (car as CarModel).cityDetails;
+                          if (Array.isArray(details) && details.length > 1) return undefined;
+                          return car.cityName ?? undefined;
+                        })()
+                      }
                     />
                   </div>
                 </CardContent>
