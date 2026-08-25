@@ -17,7 +17,7 @@ export default defineTool({
       { auth: { persistSession: false, autoRefreshToken: false } },
     );
     const { data, error } = await supabase
-      .from("cars")
+      .from("cars_public")
       .select("*, locations(name, slug)")
       .eq("slug", slug)
       .maybeSingle();

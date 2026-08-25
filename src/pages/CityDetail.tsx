@@ -92,9 +92,8 @@ const CityDetail = () => {
     queryFn: async () => {
       // Désormais : filtrage par location_id (un véhicule = une ville).
       const { data, error } = await supabase
-        .from("cars")
+        .from("cars_public")
         .select("*, locations(name, slug)")
-        .eq("is_active", true)
         .eq("location_id", city!.id)
         .order("name");
       if (error) throw error;
