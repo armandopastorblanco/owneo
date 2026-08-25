@@ -39,6 +39,12 @@ import lamborghiniUrusSePerformanteImg from "@/assets/news/lamborghini-urus-se-p
 import maseratiGt2StradaleImg from "@/assets/news/maserati-gt2-stradale.jpg.asset.json";
 import astonMartinVanquishImg from "@/assets/news/aston-martin-vanquish.jpg.asset.json";
 import ferrari296SpecialeImg from "@/assets/news/ferrari-296-speciale.jpg.asset.json";
+import lamborghiniTemerarioSpyder2026 from "@/assets/news/lamborghini-temerario-spyder-2026.jpg";
+import porsche911Gt3Touring2025 from "@/assets/news/porsche-911-gt3-touring-2025.jpg";
+import bentleyGtSpeed2026 from "@/assets/news/bentley-continental-gt-speed-2026.jpg";
+import mclaren750sSpider2025 from "@/assets/news/mclaren-750s-spider-2025.jpg";
+import rollsRoycePhantom2026 from "@/assets/news/rolls-royce-phantom-2026.jpg";
+import ferrari12CilindriSpider2025 from "@/assets/news/ferrari-12cilindri-spider-2025.jpg";
 
 export interface NewsArticle {
   id: number;
@@ -69,6 +75,350 @@ export interface NewsArticle {
 }
 
 const articlesEs: NewsArticle[] = [
+  {
+    id: 107,
+    slug: "lamborghini-temerario-spyder-2026",
+    image: lamborghiniTemerarioSpyder2026,
+    date: "19 Julio 2026",
+    category: "Lanzamientos",
+    title: "Lamborghini Temerario Spyder: el descapotable V8 híbrido debuta oficialmente en Goodwood",
+    excerpt: "Tras meses de imágenes espía en el Nürburgring, Lamborghini desvela oficialmente el Temerario Spyder en el Festival of Speed de Goodwood 2026. El mismo V8 biturbo híbrido de 920 CV del coupé, sin techo fijo y con la misma capacidad de rozar los 10.000 rpm. Sant'Agata Bolognese redefine el concepto de descapotable de altas prestaciones.",
+    excerpt_en: "After months of spy shots at the Nürburgring, Lamborghini officially unveils the Temerario Spyder at the 2026 Goodwood Festival of Speed. The same 920 hp hybrid twin-turbo V8 as the coupé, open-top, and still capable of approaching 10,000 rpm. Sant'Agata Bolognese redefines the high-performance convertible.",
+    readTime: "7 min",
+    content: {
+      intro: "El Festival of Speed de Goodwood ha sido históricamente el escenario elegido por Lamborghini para sus presentaciones más espectaculares, y el Temerario Spyder no es una excepción. Confirmando los pronósticos que apuntaban a una presentación en julio de 2026, Sant'Agata Bolognese desvela la versión descapotable del sucesor del Huracán con toda la potencia y sofisticación técnica del coupé, añadiendo la dimensión sensorial que solo un techo abierto puede ofrecer. La pregunta que se hacía la industria era si Lamborghini sería capaz de mantener la rigidez estructural necesaria para conservar las sensaciones dinámicas del coupé en una carrocería abierta. La respuesta, como era de esperar, es afirmativa.",
+      intro_en: "The Goodwood Festival of Speed has historically been Lamborghini's stage of choice for its most spectacular unveilings, and the Temerario Spyder is no exception. Confirming predictions that pointed to a July 2026 reveal, Sant'Agata Bolognese unveils the open-top version of the Huracán successor with all the power and technical sophistication of the coupé, adding the sensory dimension that only an open roof can provide. The question the industry was asking was whether Lamborghini could maintain the structural rigidity needed to preserve the coupé's dynamic feel in an open-top body. The answer, as expected, is yes.",
+      sections: [
+        {
+          title: "V8 híbrido de 920 CV: la misma fórmula, a cielo abierto",
+          title_en: "920 hp hybrid V8: the same formula, open to the sky",
+          paragraphs: [
+            "El corazón del Temerario Spyder es idéntico al del coupé: el V8 biturbo de 4.0 litros L411 con tres motores eléctricos, uno en el eje trasero y dos en el delantero, que suman una potencia combinada de 920 CV. El motor de combustión puede girar hasta casi 10.000 rpm, una cifra extraordinaria para un V8 sobrealimentado que otorga al Temerario un carácter sonoro y de respuesta único en su segmento.",
+            "La transmisión de doble embrague de ocho velocidades gestiona la potencia con la precisión característica de Lamborghini, y el sistema de vectorización de par entre los ejes delantero y trasero garantiza una agilidad y una tracción que ningún rival descapotable puede igualar. Las cifras de rendimiento del Spyder son prácticamente idénticas a las del coupé: 0 a 100 km/h en 2,7 segundos y velocidad máxima de 343 km/h."
+          ],
+          paragraphs_en: [
+            "The heart of the Temerario Spyder is identical to the coupé: the 4.0-litre L411 twin-turbo V8 with three electric motors, one on the rear axle and two on the front, delivering a combined output of 920 hp. The combustion engine can rev to nearly 10,000 rpm, an extraordinary figure for a supercharged V8 that gives the Temerario a sound character and response unique in its segment.",
+            "The eight-speed dual-clutch transmission manages the power with Lamborghini's characteristic precision, and the torque vectoring system between the front and rear axles guarantees agility and traction that no rival convertible can match. The Spyder's performance figures are virtually identical to the coupé: 0 to 100 km/h in 2.7 seconds and a top speed of 343 km/h."
+          ]
+        },
+        {
+          title: "Estructura reforzada y capota retráctil de tela",
+          title_en: "Reinforced structure and retractable soft top",
+          paragraphs: [
+            "Lamborghini ha reforzado el chasis del Temerario Spyder con travesaños adicionales de fibra de carbono que compensan la ausencia del techo fijo. El resultado es una rigidez torsional que, según Sant'Agata Bolognese, supera a la de muchos coupés de la competencia, gracias al uso extensivo de la fibra de carbono en todos los elementos estructurales.",
+            "La capota retráctil de tela opera en menos de 15 segundos y puede accionarse con el vehículo en marcha a velocidades de hasta 50 km/h. En posición abierta, el diseño de la capota se integra de forma limpia en la zaga, sin crear el volumen indeseable que penaliza a algunos descapotables convencionales. El arco de seguridad, integrado en el diseño, emerge automáticamente en caso de vuelco."
+          ],
+          paragraphs_en: [
+            "Lamborghini has reinforced the Temerario Spyder's chassis with additional carbon fibre cross-members that compensate for the absence of the fixed roof. The result is a torsional rigidity that, according to Sant'Agata Bolognese, exceeds that of many rival coupés, thanks to the extensive use of carbon fibre in all structural elements.",
+            "The retractable soft top operates in under 15 seconds and can be operated on the move at speeds of up to 50 km/h. In the open position, the hood design integrates cleanly into the rear, without creating the unwanted bulk that penalises some conventional convertibles. The roll-over bar, integrated into the design, automatically deploys in the event of a rollover."
+          ]
+        },
+        {
+          title: "Diseño y posicionamiento en la gama",
+          title_en: "Design and position in the range",
+          paragraphs: [
+            "El Temerario Spyder mantiene la línea agresiva y futurista del coupé, adaptada a las exigencias estructurales de una carrocería abierta. Las salidas de aire laterales, el frontal activo y el difusor trasero son compartidos con el coupé, manteniendo la coherencia estética de la gama. El precio del Spyder se sitúa por encima del coupé, con estimaciones que apuntan a los 280.000 euros como punto de partida, antes de opciones del programa Ad Personam.",
+            "Con el Temerario Spyder, Lamborghini consolida su oferta en el segmento de los superdeportivos de altas prestaciones descapotables, un mercado en el que la competencia del Ferrari 12Cilindri Spider y el McLaren 750S Spider es cada vez más intensa."
+          ],
+          paragraphs_en: [
+            "The Temerario Spyder maintains the aggressive and futuristic lines of the coupé, adapted to the structural requirements of an open-top body. The lateral air outlets, active front end, and rear diffuser are shared with the coupé, maintaining the aesthetic coherence of the range. The Spyder's price sits above the coupé, with estimates pointing to 280,000 euros as a starting point, before Ad Personam programme options.",
+            "With the Temerario Spyder, Lamborghini consolidates its offering in the high-performance open-top supercar segment, a market in which competition from the Ferrari 12Cilindri Spider and the McLaren 750S Spider is increasingly intense."
+          ]
+        }
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "920 CV" },
+      { label: "0-100 km/h", value: "2,7 s" },
+      { label: "Motor", value: "V8 4.0 biturbo + 3 eléctricos" },
+      { label: "Velocidad máxima", value: "343 km/h" }
+    ]
+  },
+  {
+    id: 108,
+    slug: "porsche-911-gt3-touring-2025",
+    image: porsche911Gt3Touring2025,
+    date: "26 Julio 2026",
+    category: "Competición",
+    title: "Porsche 911 GT3 Touring 2025: 502 CV atmosféricos y la pureza del GT3 sin alerón",
+    excerpt: "El Porsche 911 GT3 con paquete Touring elimina el gran alerón fijo en favor de un spoiler integrado, manteniendo los 502 CV del bóxer atmosférico de 4.0 litros y toda la mecánica de competición. Para quienes quieren el GT3 de verdad sin que se note demasiado.",
+    excerpt_en: "The Porsche 911 GT3 with Touring package removes the large fixed wing in favour of an integrated spoiler, retaining all 502 hp of the 4.0-litre naturally aspirated boxer and full competition-grade mechanicals. For those who want the real GT3 without making a statement.",
+    readTime: "7 min",
+    content: {
+      intro: "Desde su introducción, el paquete Touring del 911 GT3 ha sido uno de los grandes aciertos de Porsche: ofrecer toda la mecánica del modelo más deportivo de la gama 911 con una presentación exterior más discreta, pensada para quienes prefieren la sutileza a la ostentación. La generación 992.2 del GT3 Touring lleva este concepto a su máxima expresión, con un motor bóxer atmosférico de 4.0 litros y 502 CV que representa el pináculo de la ingeniería de motores aspirados de Zuffenhausen, combinado con una carrocería que podría confundirse con un 911 convencional a primera vista.",
+      intro_en: "Since its introduction, the 911 GT3 Touring package has been one of Porsche's great successes: offering all the mechanicals of the most sporting model in the 911 range with a more discreet exterior, designed for those who prefer subtlety to ostentation. The 992.2 generation GT3 Touring takes this concept to its fullest expression, with a 4.0-litre naturally aspirated 502 hp boxer engine that represents the pinnacle of Zuffenhausen's naturally aspirated engine engineering, combined with a body that could be mistaken for a standard 911 at first glance.",
+      sections: [
+        {
+          title: "Bóxer 4.0 atmosférico: el mejor motor de la historia de Porsche",
+          title_en: "4.0 naturally aspirated boxer: the greatest Porsche engine ever made",
+          paragraphs: [
+            "El motor del GT3 Touring es el mismo que el del GT3 estándar: un bóxer de seis cilindros y 4.0 litros de aspiración natural que entrega 502 CV a 9.000 rpm y 465 Nm a 6.100 rpm, con una línea roja situada a 9.000 rpm. Es un propulsor que no tiene rival en la actualidad entre los coches de producción de altas prestaciones, con una entrega de potencia lineal y una sonoridad que ningún motor turboalimentado puede replicar.",
+            "La transmisión PDK de siete velocidades y la tracción trasera completan un esquema dinámico que Porsche ha perfeccionado durante décadas. El 0 a 100 km/h se completa en 3,4 segundos, y la velocidad máxima supera los 320 km/h. El chassis, con el eje trasero directriz y los frenos de carbono-cerámica opcionales, procede directamente de la competición."
+          ],
+          paragraphs_en: [
+            "The GT3 Touring's engine is the same as the standard GT3: a 4.0-litre six-cylinder naturally aspirated boxer delivering 502 hp at 9,000 rpm and 465 Nm at 6,100 rpm, with a redline at 9,000 rpm. It is a powertrain that currently has no rival among high-performance production cars, with a linear power delivery and a sound that no turbocharged engine can replicate.",
+            "The seven-speed PDK transmission and rear-wheel drive complete a dynamic package that Porsche has perfected over decades. The 0 to 100 km/h sprint is completed in 3.4 seconds, and the top speed exceeds 320 km/h. The chassis, with rear-wheel steering and optional carbon-ceramic brakes, is derived directly from motorsport."
+          ]
+        },
+        {
+          title: "Touring: discreción sin renuncias",
+          title_en: "Touring: discretion without compromise",
+          paragraphs: [
+            "La diferencia estética fundamental entre el GT3 y el GT3 Touring reside en el alerón trasero. El Touring sustituye el gran ala fija de fibra de carbono por un spoiler integrado en la tapa del maletero que despliega automáticamente según la velocidad, manteniendo la carga aerodinámica necesaria sin el impacto visual del ala biplano del GT3 convencional.",
+            "En el interior, el GT3 Touring puede configurarse con asientos de cuero en lugar de los baquet de tela de los modelos más deportivos, y ofrece un mayor número de opciones de confort que lo hacen más adecuado para el uso en carretera diario. Sin embargo, toda la electrónica de chasis, los modos de conducción y la puesta a punto deportiva son compartidos con el GT3 estándar."
+          ],
+          paragraphs_en: [
+            "The fundamental aesthetic difference between the GT3 and the GT3 Touring lies in the rear spoiler. The Touring replaces the large fixed carbon fibre wing with a spoiler integrated into the bonnet lid that deploys automatically according to speed, maintaining the necessary aerodynamic downforce without the visual impact of the conventional GT3's biplane wing.",
+            "Inside, the GT3 Touring can be configured with leather seats instead of the fabric bucket seats of the more sporting models, and offers a greater number of comfort options that make it more suited to everyday road use. However, all the chassis electronics, driving modes, and sporting tuning are shared with the standard GT3."
+          ]
+        },
+        {
+          title: "Precio y disponibilidad",
+          title_en: "Price and availability",
+          paragraphs: [
+            "El Porsche 911 GT3 Touring parte de un precio de 234.195 dólares en el mercado estadounidense, aproximadamente 220.000 euros en Europa. Con el catálogo de opciones, el precio puede superar fácilmente los 280.000 euros. La demanda supera habitualmente la oferta disponible, con listas de espera en la mayoría de mercados."
+          ],
+          paragraphs_en: [
+            "The Porsche 911 GT3 Touring starts from a price of $234,195 in the US market, approximately 220,000 euros in Europe. With the options catalogue, the price can easily exceed 280,000 euros. Demand consistently outstrips available supply, with waiting lists in most markets."
+          ]
+        }
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "502 CV" },
+      { label: "0-100 km/h", value: "3,4 s" },
+      { label: "Motor", value: "Bóxer 6 cil. 4.0 atmosférico" },
+      { label: "Velocidad máxima", value: "+320 km/h" }
+    ]
+  },
+  {
+    id: 109,
+    slug: "bentley-continental-gt-speed-2026",
+    image: bentleyGtSpeed2026,
+    date: "2 Agosto 2026",
+    category: "Gran Turismo",
+    title: "Bentley Continental GT Speed 2026: 782 CV híbridos para el gran turismo más rápido de Crewe",
+    excerpt: "Bentley presenta el Continental GT Speed 2026 con un sistema híbrido enchufable que eleva la potencia a 782 CV combinados sobre la base del V8 biturbo. El gran turismo más exclusivo de Crewe alcanza los 335 km/h y completa el 0 a 100 km/h en 3,2 segundos. Una nueva era para el GT Speed.",
+    excerpt_en: "Bentley unveils the 2026 Continental GT Speed with a plug-in hybrid system that raises combined output to 782 hp on the twin-turbo V8 base. Crewe's most exclusive grand tourer reaches 335 km/h and completes the 0 to 100 km/h sprint in 3.2 seconds. A new era for the GT Speed.",
+    readTime: "7 min",
+    content: {
+      intro: "El Continental GT Speed ha representado siempre la cúspide de la gama Continental, el modelo que lleva el concepto de gran turismo de Bentley a su expresión más potente y dinámica. Con la generación 2026, Crewe da un paso histórico al adoptar la electrificación enchufable en su modelo más deportivo, combinando el V8 biturbo de 4.0 litros con un motor eléctrico para alcanzar 782 CV combinados. Lejos de suavizar el carácter del Speed, el sistema híbrido lo intensifica: el empuje eléctrico instantáneo elimina cualquier sensación de espera en la respuesta del motor y multiplica la energía disponible en los tramos de aceleración.",
+      intro_en: "The Continental GT Speed has always represented the pinnacle of the Continental range, the model that takes Bentley's grand tourer concept to its most powerful and dynamic expression. With the 2026 generation, Crewe takes a historic step by adopting plug-in electrification in its most sporting model, combining the 4.0-litre twin-turbo V8 with an electric motor to achieve a combined 782 hp. Far from softening the Speed's character, the hybrid system intensifies it: the instant electric thrust eliminates any sense of delay in engine response and multiplies the energy available during acceleration.",
+      sections: [
+        {
+          title: "V8 híbrido enchufable: el GT Speed más potente de la historia",
+          title_en: "Plug-in hybrid V8: the most powerful GT Speed ever",
+          paragraphs: [
+            "El sistema motriz del Continental GT Speed 2026 combina el V8 biturbo de 4.0 litros, revisado para esta generación, con un motor eléctrico integrado en la caja de cambios de doble embrague de ocho velocidades. La potencia combinada de 782 CV y un par de 1.000 Nm convierten al GT Speed en el Continental más potente jamás producido en Crewe.",
+            "El rendimiento está a la altura de las cifras: 0 a 100 km/h en 3,2 segundos y velocidad máxima de 335 km/h. La tracción total permanente gestiona el caudal de potencia con una eficiencia que garantiza tracción máxima en cualquier condición climatológica, manteniendo siempre el comportamiento dinámico refinado que caracteriza a los grandes Bentley."
+          ],
+          paragraphs_en: [
+            "The 2026 Continental GT Speed's drivetrain combines the revised 4.0-litre twin-turbo V8 with an electric motor integrated into the eight-speed dual-clutch gearbox. The combined output of 782 hp and 1,000 Nm of torque makes the GT Speed the most powerful Continental ever produced at Crewe.",
+            "The performance lives up to the figures: 0 to 100 km/h in 3.2 seconds and a top speed of 335 km/h. Permanent all-wheel drive manages the flow of power with an efficiency that guarantees maximum traction in any weather condition, always maintaining the refined dynamic behaviour that characterises great Bentleys."
+          ]
+        },
+        {
+          title: "Artesanía británica en la era eléctrica",
+          title_en: "British craftsmanship in the electric age",
+          paragraphs: [
+            "El interior del Continental GT Speed 2026 mantiene los estándares artesanales que han definido a Bentley durante más de un siglo. Cuero cosido a mano, madera pulida de procedencia sostenible y aluminio torneado conviven con una nueva interfaz de infoentretenimiento que integra la gestión del sistema híbrido de forma intuitiva. El display de cristal girado y las pantallas de alta resolución coexisten con los detalles analógicos que los clientes de Bentley aprecian.",
+            "El GT Speed 2026 estrena además nuevas opciones de personalización del programa Mulliner, con acabados exclusivos para la carrocería, las llantas y el interior que permiten a cada cliente crear un ejemplar único. El precio de partida se sitúa en torno a los 260.000 euros en Europa antes de opciones."
+          ],
+          paragraphs_en: [
+            "The interior of the 2026 Continental GT Speed maintains the artisanal standards that have defined Bentley for more than a century. Hand-stitched leather, sustainably sourced polished wood, and turned aluminium coexist with a new infotainment interface that integrates hybrid system management intuitively. The rotating glass display and high-resolution screens coexist with the analogue details that Bentley customers appreciate.",
+            "The 2026 GT Speed also debuts new Mulliner programme personalisation options, with exclusive body, wheel, and interior finishes that allow each customer to create a unique example. The starting price is around 260,000 euros in Europe before options."
+          ]
+        },
+        {
+          title: "Posicionamiento y entrega",
+          title_en: "Positioning and delivery",
+          paragraphs: [
+            "Con el GT Speed 2026, Bentley demuestra que la electrificación puede convivir con la tradición del gran turismo de lujo sin sacrificar ninguna de las cualidades que hacen único a este modelo. Las primeras entregas a clientes europeos están en marcha, con una demanda que supera la producción disponible en los principales mercados."
+          ],
+          paragraphs_en: [
+            "With the 2026 GT Speed, Bentley demonstrates that electrification can coexist with the luxury grand tourer tradition without sacrificing any of the qualities that make this model unique. First deliveries to European customers are underway, with demand exceeding available production in key markets."
+          ]
+        }
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "782 CV" },
+      { label: "0-100 km/h", value: "3,2 s" },
+      { label: "Motor", value: "V8 4.0 biturbo PHEV" },
+      { label: "Velocidad máxima", value: "335 km/h" }
+    ]
+  },
+  {
+    id: 110,
+    slug: "mclaren-750s-spider-2025",
+    image: mclaren750sSpider2025,
+    date: "9 Agosto 2026",
+    category: "Lanzamientos",
+    title: "McLaren 750S Spider: el descapotable de Woking que redefine la relación entre el piloto y la máquina",
+    excerpt: "El McLaren 750S Spider lleva la experiencia del 720S al siguiente nivel con 750 CV, un peso de solo 1.277 kg y una capota retráctil de fibra de carbono que opera en 11 segundos. Es el McLaren más equilibrado y accesible del segmento Super Series, con primeras entregas europeas completadas.",
+    excerpt_en: "The McLaren 750S Spider takes the 720S experience to the next level with 750 hp, a weight of just 1,277 kg, and a retractable carbon fibre roof that operates in 11 seconds. It is the most balanced and accessible McLaren in the Super Series segment, with first European deliveries complete.",
+    readTime: "7 min",
+    content: {
+      intro: "McLaren ha construido su reputación sobre la pureza dinámica y la relación entre el piloto y el coche. El 750S Spider lleva esa filosofía al segmento de los superdeportivos descapotables con una fórmula que prioriza el peso mínimo, la potencia máxima y una aerodinámica activa que trabaja en perfecta coordinación con el conjunto mecánico. El resultado es un coche que, sobre papel, podría parecer una evolución del 720S Spider, pero que en la carretera representa un salto cualitativo significativo en precisión, respuesta y capacidad en límite.",
+      intro_en: "McLaren has built its reputation on dynamic purity and the relationship between driver and car. The 750S Spider takes that philosophy into the open-top supercar segment with a formula that prioritises minimum weight, maximum power, and active aerodynamics that work in perfect coordination with the mechanical package. The result is a car that, on paper, might seem like an evolution of the 720S Spider, but on the road represents a significant qualitative leap in precision, response, and limit-handling capability.",
+      sections: [
+        {
+          title: "750 CV y 1.277 kg: la ecuación perfecta",
+          title_en: "750 hp and 1,277 kg: the perfect equation",
+          paragraphs: [
+            "El motor del 750S Spider es el V8 biturbo de 4.0 litros M840T en su revisión más potente, con 750 CV a 8.500 rpm y 800 Nm de par. La transmisión de doble embrague de siete velocidades y la tracción trasera completan un conjunto que lleva el comportamiento dinámico del coche a un nivel prácticamente indistinguible del de un superdeportivo puro de circuito.",
+            "El peso de 1.277 kg en orden de marcha —apenas 40 kg más que el coupé 750S— es consecuencia de la utilización de paneles de carrocería en fibra de carbono, la estructura del monocasco MonoCell II-T en fibra de carbono y una filosofía de ingeniería que rechaza el peso innecesario en cada componente. El 0 a 100 km/h se completa en 2,8 segundos, y el 0 a 200 km/h en menos de 7,9 segundos."
+          ],
+          paragraphs_en: [
+            "The 750S Spider's engine is the 4.0-litre M840T twin-turbo V8 in its most powerful iteration, with 750 hp at 8,500 rpm and 800 Nm of torque. The seven-speed dual-clutch transmission and rear-wheel drive complete a package that takes the car's dynamic behaviour to a level practically indistinguishable from a pure track supercar.",
+            "The kerb weight of 1,277 kg — barely 40 kg more than the 750S coupé — is a consequence of the use of carbon fibre body panels, the MonoCell II-T carbon fibre monocoque structure, and an engineering philosophy that rejects unnecessary weight in every component. The 0 to 100 km/h sprint is completed in 2.8 seconds, and 0 to 200 km/h in under 7.9 seconds."
+          ]
+        },
+        {
+          title: "Capota de fibra de carbono y Proactive Chassis Control II",
+          title_en: "Carbon fibre roof and Proactive Chassis Control II",
+          paragraphs: [
+            "La capota retráctil del 750S Spider está fabricada en fibra de carbono, lo que contribuye a mantener el peso al mínimo y a preservar la rigidez estructural del monocasco. Opera en 11 segundos y puede accionarse hasta 50 km/h, integrándose limpiamente en la zaga sin alterar las líneas del coche cuando está recogida.",
+            "El sistema Proactive Chassis Control II, con amortiguadores de actuación hidráulica que ajustan la respuesta individualmente en cada rueda, es la clave de la extraordinaria capacidad dinámica del 750S Spider. En modo Sport y Track, el coche adquiere una precisión y una comunicación que muy pocos descapotables en el mercado pueden igualar. Las entregas europeas a clientes están en marcha desde principios de 2025."
+          ],
+          paragraphs_en: [
+            "The 750S Spider's retractable roof is made from carbon fibre, which helps maintain minimum weight and preserve the structural rigidity of the monocoque. It operates in 11 seconds and can be actuated at up to 50 km/h, integrating cleanly into the rear without altering the car's lines when stowed.",
+            "The Proactive Chassis Control II system, with hydraulically actuated dampers that individually adjust the response at each wheel, is the key to the 750S Spider's extraordinary dynamic capability. In Sport and Track modes, the car acquires a precision and communication that very few convertibles on the market can match. European deliveries to customers have been underway since early 2025."
+          ]
+        },
+        {
+          title: "Precio y competidores",
+          title_en: "Price and competitors",
+          paragraphs: [
+            "El McLaren 750S Spider parte de un precio cercano a los 370.000 dólares en el mercado estadounidense, con un equivalente europeo de aproximadamente 320.000 euros antes de impuestos y opciones. Se posiciona directamente frente al Ferrari 12Cilindri Spider y al Lamborghini Temerario Spyder, con la ventaja del menor peso como principal argumento diferenciador."
+          ],
+          paragraphs_en: [
+            "The McLaren 750S Spider starts at a price close to $370,000 in the US market, with a European equivalent of approximately 320,000 euros before taxes and options. It positions itself directly against the Ferrari 12Cilindri Spider and the Lamborghini Temerario Spyder, with the lower weight advantage as its main differentiating argument."
+          ]
+        }
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "750 CV" },
+      { label: "0-100 km/h", value: "2,8 s" },
+      { label: "Peso", value: "1.277 kg" },
+      { label: "Motor", value: "V8 4.0 biturbo" }
+    ]
+  },
+  {
+    id: 111,
+    slug: "rolls-royce-phantom-2026",
+    image: rollsRoycePhantom2026,
+    date: "16 Agosto 2026",
+    category: "Gran Turismo",
+    title: "Rolls-Royce Phantom 2026: el summum del lujo se actualiza con nuevas opciones Bespoke y mayor personalización",
+    excerpt: "Rolls-Royce refina el Phantom para 2026 con nuevas opciones de personalización Bespoke, materiales exclusivos de nueva generación y actualizaciones en la conectividad. El V12 biturbo de 6,75 litros y 563 CV permanece inalterado. La arquitectura de la excelencia no necesita revolución, solo evolución.",
+    excerpt_en: "Rolls-Royce refines the Phantom for 2026 with new Bespoke personalisation options, next-generation exclusive materials, and connectivity updates. The 6.75-litre twin-turbo V12 with 563 hp remains unchanged. The architecture of excellence requires no revolution, only evolution.",
+    readTime: "7 min",
+    content: {
+      intro: "El Rolls-Royce Phantom no necesita presentación. Desde 1925, el nombre define el concepto de automóvil de lujo absoluto, el vehículo al que todos los demás aspiran a parecerse sin lograrlo jamás. La actualización para 2026 no busca revolucionar un modelo que ya representa la cúspide de la industria, sino refinarlo en los aspectos que los clientes más exigentes del mundo valoran: la personalización sin límites, los materiales de la más alta calidad y la experiencia de conducción más silenciosa y refinada del planeta.",
+      intro_en: "The Rolls-Royce Phantom needs no introduction. Since 1925, the name has defined the concept of absolute luxury motoring, the car that all others aspire to emulate without ever succeeding. The 2026 update does not seek to revolutionise a model that already represents the pinnacle of the industry, but to refine it in the aspects that the world's most demanding customers value: unlimited personalisation, the highest quality materials, and the most silent and refined driving experience on the planet.",
+      sections: [
+        {
+          title: "V12 eterno: 6,75 litros de silencio",
+          title_en: "Eternal V12: 6.75 litres of silence",
+          paragraphs: [
+            "El corazón del Phantom 2026 sigue siendo el V12 biturbo de 6,75 litros, un propulsor con historia propia en los anales de Rolls-Royce. Con 563 CV a 5.000 rpm y 900 Nm disponibles desde 1.700 rpm, el motor ofrece una entrega de potencia que se percibe más como una fuerza de la naturaleza que como el funcionamiento de un motor convencional. La transmisión automática de ocho velocidades trabaja de forma imperceptible, y la insonorización de más de 130 kg de material absorbente garantiza que el único sonido en el habitáculo sea el que el ocupante elija escuchar.",
+            "La suspensión neumática con amortiguadores controlados electrónicamente y la dirección de cuatro ruedas contribuyen a una experiencia de rodadura que Rolls-Royce denomina 'Magic Carpet Ride', capaz de aislar completamente a los ocupantes de cualquier irregularidad del pavimento."
+          ],
+          paragraphs_en: [
+            "The heart of the 2026 Phantom remains the 6.75-litre twin-turbo V12, an engine with its own history in the annals of Rolls-Royce. With 563 hp at 5,000 rpm and 900 Nm available from 1,700 rpm, the engine delivers power in a way that feels more like a force of nature than the operation of a conventional engine. The eight-speed automatic transmission works imperceptibly, and over 130 kg of sound-absorbing material ensures that the only sound in the cabin is the one the occupant chooses to hear.",
+            "The air suspension with electronically controlled dampers and four-wheel steering contribute to a ride experience that Rolls-Royce calls the 'Magic Carpet Ride', capable of completely isolating occupants from any road surface irregularity."
+          ]
+        },
+        {
+          title: "Bespoke 2026: personalización sin límites",
+          title_en: "Bespoke 2026: personalisation without limits",
+          paragraphs: [
+            "Las novedades más significativas del Phantom 2026 se encuentran en el programa Bespoke. Rolls-Royce amplía el catálogo de maderas, metales y cueros disponibles, incorporando nuevas especies de madera de procedencia sostenible certificada FSC, aleaciones metálicas de nueva generación para elementos decorativos y una paleta ampliada de cueros tintados a mano en la curtidora histórica de Cornualles.",
+            "La Gallery, el panel de instrumentos acristalado que permite alojar objetos únicos entre dos capas de cristal, recibe nuevas posibilidades de iluminación LED de alta resolución que permiten crear composiciones lumínicas personalizadas. La conectividad se actualiza con la integración de Apple CarPlay inalámbrico y un nuevo sistema de audio Bespoke diseñado conjuntamente con un fabricante de equipos de alta fidelidad de referencia mundial."
+          ],
+          paragraphs_en: [
+            "The most significant innovations of the 2026 Phantom are found in the Bespoke programme. Rolls-Royce expands the catalogue of available woods, metals, and leathers, incorporating new species of FSC-certified sustainably sourced wood, next-generation metal alloys for decorative elements, and an expanded palette of hand-dyed leathers from the historic Cornish tannery.",
+            "The Gallery, the glazed instrument panel that allows unique objects to be housed between two layers of glass, receives new high-resolution LED lighting possibilities that allow personalised light compositions to be created. Connectivity is updated with the integration of wireless Apple CarPlay and a new Bespoke audio system co-designed with a world-reference high-fidelity equipment manufacturer."
+          ]
+        },
+        {
+          title: "El Phantom como inversión y legado",
+          title_en: "The Phantom as investment and legacy",
+          paragraphs: [
+            "El precio del Rolls-Royce Phantom 2026 parte de 520.000 euros en Europa, una cifra que puede multiplicarse varias veces con el programa Bespoke completo. La lista de espera, habitual en todos los Phantom de producción reciente, se extiende entre 12 y 24 meses según el nivel de personalización. Para sus propietarios, el Phantom no es solo un automóvil: es un objeto de arte funcional concebido para perdurar generaciones."
+          ],
+          paragraphs_en: [
+            "The price of the 2026 Rolls-Royce Phantom starts from 520,000 euros in Europe, a figure that can be multiplied several times with the full Bespoke programme. The waiting list, standard for all recently produced Phantoms, extends between 12 and 24 months depending on the level of personalisation. For their owners, the Phantom is not just a car: it is a functional work of art conceived to last generations."
+          ]
+        }
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "563 CV" },
+      { label: "0-100 km/h", value: "5,1 s" },
+      { label: "Motor", value: "V12 6.75 biturbo" },
+      { label: "Precio desde", value: "520.000 €" }
+    ]
+  },
+  {
+    id: 112,
+    slug: "ferrari-12cilindri-spider-2025",
+    image: ferrari12CilindriSpider2025,
+    date: "23 Agosto 2026",
+    category: "Lanzamientos",
+    title: "Ferrari 12Cilindri Spider: carta de amor al V12 atmosférico con techo de cristal retráctil",
+    excerpt: "Ferrari presenta el 12Cilindri Spider, la versión descapotable del gran turismo V12 más emocionante de Maranello. 830 CV a 9.500 rpm, 1.570 kg y un techo de cristal retráctil en 14 segundos. La experiencia del V12 atmosférico más pura que Ferrari ha ofrecido en décadas.",
+    excerpt_en: "Ferrari introduces the 12Cilindri Spider, the open-top version of Maranello's most thrilling V12 grand tourer. 830 hp at 9,500 rpm, 1,570 kg, and a retractable glass roof in 14 seconds. The purest naturally aspirated V12 experience Ferrari has offered in decades.",
+    readTime: "7 min",
+    content: {
+      intro: "Si el 12Cilindri coupé ya era una declaración de amor al motor de doce cilindros atmosférico en una era de electrificación creciente, el Spider lleva esa declaración al máximo. Ferrari ha creado no solo un descapotable, sino una experiencia sensorial completa: la posibilidad de escuchar sin filtros el V12 de 6,5 litros y 830 CV mientras gira hasta los 9.500 rpm es algo que ningún otro fabricante puede ofrecer en la actualidad. El 12Cilindri Spider no es simplemente un 12Cilindri sin techo: es una obra de ingeniería que ha requerido una revisión completa de la estructura y del sistema de apertura para preservar las sensaciones dinámicas del coupé con toda la intensidad añadida que ofrece el cielo abierto.",
+      intro_en: "If the 12Cilindri coupé was already a love letter to the naturally aspirated twelve-cylinder engine in an era of increasing electrification, the Spider takes that declaration to its maximum. Ferrari has created not just a convertible, but a complete sensory experience: the possibility of hearing the unfiltered 6.5-litre 830 hp V12 as it spins to 9,500 rpm is something no other manufacturer can currently offer. The 12Cilindri Spider is not simply a 12Cilindri without a roof: it is an engineering feat that has required a complete revision of the structure and opening system to preserve the coupé's dynamic sensations with all the added intensity that the open sky provides.",
+      sections: [
+        {
+          title: "El V12 atmosférico más avanzado de Maranello",
+          title_en: "Maranello's most advanced naturally aspirated V12",
+          paragraphs: [
+            "El motor del 12Cilindri Spider es el F140HD: un V12 de 6,5 litros de aspiración natural que entrega 830 CV a 9.250 rpm y 678 Nm de par. La línea roja a 9.500 rpm es una cifra que pocos motores de producción en el mundo pueden alcanzar, y la entrega de potencia completamente lineal desde las bajas revoluciones hasta el límite del cuentarrevoluciones define la experiencia de conducción única que solo un Ferrari V12 puede ofrecer.",
+            "La transmisión de doble embrague de ocho velocidades y la tracción trasera completan un esquema que Maranello ha perfeccionado durante décadas. El 0 a 100 km/h se completa en 2,9 segundos, y la velocidad máxima supera los 320 km/h. El peso en orden de marcha de 1.570 kg es extraordinariamente contenido para un gran turismo V12 descapotable con todas las prestaciones activas."
+          ],
+          paragraphs_en: [
+            "The 12Cilindri Spider's engine is the F140HD: a 6.5-litre naturally aspirated V12 delivering 830 hp at 9,250 rpm and 678 Nm of torque. The redline at 9,500 rpm is a figure that few production engines in the world can reach, and the completely linear power delivery from low revs to the limit of the rev counter defines the unique driving experience that only a Ferrari V12 can offer.",
+            "The eight-speed dual-clutch transmission and rear-wheel drive complete a package that Maranello has perfected over decades. The 0 to 100 km/h sprint is completed in 2.9 seconds, and the top speed exceeds 320 km/h. The kerb weight of 1,570 kg is extraordinarily controlled for a V12 convertible grand tourer with all active features."
+          ]
+        },
+        {
+          title: "Techo de cristal retráctil: la solución Ferrari",
+          title_en: "Retractable glass roof: the Ferrari solution",
+          paragraphs: [
+            "Ferrari ha optado por un techo retráctil de cristal en lugar de una capota de tela, una decisión que tiene implicaciones tanto estéticas como dinámicas. El Retractable Hard Top (RHT) de cristal opera en 14 segundos y puede accionarse con el coche en marcha hasta 45 km/h. La estructura de cristal filtrado reduce el calor solar y preserva la luminosidad del habitáculo incluso con el techo cerrado.",
+            "La rigidez estructural del 12Cilindri Spider se ha conseguido mediante el uso extensivo de fibra de carbono en puntos clave del chasis, con el objetivo de igualar la experiencia dinámica del coupé. La suspensión activa Ferrari, el sistema Side Slip Control de última generación y el diferencial electrónico de deslizamiento limitado E-Diff3 trabajan en sinergia para ofrecer una dinámica de referencia en el segmento."
+          ],
+          paragraphs_en: [
+            "Ferrari has opted for a retractable glass roof rather than a fabric hood, a decision with both aesthetic and dynamic implications. The glass Retractable Hard Top (RHT) operates in 14 seconds and can be actuated on the move at up to 45 km/h. The filtered glass structure reduces solar heat and preserves cabin luminosity even with the roof closed.",
+            "The structural rigidity of the 12Cilindri Spider has been achieved through extensive use of carbon fibre at key chassis points, with the aim of matching the coupé's dynamic experience. The Ferrari active suspension, the latest-generation Side Slip Control system, and the E-Diff3 electronic limited-slip differential work in synergy to offer benchmark dynamics in the segment."
+          ]
+        },
+        {
+          title: "Precio y exclusividad",
+          title_en: "Price and exclusivity",
+          paragraphs: [
+            "El Ferrari 12Cilindri Spider parte de un precio aproximado de 465.000 euros en Europa, unos 50.000 euros más que el coupé equivalente. La lista de espera supera los 18 meses en la mayoría de mercados europeos, con todos los ejemplares de la primera asignación ya comprometidos. Para sus propietarios, el 12Cilindri Spider no es solo un automóvil de lujo: es la última oportunidad de experimentar el V12 atmosférico de Ferrari en su forma más pura y emocional."
+          ],
+          paragraphs_en: [
+            "The Ferrari 12Cilindri Spider starts at an approximate price of 465,000 euros in Europe, around 50,000 euros more than the equivalent coupé. The waiting list exceeds 18 months in most European markets, with all examples from the first allocation already committed. For their owners, the 12Cilindri Spider is not just a luxury car: it is the last opportunity to experience Ferrari's naturally aspirated V12 in its purest and most emotional form."
+          ]
+        }
+      ]
+    },
+    specs: [
+      { label: "Potencia", value: "830 CV" },
+      { label: "0-100 km/h", value: "2,9 s" },
+      { label: "Motor", value: "V12 6.5 atmosférico" },
+      { label: "Línea roja", value: "9.500 rpm" }
+    ]
+  },
   {
     id: 101,
     slug: "ferrari-296-speciale",
