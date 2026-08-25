@@ -78,6 +78,18 @@ const Creditos = () => {
                 <td className="py-4 px-4 text-white/40 text-xs">CC BY-SA 4.0</td>
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td className="py-4 px-4 text-white/70">porsche-turbo-s-detail-2.jpg</td>
+                <td className="py-4 px-4 text-white/70">Alexander-93</td>
+                <td className="py-4 px-4">
+                  <a href="https://commons.wikimedia.org/wiki/File:2025_Porsche_992_Turbo_S_coupes_IAA_2025_DSC_1840.jpg"
+                    target="_blank" rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white underline underline-offset-4 transition-colors text-xs">
+                    Wikimedia Commons
+                  </a>
+                </td>
+                <td className="py-4 px-4 text-white/40 text-xs">CC BY-SA 4.0</td>
+              </tr>
+              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">porsche-turbo-s-detail-3.jpg</td>
                 <td className="py-4 px-4 text-white/70">Alexander-93</td>
                 <td className="py-4 px-4">
@@ -273,7 +285,7 @@ const Creditos = () => {
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">lamborghini-reveal.jpg</td>
-                <td className="py-4 px-4 text-white/70">Charles (usf1fan2 via Flickr)</td>
+                <td className="py-4 px-4 text-white/70">Charles (usf1fan2 via Flickr) — Revuelto 2024, utilisée comme illustration Temerario Spyder</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:Lamborghini_Revuelto_(2024)_(53620872937).jpg"
                     target="_blank" rel="noopener noreferrer"
@@ -439,7 +451,7 @@ const Creditos = () => {
               {/* ─── Rimac Nevera R ─── */}
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">rimac-nevera.jpg</td>
-                <td className="py-4 px-4 text-white/70">Smnt</td>
+                <td className="py-4 px-4 text-white/70">Smnt (Rimac C_Two 2018 — modèle différent de la Nevera R)</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:Rimac_C_Two_2018_Geneva_Motor_Show.jpg"
                     target="_blank" rel="noopener noreferrer"
@@ -451,7 +463,7 @@ const Creditos = () => {
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">rimac-nevera-detail-1.jpg</td>
-                <td className="py-4 px-4 text-white/70">Norbert Aepli</td>
+                <td className="py-4 px-4 text-white/70">Norbert Aepli (Rimac C_Two 2018 — modèle différent de la Nevera R)</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:2018-03-06_Geneva_Motor_Show_2452.JPG"
                     target="_blank" rel="noopener noreferrer"
@@ -463,7 +475,7 @@ const Creditos = () => {
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">rimac-nevera-detail-2.jpg</td>
-                <td className="py-4 px-4 text-white/70">Ank kumar</td>
+                <td className="py-4 px-4 text-white/70">Ank kumar (Rimac C_Two 2018 — modèle différent de la Nevera R)</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:Rimac_(Geneva_Motor_Show)_10.jpg"
                     target="_blank" rel="noopener noreferrer"
@@ -608,7 +620,7 @@ const Creditos = () => {
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">porsche-911-turbo-s-hibrido.jpg</td>
-                <td className="py-4 px-4 text-white/70">Wikimedia Commons (IAA 2025)</td>
+                <td className="py-4 px-4 text-white/70">Alexander-93</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:2025_Porsche_992_Turbo_S_coupes_IAA_2025_DSC_1835.jpg"
                     target="_blank" rel="noopener noreferrer"
@@ -625,7 +637,7 @@ const Creditos = () => {
               </tr>
               <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 <td className="py-4 px-4 text-white/70">lamborghini-urus-se-performante.jpg</td>
-                <td className="py-4 px-4 text-white/70">Wikimedia Commons</td>
+                <td className="py-4 px-4 text-white/70">Oleg Yunakov (via Wikimedia Commons)</td>
                 <td className="py-4 px-4">
                   <a href="https://commons.wikimedia.org/wiki/File:Lamborghini_Urus_SE_-_54661371834.jpg"
                     target="_blank" rel="noopener noreferrer"

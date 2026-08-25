@@ -33,6 +33,12 @@ const NoticiaDetalle = () => {
   const { trackEvent } = useAnalytics();
 
 const sourceUrls: Record<string, string> = {
+  "lamborghini-temerario-spyder-2026": "https://newsroom.lamborghini.com/en/models/temerario",
+  "porsche-911-gt3-touring-2025": "https://newsroom.porsche.com/en_US/model-range/911/911-gt3-touring.html",
+  "bentley-continental-gt-speed-2026": "https://www.bentleymedia.com/en/models/continental-gt",
+  "mclaren-750s-spider-2025": "https://cars.mclaren.com/uk_en/750S-spider",
+  "rolls-royce-phantom-2026": "https://www.rolls-roycemotorcars.com/en_US/showroom/phantom.html",
+  "ferrari-12cilindri-spider-2025": "https://www.ferrari.com/en-EN/auto/ferrari-12cilindri-spider",
   "ferrari-purosangue": "https://www.ferrari.com/es-ES/auto/ferrari-purosangue",
   "porsche-911-turbo-s-hibrido-992-2": "https://www.porsche.com/usa/models/911/911-turbo-models/911-turbo-s/",
   "lamborghini-urus-se-performante": "https://www.lamborghini.com/en-en/models/urus/urus-se-performante",
@@ -73,6 +79,12 @@ const sourceUrls: Record<string, string> = {
 };
 
 const sourceLabels: Record<string, string> = {
+  "lamborghini-temerario-spyder-2026": "Lamborghini — Temerario Newsroom",
+  "porsche-911-gt3-touring-2025": "Porsche — 911 GT3 Touring",
+  "bentley-continental-gt-speed-2026": "Bentley Media — Continental GT Speed",
+  "mclaren-750s-spider-2025": "McLaren — 750S Spider",
+  "rolls-royce-phantom-2026": "Rolls-Royce — Phantom",
+  "ferrari-12cilindri-spider-2025": "Ferrari — 12Cilindri Spider",
   "ferrari-purosangue": "Ferrari — Purosangue",
   "porsche-911-turbo-s-hibrido-992-2": "Porsche — 911 Turbo S (992.2)",
   "lamborghini-urus-se-performante": "Lamborghini — Urus SE Performante",
