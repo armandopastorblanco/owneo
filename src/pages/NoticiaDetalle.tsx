@@ -225,12 +225,38 @@ const sourceLabels: Record<string, string> = {
           },
           url: `https://www.owneo.es/noticias/${article.slug}`,
         })}</script>
+
+        {/* JSON-LD BreadcrumbList */}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Owneo",
+              item: "https://www.owneo.es/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Noticias",
+              item: "https://www.owneo.es/noticias",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: article.title,
+              item: `https://www.owneo.es/noticias/${article.slug}`,
+            },
+          ],
+        })}</script>
       </Helmet>
       <Navbar />
 
 
       <section className="relative w-full h-[60vh] md:h-[70vh]">
-        <img src={article.image} alt={article.title} loading="eager" className="w-full h-full object-cover" />
+        <img src={article.image} alt={article.title} width="1200" height="630" loading="eager" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="container mx-auto max-w-4xl">
