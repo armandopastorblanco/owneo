@@ -56,7 +56,7 @@ export interface Car {
 }
 
 // Row + jointure locations (name, slug)
-type CarRowWithLocation = Tables<"cars"> & {
+type CarRowWithLocation = Tables<"cars_public"> & {
   locations?: { name: string | null; slug: string | null } | null;
 };
 
@@ -121,9 +121,8 @@ export function useCars() {
     queryKey: ["cars"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("cars")
+        .from("cars_public")
         .select("*, locations(name, slug)")
-        .eq("is_active", true)
         .order("name");
       if (error) throw error;
       return (data as unknown as CarRowWithLocation[]).map(mapDbCarToCar);
@@ -210,7 +209,7 @@ export function useCar(idOrSlug: string | undefined, opts?: { bySlug?: boolean }
     queryKey: ["car", bySlug ? "slug" : "id", idOrSlug],
     queryFn: async () => {
       if (!idOrSlug) return null;
-      const q = supabase.from("cars").select("*, locations(name, slug)").eq("is_active", true);
+      const q = supabase.from("cars_public").select("*, locations(name, slug)");
       const { data, error } = await (bySlug
         ? q.eq("slug", idOrSlug).maybeSingle()
         : q.eq("id", idOrSlug).maybeSingle());

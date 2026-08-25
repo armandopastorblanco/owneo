@@ -22,7 +22,7 @@ export default defineTool({
       { auth: { persistSession: false, autoRefreshToken: false } },
     );
     let query = supabase
-      .from("cars")
+      .from("cars_public")
       .select("id, slug, name, brand, model, year, price, category, status, max_participations, locations(name, slug)")
       .eq("status", "active")
       .limit(limit ?? 20);

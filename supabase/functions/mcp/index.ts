@@ -24,7 +24,7 @@ var list_cars_default = defineTool({
       process.env.SUPABASE_PUBLISHABLE_KEY,
       { auth: { persistSession: false, autoRefreshToken: false } }
     );
-    let query = supabase.from("cars").select("id, slug, name, brand, model, year, price, category, status, max_participations, locations(name, slug)").eq("status", "active").limit(limit ?? 20);
+    let query = supabase.from("cars_public").select("id, slug, name, brand, model, year, price, category, status, max_participations, locations(name, slug)").eq("status", "active").limit(limit ?? 20);
     const { data, error } = await query;
     if (error) return { content: [{ type: "text", text: error.message }], isError: true };
     const rows = (data ?? []).filter(
@@ -55,7 +55,7 @@ var get_car_default = defineTool2({
       process.env.SUPABASE_PUBLISHABLE_KEY,
       { auth: { persistSession: false, autoRefreshToken: false } }
     );
-    const { data, error } = await supabase.from("cars").select("*, locations(name, slug)").eq("slug", slug).maybeSingle();
+    const { data, error } = await supabase.from("cars_public").select("*, locations(name, slug)").eq("slug", slug).maybeSingle();
     if (error) return { content: [{ type: "text", text: error.message }], isError: true };
     if (!data) return { content: [{ type: "text", text: "Car not found" }], isError: true };
     return {
