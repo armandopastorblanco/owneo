@@ -131,24 +131,99 @@ const sourceLabels: Record<string, string> = {
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
         <title>{`${article.title} | Owneo`}</title>
-        <meta name="description" content={((isEn && article.excerpt_en) || article.excerpt).slice(0, 155)} />
+        <meta
+          name="description"
+          content={(() => {
+            const raw = article.excerpt;
+            if (raw.length <= 155) return raw;
+            const cut = raw.slice(0, 155);
+            return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+          })()}
+        />
         <link rel="canonical" href={`https://www.owneo.es/noticias/${article.slug}`} />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
         <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={((isEn && article.excerpt_en) || article.excerpt).slice(0, 155)} />
+        <meta
+          property="og:description"
+          content={(() => {
+            const raw = article.excerpt;
+            if (raw.length <= 155) return raw;
+            const cut = raw.slice(0, 155);
+            return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+          })()}
+        />
         <meta property="og:url" content={`https://www.owneo.es/noticias/${article.slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Owneo" />
+        <meta property="og:image" content={
+          article.image.startsWith("http")
+            ? article.image
+            : `https://www.owneo.es${article.image}`
+        } />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="es_ES" />
+
+        {/* Twitter / X */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+        <meta name="twitter:title" content={article.title} />
+        <meta
+          name="twitter:description"
+          content={(() => {
+            const raw = article.excerpt;
+            if (raw.length <= 155) return raw;
+            const cut = raw.slice(0, 155);
+            return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+          })()}
+        />
+        <meta name="twitter:image" content={
+          article.image.startsWith("http")
+            ? article.image
+            : `https://www.owneo.es${article.image}`
+        } />
+
+        {/* JSON-LD NewsArticle — complet */}
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "NewsArticle",
           headline: article.title,
+          description: article.excerpt.slice(0, 200),
           datePublished: toISODate(article.date),
-          publisher: {
+          dateModified: toISODate(article.date),
+          articleSection: article.category,
+          inLanguage: "es-ES",
+          image: {
+            "@type": "ImageObject",
+            url: article.image.startsWith("http")
+              ? article.image
+              : `https://www.owneo.es${article.image}`,
+            width: 1200,
+            height: 630,
+          },
+          author: {
             "@type": "Organization",
             name: "Owneo",
             url: "https://www.owneo.es",
           },
-          mainEntityOfPage: `https://www.owneo.es/noticias/${article.slug}`,
+          publisher: {
+            "@type": "Organization",
+            name: "Owneo",
+            url: "https://www.owneo.es",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://www.owneo.es/pwa-icon-512.png",
+              width: 512,
+              height: 512,
+            },
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://www.owneo.es/noticias/${article.slug}`,
+          },
+          url: `https://www.owneo.es/noticias/${article.slug}`,
         })}</script>
       </Helmet>
       <Navbar />
