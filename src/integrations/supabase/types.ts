@@ -208,6 +208,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "calendar_blocks_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "calendar_blocks_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
@@ -241,6 +248,13 @@ export type Database = {
             columns: ["car_id"]
             isOneToOne: true
             referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "car_admin_notes_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: true
+            referencedRelation: "cars_public"
             referencedColumns: ["id"]
           },
         ]
@@ -457,6 +471,13 @@ export type Database = {
             referencedRelation: "cars"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "consultation_requests_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       contact_logs: {
@@ -625,6 +646,13 @@ export type Database = {
             columns: ["car_id"]
             isOneToOne: false
             referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
             referencedColumns: ["id"]
           },
           {
@@ -986,6 +1014,13 @@ export type Database = {
             referencedRelation: "cars"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "featured_cars_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       hero_slides: {
@@ -1284,6 +1319,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "participation_requests_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "participation_requests_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -1332,6 +1374,13 @@ export type Database = {
             columns: ["car_id"]
             isOneToOne: false
             referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "participations_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
             referencedColumns: ["id"]
           },
         ]
@@ -1574,6 +1623,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "reservations_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "reservations_participation_id_fkey"
             columns: ["participation_id"]
             isOneToOne: false
@@ -1762,6 +1818,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "validated_participations_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "validated_participations_request_id_fkey"
             columns: ["request_id"]
             isOneToOne: false
@@ -1865,6 +1928,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "vehicle_documents_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "vehicle_documents_document_type_id_fkey"
             columns: ["document_type_id"]
             isOneToOne: false
@@ -1929,6 +1999,13 @@ export type Database = {
             columns: ["car_id"]
             isOneToOne: false
             referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_inspections_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
             referencedColumns: ["id"]
           },
           {
@@ -1999,6 +2076,13 @@ export type Database = {
             columns: ["car_id"]
             isOneToOne: false
             referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vehicle_maintenance_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars_public"
             referencedColumns: ["id"]
           },
           {
@@ -2074,7 +2158,146 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      cars_public: {
+        Row: {
+          annual_fee_override: number | null
+          annual_fee_percent: number | null
+          available_in: string[] | null
+          brand: string | null
+          category: string | null
+          category_en: string | null
+          consultation_enabled: boolean | null
+          created_at: string | null
+          deadline: string | null
+          description: string | null
+          description_en: string | null
+          features: string[] | null
+          features_en: string[] | null
+          gallery: string[] | null
+          id: string | null
+          image_url: string | null
+          is_active: boolean | null
+          km_per_participation: number | null
+          location_id: string | null
+          luxury_description: string | null
+          luxury_description_en: string | null
+          luxury_description_override: string | null
+          max_participations: number | null
+          max_reservation_days: number | null
+          min_reservation_days: number | null
+          model: string | null
+          name: string | null
+          participation_duration_years: number | null
+          participation_price: number | null
+          price: number | null
+          promotion: Json | null
+          remaining_participations: number | null
+          reservation_advance_days: number | null
+          slug: string | null
+          specifications: Json | null
+          specifications_en: Json | null
+          status: string | null
+          technical_sheet: Json | null
+          updated_at: string | null
+          weeks_per_participation: number | null
+          year: number | null
+        }
+        Insert: {
+          annual_fee_override?: number | null
+          annual_fee_percent?: number | null
+          available_in?: string[] | null
+          brand?: string | null
+          category?: string | null
+          category_en?: string | null
+          consultation_enabled?: boolean | null
+          created_at?: string | null
+          deadline?: string | null
+          description?: string | null
+          description_en?: string | null
+          features?: string[] | null
+          features_en?: string[] | null
+          gallery?: string[] | null
+          id?: string | null
+          image_url?: string | null
+          is_active?: boolean | null
+          km_per_participation?: number | null
+          location_id?: string | null
+          luxury_description?: string | null
+          luxury_description_en?: string | null
+          luxury_description_override?: string | null
+          max_participations?: number | null
+          max_reservation_days?: number | null
+          min_reservation_days?: number | null
+          model?: string | null
+          name?: string | null
+          participation_duration_years?: number | null
+          participation_price?: number | null
+          price?: number | null
+          promotion?: Json | null
+          remaining_participations?: number | null
+          reservation_advance_days?: number | null
+          slug?: string | null
+          specifications?: Json | null
+          specifications_en?: Json | null
+          status?: string | null
+          technical_sheet?: Json | null
+          updated_at?: string | null
+          weeks_per_participation?: number | null
+          year?: number | null
+        }
+        Update: {
+          annual_fee_override?: number | null
+          annual_fee_percent?: number | null
+          available_in?: string[] | null
+          brand?: string | null
+          category?: string | null
+          category_en?: string | null
+          consultation_enabled?: boolean | null
+          created_at?: string | null
+          deadline?: string | null
+          description?: string | null
+          description_en?: string | null
+          features?: string[] | null
+          features_en?: string[] | null
+          gallery?: string[] | null
+          id?: string | null
+          image_url?: string | null
+          is_active?: boolean | null
+          km_per_participation?: number | null
+          location_id?: string | null
+          luxury_description?: string | null
+          luxury_description_en?: string | null
+          luxury_description_override?: string | null
+          max_participations?: number | null
+          max_reservation_days?: number | null
+          min_reservation_days?: number | null
+          model?: string | null
+          name?: string | null
+          participation_duration_years?: number | null
+          participation_price?: number | null
+          price?: number | null
+          promotion?: Json | null
+          remaining_participations?: number | null
+          reservation_advance_days?: number | null
+          slug?: string | null
+          specifications?: Json | null
+          specifications_en?: Json | null
+          status?: string | null
+          technical_sheet?: Json | null
+          updated_at?: string | null
+          weeks_per_participation?: number | null
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cars_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       admin_update_document_status: {
