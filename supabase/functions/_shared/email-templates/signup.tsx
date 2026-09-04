@@ -13,10 +13,10 @@ interface SignupEmailProps {
   confirmationUrl: string
 }
 
-// Champagne color — extracted from tailwind config / index.css token --champagne: 12 24% 66%
-const CHAMPAGNE = '#bd9c94'
-const CHAMPAGNE_60 = 'rgba(189,156,148,0.6)'
-const CHAMPAGNE_20 = 'rgba(201,168,76,0.2)'
+// Champagne color — official brand book: #bda095 / token --champagne: 16.5 23.3% 66.3%
+const CHAMPAGNE = '#bda095'
+const CHAMPAGNE_60 = 'rgba(189,160,149,0.6)'
+const CHAMPAGNE_20 = 'rgba(189,160,149,0.2)'
 const FONT = '"Encode Sans Expanded", Arial, sans-serif'
 
 export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
