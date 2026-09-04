@@ -8,8 +8,8 @@ Deno.serve(async (req) => {
     const fmt = credits_reset_date ? new Date(credits_reset_date).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" }) : "—";
     const body = `
       <p style="margin:0 0 16px 0;">Hola,</p>
-      <p style="margin:0 0 16px 0;">Te quedan <strong style="color:#c9a84c;">${credits_remaining} días</strong> de créditos disponibles para tu participación en <strong>${vehicle_name || "tu vehículo"}</strong>.</p>
-      <p style="margin:0 0 16px 0;">Estos créditos caducarán el <strong style="color:#c9a84c;">${fmt}</strong>. Aprovéchalos antes de que se reinicien.</p>
+      <p style="margin:0 0 16px 0;">Te quedan <strong style="color:#bda095;">${credits_remaining} días</strong> de créditos disponibles para tu participación en <strong>${vehicle_name || "tu vehículo"}</strong>.</p>
+      <p style="margin:0 0 16px 0;">Estos créditos caducarán el <strong style="color:#bda095;">${fmt}</strong>. Aprovéchalos antes de que se reinicien.</p>
       ${ctaButton("Reservar ahora", `${SITE_URL}/dashboard`)}
     `;
     const html = owneoEmailTemplate("Tus créditos OWNEO caducan pronto", `Quedan ${credits_remaining} días disponibles`, body);

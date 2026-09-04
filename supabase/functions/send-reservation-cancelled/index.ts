@@ -17,10 +17,10 @@ Deno.serve(async (req) => {
     const fmt = (d: string) => new Date(d).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" });
     const body = `
       <p style="margin:0 0 16px 0;">Hola${profile.first_name ? ` ${profile.first_name}` : ""},</p>
-      <p style="margin:0 0 16px 0;">Te confirmamos que tu reserva ha sido <strong style="color:#c9a84c;">cancelada</strong>.</p>
+      <p style="margin:0 0 16px 0;">Te confirmamos que tu reserva ha sido <strong style="color:#bda095;">cancelada</strong>.</p>
       <p style="margin:0 0 8px 0;"><strong>Vehículo:</strong> ${car?.name || "—"}</p>
       <p style="margin:0 0 8px 0;"><strong>Fechas originales:</strong> ${fmt(r.start_date)} → ${fmt(r.end_date)}</p>
-      <p style="margin:16px 0;">Los créditos correspondientes han sido <strong style="color:#c9a84c;">reembolsados a tu cuenta</strong>.</p>
+      <p style="margin:16px 0;">Los créditos correspondientes han sido <strong style="color:#bda095;">reembolsados a tu cuenta</strong>.</p>
       ${ctaButton("Volver a reservar", `${SITE_URL}/dashboard`)}
     `;
     const html = owneoEmailTemplate("Tu reserva ha sido cancelada", "Tus créditos han sido reembolsados", body);

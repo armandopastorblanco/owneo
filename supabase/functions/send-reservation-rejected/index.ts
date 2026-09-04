@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
       <p style="margin:0 0 16px 0;">Lamentamos comunicarte que tu reserva no ha podido ser confirmada.</p>
       <p style="margin:0 0 8px 0;"><strong>Vehículo:</strong> ${car?.name || "—"}</p>
       <p style="margin:0 0 8px 0;"><strong>Fechas solicitadas:</strong> ${fmt(r.start_date)} → ${fmt(r.end_date)}</p>
-      <div style="border-left:2px solid #c9a84c;padding:12px 16px;margin:16px 0;background:rgba(201,168,76,0.05);">
+      <div style="border-left:2px solid #bda095;padding:12px 16px;margin:16px 0;background:rgba(189,160,149,0.05);">
         <p style="margin:0;color:#cccccc;font-style:italic;white-space:pre-wrap;">${String(reason).replace(/</g, "&lt;")}</p>
       </div>
       <p style="margin:16px 0;">Te invitamos a elegir otras fechas desde tu panel.</p>

@@ -23,16 +23,16 @@
 
     /* ─── Accent unique : CHAMPAGNE (usage parcimonieux) ───
        Rebrand : ne change la valeur QU'ICI. */
-    --champagne: 16 23% 66%;
+    --champagne: 16.5 23.3% 66.3%;
     --champagne-foreground: 0 0% 7%;
 
-    --primary: 16 23% 66%;
+    --primary: 16.5 23.3% 66.3%;
     --primary-foreground: 0 0% 7%;
 
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 16 23% 66%;
+    --accent: 16.5 23.3% 66.3%;
     --accent-foreground: 0 0% 7%;
 
     --muted: 0 0% 15%;
@@ -43,20 +43,20 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 16 23% 66%;
+    --ring: 16.5 23.3% 66.3%;
 
     --radius: 1rem;
 
-    --participation-available: 16 23% 66%;
+    --participation-available: 16.5 23.3% 66.3%;
 
     --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 89%;
-    --sidebar-primary: 16 23% 66%;
+    --sidebar-primary: 16.5 23.3% 66.3%;
     --sidebar-primary-foreground: 0 0% 7%;
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 16 23% 66%;
+    --sidebar-ring: 16.5 23.3% 66.3%;
   }
 
   .dark {

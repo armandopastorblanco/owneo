@@ -16,15 +16,15 @@ Deno.serve(async (req) => {
     if (!profile?.email) return jsonResponse({ ok: true });
     const fmt = (d: string) => new Date(d).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" });
     const managerBlock = (car?.manager_name || car?.manager_email || car?.manager_phone) ? `
-      <div style="border-top:1px solid rgba(201,168,76,0.3);padding-top:16px;margin-top:24px;">
-        <p style="margin:0 0 8px 0;color:#c9a84c;font-weight:600;">Tu gestor del vehículo</p>
+      <div style="border-top:1px solid rgba(189,160,149,0.3);padding-top:16px;margin-top:24px;">
+        <p style="margin:0 0 8px 0;color:#bda095;font-weight:600;">Tu gestor del vehículo</p>
         ${car?.manager_name ? `<p style="margin:0 0 4px 0;">${car.manager_name}</p>` : ""}
         ${car?.manager_phone ? `<p style="margin:0 0 4px 0;">${car.manager_phone}</p>` : ""}
-        ${car?.manager_email ? `<p style="margin:0 0 4px 0;"><a href="mailto:${car.manager_email}" style="color:#c9a84c;text-decoration:none;">${car.manager_email}</a></p>` : ""}
+        ${car?.manager_email ? `<p style="margin:0 0 4px 0;"><a href="mailto:${car.manager_email}" style="color:#bda095;text-decoration:none;">${car.manager_email}</a></p>` : ""}
       </div>` : "";
     const body = `
       <p style="margin:0 0 16px 0;">Hola${profile.first_name ? ` ${profile.first_name}` : ""},</p>
-      <p style="margin:0 0 16px 0;"><strong style="color:#c9a84c;">Tu reserva está confirmada.</strong></p>
+      <p style="margin:0 0 16px 0;"><strong style="color:#bda095;">Tu reserva está confirmada.</strong></p>
       <p style="margin:0 0 8px 0;"><strong>Vehículo:</strong> ${car?.name || "—"}</p>
       <p style="margin:0 0 8px 0;"><strong>Inicio:</strong> ${fmt(r.start_date)}</p>
       <p style="margin:0 0 8px 0;"><strong>Fin:</strong> ${fmt(r.end_date)}</p>

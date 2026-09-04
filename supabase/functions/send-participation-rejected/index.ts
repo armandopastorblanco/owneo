@@ -16,10 +16,10 @@ Deno.serve(async (req) => {
       <p style="margin:0 0 16px 0;">Hola${profile.first_name ? ` ${profile.first_name}` : ""},</p>
       <p style="margin:0 0 16px 0;">Hemos revisado tu solicitud de participación con detenimiento.</p>
       <p style="margin:0 0 16px 0;">Lamentamos comunicarte que en esta ocasión no hemos podido aprobarla.</p>
-      <div style="border-left:2px solid #c9a84c;padding:12px 16px;margin:16px 0;background:rgba(201,168,76,0.05);">
+      <div style="border-left:2px solid #bda095;padding:12px 16px;margin:16px 0;background:rgba(189,160,149,0.05);">
         <p style="margin:0;color:#cccccc;font-style:italic;white-space:pre-wrap;">${reason.replace(/</g, "&lt;")}</p>
       </div>
-      <p style="margin:16px 0;">Si tienes cualquier duda, escríbenos a <a href="mailto:${REPLY_TO}" style="color:#c9a84c;text-decoration:none;">${REPLY_TO}</a> y estaremos encantados de atenderte.</p>
+      <p style="margin:16px 0;">Si tienes cualquier duda, escríbenos a <a href="mailto:${REPLY_TO}" style="color:#bda095;text-decoration:none;">${REPLY_TO}</a> y estaremos encantados de atenderte.</p>
     `;
     const html = owneoEmailTemplate("Actualización sobre tu solicitud", "Información sobre tu solicitud OWNEO", body);
     const r = await sendEmail({ to: profile.email, subject: "Actualización sobre tu solicitud — OWNEO", html });
