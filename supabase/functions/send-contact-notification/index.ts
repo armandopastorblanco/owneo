@@ -14,14 +14,14 @@ Deno.serve(async (req) => {
     const row = (label: string, value: string | null | undefined) => {
       if (!value) return "";
       return `<tr>
-        <td style="padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.2);color:#c9a84c;font-weight:600;white-space:nowrap;vertical-align:top;">${label}</td>
-        <td style="padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.2);color:#ffffff;">${esc(value).replace(/\n/g, "<br>")}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid rgba(189,160,149,0.2);color:#bda095;font-weight:600;white-space:nowrap;vertical-align:top;">${label}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid rgba(189,160,149,0.2);color:#ffffff;">${esc(value).replace(/\n/g, "<br>")}</td>
       </tr>`;
     };
 
     const body = `
       <p style="margin:0 0 16px 0;">Has recibido una nueva consulta desde el formulario de contacto:</p>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0;background-color:#0a0a0a;border:1px solid rgba(201,168,76,0.3);border-radius:4px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0;background-color:#0a0a0a;border:1px solid rgba(189,160,149,0.3);border-radius:4px;">
         ${row("Nombre", name)}
         ${row("Email", email)}
         ${row("Teléfono", phone)}

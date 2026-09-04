@@ -17,7 +17,7 @@ Deno.serve(async (req) => {
     if (!profile?.email) return jsonResponse({ error: "no email" }, 200);
     const body = `
       <p style="margin:0 0 16px 0;">Hola${profile.first_name ? ` ${profile.first_name}` : ""},</p>
-      <p style="margin:0 0 16px 0;"><strong style="color:#c9a84c;">¡Enhorabuena!</strong> Tu solicitud de participación ha sido aprobada.</p>
+      <p style="margin:0 0 16px 0;"><strong style="color:#bda095;">¡Enhorabuena!</strong> Tu solicitud de participación ha sido aprobada.</p>
       <p style="margin:0 0 8px 0;"><strong>Vehículo:</strong> ${car?.name || "—"}</p>
       ${vp?.participation_number ? `<p style="margin:0 0 8px 0;"><strong>Número de participación:</strong> #${vp.participation_number}</p>` : ""}
       ${vp?.credits_per_year ? `<p style="margin:0 0 8px 0;"><strong>Créditos anuales:</strong> ${vp.credits_per_year} días</p>` : ""}

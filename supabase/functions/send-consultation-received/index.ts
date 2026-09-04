@@ -5,7 +5,7 @@ Deno.serve(async (req) => {
   try {
     const { name, email, phone, car_name, message, source } = await req.json();
     if (!email) return jsonResponse({ error: "email required" }, 400);
-    const carLine = car_name ? `<p style="margin:0 0 16px 0;">Vehículo de interés: <strong style="color:#c9a84c;">${car_name}</strong></p>` : "";
+    const carLine = car_name ? `<p style="margin:0 0 16px 0;">Vehículo de interés: <strong style="color:#bda095;">${car_name}</strong></p>` : "";
     const bodyUser = `
       <p style="margin:0 0 16px 0;">Hola${name ? ` ${name}` : ""},</p>
       <p style="margin:0 0 16px 0;">Hemos recibido tu consulta y la estamos revisando.</p>
@@ -16,7 +16,7 @@ Deno.serve(async (req) => {
     await sendEmail({ to: email, subject: "Hemos recibido tu consulta — OWNEO", html: htmlUser });
 
     const bodyAdmin = `
-      <p style="margin:0 0 16px 0;">Nueva consulta recibida desde <strong style="color:#c9a84c;">${source || "—"}</strong>.</p>
+      <p style="margin:0 0 16px 0;">Nueva consulta recibida desde <strong style="color:#bda095;">${source || "—"}</strong>.</p>
       <p style="margin:0 0 8px 0;"><strong>Nombre:</strong> ${name || "—"}</p>
       <p style="margin:0 0 8px 0;"><strong>Email:</strong> ${email}</p>
       <p style="margin:0 0 8px 0;"><strong>Teléfono:</strong> ${phone || "—"}</p>
