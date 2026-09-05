@@ -12,24 +12,28 @@
 
   <url>
     <loc>https://www.owneo.es/nuestro-modelo</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://www.owneo.es/coches</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://www.owneo.es/ubicaciones</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.owneo.es/quienes-somos</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -43,6 +47,7 @@
 
   <url>
     <loc>https://www.owneo.es/contacto</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -158,19 +163,7 @@
     <priority>0.75</priority>
   </url>
 
-  <url>
-    <loc>https://www.owneo.es/noticias/lamborghini-temerario-spyder</loc>
-    <lastmod>2026-05-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
 
-  <url>
-    <loc>https://www.owneo.es/noticias/ferrari-luce-ev</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
 
   <url>
     <loc>https://www.owneo.es/noticias/aston-martin-valhalla</loc>
@@ -270,12 +263,6 @@
     <priority>0.75</priority>
   </url>
 
-  <url>
-    <loc>https://www.owneo.es/noticias/lamborghini-huracan-hibrido</loc>
-    <lastmod>2026-02-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
 
   <url>
     <loc>https://www.owneo.es/noticias/mclaren-w1</loc>
