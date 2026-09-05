@@ -817,6 +817,30 @@ export type Database = {
         }
         Relationships: []
       }
+      delivery_feedback: {
+        Row: {
+          contact_email: string | null
+          created_at: string
+          id: string
+          rating: string
+          source: string | null
+        }
+        Insert: {
+          contact_email?: string | null
+          created_at?: string
+          id?: string
+          rating: string
+          source?: string | null
+        }
+        Update: {
+          contact_email?: string | null
+          created_at?: string
+          id?: string
+          rating?: string
+          source?: string | null
+        }
+        Relationships: []
+      }
       document_types: {
         Row: {
           applies_to: string
