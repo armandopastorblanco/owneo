@@ -97,6 +97,22 @@ Deno.serve(async (req) => {
       return json({ ok: false, reason: "missing_api_key" }, 200);
     }
 
+    // Never resurrect a suppressed address (unsubscribe / bounce / complaint).
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      { auth: { persistSession: false } },
+    );
+    const { data: suppressed } = await supabase
+      .from("suppressed_emails")
+      .select("reason")
+      .eq("email", email)
+      .maybeSingle();
+    if (suppressed) {
+      return json({ ok: true, skipped: "suppressed", reason: suppressed.reason });
+    }
+
+
     const attributes: Record<string, string | number> = {
       SUPABASE_ID: str(body.id),
       FIRSTNAME: str(body.name),
