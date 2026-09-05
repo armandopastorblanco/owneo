@@ -97,7 +97,10 @@ Deno.serve(async (req) => {
       if (items.length < 100) break;
     }
 
-    // --- 3. Known leads that no longer exist in Brevo (deleted contacts) ---
+    // --- 3. Known leads absent from Brevo (report only) --------------------
+    // An address missing from Brevo may have been deleted OR simply never
+    // synced, so we only REPORT it here; real deletions are suppressed by the
+    // brevo-webhook "contact_deleted" event.
     const knownEmails = new Set<string>();
     const [contacts, consultations, profiles, waitlist] = await Promise.all([
       supabase.from("contacts").select("email"),
@@ -112,20 +115,12 @@ Deno.serve(async (req) => {
       }
     }
 
-    const deleted: string[] = [];
+    const missingInBrevo: string[] = [];
     for (const email of knownEmails) {
       if (brevoContacts.has(email) || suppress.has(email)) continue;
-      const res = await fetch(`${BREVO}/contacts/${encodeURIComponent(email)}`, { headers });
-      if (res.status === 404) {
-        deleted.push(email);
-        suppress.set(email, {
-          reason: "unsubscribe",
-          metadata: { source: "brevo_contact_deleted" },
-        });
-      } else {
-        await res.text();
-      }
+      missingInBrevo.push(email);
     }
+
 
     // --- 4. Append-only insert into suppressed_emails ----------------------
     const rows = [...suppress.entries()].map(([email, v]) => ({
