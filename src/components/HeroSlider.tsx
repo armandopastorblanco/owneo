@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { useCars } from "@/hooks/useCars";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const HeroSlider = () => {
+  const { t, i18n } = useTranslation();
   const { data: cars = [] } = useCars();
   const heroSlides = useMemo(() => {
     const excluded = ["aston martin", "bentley", "rolls-royce", "rolls royce"];
@@ -152,10 +154,10 @@ const HeroSlider = () => {
           />
           
           <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extralight text-white/90 tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-2 sm:mb-4">
-            Vive lo
+            {t("home.hero_title")}
           </h1>
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.1em] sm:tracking-[0.15em] uppercase mb-6 sm:mb-8">
-            Extraordinario
+            {t("home.hero_title_accent")}
           </h1>
           
           <motion.p
@@ -164,7 +166,7 @@ const HeroSlider = () => {
             transition={{ duration: 1, delay: 1 }}
             className="text-xs sm:text-sm md:text-base lg:text-lg text-white/50 font-extralight tracking-[0.05em] sm:tracking-[0.1em] max-w-xs sm:max-w-xl mx-auto mb-8 sm:mb-12 px-2"
           >
-            Copropiedad de supercoches. Seis ciudades en España.
+            {t("home.hero_subtitle")}
           </motion.p>
 
           <motion.div
@@ -172,13 +174,13 @@ const HeroSlider = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.3 }}
           >
-            <Link to="/nuestro-modelo">
+            <Link to={i18n.language === "en" ? "/en/our-model" : "/nuestro-modelo"}>
               <Button 
                 variant="ghost"
                 size="lg"
                 className="border border-white/20 text-white/80 hover:text-white hover:bg-white/5 hover:border-white/40 text-xs md:text-sm font-light tracking-[0.2em] px-10 py-6 group transition-all duration-500"
               >
-                DESCUBRIR
+                {t("home.hero_cta")}
                 <ArrowRight className="ml-3 w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
               </Button>
             </Link>
