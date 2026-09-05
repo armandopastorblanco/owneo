@@ -10,13 +10,13 @@ Deno.serve(async (req) => {
     const { data: r } = await supa.from("reservations").select("user_id, car_id, start_date, end_date").eq("id", reservation_id).maybeSingle();
     if (!r) return jsonResponse({ error: "not found" }, 404);
     const [{ data: profile }, { data: car }] = await Promise.all([
-      supa.from("profiles").select("email, first_name").eq("id", r.user_id).maybeSingle(),
+      supa.from("profiles").select("email, name").eq("id", r.user_id).maybeSingle(),
       supa.from("cars").select("name").eq("id", r.car_id).maybeSingle(),
     ]);
     if (!profile?.email) return jsonResponse({ ok: true });
     const fmt = (d: string) => new Date(d).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" });
     const body = `
-      <p style="margin:0 0 16px 0;">Hola${profile.first_name ? ` ${profile.first_name}` : ""},</p>
+      <p style="margin:0 0 16px 0;">Hola${profile.name ? ` ${profile.name}` : ""},</p>
       <p style="margin:0 0 16px 0;">Te confirmamos que tu reserva ha sido <strong style="color:#bda095;">cancelada</strong>.</p>
       <p style="margin:0 0 8px 0;"><strong>Vehículo:</strong> ${car?.name || "—"}</p>
       <p style="margin:0 0 8px 0;"><strong>Fechas originales:</strong> ${fmt(r.start_date)} → ${fmt(r.end_date)}</p>

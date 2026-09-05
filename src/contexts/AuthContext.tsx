@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               const createdAt = session.user.created_at ? new Date(session.user.created_at).getTime() : 0;
               // Only send if account was created in the last 10 minutes (avoid sending on re-login of old users)
               if (createdAt && Date.now() - createdAt < 10 * 60 * 1000) {
-                const name = (session.user.user_metadata as any)?.first_name || "";
+                const name = (session.user.user_metadata as any)?.name || "";
                 supabase.functions.invoke("send-welcome-email", {
                   body: { email: session.user.email, name },
                 }).catch((err) => console.error("welcome email error", err));

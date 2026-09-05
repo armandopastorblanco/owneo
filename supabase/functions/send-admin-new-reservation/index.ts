@@ -10,11 +10,11 @@ Deno.serve(async (req) => {
     const { data: r } = await supa.from("reservations").select("user_id, car_id, start_date, end_date, credits_used").eq("id", reservation_id).maybeSingle();
     if (!r) return jsonResponse({ error: "not found" }, 404);
     const [{ data: profile }, { data: car }] = await Promise.all([
-      supa.from("profiles").select("email, first_name, last_name").eq("id", r.user_id).maybeSingle(),
+      supa.from("profiles").select("email, name, surname").eq("id", r.user_id).maybeSingle(),
       supa.from("cars").select("name").eq("id", r.car_id).maybeSingle(),
     ]);
     const fmt = (d: string) => new Date(d).toLocaleDateString("es-ES");
-    const userName = `${profile?.first_name || ""} ${profile?.last_name || ""}`.trim() || profile?.email || "—";
+    const userName = `${profile?.name || ""} ${profile?.surname || ""}`.trim() || profile?.email || "—";
     const body = `
       <p style="margin:0 0 16px 0;">Nueva reserva recibida.</p>
       <p style="margin:0 0 8px 0;"><strong>Usuario:</strong> ${userName}</p>

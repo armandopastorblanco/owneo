@@ -9,11 +9,11 @@ Deno.serve(async (req) => {
     const supa = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const { data: pr } = await supa.from("participation_requests").select("user_id, rejection_reason").eq("id", request_id).maybeSingle();
     if (!pr) return jsonResponse({ error: "request not found" }, 404);
-    const { data: profile } = await supa.from("profiles").select("email, first_name").eq("id", pr.user_id).maybeSingle();
+    const { data: profile } = await supa.from("profiles").select("email, name").eq("id", pr.user_id).maybeSingle();
     if (!profile?.email) return jsonResponse({ ok: true });
     const reason = pr.rejection_reason || "Tras un análisis detallado, no podemos aceptar tu solicitud en este momento.";
     const body = `
-      <p style="margin:0 0 16px 0;">Hola${profile.first_name ? ` ${profile.first_name}` : ""},</p>
+      <p style="margin:0 0 16px 0;">Hola${profile.name ? ` ${profile.name}` : ""},</p>
       <p style="margin:0 0 16px 0;">Hemos revisado tu solicitud de participación con detenimiento.</p>
       <p style="margin:0 0 16px 0;">Lamentamos comunicarte que en esta ocasión no hemos podido aprobarla.</p>
       <div style="border-left:2px solid #bda095;padding:12px 16px;margin:16px 0;background:rgba(189,160,149,0.05);">

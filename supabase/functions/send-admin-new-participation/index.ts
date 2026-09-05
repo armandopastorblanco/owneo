@@ -10,10 +10,10 @@ Deno.serve(async (req) => {
     const { data: pr } = await supa.from("participation_requests").select("user_id, car_id, created_at").eq("id", request_id).maybeSingle();
     if (!pr) return jsonResponse({ error: "not found" }, 404);
     const [{ data: profile }, { data: car }] = await Promise.all([
-      supa.from("profiles").select("email, first_name, last_name").eq("id", pr.user_id).maybeSingle(),
+      supa.from("profiles").select("email, name, surname").eq("id", pr.user_id).maybeSingle(),
       supa.from("cars").select("name").eq("id", pr.car_id).maybeSingle(),
     ]);
-    const userName = `${profile?.first_name || ""} ${profile?.last_name || ""}`.trim() || profile?.email || "—";
+    const userName = `${profile?.name || ""} ${profile?.surname || ""}`.trim() || profile?.email || "—";
     const dateStr = new Date(pr.created_at).toLocaleString("es-ES");
     const body = `
       <p style="margin:0 0 16px 0;">Nueva solicitud de participación recibida.</p>
