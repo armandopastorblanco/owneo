@@ -94,10 +94,13 @@ Deno.serve(async (req) => {
               SOURCE_LIST: 'contacts',
               ACQUISITION_CHANNEL: 'web_form',
               ACQUISITION_DATE: new Date().toISOString().slice(0, 10),
+              // Sin doble opt-in confirmado el contacto existe pero no entra en
+              // ninguna lista (regla owneo: WELCOME_OPTIN_STATUS != confirmed).
+              WELCOME_OPTIN_STATUS: 'pending',
             },
-            listIds: [5],
             updateEnabled: true,
           }),
+
         });
         brevoOk = brevoRes.ok;
         if (!brevoRes.ok) {

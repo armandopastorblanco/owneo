@@ -8,15 +8,35 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-// Brevo list ids per lead origin. 5 = lista de espera / general.
-const LIST_BY_SOURCE: Record<string, number[]> = {
-  beta_gate: [5],
-  landing: [5],
-  contacto: [5],
-  car_detail: [5],
-  dashboard_concierge: [5],
-  participation: [5],
+// Brevo list ids (folder Owneo).
+const LIST_LEADS = 6;
+const LIST_CANDIDATES = 7;
+const LIST_COPROPIETARIOS = 8;
+const LIST_DISQUALIFIED = 9;
+
+const CANDIDATE_STATUSES = ["pending", "scoring", "waitlist", "approved"];
+
+/**
+ * List assignment rules:
+ * - QUALIFICATION_STATUS = rejected                       -> owneo_disqualified
+ * - active/signed participation                           -> owneo_copropietarios
+ * - optin confirmed + status in candidate statuses        -> owneo_candidates
+ * - optin confirmed + status not approved/rejected        -> owneo_leads
+ * - optin not confirmed                                   -> no list (contact only)
+ */
+const resolveListIds = (
+  optinStatus: string,
+  qualificationStatus: string,
+  participationActive: boolean,
+): number[] => {
+  if (qualificationStatus === "rejected") return [LIST_DISQUALIFIED];
+  if (participationActive) return [LIST_COPROPIETARIOS];
+  if (optinStatus !== "confirmed") return [];
+  if (CANDIDATE_STATUSES.includes(qualificationStatus)) return [LIST_CANDIDATES];
+  if (qualificationStatus === "approved") return [LIST_CANDIDATES];
+  return [LIST_LEADS];
 };
+
 
 // Source form -> origin table (SOURCE_LIST) + acquisition channel.
 const ORIGIN_BY_SOURCE: Record<string, { list: string; channel: string }> = {
@@ -88,8 +108,14 @@ Deno.serve(async (req) => {
       ACQUISITION_CHANNEL: origin.channel,
     };
 
+    const qualificationStatus = str(body.status);
+    const optinStatus = str(body.welcome_optin_status) || "pending";
+    const participationActive =
+      body.participation_active === true || qualificationStatus === "active";
+
     if (typeof body.score === "number") attributes.SCORE_DD = body.score;
-    if (str(body.status)) attributes.QUALIFICATION_STATUS = str(body.status);
+    if (qualificationStatus) attributes.QUALIFICATION_STATUS = qualificationStatus;
+    attributes.WELCOME_OPTIN_STATUS = optinStatus;
     if (typeof body.num_participations === "number") {
       attributes.PARTICIPATIONS_REQUESTED = body.num_participations;
     }
@@ -98,7 +124,8 @@ Deno.serve(async (req) => {
       if (attributes[k] === "" || attributes[k] === undefined) delete attributes[k];
     }
 
-    const listIds = LIST_BY_SOURCE[source] ?? [5];
+    const listIds = resolveListIds(optinStatus, qualificationStatus, participationActive);
+
 
     const res = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
@@ -107,7 +134,13 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ email, attributes, listIds, updateEnabled: true }),
+      body: JSON.stringify({
+        email,
+        attributes,
+        ...(listIds.length ? { listIds } : {}),
+        updateEnabled: true,
+      }),
+
     });
 
     const text = await res.text();
