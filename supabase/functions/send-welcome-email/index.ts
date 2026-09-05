@@ -17,9 +17,7 @@ Deno.serve(async (req) => {
       </ul>
       <p style="margin:0 0 16px 0;">Síguenos para no perderte las novedades de nuestra flota:</p>
       <p style="margin:0 0 8px 0;">
-        <a href="#" style="color:#bda095;text-decoration:none;margin-right:16px;">Instagram</a>
-        <a href="#" style="color:#bda095;text-decoration:none;margin-right:16px;">LinkedIn</a>
-        <a href="#" style="color:#bda095;text-decoration:none;">Facebook</a>
+        <a href="https://www.instagram.com/owneo_supercars" style="color:#bda095;text-decoration:none;">Instagram</a>
       </p>
     `;
     const html = owneoEmailTemplate("Bienvenido a OWNEO", "El lujo que se comparte", body);
