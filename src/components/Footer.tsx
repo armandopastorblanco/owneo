@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
@@ -113,19 +113,14 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground">{t("footer.section_social")}</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a
+                href="https://www.instagram.com/owneo_supercars"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="/twitter" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="/tiktok" className="text-muted-foreground hover:text-foreground transition-colors">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.92a8.2 8.2 0 0 0 4.78 1.53V7.01a4.85 4.85 0 0 1-1.02-.32z"/>
-                </svg>
               </a>
             </div>
           </div>
