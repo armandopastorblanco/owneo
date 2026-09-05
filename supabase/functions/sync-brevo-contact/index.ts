@@ -1,4 +1,5 @@
-// Sync any lead captured on the site into Brevo (CRM) with full attributes.
+// Sync any lead captured on the site into Brevo (CRM) with the official
+// Supabase -> Brevo attribute mapping.
 // Called fire-and-forget from every public form.
 
 const corsHeaders = {
@@ -15,6 +16,32 @@ const LIST_BY_SOURCE: Record<string, number[]> = {
   car_detail: [5],
   dashboard_concierge: [5],
   participation: [5],
+};
+
+// Source form -> origin table (SOURCE_LIST) + acquisition channel.
+const ORIGIN_BY_SOURCE: Record<string, { list: string; channel: string }> = {
+  contacto: { list: "contacts", channel: "web_form" },
+  beta_gate: { list: "contacts", channel: "web_form" },
+  landing: { list: "contacts", channel: "web_form" },
+  car_detail: { list: "consultation_requests", channel: "consultation_form" },
+  dashboard_concierge: { list: "consultation_requests", channel: "consultation_form" },
+  participation: { list: "participation_requests", channel: "participation_form" },
+};
+
+const KNOWN_BRANDS = [
+  "Ferrari",
+  "Porsche",
+  "Lamborghini",
+  "Aston Martin",
+  "McLaren",
+  "Mercedes-AMG",
+  "Bentley",
+  "Rolls-Royce",
+];
+
+const brandFromVehicle = (vehicle: string) => {
+  const v = vehicle.toLowerCase();
+  return KNOWN_BRANDS.find((b) => v.includes(b.toLowerCase())) ?? "";
 };
 
 const json = (data: unknown, status = 200) =>
@@ -36,7 +63,10 @@ Deno.serve(async (req) => {
     if (!email.includes("@")) return json({ error: "Invalid email" }, 400);
 
     const source = str(body.source) || "web";
-    const language = body.language === "en" ? "EN" : "ES";
+    const language = body.language === "en" ? "en" : "es";
+    const origin = ORIGIN_BY_SOURCE[source] ?? { list: "contacts", channel: "web_form" };
+    const vehicle = str(body.car_name);
+    const acquisitionDate = str(body.created_at) || new Date().toISOString();
 
     const apiKey = Deno.env.get("BREVO_API_KEY");
     if (!apiKey) {
@@ -44,21 +74,28 @@ Deno.serve(async (req) => {
       return json({ ok: false, reason: "missing_api_key" }, 200);
     }
 
-    const attributes: Record<string, string> = {
-      NOMBRE: str(body.name),
-      APELLIDOS: str(body.surname),
-      SMS: str(body.phone),
-      TELEFONO: str(body.phone),
-      CIUDAD: str(body.city),
-      IDIOMA: language,
-      ORIGEN: source,
-      VEHICULO: str(body.car_name),
-      ASUNTO: str(body.subject),
-      MENSAJE: str(body.message).slice(0, 500),
-      ULTIMO_CONTACTO: new Date().toISOString().slice(0, 10),
+    const attributes: Record<string, string | number> = {
+      SUPABASE_ID: str(body.id),
+      FIRSTNAME: str(body.name),
+      LASTNAME: str(body.surname),
+      PHONE: str(body.phone),
+      LANGUAGE: language,
+      ACQUISITION_DATE: acquisitionDate.slice(0, 10),
+      VEHICLE_OF_INTEREST: vehicle,
+      BRAND_OF_INTEREST: brandFromVehicle(vehicle),
+      HUB_OF_INTEREST: str(body.city),
+      SOURCE_LIST: origin.list,
+      ACQUISITION_CHANNEL: origin.channel,
     };
+
+    if (typeof body.score === "number") attributes.SCORE_DD = body.score;
+    if (str(body.status)) attributes.QUALIFICATION_STATUS = str(body.status);
+    if (typeof body.num_participations === "number") {
+      attributes.PARTICIPATIONS_REQUESTED = body.num_participations;
+    }
+
     for (const k of Object.keys(attributes)) {
-      if (!attributes[k]) delete attributes[k];
+      if (attributes[k] === "" || attributes[k] === undefined) delete attributes[k];
     }
 
     const listIds = LIST_BY_SOURCE[source] ?? [5];
