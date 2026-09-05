@@ -118,17 +118,76 @@ export default function NuestroModelo() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
-        <title>Nuestro Modelo — Cómo funciona el car sharing | Owneo</title>
+        <title>Nuestro Modelo — Cómo funciona el car sharing de lujo | Owneo</title>
         <meta name="description" content="Descubre cómo funciona Owneo: accede a un Ferrari, Lamborghini o Porsche pagando solo el 10% de su valor. Gastos compartidos entre 10 miembros, 4 semanas al año, experiencia total." />
         <link rel="canonical" href="https://www.owneo.es/nuestro-modelo" />
-        <meta property="og:title" content="Nuestro Modelo | Owneo" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:title" content="Nuestro Modelo — Cómo funciona el car sharing de lujo | Owneo" />
         <meta property="og:description" content="Descubre cómo funciona Owneo: accede a un Ferrari, Lamborghini o Porsche pagando solo el 10% de su valor. Gastos compartidos entre 10 miembros, 4 semanas al año, experiencia total." />
         <meta property="og:url" content="https://www.owneo.es/nuestro-modelo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Owneo" />
         <meta property="og:locale" content="es_ES" />
+        <meta property="og:image" content="https://www.owneo.es/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@owneo" />
+        <meta name="twitter:title" content="Nuestro Modelo — Cómo funciona el car sharing de lujo | Owneo" />
+        <meta name="twitter:description" content="Descubre cómo funciona Owneo: accede a un Ferrari, Lamborghini o Porsche pagando solo el 10% de su valor." />
+        <meta name="twitter:image" content="https://www.owneo.es/og-image.png" />
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Owneo — Car Sharing de Supercoches de Lujo",
+          "description": "Accede a un Ferrari, Lamborghini o Porsche pagando solo el 10% de su valor. Gastos compartidos entre 10 miembros, 4 semanas al año.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Owneo",
+            "url": "https://www.owneo.es",
+            "logo": "https://www.owneo.es/pwa-icon-512.png"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "España"
+          },
+          "serviceType": "Car Sharing de Lujo",
+          "url": "https://www.owneo.es/nuestro-modelo"
+        })}</script>
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cómo funciona el car sharing de Owneo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Owneo permite acceder a un supercoche de lujo pagando solo el 10% de su valor. Los gastos se comparten entre 10 miembros, cada uno con 4 semanas y 2.000 km al año."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta una participación en Owneo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El precio de una participación equivale al 10% del valor del vehículo. Por ejemplo, para un Porsche 911 Turbo S de 250.000€, la participación es de 25.000€."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿En qué ciudades opera Owneo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Owneo opera actualmente en Barcelona, Madrid, Valencia, Marbella, Ibiza y Alicante."
+              }
+            }
+          ]
+        })}</script>
       </Helmet>
       <Navbar />
 
