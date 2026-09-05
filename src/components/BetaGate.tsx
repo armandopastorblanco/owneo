@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import i18n from "@/i18n";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const STORAGE_KEY = "owneo_beta_access";

@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
+import i18n from "@/i18n";
 
 const CIUDADES = ["Barcelona", "Madrid", "Marbella", "Valencia", "Ibiza", "Alicante", "Otra"];
 
