@@ -31,7 +31,7 @@ export function owneoEmailTemplate(title: string, preheader: string, bodyHtml: s
           <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">In</a>
           <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">Fb</a>
         </p>
-        <p style="margin:0;font-size:11px;color:#666666;">© 2025 OWNEO. Todos los derechos reservados.</p>
+        <p style="margin:0;font-size:11px;color:#666666;">© 2026 OWNEO. Todos los derechos reservados.</p>
       </td></tr>
     </table>
   </td></tr>
