@@ -321,7 +321,9 @@
     "sending": "Enviando...",
     "error_required": "Completa todos los campos obligatorios.",
     "error_privacy": "Debes aceptar la política de privacidad.",
-    "error_send": "No se pudo enviar el mensaje."
+    "error_send": "No se pudo enviar el mensaje.",
+    "city": "Ciudad de interés",
+    "city_placeholder": "Selecciona una ciudad (opcional)"
   },
   "participate": {
     "title": "Solicitar plaza",
