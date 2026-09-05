@@ -134,7 +134,13 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ email, attributes, listIds, updateEnabled: true }),
+      body: JSON.stringify({
+        email,
+        attributes,
+        ...(listIds.length ? { listIds } : {}),
+        updateEnabled: true,
+      }),
+
     });
 
     const text = await res.text();
