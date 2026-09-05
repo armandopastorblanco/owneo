@@ -104,6 +104,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
           subject: "Solicitud de acceso beta",
           source: "beta_gate",
           status: "pending",
+          language: i18n.language === "en" ? "en" : "es",
         } as any);
       if (insertError) throw insertError;
 

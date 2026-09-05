@@ -40,7 +40,7 @@ const WaitlistLanding = () => {
     setLoading(true);
     try {
       const { error: invokeError } = await supabase.functions.invoke("join-waitlist", {
-        body: { nombre, email, ciudad, source: "landing" },
+        body: { nombre, email, ciudad, source: "landing", language: i18n.language === "en" ? "en" : "es" },
       });
       if (invokeError) throw invokeError;
       setEnviado(true);

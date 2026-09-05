@@ -235,6 +235,7 @@ const CarDetail = () => {
         phone: values.phone || null,
         message: values.message || null,
         city: values.city || selectedCity || null,
+        language: i18n.language === "en" ? "en" : "es",
         status: "pending",
       } as never);
       if (error) throw error;

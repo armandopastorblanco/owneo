@@ -886,7 +886,8 @@ const Participar = () => {
         questionnaire_answers: draft.answers || {},
         payment_amount: selectedCar.participationPrice * draft.personal.numParticipations,
         payment_status: "pending",
-      });
+        language: i18n.language === "en" ? "en" : "es",
+      } as never);
       if (error) {
         toast({
           title: "Error al enviar la solicitud",
