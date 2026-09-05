@@ -25,16 +25,41 @@ const Cities = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Ubicaciones — Tu Supercoche cerca de ti | Owneo</title>
-        <meta name="description" content="Owneo opera en las principales ciudades de España. Encuentra tu Ferrari, Lamborghini o Porsche compartido cerca de ti." />
+        <meta name="description" content="Owneo opera en Barcelona, Madrid, Valencia, Marbella, Ibiza y Alicante. Encuentra tu Ferrari, Lamborghini o Porsche compartido cerca de ti." />
         <link rel="canonical" href="https://www.owneo.es/ubicaciones" />
-        <meta property="og:title" content="Ubicaciones | Owneo" />
-        <meta property="og:description" content="Owneo opera en las principales ciudades de España. Encuentra tu Ferrari, Lamborghini o Porsche compartido cerca de ti." />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:title" content="Ubicaciones — Tu Supercoche cerca de ti | Owneo" />
+        <meta property="og:description" content="Owneo opera en Barcelona, Madrid, Valencia, Marbella, Ibiza y Alicante. Encuentra tu Ferrari, Lamborghini o Porsche compartido cerca de ti." />
         <meta property="og:url" content="https://www.owneo.es/ubicaciones" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Owneo" />
         <meta property="og:locale" content="es_ES" />
+        <meta property="og:image" content="https://www.owneo.es/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@owneo" />
+        <meta name="twitter:title" content="Ubicaciones — Tu Supercoche cerca de ti | Owneo" />
+        <meta name="twitter:description" content="Owneo opera en Barcelona, Madrid, Valencia, Marbella, Ibiza y Alicante." />
+        <meta name="twitter:image" content="https://www.owneo.es/og-image.png" />
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Ciudades donde opera Owneo",
+          "url": "https://www.owneo.es/ubicaciones",
+          "numberOfItems": 6,
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Barcelona", "url": "https://www.owneo.es/coches?ciudad=barcelona" },
+            { "@type": "ListItem", "position": 2, "name": "Madrid", "url": "https://www.owneo.es/coches?ciudad=madrid" },
+            { "@type": "ListItem", "position": 3, "name": "Valencia", "url": "https://www.owneo.es/coches?ciudad=valencia" },
+            { "@type": "ListItem", "position": 4, "name": "Marbella", "url": "https://www.owneo.es/coches?ciudad=marbella" },
+            { "@type": "ListItem", "position": 5, "name": "Ibiza", "url": "https://www.owneo.es/coches?ciudad=ibiza" },
+            { "@type": "ListItem", "position": 6, "name": "Alicante", "url": "https://www.owneo.es/coches?ciudad=alicante" }
+          ]
+        })}</script>
       </Helmet>
       <Navbar />
 
