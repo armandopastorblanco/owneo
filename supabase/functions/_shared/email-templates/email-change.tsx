@@ -32,7 +32,7 @@ export const EmailChangeEmail = ({ oldEmail, newEmail, confirmationUrl }: EmailC
         </Section>
         <Hr style={hr} />
         <Text style={signature}>El equipo OWNEO</Text>
-        <Text style={legal}>© 2025 OWNEO. Todos los derechos reservados.</Text>
+        <Text style={legal}>© 2026 OWNEO. Todos los derechos reservados.</Text>
       </Container>
     </Body>
   </Html>

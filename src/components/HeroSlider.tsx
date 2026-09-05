@@ -164,7 +164,7 @@ const HeroSlider = () => {
             transition={{ duration: 1, delay: 1 }}
             className="text-xs sm:text-sm md:text-base lg:text-lg text-white/50 font-extralight tracking-[0.05em] sm:tracking-[0.1em] max-w-xs sm:max-w-xl mx-auto mb-8 sm:mb-12 px-2"
           >
-            El lujo de los supercoches, ahora accesible
+            Copropiedad de supercoches. Seis ciudades en España.
           </motion.p>
 
           <motion.div

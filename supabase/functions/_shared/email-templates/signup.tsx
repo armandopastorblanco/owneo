@@ -158,11 +158,7 @@ export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
             </Text>
 
             <Section style={{ textAlign: 'center' as const, margin: '0 0 20px 0' }}>
-              <Link href="#" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>IG</Link>
-              <span style={{ color: '#dddddd', fontSize: '11px' }}>·</span>
-              <Link href="#" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>LI</Link>
-              <span style={{ color: '#dddddd', fontSize: '11px' }}>·</span>
-              <Link href="#" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>FB</Link>
+              <Link href="https://www.instagram.com/owneo_supercars" style={{ color: '#cccccc', fontFamily: FONT, fontSize: '11px', textDecoration: 'none', margin: '0 12px', letterSpacing: '0.1em' }}>Instagram</Link>
             </Section>
 
             <Text style={{
@@ -172,7 +168,7 @@ export const SignupEmail = ({ siteUrl, confirmationUrl }: SignupEmailProps) => {
               textAlign: 'center' as const,
               margin: '0 0 6px 0',
             }}>
-              © 2025 OWNEO. Todos los derechos reservados.
+              © 2026 OWNEO. Todos los derechos reservados.
             </Text>
             <Text style={{
               color: '#cccccc',

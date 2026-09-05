@@ -27,9 +27,7 @@ export function owneoEmailTemplate(title: string, preheader: string, bodyHtml: s
       <tr><td align="center" style="padding:16px 32px 24px 32px;color:#888888;font-size:13px;font-family:'Encode Sans Expanded', Arial, sans-serif;">
         <p style="margin:0 0 12px 0;color:#ffffff;">El equipo OWNEO</p>
         <p style="margin:0 0 16px 0;">
-          <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">Ig</a>
-          <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">In</a>
-          <a href="#" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">Fb</a>
+          <a href="https://www.instagram.com/owneo_supercars" style="color:#bda095;text-decoration:none;margin:0 8px;font-size:18px;">Instagram</a>
         </p>
         <p style="margin:0;font-size:11px;color:#666666;">© 2026 OWNEO. Todos los derechos reservados.</p>
       </td></tr>
