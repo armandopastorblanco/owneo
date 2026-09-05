@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import i18n from "@/i18n";
 import owneoLogo from "@/assets/owneo-logo.png";
 
 const STORAGE_KEY = "owneo_beta_access";
@@ -104,6 +105,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
           subject: "Solicitud de acceso beta",
           source: "beta_gate",
           status: "pending",
+          language: i18n.language === "en" ? "en" : "es",
         } as any);
       if (insertError) throw insertError;
 
@@ -114,6 +116,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
             email: reqEmail,
             subject: "Solicitud de acceso beta",
             message: reqMessage,
+            language: i18n.language === "en" ? "en" : "es",
           },
         })
         .catch((err) => console.error("send-contact-notification:", err));

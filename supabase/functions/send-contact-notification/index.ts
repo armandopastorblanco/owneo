@@ -3,7 +3,7 @@ import { owneoEmailTemplate, sendEmail, jsonResponse, corsHeaders } from "../_sh
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
-    const { name, email, phone, subject, message, car_name } = await req.json();
+    const { name, email, phone, subject, message, car_name, city, language } = await req.json();
     if (!name || !email || !subject || !message) {
       return jsonResponse({ error: "name, email, subject and message are required" }, 400);
     }
@@ -27,6 +27,8 @@ Deno.serve(async (req) => {
         ${row("Teléfono", phone)}
         ${row("Asunto", subject)}
         ${row("Vehículo de interés", car_name)}
+        ${row("Ciudad de interés", city)}
+        ${row("Idioma del contacto", language === "en" ? "Inglés (EN)" : "Español (ES)")}
         ${row("Mensaje", message)}
       </table>
     `;

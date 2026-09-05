@@ -30,6 +30,7 @@ Deno.serve(async (req) => {
     const nombre = typeof body.nombre === 'string' ? body.nombre.trim() : '';
     const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
     const ciudad = typeof body.ciudad === 'string' ? body.ciudad.trim() : '';
+    const language = body.language === 'en' ? 'en' : 'es';
 
     if (!email.includes('@')) {
       return new Response(JSON.stringify({ error: 'Invalid email' }), {
@@ -45,7 +46,7 @@ Deno.serve(async (req) => {
 
     const { error: dbError } = await supabase
       .from('waitlist')
-      .upsert({ nombre, email, ciudad }, { onConflict: 'email' });
+      .upsert({ nombre, email, ciudad, language }, { onConflict: 'email' });
 
     if (dbError) {
       console.error('Waitlist upsert error', dbError);
@@ -64,6 +65,8 @@ Deno.serve(async (req) => {
         message: `Solicitud desde lista de espera${ciudad ? ` — Ciudad de interés: ${ciudad}` : ''}`,
         source: 'beta_gate',
         status: 'pending',
+        language,
+        city: ciudad || null,
       });
       if (consultErr) console.error('consultation_requests insert error', consultErr);
     } catch (err) {

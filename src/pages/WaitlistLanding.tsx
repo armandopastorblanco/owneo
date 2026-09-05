@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
+import i18n from "@/i18n";
 
 const CIUDADES = ["Barcelona", "Madrid", "Marbella", "Valencia", "Ibiza", "Alicante", "Otra"];
 
@@ -40,7 +41,7 @@ const WaitlistLanding = () => {
     setLoading(true);
     try {
       const { error: invokeError } = await supabase.functions.invoke("join-waitlist", {
-        body: { nombre, email, ciudad, source: "landing" },
+        body: { nombre, email, ciudad, source: "landing", language: i18n.language === "en" ? "en" : "es" },
       });
       if (invokeError) throw invokeError;
       setEnviado(true);

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import type { TFunction } from "i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -886,7 +887,8 @@ const Participar = () => {
         questionnaire_answers: draft.answers || {},
         payment_amount: selectedCar.participationPrice * draft.personal.numParticipations,
         payment_status: "pending",
-      });
+        language: i18n.language === "en" ? "en" : "es",
+      } as never);
       if (error) {
         toast({
           title: "Error al enviar la solicitud",

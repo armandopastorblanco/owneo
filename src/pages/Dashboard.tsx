@@ -480,7 +480,9 @@ const Dashboard = () => {
         phone: values.phone || null,
         message: values.message || null,
         status: "pending",
-      });
+        language: i18n.language === "en" ? "en" : "es",
+        city: (primary?.car as any)?.locations?.name ?? null,
+      } as never);
       if (error) throw error;
     },
     onSuccess: () => {

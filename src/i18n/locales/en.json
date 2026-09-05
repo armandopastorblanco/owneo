@@ -321,7 +321,9 @@
     "sending": "Sending...",
     "error_required": "Please fill in all required fields.",
     "error_privacy": "You must accept the privacy policy.",
-    "error_send": "Could not send the message."
+    "error_send": "Could not send the message.",
+    "city": "City of interest",
+    "city_placeholder": "Select a city (optional)"
   },
   "participate": {
     "title": "Request a spot",

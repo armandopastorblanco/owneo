@@ -419,10 +419,13 @@ export type Database = {
           admin_notes: string | null
           car_id: string | null
           car_name: string | null
+          city: string | null
+          city_id: string | null
           created_at: string
           email: string
           id: string
           is_read: boolean | null
+          language: string | null
           message: string | null
           name: string
           phone: string | null
@@ -435,10 +438,13 @@ export type Database = {
           admin_notes?: string | null
           car_id?: string | null
           car_name?: string | null
+          city?: string | null
+          city_id?: string | null
           created_at?: string
           email: string
           id?: string
           is_read?: boolean | null
+          language?: string | null
           message?: string | null
           name: string
           phone?: string | null
@@ -451,10 +457,13 @@ export type Database = {
           admin_notes?: string | null
           car_id?: string | null
           car_name?: string | null
+          city?: string | null
+          city_id?: string | null
           created_at?: string
           email?: string
           id?: string
           is_read?: boolean | null
+          language?: string | null
           message?: string | null
           name?: string
           phone?: string | null
@@ -476,6 +485,13 @@ export type Database = {
             columns: ["car_id"]
             isOneToOne: false
             referencedRelation: "cars_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consultation_requests_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
             referencedColumns: ["id"]
           },
         ]
@@ -515,9 +531,11 @@ export type Database = {
       }
       contacts: {
         Row: {
+          city: string | null
           created_at: string
           email: string
           id: string
+          language: string | null
           message: string
           name: string
           phone: string | null
@@ -526,9 +544,11 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          city?: string | null
           created_at?: string
           email: string
           id?: string
+          language?: string | null
           message: string
           name: string
           phone?: string | null
@@ -537,9 +557,11 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          city?: string | null
           created_at?: string
           email?: string
           id?: string
+          language?: string | null
           message?: string
           name?: string
           phone?: string | null
@@ -1248,6 +1270,7 @@ export type Database = {
           car_id: string
           created_at: string
           id: string
+          language: string | null
           list_priority: number | null
           num_participations: number | null
           num_participations_modified: boolean | null
@@ -1270,6 +1293,7 @@ export type Database = {
           car_id: string
           created_at?: string
           id?: string
+          language?: string | null
           list_priority?: number | null
           num_participations?: number | null
           num_participations_modified?: boolean | null
@@ -1292,6 +1316,7 @@ export type Database = {
           car_id?: string
           created_at?: string
           id?: string
+          language?: string | null
           list_priority?: number | null
           num_participations?: number | null
           num_participations_modified?: boolean | null
@@ -1430,6 +1455,7 @@ export type Database = {
           linkedin: string | null
           name: string | null
           phone: string | null
+          preferred_language: string | null
           role: string
           surname: string | null
           updated_at: string
@@ -1445,6 +1471,7 @@ export type Database = {
           linkedin?: string | null
           name?: string | null
           phone?: string | null
+          preferred_language?: string | null
           role?: string
           surname?: string | null
           updated_at?: string
@@ -1460,6 +1487,7 @@ export type Database = {
           linkedin?: string | null
           name?: string | null
           phone?: string | null
+          preferred_language?: string | null
           role?: string
           surname?: string | null
           updated_at?: string
@@ -2135,6 +2163,7 @@ export type Database = {
           created_at: string | null
           email: string
           id: string
+          language: string | null
           nombre: string | null
           source: string | null
         }
@@ -2143,6 +2172,7 @@ export type Database = {
           created_at?: string | null
           email: string
           id?: string
+          language?: string | null
           nombre?: string | null
           source?: string | null
         }
@@ -2151,6 +2181,7 @@ export type Database = {
           created_at?: string | null
           email?: string
           id?: string
+          language?: string | null
           nombre?: string | null
           source?: string | null
         }
