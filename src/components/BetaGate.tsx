@@ -121,6 +121,19 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
         })
         .catch((err) => console.error("send-contact-notification:", err));
 
+      supabase.functions
+        .invoke("sync-brevo-contact", {
+          body: {
+            name: reqName,
+            email: reqEmail,
+            subject: "Solicitud de acceso beta",
+            message: reqMessage,
+            language: i18n.language === "en" ? "en" : "es",
+            source: "beta_gate",
+          },
+        })
+        .catch((err) => console.error("sync-brevo-contact:", err));
+
       toast.success("Solicitud enviada. Te contactaremos pronto.");
       setReqName("");
       setReqEmail("");

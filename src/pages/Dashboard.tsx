@@ -484,6 +484,21 @@ const Dashboard = () => {
         city: (primary?.car as any)?.locations?.name ?? null,
       } as never);
       if (error) throw error;
+
+      supabase.functions
+        .invoke("sync-brevo-contact", {
+          body: {
+            name: values.name,
+            email: values.email,
+            phone: values.phone || null,
+            message: values.message || null,
+            car_name: primary?.car?.name ?? null,
+            city: (primary?.car as any)?.locations?.name ?? null,
+            language: i18n.language === "en" ? "en" : "es",
+            source: "dashboard_concierge",
+          },
+        })
+        .catch((err) => console.error("sync-brevo-contact:", err));
     },
     onSuccess: () => {
       toast.success("Mensaje enviado. Te contactaremos en menos de 24h.");

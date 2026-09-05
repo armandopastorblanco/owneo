@@ -85,6 +85,22 @@ export default function Contacto() {
         })
         .catch((err) => console.error("send-contact-notification:", err));
 
+      supabase.functions
+        .invoke("sync-brevo-contact", {
+          body: {
+            name: form.name,
+            email: form.email,
+            phone: form.phone || null,
+            subject: form.subject,
+            message: form.message,
+            car_name: form.car_name || null,
+            city: selectedCity?.name || null,
+            language: i18n.language === "en" ? "en" : "es",
+            source: "contacto",
+          },
+        })
+        .catch((err) => console.error("sync-brevo-contact:", err));
+
       toast.success(t("contact.success"));
       setForm(initialForm);
       setAccepted(false);

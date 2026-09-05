@@ -900,6 +900,19 @@ const Participar = () => {
         setSubmitting(false);
         return;
       }
+      supabase.functions
+        .invoke("sync-brevo-contact", {
+          body: {
+            name: authUser.email ?? "",
+            email: authUser.email ?? "",
+            car_name: selectedCar.name,
+            city: (selectedCar as any).cityName ?? null,
+            language: i18n.language === "en" ? "en" : "es",
+            source: "participation",
+          },
+        })
+        .catch((err) => console.error("sync-brevo-contact:", err));
+
       toast({ title: "¡Solicitud enviada correctamente!" });
       const txnValue =
         selectedCar.participationPrice * draft.personal.numParticipations;
