@@ -108,8 +108,14 @@ Deno.serve(async (req) => {
       ACQUISITION_CHANNEL: origin.channel,
     };
 
+    const qualificationStatus = str(body.status);
+    const optinStatus = str(body.welcome_optin_status) || "pending";
+    const participationActive =
+      body.participation_active === true || qualificationStatus === "active";
+
     if (typeof body.score === "number") attributes.SCORE_DD = body.score;
-    if (str(body.status)) attributes.QUALIFICATION_STATUS = str(body.status);
+    if (qualificationStatus) attributes.QUALIFICATION_STATUS = qualificationStatus;
+    attributes.WELCOME_OPTIN_STATUS = optinStatus;
     if (typeof body.num_participations === "number") {
       attributes.PARTICIPATIONS_REQUESTED = body.num_participations;
     }
@@ -118,7 +124,8 @@ Deno.serve(async (req) => {
       if (attributes[k] === "" || attributes[k] === undefined) delete attributes[k];
     }
 
-    const listIds = LIST_BY_SOURCE[source] ?? [5];
+    const listIds = resolveListIds(optinStatus, qualificationStatus, participationActive);
+
 
     const res = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
