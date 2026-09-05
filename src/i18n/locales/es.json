@@ -743,5 +743,11 @@
     "android_step2_opt2": "Añadir a pantalla de inicio",
     "install_btn": "Instalar app",
     "not_now": "Ahora no"
+  },
+  "feedback": {
+    "title": "Gracias",
+    "body": "Hemos registrado tu valoración. Nos ayuda a cuidar cada entrega.",
+    "signoff": "El equipo de Owneo",
+    "cta": "Volver a Owneo"
   }
 }

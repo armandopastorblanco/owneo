@@ -743,5 +743,11 @@
     "android_step2_opt2": "Add to Home Screen",
     "install_btn": "Install app",
     "not_now": "Not now"
+  },
+  "feedback": {
+    "title": "Thank you",
+    "body": "Your feedback has been recorded. It helps us take care of every delivery.",
+    "signoff": "The Owneo team",
+    "cta": "Back to Owneo"
   }
 }

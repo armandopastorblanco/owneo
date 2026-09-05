@@ -41,6 +41,7 @@ import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import Creditos from "./pages/Creditos";
 import Unauthorized from "./pages/Unauthorized";
+import Opinion from "./pages/Opinion";
 import DesignSystem from "./pages/DesignSystem";
 import AdminGuard from "./components/admin/AdminGuard";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -140,6 +141,7 @@ const App = () => {
               <Route path="/noticias/:slug" element={<NoticiaDetalle />} />
               <Route path="/login" element={<Login />} />
               <Route path="/participar" element={<Participar />} />
+              <Route path="/opinion" element={<Opinion />} />
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
@@ -164,6 +166,7 @@ const App = () => {
               <Route path="/en/news/mercedes-amg-one-actualizacion" element={<NoticiaMercedesAMGOne />} />
               <Route path="/en/news/:slug" element={<NoticiaDetalle />} />
               <Route path="/en/contact" element={<Contacto />} />
+              <Route path="/en/feedback" element={<Opinion />} />
               <Route path="/en/cars/:slug" element={<CarDetail />} />
               <Route path="/en/legal-notice" element={<AvisoLegal />} />
               <Route path="/en/privacy-policy" element={<PoliticaPrivacidad />} />

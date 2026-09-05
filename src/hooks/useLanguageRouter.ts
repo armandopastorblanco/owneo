@@ -11,6 +11,7 @@ const routeMap: Record<string, string> = {
   '/quienes-somos': '/en/about-us',
   '/noticias': '/en/news',
   '/contacto': '/en/contact',
+  '/opinion': '/en/feedback',
   '/aviso-legal': '/en/legal-notice',
   '/politica-de-privacidad': '/en/privacy-policy',
   '/politica-de-cookies': '/en/cookies-policy',
@@ -64,11 +65,14 @@ export const useLanguageRouter = () => {
       if (isEnPath) return;
     }
     prevLang.current = i18n.language;
+    // Conserva la query string y el hash: hay rutas (p. ej. /opinion) cuyo
+    // contenido depende de sus parámetros, y perderlos rompería la página.
+    const suffix = location.search + location.hash;
     if (i18n.language === 'en' && !isEnPath) {
-      navigate(toEnPath(location.pathname), { replace: true });
+      navigate(toEnPath(location.pathname) + suffix, { replace: true });
     }
     if (i18n.language === 'es' && isEnPath) {
-      navigate(toEsPath(location.pathname) || '/', { replace: true });
+      navigate((toEsPath(location.pathname) || '/') + suffix, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
