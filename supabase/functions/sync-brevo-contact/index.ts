@@ -1,6 +1,9 @@
 // Sync any lead captured on the site into Brevo (CRM) with the official
 // Supabase -> Brevo attribute mapping.
 // Called fire-and-forget from every public form.
+import { createClient } from "npm:@supabase/supabase-js@2";
+
+
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
