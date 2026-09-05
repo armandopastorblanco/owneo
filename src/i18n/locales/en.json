@@ -302,7 +302,14 @@
   "news": {
     "title": "News",
     "subtitle": "The latest from the world of supercars and automotive luxury",
-    "read_more": "Read more"
+    "read_more": "Read more",
+    "article_cta_range": "View the OWNEO range",
+    "article_cta_vote": "Vote for this vehicle",
+    "article_cta_voted": "Vote recorded",
+    "article_cta_back": "All news",
+    "vote_toast_title": "Vote recorded: {{vehicle}}",
+    "vote_toast_desc": "Your vote helps us decide which vehicles we add.",
+    "default_vehicle": "this vehicle"
   },
   "contact": {
     "title": "Contact",

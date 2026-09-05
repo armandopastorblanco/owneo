@@ -302,7 +302,14 @@
   "news": {
     "title": "Noticias",
     "subtitle": "Las últimas novedades del mundo de los supercars y el lujo automovilístico",
-    "read_more": "Leer más"
+    "read_more": "Leer más",
+    "article_cta_range": "Ver la Gama OWNEO",
+    "article_cta_vote": "Votar por este vehículo",
+    "article_cta_voted": "Voto registrado",
+    "article_cta_back": "Todas las noticias",
+    "vote_toast_title": "Voto registrado: {{vehicle}}",
+    "vote_toast_desc": "Tu voto nos ayuda a decidir qué vehículos incorporamos.",
+    "default_vehicle": "este vehículo"
   },
   "contact": {
     "title": "Contacto",
