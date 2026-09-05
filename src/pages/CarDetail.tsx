@@ -259,6 +259,21 @@ const CarDetail = () => {
         status: "pending",
       } as never);
       if (error) throw error;
+
+      supabase.functions
+        .invoke("sync-brevo-contact", {
+          body: {
+            name: values.name,
+            email: values.email,
+            phone: values.phone || null,
+            message: values.message || null,
+            car_name: car?.name || null,
+            city: cityName,
+            language: i18n.language === "en" ? "en" : "es",
+            source: "car_detail",
+          },
+        })
+        .catch((err) => console.error("sync-brevo-contact:", err));
     },
     onSuccess: () => {
       setSubmitted(true);

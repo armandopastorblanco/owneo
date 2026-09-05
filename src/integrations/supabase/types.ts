@@ -823,27 +823,21 @@ export type Database = {
           created_at: string
           id: string
           rating: string
-          reservation_id: string | null
-          source: string
-          user_id: string | null
+          source: string | null
         }
         Insert: {
           contact_email?: string | null
           created_at?: string
           id?: string
           rating: string
-          reservation_id?: string | null
-          source?: string
-          user_id?: string | null
+          source?: string | null
         }
         Update: {
           contact_email?: string | null
           created_at?: string
           id?: string
           rating?: string
-          reservation_id?: string | null
-          source?: string
-          user_id?: string | null
+          source?: string | null
         }
         Relationships: []
       }

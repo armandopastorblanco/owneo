@@ -87,7 +87,13 @@ Deno.serve(async (req) => {
           },
           body: JSON.stringify({
             email,
-            attributes: { NOMBRE: nombre, CIUDAD: ciudad },
+            attributes: {
+              NOMBRE: nombre,
+              CIUDAD: ciudad,
+              IDIOMA: language === 'en' ? 'EN' : 'ES',
+              ORIGEN: 'landing',
+              ULTIMO_CONTACTO: new Date().toISOString().slice(0, 10),
+            },
             listIds: [5],
             updateEnabled: true,
           }),
