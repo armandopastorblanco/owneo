@@ -88,11 +88,12 @@ Deno.serve(async (req) => {
           body: JSON.stringify({
             email,
             attributes: {
-              NOMBRE: nombre,
-              CIUDAD: ciudad,
-              IDIOMA: language === 'en' ? 'EN' : 'ES',
-              ORIGEN: 'landing',
-              ULTIMO_CONTACTO: new Date().toISOString().slice(0, 10),
+              FIRSTNAME: nombre,
+              HUB_OF_INTEREST: ciudad,
+              LANGUAGE: language,
+              SOURCE_LIST: 'contacts',
+              ACQUISITION_CHANNEL: 'web_form',
+              ACQUISITION_DATE: new Date().toISOString().slice(0, 10),
             },
             listIds: [5],
             updateEnabled: true,
