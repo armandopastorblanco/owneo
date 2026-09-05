@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCar, CarModel } from "@/hooks/useCars";
+import { useLocations } from "@/hooks/useLocations";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -129,6 +130,7 @@ const CarDetail = () => {
   const slug = params.slug;
   const id = params.id;
   const { data: car, isLoading } = useCar(slug ?? id, { bySlug: !!slug });
+  const { data: locations } = useLocations();
   const { trackEvent } = useAnalytics();
 
   /* ─── refs ─── */
@@ -227,6 +229,23 @@ const CarDetail = () => {
 
   const consultaMutation = useMutation({
     mutationFn: async (values: ConsultaForm) => {
+      // La ciudad aquí es el nombre que viene del coche, que puede no existir
+      // en `locations`. Resolvemos de forma tolerante (minúsculas, sin acentos)
+      // y, si no casa, dejamos city_id null sin bloquear el envío.
+      const cityName = values.city || selectedCity || null;
+      const normalize = (s: string) =>
+        s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      let cityId: string | null = null;
+      if (cityName) {
+        const match = (locations ?? []).find(
+          (l) => normalize(l.name) === normalize(cityName)
+        );
+        if (match) {
+          cityId = match.id;
+        } else {
+          console.warn(`consultation_requests: ciudad sin resolver en locations: "${cityName}"`);
+        }
+      }
       const { error } = await supabase.from("consultation_requests" as never).insert({
         car_id: car?.id,
         car_name: car?.name,
@@ -234,7 +253,8 @@ const CarDetail = () => {
         email: values.email,
         phone: values.phone || null,
         message: values.message || null,
-        city: values.city || selectedCity || null,
+        city: cityName,
+        city_id: cityId,
         language: i18n.language === "en" ? "en" : "es",
         status: "pending",
       } as never);

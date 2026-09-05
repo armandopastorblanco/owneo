@@ -52,6 +52,9 @@ export default function Contacto() {
     }
     setSubmitting(true);
     try {
+      // form.city guarda el id de la ciudad (value del desplegable); de ahí
+      // derivamos el nombre para conservar el histórico en la columna de texto.
+      const selectedCity = (cities ?? []).find((c) => c.id === form.city);
       const { error } = await supabase.from("consultation_requests").insert({
         name: form.name,
         email: form.email,
@@ -59,7 +62,8 @@ export default function Contacto() {
         message: form.message,
         car_name: form.car_name || null,
         subject: form.subject,
-        city: form.city || null,
+        city: selectedCity?.name || null,
+        city_id: selectedCity?.id || null,
         language: i18n.language === "en" ? "en" : "es",
         source: "contacto",
         status: "pending",
@@ -75,7 +79,7 @@ export default function Contacto() {
             subject: form.subject,
             message: form.message,
             car_name: form.car_name || null,
-            city: form.city || null,
+            city: selectedCity?.name || null,
             language: i18n.language === "en" ? "en" : "es",
           },
         })
@@ -152,7 +156,7 @@ export default function Contacto() {
                 </SelectTrigger>
                 <SelectContent>
                   {(cities ?? []).map((c) => (
-                    <SelectItem key={c.id} value={c.name}>
+                    <SelectItem key={c.id} value={c.id}>
                       {c.name}
                     </SelectItem>
                   ))}

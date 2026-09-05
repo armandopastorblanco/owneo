@@ -350,7 +350,7 @@ const Step1PersonalInfo = ({
   onBack: () => void;
   onComplete: (data: Draft["personal"]) => void;
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const fieldLabels = makeFieldLabels(t);
   const { user } = useAuth();
   const { data: locations = [] } = useLocations();
@@ -492,6 +492,7 @@ const Step1PersonalInfo = ({
               address: form.address?.trim() || null,
               linkedin: form.linkedin?.trim() || null,
               city_id: form.cityId,
+              preferred_language: i18n.language === "en" ? "en" : "es",
               kyc_status: "pending",
               role: "user",
             },
@@ -512,6 +513,7 @@ const Step1PersonalInfo = ({
               address: form.address?.trim() || null,
               linkedin: form.linkedin?.trim() || null,
               city_id: form.cityId,
+              preferred_language: i18n.language === "en" ? "en" : "es",
             },
             { onConflict: "id" }
           );
