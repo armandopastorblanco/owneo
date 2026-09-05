@@ -32,3 +32,7 @@ project_id = "deafxtmgcqovwqlvktte"
   [functions.sync-brevo-contact]
     verify_jwt = false
 
+  [functions.brevo-webhook]
+    verify_jwt = false
+  [functions.sync-brevo-suppressions]
+    verify_jwt = true
