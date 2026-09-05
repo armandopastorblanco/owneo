@@ -46,11 +46,36 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Nuestra Gama | OWNEO</title>
-        <meta
-          name="description"
-          content="Explora nuestra colección exclusiva de los supercoches más prestigiosos del mundo."
-        />
+        <title>Nuestra Gama — Supercoches de Lujo Compartidos en España | Owneo</title>
+        <meta name="description" content="Explora nuestra flota exclusiva: Ferrari, Lamborghini, Porsche, Bentley y más. Car sharing de supercoches en Barcelona, Madrid, Valencia, Marbella, Ibiza y Alicante." />
+        <link rel="canonical" href="https://www.owneo.es/coches" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:title" content="Nuestra Gama — Supercoches de Lujo Compartidos en España | Owneo" />
+        <meta property="og:description" content="Explora nuestra flota exclusiva: Ferrari, Lamborghini, Porsche, Bentley y más. Car sharing de supercoches en Barcelona, Madrid, Valencia, Marbella, Ibiza y Alicante." />
+        <meta property="og:url" content="https://www.owneo.es/coches" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Owneo" />
+        <meta property="og:locale" content="es_ES" />
+        <meta property="og:image" content="https://www.owneo.es/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@owneo" />
+        <meta name="twitter:title" content="Nuestra Gama — Supercoches de Lujo Compartidos en España | Owneo" />
+        <meta name="twitter:description" content="Ferrari, Lamborghini, Porsche, Bentley y más. Car sharing de supercoches en España." />
+        <meta name="twitter:image" content="https://www.owneo.es/og-image.png" />
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Flota de Supercoches Owneo",
+          "description": "Selección de supercoches de lujo disponibles en car sharing en España.",
+          "url": "https://www.owneo.es/coches",
+          "numberOfItems": 15,
+          "itemListOrder": "https://schema.org/ItemListOrderAscending"
+        })}</script>
       </Helmet>
 
       <Navbar />
