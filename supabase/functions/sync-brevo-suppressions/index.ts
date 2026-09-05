@@ -2,8 +2,8 @@
 //
 // 1. Pulls Brevo blocked/bounced/unsubscribed contacts and INSERTs them into
 //    suppressed_emails (append-only: never deletes existing rows).
-// 2. Detects contacts deleted in Brevo (known lead email no longer in Brevo)
-//    and suppresses them as "unsubscribe".
+// 2. Reports known lead emails absent from Brevo (possible deletions).
+//    Real deletions are suppressed through the brevo-webhook event.
 // 3. Verifies no suppressed email is still active in a Brevo list; if it is,
 //    the contact is blacklisted and unlinked from every list, and reported.
 import { createClient } from "npm:@supabase/supabase-js@2";
@@ -163,7 +163,7 @@ Deno.serve(async (req) => {
     return json({
       ok: true,
       suppressed_inserted_or_existing: rows.length,
-      deleted_in_brevo: deleted,
+      missing_in_brevo: missingInBrevo,
       discrepancies,
       blocked_in_brevo: blocked,
     });
