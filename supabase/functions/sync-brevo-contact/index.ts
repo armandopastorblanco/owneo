@@ -8,15 +8,35 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-// Brevo list ids per lead origin. 5 = lista de espera / general.
-const LIST_BY_SOURCE: Record<string, number[]> = {
-  beta_gate: [5],
-  landing: [5],
-  contacto: [5],
-  car_detail: [5],
-  dashboard_concierge: [5],
-  participation: [5],
+// Brevo list ids (folder Owneo).
+const LIST_LEADS = 6;
+const LIST_CANDIDATES = 7;
+const LIST_COPROPIETARIOS = 8;
+const LIST_DISQUALIFIED = 9;
+
+const CANDIDATE_STATUSES = ["pending", "scoring", "waitlist", "approved"];
+
+/**
+ * List assignment rules:
+ * - QUALIFICATION_STATUS = rejected                       -> owneo_disqualified
+ * - active/signed participation                           -> owneo_copropietarios
+ * - optin confirmed + status in candidate statuses        -> owneo_candidates
+ * - optin confirmed + status not approved/rejected        -> owneo_leads
+ * - optin not confirmed                                   -> no list (contact only)
+ */
+const resolveListIds = (
+  optinStatus: string,
+  qualificationStatus: string,
+  participationActive: boolean,
+): number[] => {
+  if (qualificationStatus === "rejected") return [LIST_DISQUALIFIED];
+  if (participationActive) return [LIST_COPROPIETARIOS];
+  if (optinStatus !== "confirmed") return [];
+  if (CANDIDATE_STATUSES.includes(qualificationStatus)) return [LIST_CANDIDATES];
+  if (qualificationStatus === "approved") return [LIST_CANDIDATES];
+  return [LIST_LEADS];
 };
+
 
 // Source form -> origin table (SOURCE_LIST) + acquisition channel.
 const ORIGIN_BY_SOURCE: Record<string, { list: string; channel: string }> = {
