@@ -817,36 +817,6 @@ export type Database = {
         }
         Relationships: []
       }
-      delivery_feedback: {
-        Row: {
-          contact_email: string | null
-          created_at: string
-          id: string
-          rating: string
-          reservation_id: string | null
-          source: string
-          user_id: string | null
-        }
-        Insert: {
-          contact_email?: string | null
-          created_at?: string
-          id?: string
-          rating: string
-          reservation_id?: string | null
-          source?: string
-          user_id?: string | null
-        }
-        Update: {
-          contact_email?: string | null
-          created_at?: string
-          id?: string
-          rating?: string
-          reservation_id?: string | null
-          source?: string
-          user_id?: string | null
-        }
-        Relationships: []
-      }
       document_types: {
         Row: {
           applies_to: string
