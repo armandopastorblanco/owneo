@@ -36,7 +36,7 @@ Deno.serve(async (req) => {
       body,
     );
     const sr = await sendEmail({
-      to: "info@owneo.es",
+      to: ["info@owneo.es", "armando.pastorblanco@gmail.com"],
       subject: `Nueva consulta de contacto — ${subject}`,
       html,
     });
