@@ -1,6 +1,9 @@
 // Sync any lead captured on the site into Brevo (CRM) with the official
 // Supabase -> Brevo attribute mapping.
 // Called fire-and-forget from every public form.
+import { createClient } from "npm:@supabase/supabase-js@2";
+
+
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -93,6 +96,22 @@ Deno.serve(async (req) => {
       console.warn("BREVO_API_KEY not configured");
       return json({ ok: false, reason: "missing_api_key" }, 200);
     }
+
+    // Never resurrect a suppressed address (unsubscribe / bounce / complaint).
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      { auth: { persistSession: false } },
+    );
+    const { data: suppressed } = await supabase
+      .from("suppressed_emails")
+      .select("reason")
+      .eq("email", email)
+      .maybeSingle();
+    if (suppressed) {
+      return json({ ok: true, skipped: "suppressed", reason: suppressed.reason });
+    }
+
 
     const attributes: Record<string, string | number> = {
       SUPABASE_ID: str(body.id),
