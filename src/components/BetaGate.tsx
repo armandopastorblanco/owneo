@@ -116,6 +116,7 @@ const BetaGate = ({ children }: { children: ReactNode }) => {
             email: reqEmail,
             subject: "Solicitud de acceso beta",
             message: reqMessage,
+            language: i18n.language === "en" ? "en" : "es",
           },
         })
         .catch((err) => console.error("send-contact-notification:", err));

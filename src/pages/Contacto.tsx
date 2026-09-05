@@ -9,7 +9,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
+import { useLocations } from "@/hooks/useLocations";
 
 const initialForm = {
   name: "",
@@ -18,11 +26,13 @@ const initialForm = {
   subject: "",
   car_name: "",
   message: "",
+  city: "",
 };
 
 export default function Contacto() {
   const { t, i18n } = useTranslation();
   const [form, setForm] = useState(initialForm);
+  const { data: cities } = useLocations();
   const [accepted, setAccepted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -49,6 +59,8 @@ export default function Contacto() {
         message: form.message,
         car_name: form.car_name || null,
         subject: form.subject,
+        city: form.city || null,
+        language: i18n.language === "en" ? "en" : "es",
         source: "contacto",
         status: "pending",
       } as any);
@@ -63,6 +75,8 @@ export default function Contacto() {
             subject: form.subject,
             message: form.message,
             car_name: form.car_name || null,
+            city: form.city || null,
+            language: i18n.language === "en" ? "en" : "es",
           },
         })
         .catch((err) => console.error("send-contact-notification:", err));
@@ -126,6 +140,24 @@ export default function Contacto() {
             <div className="space-y-2">
               <Label htmlFor="subject">{t("contact.subject")} *</Label>
               <Input id="subject" value={form.subject} onChange={update("subject")} required />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            <div className="space-y-2">
+              <Label htmlFor="city">{t("contact.city")}</Label>
+              <Select value={form.city} onValueChange={(v) => setForm((f) => ({ ...f, city: v }))}>
+                <SelectTrigger id="city">
+                  <SelectValue placeholder={t("contact.city_placeholder")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {(cities ?? []).map((c) => (
+                    <SelectItem key={c.id} value={c.name}>
+                      {c.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
