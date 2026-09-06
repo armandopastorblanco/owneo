@@ -51,6 +51,8 @@ export const SITE_URL = "https://owneo.es";
 export const SENDER = "OWNEO <noreply@owneo.es>";
 export const REPLY_TO = "contacto@owneo.es";
 export const ADMIN_EMAIL = "armando.pastorblanco@gmail.com";
+export const LOGO_DARK_URL = "https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo.png";
+export const LOGO_LIGHT_URL = "https://deafxtmgcqovwqlvktte.supabase.co/storage/v1/object/public/email-assets/owneo-logo-positivo.jpg";
 
 export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
